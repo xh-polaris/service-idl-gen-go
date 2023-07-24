@@ -9,6 +9,7 @@ package core_api
 import (
 	context "context"
 	base "github.com/xh-polaris/service-idl-gen-go/kitex_gen/base"
+	_ "github.com/xh-polaris/service-idl-gen-go/kitex_gen/http"
 	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/basic"
 	like "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/like"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"

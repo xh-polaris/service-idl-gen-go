@@ -6,6 +6,7 @@ import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
 	base "github.com/xh-polaris/service-idl-gen-go/kitex_gen/base"
+	http "github.com/xh-polaris/service-idl-gen-go/kitex_gen/http"
 	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/basic"
 )
 
@@ -1504,5 +1505,5 @@ var fieldIDToName_SearchMomentResp = map[int32]string{
 }
 
 var _ = base.File_base_status_proto
-var _ = base.File_http_http_proto
+var _ = http.File_http_http_proto
 var _ = basic.File_meowchat_basic_basic_proto
