@@ -5,7 +5,6 @@ package core_api
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
-	base "github.com/xh-polaris/service-idl-gen-go/kitex_gen/base"
 	http "github.com/xh-polaris/service-idl-gen-go/kitex_gen/http"
 	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/basic"
 )
@@ -195,11 +194,6 @@ func (x *GetMomentPreviewsResp) FastRead(buf []byte, _type int8, number int32) (
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -226,16 +220,6 @@ func (x *GetMomentPreviewsResp) fastReadField1(buf []byte, _type int8) (offset i
 func (x *GetMomentPreviewsResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
-}
-
-func (x *GetMomentPreviewsResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *GetMomentDetailReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -270,11 +254,6 @@ func (x *GetMomentDetailResp) FastRead(buf []byte, _type int8, number int32) (of
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -295,16 +274,6 @@ func (x *GetMomentDetailResp) fastReadField1(buf []byte, _type int8) (offset int
 		return offset, err
 	}
 	x.Moment = &v
-	return offset, nil
-}
-
-func (x *GetMomentDetailResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
 	return offset, nil
 }
 
@@ -335,11 +304,6 @@ func (x *DeleteMomentReq) fastReadField1(buf []byte, _type int8) (offset int, er
 
 func (x *DeleteMomentResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -349,18 +313,6 @@ func (x *DeleteMomentResp) FastRead(buf []byte, _type int8, number int32) (offse
 	return offset, nil
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DeleteMomentResp[number], err)
-}
-
-func (x *DeleteMomentResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *NewMomentReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -455,11 +407,6 @@ func (x *NewMomentResp) FastRead(buf []byte, _type int8, number int32) (offset i
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -476,16 +423,6 @@ ReadFieldError:
 func (x *NewMomentResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.MomentId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
-}
-
-func (x *NewMomentResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *SearchMomentReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -574,11 +511,6 @@ func (x *SearchMomentResp) FastRead(buf []byte, _type int8, number int32) (offse
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -605,16 +537,6 @@ func (x *SearchMomentResp) fastReadField1(buf []byte, _type int8) (offset int, e
 func (x *SearchMomentResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
-}
-
-func (x *SearchMomentResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *Moment) FastWrite(buf []byte) (offset int) {
@@ -747,7 +669,6 @@ func (x *GetMomentPreviewsResp) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -766,14 +687,6 @@ func (x *GetMomentPreviewsResp) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetTotal())
-	return offset
-}
-
-func (x *GetMomentPreviewsResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -798,7 +711,6 @@ func (x *GetMomentDetailResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -807,14 +719,6 @@ func (x *GetMomentDetailResp) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetMoment())
-	return offset
-}
-
-func (x *GetMomentDetailResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -838,15 +742,6 @@ func (x *DeleteMomentResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
-	offset += x.fastWriteField255(buf[offset:])
-	return offset
-}
-
-func (x *DeleteMomentResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -918,7 +813,6 @@ func (x *NewMomentResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -927,14 +821,6 @@ func (x *NewMomentResp) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 1, x.GetMomentId())
-	return offset
-}
-
-func (x *NewMomentResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -996,7 +882,6 @@ func (x *SearchMomentResp) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1015,14 +900,6 @@ func (x *SearchMomentResp) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetTotal())
-	return offset
-}
-
-func (x *SearchMomentResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1156,7 +1033,6 @@ func (x *GetMomentPreviewsResp) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1175,14 +1051,6 @@ func (x *GetMomentPreviewsResp) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(2, x.GetTotal())
-	return n
-}
-
-func (x *GetMomentPreviewsResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1207,7 +1075,6 @@ func (x *GetMomentDetailResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1216,14 +1083,6 @@ func (x *GetMomentDetailResp) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeMessage(1, x.GetMoment())
-	return n
-}
-
-func (x *GetMomentDetailResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1247,15 +1106,6 @@ func (x *DeleteMomentResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
-	n += x.sizeField255()
-	return n
-}
-
-func (x *DeleteMomentResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1327,7 +1177,6 @@ func (x *NewMomentResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1336,14 +1185,6 @@ func (x *NewMomentResp) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(1, x.GetMomentId())
-	return n
-}
-
-func (x *NewMomentResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1405,7 +1246,6 @@ func (x *SearchMomentResp) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1424,14 +1264,6 @@ func (x *SearchMomentResp) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(2, x.GetTotal())
-	return n
-}
-
-func (x *SearchMomentResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1454,9 +1286,8 @@ var fieldIDToName_GetMomentPreviewsReq = map[int32]string{
 }
 
 var fieldIDToName_GetMomentPreviewsResp = map[int32]string{
-	1:   "Moments",
-	2:   "Total",
-	255: "Status",
+	1: "Moments",
+	2: "Total",
 }
 
 var fieldIDToName_GetMomentDetailReq = map[int32]string{
@@ -1464,17 +1295,14 @@ var fieldIDToName_GetMomentDetailReq = map[int32]string{
 }
 
 var fieldIDToName_GetMomentDetailResp = map[int32]string{
-	1:   "Moment",
-	255: "Status",
+	1: "Moment",
 }
 
 var fieldIDToName_DeleteMomentReq = map[int32]string{
 	1: "MomentId",
 }
 
-var fieldIDToName_DeleteMomentResp = map[int32]string{
-	255: "Status",
-}
+var fieldIDToName_DeleteMomentResp = map[int32]string{}
 
 var fieldIDToName_NewMomentReq = map[int32]string{
 	1: "Id",
@@ -1486,8 +1314,7 @@ var fieldIDToName_NewMomentReq = map[int32]string{
 }
 
 var fieldIDToName_NewMomentResp = map[int32]string{
-	1:   "MomentId",
-	255: "Status",
+	1: "MomentId",
 }
 
 var fieldIDToName_SearchMomentReq = map[int32]string{
@@ -1499,11 +1326,9 @@ var fieldIDToName_SearchMomentReq = map[int32]string{
 }
 
 var fieldIDToName_SearchMomentResp = map[int32]string{
-	1:   "Moments",
-	2:   "Total",
-	255: "Status",
+	1: "Moments",
+	2: "Total",
 }
 
-var _ = base.File_base_status_proto
 var _ = http.File_http_http_proto
 var _ = basic.File_meowchat_basic_basic_proto

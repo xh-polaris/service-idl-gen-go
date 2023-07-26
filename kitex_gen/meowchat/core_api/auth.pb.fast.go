@@ -5,7 +5,6 @@ package core_api
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
-	base "github.com/xh-polaris/service-idl-gen-go/kitex_gen/base"
 	http "github.com/xh-polaris/service-idl-gen-go/kitex_gen/http"
 	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/basic"
 )
@@ -93,11 +92,6 @@ func (x *SignInResp) FastRead(buf []byte, _type int8, number int32) (offset int,
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -124,16 +118,6 @@ func (x *SignInResp) fastReadField2(buf []byte, _type int8) (offset int, err err
 func (x *SignInResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	x.AccessExpire, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
-}
-
-func (x *SignInResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *SetPasswordReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -178,11 +162,6 @@ func (x *SetPasswordReq) fastReadField255(buf []byte, _type int8) (offset int, e
 
 func (x *SetPasswordResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -192,18 +171,6 @@ func (x *SetPasswordResp) FastRead(buf []byte, _type int8, number int32) (offset
 	return offset, nil
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_SetPasswordResp[number], err)
-}
-
-func (x *SetPasswordResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *SendVerifyCodeReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -243,11 +210,6 @@ func (x *SendVerifyCodeReq) fastReadField2(buf []byte, _type int8) (offset int, 
 
 func (x *SendVerifyCodeResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -257,18 +219,6 @@ func (x *SendVerifyCodeResp) FastRead(buf []byte, _type int8, number int32) (off
 	return offset, nil
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_SendVerifyCodeResp[number], err)
-}
-
-func (x *SendVerifyCodeResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *SignInReq) FastWrite(buf []byte) (offset int) {
@@ -323,7 +273,6 @@ func (x *SignInResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -348,14 +297,6 @@ func (x *SignInResp) fastWriteField3(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetAccessExpire())
-	return offset
-}
-
-func (x *SignInResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -388,15 +329,6 @@ func (x *SetPasswordResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
-	offset += x.fastWriteField255(buf[offset:])
-	return offset
-}
-
-func (x *SetPasswordResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -429,15 +361,6 @@ func (x *SendVerifyCodeResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
-	offset += x.fastWriteField255(buf[offset:])
-	return offset
-}
-
-func (x *SendVerifyCodeResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -493,7 +416,6 @@ func (x *SignInResp) Size() (n int) {
 	n += x.sizeField1()
 	n += x.sizeField2()
 	n += x.sizeField3()
-	n += x.sizeField255()
 	return n
 }
 
@@ -518,14 +440,6 @@ func (x *SignInResp) sizeField3() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(3, x.GetAccessExpire())
-	return n
-}
-
-func (x *SignInResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -558,15 +472,6 @@ func (x *SetPasswordResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
-	n += x.sizeField255()
-	return n
-}
-
-func (x *SetPasswordResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -599,15 +504,6 @@ func (x *SendVerifyCodeResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
-	n += x.sizeField255()
-	return n
-}
-
-func (x *SendVerifyCodeResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -619,10 +515,9 @@ var fieldIDToName_SignInReq = map[int32]string{
 }
 
 var fieldIDToName_SignInResp = map[int32]string{
-	1:   "UserId",
-	2:   "AccessToken",
-	3:   "AccessExpire",
-	255: "Status",
+	1: "UserId",
+	2: "AccessToken",
+	3: "AccessExpire",
 }
 
 var fieldIDToName_SetPasswordReq = map[int32]string{
@@ -630,19 +525,14 @@ var fieldIDToName_SetPasswordReq = map[int32]string{
 	255: "User",
 }
 
-var fieldIDToName_SetPasswordResp = map[int32]string{
-	255: "Status",
-}
+var fieldIDToName_SetPasswordResp = map[int32]string{}
 
 var fieldIDToName_SendVerifyCodeReq = map[int32]string{
 	1: "AuthType",
 	2: "AuthId",
 }
 
-var fieldIDToName_SendVerifyCodeResp = map[int32]string{
-	255: "Status",
-}
+var fieldIDToName_SendVerifyCodeResp = map[int32]string{}
 
-var _ = base.File_base_status_proto
 var _ = http.File_http_http_proto
 var _ = basic.File_meowchat_basic_basic_proto

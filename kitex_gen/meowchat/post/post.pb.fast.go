@@ -5,7 +5,6 @@ package post
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
-	base "github.com/xh-polaris/service-idl-gen-go/kitex_gen/base"
 	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/basic"
 )
 
@@ -201,11 +200,6 @@ func (x *CreatePostResp) FastRead(buf []byte, _type int8, number int32) (offset 
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -222,16 +216,6 @@ ReadFieldError:
 func (x *CreatePostResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.PostId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
-}
-
-func (x *CreatePostResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *RetrievePostReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -266,11 +250,6 @@ func (x *RetrievePostResp) FastRead(buf []byte, _type int8, number int32) (offse
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -291,16 +270,6 @@ func (x *RetrievePostResp) fastReadField1(buf []byte, _type int8) (offset int, e
 		return offset, err
 	}
 	x.Post = &v
-	return offset, nil
-}
-
-func (x *RetrievePostResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
 	return offset, nil
 }
 
@@ -376,11 +345,6 @@ func (x *UpdatePostReq) fastReadField6(buf []byte, _type int8) (offset int, err 
 
 func (x *UpdatePostResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -390,18 +354,6 @@ func (x *UpdatePostResp) FastRead(buf []byte, _type int8, number int32) (offset 
 	return offset, nil
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_UpdatePostResp[number], err)
-}
-
-func (x *UpdatePostResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *DeletePostReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -431,11 +383,6 @@ func (x *DeletePostReq) fastReadField1(buf []byte, _type int8) (offset int, err 
 
 func (x *DeletePostResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -445,18 +392,6 @@ func (x *DeletePostResp) FastRead(buf []byte, _type int8, number int32) (offset 
 	return offset, nil
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DeletePostResp[number], err)
-}
-
-func (x *DeletePostResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *SearchField) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -665,11 +600,6 @@ func (x *ListPostResp) FastRead(buf []byte, _type int8, number int32) (offset in
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -701,16 +631,6 @@ func (x *ListPostResp) fastReadField2(buf []byte, _type int8) (offset int, err e
 func (x *ListPostResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	x.Token, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
-}
-
-func (x *ListPostResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *CountPostReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -765,11 +685,6 @@ func (x *CountPostResp) FastRead(buf []byte, _type int8, number int32) (offset i
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -786,16 +701,6 @@ ReadFieldError:
 func (x *CountPostResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
-}
-
-func (x *CountPostResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *SetOfficialReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -835,11 +740,6 @@ func (x *SetOfficialReq) fastReadField2(buf []byte, _type int8) (offset int, err
 
 func (x *SetOfficialResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -849,18 +749,6 @@ func (x *SetOfficialResp) FastRead(buf []byte, _type int8, number int32) (offset
 	return offset, nil
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_SetOfficialResp[number], err)
-}
-
-func (x *SetOfficialResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *Post) FastWrite(buf []byte) (offset int) {
@@ -1012,7 +900,6 @@ func (x *CreatePostResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1021,14 +908,6 @@ func (x *CreatePostResp) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 1, x.GetPostId())
-	return offset
-}
-
-func (x *CreatePostResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1053,7 +932,6 @@ func (x *RetrievePostResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1062,14 +940,6 @@ func (x *RetrievePostResp) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetPost())
-	return offset
-}
-
-func (x *RetrievePostResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1131,15 +1001,6 @@ func (x *UpdatePostResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
-	offset += x.fastWriteField255(buf[offset:])
-	return offset
-}
-
-func (x *UpdatePostResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1163,15 +1024,6 @@ func (x *DeletePostResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
-	offset += x.fastWriteField255(buf[offset:])
-	return offset
-}
-
-func (x *DeletePostResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1300,7 +1152,6 @@ func (x *ListPostResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1327,14 +1178,6 @@ func (x *ListPostResp) fastWriteField3(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 3, x.GetToken())
-	return offset
-}
-
-func (x *ListPostResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1368,7 +1211,6 @@ func (x *CountPostResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1377,14 +1219,6 @@ func (x *CountPostResp) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetTotal())
-	return offset
-}
-
-func (x *CountPostResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1417,15 +1251,6 @@ func (x *SetOfficialResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
-	offset += x.fastWriteField255(buf[offset:])
-	return offset
-}
-
-func (x *SetOfficialResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1578,7 +1403,6 @@ func (x *CreatePostResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1587,14 +1411,6 @@ func (x *CreatePostResp) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(1, x.GetPostId())
-	return n
-}
-
-func (x *CreatePostResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1619,7 +1435,6 @@ func (x *RetrievePostResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1628,14 +1443,6 @@ func (x *RetrievePostResp) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeMessage(1, x.GetPost())
-	return n
-}
-
-func (x *RetrievePostResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1697,15 +1504,6 @@ func (x *UpdatePostResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
-	n += x.sizeField255()
-	return n
-}
-
-func (x *UpdatePostResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1729,15 +1527,6 @@ func (x *DeletePostResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
-	n += x.sizeField255()
-	return n
-}
-
-func (x *DeletePostResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1866,7 +1655,6 @@ func (x *ListPostResp) Size() (n int) {
 	n += x.sizeField1()
 	n += x.sizeField2()
 	n += x.sizeField3()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1893,14 +1681,6 @@ func (x *ListPostResp) sizeField3() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(3, x.GetToken())
-	return n
-}
-
-func (x *ListPostResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1934,7 +1714,6 @@ func (x *CountPostResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1943,14 +1722,6 @@ func (x *CountPostResp) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(1, x.GetTotal())
-	return n
-}
-
-func (x *CountPostResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1983,15 +1754,6 @@ func (x *SetOfficialResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
-	n += x.sizeField255()
-	return n
-}
-
-func (x *SetOfficialResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -2016,8 +1778,7 @@ var fieldIDToName_CreatePostReq = map[int32]string{
 }
 
 var fieldIDToName_CreatePostResp = map[int32]string{
-	1:   "PostId",
-	255: "Status",
+	1: "PostId",
 }
 
 var fieldIDToName_RetrievePostReq = map[int32]string{
@@ -2025,8 +1786,7 @@ var fieldIDToName_RetrievePostReq = map[int32]string{
 }
 
 var fieldIDToName_RetrievePostResp = map[int32]string{
-	1:   "Post",
-	255: "Status",
+	1: "Post",
 }
 
 var fieldIDToName_UpdatePostReq = map[int32]string{
@@ -2037,17 +1797,13 @@ var fieldIDToName_UpdatePostReq = map[int32]string{
 	6: "Tags",
 }
 
-var fieldIDToName_UpdatePostResp = map[int32]string{
-	255: "Status",
-}
+var fieldIDToName_UpdatePostResp = map[int32]string{}
 
 var fieldIDToName_DeletePostReq = map[int32]string{
 	1: "Id",
 }
 
-var fieldIDToName_DeletePostResp = map[int32]string{
-	255: "Status",
-}
+var fieldIDToName_DeletePostResp = map[int32]string{}
 
 var fieldIDToName_SearchField = map[int32]string{
 	1: "Text",
@@ -2072,10 +1828,9 @@ var fieldIDToName_ListPostReq = map[int32]string{
 }
 
 var fieldIDToName_ListPostResp = map[int32]string{
-	1:   "Posts",
-	2:   "Total",
-	3:   "Token",
-	255: "Status",
+	1: "Posts",
+	2: "Total",
+	3: "Token",
 }
 
 var fieldIDToName_CountPostReq = map[int32]string{
@@ -2084,8 +1839,7 @@ var fieldIDToName_CountPostReq = map[int32]string{
 }
 
 var fieldIDToName_CountPostResp = map[int32]string{
-	1:   "Total",
-	255: "Status",
+	1: "Total",
 }
 
 var fieldIDToName_SetOfficialReq = map[int32]string{
@@ -2093,9 +1847,6 @@ var fieldIDToName_SetOfficialReq = map[int32]string{
 	2: "IsRemove",
 }
 
-var fieldIDToName_SetOfficialResp = map[int32]string{
-	255: "Status",
-}
+var fieldIDToName_SetOfficialResp = map[int32]string{}
 
-var _ = base.File_base_status_proto
 var _ = basic.File_meowchat_basic_basic_proto

@@ -5,7 +5,6 @@ package sts
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
-	base "github.com/xh-polaris/service-idl-gen-go/kitex_gen/base"
 )
 
 var (
@@ -65,11 +64,6 @@ func (x *GenCosStsResp) FastRead(buf []byte, _type int8, number int32) (offset i
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -106,16 +100,6 @@ func (x *GenCosStsResp) fastReadField4(buf []byte, _type int8) (offset int, err 
 func (x *GenCosStsResp) fastReadField5(buf []byte, _type int8) (offset int, err error) {
 	x.StartTime, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
-}
-
-func (x *GenCosStsResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *GenSignedUrlReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -180,11 +164,6 @@ func (x *GenSignedUrlResp) FastRead(buf []byte, _type int8, number int32) (offse
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -201,16 +180,6 @@ ReadFieldError:
 func (x *GenSignedUrlResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.SignedUrl, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
-}
-
-func (x *GenSignedUrlResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *DeleteObjectReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -240,11 +209,6 @@ func (x *DeleteObjectReq) fastReadField1(buf []byte, _type int8) (offset int, er
 
 func (x *DeleteObjectResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -254,18 +218,6 @@ func (x *DeleteObjectResp) FastRead(buf []byte, _type int8, number int32) (offse
 	return offset, nil
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DeleteObjectResp[number], err)
-}
-
-func (x *DeleteObjectResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *GetAccessTokenReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -305,11 +257,6 @@ func (x *GetAccessTokenResp) FastRead(buf []byte, _type int8, number int32) (off
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -331,16 +278,6 @@ func (x *GetAccessTokenResp) fastReadField1(buf []byte, _type int8) (offset int,
 func (x *GetAccessTokenResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.ExpiresIn, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
-}
-
-func (x *GetAccessTokenResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *GenCosStsReq) FastWrite(buf []byte) (offset int) {
@@ -368,7 +305,6 @@ func (x *GenCosStsResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
 	offset += x.fastWriteField5(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -409,14 +345,6 @@ func (x *GenCosStsResp) fastWriteField5(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 5, x.GetStartTime())
-	return offset
-}
-
-func (x *GenCosStsResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -468,7 +396,6 @@ func (x *GenSignedUrlResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -477,14 +404,6 @@ func (x *GenSignedUrlResp) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 1, x.GetSignedUrl())
-	return offset
-}
-
-func (x *GenSignedUrlResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -508,15 +427,6 @@ func (x *DeleteObjectResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
-	offset += x.fastWriteField255(buf[offset:])
-	return offset
-}
-
-func (x *DeleteObjectResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -542,7 +452,6 @@ func (x *GetAccessTokenResp) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -559,14 +468,6 @@ func (x *GetAccessTokenResp) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetExpiresIn())
-	return offset
-}
-
-func (x *GetAccessTokenResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -595,7 +496,6 @@ func (x *GenCosStsResp) Size() (n int) {
 	n += x.sizeField3()
 	n += x.sizeField4()
 	n += x.sizeField5()
-	n += x.sizeField255()
 	return n
 }
 
@@ -636,14 +536,6 @@ func (x *GenCosStsResp) sizeField5() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(5, x.GetStartTime())
-	return n
-}
-
-func (x *GenCosStsResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -695,7 +587,6 @@ func (x *GenSignedUrlResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField255()
 	return n
 }
 
@@ -704,14 +595,6 @@ func (x *GenSignedUrlResp) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(1, x.GetSignedUrl())
-	return n
-}
-
-func (x *GenSignedUrlResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -735,15 +618,6 @@ func (x *DeleteObjectResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
-	n += x.sizeField255()
-	return n
-}
-
-func (x *DeleteObjectResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -769,7 +643,6 @@ func (x *GetAccessTokenResp) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField255()
 	return n
 }
 
@@ -789,25 +662,16 @@ func (x *GetAccessTokenResp) sizeField2() (n int) {
 	return n
 }
 
-func (x *GetAccessTokenResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
-	return n
-}
-
 var fieldIDToName_GenCosStsReq = map[int32]string{
 	1: "Path",
 }
 
 var fieldIDToName_GenCosStsResp = map[int32]string{
-	1:   "SecretId",
-	2:   "SecretKey",
-	3:   "SessionToken",
-	4:   "ExpiredTime",
-	5:   "StartTime",
-	255: "Status",
+	1: "SecretId",
+	2: "SecretKey",
+	3: "SessionToken",
+	4: "ExpiredTime",
+	5: "StartTime",
 }
 
 var fieldIDToName_GenSignedUrlReq = map[int32]string{
@@ -818,26 +682,20 @@ var fieldIDToName_GenSignedUrlReq = map[int32]string{
 }
 
 var fieldIDToName_GenSignedUrlResp = map[int32]string{
-	1:   "SignedUrl",
-	255: "Status",
+	1: "SignedUrl",
 }
 
 var fieldIDToName_DeleteObjectReq = map[int32]string{
 	1: "Path",
 }
 
-var fieldIDToName_DeleteObjectResp = map[int32]string{
-	255: "Status",
-}
+var fieldIDToName_DeleteObjectResp = map[int32]string{}
 
 var fieldIDToName_GetAccessTokenReq = map[int32]string{
 	1: "App",
 }
 
 var fieldIDToName_GetAccessTokenResp = map[int32]string{
-	1:   "AccessToken",
-	2:   "ExpiresIn",
-	255: "Status",
+	1: "AccessToken",
+	2: "ExpiresIn",
 }
-
-var _ = base.File_base_status_proto

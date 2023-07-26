@@ -5,7 +5,6 @@ package like
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
-	base "github.com/xh-polaris/service-idl-gen-go/kitex_gen/base"
 )
 
 var (
@@ -70,11 +69,6 @@ func (x *DoLikeReq) fastReadField4(buf []byte, _type int8) (offset int, err erro
 
 func (x *DoLikeResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -84,18 +78,6 @@ func (x *DoLikeResp) FastRead(buf []byte, _type int8, number int32) (offset int,
 	return offset, nil
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DoLikeResp[number], err)
-}
-
-func (x *DoLikeResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *GetUserLikedReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -150,11 +132,6 @@ func (x *GetUserLikedResp) FastRead(buf []byte, _type int8, number int32) (offse
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -171,16 +148,6 @@ ReadFieldError:
 func (x *GetUserLikedResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.Liked, offset, err = fastpb.ReadBool(buf, _type)
 	return offset, err
-}
-
-func (x *GetUserLikedResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *GetTargetLikesReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -225,11 +192,6 @@ func (x *GetTargetLikesResp) FastRead(buf []byte, _type int8, number int32) (off
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -246,16 +208,6 @@ ReadFieldError:
 func (x *GetTargetLikesResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.Count, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
-}
-
-func (x *GetTargetLikesResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *GetUserLikesReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -300,11 +252,6 @@ func (x *GetUserLikesResp) FastRead(buf []byte, _type int8, number int32) (offse
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -325,16 +272,6 @@ func (x *GetUserLikesResp) fastReadField1(buf []byte, _type int8) (offset int, e
 		return offset, err
 	}
 	x.Likes = append(x.Likes, &v)
-	return offset, nil
-}
-
-func (x *GetUserLikesResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
 	return offset, nil
 }
 
@@ -380,11 +317,6 @@ func (x *GetLikedUsersResp) FastRead(buf []byte, _type int8, number int32) (offs
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -406,16 +338,6 @@ func (x *GetLikedUsersResp) fastReadField1(buf []byte, _type int8) (offset int, 
 	}
 	x.UserIds = append(x.UserIds, v)
 	return offset, err
-}
-
-func (x *GetLikedUsersResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *GetTopKReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -505,11 +427,6 @@ func (x *GetTopKResp) FastRead(buf []byte, _type int8, number int32) (offset int
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -530,16 +447,6 @@ func (x *GetTopKResp) fastReadField1(buf []byte, _type int8) (offset int, err er
 		return offset, err
 	}
 	x.Item = append(x.Item, &v)
-	return offset, nil
-}
-
-func (x *GetTopKResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
 	return offset, nil
 }
 
@@ -595,11 +502,6 @@ func (x *AddScoreResp) FastRead(buf []byte, _type int8, number int32) (offset in
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -618,16 +520,6 @@ func (x *AddScoreResp) fastReadField1(buf []byte, _type int8) (offset int, err e
 	return offset, err
 }
 
-func (x *AddScoreResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
-}
-
 func (x *DailyUpdateReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	default:
@@ -643,11 +535,6 @@ SkipFieldError:
 
 func (x *DailyUpdateResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -657,18 +544,6 @@ func (x *DailyUpdateResp) FastRead(buf []byte, _type int8, number int32) (offset
 	return offset, nil
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DailyUpdateResp[number], err)
-}
-
-func (x *DailyUpdateResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *ListCatPopularityReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -743,11 +618,6 @@ func (x *ListCatPopularityResp) FastRead(buf []byte, _type int8, number int32) (
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -768,16 +638,6 @@ func (x *ListCatPopularityResp) fastReadField1(buf []byte, _type int8) (offset i
 		return offset, err
 	}
 	x.Cats = append(x.Cats, &v)
-	return offset, nil
-}
-
-func (x *ListCatPopularityResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
 	return offset, nil
 }
 
@@ -818,11 +678,6 @@ func (x *AddCatPopularityReq) fastReadField2(buf []byte, _type int8) (offset int
 
 func (x *AddCatPopularityResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -832,18 +687,6 @@ func (x *AddCatPopularityResp) FastRead(buf []byte, _type int8, number int32) (o
 	return offset, nil
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_AddCatPopularityResp[number], err)
-}
-
-func (x *AddCatPopularityResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *ListTopCatReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -878,11 +721,6 @@ func (x *ListTopCatResp) FastRead(buf []byte, _type int8, number int32) (offset 
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -903,16 +741,6 @@ func (x *ListTopCatResp) fastReadField1(buf []byte, _type int8) (offset int, err
 		return offset, err
 	}
 	x.Cats = append(x.Cats, &v)
-	return offset, nil
-}
-
-func (x *ListTopCatResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
 	return offset, nil
 }
 
@@ -963,15 +791,6 @@ func (x *DoLikeResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
-	offset += x.fastWriteField255(buf[offset:])
-	return offset
-}
-
-func (x *DoLikeResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1014,7 +833,6 @@ func (x *GetUserLikedResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1023,14 +841,6 @@ func (x *GetUserLikedResp) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteBool(buf[offset:], 1, x.GetLiked())
-	return offset
-}
-
-func (x *GetUserLikedResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1064,7 +874,6 @@ func (x *GetTargetLikesResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1073,14 +882,6 @@ func (x *GetTargetLikesResp) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetCount())
-	return offset
-}
-
-func (x *GetTargetLikesResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1114,7 +915,6 @@ func (x *GetUserLikesResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1125,14 +925,6 @@ func (x *GetUserLikesResp) fastWriteField1(buf []byte) (offset int) {
 	for i := range x.GetLikes() {
 		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetLikes()[i])
 	}
-	return offset
-}
-
-func (x *GetUserLikesResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1166,7 +958,6 @@ func (x *GetLikedUsersResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1177,14 +968,6 @@ func (x *GetLikedUsersResp) fastWriteField1(buf []byte) (offset int) {
 	for i := range x.GetUserIds() {
 		offset += fastpb.WriteString(buf[offset:], 1, x.GetUserIds()[i])
 	}
-	return offset
-}
-
-func (x *GetLikedUsersResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1252,7 +1035,6 @@ func (x *GetTopKResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1263,14 +1045,6 @@ func (x *GetTopKResp) fastWriteField1(buf []byte) (offset int) {
 	for i := range x.GetItem() {
 		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetItem()[i])
 	}
-	return offset
-}
-
-func (x *GetTopKResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1313,7 +1087,6 @@ func (x *AddScoreResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1322,14 +1095,6 @@ func (x *AddScoreResp) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetVal())
-	return offset
-}
-
-func (x *AddScoreResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1344,15 +1109,6 @@ func (x *DailyUpdateResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
-	offset += x.fastWriteField255(buf[offset:])
-	return offset
-}
-
-func (x *DailyUpdateResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1404,7 +1160,6 @@ func (x *ListCatPopularityResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1415,14 +1170,6 @@ func (x *ListCatPopularityResp) fastWriteField1(buf []byte) (offset int) {
 	for i := range x.GetCats() {
 		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetCats()[i])
 	}
-	return offset
-}
-
-func (x *ListCatPopularityResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1455,15 +1202,6 @@ func (x *AddCatPopularityResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
-	offset += x.fastWriteField255(buf[offset:])
-	return offset
-}
-
-func (x *AddCatPopularityResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1488,7 +1226,6 @@ func (x *ListTopCatResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1499,14 +1236,6 @@ func (x *ListTopCatResp) fastWriteField1(buf []byte) (offset int) {
 	for i := range x.GetCats() {
 		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetCats()[i])
 	}
-	return offset
-}
-
-func (x *ListTopCatResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1557,15 +1286,6 @@ func (x *DoLikeResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
-	n += x.sizeField255()
-	return n
-}
-
-func (x *DoLikeResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1608,7 +1328,6 @@ func (x *GetUserLikedResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1617,14 +1336,6 @@ func (x *GetUserLikedResp) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeBool(1, x.GetLiked())
-	return n
-}
-
-func (x *GetUserLikedResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1658,7 +1369,6 @@ func (x *GetTargetLikesResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1667,14 +1377,6 @@ func (x *GetTargetLikesResp) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(1, x.GetCount())
-	return n
-}
-
-func (x *GetTargetLikesResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1708,7 +1410,6 @@ func (x *GetUserLikesResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1719,14 +1420,6 @@ func (x *GetUserLikesResp) sizeField1() (n int) {
 	for i := range x.GetLikes() {
 		n += fastpb.SizeMessage(1, x.GetLikes()[i])
 	}
-	return n
-}
-
-func (x *GetUserLikesResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1760,7 +1453,6 @@ func (x *GetLikedUsersResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1771,14 +1463,6 @@ func (x *GetLikedUsersResp) sizeField1() (n int) {
 	for i := range x.GetUserIds() {
 		n += fastpb.SizeString(1, x.GetUserIds()[i])
 	}
-	return n
-}
-
-func (x *GetLikedUsersResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1846,7 +1530,6 @@ func (x *GetTopKResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1857,14 +1540,6 @@ func (x *GetTopKResp) sizeField1() (n int) {
 	for i := range x.GetItem() {
 		n += fastpb.SizeMessage(1, x.GetItem()[i])
 	}
-	return n
-}
-
-func (x *GetTopKResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1907,7 +1582,6 @@ func (x *AddScoreResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1916,14 +1590,6 @@ func (x *AddScoreResp) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(1, x.GetVal())
-	return n
-}
-
-func (x *AddScoreResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1938,15 +1604,6 @@ func (x *DailyUpdateResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
-	n += x.sizeField255()
-	return n
-}
-
-func (x *DailyUpdateResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1998,7 +1655,6 @@ func (x *ListCatPopularityResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField255()
 	return n
 }
 
@@ -2009,14 +1665,6 @@ func (x *ListCatPopularityResp) sizeField1() (n int) {
 	for i := range x.GetCats() {
 		n += fastpb.SizeMessage(1, x.GetCats()[i])
 	}
-	return n
-}
-
-func (x *ListCatPopularityResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -2049,15 +1697,6 @@ func (x *AddCatPopularityResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
-	n += x.sizeField255()
-	return n
-}
-
-func (x *AddCatPopularityResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -2082,7 +1721,6 @@ func (x *ListTopCatResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField255()
 	return n
 }
 
@@ -2096,14 +1734,6 @@ func (x *ListTopCatResp) sizeField1() (n int) {
 	return n
 }
 
-func (x *ListTopCatResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
-	return n
-}
-
 var fieldIDToName_DoLikeReq = map[int32]string{
 	1: "UserId",
 	2: "TargetId",
@@ -2111,9 +1741,7 @@ var fieldIDToName_DoLikeReq = map[int32]string{
 	4: "AssociatedId",
 }
 
-var fieldIDToName_DoLikeResp = map[int32]string{
-	255: "Status",
-}
+var fieldIDToName_DoLikeResp = map[int32]string{}
 
 var fieldIDToName_GetUserLikedReq = map[int32]string{
 	1: "UserId",
@@ -2122,8 +1750,7 @@ var fieldIDToName_GetUserLikedReq = map[int32]string{
 }
 
 var fieldIDToName_GetUserLikedResp = map[int32]string{
-	1:   "Liked",
-	255: "Status",
+	1: "Liked",
 }
 
 var fieldIDToName_GetTargetLikesReq = map[int32]string{
@@ -2132,8 +1759,7 @@ var fieldIDToName_GetTargetLikesReq = map[int32]string{
 }
 
 var fieldIDToName_GetTargetLikesResp = map[int32]string{
-	1:   "Count",
-	255: "Status",
+	1: "Count",
 }
 
 var fieldIDToName_GetUserLikesReq = map[int32]string{
@@ -2142,8 +1768,7 @@ var fieldIDToName_GetUserLikesReq = map[int32]string{
 }
 
 var fieldIDToName_GetUserLikesResp = map[int32]string{
-	1:   "Likes",
-	255: "Status",
+	1: "Likes",
 }
 
 var fieldIDToName_GetLikedUsersReq = map[int32]string{
@@ -2152,8 +1777,7 @@ var fieldIDToName_GetLikedUsersReq = map[int32]string{
 }
 
 var fieldIDToName_GetLikedUsersResp = map[int32]string{
-	1:   "UserIds",
-	255: "Status",
+	1: "UserIds",
 }
 
 var fieldIDToName_GetTopKReq = map[int32]string{
@@ -2168,8 +1792,7 @@ var fieldIDToName_ItemScore = map[int32]string{
 }
 
 var fieldIDToName_GetTopKResp = map[int32]string{
-	1:   "Item",
-	255: "Status",
+	1: "Item",
 }
 
 var fieldIDToName_AddScoreReq = map[int32]string{
@@ -2179,15 +1802,12 @@ var fieldIDToName_AddScoreReq = map[int32]string{
 }
 
 var fieldIDToName_AddScoreResp = map[int32]string{
-	1:   "Val",
-	255: "Status",
+	1: "Val",
 }
 
 var fieldIDToName_DailyUpdateReq = map[int32]string{}
 
-var fieldIDToName_DailyUpdateResp = map[int32]string{
-	255: "Status",
-}
+var fieldIDToName_DailyUpdateResp = map[int32]string{}
 
 var fieldIDToName_ListCatPopularityReq = map[int32]string{
 	1: "CatId",
@@ -2199,8 +1819,7 @@ var fieldIDToName_CatPop = map[int32]string{
 }
 
 var fieldIDToName_ListCatPopularityResp = map[int32]string{
-	1:   "Cats",
-	255: "Status",
+	1: "Cats",
 }
 
 var fieldIDToName_AddCatPopularityReq = map[int32]string{
@@ -2208,17 +1827,12 @@ var fieldIDToName_AddCatPopularityReq = map[int32]string{
 	2: "Val",
 }
 
-var fieldIDToName_AddCatPopularityResp = map[int32]string{
-	255: "Status",
-}
+var fieldIDToName_AddCatPopularityResp = map[int32]string{}
 
 var fieldIDToName_ListTopCatReq = map[int32]string{
 	1: "K",
 }
 
 var fieldIDToName_ListTopCatResp = map[int32]string{
-	1:   "Cats",
-	255: "Status",
+	1: "Cats",
 }
-
-var _ = base.File_base_status_proto

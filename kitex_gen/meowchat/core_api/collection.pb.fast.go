@@ -5,7 +5,6 @@ package core_api
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
-	base "github.com/xh-polaris/service-idl-gen-go/kitex_gen/base"
 	http "github.com/xh-polaris/service-idl-gen-go/kitex_gen/http"
 	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/basic"
 	collection "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/collection"
@@ -138,11 +137,6 @@ func (x *GetCatPreviewsResp) FastRead(buf []byte, _type int8, number int32) (off
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -169,16 +163,6 @@ func (x *GetCatPreviewsResp) fastReadField1(buf []byte, _type int8) (offset int,
 func (x *GetCatPreviewsResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
-}
-
-func (x *GetCatPreviewsResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *GetCatDetailReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -213,11 +197,6 @@ func (x *GetCatDetailResp) FastRead(buf []byte, _type int8, number int32) (offse
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -238,16 +217,6 @@ func (x *GetCatDetailResp) fastReadField1(buf []byte, _type int8) (offset int, e
 		return offset, err
 	}
 	x.Cat = &v
-	return offset, nil
-}
-
-func (x *GetCatDetailResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
 	return offset, nil
 }
 
@@ -278,11 +247,6 @@ func (x *DeleteCatReq) fastReadField1(buf []byte, _type int8) (offset int, err e
 
 func (x *DeleteCatResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -292,18 +256,6 @@ func (x *DeleteCatResp) FastRead(buf []byte, _type int8, number int32) (offset i
 	return offset, nil
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DeleteCatResp[number], err)
-}
-
-func (x *DeleteCatResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *NewCatReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -444,11 +396,6 @@ func (x *NewCatResp) FastRead(buf []byte, _type int8, number int32) (offset int,
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -465,16 +412,6 @@ ReadFieldError:
 func (x *NewCatResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.CatId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
-}
-
-func (x *NewCatResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *SearchCatReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -539,11 +476,6 @@ func (x *SearchCatResp) FastRead(buf []byte, _type int8, number int32) (offset i
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -570,16 +502,6 @@ func (x *SearchCatResp) fastReadField1(buf []byte, _type int8) (offset int, err 
 func (x *SearchCatResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
-}
-
-func (x *SearchCatResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *CreateImageReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -619,11 +541,6 @@ func (x *CreateImageResp) FastRead(buf []byte, _type int8, number int32) (offset
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -645,16 +562,6 @@ func (x *CreateImageResp) fastReadField1(buf []byte, _type int8) (offset int, er
 	}
 	x.ImageIds = append(x.ImageIds, v)
 	return offset, err
-}
-
-func (x *CreateImageResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *DeleteImageReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -684,11 +591,6 @@ func (x *DeleteImageReq) fastReadField1(buf []byte, _type int8) (offset int, err
 
 func (x *DeleteImageResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -698,18 +600,6 @@ func (x *DeleteImageResp) FastRead(buf []byte, _type int8, number int32) (offset
 	return offset, nil
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DeleteImageResp[number], err)
-}
-
-func (x *DeleteImageResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *GetImageByCatReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -790,11 +680,6 @@ func (x *GetImageByCatResp) FastRead(buf []byte, _type int8, number int32) (offs
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -821,16 +706,6 @@ func (x *GetImageByCatResp) fastReadField1(buf []byte, _type int8) (offset int, 
 func (x *GetImageByCatResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
-}
-
-func (x *GetImageByCatResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *CatPreview) FastWrite(buf []byte) (offset int) {
@@ -925,7 +800,6 @@ func (x *GetCatPreviewsResp) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -944,14 +818,6 @@ func (x *GetCatPreviewsResp) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetTotal())
-	return offset
-}
-
-func (x *GetCatPreviewsResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -976,7 +842,6 @@ func (x *GetCatDetailResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -985,14 +850,6 @@ func (x *GetCatDetailResp) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetCat())
-	return offset
-}
-
-func (x *GetCatDetailResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1016,15 +873,6 @@ func (x *DeleteCatResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
-	offset += x.fastWriteField255(buf[offset:])
-	return offset
-}
-
-func (x *DeleteCatResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1141,7 +989,6 @@ func (x *NewCatResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1150,14 +997,6 @@ func (x *NewCatResp) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 1, x.GetCatId())
-	return offset
-}
-
-func (x *NewCatResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1201,7 +1040,6 @@ func (x *SearchCatResp) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1220,14 +1058,6 @@ func (x *SearchCatResp) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetTotal())
-	return offset
-}
-
-func (x *SearchCatResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1254,7 +1084,6 @@ func (x *CreateImageResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1265,14 +1094,6 @@ func (x *CreateImageResp) fastWriteField1(buf []byte) (offset int) {
 	for i := range x.GetImageIds() {
 		offset += fastpb.WriteString(buf[offset:], 1, x.GetImageIds()[i])
 	}
-	return offset
-}
-
-func (x *CreateImageResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1296,15 +1117,6 @@ func (x *DeleteImageResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
-	offset += x.fastWriteField255(buf[offset:])
-	return offset
-}
-
-func (x *DeleteImageResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1366,7 +1178,6 @@ func (x *GetImageByCatResp) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1385,14 +1196,6 @@ func (x *GetImageByCatResp) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetTotal())
-	return offset
-}
-
-func (x *GetImageByCatResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1488,7 +1291,6 @@ func (x *GetCatPreviewsResp) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1507,14 +1309,6 @@ func (x *GetCatPreviewsResp) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(2, x.GetTotal())
-	return n
-}
-
-func (x *GetCatPreviewsResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1539,7 +1333,6 @@ func (x *GetCatDetailResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1548,14 +1341,6 @@ func (x *GetCatDetailResp) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeMessage(1, x.GetCat())
-	return n
-}
-
-func (x *GetCatDetailResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1579,15 +1364,6 @@ func (x *DeleteCatResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
-	n += x.sizeField255()
-	return n
-}
-
-func (x *DeleteCatResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1704,7 +1480,6 @@ func (x *NewCatResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1713,14 +1488,6 @@ func (x *NewCatResp) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(1, x.GetCatId())
-	return n
-}
-
-func (x *NewCatResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1764,7 +1531,6 @@ func (x *SearchCatResp) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1783,14 +1549,6 @@ func (x *SearchCatResp) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(2, x.GetTotal())
-	return n
-}
-
-func (x *SearchCatResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1817,7 +1575,6 @@ func (x *CreateImageResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1828,14 +1585,6 @@ func (x *CreateImageResp) sizeField1() (n int) {
 	for i := range x.GetImageIds() {
 		n += fastpb.SizeString(1, x.GetImageIds()[i])
 	}
-	return n
-}
-
-func (x *CreateImageResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1859,15 +1608,6 @@ func (x *DeleteImageResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
-	n += x.sizeField255()
-	return n
-}
-
-func (x *DeleteImageResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1929,7 +1669,6 @@ func (x *GetImageByCatResp) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1951,14 +1690,6 @@ func (x *GetImageByCatResp) sizeField2() (n int) {
 	return n
 }
 
-func (x *GetImageByCatResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
-	return n
-}
-
 var fieldIDToName_CatPreview = map[int32]string{
 	1: "Id",
 	2: "Name",
@@ -1974,9 +1705,8 @@ var fieldIDToName_GetCatPreviewsReq = map[int32]string{
 }
 
 var fieldIDToName_GetCatPreviewsResp = map[int32]string{
-	1:   "Cats",
-	2:   "Total",
-	255: "Status",
+	1: "Cats",
+	2: "Total",
 }
 
 var fieldIDToName_GetCatDetailReq = map[int32]string{
@@ -1984,17 +1714,14 @@ var fieldIDToName_GetCatDetailReq = map[int32]string{
 }
 
 var fieldIDToName_GetCatDetailResp = map[int32]string{
-	1:   "Cat",
-	255: "Status",
+	1: "Cat",
 }
 
 var fieldIDToName_DeleteCatReq = map[int32]string{
 	1: "CatId",
 }
 
-var fieldIDToName_DeleteCatResp = map[int32]string{
-	255: "Status",
-}
+var fieldIDToName_DeleteCatResp = map[int32]string{}
 
 var fieldIDToName_NewCatReq = map[int32]string{
 	1:  "Id",
@@ -2011,8 +1738,7 @@ var fieldIDToName_NewCatReq = map[int32]string{
 }
 
 var fieldIDToName_NewCatResp = map[int32]string{
-	1:   "CatId",
-	255: "Status",
+	1: "CatId",
 }
 
 var fieldIDToName_SearchCatReq = map[int32]string{
@@ -2022,9 +1748,8 @@ var fieldIDToName_SearchCatReq = map[int32]string{
 }
 
 var fieldIDToName_SearchCatResp = map[int32]string{
-	1:   "Cats",
-	2:   "Total",
-	255: "Status",
+	1: "Cats",
+	2: "Total",
 }
 
 var fieldIDToName_CreateImageReq = map[int32]string{
@@ -2032,17 +1757,14 @@ var fieldIDToName_CreateImageReq = map[int32]string{
 }
 
 var fieldIDToName_CreateImageResp = map[int32]string{
-	1:   "ImageIds",
-	255: "Status",
+	1: "ImageIds",
 }
 
 var fieldIDToName_DeleteImageReq = map[int32]string{
 	1: "ImageId",
 }
 
-var fieldIDToName_DeleteImageResp = map[int32]string{
-	255: "Status",
-}
+var fieldIDToName_DeleteImageResp = map[int32]string{}
 
 var fieldIDToName_GetImageByCatReq = map[int32]string{
 	1: "CatId",
@@ -2053,12 +1775,10 @@ var fieldIDToName_GetImageByCatReq = map[int32]string{
 }
 
 var fieldIDToName_GetImageByCatResp = map[int32]string{
-	1:   "Images",
-	2:   "Total",
-	255: "Status",
+	1: "Images",
+	2: "Total",
 }
 
-var _ = base.File_base_status_proto
 var _ = http.File_http_http_proto
 var _ = collection.File_meowchat_collection_common_proto
 var _ = basic.File_meowchat_basic_basic_proto

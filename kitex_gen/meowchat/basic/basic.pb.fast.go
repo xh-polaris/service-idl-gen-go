@@ -68,32 +68,32 @@ ReadFieldError:
 }
 
 func (x *UserMeta) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.UserID, offset, err = fastpb.ReadString(buf, _type)
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *UserMeta) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.AppID, offset, err = fastpb.ReadInt64(buf, _type)
+	x.AppId, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
 func (x *UserMeta) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.DeviceID, offset, err = fastpb.ReadString(buf, _type)
+	x.DeviceId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *UserMeta) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	x.SessionUserID, offset, err = fastpb.ReadString(buf, _type)
+	x.SessionUserId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *UserMeta) fastReadField5(buf []byte, _type int8) (offset int, err error) {
-	x.SessionAppID, offset, err = fastpb.ReadInt64(buf, _type)
+	x.SessionAppId, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
 func (x *UserMeta) fastReadField6(buf []byte, _type int8) (offset int, err error) {
-	x.SessionDeviceID, offset, err = fastpb.ReadString(buf, _type)
+	x.SessionDeviceId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -188,7 +188,7 @@ func (x *Extra) fastReadField5(buf []byte, _type int8) (offset int, err error) {
 }
 
 func (x *Extra) fastReadField6(buf []byte, _type int8) (offset int, err error) {
-	x.DeviceID, offset, err = fastpb.ReadString(buf, _type)
+	x.DeviceId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -233,22 +233,22 @@ ReadFieldError:
 }
 
 func (x *WechatUserMeta) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.AppID, offset, err = fastpb.ReadString(buf, _type)
+	x.AppId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *WechatUserMeta) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.OpenID, offset, err = fastpb.ReadString(buf, _type)
+	x.OpenId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *WechatUserMeta) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.PlatformID, offset, err = fastpb.ReadString(buf, _type)
+	x.PlatformId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *WechatUserMeta) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	x.UnionID, offset, err = fastpb.ReadString(buf, _type)
+	x.UnionId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -419,50 +419,50 @@ func (x *UserMeta) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *UserMeta) fastWriteField1(buf []byte) (offset int) {
-	if x.UserID == "" {
+	if x.UserId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserID())
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
 	return offset
 }
 
 func (x *UserMeta) fastWriteField2(buf []byte) (offset int) {
-	if x.AppID == 0 {
+	if x.AppId == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetAppID())
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetAppId())
 	return offset
 }
 
 func (x *UserMeta) fastWriteField3(buf []byte) (offset int) {
-	if x.DeviceID == "" {
+	if x.DeviceId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetDeviceID())
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetDeviceId())
 	return offset
 }
 
 func (x *UserMeta) fastWriteField4(buf []byte) (offset int) {
-	if x.SessionUserID == "" {
+	if x.SessionUserId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 4, x.GetSessionUserID())
+	offset += fastpb.WriteString(buf[offset:], 4, x.GetSessionUserId())
 	return offset
 }
 
 func (x *UserMeta) fastWriteField5(buf []byte) (offset int) {
-	if x.SessionAppID == 0 {
+	if x.SessionAppId == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 5, x.GetSessionAppID())
+	offset += fastpb.WriteInt64(buf[offset:], 5, x.GetSessionAppId())
 	return offset
 }
 
 func (x *UserMeta) fastWriteField6(buf []byte) (offset int) {
-	if x.SessionDeviceID == "" {
+	if x.SessionDeviceId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 6, x.GetSessionDeviceID())
+	offset += fastpb.WriteString(buf[offset:], 6, x.GetSessionDeviceId())
 	return offset
 }
 
@@ -537,10 +537,10 @@ func (x *Extra) fastWriteField5(buf []byte) (offset int) {
 }
 
 func (x *Extra) fastWriteField6(buf []byte) (offset int) {
-	if x.DeviceID == "" {
+	if x.DeviceId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 6, x.GetDeviceID())
+	offset += fastpb.WriteString(buf[offset:], 6, x.GetDeviceId())
 	return offset
 }
 
@@ -564,34 +564,34 @@ func (x *WechatUserMeta) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *WechatUserMeta) fastWriteField1(buf []byte) (offset int) {
-	if x.AppID == "" {
+	if x.AppId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetAppID())
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetAppId())
 	return offset
 }
 
 func (x *WechatUserMeta) fastWriteField2(buf []byte) (offset int) {
-	if x.OpenID == "" {
+	if x.OpenId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 2, x.GetOpenID())
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetOpenId())
 	return offset
 }
 
 func (x *WechatUserMeta) fastWriteField3(buf []byte) (offset int) {
-	if x.PlatformID == "" {
+	if x.PlatformId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetPlatformID())
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetPlatformId())
 	return offset
 }
 
 func (x *WechatUserMeta) fastWriteField4(buf []byte) (offset int) {
-	if x.UnionID == "" {
+	if x.UnionId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 4, x.GetUnionID())
+	offset += fastpb.WriteString(buf[offset:], 4, x.GetUnionId())
 	return offset
 }
 
@@ -722,50 +722,50 @@ func (x *UserMeta) Size() (n int) {
 }
 
 func (x *UserMeta) sizeField1() (n int) {
-	if x.UserID == "" {
+	if x.UserId == "" {
 		return n
 	}
-	n += fastpb.SizeString(1, x.GetUserID())
+	n += fastpb.SizeString(1, x.GetUserId())
 	return n
 }
 
 func (x *UserMeta) sizeField2() (n int) {
-	if x.AppID == 0 {
+	if x.AppId == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(2, x.GetAppID())
+	n += fastpb.SizeInt64(2, x.GetAppId())
 	return n
 }
 
 func (x *UserMeta) sizeField3() (n int) {
-	if x.DeviceID == "" {
+	if x.DeviceId == "" {
 		return n
 	}
-	n += fastpb.SizeString(3, x.GetDeviceID())
+	n += fastpb.SizeString(3, x.GetDeviceId())
 	return n
 }
 
 func (x *UserMeta) sizeField4() (n int) {
-	if x.SessionUserID == "" {
+	if x.SessionUserId == "" {
 		return n
 	}
-	n += fastpb.SizeString(4, x.GetSessionUserID())
+	n += fastpb.SizeString(4, x.GetSessionUserId())
 	return n
 }
 
 func (x *UserMeta) sizeField5() (n int) {
-	if x.SessionAppID == 0 {
+	if x.SessionAppId == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(5, x.GetSessionAppID())
+	n += fastpb.SizeInt64(5, x.GetSessionAppId())
 	return n
 }
 
 func (x *UserMeta) sizeField6() (n int) {
-	if x.SessionDeviceID == "" {
+	if x.SessionDeviceId == "" {
 		return n
 	}
-	n += fastpb.SizeString(6, x.GetSessionDeviceID())
+	n += fastpb.SizeString(6, x.GetSessionDeviceId())
 	return n
 }
 
@@ -840,10 +840,10 @@ func (x *Extra) sizeField5() (n int) {
 }
 
 func (x *Extra) sizeField6() (n int) {
-	if x.DeviceID == "" {
+	if x.DeviceId == "" {
 		return n
 	}
-	n += fastpb.SizeString(6, x.GetDeviceID())
+	n += fastpb.SizeString(6, x.GetDeviceId())
 	return n
 }
 
@@ -867,34 +867,34 @@ func (x *WechatUserMeta) Size() (n int) {
 }
 
 func (x *WechatUserMeta) sizeField1() (n int) {
-	if x.AppID == "" {
+	if x.AppId == "" {
 		return n
 	}
-	n += fastpb.SizeString(1, x.GetAppID())
+	n += fastpb.SizeString(1, x.GetAppId())
 	return n
 }
 
 func (x *WechatUserMeta) sizeField2() (n int) {
-	if x.OpenID == "" {
+	if x.OpenId == "" {
 		return n
 	}
-	n += fastpb.SizeString(2, x.GetOpenID())
+	n += fastpb.SizeString(2, x.GetOpenId())
 	return n
 }
 
 func (x *WechatUserMeta) sizeField3() (n int) {
-	if x.PlatformID == "" {
+	if x.PlatformId == "" {
 		return n
 	}
-	n += fastpb.SizeString(3, x.GetPlatformID())
+	n += fastpb.SizeString(3, x.GetPlatformId())
 	return n
 }
 
 func (x *WechatUserMeta) sizeField4() (n int) {
-	if x.UnionID == "" {
+	if x.UnionId == "" {
 		return n
 	}
-	n += fastpb.SizeString(4, x.GetUnionID())
+	n += fastpb.SizeString(4, x.GetUnionId())
 	return n
 }
 
@@ -1010,12 +1010,12 @@ func (x *PaginationOptions) sizeField5() (n int) {
 }
 
 var fieldIDToName_UserMeta = map[int32]string{
-	1: "UserID",
-	2: "AppID",
-	3: "DeviceID",
-	4: "SessionUserID",
-	5: "SessionAppID",
-	6: "SessionDeviceID",
+	1: "UserId",
+	2: "AppId",
+	3: "DeviceId",
+	4: "SessionUserId",
+	5: "SessionAppId",
+	6: "SessionDeviceId",
 	7: "IsLogin",
 	8: "WechatUserMeta",
 }
@@ -1026,15 +1026,15 @@ var fieldIDToName_Extra = map[int32]string{
 	3: "Resolution",
 	4: "DevicePlatform",
 	5: "DeviceBrand",
-	6: "DeviceID",
+	6: "DeviceId",
 	7: "OperateSystem",
 }
 
 var fieldIDToName_WechatUserMeta = map[int32]string{
-	1: "AppID",
-	2: "OpenID",
-	3: "PlatformID",
-	4: "UnionID",
+	1: "AppId",
+	2: "OpenId",
+	3: "PlatformId",
+	4: "UnionId",
 }
 
 var fieldIDToName_UserPreview = map[int32]string{

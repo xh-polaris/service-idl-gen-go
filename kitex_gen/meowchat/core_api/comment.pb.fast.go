@@ -5,7 +5,6 @@ package core_api
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
-	base "github.com/xh-polaris/service-idl-gen-go/kitex_gen/base"
 	http "github.com/xh-polaris/service-idl-gen-go/kitex_gen/http"
 	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/basic"
 )
@@ -153,11 +152,6 @@ func (x *NewCommentReq) fastReadField3(buf []byte, _type int8) (offset int, err 
 
 func (x *NewCommentResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -167,18 +161,6 @@ func (x *NewCommentResp) FastRead(buf []byte, _type int8, number int32) (offset 
 	return offset, nil
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_NewCommentResp[number], err)
-}
-
-func (x *NewCommentResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *GetCommentsReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -238,11 +220,6 @@ func (x *GetCommentsResp) FastRead(buf []byte, _type int8, number int32) (offset
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -269,16 +246,6 @@ func (x *GetCommentsResp) fastReadField1(buf []byte, _type int8) (offset int, er
 func (x *GetCommentsResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
-}
-
-func (x *GetCommentsResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *DeleteCommentReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -308,11 +275,6 @@ func (x *DeleteCommentReq) fastReadField1(buf []byte, _type int8) (offset int, e
 
 func (x *DeleteCommentResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -322,18 +284,6 @@ func (x *DeleteCommentResp) FastRead(buf []byte, _type int8, number int32) (offs
 	return offset, nil
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DeleteCommentResp[number], err)
-}
-
-func (x *DeleteCommentResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *Comment) FastWrite(buf []byte) (offset int) {
@@ -444,15 +394,6 @@ func (x *NewCommentResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
-	offset += x.fastWriteField255(buf[offset:])
-	return offset
-}
-
-func (x *NewCommentResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -496,7 +437,6 @@ func (x *GetCommentsResp) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -515,14 +455,6 @@ func (x *GetCommentsResp) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetTotal())
-	return offset
-}
-
-func (x *GetCommentsResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -546,15 +478,6 @@ func (x *DeleteCommentResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
-	offset += x.fastWriteField255(buf[offset:])
-	return offset
-}
-
-func (x *DeleteCommentResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -666,15 +589,6 @@ func (x *NewCommentResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
-	n += x.sizeField255()
-	return n
-}
-
-func (x *NewCommentResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -718,7 +632,6 @@ func (x *GetCommentsResp) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField255()
 	return n
 }
 
@@ -737,14 +650,6 @@ func (x *GetCommentsResp) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(2, x.GetTotal())
-	return n
-}
-
-func (x *GetCommentsResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -768,15 +673,6 @@ func (x *DeleteCommentResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
-	n += x.sizeField255()
-	return n
-}
-
-func (x *DeleteCommentResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -796,9 +692,7 @@ var fieldIDToName_NewCommentReq = map[int32]string{
 	3: "Scope",
 }
 
-var fieldIDToName_NewCommentResp = map[int32]string{
-	255: "Status",
-}
+var fieldIDToName_NewCommentResp = map[int32]string{}
 
 var fieldIDToName_GetCommentsReq = map[int32]string{
 	1: "Id",
@@ -807,19 +701,15 @@ var fieldIDToName_GetCommentsReq = map[int32]string{
 }
 
 var fieldIDToName_GetCommentsResp = map[int32]string{
-	1:   "Comments",
-	2:   "Total",
-	255: "Status",
+	1: "Comments",
+	2: "Total",
 }
 
 var fieldIDToName_DeleteCommentReq = map[int32]string{
 	1: "CommentId",
 }
 
-var fieldIDToName_DeleteCommentResp = map[int32]string{
-	255: "Status",
-}
+var fieldIDToName_DeleteCommentResp = map[int32]string{}
 
-var _ = base.File_base_status_proto
 var _ = http.File_http_http_proto
 var _ = basic.File_meowchat_basic_basic_proto

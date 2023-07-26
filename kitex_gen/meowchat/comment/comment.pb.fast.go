@@ -5,7 +5,6 @@ package comment
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
-	base "github.com/xh-polaris/service-idl-gen-go/kitex_gen/base"
 )
 
 var (
@@ -180,11 +179,6 @@ func (x *CreateCommentResponse) FastRead(buf []byte, _type int8, number int32) (
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -201,16 +195,6 @@ ReadFieldError:
 func (x *CreateCommentResponse) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.Id, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
-}
-
-func (x *CreateCommentResponse) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *UpdateCommentRequest) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -250,11 +234,6 @@ func (x *UpdateCommentRequest) fastReadField2(buf []byte, _type int8) (offset in
 
 func (x *UpdateCommentResponse) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -264,18 +243,6 @@ func (x *UpdateCommentResponse) FastRead(buf []byte, _type int8, number int32) (
 	return offset, nil
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_UpdateCommentResponse[number], err)
-}
-
-func (x *UpdateCommentResponse) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *DeleteCommentByIdRequest) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -305,11 +272,6 @@ func (x *DeleteCommentByIdRequest) fastReadField1(buf []byte, _type int8) (offse
 
 func (x *DeleteCommentByIdResponse) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -319,18 +281,6 @@ func (x *DeleteCommentByIdResponse) FastRead(buf []byte, _type int8, number int3
 	return offset, nil
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DeleteCommentByIdResponse[number], err)
-}
-
-func (x *DeleteCommentByIdResponse) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *ListCommentByParentRequest) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -400,11 +350,6 @@ func (x *ListCommentByParentResponse) FastRead(buf []byte, _type int8, number in
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -431,16 +376,6 @@ func (x *ListCommentByParentResponse) fastReadField1(buf []byte, _type int8) (of
 func (x *ListCommentByParentResponse) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
-}
-
-func (x *ListCommentByParentResponse) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *CountCommentByParentRequest) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -485,11 +420,6 @@ func (x *CountCommentByParentResponse) FastRead(buf []byte, _type int8, number i
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -506,16 +436,6 @@ ReadFieldError:
 func (x *CountCommentByParentResponse) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
-}
-
-func (x *CountCommentByParentResponse) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *RetrieveCommentByIdRequest) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -550,11 +470,6 @@ func (x *RetrieveCommentByIdResponse) FastRead(buf []byte, _type int8, number in
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -575,16 +490,6 @@ func (x *RetrieveCommentByIdResponse) fastReadField1(buf []byte, _type int8) (of
 		return offset, err
 	}
 	x.Comment = &v
-	return offset, nil
-}
-
-func (x *RetrieveCommentByIdResponse) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
 	return offset, nil
 }
 
@@ -655,11 +560,6 @@ func (x *ListCommentByAuthorIdAndTypeResponse) FastRead(buf []byte, _type int8, 
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -686,16 +586,6 @@ func (x *ListCommentByAuthorIdAndTypeResponse) fastReadField1(buf []byte, _type 
 func (x *ListCommentByAuthorIdAndTypeResponse) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
-}
-
-func (x *ListCommentByAuthorIdAndTypeResponse) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *ListCommentByReplyToAndTypeRequest) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -765,11 +655,6 @@ func (x *ListCommentByReplyToAndTypeResponse) FastRead(buf []byte, _type int8, n
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -796,16 +681,6 @@ func (x *ListCommentByReplyToAndTypeResponse) fastReadField1(buf []byte, _type i
 func (x *ListCommentByReplyToAndTypeResponse) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
-}
-
-func (x *ListCommentByReplyToAndTypeResponse) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *Comment) FastWrite(buf []byte) (offset int) {
@@ -944,7 +819,6 @@ func (x *CreateCommentResponse) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -953,14 +827,6 @@ func (x *CreateCommentResponse) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
-	return offset
-}
-
-func (x *CreateCommentResponse) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -993,15 +859,6 @@ func (x *UpdateCommentResponse) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
-	offset += x.fastWriteField255(buf[offset:])
-	return offset
-}
-
-func (x *UpdateCommentResponse) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1025,15 +882,6 @@ func (x *DeleteCommentByIdResponse) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
-	offset += x.fastWriteField255(buf[offset:])
-	return offset
-}
-
-func (x *DeleteCommentByIdResponse) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1086,7 +934,6 @@ func (x *ListCommentByParentResponse) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1105,14 +952,6 @@ func (x *ListCommentByParentResponse) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetTotal())
-	return offset
-}
-
-func (x *ListCommentByParentResponse) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1146,7 +985,6 @@ func (x *CountCommentByParentResponse) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1155,14 +993,6 @@ func (x *CountCommentByParentResponse) fastWriteField1(buf []byte) (offset int) 
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetTotal())
-	return offset
-}
-
-func (x *CountCommentByParentResponse) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1187,7 +1017,6 @@ func (x *RetrieveCommentByIdResponse) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1196,14 +1025,6 @@ func (x *RetrieveCommentByIdResponse) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetComment())
-	return offset
-}
-
-func (x *RetrieveCommentByIdResponse) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1256,7 +1077,6 @@ func (x *ListCommentByAuthorIdAndTypeResponse) FastWrite(buf []byte) (offset int
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1275,14 +1095,6 @@ func (x *ListCommentByAuthorIdAndTypeResponse) fastWriteField2(buf []byte) (offs
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetTotal())
-	return offset
-}
-
-func (x *ListCommentByAuthorIdAndTypeResponse) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1335,7 +1147,6 @@ func (x *ListCommentByReplyToAndTypeResponse) FastWrite(buf []byte) (offset int)
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -1354,14 +1165,6 @@ func (x *ListCommentByReplyToAndTypeResponse) fastWriteField2(buf []byte) (offse
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetTotal())
-	return offset
-}
-
-func (x *ListCommentByReplyToAndTypeResponse) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -1501,7 +1304,6 @@ func (x *CreateCommentResponse) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1510,14 +1312,6 @@ func (x *CreateCommentResponse) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(1, x.GetId())
-	return n
-}
-
-func (x *CreateCommentResponse) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1550,15 +1344,6 @@ func (x *UpdateCommentResponse) Size() (n int) {
 	if x == nil {
 		return n
 	}
-	n += x.sizeField255()
-	return n
-}
-
-func (x *UpdateCommentResponse) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1582,15 +1367,6 @@ func (x *DeleteCommentByIdResponse) Size() (n int) {
 	if x == nil {
 		return n
 	}
-	n += x.sizeField255()
-	return n
-}
-
-func (x *DeleteCommentByIdResponse) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1643,7 +1419,6 @@ func (x *ListCommentByParentResponse) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1662,14 +1437,6 @@ func (x *ListCommentByParentResponse) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(2, x.GetTotal())
-	return n
-}
-
-func (x *ListCommentByParentResponse) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1703,7 +1470,6 @@ func (x *CountCommentByParentResponse) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1712,14 +1478,6 @@ func (x *CountCommentByParentResponse) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(1, x.GetTotal())
-	return n
-}
-
-func (x *CountCommentByParentResponse) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1744,7 +1502,6 @@ func (x *RetrieveCommentByIdResponse) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1753,14 +1510,6 @@ func (x *RetrieveCommentByIdResponse) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeMessage(1, x.GetComment())
-	return n
-}
-
-func (x *RetrieveCommentByIdResponse) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1813,7 +1562,6 @@ func (x *ListCommentByAuthorIdAndTypeResponse) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1832,14 +1580,6 @@ func (x *ListCommentByAuthorIdAndTypeResponse) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(2, x.GetTotal())
-	return n
-}
-
-func (x *ListCommentByAuthorIdAndTypeResponse) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1892,7 +1632,6 @@ func (x *ListCommentByReplyToAndTypeResponse) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField255()
 	return n
 }
 
@@ -1911,14 +1650,6 @@ func (x *ListCommentByReplyToAndTypeResponse) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(2, x.GetTotal())
-	return n
-}
-
-func (x *ListCommentByReplyToAndTypeResponse) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -1942,8 +1673,7 @@ var fieldIDToName_CreateCommentRequest = map[int32]string{
 }
 
 var fieldIDToName_CreateCommentResponse = map[int32]string{
-	1:   "Id",
-	255: "Status",
+	1: "Id",
 }
 
 var fieldIDToName_UpdateCommentRequest = map[int32]string{
@@ -1951,17 +1681,13 @@ var fieldIDToName_UpdateCommentRequest = map[int32]string{
 	2: "Text",
 }
 
-var fieldIDToName_UpdateCommentResponse = map[int32]string{
-	255: "Status",
-}
+var fieldIDToName_UpdateCommentResponse = map[int32]string{}
 
 var fieldIDToName_DeleteCommentByIdRequest = map[int32]string{
 	1: "Id",
 }
 
-var fieldIDToName_DeleteCommentByIdResponse = map[int32]string{
-	255: "Status",
-}
+var fieldIDToName_DeleteCommentByIdResponse = map[int32]string{}
 
 var fieldIDToName_ListCommentByParentRequest = map[int32]string{
 	1: "Type",
@@ -1971,9 +1697,8 @@ var fieldIDToName_ListCommentByParentRequest = map[int32]string{
 }
 
 var fieldIDToName_ListCommentByParentResponse = map[int32]string{
-	1:   "Comments",
-	2:   "Total",
-	255: "Status",
+	1: "Comments",
+	2: "Total",
 }
 
 var fieldIDToName_CountCommentByParentRequest = map[int32]string{
@@ -1982,8 +1707,7 @@ var fieldIDToName_CountCommentByParentRequest = map[int32]string{
 }
 
 var fieldIDToName_CountCommentByParentResponse = map[int32]string{
-	1:   "Total",
-	255: "Status",
+	1: "Total",
 }
 
 var fieldIDToName_RetrieveCommentByIdRequest = map[int32]string{
@@ -1991,8 +1715,7 @@ var fieldIDToName_RetrieveCommentByIdRequest = map[int32]string{
 }
 
 var fieldIDToName_RetrieveCommentByIdResponse = map[int32]string{
-	1:   "Comment",
-	255: "Status",
+	1: "Comment",
 }
 
 var fieldIDToName_ListCommentByAuthorIdAndTypeRequest = map[int32]string{
@@ -2003,9 +1726,8 @@ var fieldIDToName_ListCommentByAuthorIdAndTypeRequest = map[int32]string{
 }
 
 var fieldIDToName_ListCommentByAuthorIdAndTypeResponse = map[int32]string{
-	1:   "Comments",
-	2:   "Total",
-	255: "Status",
+	1: "Comments",
+	2: "Total",
 }
 
 var fieldIDToName_ListCommentByReplyToAndTypeRequest = map[int32]string{
@@ -2016,9 +1738,6 @@ var fieldIDToName_ListCommentByReplyToAndTypeRequest = map[int32]string{
 }
 
 var fieldIDToName_ListCommentByReplyToAndTypeResponse = map[int32]string{
-	1:   "Comments",
-	2:   "Total",
-	255: "Status",
+	1: "Comments",
+	2: "Total",
 }
-
-var _ = base.File_base_status_proto

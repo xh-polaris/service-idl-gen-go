@@ -5,7 +5,6 @@ package core_api
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
-	base "github.com/xh-polaris/service-idl-gen-go/kitex_gen/base"
 	http "github.com/xh-polaris/service-idl-gen-go/kitex_gen/http"
 )
 
@@ -63,11 +62,6 @@ func (x *ApplySignedUrlResp) FastRead(buf []byte, _type int8, number int32) (off
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -89,16 +83,6 @@ func (x *ApplySignedUrlResp) fastReadField1(buf []byte, _type int8) (offset int,
 func (x *ApplySignedUrlResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.SessionToken, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
-}
-
-func (x *ApplySignedUrlResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *ApplySignedUrlAsCommunityReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -158,11 +142,6 @@ func (x *ApplySignedUrlAsCommunityResp) FastRead(buf []byte, _type int8, number 
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -184,16 +163,6 @@ func (x *ApplySignedUrlAsCommunityResp) fastReadField1(buf []byte, _type int8) (
 func (x *ApplySignedUrlAsCommunityResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.SessionToken, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
-}
-
-func (x *ApplySignedUrlAsCommunityResp) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v base.Status
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Status = &v
-	return offset, nil
 }
 
 func (x *ApplySignedUrlReq) FastWrite(buf []byte) (offset int) {
@@ -227,7 +196,6 @@ func (x *ApplySignedUrlResp) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -244,14 +212,6 @@ func (x *ApplySignedUrlResp) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 2, x.GetSessionToken())
-	return offset
-}
-
-func (x *ApplySignedUrlResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -295,7 +255,6 @@ func (x *ApplySignedUrlAsCommunityResp) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -312,14 +271,6 @@ func (x *ApplySignedUrlAsCommunityResp) fastWriteField2(buf []byte) (offset int)
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 2, x.GetSessionToken())
-	return offset
-}
-
-func (x *ApplySignedUrlAsCommunityResp) fastWriteField255(buf []byte) (offset int) {
-	if x.Status == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetStatus())
 	return offset
 }
 
@@ -354,7 +305,6 @@ func (x *ApplySignedUrlResp) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField255()
 	return n
 }
 
@@ -371,14 +321,6 @@ func (x *ApplySignedUrlResp) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(2, x.GetSessionToken())
-	return n
-}
-
-func (x *ApplySignedUrlResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
 	return n
 }
 
@@ -422,7 +364,6 @@ func (x *ApplySignedUrlAsCommunityResp) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField255()
 	return n
 }
 
@@ -442,23 +383,14 @@ func (x *ApplySignedUrlAsCommunityResp) sizeField2() (n int) {
 	return n
 }
 
-func (x *ApplySignedUrlAsCommunityResp) sizeField255() (n int) {
-	if x.Status == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetStatus())
-	return n
-}
-
 var fieldIDToName_ApplySignedUrlReq = map[int32]string{
 	1: "Prefix",
 	2: "Suffix",
 }
 
 var fieldIDToName_ApplySignedUrlResp = map[int32]string{
-	1:   "Url",
-	2:   "SessionToken",
-	255: "Status",
+	1: "Url",
+	2: "SessionToken",
 }
 
 var fieldIDToName_ApplySignedUrlAsCommunityReq = map[int32]string{
@@ -468,10 +400,8 @@ var fieldIDToName_ApplySignedUrlAsCommunityReq = map[int32]string{
 }
 
 var fieldIDToName_ApplySignedUrlAsCommunityResp = map[int32]string{
-	1:   "Url",
-	2:   "SessionToken",
-	255: "Status",
+	1: "Url",
+	2: "SessionToken",
 }
 
 var _ = http.File_http_http_proto
-var _ = base.File_base_status_proto
