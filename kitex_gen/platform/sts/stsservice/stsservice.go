@@ -22,11 +22,14 @@ func NewServiceInfo() *kitex.ServiceInfo {
 	serviceName := "StsService"
 	handlerType := (*sts.StsService)(nil)
 	methods := map[string]kitex.MethodInfo{
-		"genCosSts":    kitex.NewMethodInfo(genCosStsHandler, newGenCosStsArgs, newGenCosStsResult, false),
-		"genSignedUrl": kitex.NewMethodInfo(genSignedUrlHandler, newGenSignedUrlArgs, newGenSignedUrlResult, false),
-		"deleteObject": kitex.NewMethodInfo(deleteObjectHandler, newDeleteObjectArgs, newDeleteObjectResult, false),
-		"textCheck":    kitex.NewMethodInfo(textCheckHandler, newTextCheckArgs, newTextCheckResult, false),
-		"photoCheck":   kitex.NewMethodInfo(photoCheckHandler, newPhotoCheckArgs, newPhotoCheckResult, false),
+		"genCosSts":      kitex.NewMethodInfo(genCosStsHandler, newGenCosStsArgs, newGenCosStsResult, false),
+		"genSignedUrl":   kitex.NewMethodInfo(genSignedUrlHandler, newGenSignedUrlArgs, newGenSignedUrlResult, false),
+		"deleteObject":   kitex.NewMethodInfo(deleteObjectHandler, newDeleteObjectArgs, newDeleteObjectResult, false),
+		"textCheck":      kitex.NewMethodInfo(textCheckHandler, newTextCheckArgs, newTextCheckResult, false),
+		"photoCheck":     kitex.NewMethodInfo(photoCheckHandler, newPhotoCheckArgs, newPhotoCheckResult, false),
+		"signIn":         kitex.NewMethodInfo(signInHandler, newSignInArgs, newSignInResult, false),
+		"setPassword":    kitex.NewMethodInfo(setPasswordHandler, newSetPasswordArgs, newSetPasswordResult, false),
+		"sendVerifyCode": kitex.NewMethodInfo(sendVerifyCodeHandler, newSendVerifyCodeArgs, newSendVerifyCodeResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName": "platform.sts",
@@ -807,6 +810,465 @@ func (p *PhotoCheckResult) GetResult() interface{} {
 	return p.Success
 }
 
+func signInHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(sts.SignInReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(sts.StsService).SignIn(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *SignInArgs:
+		success, err := handler.(sts.StsService).SignIn(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*SignInResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newSignInArgs() interface{} {
+	return &SignInArgs{}
+}
+
+func newSignInResult() interface{} {
+	return &SignInResult{}
+}
+
+type SignInArgs struct {
+	Req *sts.SignInReq
+}
+
+func (p *SignInArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(sts.SignInReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *SignInArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *SignInArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *SignInArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in SignInArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *SignInArgs) Unmarshal(in []byte) error {
+	msg := new(sts.SignInReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var SignInArgs_Req_DEFAULT *sts.SignInReq
+
+func (p *SignInArgs) GetReq() *sts.SignInReq {
+	if !p.IsSetReq() {
+		return SignInArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *SignInArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *SignInArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type SignInResult struct {
+	Success *sts.SignInResp
+}
+
+var SignInResult_Success_DEFAULT *sts.SignInResp
+
+func (p *SignInResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(sts.SignInResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *SignInResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *SignInResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *SignInResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in SignInResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *SignInResult) Unmarshal(in []byte) error {
+	msg := new(sts.SignInResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *SignInResult) GetSuccess() *sts.SignInResp {
+	if !p.IsSetSuccess() {
+		return SignInResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *SignInResult) SetSuccess(x interface{}) {
+	p.Success = x.(*sts.SignInResp)
+}
+
+func (p *SignInResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *SignInResult) GetResult() interface{} {
+	return p.Success
+}
+
+func setPasswordHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(sts.SetPasswordReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(sts.StsService).SetPassword(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *SetPasswordArgs:
+		success, err := handler.(sts.StsService).SetPassword(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*SetPasswordResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newSetPasswordArgs() interface{} {
+	return &SetPasswordArgs{}
+}
+
+func newSetPasswordResult() interface{} {
+	return &SetPasswordResult{}
+}
+
+type SetPasswordArgs struct {
+	Req *sts.SetPasswordReq
+}
+
+func (p *SetPasswordArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(sts.SetPasswordReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *SetPasswordArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *SetPasswordArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *SetPasswordArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in SetPasswordArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *SetPasswordArgs) Unmarshal(in []byte) error {
+	msg := new(sts.SetPasswordReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var SetPasswordArgs_Req_DEFAULT *sts.SetPasswordReq
+
+func (p *SetPasswordArgs) GetReq() *sts.SetPasswordReq {
+	if !p.IsSetReq() {
+		return SetPasswordArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *SetPasswordArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *SetPasswordArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type SetPasswordResult struct {
+	Success *sts.SetPasswordResp
+}
+
+var SetPasswordResult_Success_DEFAULT *sts.SetPasswordResp
+
+func (p *SetPasswordResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(sts.SetPasswordResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *SetPasswordResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *SetPasswordResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *SetPasswordResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in SetPasswordResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *SetPasswordResult) Unmarshal(in []byte) error {
+	msg := new(sts.SetPasswordResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *SetPasswordResult) GetSuccess() *sts.SetPasswordResp {
+	if !p.IsSetSuccess() {
+		return SetPasswordResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *SetPasswordResult) SetSuccess(x interface{}) {
+	p.Success = x.(*sts.SetPasswordResp)
+}
+
+func (p *SetPasswordResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *SetPasswordResult) GetResult() interface{} {
+	return p.Success
+}
+
+func sendVerifyCodeHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(sts.SendVerifyCodeReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(sts.StsService).SendVerifyCode(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *SendVerifyCodeArgs:
+		success, err := handler.(sts.StsService).SendVerifyCode(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*SendVerifyCodeResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newSendVerifyCodeArgs() interface{} {
+	return &SendVerifyCodeArgs{}
+}
+
+func newSendVerifyCodeResult() interface{} {
+	return &SendVerifyCodeResult{}
+}
+
+type SendVerifyCodeArgs struct {
+	Req *sts.SendVerifyCodeReq
+}
+
+func (p *SendVerifyCodeArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(sts.SendVerifyCodeReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *SendVerifyCodeArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *SendVerifyCodeArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *SendVerifyCodeArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in SendVerifyCodeArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *SendVerifyCodeArgs) Unmarshal(in []byte) error {
+	msg := new(sts.SendVerifyCodeReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var SendVerifyCodeArgs_Req_DEFAULT *sts.SendVerifyCodeReq
+
+func (p *SendVerifyCodeArgs) GetReq() *sts.SendVerifyCodeReq {
+	if !p.IsSetReq() {
+		return SendVerifyCodeArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *SendVerifyCodeArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *SendVerifyCodeArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type SendVerifyCodeResult struct {
+	Success *sts.SendVerifyCodeResp
+}
+
+var SendVerifyCodeResult_Success_DEFAULT *sts.SendVerifyCodeResp
+
+func (p *SendVerifyCodeResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(sts.SendVerifyCodeResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *SendVerifyCodeResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *SendVerifyCodeResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *SendVerifyCodeResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in SendVerifyCodeResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *SendVerifyCodeResult) Unmarshal(in []byte) error {
+	msg := new(sts.SendVerifyCodeResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *SendVerifyCodeResult) GetSuccess() *sts.SendVerifyCodeResp {
+	if !p.IsSetSuccess() {
+		return SendVerifyCodeResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *SendVerifyCodeResult) SetSuccess(x interface{}) {
+	p.Success = x.(*sts.SendVerifyCodeResp)
+}
+
+func (p *SendVerifyCodeResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *SendVerifyCodeResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -862,6 +1324,36 @@ func (p *kClient) PhotoCheck(ctx context.Context, Req *sts.PhotoCheckReq) (r *st
 	_args.Req = Req
 	var _result PhotoCheckResult
 	if err = p.c.Call(ctx, "photoCheck", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) SignIn(ctx context.Context, Req *sts.SignInReq) (r *sts.SignInResp, err error) {
+	var _args SignInArgs
+	_args.Req = Req
+	var _result SignInResult
+	if err = p.c.Call(ctx, "signIn", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) SetPassword(ctx context.Context, Req *sts.SetPasswordReq) (r *sts.SetPasswordResp, err error) {
+	var _args SetPasswordArgs
+	_args.Req = Req
+	var _result SetPasswordResult
+	if err = p.c.Call(ctx, "setPassword", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) SendVerifyCode(ctx context.Context, Req *sts.SendVerifyCodeReq) (r *sts.SendVerifyCodeResp, err error) {
+	var _args SendVerifyCodeArgs
+	_args.Req = Req
+	var _result SendVerifyCodeResult
+	if err = p.c.Call(ctx, "sendVerifyCode", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

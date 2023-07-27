@@ -2,7 +2,7 @@
 // versions:
 // 	protoc-gen-go v1.28.1
 // 	protoc        v3.19.4
-// source: meowchat/comment/comment.proto
+// source: platform/comment/comment.proto
 
 package comment
 
@@ -36,7 +36,7 @@ type CreateCommentReq struct {
 func (x *CreateCommentReq) Reset() {
 	*x = CreateCommentReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_comment_comment_proto_msgTypes[0]
+		mi := &file_platform_comment_comment_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -49,7 +49,7 @@ func (x *CreateCommentReq) String() string {
 func (*CreateCommentReq) ProtoMessage() {}
 
 func (x *CreateCommentReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_comment_comment_proto_msgTypes[0]
+	mi := &file_platform_comment_comment_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -62,7 +62,7 @@ func (x *CreateCommentReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCommentReq.ProtoReflect.Descriptor instead.
 func (*CreateCommentReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_comment_comment_proto_rawDescGZIP(), []int{0}
+	return file_platform_comment_comment_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *CreateCommentReq) GetText() string {
@@ -111,7 +111,7 @@ type CreateCommentResp struct {
 func (x *CreateCommentResp) Reset() {
 	*x = CreateCommentResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_comment_comment_proto_msgTypes[1]
+		mi := &file_platform_comment_comment_proto_msgTypes[1]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -124,7 +124,7 @@ func (x *CreateCommentResp) String() string {
 func (*CreateCommentResp) ProtoMessage() {}
 
 func (x *CreateCommentResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_comment_comment_proto_msgTypes[1]
+	mi := &file_platform_comment_comment_proto_msgTypes[1]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -137,7 +137,7 @@ func (x *CreateCommentResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateCommentResp.ProtoReflect.Descriptor instead.
 func (*CreateCommentResp) Descriptor() ([]byte, []int) {
-	return file_meowchat_comment_comment_proto_rawDescGZIP(), []int{1}
+	return file_platform_comment_comment_proto_rawDescGZIP(), []int{1}
 }
 
 func (x *CreateCommentResp) GetId() string {
@@ -159,7 +159,7 @@ type UpdateCommentReq struct {
 func (x *UpdateCommentReq) Reset() {
 	*x = UpdateCommentReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_comment_comment_proto_msgTypes[2]
+		mi := &file_platform_comment_comment_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -172,7 +172,7 @@ func (x *UpdateCommentReq) String() string {
 func (*UpdateCommentReq) ProtoMessage() {}
 
 func (x *UpdateCommentReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_comment_comment_proto_msgTypes[2]
+	mi := &file_platform_comment_comment_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -185,7 +185,7 @@ func (x *UpdateCommentReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateCommentReq.ProtoReflect.Descriptor instead.
 func (*UpdateCommentReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_comment_comment_proto_rawDescGZIP(), []int{2}
+	return file_platform_comment_comment_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *UpdateCommentReq) GetId() string {
@@ -211,7 +211,7 @@ type UpdateCommentResp struct {
 func (x *UpdateCommentResp) Reset() {
 	*x = UpdateCommentResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_comment_comment_proto_msgTypes[3]
+		mi := &file_platform_comment_comment_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -224,7 +224,7 @@ func (x *UpdateCommentResp) String() string {
 func (*UpdateCommentResp) ProtoMessage() {}
 
 func (x *UpdateCommentResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_comment_comment_proto_msgTypes[3]
+	mi := &file_platform_comment_comment_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -237,7 +237,7 @@ func (x *UpdateCommentResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateCommentResp.ProtoReflect.Descriptor instead.
 func (*UpdateCommentResp) Descriptor() ([]byte, []int) {
-	return file_meowchat_comment_comment_proto_rawDescGZIP(), []int{3}
+	return file_platform_comment_comment_proto_rawDescGZIP(), []int{3}
 }
 
 // 根据 Id 删除评论
@@ -252,7 +252,7 @@ type DeleteCommentByIdReq struct {
 func (x *DeleteCommentByIdReq) Reset() {
 	*x = DeleteCommentByIdReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_comment_comment_proto_msgTypes[4]
+		mi := &file_platform_comment_comment_proto_msgTypes[4]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -265,7 +265,7 @@ func (x *DeleteCommentByIdReq) String() string {
 func (*DeleteCommentByIdReq) ProtoMessage() {}
 
 func (x *DeleteCommentByIdReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_comment_comment_proto_msgTypes[4]
+	mi := &file_platform_comment_comment_proto_msgTypes[4]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -278,7 +278,7 @@ func (x *DeleteCommentByIdReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCommentByIdReq.ProtoReflect.Descriptor instead.
 func (*DeleteCommentByIdReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_comment_comment_proto_rawDescGZIP(), []int{4}
+	return file_platform_comment_comment_proto_rawDescGZIP(), []int{4}
 }
 
 func (x *DeleteCommentByIdReq) GetId() string {
@@ -297,7 +297,7 @@ type DeleteCommentByIdResp struct {
 func (x *DeleteCommentByIdResp) Reset() {
 	*x = DeleteCommentByIdResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_comment_comment_proto_msgTypes[5]
+		mi := &file_platform_comment_comment_proto_msgTypes[5]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -310,7 +310,7 @@ func (x *DeleteCommentByIdResp) String() string {
 func (*DeleteCommentByIdResp) ProtoMessage() {}
 
 func (x *DeleteCommentByIdResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_comment_comment_proto_msgTypes[5]
+	mi := &file_platform_comment_comment_proto_msgTypes[5]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -323,7 +323,7 @@ func (x *DeleteCommentByIdResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteCommentByIdResp.ProtoReflect.Descriptor instead.
 func (*DeleteCommentByIdResp) Descriptor() ([]byte, []int) {
-	return file_meowchat_comment_comment_proto_rawDescGZIP(), []int{5}
+	return file_platform_comment_comment_proto_rawDescGZIP(), []int{5}
 }
 
 type ListCommentByParentReq struct {
@@ -340,7 +340,7 @@ type ListCommentByParentReq struct {
 func (x *ListCommentByParentReq) Reset() {
 	*x = ListCommentByParentReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_comment_comment_proto_msgTypes[6]
+		mi := &file_platform_comment_comment_proto_msgTypes[6]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -353,7 +353,7 @@ func (x *ListCommentByParentReq) String() string {
 func (*ListCommentByParentReq) ProtoMessage() {}
 
 func (x *ListCommentByParentReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_comment_comment_proto_msgTypes[6]
+	mi := &file_platform_comment_comment_proto_msgTypes[6]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -366,7 +366,7 @@ func (x *ListCommentByParentReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCommentByParentReq.ProtoReflect.Descriptor instead.
 func (*ListCommentByParentReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_comment_comment_proto_rawDescGZIP(), []int{6}
+	return file_platform_comment_comment_proto_rawDescGZIP(), []int{6}
 }
 
 func (x *ListCommentByParentReq) GetType() string {
@@ -409,7 +409,7 @@ type ListCommentByParentResp struct {
 func (x *ListCommentByParentResp) Reset() {
 	*x = ListCommentByParentResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_comment_comment_proto_msgTypes[7]
+		mi := &file_platform_comment_comment_proto_msgTypes[7]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -422,7 +422,7 @@ func (x *ListCommentByParentResp) String() string {
 func (*ListCommentByParentResp) ProtoMessage() {}
 
 func (x *ListCommentByParentResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_comment_comment_proto_msgTypes[7]
+	mi := &file_platform_comment_comment_proto_msgTypes[7]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -435,7 +435,7 @@ func (x *ListCommentByParentResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCommentByParentResp.ProtoReflect.Descriptor instead.
 func (*ListCommentByParentResp) Descriptor() ([]byte, []int) {
-	return file_meowchat_comment_comment_proto_rawDescGZIP(), []int{7}
+	return file_platform_comment_comment_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *ListCommentByParentResp) GetComments() []*Comment {
@@ -464,7 +464,7 @@ type CountCommentByParentReq struct {
 func (x *CountCommentByParentReq) Reset() {
 	*x = CountCommentByParentReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_comment_comment_proto_msgTypes[8]
+		mi := &file_platform_comment_comment_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -477,7 +477,7 @@ func (x *CountCommentByParentReq) String() string {
 func (*CountCommentByParentReq) ProtoMessage() {}
 
 func (x *CountCommentByParentReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_comment_comment_proto_msgTypes[8]
+	mi := &file_platform_comment_comment_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -490,7 +490,7 @@ func (x *CountCommentByParentReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountCommentByParentReq.ProtoReflect.Descriptor instead.
 func (*CountCommentByParentReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_comment_comment_proto_rawDescGZIP(), []int{8}
+	return file_platform_comment_comment_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *CountCommentByParentReq) GetType() string {
@@ -518,7 +518,7 @@ type CountCommentByParentResp struct {
 func (x *CountCommentByParentResp) Reset() {
 	*x = CountCommentByParentResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_comment_comment_proto_msgTypes[9]
+		mi := &file_platform_comment_comment_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -531,7 +531,7 @@ func (x *CountCommentByParentResp) String() string {
 func (*CountCommentByParentResp) ProtoMessage() {}
 
 func (x *CountCommentByParentResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_comment_comment_proto_msgTypes[9]
+	mi := &file_platform_comment_comment_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -544,7 +544,7 @@ func (x *CountCommentByParentResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountCommentByParentResp.ProtoReflect.Descriptor instead.
 func (*CountCommentByParentResp) Descriptor() ([]byte, []int) {
-	return file_meowchat_comment_comment_proto_rawDescGZIP(), []int{9}
+	return file_platform_comment_comment_proto_rawDescGZIP(), []int{9}
 }
 
 func (x *CountCommentByParentResp) GetTotal() int64 {
@@ -565,7 +565,7 @@ type RetrieveCommentByIdReq struct {
 func (x *RetrieveCommentByIdReq) Reset() {
 	*x = RetrieveCommentByIdReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_comment_comment_proto_msgTypes[10]
+		mi := &file_platform_comment_comment_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -578,7 +578,7 @@ func (x *RetrieveCommentByIdReq) String() string {
 func (*RetrieveCommentByIdReq) ProtoMessage() {}
 
 func (x *RetrieveCommentByIdReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_comment_comment_proto_msgTypes[10]
+	mi := &file_platform_comment_comment_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -591,7 +591,7 @@ func (x *RetrieveCommentByIdReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RetrieveCommentByIdReq.ProtoReflect.Descriptor instead.
 func (*RetrieveCommentByIdReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_comment_comment_proto_rawDescGZIP(), []int{10}
+	return file_platform_comment_comment_proto_rawDescGZIP(), []int{10}
 }
 
 func (x *RetrieveCommentByIdReq) GetId() string {
@@ -612,7 +612,7 @@ type RetrieveCommentByIdResp struct {
 func (x *RetrieveCommentByIdResp) Reset() {
 	*x = RetrieveCommentByIdResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_comment_comment_proto_msgTypes[11]
+		mi := &file_platform_comment_comment_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -625,7 +625,7 @@ func (x *RetrieveCommentByIdResp) String() string {
 func (*RetrieveCommentByIdResp) ProtoMessage() {}
 
 func (x *RetrieveCommentByIdResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_comment_comment_proto_msgTypes[11]
+	mi := &file_platform_comment_comment_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -638,7 +638,7 @@ func (x *RetrieveCommentByIdResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use RetrieveCommentByIdResp.ProtoReflect.Descriptor instead.
 func (*RetrieveCommentByIdResp) Descriptor() ([]byte, []int) {
-	return file_meowchat_comment_comment_proto_rawDescGZIP(), []int{11}
+	return file_platform_comment_comment_proto_rawDescGZIP(), []int{11}
 }
 
 func (x *RetrieveCommentByIdResp) GetComment() *Comment {
@@ -662,7 +662,7 @@ type ListCommentByAuthorIdAndTypeReq struct {
 func (x *ListCommentByAuthorIdAndTypeReq) Reset() {
 	*x = ListCommentByAuthorIdAndTypeReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_comment_comment_proto_msgTypes[12]
+		mi := &file_platform_comment_comment_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -675,7 +675,7 @@ func (x *ListCommentByAuthorIdAndTypeReq) String() string {
 func (*ListCommentByAuthorIdAndTypeReq) ProtoMessage() {}
 
 func (x *ListCommentByAuthorIdAndTypeReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_comment_comment_proto_msgTypes[12]
+	mi := &file_platform_comment_comment_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -688,7 +688,7 @@ func (x *ListCommentByAuthorIdAndTypeReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCommentByAuthorIdAndTypeReq.ProtoReflect.Descriptor instead.
 func (*ListCommentByAuthorIdAndTypeReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_comment_comment_proto_rawDescGZIP(), []int{12}
+	return file_platform_comment_comment_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *ListCommentByAuthorIdAndTypeReq) GetAuthorId() string {
@@ -731,7 +731,7 @@ type ListCommentByAuthorIdAndTypeResp struct {
 func (x *ListCommentByAuthorIdAndTypeResp) Reset() {
 	*x = ListCommentByAuthorIdAndTypeResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_comment_comment_proto_msgTypes[13]
+		mi := &file_platform_comment_comment_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -744,7 +744,7 @@ func (x *ListCommentByAuthorIdAndTypeResp) String() string {
 func (*ListCommentByAuthorIdAndTypeResp) ProtoMessage() {}
 
 func (x *ListCommentByAuthorIdAndTypeResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_comment_comment_proto_msgTypes[13]
+	mi := &file_platform_comment_comment_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -757,7 +757,7 @@ func (x *ListCommentByAuthorIdAndTypeResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCommentByAuthorIdAndTypeResp.ProtoReflect.Descriptor instead.
 func (*ListCommentByAuthorIdAndTypeResp) Descriptor() ([]byte, []int) {
-	return file_meowchat_comment_comment_proto_rawDescGZIP(), []int{13}
+	return file_platform_comment_comment_proto_rawDescGZIP(), []int{13}
 }
 
 func (x *ListCommentByAuthorIdAndTypeResp) GetComments() []*Comment {
@@ -788,7 +788,7 @@ type ListCommentByReplyToAndTypeReq struct {
 func (x *ListCommentByReplyToAndTypeReq) Reset() {
 	*x = ListCommentByReplyToAndTypeReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_comment_comment_proto_msgTypes[14]
+		mi := &file_platform_comment_comment_proto_msgTypes[14]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -801,7 +801,7 @@ func (x *ListCommentByReplyToAndTypeReq) String() string {
 func (*ListCommentByReplyToAndTypeReq) ProtoMessage() {}
 
 func (x *ListCommentByReplyToAndTypeReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_comment_comment_proto_msgTypes[14]
+	mi := &file_platform_comment_comment_proto_msgTypes[14]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -814,7 +814,7 @@ func (x *ListCommentByReplyToAndTypeReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCommentByReplyToAndTypeReq.ProtoReflect.Descriptor instead.
 func (*ListCommentByReplyToAndTypeReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_comment_comment_proto_rawDescGZIP(), []int{14}
+	return file_platform_comment_comment_proto_rawDescGZIP(), []int{14}
 }
 
 func (x *ListCommentByReplyToAndTypeReq) GetReplyTo() string {
@@ -857,7 +857,7 @@ type ListCommentByReplyToAndTypeResp struct {
 func (x *ListCommentByReplyToAndTypeResp) Reset() {
 	*x = ListCommentByReplyToAndTypeResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_comment_comment_proto_msgTypes[15]
+		mi := &file_platform_comment_comment_proto_msgTypes[15]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -870,7 +870,7 @@ func (x *ListCommentByReplyToAndTypeResp) String() string {
 func (*ListCommentByReplyToAndTypeResp) ProtoMessage() {}
 
 func (x *ListCommentByReplyToAndTypeResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_comment_comment_proto_msgTypes[15]
+	mi := &file_platform_comment_comment_proto_msgTypes[15]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -883,7 +883,7 @@ func (x *ListCommentByReplyToAndTypeResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListCommentByReplyToAndTypeResp.ProtoReflect.Descriptor instead.
 func (*ListCommentByReplyToAndTypeResp) Descriptor() ([]byte, []int) {
-	return file_meowchat_comment_comment_proto_rawDescGZIP(), []int{15}
+	return file_platform_comment_comment_proto_rawDescGZIP(), []int{15}
 }
 
 func (x *ListCommentByReplyToAndTypeResp) GetComments() []*Comment {
@@ -900,13 +900,13 @@ func (x *ListCommentByReplyToAndTypeResp) GetTotal() int64 {
 	return 0
 }
 
-var File_meowchat_comment_comment_proto protoreflect.FileDescriptor
+var File_platform_comment_comment_proto protoreflect.FileDescriptor
 
-var file_meowchat_comment_comment_proto_rawDesc = []byte{
-	0x0a, 0x1e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x68, 0x61, 0x74, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x65,
+var file_platform_comment_comment_proto_rawDesc = []byte{
+	0x0a, 0x1e, 0x70, 0x6c, 0x61, 0x74, 0x66, 0x6f, 0x72, 0x6d, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x65,
 	0x6e, 0x74, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x65, 0x6e, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f,
 	0x12, 0x10, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x6f, 0x6d, 0x6d, 0x65,
-	0x6e, 0x74, 0x1a, 0x1d, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x68, 0x61, 0x74, 0x2f, 0x63, 0x6f, 0x6d,
+	0x6e, 0x74, 0x1a, 0x1d, 0x70, 0x6c, 0x61, 0x74, 0x66, 0x6f, 0x72, 0x6d, 0x2f, 0x63, 0x6f, 0x6d,
 	0x6d, 0x65, 0x6e, 0x74, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74,
 	0x6f, 0x22, 0x8c, 0x01, 0x0a, 0x10, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x43, 0x6f, 0x6d, 0x6d,
 	0x65, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x12, 0x12, 0x0a, 0x04, 0x74, 0x65, 0x78, 0x74, 0x18, 0x01,
@@ -1051,19 +1051,19 @@ var file_meowchat_comment_comment_proto_rawDesc = []byte{
 }
 
 var (
-	file_meowchat_comment_comment_proto_rawDescOnce sync.Once
-	file_meowchat_comment_comment_proto_rawDescData = file_meowchat_comment_comment_proto_rawDesc
+	file_platform_comment_comment_proto_rawDescOnce sync.Once
+	file_platform_comment_comment_proto_rawDescData = file_platform_comment_comment_proto_rawDesc
 )
 
-func file_meowchat_comment_comment_proto_rawDescGZIP() []byte {
-	file_meowchat_comment_comment_proto_rawDescOnce.Do(func() {
-		file_meowchat_comment_comment_proto_rawDescData = protoimpl.X.CompressGZIP(file_meowchat_comment_comment_proto_rawDescData)
+func file_platform_comment_comment_proto_rawDescGZIP() []byte {
+	file_platform_comment_comment_proto_rawDescOnce.Do(func() {
+		file_platform_comment_comment_proto_rawDescData = protoimpl.X.CompressGZIP(file_platform_comment_comment_proto_rawDescData)
 	})
-	return file_meowchat_comment_comment_proto_rawDescData
+	return file_platform_comment_comment_proto_rawDescData
 }
 
-var file_meowchat_comment_comment_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
-var file_meowchat_comment_comment_proto_goTypes = []interface{}{
+var file_platform_comment_comment_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_platform_comment_comment_proto_goTypes = []interface{}{
 	(*CreateCommentReq)(nil),                 // 0: meowchat.comment.CreateCommentReq
 	(*CreateCommentResp)(nil),                // 1: meowchat.comment.CreateCommentResp
 	(*UpdateCommentReq)(nil),                 // 2: meowchat.comment.UpdateCommentReq
@@ -1082,7 +1082,7 @@ var file_meowchat_comment_comment_proto_goTypes = []interface{}{
 	(*ListCommentByReplyToAndTypeResp)(nil),  // 15: meowchat.comment.ListCommentByReplyToAndTypeResp
 	(*Comment)(nil),                          // 16: meowchat.comment.Comment
 }
-var file_meowchat_comment_comment_proto_depIdxs = []int32{
+var file_platform_comment_comment_proto_depIdxs = []int32{
 	16, // 0: meowchat.comment.ListCommentByParentResp.comments:type_name -> meowchat.comment.Comment
 	16, // 1: meowchat.comment.RetrieveCommentByIdResp.comment:type_name -> meowchat.comment.Comment
 	16, // 2: meowchat.comment.ListCommentByAuthorIdAndTypeResp.comments:type_name -> meowchat.comment.Comment
@@ -1110,14 +1110,14 @@ var file_meowchat_comment_comment_proto_depIdxs = []int32{
 	0,  // [0:4] is the sub-list for field type_name
 }
 
-func init() { file_meowchat_comment_comment_proto_init() }
-func file_meowchat_comment_comment_proto_init() {
-	if File_meowchat_comment_comment_proto != nil {
+func init() { file_platform_comment_comment_proto_init() }
+func file_platform_comment_comment_proto_init() {
+	if File_platform_comment_comment_proto != nil {
 		return
 	}
-	file_meowchat_comment_common_proto_init()
+	file_platform_comment_common_proto_init()
 	if !protoimpl.UnsafeEnabled {
-		file_meowchat_comment_comment_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_platform_comment_comment_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreateCommentReq); i {
 			case 0:
 				return &v.state
@@ -1129,7 +1129,7 @@ func file_meowchat_comment_comment_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_comment_comment_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
+		file_platform_comment_comment_proto_msgTypes[1].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreateCommentResp); i {
 			case 0:
 				return &v.state
@@ -1141,7 +1141,7 @@ func file_meowchat_comment_comment_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_comment_comment_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
+		file_platform_comment_comment_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UpdateCommentReq); i {
 			case 0:
 				return &v.state
@@ -1153,7 +1153,7 @@ func file_meowchat_comment_comment_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_comment_comment_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
+		file_platform_comment_comment_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UpdateCommentResp); i {
 			case 0:
 				return &v.state
@@ -1165,7 +1165,7 @@ func file_meowchat_comment_comment_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_comment_comment_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+		file_platform_comment_comment_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteCommentByIdReq); i {
 			case 0:
 				return &v.state
@@ -1177,7 +1177,7 @@ func file_meowchat_comment_comment_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_comment_comment_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+		file_platform_comment_comment_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteCommentByIdResp); i {
 			case 0:
 				return &v.state
@@ -1189,7 +1189,7 @@ func file_meowchat_comment_comment_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_comment_comment_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
+		file_platform_comment_comment_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListCommentByParentReq); i {
 			case 0:
 				return &v.state
@@ -1201,7 +1201,7 @@ func file_meowchat_comment_comment_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_comment_comment_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
+		file_platform_comment_comment_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListCommentByParentResp); i {
 			case 0:
 				return &v.state
@@ -1213,7 +1213,7 @@ func file_meowchat_comment_comment_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_comment_comment_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
+		file_platform_comment_comment_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CountCommentByParentReq); i {
 			case 0:
 				return &v.state
@@ -1225,7 +1225,7 @@ func file_meowchat_comment_comment_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_comment_comment_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
+		file_platform_comment_comment_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CountCommentByParentResp); i {
 			case 0:
 				return &v.state
@@ -1237,7 +1237,7 @@ func file_meowchat_comment_comment_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_comment_comment_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
+		file_platform_comment_comment_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*RetrieveCommentByIdReq); i {
 			case 0:
 				return &v.state
@@ -1249,7 +1249,7 @@ func file_meowchat_comment_comment_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_comment_comment_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
+		file_platform_comment_comment_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*RetrieveCommentByIdResp); i {
 			case 0:
 				return &v.state
@@ -1261,7 +1261,7 @@ func file_meowchat_comment_comment_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_comment_comment_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
+		file_platform_comment_comment_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListCommentByAuthorIdAndTypeReq); i {
 			case 0:
 				return &v.state
@@ -1273,7 +1273,7 @@ func file_meowchat_comment_comment_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_comment_comment_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
+		file_platform_comment_comment_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListCommentByAuthorIdAndTypeResp); i {
 			case 0:
 				return &v.state
@@ -1285,7 +1285,7 @@ func file_meowchat_comment_comment_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_comment_comment_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+		file_platform_comment_comment_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListCommentByReplyToAndTypeReq); i {
 			case 0:
 				return &v.state
@@ -1297,7 +1297,7 @@ func file_meowchat_comment_comment_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_comment_comment_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+		file_platform_comment_comment_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListCommentByReplyToAndTypeResp); i {
 			case 0:
 				return &v.state
@@ -1314,20 +1314,20 @@ func file_meowchat_comment_comment_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_meowchat_comment_comment_proto_rawDesc,
+			RawDescriptor: file_platform_comment_comment_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   16,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
-		GoTypes:           file_meowchat_comment_comment_proto_goTypes,
-		DependencyIndexes: file_meowchat_comment_comment_proto_depIdxs,
-		MessageInfos:      file_meowchat_comment_comment_proto_msgTypes,
+		GoTypes:           file_platform_comment_comment_proto_goTypes,
+		DependencyIndexes: file_platform_comment_comment_proto_depIdxs,
+		MessageInfos:      file_platform_comment_comment_proto_msgTypes,
 	}.Build()
-	File_meowchat_comment_comment_proto = out.File
-	file_meowchat_comment_comment_proto_rawDesc = nil
-	file_meowchat_comment_comment_proto_goTypes = nil
-	file_meowchat_comment_comment_proto_depIdxs = nil
+	File_platform_comment_comment_proto = out.File
+	file_platform_comment_comment_proto_rawDesc = nil
+	file_platform_comment_comment_proto_goTypes = nil
+	file_platform_comment_comment_proto_depIdxs = nil
 }
 
 var _ context.Context

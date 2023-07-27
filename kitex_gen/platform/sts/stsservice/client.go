@@ -16,6 +16,9 @@ type Client interface {
 	DeleteObject(ctx context.Context, Req *sts.DeleteObjectReq, callOptions ...callopt.Option) (r *sts.DeleteObjectResp, err error)
 	TextCheck(ctx context.Context, Req *sts.TextCheckReq, callOptions ...callopt.Option) (r *sts.TextCheckResp, err error)
 	PhotoCheck(ctx context.Context, Req *sts.PhotoCheckReq, callOptions ...callopt.Option) (r *sts.PhotoCheckResp, err error)
+	SignIn(ctx context.Context, Req *sts.SignInReq, callOptions ...callopt.Option) (r *sts.SignInResp, err error)
+	SetPassword(ctx context.Context, Req *sts.SetPasswordReq, callOptions ...callopt.Option) (r *sts.SetPasswordResp, err error)
+	SendVerifyCode(ctx context.Context, Req *sts.SendVerifyCodeReq, callOptions ...callopt.Option) (r *sts.SendVerifyCodeResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -70,4 +73,19 @@ func (p *kStsServiceClient) TextCheck(ctx context.Context, Req *sts.TextCheckReq
 func (p *kStsServiceClient) PhotoCheck(ctx context.Context, Req *sts.PhotoCheckReq, callOptions ...callopt.Option) (r *sts.PhotoCheckResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.PhotoCheck(ctx, Req)
+}
+
+func (p *kStsServiceClient) SignIn(ctx context.Context, Req *sts.SignInReq, callOptions ...callopt.Option) (r *sts.SignInResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.SignIn(ctx, Req)
+}
+
+func (p *kStsServiceClient) SetPassword(ctx context.Context, Req *sts.SetPasswordReq, callOptions ...callopt.Option) (r *sts.SetPasswordResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.SetPassword(ctx, Req)
+}
+
+func (p *kStsServiceClient) SendVerifyCode(ctx context.Context, Req *sts.SendVerifyCodeReq, callOptions ...callopt.Option) (r *sts.SendVerifyCodeResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.SendVerifyCode(ctx, Req)
 }
