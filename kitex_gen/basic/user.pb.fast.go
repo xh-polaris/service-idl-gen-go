@@ -73,8 +73,13 @@ func (x *UserMeta) fastReadField1(buf []byte, _type int8) (offset int, err error
 }
 
 func (x *UserMeta) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.AppId, offset, err = fastpb.ReadInt64(buf, _type)
-	return offset, err
+	var v int32
+	v, offset, err = fastpb.ReadInt32(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.AppId = APP(v)
+	return offset, nil
 }
 
 func (x *UserMeta) fastReadField3(buf []byte, _type int8) (offset int, err error) {
@@ -88,8 +93,13 @@ func (x *UserMeta) fastReadField4(buf []byte, _type int8) (offset int, err error
 }
 
 func (x *UserMeta) fastReadField5(buf []byte, _type int8) (offset int, err error) {
-	x.SessionAppId, offset, err = fastpb.ReadInt64(buf, _type)
-	return offset, err
+	var v int32
+	v, offset, err = fastpb.ReadInt32(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.SessionAppId = APP(v)
+	return offset, nil
 }
 
 func (x *UserMeta) fastReadField6(buf []byte, _type int8) (offset int, err error) {
@@ -279,7 +289,7 @@ func (x *UserMeta) fastWriteField2(buf []byte) (offset int) {
 	if x.AppId == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetAppId())
+	offset += fastpb.WriteInt32(buf[offset:], 2, int32(x.GetAppId()))
 	return offset
 }
 
@@ -303,7 +313,7 @@ func (x *UserMeta) fastWriteField5(buf []byte) (offset int) {
 	if x.SessionAppId == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 5, x.GetSessionAppId())
+	offset += fastpb.WriteInt32(buf[offset:], 5, int32(x.GetSessionAppId()))
 	return offset
 }
 
@@ -471,7 +481,7 @@ func (x *UserMeta) sizeField2() (n int) {
 	if x.AppId == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(2, x.GetAppId())
+	n += fastpb.SizeInt32(2, int32(x.GetAppId()))
 	return n
 }
 
@@ -495,7 +505,7 @@ func (x *UserMeta) sizeField5() (n int) {
 	if x.SessionAppId == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(5, x.GetSessionAppId())
+	n += fastpb.SizeInt32(5, int32(x.GetSessionAppId()))
 	return n
 }
 

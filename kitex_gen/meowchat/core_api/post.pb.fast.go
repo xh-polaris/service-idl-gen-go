@@ -62,6 +62,11 @@ func (x *Post) FastRead(buf []byte, _type int8, number int32) (offset int, err e
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 11:
+		offset, err = x.fastReadField11(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -127,6 +132,11 @@ func (x *Post) fastReadField9(buf []byte, _type int8) (offset int, err error) {
 
 func (x *Post) fastReadField10(buf []byte, _type int8) (offset int, err error) {
 	x.IsOfficial, offset, err = fastpb.ReadBool(buf, _type)
+	return offset, err
+}
+
+func (x *Post) fastReadField11(buf []byte, _type int8) (offset int, err error) {
+	x.Likes, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -557,6 +567,7 @@ func (x *Post) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField8(buf[offset:])
 	offset += x.fastWriteField9(buf[offset:])
 	offset += x.fastWriteField10(buf[offset:])
+	offset += x.fastWriteField11(buf[offset:])
 	return offset
 }
 
@@ -631,6 +642,14 @@ func (x *Post) fastWriteField10(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteBool(buf[offset:], 10, x.GetIsOfficial())
+	return offset
+}
+
+func (x *Post) fastWriteField11(buf []byte) (offset int) {
+	if x.Likes == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 11, x.GetLikes())
 	return offset
 }
 
@@ -926,6 +945,7 @@ func (x *Post) Size() (n int) {
 	n += x.sizeField8()
 	n += x.sizeField9()
 	n += x.sizeField10()
+	n += x.sizeField11()
 	return n
 }
 
@@ -1000,6 +1020,14 @@ func (x *Post) sizeField10() (n int) {
 		return n
 	}
 	n += fastpb.SizeBool(10, x.GetIsOfficial())
+	return n
+}
+
+func (x *Post) sizeField11() (n int) {
+	if x.Likes == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(11, x.GetLikes())
 	return n
 }
 
@@ -1292,6 +1320,7 @@ var fieldIDToName_Post = map[int32]string{
 	8:  "Tags",
 	9:  "User",
 	10: "IsOfficial",
+	11: "Likes",
 }
 
 var fieldIDToName_SearchOptions = map[int32]string{

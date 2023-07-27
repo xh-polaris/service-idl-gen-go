@@ -36,6 +36,16 @@ func (x *SignInReq) FastRead(buf []byte, _type int8, number int32) (offset int, 
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 5:
+		offset, err = x.fastReadField5(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 6:
+		offset, err = x.fastReadField6(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -66,12 +76,23 @@ func (x *SignInReq) fastReadField3(buf []byte, _type int8) (offset int, err erro
 }
 
 func (x *SignInReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	var v string
-	v, offset, err = fastpb.ReadString(buf, _type)
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.VerifyCode = &tmp
+	return offset, err
+}
+
+func (x *SignInReq) fastReadField5(buf []byte, _type int8) (offset int, err error) {
+	var v int32
+	v, offset, err = fastpb.ReadInt32(buf, _type)
 	if err != nil {
 		return offset, err
 	}
-	x.Params = append(x.Params, v)
+	x.AppId = basic.APP(v)
+	return offset, nil
+}
+
+func (x *SignInReq) fastReadField6(buf []byte, _type int8) (offset int, err error) {
+	x.DeviceId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -214,6 +235,8 @@ func (x *SignInReq) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
+	offset += x.fastWriteField5(buf[offset:])
+	offset += x.fastWriteField6(buf[offset:])
 	return offset
 }
 
@@ -242,12 +265,26 @@ func (x *SignInReq) fastWriteField3(buf []byte) (offset int) {
 }
 
 func (x *SignInReq) fastWriteField4(buf []byte) (offset int) {
-	if len(x.Params) == 0 {
+	if x.VerifyCode == nil {
 		return offset
 	}
-	for i := range x.GetParams() {
-		offset += fastpb.WriteString(buf[offset:], 4, x.GetParams()[i])
+	offset += fastpb.WriteString(buf[offset:], 4, x.GetVerifyCode())
+	return offset
+}
+
+func (x *SignInReq) fastWriteField5(buf []byte) (offset int) {
+	if x.AppId == 0 {
+		return offset
 	}
+	offset += fastpb.WriteInt32(buf[offset:], 5, int32(x.GetAppId()))
+	return offset
+}
+
+func (x *SignInReq) fastWriteField6(buf []byte) (offset int) {
+	if x.DeviceId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 6, x.GetDeviceId())
 	return offset
 }
 
@@ -348,6 +385,8 @@ func (x *SignInReq) Size() (n int) {
 	n += x.sizeField2()
 	n += x.sizeField3()
 	n += x.sizeField4()
+	n += x.sizeField5()
+	n += x.sizeField6()
 	return n
 }
 
@@ -376,12 +415,26 @@ func (x *SignInReq) sizeField3() (n int) {
 }
 
 func (x *SignInReq) sizeField4() (n int) {
-	if len(x.Params) == 0 {
+	if x.VerifyCode == nil {
 		return n
 	}
-	for i := range x.GetParams() {
-		n += fastpb.SizeString(4, x.GetParams()[i])
+	n += fastpb.SizeString(4, x.GetVerifyCode())
+	return n
+}
+
+func (x *SignInReq) sizeField5() (n int) {
+	if x.AppId == 0 {
+		return n
 	}
+	n += fastpb.SizeInt32(5, int32(x.GetAppId()))
+	return n
+}
+
+func (x *SignInReq) sizeField6() (n int) {
+	if x.DeviceId == "" {
+		return n
+	}
+	n += fastpb.SizeString(6, x.GetDeviceId())
 	return n
 }
 
@@ -478,7 +531,9 @@ var fieldIDToName_SignInReq = map[int32]string{
 	1: "AuthType",
 	2: "AuthId",
 	3: "Password",
-	4: "Params",
+	4: "VerifyCode",
+	5: "AppId",
+	6: "DeviceId",
 }
 
 var fieldIDToName_SignInResp = map[int32]string{
@@ -502,3 +557,4 @@ var fieldIDToName_SendVerifyCodeResp = map[int32]string{}
 
 var _ = http.File_http_http_proto
 var _ = basic.File_basic_user_proto
+var _ = basic.File_basic_app_proto
