@@ -338,7 +338,12 @@ ReadFieldError:
 }
 
 func (x *PhotoCheckReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.Url, offset, err = fastpb.ReadString(buf, _type)
+	var v string
+	v, offset, err = fastpb.ReadString(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.Url = append(x.Url, v)
 	return offset, err
 }
 
@@ -596,10 +601,12 @@ func (x *PhotoCheckReq) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *PhotoCheckReq) fastWriteField1(buf []byte) (offset int) {
-	if x.Url == "" {
+	if len(x.Url) == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetUrl())
+	for i := range x.GetUrl() {
+		offset += fastpb.WriteString(buf[offset:], 1, x.GetUrl()[i])
+	}
 	return offset
 }
 
@@ -846,10 +853,12 @@ func (x *PhotoCheckReq) Size() (n int) {
 }
 
 func (x *PhotoCheckReq) sizeField1() (n int) {
-	if x.Url == "" {
+	if len(x.Url) == 0 {
 		return n
 	}
-	n += fastpb.SizeString(1, x.GetUrl())
+	for i := range x.GetUrl() {
+		n += fastpb.SizeString(1, x.GetUrl()[i])
+	}
 	return n
 }
 

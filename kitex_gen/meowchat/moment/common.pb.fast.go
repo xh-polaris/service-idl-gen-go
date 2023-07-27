@@ -5,7 +5,6 @@ package moment
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
-	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/basic"
 )
 
 var (
@@ -606,5 +605,3 @@ var fieldIDToName_FilterOptions = map[int32]string{
 	2: "OnlyCommunityId",
 	3: "OnlyCommunityIds",
 }
-
-var _ = basic.File_basic_pagination_proto
