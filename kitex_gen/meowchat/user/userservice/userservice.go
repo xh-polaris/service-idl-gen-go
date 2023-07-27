@@ -22,10 +22,15 @@ func NewServiceInfo() *kitex.ServiceInfo {
 	serviceName := "UserService"
 	handlerType := (*user.UserService)(nil)
 	methods := map[string]kitex.MethodInfo{
-		"GetUser":       kitex.NewMethodInfo(getUserHandler, newGetUserArgs, newGetUserResult, false),
-		"GetUserDetail": kitex.NewMethodInfo(getUserDetailHandler, newGetUserDetailArgs, newGetUserDetailResult, false),
-		"UpdateUser":    kitex.NewMethodInfo(updateUserHandler, newUpdateUserArgs, newUpdateUserResult, false),
-		"SearchUser":    kitex.NewMethodInfo(searchUserHandler, newSearchUserArgs, newSearchUserResult, false),
+		"GetUser":        kitex.NewMethodInfo(getUserHandler, newGetUserArgs, newGetUserResult, false),
+		"GetUserDetail":  kitex.NewMethodInfo(getUserDetailHandler, newGetUserDetailArgs, newGetUserDetailResult, false),
+		"UpdateUser":     kitex.NewMethodInfo(updateUserHandler, newUpdateUserArgs, newUpdateUserResult, false),
+		"SearchUser":     kitex.NewMethodInfo(searchUserHandler, newSearchUserArgs, newSearchUserResult, false),
+		"DoLike":         kitex.NewMethodInfo(doLikeHandler, newDoLikeArgs, newDoLikeResult, false),
+		"GetUserLike":    kitex.NewMethodInfo(getUserLikeHandler, newGetUserLikeArgs, newGetUserLikeResult, false),
+		"GetTargetLikes": kitex.NewMethodInfo(getTargetLikesHandler, newGetTargetLikesArgs, newGetTargetLikesResult, false),
+		"GetUserLikes":   kitex.NewMethodInfo(getUserLikesHandler, newGetUserLikesArgs, newGetUserLikesResult, false),
+		"GetLikedUsers":  kitex.NewMethodInfo(getLikedUsersHandler, newGetLikedUsersArgs, newGetLikedUsersResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName": "meowchat.user",
@@ -653,6 +658,771 @@ func (p *SearchUserResult) GetResult() interface{} {
 	return p.Success
 }
 
+func doLikeHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.DoLikeReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).DoLike(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *DoLikeArgs:
+		success, err := handler.(user.UserService).DoLike(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*DoLikeResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newDoLikeArgs() interface{} {
+	return &DoLikeArgs{}
+}
+
+func newDoLikeResult() interface{} {
+	return &DoLikeResult{}
+}
+
+type DoLikeArgs struct {
+	Req *user.DoLikeReq
+}
+
+func (p *DoLikeArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.DoLikeReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *DoLikeArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *DoLikeArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *DoLikeArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in DoLikeArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *DoLikeArgs) Unmarshal(in []byte) error {
+	msg := new(user.DoLikeReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var DoLikeArgs_Req_DEFAULT *user.DoLikeReq
+
+func (p *DoLikeArgs) GetReq() *user.DoLikeReq {
+	if !p.IsSetReq() {
+		return DoLikeArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *DoLikeArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *DoLikeArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type DoLikeResult struct {
+	Success *user.DoLikeResp
+}
+
+var DoLikeResult_Success_DEFAULT *user.DoLikeResp
+
+func (p *DoLikeResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.DoLikeResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *DoLikeResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *DoLikeResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *DoLikeResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in DoLikeResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *DoLikeResult) Unmarshal(in []byte) error {
+	msg := new(user.DoLikeResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *DoLikeResult) GetSuccess() *user.DoLikeResp {
+	if !p.IsSetSuccess() {
+		return DoLikeResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *DoLikeResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.DoLikeResp)
+}
+
+func (p *DoLikeResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *DoLikeResult) GetResult() interface{} {
+	return p.Success
+}
+
+func getUserLikeHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.GetUserLikedReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).GetUserLike(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *GetUserLikeArgs:
+		success, err := handler.(user.UserService).GetUserLike(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetUserLikeResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newGetUserLikeArgs() interface{} {
+	return &GetUserLikeArgs{}
+}
+
+func newGetUserLikeResult() interface{} {
+	return &GetUserLikeResult{}
+}
+
+type GetUserLikeArgs struct {
+	Req *user.GetUserLikedReq
+}
+
+func (p *GetUserLikeArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.GetUserLikedReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetUserLikeArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetUserLikeArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetUserLikeArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in GetUserLikeArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetUserLikeArgs) Unmarshal(in []byte) error {
+	msg := new(user.GetUserLikedReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetUserLikeArgs_Req_DEFAULT *user.GetUserLikedReq
+
+func (p *GetUserLikeArgs) GetReq() *user.GetUserLikedReq {
+	if !p.IsSetReq() {
+		return GetUserLikeArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetUserLikeArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetUserLikeArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetUserLikeResult struct {
+	Success *user.GetUserLikedResp
+}
+
+var GetUserLikeResult_Success_DEFAULT *user.GetUserLikedResp
+
+func (p *GetUserLikeResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.GetUserLikedResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetUserLikeResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetUserLikeResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetUserLikeResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in GetUserLikeResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetUserLikeResult) Unmarshal(in []byte) error {
+	msg := new(user.GetUserLikedResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetUserLikeResult) GetSuccess() *user.GetUserLikedResp {
+	if !p.IsSetSuccess() {
+		return GetUserLikeResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetUserLikeResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.GetUserLikedResp)
+}
+
+func (p *GetUserLikeResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetUserLikeResult) GetResult() interface{} {
+	return p.Success
+}
+
+func getTargetLikesHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.GetTargetLikesReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).GetTargetLikes(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *GetTargetLikesArgs:
+		success, err := handler.(user.UserService).GetTargetLikes(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetTargetLikesResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newGetTargetLikesArgs() interface{} {
+	return &GetTargetLikesArgs{}
+}
+
+func newGetTargetLikesResult() interface{} {
+	return &GetTargetLikesResult{}
+}
+
+type GetTargetLikesArgs struct {
+	Req *user.GetTargetLikesReq
+}
+
+func (p *GetTargetLikesArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.GetTargetLikesReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetTargetLikesArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetTargetLikesArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetTargetLikesArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in GetTargetLikesArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetTargetLikesArgs) Unmarshal(in []byte) error {
+	msg := new(user.GetTargetLikesReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetTargetLikesArgs_Req_DEFAULT *user.GetTargetLikesReq
+
+func (p *GetTargetLikesArgs) GetReq() *user.GetTargetLikesReq {
+	if !p.IsSetReq() {
+		return GetTargetLikesArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetTargetLikesArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetTargetLikesArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetTargetLikesResult struct {
+	Success *user.GetTargetLikesResp
+}
+
+var GetTargetLikesResult_Success_DEFAULT *user.GetTargetLikesResp
+
+func (p *GetTargetLikesResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.GetTargetLikesResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetTargetLikesResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetTargetLikesResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetTargetLikesResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in GetTargetLikesResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetTargetLikesResult) Unmarshal(in []byte) error {
+	msg := new(user.GetTargetLikesResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetTargetLikesResult) GetSuccess() *user.GetTargetLikesResp {
+	if !p.IsSetSuccess() {
+		return GetTargetLikesResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetTargetLikesResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.GetTargetLikesResp)
+}
+
+func (p *GetTargetLikesResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetTargetLikesResult) GetResult() interface{} {
+	return p.Success
+}
+
+func getUserLikesHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.GetUserLikesReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).GetUserLikes(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *GetUserLikesArgs:
+		success, err := handler.(user.UserService).GetUserLikes(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetUserLikesResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newGetUserLikesArgs() interface{} {
+	return &GetUserLikesArgs{}
+}
+
+func newGetUserLikesResult() interface{} {
+	return &GetUserLikesResult{}
+}
+
+type GetUserLikesArgs struct {
+	Req *user.GetUserLikesReq
+}
+
+func (p *GetUserLikesArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.GetUserLikesReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetUserLikesArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetUserLikesArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetUserLikesArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in GetUserLikesArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetUserLikesArgs) Unmarshal(in []byte) error {
+	msg := new(user.GetUserLikesReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetUserLikesArgs_Req_DEFAULT *user.GetUserLikesReq
+
+func (p *GetUserLikesArgs) GetReq() *user.GetUserLikesReq {
+	if !p.IsSetReq() {
+		return GetUserLikesArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetUserLikesArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetUserLikesArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetUserLikesResult struct {
+	Success *user.GetUserLikesResp
+}
+
+var GetUserLikesResult_Success_DEFAULT *user.GetUserLikesResp
+
+func (p *GetUserLikesResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.GetUserLikesResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetUserLikesResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetUserLikesResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetUserLikesResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in GetUserLikesResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetUserLikesResult) Unmarshal(in []byte) error {
+	msg := new(user.GetUserLikesResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetUserLikesResult) GetSuccess() *user.GetUserLikesResp {
+	if !p.IsSetSuccess() {
+		return GetUserLikesResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetUserLikesResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.GetUserLikesResp)
+}
+
+func (p *GetUserLikesResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetUserLikesResult) GetResult() interface{} {
+	return p.Success
+}
+
+func getLikedUsersHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.GetLikedUsersReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).GetLikedUsers(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *GetLikedUsersArgs:
+		success, err := handler.(user.UserService).GetLikedUsers(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetLikedUsersResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newGetLikedUsersArgs() interface{} {
+	return &GetLikedUsersArgs{}
+}
+
+func newGetLikedUsersResult() interface{} {
+	return &GetLikedUsersResult{}
+}
+
+type GetLikedUsersArgs struct {
+	Req *user.GetLikedUsersReq
+}
+
+func (p *GetLikedUsersArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.GetLikedUsersReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetLikedUsersArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetLikedUsersArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetLikedUsersArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in GetLikedUsersArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetLikedUsersArgs) Unmarshal(in []byte) error {
+	msg := new(user.GetLikedUsersReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetLikedUsersArgs_Req_DEFAULT *user.GetLikedUsersReq
+
+func (p *GetLikedUsersArgs) GetReq() *user.GetLikedUsersReq {
+	if !p.IsSetReq() {
+		return GetLikedUsersArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetLikedUsersArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetLikedUsersArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetLikedUsersResult struct {
+	Success *user.GetLikedUsersResp
+}
+
+var GetLikedUsersResult_Success_DEFAULT *user.GetLikedUsersResp
+
+func (p *GetLikedUsersResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.GetLikedUsersResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetLikedUsersResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetLikedUsersResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetLikedUsersResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in GetLikedUsersResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetLikedUsersResult) Unmarshal(in []byte) error {
+	msg := new(user.GetLikedUsersResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetLikedUsersResult) GetSuccess() *user.GetLikedUsersResp {
+	if !p.IsSetSuccess() {
+		return GetLikedUsersResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetLikedUsersResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.GetLikedUsersResp)
+}
+
+func (p *GetLikedUsersResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetLikedUsersResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -698,6 +1468,56 @@ func (p *kClient) SearchUser(ctx context.Context, Req *user.SearchUserReq) (r *u
 	_args.Req = Req
 	var _result SearchUserResult
 	if err = p.c.Call(ctx, "SearchUser", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) DoLike(ctx context.Context, Req *user.DoLikeReq) (r *user.DoLikeResp, err error) {
+	var _args DoLikeArgs
+	_args.Req = Req
+	var _result DoLikeResult
+	if err = p.c.Call(ctx, "DoLike", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetUserLike(ctx context.Context, Req *user.GetUserLikedReq) (r *user.GetUserLikedResp, err error) {
+	var _args GetUserLikeArgs
+	_args.Req = Req
+	var _result GetUserLikeResult
+	if err = p.c.Call(ctx, "GetUserLike", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetTargetLikes(ctx context.Context, Req *user.GetTargetLikesReq) (r *user.GetTargetLikesResp, err error) {
+	var _args GetTargetLikesArgs
+	_args.Req = Req
+	var _result GetTargetLikesResult
+	if err = p.c.Call(ctx, "GetTargetLikes", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetUserLikes(ctx context.Context, Req *user.GetUserLikesReq) (r *user.GetUserLikesResp, err error) {
+	var _args GetUserLikesArgs
+	_args.Req = Req
+	var _result GetUserLikesResult
+	if err = p.c.Call(ctx, "GetUserLikes", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetLikedUsers(ctx context.Context, Req *user.GetLikedUsersReq) (r *user.GetLikedUsersResp, err error) {
+	var _args GetLikedUsersArgs
+	_args.Req = Req
+	var _result GetLikedUsersResult
+	if err = p.c.Call(ctx, "GetLikedUsers", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

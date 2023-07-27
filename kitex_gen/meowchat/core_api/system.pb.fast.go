@@ -1392,6 +1392,71 @@ func (x *RetrieveUserPreviewResp) fastReadField1(buf []byte, _type int8) (offset
 	return offset, nil
 }
 
+func (x *GetUserByRoleReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetUserByRoleReq[number], err)
+}
+
+func (x *GetUserByRoleReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.RoleType, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetUserByRoleReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.CommunityId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetUserByRoleResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetUserByRoleResp[number], err)
+}
+
+func (x *GetUserByRoleResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v user.UserPreview
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Users = append(x.Users, &v)
+	return offset, nil
+}
+
 func (x *News) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -2337,6 +2402,49 @@ func (x *RetrieveUserPreviewResp) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *RetrieveUserPreviewResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Users == nil {
+		return offset
+	}
+	for i := range x.GetUsers() {
+		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetUsers()[i])
+	}
+	return offset
+}
+
+func (x *GetUserByRoleReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *GetUserByRoleReq) fastWriteField1(buf []byte) (offset int) {
+	if x.RoleType == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetRoleType())
+	return offset
+}
+
+func (x *GetUserByRoleReq) fastWriteField2(buf []byte) (offset int) {
+	if x.CommunityId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetCommunityId())
+	return offset
+}
+
+func (x *GetUserByRoleResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *GetUserByRoleResp) fastWriteField1(buf []byte) (offset int) {
 	if x.Users == nil {
 		return offset
 	}
@@ -3300,6 +3408,49 @@ func (x *RetrieveUserPreviewResp) sizeField1() (n int) {
 	return n
 }
 
+func (x *GetUserByRoleReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *GetUserByRoleReq) sizeField1() (n int) {
+	if x.RoleType == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetRoleType())
+	return n
+}
+
+func (x *GetUserByRoleReq) sizeField2() (n int) {
+	if x.CommunityId == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetCommunityId())
+	return n
+}
+
+func (x *GetUserByRoleResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *GetUserByRoleResp) sizeField1() (n int) {
+	if x.Users == nil {
+		return n
+	}
+	for i := range x.GetUsers() {
+		n += fastpb.SizeMessage(1, x.GetUsers()[i])
+	}
+	return n
+}
+
 var fieldIDToName_News = map[int32]string{
 	1: "Id",
 	2: "CreateAt",
@@ -3488,6 +3639,15 @@ var fieldIDToName_RetrieveUserPreviewReq = map[int32]string{
 }
 
 var fieldIDToName_RetrieveUserPreviewResp = map[int32]string{
+	1: "Users",
+}
+
+var fieldIDToName_GetUserByRoleReq = map[int32]string{
+	1: "RoleType",
+	2: "CommunityId",
+}
+
+var fieldIDToName_GetUserByRoleResp = map[int32]string{
 	1: "Users",
 }
 

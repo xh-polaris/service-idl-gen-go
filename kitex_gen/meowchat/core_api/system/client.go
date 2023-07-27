@@ -14,8 +14,6 @@ type Client interface {
 	GetAdmins(ctx context.Context, Req *core_api.GetAdminsReq, callOptions ...callopt.Option) (r *core_api.GetAdminsResp, err error)
 	NewAdmin(ctx context.Context, Req *core_api.NewAdminReq, callOptions ...callopt.Option) (r *core_api.NewAdminResp, err error)
 	DeleteAdmin(ctx context.Context, Req *core_api.DeleteAdminReq, callOptions ...callopt.Option) (r *core_api.DeleteAdminResp, err error)
-	ListApply(ctx context.Context, Req *core_api.ListApplyReq, callOptions ...callopt.Option) (r *core_api.ListApplyResp, err error)
-	HandleApply(ctx context.Context, Req *core_api.HandleApplyReq, callOptions ...callopt.Option) (r *core_api.HandleApplyResp, err error)
 	GetNews(ctx context.Context, Req *core_api.GetNewsReq, callOptions ...callopt.Option) (r *core_api.GetNewsResp, err error)
 	NewNews(ctx context.Context, Req *core_api.NewNewsReq, callOptions ...callopt.Option) (r *core_api.NewNewsResp, err error)
 	DeleteNews(ctx context.Context, Req *core_api.DeleteNewsReq, callOptions ...callopt.Option) (r *core_api.DeleteNewsResp, err error)
@@ -28,7 +26,10 @@ type Client interface {
 	GetUserRoles(ctx context.Context, Req *core_api.GetUserRolesReq, callOptions ...callopt.Option) (r *core_api.GetUserRolesResp, err error)
 	UpdateCommunityAdmin(ctx context.Context, Req *core_api.UpdateCommunityAdminReq, callOptions ...callopt.Option) (r *core_api.UpdateCommunityAdminResp, err error)
 	UpdateSuperAdmin(ctx context.Context, Req *core_api.UpdateSuperAdminReq, callOptions ...callopt.Option) (r *core_api.UpdateSuperAdminResp, err error)
-	GetUserByRole(ctx context.Context, Req *core_api.RetrieveUserPreviewReq, callOptions ...callopt.Option) (r *core_api.RetrieveUserPreviewResp, err error)
+	GetUserByRole(ctx context.Context, Req *core_api.GetUserByRoleReq, callOptions ...callopt.Option) (r *core_api.GetUserByRoleResp, err error)
+	ListApply(ctx context.Context, Req *core_api.ListApplyReq, callOptions ...callopt.Option) (r *core_api.ListApplyResp, err error)
+	HandleApply(ctx context.Context, Req *core_api.HandleApplyReq, callOptions ...callopt.Option) (r *core_api.HandleApplyResp, err error)
+	CreateApply(ctx context.Context, Req *core_api.CreateApplyReq, callOptions ...callopt.Option) (r *core_api.CreateApplyResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -73,16 +74,6 @@ func (p *kSystemClient) NewAdmin(ctx context.Context, Req *core_api.NewAdminReq,
 func (p *kSystemClient) DeleteAdmin(ctx context.Context, Req *core_api.DeleteAdminReq, callOptions ...callopt.Option) (r *core_api.DeleteAdminResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.DeleteAdmin(ctx, Req)
-}
-
-func (p *kSystemClient) ListApply(ctx context.Context, Req *core_api.ListApplyReq, callOptions ...callopt.Option) (r *core_api.ListApplyResp, err error) {
-	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.ListApply(ctx, Req)
-}
-
-func (p *kSystemClient) HandleApply(ctx context.Context, Req *core_api.HandleApplyReq, callOptions ...callopt.Option) (r *core_api.HandleApplyResp, err error) {
-	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.HandleApply(ctx, Req)
 }
 
 func (p *kSystemClient) GetNews(ctx context.Context, Req *core_api.GetNewsReq, callOptions ...callopt.Option) (r *core_api.GetNewsResp, err error) {
@@ -145,7 +136,22 @@ func (p *kSystemClient) UpdateSuperAdmin(ctx context.Context, Req *core_api.Upda
 	return p.kClient.UpdateSuperAdmin(ctx, Req)
 }
 
-func (p *kSystemClient) GetUserByRole(ctx context.Context, Req *core_api.RetrieveUserPreviewReq, callOptions ...callopt.Option) (r *core_api.RetrieveUserPreviewResp, err error) {
+func (p *kSystemClient) GetUserByRole(ctx context.Context, Req *core_api.GetUserByRoleReq, callOptions ...callopt.Option) (r *core_api.GetUserByRoleResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.GetUserByRole(ctx, Req)
+}
+
+func (p *kSystemClient) ListApply(ctx context.Context, Req *core_api.ListApplyReq, callOptions ...callopt.Option) (r *core_api.ListApplyResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.ListApply(ctx, Req)
+}
+
+func (p *kSystemClient) HandleApply(ctx context.Context, Req *core_api.HandleApplyReq, callOptions ...callopt.Option) (r *core_api.HandleApplyResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.HandleApply(ctx, Req)
+}
+
+func (p *kSystemClient) CreateApply(ctx context.Context, Req *core_api.CreateApplyReq, callOptions ...callopt.Option) (r *core_api.CreateApplyResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.CreateApply(ctx, Req)
 }

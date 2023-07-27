@@ -6,7 +6,6 @@ import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
 	http "github.com/xh-polaris/service-idl-gen-go/kitex_gen/http"
-	like "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/like"
 	user "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/user"
 )
 
@@ -239,7 +238,7 @@ ReadFieldError:
 }
 
 func (x *GetUserLikesResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v like.Like
+	var v user.Like
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -757,5 +756,4 @@ var fieldIDToName_GetLikedUsersResp = map[int32]string{
 }
 
 var _ = http.File_http_http_proto
-var _ = like.File_meowchat_like_common_proto
 var _ = user.File_meowchat_user_common_proto

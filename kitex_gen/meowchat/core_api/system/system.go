@@ -25,8 +25,6 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		"GetAdmins":            kitex.NewMethodInfo(getAdminsHandler, newGetAdminsArgs, newGetAdminsResult, false),
 		"NewAdmin":             kitex.NewMethodInfo(newAdminHandler, newNewAdminArgs, newNewAdminResult, false),
 		"DeleteAdmin":          kitex.NewMethodInfo(deleteAdminHandler, newDeleteAdminArgs, newDeleteAdminResult, false),
-		"ListApply":            kitex.NewMethodInfo(listApplyHandler, newListApplyArgs, newListApplyResult, false),
-		"HandleApply":          kitex.NewMethodInfo(handleApplyHandler, newHandleApplyArgs, newHandleApplyResult, false),
 		"GetNews":              kitex.NewMethodInfo(getNewsHandler, newGetNewsArgs, newGetNewsResult, false),
 		"NewNews":              kitex.NewMethodInfo(newNewsHandler, newNewNewsArgs, newNewNewsResult, false),
 		"DeleteNews":           kitex.NewMethodInfo(deleteNewsHandler, newDeleteNewsArgs, newDeleteNewsResult, false),
@@ -40,6 +38,9 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		"UpdateCommunityAdmin": kitex.NewMethodInfo(updateCommunityAdminHandler, newUpdateCommunityAdminArgs, newUpdateCommunityAdminResult, false),
 		"UpdateSuperAdmin":     kitex.NewMethodInfo(updateSuperAdminHandler, newUpdateSuperAdminArgs, newUpdateSuperAdminResult, false),
 		"GetUserByRole":        kitex.NewMethodInfo(getUserByRoleHandler, newGetUserByRoleArgs, newGetUserByRoleResult, false),
+		"ListApply":            kitex.NewMethodInfo(listApplyHandler, newListApplyArgs, newListApplyResult, false),
+		"HandleApply":          kitex.NewMethodInfo(handleApplyHandler, newHandleApplyArgs, newHandleApplyResult, false),
+		"CreateApply":          kitex.NewMethodInfo(createApplyHandler, newCreateApplyArgs, newCreateApplyResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName": "meowchat.core_api",
@@ -511,312 +512,6 @@ func (p *DeleteAdminResult) IsSetSuccess() bool {
 }
 
 func (p *DeleteAdminResult) GetResult() interface{} {
-	return p.Success
-}
-
-func listApplyHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	switch s := arg.(type) {
-	case *streaming.Args:
-		st := s.Stream
-		req := new(core_api.ListApplyReq)
-		if err := st.RecvMsg(req); err != nil {
-			return err
-		}
-		resp, err := handler.(core_api.System).ListApply(ctx, req)
-		if err != nil {
-			return err
-		}
-		if err := st.SendMsg(resp); err != nil {
-			return err
-		}
-	case *ListApplyArgs:
-		success, err := handler.(core_api.System).ListApply(ctx, s.Req)
-		if err != nil {
-			return err
-		}
-		realResult := result.(*ListApplyResult)
-		realResult.Success = success
-	}
-	return nil
-}
-func newListApplyArgs() interface{} {
-	return &ListApplyArgs{}
-}
-
-func newListApplyResult() interface{} {
-	return &ListApplyResult{}
-}
-
-type ListApplyArgs struct {
-	Req *core_api.ListApplyReq
-}
-
-func (p *ListApplyArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetReq() {
-		p.Req = new(core_api.ListApplyReq)
-	}
-	return p.Req.FastRead(buf, _type, number)
-}
-
-func (p *ListApplyArgs) FastWrite(buf []byte) (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.FastWrite(buf)
-}
-
-func (p *ListApplyArgs) Size() (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.Size()
-}
-
-func (p *ListApplyArgs) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetReq() {
-		return out, fmt.Errorf("No req in ListApplyArgs")
-	}
-	return proto.Marshal(p.Req)
-}
-
-func (p *ListApplyArgs) Unmarshal(in []byte) error {
-	msg := new(core_api.ListApplyReq)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Req = msg
-	return nil
-}
-
-var ListApplyArgs_Req_DEFAULT *core_api.ListApplyReq
-
-func (p *ListApplyArgs) GetReq() *core_api.ListApplyReq {
-	if !p.IsSetReq() {
-		return ListApplyArgs_Req_DEFAULT
-	}
-	return p.Req
-}
-
-func (p *ListApplyArgs) IsSetReq() bool {
-	return p.Req != nil
-}
-
-func (p *ListApplyArgs) GetFirstArgument() interface{} {
-	return p.Req
-}
-
-type ListApplyResult struct {
-	Success *core_api.ListApplyResp
-}
-
-var ListApplyResult_Success_DEFAULT *core_api.ListApplyResp
-
-func (p *ListApplyResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetSuccess() {
-		p.Success = new(core_api.ListApplyResp)
-	}
-	return p.Success.FastRead(buf, _type, number)
-}
-
-func (p *ListApplyResult) FastWrite(buf []byte) (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.FastWrite(buf)
-}
-
-func (p *ListApplyResult) Size() (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.Size()
-}
-
-func (p *ListApplyResult) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetSuccess() {
-		return out, fmt.Errorf("No req in ListApplyResult")
-	}
-	return proto.Marshal(p.Success)
-}
-
-func (p *ListApplyResult) Unmarshal(in []byte) error {
-	msg := new(core_api.ListApplyResp)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Success = msg
-	return nil
-}
-
-func (p *ListApplyResult) GetSuccess() *core_api.ListApplyResp {
-	if !p.IsSetSuccess() {
-		return ListApplyResult_Success_DEFAULT
-	}
-	return p.Success
-}
-
-func (p *ListApplyResult) SetSuccess(x interface{}) {
-	p.Success = x.(*core_api.ListApplyResp)
-}
-
-func (p *ListApplyResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *ListApplyResult) GetResult() interface{} {
-	return p.Success
-}
-
-func handleApplyHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	switch s := arg.(type) {
-	case *streaming.Args:
-		st := s.Stream
-		req := new(core_api.HandleApplyReq)
-		if err := st.RecvMsg(req); err != nil {
-			return err
-		}
-		resp, err := handler.(core_api.System).HandleApply(ctx, req)
-		if err != nil {
-			return err
-		}
-		if err := st.SendMsg(resp); err != nil {
-			return err
-		}
-	case *HandleApplyArgs:
-		success, err := handler.(core_api.System).HandleApply(ctx, s.Req)
-		if err != nil {
-			return err
-		}
-		realResult := result.(*HandleApplyResult)
-		realResult.Success = success
-	}
-	return nil
-}
-func newHandleApplyArgs() interface{} {
-	return &HandleApplyArgs{}
-}
-
-func newHandleApplyResult() interface{} {
-	return &HandleApplyResult{}
-}
-
-type HandleApplyArgs struct {
-	Req *core_api.HandleApplyReq
-}
-
-func (p *HandleApplyArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetReq() {
-		p.Req = new(core_api.HandleApplyReq)
-	}
-	return p.Req.FastRead(buf, _type, number)
-}
-
-func (p *HandleApplyArgs) FastWrite(buf []byte) (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.FastWrite(buf)
-}
-
-func (p *HandleApplyArgs) Size() (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.Size()
-}
-
-func (p *HandleApplyArgs) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetReq() {
-		return out, fmt.Errorf("No req in HandleApplyArgs")
-	}
-	return proto.Marshal(p.Req)
-}
-
-func (p *HandleApplyArgs) Unmarshal(in []byte) error {
-	msg := new(core_api.HandleApplyReq)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Req = msg
-	return nil
-}
-
-var HandleApplyArgs_Req_DEFAULT *core_api.HandleApplyReq
-
-func (p *HandleApplyArgs) GetReq() *core_api.HandleApplyReq {
-	if !p.IsSetReq() {
-		return HandleApplyArgs_Req_DEFAULT
-	}
-	return p.Req
-}
-
-func (p *HandleApplyArgs) IsSetReq() bool {
-	return p.Req != nil
-}
-
-func (p *HandleApplyArgs) GetFirstArgument() interface{} {
-	return p.Req
-}
-
-type HandleApplyResult struct {
-	Success *core_api.HandleApplyResp
-}
-
-var HandleApplyResult_Success_DEFAULT *core_api.HandleApplyResp
-
-func (p *HandleApplyResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetSuccess() {
-		p.Success = new(core_api.HandleApplyResp)
-	}
-	return p.Success.FastRead(buf, _type, number)
-}
-
-func (p *HandleApplyResult) FastWrite(buf []byte) (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.FastWrite(buf)
-}
-
-func (p *HandleApplyResult) Size() (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.Size()
-}
-
-func (p *HandleApplyResult) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetSuccess() {
-		return out, fmt.Errorf("No req in HandleApplyResult")
-	}
-	return proto.Marshal(p.Success)
-}
-
-func (p *HandleApplyResult) Unmarshal(in []byte) error {
-	msg := new(core_api.HandleApplyResp)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Success = msg
-	return nil
-}
-
-func (p *HandleApplyResult) GetSuccess() *core_api.HandleApplyResp {
-	if !p.IsSetSuccess() {
-		return HandleApplyResult_Success_DEFAULT
-	}
-	return p.Success
-}
-
-func (p *HandleApplyResult) SetSuccess(x interface{}) {
-	p.Success = x.(*core_api.HandleApplyResp)
-}
-
-func (p *HandleApplyResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *HandleApplyResult) GetResult() interface{} {
 	return p.Success
 }
 
@@ -2660,7 +2355,7 @@ func getUserByRoleHandler(ctx context.Context, handler interface{}, arg, result 
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(core_api.RetrieveUserPreviewReq)
+		req := new(core_api.GetUserByRoleReq)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
@@ -2690,12 +2385,12 @@ func newGetUserByRoleResult() interface{} {
 }
 
 type GetUserByRoleArgs struct {
-	Req *core_api.RetrieveUserPreviewReq
+	Req *core_api.GetUserByRoleReq
 }
 
 func (p *GetUserByRoleArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(core_api.RetrieveUserPreviewReq)
+		p.Req = new(core_api.GetUserByRoleReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
@@ -2722,7 +2417,7 @@ func (p *GetUserByRoleArgs) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *GetUserByRoleArgs) Unmarshal(in []byte) error {
-	msg := new(core_api.RetrieveUserPreviewReq)
+	msg := new(core_api.GetUserByRoleReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -2730,9 +2425,9 @@ func (p *GetUserByRoleArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var GetUserByRoleArgs_Req_DEFAULT *core_api.RetrieveUserPreviewReq
+var GetUserByRoleArgs_Req_DEFAULT *core_api.GetUserByRoleReq
 
-func (p *GetUserByRoleArgs) GetReq() *core_api.RetrieveUserPreviewReq {
+func (p *GetUserByRoleArgs) GetReq() *core_api.GetUserByRoleReq {
 	if !p.IsSetReq() {
 		return GetUserByRoleArgs_Req_DEFAULT
 	}
@@ -2748,14 +2443,14 @@ func (p *GetUserByRoleArgs) GetFirstArgument() interface{} {
 }
 
 type GetUserByRoleResult struct {
-	Success *core_api.RetrieveUserPreviewResp
+	Success *core_api.GetUserByRoleResp
 }
 
-var GetUserByRoleResult_Success_DEFAULT *core_api.RetrieveUserPreviewResp
+var GetUserByRoleResult_Success_DEFAULT *core_api.GetUserByRoleResp
 
 func (p *GetUserByRoleResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(core_api.RetrieveUserPreviewResp)
+		p.Success = new(core_api.GetUserByRoleResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
@@ -2782,7 +2477,7 @@ func (p *GetUserByRoleResult) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *GetUserByRoleResult) Unmarshal(in []byte) error {
-	msg := new(core_api.RetrieveUserPreviewResp)
+	msg := new(core_api.GetUserByRoleResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -2790,7 +2485,7 @@ func (p *GetUserByRoleResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *GetUserByRoleResult) GetSuccess() *core_api.RetrieveUserPreviewResp {
+func (p *GetUserByRoleResult) GetSuccess() *core_api.GetUserByRoleResp {
 	if !p.IsSetSuccess() {
 		return GetUserByRoleResult_Success_DEFAULT
 	}
@@ -2798,7 +2493,7 @@ func (p *GetUserByRoleResult) GetSuccess() *core_api.RetrieveUserPreviewResp {
 }
 
 func (p *GetUserByRoleResult) SetSuccess(x interface{}) {
-	p.Success = x.(*core_api.RetrieveUserPreviewResp)
+	p.Success = x.(*core_api.GetUserByRoleResp)
 }
 
 func (p *GetUserByRoleResult) IsSetSuccess() bool {
@@ -2806,6 +2501,465 @@ func (p *GetUserByRoleResult) IsSetSuccess() bool {
 }
 
 func (p *GetUserByRoleResult) GetResult() interface{} {
+	return p.Success
+}
+
+func listApplyHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.ListApplyReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.System).ListApply(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *ListApplyArgs:
+		success, err := handler.(core_api.System).ListApply(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*ListApplyResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newListApplyArgs() interface{} {
+	return &ListApplyArgs{}
+}
+
+func newListApplyResult() interface{} {
+	return &ListApplyResult{}
+}
+
+type ListApplyArgs struct {
+	Req *core_api.ListApplyReq
+}
+
+func (p *ListApplyArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.ListApplyReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *ListApplyArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *ListApplyArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *ListApplyArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in ListApplyArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *ListApplyArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.ListApplyReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var ListApplyArgs_Req_DEFAULT *core_api.ListApplyReq
+
+func (p *ListApplyArgs) GetReq() *core_api.ListApplyReq {
+	if !p.IsSetReq() {
+		return ListApplyArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *ListApplyArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *ListApplyArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type ListApplyResult struct {
+	Success *core_api.ListApplyResp
+}
+
+var ListApplyResult_Success_DEFAULT *core_api.ListApplyResp
+
+func (p *ListApplyResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.ListApplyResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *ListApplyResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *ListApplyResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *ListApplyResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in ListApplyResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *ListApplyResult) Unmarshal(in []byte) error {
+	msg := new(core_api.ListApplyResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *ListApplyResult) GetSuccess() *core_api.ListApplyResp {
+	if !p.IsSetSuccess() {
+		return ListApplyResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *ListApplyResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.ListApplyResp)
+}
+
+func (p *ListApplyResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *ListApplyResult) GetResult() interface{} {
+	return p.Success
+}
+
+func handleApplyHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.HandleApplyReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.System).HandleApply(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *HandleApplyArgs:
+		success, err := handler.(core_api.System).HandleApply(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*HandleApplyResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newHandleApplyArgs() interface{} {
+	return &HandleApplyArgs{}
+}
+
+func newHandleApplyResult() interface{} {
+	return &HandleApplyResult{}
+}
+
+type HandleApplyArgs struct {
+	Req *core_api.HandleApplyReq
+}
+
+func (p *HandleApplyArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.HandleApplyReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *HandleApplyArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *HandleApplyArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *HandleApplyArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in HandleApplyArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *HandleApplyArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.HandleApplyReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var HandleApplyArgs_Req_DEFAULT *core_api.HandleApplyReq
+
+func (p *HandleApplyArgs) GetReq() *core_api.HandleApplyReq {
+	if !p.IsSetReq() {
+		return HandleApplyArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *HandleApplyArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *HandleApplyArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type HandleApplyResult struct {
+	Success *core_api.HandleApplyResp
+}
+
+var HandleApplyResult_Success_DEFAULT *core_api.HandleApplyResp
+
+func (p *HandleApplyResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.HandleApplyResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *HandleApplyResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *HandleApplyResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *HandleApplyResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in HandleApplyResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *HandleApplyResult) Unmarshal(in []byte) error {
+	msg := new(core_api.HandleApplyResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *HandleApplyResult) GetSuccess() *core_api.HandleApplyResp {
+	if !p.IsSetSuccess() {
+		return HandleApplyResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *HandleApplyResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.HandleApplyResp)
+}
+
+func (p *HandleApplyResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *HandleApplyResult) GetResult() interface{} {
+	return p.Success
+}
+
+func createApplyHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.CreateApplyReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.System).CreateApply(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *CreateApplyArgs:
+		success, err := handler.(core_api.System).CreateApply(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*CreateApplyResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newCreateApplyArgs() interface{} {
+	return &CreateApplyArgs{}
+}
+
+func newCreateApplyResult() interface{} {
+	return &CreateApplyResult{}
+}
+
+type CreateApplyArgs struct {
+	Req *core_api.CreateApplyReq
+}
+
+func (p *CreateApplyArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.CreateApplyReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *CreateApplyArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *CreateApplyArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *CreateApplyArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in CreateApplyArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *CreateApplyArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.CreateApplyReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var CreateApplyArgs_Req_DEFAULT *core_api.CreateApplyReq
+
+func (p *CreateApplyArgs) GetReq() *core_api.CreateApplyReq {
+	if !p.IsSetReq() {
+		return CreateApplyArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *CreateApplyArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *CreateApplyArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type CreateApplyResult struct {
+	Success *core_api.CreateApplyResp
+}
+
+var CreateApplyResult_Success_DEFAULT *core_api.CreateApplyResp
+
+func (p *CreateApplyResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.CreateApplyResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *CreateApplyResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *CreateApplyResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *CreateApplyResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in CreateApplyResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *CreateApplyResult) Unmarshal(in []byte) error {
+	msg := new(core_api.CreateApplyResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *CreateApplyResult) GetSuccess() *core_api.CreateApplyResp {
+	if !p.IsSetSuccess() {
+		return CreateApplyResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *CreateApplyResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.CreateApplyResp)
+}
+
+func (p *CreateApplyResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *CreateApplyResult) GetResult() interface{} {
 	return p.Success
 }
 
@@ -2844,26 +2998,6 @@ func (p *kClient) DeleteAdmin(ctx context.Context, Req *core_api.DeleteAdminReq)
 	_args.Req = Req
 	var _result DeleteAdminResult
 	if err = p.c.Call(ctx, "DeleteAdmin", &_args, &_result); err != nil {
-		return
-	}
-	return _result.GetSuccess(), nil
-}
-
-func (p *kClient) ListApply(ctx context.Context, Req *core_api.ListApplyReq) (r *core_api.ListApplyResp, err error) {
-	var _args ListApplyArgs
-	_args.Req = Req
-	var _result ListApplyResult
-	if err = p.c.Call(ctx, "ListApply", &_args, &_result); err != nil {
-		return
-	}
-	return _result.GetSuccess(), nil
-}
-
-func (p *kClient) HandleApply(ctx context.Context, Req *core_api.HandleApplyReq) (r *core_api.HandleApplyResp, err error) {
-	var _args HandleApplyArgs
-	_args.Req = Req
-	var _result HandleApplyResult
-	if err = p.c.Call(ctx, "HandleApply", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
@@ -2989,11 +3123,41 @@ func (p *kClient) UpdateSuperAdmin(ctx context.Context, Req *core_api.UpdateSupe
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) GetUserByRole(ctx context.Context, Req *core_api.RetrieveUserPreviewReq) (r *core_api.RetrieveUserPreviewResp, err error) {
+func (p *kClient) GetUserByRole(ctx context.Context, Req *core_api.GetUserByRoleReq) (r *core_api.GetUserByRoleResp, err error) {
 	var _args GetUserByRoleArgs
 	_args.Req = Req
 	var _result GetUserByRoleResult
 	if err = p.c.Call(ctx, "GetUserByRole", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) ListApply(ctx context.Context, Req *core_api.ListApplyReq) (r *core_api.ListApplyResp, err error) {
+	var _args ListApplyArgs
+	_args.Req = Req
+	var _result ListApplyResult
+	if err = p.c.Call(ctx, "ListApply", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) HandleApply(ctx context.Context, Req *core_api.HandleApplyReq) (r *core_api.HandleApplyResp, err error) {
+	var _args HandleApplyArgs
+	_args.Req = Req
+	var _result HandleApplyResult
+	if err = p.c.Call(ctx, "HandleApply", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) CreateApply(ctx context.Context, Req *core_api.CreateApplyReq) (r *core_api.CreateApplyResp, err error) {
+	var _args CreateApplyArgs
+	_args.Req = Req
+	var _result CreateApplyResult
+	if err = p.c.Call(ctx, "CreateApply", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

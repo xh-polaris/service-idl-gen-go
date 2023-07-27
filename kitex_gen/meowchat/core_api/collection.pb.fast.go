@@ -7,7 +7,7 @@ import (
 	fastpb "github.com/cloudwego/fastpb"
 	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/basic"
 	http "github.com/xh-polaris/service-idl-gen-go/kitex_gen/http"
-	collection "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/collection"
+	content "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/content"
 )
 
 var (
@@ -211,7 +211,7 @@ ReadFieldError:
 }
 
 func (x *GetCatDetailResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v collection.Cat
+	var v content.Cat
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -525,7 +525,7 @@ ReadFieldError:
 }
 
 func (x *CreateImageReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v collection.CreateImageElement
+	var v content.CreateImageElement
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -694,7 +694,7 @@ ReadFieldError:
 }
 
 func (x *GetImageByCatResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v collection.Image
+	var v content.Image
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -1780,5 +1780,5 @@ var fieldIDToName_GetImageByCatResp = map[int32]string{
 }
 
 var _ = http.File_http_http_proto
-var _ = collection.File_meowchat_collection_common_proto
+var _ = content.File_meowchat_content_common_proto
 var _ = basic.File_basic_pagination_proto
