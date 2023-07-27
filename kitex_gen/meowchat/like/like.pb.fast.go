@@ -385,41 +385,6 @@ func (x *GetTopKReq) fastReadField3(buf []byte, _type int8) (offset int, err err
 	return offset, err
 }
 
-func (x *ItemScore) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 2:
-		offset, err = x.fastReadField2(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ItemScore[number], err)
-}
-
-func (x *ItemScore) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.Id, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *ItemScore) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.Score, offset, err = fastpb.ReadInt64(buf, _type)
-	return offset, err
-}
-
 func (x *GetTopKResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -573,41 +538,6 @@ func (x *ListCatPopularityReq) fastReadField1(buf []byte, _type int8) (offset in
 		return offset, err
 	}
 	x.CatId = append(x.CatId, v)
-	return offset, err
-}
-
-func (x *CatPop) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 2:
-		offset, err = x.fastReadField2(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CatPop[number], err)
-}
-
-func (x *CatPop) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.CatId, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *CatPop) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.Popularity, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -1005,31 +935,6 @@ func (x *GetTopKReq) fastWriteField3(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *ItemScore) FastWrite(buf []byte) (offset int) {
-	if x == nil {
-		return offset
-	}
-	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField2(buf[offset:])
-	return offset
-}
-
-func (x *ItemScore) fastWriteField1(buf []byte) (offset int) {
-	if x.Id == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
-	return offset
-}
-
-func (x *ItemScore) fastWriteField2(buf []byte) (offset int) {
-	if x.Score == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetScore())
-	return offset
-}
-
 func (x *GetTopKResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -1127,31 +1032,6 @@ func (x *ListCatPopularityReq) fastWriteField1(buf []byte) (offset int) {
 	for i := range x.GetCatId() {
 		offset += fastpb.WriteString(buf[offset:], 1, x.GetCatId()[i])
 	}
-	return offset
-}
-
-func (x *CatPop) FastWrite(buf []byte) (offset int) {
-	if x == nil {
-		return offset
-	}
-	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField2(buf[offset:])
-	return offset
-}
-
-func (x *CatPop) fastWriteField1(buf []byte) (offset int) {
-	if x.CatId == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetCatId())
-	return offset
-}
-
-func (x *CatPop) fastWriteField2(buf []byte) (offset int) {
-	if x.Popularity == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetPopularity())
 	return offset
 }
 
@@ -1500,31 +1380,6 @@ func (x *GetTopKReq) sizeField3() (n int) {
 	return n
 }
 
-func (x *ItemScore) Size() (n int) {
-	if x == nil {
-		return n
-	}
-	n += x.sizeField1()
-	n += x.sizeField2()
-	return n
-}
-
-func (x *ItemScore) sizeField1() (n int) {
-	if x.Id == "" {
-		return n
-	}
-	n += fastpb.SizeString(1, x.GetId())
-	return n
-}
-
-func (x *ItemScore) sizeField2() (n int) {
-	if x.Score == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(2, x.GetScore())
-	return n
-}
-
 func (x *GetTopKResp) Size() (n int) {
 	if x == nil {
 		return n
@@ -1622,31 +1477,6 @@ func (x *ListCatPopularityReq) sizeField1() (n int) {
 	for i := range x.GetCatId() {
 		n += fastpb.SizeString(1, x.GetCatId()[i])
 	}
-	return n
-}
-
-func (x *CatPop) Size() (n int) {
-	if x == nil {
-		return n
-	}
-	n += x.sizeField1()
-	n += x.sizeField2()
-	return n
-}
-
-func (x *CatPop) sizeField1() (n int) {
-	if x.CatId == "" {
-		return n
-	}
-	n += fastpb.SizeString(1, x.GetCatId())
-	return n
-}
-
-func (x *CatPop) sizeField2() (n int) {
-	if x.Popularity == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(2, x.GetPopularity())
 	return n
 }
 
@@ -1786,11 +1616,6 @@ var fieldIDToName_GetTopKReq = map[int32]string{
 	3: "Range",
 }
 
-var fieldIDToName_ItemScore = map[int32]string{
-	1: "Id",
-	2: "Score",
-}
-
 var fieldIDToName_GetTopKResp = map[int32]string{
 	1: "Item",
 }
@@ -1811,11 +1636,6 @@ var fieldIDToName_DailyUpdateResp = map[int32]string{}
 
 var fieldIDToName_ListCatPopularityReq = map[int32]string{
 	1: "CatId",
-}
-
-var fieldIDToName_CatPop = map[int32]string{
-	1: "CatId",
-	2: "Popularity",
 }
 
 var fieldIDToName_ListCatPopularityResp = map[int32]string{

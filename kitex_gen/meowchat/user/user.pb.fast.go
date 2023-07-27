@@ -13,61 +13,6 @@ var (
 	_ = fastpb.Skip
 )
 
-func (x *UserDetail) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 2:
-		offset, err = x.fastReadField2(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 4:
-		offset, err = x.fastReadField4(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_UserDetail[number], err)
-}
-
-func (x *UserDetail) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.Id, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *UserDetail) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.AvatarUrl, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *UserDetail) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.Nickname, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *UserDetail) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	x.Motto, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
 func (x *GetUserReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -340,49 +285,6 @@ func (x *SearchUserResp) fastReadField3(buf []byte, _type int8) (offset int, err
 	return offset, err
 }
 
-func (x *UserDetail) FastWrite(buf []byte) (offset int) {
-	if x == nil {
-		return offset
-	}
-	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
-	offset += x.fastWriteField4(buf[offset:])
-	return offset
-}
-
-func (x *UserDetail) fastWriteField1(buf []byte) (offset int) {
-	if x.Id == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
-	return offset
-}
-
-func (x *UserDetail) fastWriteField2(buf []byte) (offset int) {
-	if x.AvatarUrl == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 2, x.GetAvatarUrl())
-	return offset
-}
-
-func (x *UserDetail) fastWriteField3(buf []byte) (offset int) {
-	if x.Nickname == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetNickname())
-	return offset
-}
-
-func (x *UserDetail) fastWriteField4(buf []byte) (offset int) {
-	if x.Motto == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 4, x.GetMotto())
-	return offset
-}
-
 func (x *GetUserReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -558,49 +460,6 @@ func (x *SearchUserResp) fastWriteField3(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *UserDetail) Size() (n int) {
-	if x == nil {
-		return n
-	}
-	n += x.sizeField1()
-	n += x.sizeField2()
-	n += x.sizeField3()
-	n += x.sizeField4()
-	return n
-}
-
-func (x *UserDetail) sizeField1() (n int) {
-	if x.Id == "" {
-		return n
-	}
-	n += fastpb.SizeString(1, x.GetId())
-	return n
-}
-
-func (x *UserDetail) sizeField2() (n int) {
-	if x.AvatarUrl == "" {
-		return n
-	}
-	n += fastpb.SizeString(2, x.GetAvatarUrl())
-	return n
-}
-
-func (x *UserDetail) sizeField3() (n int) {
-	if x.Nickname == "" {
-		return n
-	}
-	n += fastpb.SizeString(3, x.GetNickname())
-	return n
-}
-
-func (x *UserDetail) sizeField4() (n int) {
-	if x.Motto == "" {
-		return n
-	}
-	n += fastpb.SizeString(4, x.GetMotto())
-	return n
-}
-
 func (x *GetUserReq) Size() (n int) {
 	if x == nil {
 		return n
@@ -774,13 +633,6 @@ func (x *SearchUserResp) sizeField3() (n int) {
 	}
 	n += fastpb.SizeString(3, x.GetToken())
 	return n
-}
-
-var fieldIDToName_UserDetail = map[int32]string{
-	1: "Id",
-	2: "AvatarUrl",
-	3: "Nickname",
-	4: "Motto",
 }
 
 var fieldIDToName_GetUserReq = map[int32]string{

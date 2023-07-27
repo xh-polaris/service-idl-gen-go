@@ -233,6 +233,16 @@ func (x *TextCheckReq) FastRead(buf []byte, _type int8, number int32) (offset in
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 4:
+		offset, err = x.fastReadField4(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -259,6 +269,22 @@ func (x *TextCheckReq) fastReadField2(buf []byte, _type int8) (offset int, err e
 	}
 	x.User = &v
 	return offset, nil
+}
+
+func (x *TextCheckReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	var v int32
+	v, offset, err = fastpb.ReadInt32(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.Scene = Scene(v)
+	return offset, nil
+}
+
+func (x *TextCheckReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.Title = &tmp
+	return offset, err
 }
 
 func (x *TextCheckResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -507,6 +533,8 @@ func (x *TextCheckReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField4(buf[offset:])
 	return offset
 }
 
@@ -523,6 +551,22 @@ func (x *TextCheckReq) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteMessage(buf[offset:], 2, x.GetUser())
+	return offset
+}
+
+func (x *TextCheckReq) fastWriteField3(buf []byte) (offset int) {
+	if x.Scene == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt32(buf[offset:], 3, int32(x.GetScene()))
+	return offset
+}
+
+func (x *TextCheckReq) fastWriteField4(buf []byte) (offset int) {
+	if x.Title == nil {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 4, x.GetTitle())
 	return offset
 }
 
@@ -739,6 +783,8 @@ func (x *TextCheckReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
+	n += x.sizeField3()
+	n += x.sizeField4()
 	return n
 }
 
@@ -755,6 +801,22 @@ func (x *TextCheckReq) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeMessage(2, x.GetUser())
+	return n
+}
+
+func (x *TextCheckReq) sizeField3() (n int) {
+	if x.Scene == 0 {
+		return n
+	}
+	n += fastpb.SizeInt32(3, int32(x.GetScene()))
+	return n
+}
+
+func (x *TextCheckReq) sizeField4() (n int) {
+	if x.Title == nil {
+		return n
+	}
+	n += fastpb.SizeString(4, x.GetTitle())
 	return n
 }
 
@@ -847,6 +909,8 @@ var fieldIDToName_DeleteObjectResp = map[int32]string{}
 var fieldIDToName_TextCheckReq = map[int32]string{
 	1: "Text",
 	2: "User",
+	3: "Scene",
+	4: "Title",
 }
 
 var fieldIDToName_TextCheckResp = map[int32]string{

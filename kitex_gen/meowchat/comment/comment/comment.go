@@ -49,7 +49,7 @@ func createCommentHandler(ctx context.Context, handler interface{}, arg, result 
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(comment.CreateCommentRequest)
+		req := new(comment.CreateCommentReq)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
@@ -79,12 +79,12 @@ func newCreateCommentResult() interface{} {
 }
 
 type CreateCommentArgs struct {
-	Req *comment.CreateCommentRequest
+	Req *comment.CreateCommentReq
 }
 
 func (p *CreateCommentArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(comment.CreateCommentRequest)
+		p.Req = new(comment.CreateCommentReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
@@ -111,7 +111,7 @@ func (p *CreateCommentArgs) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *CreateCommentArgs) Unmarshal(in []byte) error {
-	msg := new(comment.CreateCommentRequest)
+	msg := new(comment.CreateCommentReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -119,9 +119,9 @@ func (p *CreateCommentArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var CreateCommentArgs_Req_DEFAULT *comment.CreateCommentRequest
+var CreateCommentArgs_Req_DEFAULT *comment.CreateCommentReq
 
-func (p *CreateCommentArgs) GetReq() *comment.CreateCommentRequest {
+func (p *CreateCommentArgs) GetReq() *comment.CreateCommentReq {
 	if !p.IsSetReq() {
 		return CreateCommentArgs_Req_DEFAULT
 	}
@@ -137,14 +137,14 @@ func (p *CreateCommentArgs) GetFirstArgument() interface{} {
 }
 
 type CreateCommentResult struct {
-	Success *comment.CreateCommentResponse
+	Success *comment.CreateCommentResp
 }
 
-var CreateCommentResult_Success_DEFAULT *comment.CreateCommentResponse
+var CreateCommentResult_Success_DEFAULT *comment.CreateCommentResp
 
 func (p *CreateCommentResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(comment.CreateCommentResponse)
+		p.Success = new(comment.CreateCommentResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
@@ -171,7 +171,7 @@ func (p *CreateCommentResult) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *CreateCommentResult) Unmarshal(in []byte) error {
-	msg := new(comment.CreateCommentResponse)
+	msg := new(comment.CreateCommentResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -179,7 +179,7 @@ func (p *CreateCommentResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *CreateCommentResult) GetSuccess() *comment.CreateCommentResponse {
+func (p *CreateCommentResult) GetSuccess() *comment.CreateCommentResp {
 	if !p.IsSetSuccess() {
 		return CreateCommentResult_Success_DEFAULT
 	}
@@ -187,7 +187,7 @@ func (p *CreateCommentResult) GetSuccess() *comment.CreateCommentResponse {
 }
 
 func (p *CreateCommentResult) SetSuccess(x interface{}) {
-	p.Success = x.(*comment.CreateCommentResponse)
+	p.Success = x.(*comment.CreateCommentResp)
 }
 
 func (p *CreateCommentResult) IsSetSuccess() bool {
@@ -202,7 +202,7 @@ func updateCommentHandler(ctx context.Context, handler interface{}, arg, result 
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(comment.UpdateCommentRequest)
+		req := new(comment.UpdateCommentReq)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
@@ -232,12 +232,12 @@ func newUpdateCommentResult() interface{} {
 }
 
 type UpdateCommentArgs struct {
-	Req *comment.UpdateCommentRequest
+	Req *comment.UpdateCommentReq
 }
 
 func (p *UpdateCommentArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(comment.UpdateCommentRequest)
+		p.Req = new(comment.UpdateCommentReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
@@ -264,7 +264,7 @@ func (p *UpdateCommentArgs) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *UpdateCommentArgs) Unmarshal(in []byte) error {
-	msg := new(comment.UpdateCommentRequest)
+	msg := new(comment.UpdateCommentReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -272,9 +272,9 @@ func (p *UpdateCommentArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var UpdateCommentArgs_Req_DEFAULT *comment.UpdateCommentRequest
+var UpdateCommentArgs_Req_DEFAULT *comment.UpdateCommentReq
 
-func (p *UpdateCommentArgs) GetReq() *comment.UpdateCommentRequest {
+func (p *UpdateCommentArgs) GetReq() *comment.UpdateCommentReq {
 	if !p.IsSetReq() {
 		return UpdateCommentArgs_Req_DEFAULT
 	}
@@ -290,14 +290,14 @@ func (p *UpdateCommentArgs) GetFirstArgument() interface{} {
 }
 
 type UpdateCommentResult struct {
-	Success *comment.UpdateCommentResponse
+	Success *comment.UpdateCommentResp
 }
 
-var UpdateCommentResult_Success_DEFAULT *comment.UpdateCommentResponse
+var UpdateCommentResult_Success_DEFAULT *comment.UpdateCommentResp
 
 func (p *UpdateCommentResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(comment.UpdateCommentResponse)
+		p.Success = new(comment.UpdateCommentResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
@@ -324,7 +324,7 @@ func (p *UpdateCommentResult) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *UpdateCommentResult) Unmarshal(in []byte) error {
-	msg := new(comment.UpdateCommentResponse)
+	msg := new(comment.UpdateCommentResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -332,7 +332,7 @@ func (p *UpdateCommentResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *UpdateCommentResult) GetSuccess() *comment.UpdateCommentResponse {
+func (p *UpdateCommentResult) GetSuccess() *comment.UpdateCommentResp {
 	if !p.IsSetSuccess() {
 		return UpdateCommentResult_Success_DEFAULT
 	}
@@ -340,7 +340,7 @@ func (p *UpdateCommentResult) GetSuccess() *comment.UpdateCommentResponse {
 }
 
 func (p *UpdateCommentResult) SetSuccess(x interface{}) {
-	p.Success = x.(*comment.UpdateCommentResponse)
+	p.Success = x.(*comment.UpdateCommentResp)
 }
 
 func (p *UpdateCommentResult) IsSetSuccess() bool {
@@ -355,7 +355,7 @@ func deleteCommentHandler(ctx context.Context, handler interface{}, arg, result 
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(comment.DeleteCommentByIdRequest)
+		req := new(comment.DeleteCommentByIdReq)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
@@ -385,12 +385,12 @@ func newDeleteCommentResult() interface{} {
 }
 
 type DeleteCommentArgs struct {
-	Req *comment.DeleteCommentByIdRequest
+	Req *comment.DeleteCommentByIdReq
 }
 
 func (p *DeleteCommentArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(comment.DeleteCommentByIdRequest)
+		p.Req = new(comment.DeleteCommentByIdReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
@@ -417,7 +417,7 @@ func (p *DeleteCommentArgs) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *DeleteCommentArgs) Unmarshal(in []byte) error {
-	msg := new(comment.DeleteCommentByIdRequest)
+	msg := new(comment.DeleteCommentByIdReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -425,9 +425,9 @@ func (p *DeleteCommentArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var DeleteCommentArgs_Req_DEFAULT *comment.DeleteCommentByIdRequest
+var DeleteCommentArgs_Req_DEFAULT *comment.DeleteCommentByIdReq
 
-func (p *DeleteCommentArgs) GetReq() *comment.DeleteCommentByIdRequest {
+func (p *DeleteCommentArgs) GetReq() *comment.DeleteCommentByIdReq {
 	if !p.IsSetReq() {
 		return DeleteCommentArgs_Req_DEFAULT
 	}
@@ -443,14 +443,14 @@ func (p *DeleteCommentArgs) GetFirstArgument() interface{} {
 }
 
 type DeleteCommentResult struct {
-	Success *comment.DeleteCommentByIdResponse
+	Success *comment.DeleteCommentByIdResp
 }
 
-var DeleteCommentResult_Success_DEFAULT *comment.DeleteCommentByIdResponse
+var DeleteCommentResult_Success_DEFAULT *comment.DeleteCommentByIdResp
 
 func (p *DeleteCommentResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(comment.DeleteCommentByIdResponse)
+		p.Success = new(comment.DeleteCommentByIdResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
@@ -477,7 +477,7 @@ func (p *DeleteCommentResult) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *DeleteCommentResult) Unmarshal(in []byte) error {
-	msg := new(comment.DeleteCommentByIdResponse)
+	msg := new(comment.DeleteCommentByIdResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -485,7 +485,7 @@ func (p *DeleteCommentResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *DeleteCommentResult) GetSuccess() *comment.DeleteCommentByIdResponse {
+func (p *DeleteCommentResult) GetSuccess() *comment.DeleteCommentByIdResp {
 	if !p.IsSetSuccess() {
 		return DeleteCommentResult_Success_DEFAULT
 	}
@@ -493,7 +493,7 @@ func (p *DeleteCommentResult) GetSuccess() *comment.DeleteCommentByIdResponse {
 }
 
 func (p *DeleteCommentResult) SetSuccess(x interface{}) {
-	p.Success = x.(*comment.DeleteCommentByIdResponse)
+	p.Success = x.(*comment.DeleteCommentByIdResp)
 }
 
 func (p *DeleteCommentResult) IsSetSuccess() bool {
@@ -508,7 +508,7 @@ func listCommentByParentHandler(ctx context.Context, handler interface{}, arg, r
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(comment.ListCommentByParentRequest)
+		req := new(comment.ListCommentByParentReq)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
@@ -538,12 +538,12 @@ func newListCommentByParentResult() interface{} {
 }
 
 type ListCommentByParentArgs struct {
-	Req *comment.ListCommentByParentRequest
+	Req *comment.ListCommentByParentReq
 }
 
 func (p *ListCommentByParentArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(comment.ListCommentByParentRequest)
+		p.Req = new(comment.ListCommentByParentReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
@@ -570,7 +570,7 @@ func (p *ListCommentByParentArgs) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *ListCommentByParentArgs) Unmarshal(in []byte) error {
-	msg := new(comment.ListCommentByParentRequest)
+	msg := new(comment.ListCommentByParentReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -578,9 +578,9 @@ func (p *ListCommentByParentArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var ListCommentByParentArgs_Req_DEFAULT *comment.ListCommentByParentRequest
+var ListCommentByParentArgs_Req_DEFAULT *comment.ListCommentByParentReq
 
-func (p *ListCommentByParentArgs) GetReq() *comment.ListCommentByParentRequest {
+func (p *ListCommentByParentArgs) GetReq() *comment.ListCommentByParentReq {
 	if !p.IsSetReq() {
 		return ListCommentByParentArgs_Req_DEFAULT
 	}
@@ -596,14 +596,14 @@ func (p *ListCommentByParentArgs) GetFirstArgument() interface{} {
 }
 
 type ListCommentByParentResult struct {
-	Success *comment.ListCommentByParentResponse
+	Success *comment.ListCommentByParentResp
 }
 
-var ListCommentByParentResult_Success_DEFAULT *comment.ListCommentByParentResponse
+var ListCommentByParentResult_Success_DEFAULT *comment.ListCommentByParentResp
 
 func (p *ListCommentByParentResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(comment.ListCommentByParentResponse)
+		p.Success = new(comment.ListCommentByParentResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
@@ -630,7 +630,7 @@ func (p *ListCommentByParentResult) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *ListCommentByParentResult) Unmarshal(in []byte) error {
-	msg := new(comment.ListCommentByParentResponse)
+	msg := new(comment.ListCommentByParentResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -638,7 +638,7 @@ func (p *ListCommentByParentResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *ListCommentByParentResult) GetSuccess() *comment.ListCommentByParentResponse {
+func (p *ListCommentByParentResult) GetSuccess() *comment.ListCommentByParentResp {
 	if !p.IsSetSuccess() {
 		return ListCommentByParentResult_Success_DEFAULT
 	}
@@ -646,7 +646,7 @@ func (p *ListCommentByParentResult) GetSuccess() *comment.ListCommentByParentRes
 }
 
 func (p *ListCommentByParentResult) SetSuccess(x interface{}) {
-	p.Success = x.(*comment.ListCommentByParentResponse)
+	p.Success = x.(*comment.ListCommentByParentResp)
 }
 
 func (p *ListCommentByParentResult) IsSetSuccess() bool {
@@ -661,7 +661,7 @@ func countCommentByParentHandler(ctx context.Context, handler interface{}, arg, 
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(comment.CountCommentByParentRequest)
+		req := new(comment.CountCommentByParentReq)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
@@ -691,12 +691,12 @@ func newCountCommentByParentResult() interface{} {
 }
 
 type CountCommentByParentArgs struct {
-	Req *comment.CountCommentByParentRequest
+	Req *comment.CountCommentByParentReq
 }
 
 func (p *CountCommentByParentArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(comment.CountCommentByParentRequest)
+		p.Req = new(comment.CountCommentByParentReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
@@ -723,7 +723,7 @@ func (p *CountCommentByParentArgs) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *CountCommentByParentArgs) Unmarshal(in []byte) error {
-	msg := new(comment.CountCommentByParentRequest)
+	msg := new(comment.CountCommentByParentReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -731,9 +731,9 @@ func (p *CountCommentByParentArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var CountCommentByParentArgs_Req_DEFAULT *comment.CountCommentByParentRequest
+var CountCommentByParentArgs_Req_DEFAULT *comment.CountCommentByParentReq
 
-func (p *CountCommentByParentArgs) GetReq() *comment.CountCommentByParentRequest {
+func (p *CountCommentByParentArgs) GetReq() *comment.CountCommentByParentReq {
 	if !p.IsSetReq() {
 		return CountCommentByParentArgs_Req_DEFAULT
 	}
@@ -749,14 +749,14 @@ func (p *CountCommentByParentArgs) GetFirstArgument() interface{} {
 }
 
 type CountCommentByParentResult struct {
-	Success *comment.CountCommentByParentResponse
+	Success *comment.CountCommentByParentResp
 }
 
-var CountCommentByParentResult_Success_DEFAULT *comment.CountCommentByParentResponse
+var CountCommentByParentResult_Success_DEFAULT *comment.CountCommentByParentResp
 
 func (p *CountCommentByParentResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(comment.CountCommentByParentResponse)
+		p.Success = new(comment.CountCommentByParentResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
@@ -783,7 +783,7 @@ func (p *CountCommentByParentResult) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *CountCommentByParentResult) Unmarshal(in []byte) error {
-	msg := new(comment.CountCommentByParentResponse)
+	msg := new(comment.CountCommentByParentResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -791,7 +791,7 @@ func (p *CountCommentByParentResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *CountCommentByParentResult) GetSuccess() *comment.CountCommentByParentResponse {
+func (p *CountCommentByParentResult) GetSuccess() *comment.CountCommentByParentResp {
 	if !p.IsSetSuccess() {
 		return CountCommentByParentResult_Success_DEFAULT
 	}
@@ -799,7 +799,7 @@ func (p *CountCommentByParentResult) GetSuccess() *comment.CountCommentByParentR
 }
 
 func (p *CountCommentByParentResult) SetSuccess(x interface{}) {
-	p.Success = x.(*comment.CountCommentByParentResponse)
+	p.Success = x.(*comment.CountCommentByParentResp)
 }
 
 func (p *CountCommentByParentResult) IsSetSuccess() bool {
@@ -814,7 +814,7 @@ func retrieveCommentByIdHandler(ctx context.Context, handler interface{}, arg, r
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(comment.RetrieveCommentByIdRequest)
+		req := new(comment.RetrieveCommentByIdReq)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
@@ -844,12 +844,12 @@ func newRetrieveCommentByIdResult() interface{} {
 }
 
 type RetrieveCommentByIdArgs struct {
-	Req *comment.RetrieveCommentByIdRequest
+	Req *comment.RetrieveCommentByIdReq
 }
 
 func (p *RetrieveCommentByIdArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(comment.RetrieveCommentByIdRequest)
+		p.Req = new(comment.RetrieveCommentByIdReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
@@ -876,7 +876,7 @@ func (p *RetrieveCommentByIdArgs) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *RetrieveCommentByIdArgs) Unmarshal(in []byte) error {
-	msg := new(comment.RetrieveCommentByIdRequest)
+	msg := new(comment.RetrieveCommentByIdReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -884,9 +884,9 @@ func (p *RetrieveCommentByIdArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var RetrieveCommentByIdArgs_Req_DEFAULT *comment.RetrieveCommentByIdRequest
+var RetrieveCommentByIdArgs_Req_DEFAULT *comment.RetrieveCommentByIdReq
 
-func (p *RetrieveCommentByIdArgs) GetReq() *comment.RetrieveCommentByIdRequest {
+func (p *RetrieveCommentByIdArgs) GetReq() *comment.RetrieveCommentByIdReq {
 	if !p.IsSetReq() {
 		return RetrieveCommentByIdArgs_Req_DEFAULT
 	}
@@ -902,14 +902,14 @@ func (p *RetrieveCommentByIdArgs) GetFirstArgument() interface{} {
 }
 
 type RetrieveCommentByIdResult struct {
-	Success *comment.RetrieveCommentByIdResponse
+	Success *comment.RetrieveCommentByIdResp
 }
 
-var RetrieveCommentByIdResult_Success_DEFAULT *comment.RetrieveCommentByIdResponse
+var RetrieveCommentByIdResult_Success_DEFAULT *comment.RetrieveCommentByIdResp
 
 func (p *RetrieveCommentByIdResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(comment.RetrieveCommentByIdResponse)
+		p.Success = new(comment.RetrieveCommentByIdResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
@@ -936,7 +936,7 @@ func (p *RetrieveCommentByIdResult) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *RetrieveCommentByIdResult) Unmarshal(in []byte) error {
-	msg := new(comment.RetrieveCommentByIdResponse)
+	msg := new(comment.RetrieveCommentByIdResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -944,7 +944,7 @@ func (p *RetrieveCommentByIdResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *RetrieveCommentByIdResult) GetSuccess() *comment.RetrieveCommentByIdResponse {
+func (p *RetrieveCommentByIdResult) GetSuccess() *comment.RetrieveCommentByIdResp {
 	if !p.IsSetSuccess() {
 		return RetrieveCommentByIdResult_Success_DEFAULT
 	}
@@ -952,7 +952,7 @@ func (p *RetrieveCommentByIdResult) GetSuccess() *comment.RetrieveCommentByIdRes
 }
 
 func (p *RetrieveCommentByIdResult) SetSuccess(x interface{}) {
-	p.Success = x.(*comment.RetrieveCommentByIdResponse)
+	p.Success = x.(*comment.RetrieveCommentByIdResp)
 }
 
 func (p *RetrieveCommentByIdResult) IsSetSuccess() bool {
@@ -967,7 +967,7 @@ func listCommentByAuthorIdAndTypeHandler(ctx context.Context, handler interface{
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(comment.ListCommentByAuthorIdAndTypeRequest)
+		req := new(comment.ListCommentByAuthorIdAndTypeReq)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
@@ -997,12 +997,12 @@ func newListCommentByAuthorIdAndTypeResult() interface{} {
 }
 
 type ListCommentByAuthorIdAndTypeArgs struct {
-	Req *comment.ListCommentByAuthorIdAndTypeRequest
+	Req *comment.ListCommentByAuthorIdAndTypeReq
 }
 
 func (p *ListCommentByAuthorIdAndTypeArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(comment.ListCommentByAuthorIdAndTypeRequest)
+		p.Req = new(comment.ListCommentByAuthorIdAndTypeReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
@@ -1029,7 +1029,7 @@ func (p *ListCommentByAuthorIdAndTypeArgs) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *ListCommentByAuthorIdAndTypeArgs) Unmarshal(in []byte) error {
-	msg := new(comment.ListCommentByAuthorIdAndTypeRequest)
+	msg := new(comment.ListCommentByAuthorIdAndTypeReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -1037,9 +1037,9 @@ func (p *ListCommentByAuthorIdAndTypeArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var ListCommentByAuthorIdAndTypeArgs_Req_DEFAULT *comment.ListCommentByAuthorIdAndTypeRequest
+var ListCommentByAuthorIdAndTypeArgs_Req_DEFAULT *comment.ListCommentByAuthorIdAndTypeReq
 
-func (p *ListCommentByAuthorIdAndTypeArgs) GetReq() *comment.ListCommentByAuthorIdAndTypeRequest {
+func (p *ListCommentByAuthorIdAndTypeArgs) GetReq() *comment.ListCommentByAuthorIdAndTypeReq {
 	if !p.IsSetReq() {
 		return ListCommentByAuthorIdAndTypeArgs_Req_DEFAULT
 	}
@@ -1055,14 +1055,14 @@ func (p *ListCommentByAuthorIdAndTypeArgs) GetFirstArgument() interface{} {
 }
 
 type ListCommentByAuthorIdAndTypeResult struct {
-	Success *comment.ListCommentByAuthorIdAndTypeResponse
+	Success *comment.ListCommentByAuthorIdAndTypeResp
 }
 
-var ListCommentByAuthorIdAndTypeResult_Success_DEFAULT *comment.ListCommentByAuthorIdAndTypeResponse
+var ListCommentByAuthorIdAndTypeResult_Success_DEFAULT *comment.ListCommentByAuthorIdAndTypeResp
 
 func (p *ListCommentByAuthorIdAndTypeResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(comment.ListCommentByAuthorIdAndTypeResponse)
+		p.Success = new(comment.ListCommentByAuthorIdAndTypeResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
@@ -1089,7 +1089,7 @@ func (p *ListCommentByAuthorIdAndTypeResult) Marshal(out []byte) ([]byte, error)
 }
 
 func (p *ListCommentByAuthorIdAndTypeResult) Unmarshal(in []byte) error {
-	msg := new(comment.ListCommentByAuthorIdAndTypeResponse)
+	msg := new(comment.ListCommentByAuthorIdAndTypeResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -1097,7 +1097,7 @@ func (p *ListCommentByAuthorIdAndTypeResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *ListCommentByAuthorIdAndTypeResult) GetSuccess() *comment.ListCommentByAuthorIdAndTypeResponse {
+func (p *ListCommentByAuthorIdAndTypeResult) GetSuccess() *comment.ListCommentByAuthorIdAndTypeResp {
 	if !p.IsSetSuccess() {
 		return ListCommentByAuthorIdAndTypeResult_Success_DEFAULT
 	}
@@ -1105,7 +1105,7 @@ func (p *ListCommentByAuthorIdAndTypeResult) GetSuccess() *comment.ListCommentBy
 }
 
 func (p *ListCommentByAuthorIdAndTypeResult) SetSuccess(x interface{}) {
-	p.Success = x.(*comment.ListCommentByAuthorIdAndTypeResponse)
+	p.Success = x.(*comment.ListCommentByAuthorIdAndTypeResp)
 }
 
 func (p *ListCommentByAuthorIdAndTypeResult) IsSetSuccess() bool {
@@ -1120,7 +1120,7 @@ func listCommentByReplyToAndTypeHandler(ctx context.Context, handler interface{}
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(comment.ListCommentByReplyToAndTypeRequest)
+		req := new(comment.ListCommentByReplyToAndTypeReq)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
@@ -1150,12 +1150,12 @@ func newListCommentByReplyToAndTypeResult() interface{} {
 }
 
 type ListCommentByReplyToAndTypeArgs struct {
-	Req *comment.ListCommentByReplyToAndTypeRequest
+	Req *comment.ListCommentByReplyToAndTypeReq
 }
 
 func (p *ListCommentByReplyToAndTypeArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(comment.ListCommentByReplyToAndTypeRequest)
+		p.Req = new(comment.ListCommentByReplyToAndTypeReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
@@ -1182,7 +1182,7 @@ func (p *ListCommentByReplyToAndTypeArgs) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *ListCommentByReplyToAndTypeArgs) Unmarshal(in []byte) error {
-	msg := new(comment.ListCommentByReplyToAndTypeRequest)
+	msg := new(comment.ListCommentByReplyToAndTypeReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -1190,9 +1190,9 @@ func (p *ListCommentByReplyToAndTypeArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var ListCommentByReplyToAndTypeArgs_Req_DEFAULT *comment.ListCommentByReplyToAndTypeRequest
+var ListCommentByReplyToAndTypeArgs_Req_DEFAULT *comment.ListCommentByReplyToAndTypeReq
 
-func (p *ListCommentByReplyToAndTypeArgs) GetReq() *comment.ListCommentByReplyToAndTypeRequest {
+func (p *ListCommentByReplyToAndTypeArgs) GetReq() *comment.ListCommentByReplyToAndTypeReq {
 	if !p.IsSetReq() {
 		return ListCommentByReplyToAndTypeArgs_Req_DEFAULT
 	}
@@ -1208,14 +1208,14 @@ func (p *ListCommentByReplyToAndTypeArgs) GetFirstArgument() interface{} {
 }
 
 type ListCommentByReplyToAndTypeResult struct {
-	Success *comment.ListCommentByReplyToAndTypeResponse
+	Success *comment.ListCommentByReplyToAndTypeResp
 }
 
-var ListCommentByReplyToAndTypeResult_Success_DEFAULT *comment.ListCommentByReplyToAndTypeResponse
+var ListCommentByReplyToAndTypeResult_Success_DEFAULT *comment.ListCommentByReplyToAndTypeResp
 
 func (p *ListCommentByReplyToAndTypeResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(comment.ListCommentByReplyToAndTypeResponse)
+		p.Success = new(comment.ListCommentByReplyToAndTypeResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
@@ -1242,7 +1242,7 @@ func (p *ListCommentByReplyToAndTypeResult) Marshal(out []byte) ([]byte, error) 
 }
 
 func (p *ListCommentByReplyToAndTypeResult) Unmarshal(in []byte) error {
-	msg := new(comment.ListCommentByReplyToAndTypeResponse)
+	msg := new(comment.ListCommentByReplyToAndTypeResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -1250,7 +1250,7 @@ func (p *ListCommentByReplyToAndTypeResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *ListCommentByReplyToAndTypeResult) GetSuccess() *comment.ListCommentByReplyToAndTypeResponse {
+func (p *ListCommentByReplyToAndTypeResult) GetSuccess() *comment.ListCommentByReplyToAndTypeResp {
 	if !p.IsSetSuccess() {
 		return ListCommentByReplyToAndTypeResult_Success_DEFAULT
 	}
@@ -1258,7 +1258,7 @@ func (p *ListCommentByReplyToAndTypeResult) GetSuccess() *comment.ListCommentByR
 }
 
 func (p *ListCommentByReplyToAndTypeResult) SetSuccess(x interface{}) {
-	p.Success = x.(*comment.ListCommentByReplyToAndTypeResponse)
+	p.Success = x.(*comment.ListCommentByReplyToAndTypeResp)
 }
 
 func (p *ListCommentByReplyToAndTypeResult) IsSetSuccess() bool {
@@ -1279,7 +1279,7 @@ func newServiceClient(c client.Client) *kClient {
 	}
 }
 
-func (p *kClient) CreateComment(ctx context.Context, Req *comment.CreateCommentRequest) (r *comment.CreateCommentResponse, err error) {
+func (p *kClient) CreateComment(ctx context.Context, Req *comment.CreateCommentReq) (r *comment.CreateCommentResp, err error) {
 	var _args CreateCommentArgs
 	_args.Req = Req
 	var _result CreateCommentResult
@@ -1289,7 +1289,7 @@ func (p *kClient) CreateComment(ctx context.Context, Req *comment.CreateCommentR
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) UpdateComment(ctx context.Context, Req *comment.UpdateCommentRequest) (r *comment.UpdateCommentResponse, err error) {
+func (p *kClient) UpdateComment(ctx context.Context, Req *comment.UpdateCommentReq) (r *comment.UpdateCommentResp, err error) {
 	var _args UpdateCommentArgs
 	_args.Req = Req
 	var _result UpdateCommentResult
@@ -1299,7 +1299,7 @@ func (p *kClient) UpdateComment(ctx context.Context, Req *comment.UpdateCommentR
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) DeleteComment(ctx context.Context, Req *comment.DeleteCommentByIdRequest) (r *comment.DeleteCommentByIdResponse, err error) {
+func (p *kClient) DeleteComment(ctx context.Context, Req *comment.DeleteCommentByIdReq) (r *comment.DeleteCommentByIdResp, err error) {
 	var _args DeleteCommentArgs
 	_args.Req = Req
 	var _result DeleteCommentResult
@@ -1309,7 +1309,7 @@ func (p *kClient) DeleteComment(ctx context.Context, Req *comment.DeleteCommentB
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) ListCommentByParent(ctx context.Context, Req *comment.ListCommentByParentRequest) (r *comment.ListCommentByParentResponse, err error) {
+func (p *kClient) ListCommentByParent(ctx context.Context, Req *comment.ListCommentByParentReq) (r *comment.ListCommentByParentResp, err error) {
 	var _args ListCommentByParentArgs
 	_args.Req = Req
 	var _result ListCommentByParentResult
@@ -1319,7 +1319,7 @@ func (p *kClient) ListCommentByParent(ctx context.Context, Req *comment.ListComm
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) CountCommentByParent(ctx context.Context, Req *comment.CountCommentByParentRequest) (r *comment.CountCommentByParentResponse, err error) {
+func (p *kClient) CountCommentByParent(ctx context.Context, Req *comment.CountCommentByParentReq) (r *comment.CountCommentByParentResp, err error) {
 	var _args CountCommentByParentArgs
 	_args.Req = Req
 	var _result CountCommentByParentResult
@@ -1329,7 +1329,7 @@ func (p *kClient) CountCommentByParent(ctx context.Context, Req *comment.CountCo
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) RetrieveCommentById(ctx context.Context, Req *comment.RetrieveCommentByIdRequest) (r *comment.RetrieveCommentByIdResponse, err error) {
+func (p *kClient) RetrieveCommentById(ctx context.Context, Req *comment.RetrieveCommentByIdReq) (r *comment.RetrieveCommentByIdResp, err error) {
 	var _args RetrieveCommentByIdArgs
 	_args.Req = Req
 	var _result RetrieveCommentByIdResult
@@ -1339,7 +1339,7 @@ func (p *kClient) RetrieveCommentById(ctx context.Context, Req *comment.Retrieve
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) ListCommentByAuthorIdAndType(ctx context.Context, Req *comment.ListCommentByAuthorIdAndTypeRequest) (r *comment.ListCommentByAuthorIdAndTypeResponse, err error) {
+func (p *kClient) ListCommentByAuthorIdAndType(ctx context.Context, Req *comment.ListCommentByAuthorIdAndTypeReq) (r *comment.ListCommentByAuthorIdAndTypeResp, err error) {
 	var _args ListCommentByAuthorIdAndTypeArgs
 	_args.Req = Req
 	var _result ListCommentByAuthorIdAndTypeResult
@@ -1349,7 +1349,7 @@ func (p *kClient) ListCommentByAuthorIdAndType(ctx context.Context, Req *comment
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) ListCommentByReplyToAndType(ctx context.Context, Req *comment.ListCommentByReplyToAndTypeRequest) (r *comment.ListCommentByReplyToAndTypeResponse, err error) {
+func (p *kClient) ListCommentByReplyToAndType(ctx context.Context, Req *comment.ListCommentByReplyToAndTypeReq) (r *comment.ListCommentByReplyToAndTypeResp, err error) {
 	var _args ListCommentByReplyToAndTypeArgs
 	_args.Req = Req
 	var _result ListCommentByReplyToAndTypeResult

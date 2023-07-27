@@ -12,102 +12,7 @@ var (
 	_ = fastpb.Skip
 )
 
-func (x *Comment) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 2:
-		offset, err = x.fastReadField2(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 4:
-		offset, err = x.fastReadField4(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 5:
-		offset, err = x.fastReadField5(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 6:
-		offset, err = x.fastReadField6(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 7:
-		offset, err = x.fastReadField7(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 8:
-		offset, err = x.fastReadField8(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_Comment[number], err)
-}
-
-func (x *Comment) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.Id, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *Comment) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.Text, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *Comment) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.AuthorId, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *Comment) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	x.ReplyTo, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *Comment) fastReadField5(buf []byte, _type int8) (offset int, err error) {
-	x.Type, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *Comment) fastReadField6(buf []byte, _type int8) (offset int, err error) {
-	x.ParentId, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *Comment) fastReadField7(buf []byte, _type int8) (offset int, err error) {
-	x.UpdateAt, offset, err = fastpb.ReadInt64(buf, _type)
-	return offset, err
-}
-
-func (x *Comment) fastReadField8(buf []byte, _type int8) (offset int, err error) {
-	x.CreateAt, offset, err = fastpb.ReadInt64(buf, _type)
-	return offset, err
-}
-
-func (x *CreateCommentRequest) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *CreateCommentReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -144,35 +49,35 @@ func (x *CreateCommentRequest) FastRead(buf []byte, _type int8, number int32) (o
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CreateCommentRequest[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CreateCommentReq[number], err)
 }
 
-func (x *CreateCommentRequest) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *CreateCommentReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.Text, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *CreateCommentRequest) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+func (x *CreateCommentReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.AuthorId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *CreateCommentRequest) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+func (x *CreateCommentReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	x.ReplyTo, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *CreateCommentRequest) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+func (x *CreateCommentReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 	x.Type, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *CreateCommentRequest) fastReadField5(buf []byte, _type int8) (offset int, err error) {
+func (x *CreateCommentReq) fastReadField5(buf []byte, _type int8) (offset int, err error) {
 	x.ParentId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *CreateCommentResponse) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *CreateCommentResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -189,15 +94,15 @@ func (x *CreateCommentResponse) FastRead(buf []byte, _type int8, number int32) (
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CreateCommentResponse[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CreateCommentResp[number], err)
 }
 
-func (x *CreateCommentResponse) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *CreateCommentResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.Id, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *UpdateCommentRequest) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *UpdateCommentReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -219,20 +124,20 @@ func (x *UpdateCommentRequest) FastRead(buf []byte, _type int8, number int32) (o
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_UpdateCommentRequest[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_UpdateCommentReq[number], err)
 }
 
-func (x *UpdateCommentRequest) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *UpdateCommentReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.Id, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *UpdateCommentRequest) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+func (x *UpdateCommentReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Text, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *UpdateCommentResponse) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *UpdateCommentResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
@@ -245,7 +150,7 @@ SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 }
 
-func (x *DeleteCommentByIdRequest) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *DeleteCommentByIdReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -262,15 +167,15 @@ func (x *DeleteCommentByIdRequest) FastRead(buf []byte, _type int8, number int32
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DeleteCommentByIdRequest[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DeleteCommentByIdReq[number], err)
 }
 
-func (x *DeleteCommentByIdRequest) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *DeleteCommentByIdReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.Id, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *DeleteCommentByIdResponse) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *DeleteCommentByIdResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
@@ -283,7 +188,7 @@ SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 }
 
-func (x *ListCommentByParentRequest) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *ListCommentByParentReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -315,30 +220,30 @@ func (x *ListCommentByParentRequest) FastRead(buf []byte, _type int8, number int
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListCommentByParentRequest[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListCommentByParentReq[number], err)
 }
 
-func (x *ListCommentByParentRequest) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByParentReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.Type, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *ListCommentByParentRequest) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByParentReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.ParentId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *ListCommentByParentRequest) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByParentReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	x.Skip, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *ListCommentByParentRequest) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByParentReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 	x.Limit, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *ListCommentByParentResponse) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *ListCommentByParentResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -360,10 +265,10 @@ func (x *ListCommentByParentResponse) FastRead(buf []byte, _type int8, number in
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListCommentByParentResponse[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListCommentByParentResp[number], err)
 }
 
-func (x *ListCommentByParentResponse) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByParentResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	var v Comment
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -373,12 +278,12 @@ func (x *ListCommentByParentResponse) fastReadField1(buf []byte, _type int8) (of
 	return offset, nil
 }
 
-func (x *ListCommentByParentResponse) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByParentResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *CountCommentByParentRequest) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *CountCommentByParentReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -400,20 +305,20 @@ func (x *CountCommentByParentRequest) FastRead(buf []byte, _type int8, number in
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CountCommentByParentRequest[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CountCommentByParentReq[number], err)
 }
 
-func (x *CountCommentByParentRequest) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *CountCommentByParentReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.Type, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *CountCommentByParentRequest) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+func (x *CountCommentByParentReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.ParentId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *CountCommentByParentResponse) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *CountCommentByParentResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -430,15 +335,15 @@ func (x *CountCommentByParentResponse) FastRead(buf []byte, _type int8, number i
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CountCommentByParentResponse[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CountCommentByParentResp[number], err)
 }
 
-func (x *CountCommentByParentResponse) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *CountCommentByParentResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *RetrieveCommentByIdRequest) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *RetrieveCommentByIdReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -455,15 +360,15 @@ func (x *RetrieveCommentByIdRequest) FastRead(buf []byte, _type int8, number int
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_RetrieveCommentByIdRequest[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_RetrieveCommentByIdReq[number], err)
 }
 
-func (x *RetrieveCommentByIdRequest) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *RetrieveCommentByIdReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.Id, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *RetrieveCommentByIdResponse) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *RetrieveCommentByIdResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -480,10 +385,10 @@ func (x *RetrieveCommentByIdResponse) FastRead(buf []byte, _type int8, number in
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_RetrieveCommentByIdResponse[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_RetrieveCommentByIdResp[number], err)
 }
 
-func (x *RetrieveCommentByIdResponse) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *RetrieveCommentByIdResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	var v Comment
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -493,7 +398,7 @@ func (x *RetrieveCommentByIdResponse) fastReadField1(buf []byte, _type int8) (of
 	return offset, nil
 }
 
-func (x *ListCommentByAuthorIdAndTypeRequest) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *ListCommentByAuthorIdAndTypeReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -525,30 +430,30 @@ func (x *ListCommentByAuthorIdAndTypeRequest) FastRead(buf []byte, _type int8, n
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListCommentByAuthorIdAndTypeRequest[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListCommentByAuthorIdAndTypeReq[number], err)
 }
 
-func (x *ListCommentByAuthorIdAndTypeRequest) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByAuthorIdAndTypeReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.AuthorId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *ListCommentByAuthorIdAndTypeRequest) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByAuthorIdAndTypeReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Type, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *ListCommentByAuthorIdAndTypeRequest) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByAuthorIdAndTypeReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	x.Skip, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *ListCommentByAuthorIdAndTypeRequest) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByAuthorIdAndTypeReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 	x.Limit, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *ListCommentByAuthorIdAndTypeResponse) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *ListCommentByAuthorIdAndTypeResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -570,10 +475,10 @@ func (x *ListCommentByAuthorIdAndTypeResponse) FastRead(buf []byte, _type int8, 
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListCommentByAuthorIdAndTypeResponse[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListCommentByAuthorIdAndTypeResp[number], err)
 }
 
-func (x *ListCommentByAuthorIdAndTypeResponse) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByAuthorIdAndTypeResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	var v Comment
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -583,12 +488,12 @@ func (x *ListCommentByAuthorIdAndTypeResponse) fastReadField1(buf []byte, _type 
 	return offset, nil
 }
 
-func (x *ListCommentByAuthorIdAndTypeResponse) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByAuthorIdAndTypeResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *ListCommentByReplyToAndTypeRequest) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *ListCommentByReplyToAndTypeReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -620,30 +525,30 @@ func (x *ListCommentByReplyToAndTypeRequest) FastRead(buf []byte, _type int8, nu
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListCommentByReplyToAndTypeRequest[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListCommentByReplyToAndTypeReq[number], err)
 }
 
-func (x *ListCommentByReplyToAndTypeRequest) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByReplyToAndTypeReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.ReplyTo, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *ListCommentByReplyToAndTypeRequest) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByReplyToAndTypeReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Type, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *ListCommentByReplyToAndTypeRequest) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByReplyToAndTypeReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	x.Skip, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *ListCommentByReplyToAndTypeRequest) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByReplyToAndTypeReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 	x.Limit, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *ListCommentByReplyToAndTypeResponse) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *ListCommentByReplyToAndTypeResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -665,10 +570,10 @@ func (x *ListCommentByReplyToAndTypeResponse) FastRead(buf []byte, _type int8, n
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListCommentByReplyToAndTypeResponse[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListCommentByReplyToAndTypeResp[number], err)
 }
 
-func (x *ListCommentByReplyToAndTypeResponse) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByReplyToAndTypeResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	var v Comment
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -678,91 +583,12 @@ func (x *ListCommentByReplyToAndTypeResponse) fastReadField1(buf []byte, _type i
 	return offset, nil
 }
 
-func (x *ListCommentByReplyToAndTypeResponse) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByReplyToAndTypeResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *Comment) FastWrite(buf []byte) (offset int) {
-	if x == nil {
-		return offset
-	}
-	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
-	offset += x.fastWriteField4(buf[offset:])
-	offset += x.fastWriteField5(buf[offset:])
-	offset += x.fastWriteField6(buf[offset:])
-	offset += x.fastWriteField7(buf[offset:])
-	offset += x.fastWriteField8(buf[offset:])
-	return offset
-}
-
-func (x *Comment) fastWriteField1(buf []byte) (offset int) {
-	if x.Id == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
-	return offset
-}
-
-func (x *Comment) fastWriteField2(buf []byte) (offset int) {
-	if x.Text == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 2, x.GetText())
-	return offset
-}
-
-func (x *Comment) fastWriteField3(buf []byte) (offset int) {
-	if x.AuthorId == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetAuthorId())
-	return offset
-}
-
-func (x *Comment) fastWriteField4(buf []byte) (offset int) {
-	if x.ReplyTo == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 4, x.GetReplyTo())
-	return offset
-}
-
-func (x *Comment) fastWriteField5(buf []byte) (offset int) {
-	if x.Type == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 5, x.GetType())
-	return offset
-}
-
-func (x *Comment) fastWriteField6(buf []byte) (offset int) {
-	if x.ParentId == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 6, x.GetParentId())
-	return offset
-}
-
-func (x *Comment) fastWriteField7(buf []byte) (offset int) {
-	if x.UpdateAt == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 7, x.GetUpdateAt())
-	return offset
-}
-
-func (x *Comment) fastWriteField8(buf []byte) (offset int) {
-	if x.CreateAt == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 8, x.GetCreateAt())
-	return offset
-}
-
-func (x *CreateCommentRequest) FastWrite(buf []byte) (offset int) {
+func (x *CreateCommentReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -774,7 +600,7 @@ func (x *CreateCommentRequest) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *CreateCommentRequest) fastWriteField1(buf []byte) (offset int) {
+func (x *CreateCommentReq) fastWriteField1(buf []byte) (offset int) {
 	if x.Text == "" {
 		return offset
 	}
@@ -782,7 +608,7 @@ func (x *CreateCommentRequest) fastWriteField1(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *CreateCommentRequest) fastWriteField2(buf []byte) (offset int) {
+func (x *CreateCommentReq) fastWriteField2(buf []byte) (offset int) {
 	if x.AuthorId == "" {
 		return offset
 	}
@@ -790,7 +616,7 @@ func (x *CreateCommentRequest) fastWriteField2(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *CreateCommentRequest) fastWriteField3(buf []byte) (offset int) {
+func (x *CreateCommentReq) fastWriteField3(buf []byte) (offset int) {
 	if x.ReplyTo == "" {
 		return offset
 	}
@@ -798,7 +624,7 @@ func (x *CreateCommentRequest) fastWriteField3(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *CreateCommentRequest) fastWriteField4(buf []byte) (offset int) {
+func (x *CreateCommentReq) fastWriteField4(buf []byte) (offset int) {
 	if x.Type == "" {
 		return offset
 	}
@@ -806,7 +632,7 @@ func (x *CreateCommentRequest) fastWriteField4(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *CreateCommentRequest) fastWriteField5(buf []byte) (offset int) {
+func (x *CreateCommentReq) fastWriteField5(buf []byte) (offset int) {
 	if x.ParentId == "" {
 		return offset
 	}
@@ -814,7 +640,7 @@ func (x *CreateCommentRequest) fastWriteField5(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *CreateCommentResponse) FastWrite(buf []byte) (offset int) {
+func (x *CreateCommentResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -822,7 +648,7 @@ func (x *CreateCommentResponse) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *CreateCommentResponse) fastWriteField1(buf []byte) (offset int) {
+func (x *CreateCommentResp) fastWriteField1(buf []byte) (offset int) {
 	if x.Id == "" {
 		return offset
 	}
@@ -830,7 +656,7 @@ func (x *CreateCommentResponse) fastWriteField1(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *UpdateCommentRequest) FastWrite(buf []byte) (offset int) {
+func (x *UpdateCommentReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -839,7 +665,7 @@ func (x *UpdateCommentRequest) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *UpdateCommentRequest) fastWriteField1(buf []byte) (offset int) {
+func (x *UpdateCommentReq) fastWriteField1(buf []byte) (offset int) {
 	if x.Id == "" {
 		return offset
 	}
@@ -847,7 +673,7 @@ func (x *UpdateCommentRequest) fastWriteField1(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *UpdateCommentRequest) fastWriteField2(buf []byte) (offset int) {
+func (x *UpdateCommentReq) fastWriteField2(buf []byte) (offset int) {
 	if x.Text == "" {
 		return offset
 	}
@@ -855,14 +681,14 @@ func (x *UpdateCommentRequest) fastWriteField2(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *UpdateCommentResponse) FastWrite(buf []byte) (offset int) {
+func (x *UpdateCommentResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
 	return offset
 }
 
-func (x *DeleteCommentByIdRequest) FastWrite(buf []byte) (offset int) {
+func (x *DeleteCommentByIdReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -870,7 +696,7 @@ func (x *DeleteCommentByIdRequest) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *DeleteCommentByIdRequest) fastWriteField1(buf []byte) (offset int) {
+func (x *DeleteCommentByIdReq) fastWriteField1(buf []byte) (offset int) {
 	if x.Id == "" {
 		return offset
 	}
@@ -878,14 +704,14 @@ func (x *DeleteCommentByIdRequest) fastWriteField1(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *DeleteCommentByIdResponse) FastWrite(buf []byte) (offset int) {
+func (x *DeleteCommentByIdResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
 	return offset
 }
 
-func (x *ListCommentByParentRequest) FastWrite(buf []byte) (offset int) {
+func (x *ListCommentByParentReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -896,7 +722,7 @@ func (x *ListCommentByParentRequest) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *ListCommentByParentRequest) fastWriteField1(buf []byte) (offset int) {
+func (x *ListCommentByParentReq) fastWriteField1(buf []byte) (offset int) {
 	if x.Type == "" {
 		return offset
 	}
@@ -904,7 +730,7 @@ func (x *ListCommentByParentRequest) fastWriteField1(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *ListCommentByParentRequest) fastWriteField2(buf []byte) (offset int) {
+func (x *ListCommentByParentReq) fastWriteField2(buf []byte) (offset int) {
 	if x.ParentId == "" {
 		return offset
 	}
@@ -912,7 +738,7 @@ func (x *ListCommentByParentRequest) fastWriteField2(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *ListCommentByParentRequest) fastWriteField3(buf []byte) (offset int) {
+func (x *ListCommentByParentReq) fastWriteField3(buf []byte) (offset int) {
 	if x.Skip == 0 {
 		return offset
 	}
@@ -920,7 +746,7 @@ func (x *ListCommentByParentRequest) fastWriteField3(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *ListCommentByParentRequest) fastWriteField4(buf []byte) (offset int) {
+func (x *ListCommentByParentReq) fastWriteField4(buf []byte) (offset int) {
 	if x.Limit == 0 {
 		return offset
 	}
@@ -928,7 +754,7 @@ func (x *ListCommentByParentRequest) fastWriteField4(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *ListCommentByParentResponse) FastWrite(buf []byte) (offset int) {
+func (x *ListCommentByParentResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -937,7 +763,7 @@ func (x *ListCommentByParentResponse) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *ListCommentByParentResponse) fastWriteField1(buf []byte) (offset int) {
+func (x *ListCommentByParentResp) fastWriteField1(buf []byte) (offset int) {
 	if x.Comments == nil {
 		return offset
 	}
@@ -947,7 +773,7 @@ func (x *ListCommentByParentResponse) fastWriteField1(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *ListCommentByParentResponse) fastWriteField2(buf []byte) (offset int) {
+func (x *ListCommentByParentResp) fastWriteField2(buf []byte) (offset int) {
 	if x.Total == 0 {
 		return offset
 	}
@@ -955,7 +781,7 @@ func (x *ListCommentByParentResponse) fastWriteField2(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *CountCommentByParentRequest) FastWrite(buf []byte) (offset int) {
+func (x *CountCommentByParentReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -964,7 +790,7 @@ func (x *CountCommentByParentRequest) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *CountCommentByParentRequest) fastWriteField1(buf []byte) (offset int) {
+func (x *CountCommentByParentReq) fastWriteField1(buf []byte) (offset int) {
 	if x.Type == "" {
 		return offset
 	}
@@ -972,7 +798,7 @@ func (x *CountCommentByParentRequest) fastWriteField1(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *CountCommentByParentRequest) fastWriteField2(buf []byte) (offset int) {
+func (x *CountCommentByParentReq) fastWriteField2(buf []byte) (offset int) {
 	if x.ParentId == "" {
 		return offset
 	}
@@ -980,7 +806,7 @@ func (x *CountCommentByParentRequest) fastWriteField2(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *CountCommentByParentResponse) FastWrite(buf []byte) (offset int) {
+func (x *CountCommentByParentResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -988,7 +814,7 @@ func (x *CountCommentByParentResponse) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *CountCommentByParentResponse) fastWriteField1(buf []byte) (offset int) {
+func (x *CountCommentByParentResp) fastWriteField1(buf []byte) (offset int) {
 	if x.Total == 0 {
 		return offset
 	}
@@ -996,7 +822,7 @@ func (x *CountCommentByParentResponse) fastWriteField1(buf []byte) (offset int) 
 	return offset
 }
 
-func (x *RetrieveCommentByIdRequest) FastWrite(buf []byte) (offset int) {
+func (x *RetrieveCommentByIdReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -1004,7 +830,7 @@ func (x *RetrieveCommentByIdRequest) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *RetrieveCommentByIdRequest) fastWriteField1(buf []byte) (offset int) {
+func (x *RetrieveCommentByIdReq) fastWriteField1(buf []byte) (offset int) {
 	if x.Id == "" {
 		return offset
 	}
@@ -1012,7 +838,7 @@ func (x *RetrieveCommentByIdRequest) fastWriteField1(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *RetrieveCommentByIdResponse) FastWrite(buf []byte) (offset int) {
+func (x *RetrieveCommentByIdResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -1020,7 +846,7 @@ func (x *RetrieveCommentByIdResponse) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *RetrieveCommentByIdResponse) fastWriteField1(buf []byte) (offset int) {
+func (x *RetrieveCommentByIdResp) fastWriteField1(buf []byte) (offset int) {
 	if x.Comment == nil {
 		return offset
 	}
@@ -1028,7 +854,7 @@ func (x *RetrieveCommentByIdResponse) fastWriteField1(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *ListCommentByAuthorIdAndTypeRequest) FastWrite(buf []byte) (offset int) {
+func (x *ListCommentByAuthorIdAndTypeReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -1039,7 +865,7 @@ func (x *ListCommentByAuthorIdAndTypeRequest) FastWrite(buf []byte) (offset int)
 	return offset
 }
 
-func (x *ListCommentByAuthorIdAndTypeRequest) fastWriteField1(buf []byte) (offset int) {
+func (x *ListCommentByAuthorIdAndTypeReq) fastWriteField1(buf []byte) (offset int) {
 	if x.AuthorId == "" {
 		return offset
 	}
@@ -1047,7 +873,7 @@ func (x *ListCommentByAuthorIdAndTypeRequest) fastWriteField1(buf []byte) (offse
 	return offset
 }
 
-func (x *ListCommentByAuthorIdAndTypeRequest) fastWriteField2(buf []byte) (offset int) {
+func (x *ListCommentByAuthorIdAndTypeReq) fastWriteField2(buf []byte) (offset int) {
 	if x.Type == "" {
 		return offset
 	}
@@ -1055,7 +881,7 @@ func (x *ListCommentByAuthorIdAndTypeRequest) fastWriteField2(buf []byte) (offse
 	return offset
 }
 
-func (x *ListCommentByAuthorIdAndTypeRequest) fastWriteField3(buf []byte) (offset int) {
+func (x *ListCommentByAuthorIdAndTypeReq) fastWriteField3(buf []byte) (offset int) {
 	if x.Skip == 0 {
 		return offset
 	}
@@ -1063,7 +889,7 @@ func (x *ListCommentByAuthorIdAndTypeRequest) fastWriteField3(buf []byte) (offse
 	return offset
 }
 
-func (x *ListCommentByAuthorIdAndTypeRequest) fastWriteField4(buf []byte) (offset int) {
+func (x *ListCommentByAuthorIdAndTypeReq) fastWriteField4(buf []byte) (offset int) {
 	if x.Limit == 0 {
 		return offset
 	}
@@ -1071,7 +897,7 @@ func (x *ListCommentByAuthorIdAndTypeRequest) fastWriteField4(buf []byte) (offse
 	return offset
 }
 
-func (x *ListCommentByAuthorIdAndTypeResponse) FastWrite(buf []byte) (offset int) {
+func (x *ListCommentByAuthorIdAndTypeResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -1080,7 +906,7 @@ func (x *ListCommentByAuthorIdAndTypeResponse) FastWrite(buf []byte) (offset int
 	return offset
 }
 
-func (x *ListCommentByAuthorIdAndTypeResponse) fastWriteField1(buf []byte) (offset int) {
+func (x *ListCommentByAuthorIdAndTypeResp) fastWriteField1(buf []byte) (offset int) {
 	if x.Comments == nil {
 		return offset
 	}
@@ -1090,7 +916,7 @@ func (x *ListCommentByAuthorIdAndTypeResponse) fastWriteField1(buf []byte) (offs
 	return offset
 }
 
-func (x *ListCommentByAuthorIdAndTypeResponse) fastWriteField2(buf []byte) (offset int) {
+func (x *ListCommentByAuthorIdAndTypeResp) fastWriteField2(buf []byte) (offset int) {
 	if x.Total == 0 {
 		return offset
 	}
@@ -1098,7 +924,7 @@ func (x *ListCommentByAuthorIdAndTypeResponse) fastWriteField2(buf []byte) (offs
 	return offset
 }
 
-func (x *ListCommentByReplyToAndTypeRequest) FastWrite(buf []byte) (offset int) {
+func (x *ListCommentByReplyToAndTypeReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -1109,7 +935,7 @@ func (x *ListCommentByReplyToAndTypeRequest) FastWrite(buf []byte) (offset int) 
 	return offset
 }
 
-func (x *ListCommentByReplyToAndTypeRequest) fastWriteField1(buf []byte) (offset int) {
+func (x *ListCommentByReplyToAndTypeReq) fastWriteField1(buf []byte) (offset int) {
 	if x.ReplyTo == "" {
 		return offset
 	}
@@ -1117,7 +943,7 @@ func (x *ListCommentByReplyToAndTypeRequest) fastWriteField1(buf []byte) (offset
 	return offset
 }
 
-func (x *ListCommentByReplyToAndTypeRequest) fastWriteField2(buf []byte) (offset int) {
+func (x *ListCommentByReplyToAndTypeReq) fastWriteField2(buf []byte) (offset int) {
 	if x.Type == "" {
 		return offset
 	}
@@ -1125,7 +951,7 @@ func (x *ListCommentByReplyToAndTypeRequest) fastWriteField2(buf []byte) (offset
 	return offset
 }
 
-func (x *ListCommentByReplyToAndTypeRequest) fastWriteField3(buf []byte) (offset int) {
+func (x *ListCommentByReplyToAndTypeReq) fastWriteField3(buf []byte) (offset int) {
 	if x.Skip == 0 {
 		return offset
 	}
@@ -1133,7 +959,7 @@ func (x *ListCommentByReplyToAndTypeRequest) fastWriteField3(buf []byte) (offset
 	return offset
 }
 
-func (x *ListCommentByReplyToAndTypeRequest) fastWriteField4(buf []byte) (offset int) {
+func (x *ListCommentByReplyToAndTypeReq) fastWriteField4(buf []byte) (offset int) {
 	if x.Limit == 0 {
 		return offset
 	}
@@ -1141,7 +967,7 @@ func (x *ListCommentByReplyToAndTypeRequest) fastWriteField4(buf []byte) (offset
 	return offset
 }
 
-func (x *ListCommentByReplyToAndTypeResponse) FastWrite(buf []byte) (offset int) {
+func (x *ListCommentByReplyToAndTypeResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -1150,7 +976,7 @@ func (x *ListCommentByReplyToAndTypeResponse) FastWrite(buf []byte) (offset int)
 	return offset
 }
 
-func (x *ListCommentByReplyToAndTypeResponse) fastWriteField1(buf []byte) (offset int) {
+func (x *ListCommentByReplyToAndTypeResp) fastWriteField1(buf []byte) (offset int) {
 	if x.Comments == nil {
 		return offset
 	}
@@ -1160,7 +986,7 @@ func (x *ListCommentByReplyToAndTypeResponse) fastWriteField1(buf []byte) (offse
 	return offset
 }
 
-func (x *ListCommentByReplyToAndTypeResponse) fastWriteField2(buf []byte) (offset int) {
+func (x *ListCommentByReplyToAndTypeResp) fastWriteField2(buf []byte) (offset int) {
 	if x.Total == 0 {
 		return offset
 	}
@@ -1168,86 +994,7 @@ func (x *ListCommentByReplyToAndTypeResponse) fastWriteField2(buf []byte) (offse
 	return offset
 }
 
-func (x *Comment) Size() (n int) {
-	if x == nil {
-		return n
-	}
-	n += x.sizeField1()
-	n += x.sizeField2()
-	n += x.sizeField3()
-	n += x.sizeField4()
-	n += x.sizeField5()
-	n += x.sizeField6()
-	n += x.sizeField7()
-	n += x.sizeField8()
-	return n
-}
-
-func (x *Comment) sizeField1() (n int) {
-	if x.Id == "" {
-		return n
-	}
-	n += fastpb.SizeString(1, x.GetId())
-	return n
-}
-
-func (x *Comment) sizeField2() (n int) {
-	if x.Text == "" {
-		return n
-	}
-	n += fastpb.SizeString(2, x.GetText())
-	return n
-}
-
-func (x *Comment) sizeField3() (n int) {
-	if x.AuthorId == "" {
-		return n
-	}
-	n += fastpb.SizeString(3, x.GetAuthorId())
-	return n
-}
-
-func (x *Comment) sizeField4() (n int) {
-	if x.ReplyTo == "" {
-		return n
-	}
-	n += fastpb.SizeString(4, x.GetReplyTo())
-	return n
-}
-
-func (x *Comment) sizeField5() (n int) {
-	if x.Type == "" {
-		return n
-	}
-	n += fastpb.SizeString(5, x.GetType())
-	return n
-}
-
-func (x *Comment) sizeField6() (n int) {
-	if x.ParentId == "" {
-		return n
-	}
-	n += fastpb.SizeString(6, x.GetParentId())
-	return n
-}
-
-func (x *Comment) sizeField7() (n int) {
-	if x.UpdateAt == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(7, x.GetUpdateAt())
-	return n
-}
-
-func (x *Comment) sizeField8() (n int) {
-	if x.CreateAt == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(8, x.GetCreateAt())
-	return n
-}
-
-func (x *CreateCommentRequest) Size() (n int) {
+func (x *CreateCommentReq) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -1259,7 +1006,7 @@ func (x *CreateCommentRequest) Size() (n int) {
 	return n
 }
 
-func (x *CreateCommentRequest) sizeField1() (n int) {
+func (x *CreateCommentReq) sizeField1() (n int) {
 	if x.Text == "" {
 		return n
 	}
@@ -1267,7 +1014,7 @@ func (x *CreateCommentRequest) sizeField1() (n int) {
 	return n
 }
 
-func (x *CreateCommentRequest) sizeField2() (n int) {
+func (x *CreateCommentReq) sizeField2() (n int) {
 	if x.AuthorId == "" {
 		return n
 	}
@@ -1275,7 +1022,7 @@ func (x *CreateCommentRequest) sizeField2() (n int) {
 	return n
 }
 
-func (x *CreateCommentRequest) sizeField3() (n int) {
+func (x *CreateCommentReq) sizeField3() (n int) {
 	if x.ReplyTo == "" {
 		return n
 	}
@@ -1283,7 +1030,7 @@ func (x *CreateCommentRequest) sizeField3() (n int) {
 	return n
 }
 
-func (x *CreateCommentRequest) sizeField4() (n int) {
+func (x *CreateCommentReq) sizeField4() (n int) {
 	if x.Type == "" {
 		return n
 	}
@@ -1291,7 +1038,7 @@ func (x *CreateCommentRequest) sizeField4() (n int) {
 	return n
 }
 
-func (x *CreateCommentRequest) sizeField5() (n int) {
+func (x *CreateCommentReq) sizeField5() (n int) {
 	if x.ParentId == "" {
 		return n
 	}
@@ -1299,7 +1046,7 @@ func (x *CreateCommentRequest) sizeField5() (n int) {
 	return n
 }
 
-func (x *CreateCommentResponse) Size() (n int) {
+func (x *CreateCommentResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -1307,7 +1054,7 @@ func (x *CreateCommentResponse) Size() (n int) {
 	return n
 }
 
-func (x *CreateCommentResponse) sizeField1() (n int) {
+func (x *CreateCommentResp) sizeField1() (n int) {
 	if x.Id == "" {
 		return n
 	}
@@ -1315,7 +1062,7 @@ func (x *CreateCommentResponse) sizeField1() (n int) {
 	return n
 }
 
-func (x *UpdateCommentRequest) Size() (n int) {
+func (x *UpdateCommentReq) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -1324,7 +1071,7 @@ func (x *UpdateCommentRequest) Size() (n int) {
 	return n
 }
 
-func (x *UpdateCommentRequest) sizeField1() (n int) {
+func (x *UpdateCommentReq) sizeField1() (n int) {
 	if x.Id == "" {
 		return n
 	}
@@ -1332,7 +1079,7 @@ func (x *UpdateCommentRequest) sizeField1() (n int) {
 	return n
 }
 
-func (x *UpdateCommentRequest) sizeField2() (n int) {
+func (x *UpdateCommentReq) sizeField2() (n int) {
 	if x.Text == "" {
 		return n
 	}
@@ -1340,14 +1087,14 @@ func (x *UpdateCommentRequest) sizeField2() (n int) {
 	return n
 }
 
-func (x *UpdateCommentResponse) Size() (n int) {
+func (x *UpdateCommentResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
 	return n
 }
 
-func (x *DeleteCommentByIdRequest) Size() (n int) {
+func (x *DeleteCommentByIdReq) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -1355,7 +1102,7 @@ func (x *DeleteCommentByIdRequest) Size() (n int) {
 	return n
 }
 
-func (x *DeleteCommentByIdRequest) sizeField1() (n int) {
+func (x *DeleteCommentByIdReq) sizeField1() (n int) {
 	if x.Id == "" {
 		return n
 	}
@@ -1363,14 +1110,14 @@ func (x *DeleteCommentByIdRequest) sizeField1() (n int) {
 	return n
 }
 
-func (x *DeleteCommentByIdResponse) Size() (n int) {
+func (x *DeleteCommentByIdResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
 	return n
 }
 
-func (x *ListCommentByParentRequest) Size() (n int) {
+func (x *ListCommentByParentReq) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -1381,7 +1128,7 @@ func (x *ListCommentByParentRequest) Size() (n int) {
 	return n
 }
 
-func (x *ListCommentByParentRequest) sizeField1() (n int) {
+func (x *ListCommentByParentReq) sizeField1() (n int) {
 	if x.Type == "" {
 		return n
 	}
@@ -1389,7 +1136,7 @@ func (x *ListCommentByParentRequest) sizeField1() (n int) {
 	return n
 }
 
-func (x *ListCommentByParentRequest) sizeField2() (n int) {
+func (x *ListCommentByParentReq) sizeField2() (n int) {
 	if x.ParentId == "" {
 		return n
 	}
@@ -1397,7 +1144,7 @@ func (x *ListCommentByParentRequest) sizeField2() (n int) {
 	return n
 }
 
-func (x *ListCommentByParentRequest) sizeField3() (n int) {
+func (x *ListCommentByParentReq) sizeField3() (n int) {
 	if x.Skip == 0 {
 		return n
 	}
@@ -1405,7 +1152,7 @@ func (x *ListCommentByParentRequest) sizeField3() (n int) {
 	return n
 }
 
-func (x *ListCommentByParentRequest) sizeField4() (n int) {
+func (x *ListCommentByParentReq) sizeField4() (n int) {
 	if x.Limit == 0 {
 		return n
 	}
@@ -1413,7 +1160,7 @@ func (x *ListCommentByParentRequest) sizeField4() (n int) {
 	return n
 }
 
-func (x *ListCommentByParentResponse) Size() (n int) {
+func (x *ListCommentByParentResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -1422,7 +1169,7 @@ func (x *ListCommentByParentResponse) Size() (n int) {
 	return n
 }
 
-func (x *ListCommentByParentResponse) sizeField1() (n int) {
+func (x *ListCommentByParentResp) sizeField1() (n int) {
 	if x.Comments == nil {
 		return n
 	}
@@ -1432,7 +1179,7 @@ func (x *ListCommentByParentResponse) sizeField1() (n int) {
 	return n
 }
 
-func (x *ListCommentByParentResponse) sizeField2() (n int) {
+func (x *ListCommentByParentResp) sizeField2() (n int) {
 	if x.Total == 0 {
 		return n
 	}
@@ -1440,7 +1187,7 @@ func (x *ListCommentByParentResponse) sizeField2() (n int) {
 	return n
 }
 
-func (x *CountCommentByParentRequest) Size() (n int) {
+func (x *CountCommentByParentReq) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -1449,7 +1196,7 @@ func (x *CountCommentByParentRequest) Size() (n int) {
 	return n
 }
 
-func (x *CountCommentByParentRequest) sizeField1() (n int) {
+func (x *CountCommentByParentReq) sizeField1() (n int) {
 	if x.Type == "" {
 		return n
 	}
@@ -1457,7 +1204,7 @@ func (x *CountCommentByParentRequest) sizeField1() (n int) {
 	return n
 }
 
-func (x *CountCommentByParentRequest) sizeField2() (n int) {
+func (x *CountCommentByParentReq) sizeField2() (n int) {
 	if x.ParentId == "" {
 		return n
 	}
@@ -1465,7 +1212,7 @@ func (x *CountCommentByParentRequest) sizeField2() (n int) {
 	return n
 }
 
-func (x *CountCommentByParentResponse) Size() (n int) {
+func (x *CountCommentByParentResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -1473,7 +1220,7 @@ func (x *CountCommentByParentResponse) Size() (n int) {
 	return n
 }
 
-func (x *CountCommentByParentResponse) sizeField1() (n int) {
+func (x *CountCommentByParentResp) sizeField1() (n int) {
 	if x.Total == 0 {
 		return n
 	}
@@ -1481,7 +1228,7 @@ func (x *CountCommentByParentResponse) sizeField1() (n int) {
 	return n
 }
 
-func (x *RetrieveCommentByIdRequest) Size() (n int) {
+func (x *RetrieveCommentByIdReq) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -1489,7 +1236,7 @@ func (x *RetrieveCommentByIdRequest) Size() (n int) {
 	return n
 }
 
-func (x *RetrieveCommentByIdRequest) sizeField1() (n int) {
+func (x *RetrieveCommentByIdReq) sizeField1() (n int) {
 	if x.Id == "" {
 		return n
 	}
@@ -1497,7 +1244,7 @@ func (x *RetrieveCommentByIdRequest) sizeField1() (n int) {
 	return n
 }
 
-func (x *RetrieveCommentByIdResponse) Size() (n int) {
+func (x *RetrieveCommentByIdResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -1505,7 +1252,7 @@ func (x *RetrieveCommentByIdResponse) Size() (n int) {
 	return n
 }
 
-func (x *RetrieveCommentByIdResponse) sizeField1() (n int) {
+func (x *RetrieveCommentByIdResp) sizeField1() (n int) {
 	if x.Comment == nil {
 		return n
 	}
@@ -1513,7 +1260,7 @@ func (x *RetrieveCommentByIdResponse) sizeField1() (n int) {
 	return n
 }
 
-func (x *ListCommentByAuthorIdAndTypeRequest) Size() (n int) {
+func (x *ListCommentByAuthorIdAndTypeReq) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -1524,7 +1271,7 @@ func (x *ListCommentByAuthorIdAndTypeRequest) Size() (n int) {
 	return n
 }
 
-func (x *ListCommentByAuthorIdAndTypeRequest) sizeField1() (n int) {
+func (x *ListCommentByAuthorIdAndTypeReq) sizeField1() (n int) {
 	if x.AuthorId == "" {
 		return n
 	}
@@ -1532,7 +1279,7 @@ func (x *ListCommentByAuthorIdAndTypeRequest) sizeField1() (n int) {
 	return n
 }
 
-func (x *ListCommentByAuthorIdAndTypeRequest) sizeField2() (n int) {
+func (x *ListCommentByAuthorIdAndTypeReq) sizeField2() (n int) {
 	if x.Type == "" {
 		return n
 	}
@@ -1540,7 +1287,7 @@ func (x *ListCommentByAuthorIdAndTypeRequest) sizeField2() (n int) {
 	return n
 }
 
-func (x *ListCommentByAuthorIdAndTypeRequest) sizeField3() (n int) {
+func (x *ListCommentByAuthorIdAndTypeReq) sizeField3() (n int) {
 	if x.Skip == 0 {
 		return n
 	}
@@ -1548,7 +1295,7 @@ func (x *ListCommentByAuthorIdAndTypeRequest) sizeField3() (n int) {
 	return n
 }
 
-func (x *ListCommentByAuthorIdAndTypeRequest) sizeField4() (n int) {
+func (x *ListCommentByAuthorIdAndTypeReq) sizeField4() (n int) {
 	if x.Limit == 0 {
 		return n
 	}
@@ -1556,7 +1303,7 @@ func (x *ListCommentByAuthorIdAndTypeRequest) sizeField4() (n int) {
 	return n
 }
 
-func (x *ListCommentByAuthorIdAndTypeResponse) Size() (n int) {
+func (x *ListCommentByAuthorIdAndTypeResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -1565,7 +1312,7 @@ func (x *ListCommentByAuthorIdAndTypeResponse) Size() (n int) {
 	return n
 }
 
-func (x *ListCommentByAuthorIdAndTypeResponse) sizeField1() (n int) {
+func (x *ListCommentByAuthorIdAndTypeResp) sizeField1() (n int) {
 	if x.Comments == nil {
 		return n
 	}
@@ -1575,7 +1322,7 @@ func (x *ListCommentByAuthorIdAndTypeResponse) sizeField1() (n int) {
 	return n
 }
 
-func (x *ListCommentByAuthorIdAndTypeResponse) sizeField2() (n int) {
+func (x *ListCommentByAuthorIdAndTypeResp) sizeField2() (n int) {
 	if x.Total == 0 {
 		return n
 	}
@@ -1583,7 +1330,7 @@ func (x *ListCommentByAuthorIdAndTypeResponse) sizeField2() (n int) {
 	return n
 }
 
-func (x *ListCommentByReplyToAndTypeRequest) Size() (n int) {
+func (x *ListCommentByReplyToAndTypeReq) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -1594,7 +1341,7 @@ func (x *ListCommentByReplyToAndTypeRequest) Size() (n int) {
 	return n
 }
 
-func (x *ListCommentByReplyToAndTypeRequest) sizeField1() (n int) {
+func (x *ListCommentByReplyToAndTypeReq) sizeField1() (n int) {
 	if x.ReplyTo == "" {
 		return n
 	}
@@ -1602,7 +1349,7 @@ func (x *ListCommentByReplyToAndTypeRequest) sizeField1() (n int) {
 	return n
 }
 
-func (x *ListCommentByReplyToAndTypeRequest) sizeField2() (n int) {
+func (x *ListCommentByReplyToAndTypeReq) sizeField2() (n int) {
 	if x.Type == "" {
 		return n
 	}
@@ -1610,7 +1357,7 @@ func (x *ListCommentByReplyToAndTypeRequest) sizeField2() (n int) {
 	return n
 }
 
-func (x *ListCommentByReplyToAndTypeRequest) sizeField3() (n int) {
+func (x *ListCommentByReplyToAndTypeReq) sizeField3() (n int) {
 	if x.Skip == 0 {
 		return n
 	}
@@ -1618,7 +1365,7 @@ func (x *ListCommentByReplyToAndTypeRequest) sizeField3() (n int) {
 	return n
 }
 
-func (x *ListCommentByReplyToAndTypeRequest) sizeField4() (n int) {
+func (x *ListCommentByReplyToAndTypeReq) sizeField4() (n int) {
 	if x.Limit == 0 {
 		return n
 	}
@@ -1626,7 +1373,7 @@ func (x *ListCommentByReplyToAndTypeRequest) sizeField4() (n int) {
 	return n
 }
 
-func (x *ListCommentByReplyToAndTypeResponse) Size() (n int) {
+func (x *ListCommentByReplyToAndTypeResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -1635,7 +1382,7 @@ func (x *ListCommentByReplyToAndTypeResponse) Size() (n int) {
 	return n
 }
 
-func (x *ListCommentByReplyToAndTypeResponse) sizeField1() (n int) {
+func (x *ListCommentByReplyToAndTypeResp) sizeField1() (n int) {
 	if x.Comments == nil {
 		return n
 	}
@@ -1645,7 +1392,7 @@ func (x *ListCommentByReplyToAndTypeResponse) sizeField1() (n int) {
 	return n
 }
 
-func (x *ListCommentByReplyToAndTypeResponse) sizeField2() (n int) {
+func (x *ListCommentByReplyToAndTypeResp) sizeField2() (n int) {
 	if x.Total == 0 {
 		return n
 	}
@@ -1653,18 +1400,7 @@ func (x *ListCommentByReplyToAndTypeResponse) sizeField2() (n int) {
 	return n
 }
 
-var fieldIDToName_Comment = map[int32]string{
-	1: "Id",
-	2: "Text",
-	3: "AuthorId",
-	4: "ReplyTo",
-	5: "Type",
-	6: "ParentId",
-	7: "UpdateAt",
-	8: "CreateAt",
-}
-
-var fieldIDToName_CreateCommentRequest = map[int32]string{
+var fieldIDToName_CreateCommentReq = map[int32]string{
 	1: "Text",
 	2: "AuthorId",
 	3: "ReplyTo",
@@ -1672,72 +1408,72 @@ var fieldIDToName_CreateCommentRequest = map[int32]string{
 	5: "ParentId",
 }
 
-var fieldIDToName_CreateCommentResponse = map[int32]string{
+var fieldIDToName_CreateCommentResp = map[int32]string{
 	1: "Id",
 }
 
-var fieldIDToName_UpdateCommentRequest = map[int32]string{
+var fieldIDToName_UpdateCommentReq = map[int32]string{
 	1: "Id",
 	2: "Text",
 }
 
-var fieldIDToName_UpdateCommentResponse = map[int32]string{}
+var fieldIDToName_UpdateCommentResp = map[int32]string{}
 
-var fieldIDToName_DeleteCommentByIdRequest = map[int32]string{
+var fieldIDToName_DeleteCommentByIdReq = map[int32]string{
 	1: "Id",
 }
 
-var fieldIDToName_DeleteCommentByIdResponse = map[int32]string{}
+var fieldIDToName_DeleteCommentByIdResp = map[int32]string{}
 
-var fieldIDToName_ListCommentByParentRequest = map[int32]string{
+var fieldIDToName_ListCommentByParentReq = map[int32]string{
 	1: "Type",
 	2: "ParentId",
 	3: "Skip",
 	4: "Limit",
 }
 
-var fieldIDToName_ListCommentByParentResponse = map[int32]string{
+var fieldIDToName_ListCommentByParentResp = map[int32]string{
 	1: "Comments",
 	2: "Total",
 }
 
-var fieldIDToName_CountCommentByParentRequest = map[int32]string{
+var fieldIDToName_CountCommentByParentReq = map[int32]string{
 	1: "Type",
 	2: "ParentId",
 }
 
-var fieldIDToName_CountCommentByParentResponse = map[int32]string{
+var fieldIDToName_CountCommentByParentResp = map[int32]string{
 	1: "Total",
 }
 
-var fieldIDToName_RetrieveCommentByIdRequest = map[int32]string{
+var fieldIDToName_RetrieveCommentByIdReq = map[int32]string{
 	1: "Id",
 }
 
-var fieldIDToName_RetrieveCommentByIdResponse = map[int32]string{
+var fieldIDToName_RetrieveCommentByIdResp = map[int32]string{
 	1: "Comment",
 }
 
-var fieldIDToName_ListCommentByAuthorIdAndTypeRequest = map[int32]string{
+var fieldIDToName_ListCommentByAuthorIdAndTypeReq = map[int32]string{
 	1: "AuthorId",
 	2: "Type",
 	3: "Skip",
 	4: "Limit",
 }
 
-var fieldIDToName_ListCommentByAuthorIdAndTypeResponse = map[int32]string{
+var fieldIDToName_ListCommentByAuthorIdAndTypeResp = map[int32]string{
 	1: "Comments",
 	2: "Total",
 }
 
-var fieldIDToName_ListCommentByReplyToAndTypeRequest = map[int32]string{
+var fieldIDToName_ListCommentByReplyToAndTypeReq = map[int32]string{
 	1: "ReplyTo",
 	2: "Type",
 	3: "Skip",
 	4: "Limit",
 }
 
-var fieldIDToName_ListCommentByReplyToAndTypeResponse = map[int32]string{
+var fieldIDToName_ListCommentByReplyToAndTypeResp = map[int32]string{
 	1: "Comments",
 	2: "Total",
 }

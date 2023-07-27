@@ -5,6 +5,7 @@ package core_api
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
+	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/basic"
 	http "github.com/xh-polaris/service-idl-gen-go/kitex_gen/http"
 )
 
@@ -13,3 +14,4 @@ var (
 	_ = fastpb.Skip
 )
 var _ = http.File_http_http_proto
+var _ = basic.File_basic_user_proto

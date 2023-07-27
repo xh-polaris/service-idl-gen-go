@@ -11,14 +11,14 @@ import (
 
 // Client is designed to provide IDL-compatible methods with call-option parameter for kitex framework.
 type Client interface {
-	CreateComment(ctx context.Context, Req *comment.CreateCommentRequest, callOptions ...callopt.Option) (r *comment.CreateCommentResponse, err error)
-	UpdateComment(ctx context.Context, Req *comment.UpdateCommentRequest, callOptions ...callopt.Option) (r *comment.UpdateCommentResponse, err error)
-	DeleteComment(ctx context.Context, Req *comment.DeleteCommentByIdRequest, callOptions ...callopt.Option) (r *comment.DeleteCommentByIdResponse, err error)
-	ListCommentByParent(ctx context.Context, Req *comment.ListCommentByParentRequest, callOptions ...callopt.Option) (r *comment.ListCommentByParentResponse, err error)
-	CountCommentByParent(ctx context.Context, Req *comment.CountCommentByParentRequest, callOptions ...callopt.Option) (r *comment.CountCommentByParentResponse, err error)
-	RetrieveCommentById(ctx context.Context, Req *comment.RetrieveCommentByIdRequest, callOptions ...callopt.Option) (r *comment.RetrieveCommentByIdResponse, err error)
-	ListCommentByAuthorIdAndType(ctx context.Context, Req *comment.ListCommentByAuthorIdAndTypeRequest, callOptions ...callopt.Option) (r *comment.ListCommentByAuthorIdAndTypeResponse, err error)
-	ListCommentByReplyToAndType(ctx context.Context, Req *comment.ListCommentByReplyToAndTypeRequest, callOptions ...callopt.Option) (r *comment.ListCommentByReplyToAndTypeResponse, err error)
+	CreateComment(ctx context.Context, Req *comment.CreateCommentReq, callOptions ...callopt.Option) (r *comment.CreateCommentResp, err error)
+	UpdateComment(ctx context.Context, Req *comment.UpdateCommentReq, callOptions ...callopt.Option) (r *comment.UpdateCommentResp, err error)
+	DeleteComment(ctx context.Context, Req *comment.DeleteCommentByIdReq, callOptions ...callopt.Option) (r *comment.DeleteCommentByIdResp, err error)
+	ListCommentByParent(ctx context.Context, Req *comment.ListCommentByParentReq, callOptions ...callopt.Option) (r *comment.ListCommentByParentResp, err error)
+	CountCommentByParent(ctx context.Context, Req *comment.CountCommentByParentReq, callOptions ...callopt.Option) (r *comment.CountCommentByParentResp, err error)
+	RetrieveCommentById(ctx context.Context, Req *comment.RetrieveCommentByIdReq, callOptions ...callopt.Option) (r *comment.RetrieveCommentByIdResp, err error)
+	ListCommentByAuthorIdAndType(ctx context.Context, Req *comment.ListCommentByAuthorIdAndTypeReq, callOptions ...callopt.Option) (r *comment.ListCommentByAuthorIdAndTypeResp, err error)
+	ListCommentByReplyToAndType(ctx context.Context, Req *comment.ListCommentByReplyToAndTypeReq, callOptions ...callopt.Option) (r *comment.ListCommentByReplyToAndTypeResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -50,42 +50,42 @@ type kCommentClient struct {
 	*kClient
 }
 
-func (p *kCommentClient) CreateComment(ctx context.Context, Req *comment.CreateCommentRequest, callOptions ...callopt.Option) (r *comment.CreateCommentResponse, err error) {
+func (p *kCommentClient) CreateComment(ctx context.Context, Req *comment.CreateCommentReq, callOptions ...callopt.Option) (r *comment.CreateCommentResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.CreateComment(ctx, Req)
 }
 
-func (p *kCommentClient) UpdateComment(ctx context.Context, Req *comment.UpdateCommentRequest, callOptions ...callopt.Option) (r *comment.UpdateCommentResponse, err error) {
+func (p *kCommentClient) UpdateComment(ctx context.Context, Req *comment.UpdateCommentReq, callOptions ...callopt.Option) (r *comment.UpdateCommentResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.UpdateComment(ctx, Req)
 }
 
-func (p *kCommentClient) DeleteComment(ctx context.Context, Req *comment.DeleteCommentByIdRequest, callOptions ...callopt.Option) (r *comment.DeleteCommentByIdResponse, err error) {
+func (p *kCommentClient) DeleteComment(ctx context.Context, Req *comment.DeleteCommentByIdReq, callOptions ...callopt.Option) (r *comment.DeleteCommentByIdResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.DeleteComment(ctx, Req)
 }
 
-func (p *kCommentClient) ListCommentByParent(ctx context.Context, Req *comment.ListCommentByParentRequest, callOptions ...callopt.Option) (r *comment.ListCommentByParentResponse, err error) {
+func (p *kCommentClient) ListCommentByParent(ctx context.Context, Req *comment.ListCommentByParentReq, callOptions ...callopt.Option) (r *comment.ListCommentByParentResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.ListCommentByParent(ctx, Req)
 }
 
-func (p *kCommentClient) CountCommentByParent(ctx context.Context, Req *comment.CountCommentByParentRequest, callOptions ...callopt.Option) (r *comment.CountCommentByParentResponse, err error) {
+func (p *kCommentClient) CountCommentByParent(ctx context.Context, Req *comment.CountCommentByParentReq, callOptions ...callopt.Option) (r *comment.CountCommentByParentResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.CountCommentByParent(ctx, Req)
 }
 
-func (p *kCommentClient) RetrieveCommentById(ctx context.Context, Req *comment.RetrieveCommentByIdRequest, callOptions ...callopt.Option) (r *comment.RetrieveCommentByIdResponse, err error) {
+func (p *kCommentClient) RetrieveCommentById(ctx context.Context, Req *comment.RetrieveCommentByIdReq, callOptions ...callopt.Option) (r *comment.RetrieveCommentByIdResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.RetrieveCommentById(ctx, Req)
 }
 
-func (p *kCommentClient) ListCommentByAuthorIdAndType(ctx context.Context, Req *comment.ListCommentByAuthorIdAndTypeRequest, callOptions ...callopt.Option) (r *comment.ListCommentByAuthorIdAndTypeResponse, err error) {
+func (p *kCommentClient) ListCommentByAuthorIdAndType(ctx context.Context, Req *comment.ListCommentByAuthorIdAndTypeReq, callOptions ...callopt.Option) (r *comment.ListCommentByAuthorIdAndTypeResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.ListCommentByAuthorIdAndType(ctx, Req)
 }
 
-func (p *kCommentClient) ListCommentByReplyToAndType(ctx context.Context, Req *comment.ListCommentByReplyToAndTypeRequest, callOptions ...callopt.Option) (r *comment.ListCommentByReplyToAndTypeResponse, err error) {
+func (p *kCommentClient) ListCommentByReplyToAndType(ctx context.Context, Req *comment.ListCommentByReplyToAndTypeReq, callOptions ...callopt.Option) (r *comment.ListCommentByReplyToAndTypeResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.ListCommentByReplyToAndType(ctx, Req)
 }

@@ -127,11 +127,6 @@ func (x *SetPasswordReq) FastRead(buf []byte, _type int8, number int32) (offset 
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 255:
-		offset, err = x.fastReadField255(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -148,16 +143,6 @@ ReadFieldError:
 func (x *SetPasswordReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.Password, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
-}
-
-func (x *SetPasswordReq) fastReadField255(buf []byte, _type int8) (offset int, err error) {
-	var v basic.UserMeta
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.User = &v
-	return offset, nil
 }
 
 func (x *SetPasswordResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -305,7 +290,6 @@ func (x *SetPasswordReq) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField255(buf[offset:])
 	return offset
 }
 
@@ -314,14 +298,6 @@ func (x *SetPasswordReq) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 1, x.GetPassword())
-	return offset
-}
-
-func (x *SetPasswordReq) fastWriteField255(buf []byte) (offset int) {
-	if x.User == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 255, x.GetUser())
 	return offset
 }
 
@@ -448,7 +424,6 @@ func (x *SetPasswordReq) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField255()
 	return n
 }
 
@@ -457,14 +432,6 @@ func (x *SetPasswordReq) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(1, x.GetPassword())
-	return n
-}
-
-func (x *SetPasswordReq) sizeField255() (n int) {
-	if x.User == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(255, x.GetUser())
 	return n
 }
 
@@ -521,8 +488,7 @@ var fieldIDToName_SignInResp = map[int32]string{
 }
 
 var fieldIDToName_SetPasswordReq = map[int32]string{
-	1:   "Password",
-	255: "User",
+	1: "Password",
 }
 
 var fieldIDToName_SetPasswordResp = map[int32]string{}
