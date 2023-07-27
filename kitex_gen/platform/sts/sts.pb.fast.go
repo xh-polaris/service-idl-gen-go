@@ -5,6 +5,7 @@ package sts
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
+	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/basic"
 )
 
 var (
@@ -220,32 +221,7 @@ SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 }
 
-func (x *GetAccessTokenReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetAccessTokenReq[number], err)
-}
-
-func (x *GetAccessTokenReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.App, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *GetAccessTokenResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *TextCheckReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -267,16 +243,111 @@ func (x *GetAccessTokenResp) FastRead(buf []byte, _type int8, number int32) (off
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetAccessTokenResp[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_TextCheckReq[number], err)
 }
 
-func (x *GetAccessTokenResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.AccessToken, offset, err = fastpb.ReadString(buf, _type)
+func (x *TextCheckReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Text, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *GetAccessTokenResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.ExpiresIn, offset, err = fastpb.ReadInt64(buf, _type)
+func (x *TextCheckReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	var v basic.UserMeta
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.User = &v
+	return offset, nil
+}
+
+func (x *TextCheckResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_TextCheckResp[number], err)
+}
+
+func (x *TextCheckResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Pass, offset, err = fastpb.ReadBool(buf, _type)
+	return offset, err
+}
+
+func (x *PhotoCheckReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_PhotoCheckReq[number], err)
+}
+
+func (x *PhotoCheckReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Url, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *PhotoCheckReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	var v basic.UserMeta
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.User = &v
+	return offset, nil
+}
+
+func (x *PhotoCheckResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_PhotoCheckResp[number], err)
+}
+
+func (x *PhotoCheckResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Pass, offset, err = fastpb.ReadBool(buf, _type)
 	return offset, err
 }
 
@@ -430,23 +501,7 @@ func (x *DeleteObjectResp) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *GetAccessTokenReq) FastWrite(buf []byte) (offset int) {
-	if x == nil {
-		return offset
-	}
-	offset += x.fastWriteField1(buf[offset:])
-	return offset
-}
-
-func (x *GetAccessTokenReq) fastWriteField1(buf []byte) (offset int) {
-	if x.App == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetApp())
-	return offset
-}
-
-func (x *GetAccessTokenResp) FastWrite(buf []byte) (offset int) {
+func (x *TextCheckReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -455,19 +510,76 @@ func (x *GetAccessTokenResp) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *GetAccessTokenResp) fastWriteField1(buf []byte) (offset int) {
-	if x.AccessToken == "" {
+func (x *TextCheckReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Text == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetAccessToken())
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetText())
 	return offset
 }
 
-func (x *GetAccessTokenResp) fastWriteField2(buf []byte) (offset int) {
-	if x.ExpiresIn == 0 {
+func (x *TextCheckReq) fastWriteField2(buf []byte) (offset int) {
+	if x.User == nil {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetExpiresIn())
+	offset += fastpb.WriteMessage(buf[offset:], 2, x.GetUser())
+	return offset
+}
+
+func (x *TextCheckResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *TextCheckResp) fastWriteField1(buf []byte) (offset int) {
+	if !x.Pass {
+		return offset
+	}
+	offset += fastpb.WriteBool(buf[offset:], 1, x.GetPass())
+	return offset
+}
+
+func (x *PhotoCheckReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *PhotoCheckReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Url == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUrl())
+	return offset
+}
+
+func (x *PhotoCheckReq) fastWriteField2(buf []byte) (offset int) {
+	if x.User == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 2, x.GetUser())
+	return offset
+}
+
+func (x *PhotoCheckResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *PhotoCheckResp) fastWriteField1(buf []byte) (offset int) {
+	if !x.Pass {
+		return offset
+	}
+	offset += fastpb.WriteBool(buf[offset:], 1, x.GetPass())
 	return offset
 }
 
@@ -621,23 +733,7 @@ func (x *DeleteObjectResp) Size() (n int) {
 	return n
 }
 
-func (x *GetAccessTokenReq) Size() (n int) {
-	if x == nil {
-		return n
-	}
-	n += x.sizeField1()
-	return n
-}
-
-func (x *GetAccessTokenReq) sizeField1() (n int) {
-	if x.App == "" {
-		return n
-	}
-	n += fastpb.SizeString(1, x.GetApp())
-	return n
-}
-
-func (x *GetAccessTokenResp) Size() (n int) {
+func (x *TextCheckReq) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -646,19 +742,76 @@ func (x *GetAccessTokenResp) Size() (n int) {
 	return n
 }
 
-func (x *GetAccessTokenResp) sizeField1() (n int) {
-	if x.AccessToken == "" {
+func (x *TextCheckReq) sizeField1() (n int) {
+	if x.Text == "" {
 		return n
 	}
-	n += fastpb.SizeString(1, x.GetAccessToken())
+	n += fastpb.SizeString(1, x.GetText())
 	return n
 }
 
-func (x *GetAccessTokenResp) sizeField2() (n int) {
-	if x.ExpiresIn == 0 {
+func (x *TextCheckReq) sizeField2() (n int) {
+	if x.User == nil {
 		return n
 	}
-	n += fastpb.SizeInt64(2, x.GetExpiresIn())
+	n += fastpb.SizeMessage(2, x.GetUser())
+	return n
+}
+
+func (x *TextCheckResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *TextCheckResp) sizeField1() (n int) {
+	if !x.Pass {
+		return n
+	}
+	n += fastpb.SizeBool(1, x.GetPass())
+	return n
+}
+
+func (x *PhotoCheckReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *PhotoCheckReq) sizeField1() (n int) {
+	if x.Url == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetUrl())
+	return n
+}
+
+func (x *PhotoCheckReq) sizeField2() (n int) {
+	if x.User == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(2, x.GetUser())
+	return n
+}
+
+func (x *PhotoCheckResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *PhotoCheckResp) sizeField1() (n int) {
+	if !x.Pass {
+		return n
+	}
+	n += fastpb.SizeBool(1, x.GetPass())
 	return n
 }
 
@@ -691,11 +844,22 @@ var fieldIDToName_DeleteObjectReq = map[int32]string{
 
 var fieldIDToName_DeleteObjectResp = map[int32]string{}
 
-var fieldIDToName_GetAccessTokenReq = map[int32]string{
-	1: "App",
+var fieldIDToName_TextCheckReq = map[int32]string{
+	1: "Text",
+	2: "User",
 }
 
-var fieldIDToName_GetAccessTokenResp = map[int32]string{
-	1: "AccessToken",
-	2: "ExpiresIn",
+var fieldIDToName_TextCheckResp = map[int32]string{
+	1: "Pass",
 }
+
+var fieldIDToName_PhotoCheckReq = map[int32]string{
+	1: "Url",
+	2: "User",
+}
+
+var fieldIDToName_PhotoCheckResp = map[int32]string{
+	1: "Pass",
+}
+
+var _ = basic.File_basic_user_proto

@@ -5,8 +5,9 @@ package core_api
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
+	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/basic"
 	http "github.com/xh-polaris/service-idl-gen-go/kitex_gen/http"
-	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/basic"
+	user "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/user"
 )
 
 var (
@@ -115,7 +116,7 @@ func (x *Post) fastReadField8(buf []byte, _type int8) (offset int, err error) {
 }
 
 func (x *Post) fastReadField9(buf []byte, _type int8) (offset int, err error) {
-	var v basic.UserPreview
+	var v user.UserPreview
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -1347,4 +1348,5 @@ var fieldIDToName_SetOfficialReq = map[int32]string{
 var fieldIDToName_SetOfficialResp = map[int32]string{}
 
 var _ = http.File_http_http_proto
-var _ = basic.File_meowchat_basic_basic_proto
+var _ = basic.File_basic_pagination_proto
+var _ = user.File_meowchat_user_common_proto

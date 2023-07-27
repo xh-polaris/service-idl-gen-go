@@ -22,10 +22,11 @@ func NewServiceInfo() *kitex.ServiceInfo {
 	serviceName := "StsService"
 	handlerType := (*sts.StsService)(nil)
 	methods := map[string]kitex.MethodInfo{
-		"genCosSts":      kitex.NewMethodInfo(genCosStsHandler, newGenCosStsArgs, newGenCosStsResult, false),
-		"genSignedUrl":   kitex.NewMethodInfo(genSignedUrlHandler, newGenSignedUrlArgs, newGenSignedUrlResult, false),
-		"deleteObject":   kitex.NewMethodInfo(deleteObjectHandler, newDeleteObjectArgs, newDeleteObjectResult, false),
-		"GetAccessToken": kitex.NewMethodInfo(getAccessTokenHandler, newGetAccessTokenArgs, newGetAccessTokenResult, false),
+		"genCosSts":    kitex.NewMethodInfo(genCosStsHandler, newGenCosStsArgs, newGenCosStsResult, false),
+		"genSignedUrl": kitex.NewMethodInfo(genSignedUrlHandler, newGenSignedUrlArgs, newGenSignedUrlResult, false),
+		"deleteObject": kitex.NewMethodInfo(deleteObjectHandler, newDeleteObjectArgs, newDeleteObjectResult, false),
+		"textCheck":    kitex.NewMethodInfo(textCheckHandler, newTextCheckArgs, newTextCheckResult, false),
+		"photoCheck":   kitex.NewMethodInfo(photoCheckHandler, newPhotoCheckArgs, newPhotoCheckResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName": "platform.sts",
@@ -500,73 +501,73 @@ func (p *DeleteObjectResult) GetResult() interface{} {
 	return p.Success
 }
 
-func getAccessTokenHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+func textCheckHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(sts.GetAccessTokenReq)
+		req := new(sts.TextCheckReq)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
-		resp, err := handler.(sts.StsService).GetAccessToken(ctx, req)
+		resp, err := handler.(sts.StsService).TextCheck(ctx, req)
 		if err != nil {
 			return err
 		}
 		if err := st.SendMsg(resp); err != nil {
 			return err
 		}
-	case *GetAccessTokenArgs:
-		success, err := handler.(sts.StsService).GetAccessToken(ctx, s.Req)
+	case *TextCheckArgs:
+		success, err := handler.(sts.StsService).TextCheck(ctx, s.Req)
 		if err != nil {
 			return err
 		}
-		realResult := result.(*GetAccessTokenResult)
+		realResult := result.(*TextCheckResult)
 		realResult.Success = success
 	}
 	return nil
 }
-func newGetAccessTokenArgs() interface{} {
-	return &GetAccessTokenArgs{}
+func newTextCheckArgs() interface{} {
+	return &TextCheckArgs{}
 }
 
-func newGetAccessTokenResult() interface{} {
-	return &GetAccessTokenResult{}
+func newTextCheckResult() interface{} {
+	return &TextCheckResult{}
 }
 
-type GetAccessTokenArgs struct {
-	Req *sts.GetAccessTokenReq
+type TextCheckArgs struct {
+	Req *sts.TextCheckReq
 }
 
-func (p *GetAccessTokenArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *TextCheckArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(sts.GetAccessTokenReq)
+		p.Req = new(sts.TextCheckReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
 
-func (p *GetAccessTokenArgs) FastWrite(buf []byte) (n int) {
+func (p *TextCheckArgs) FastWrite(buf []byte) (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.FastWrite(buf)
 }
 
-func (p *GetAccessTokenArgs) Size() (n int) {
+func (p *TextCheckArgs) Size() (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.Size()
 }
 
-func (p *GetAccessTokenArgs) Marshal(out []byte) ([]byte, error) {
+func (p *TextCheckArgs) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetReq() {
-		return out, fmt.Errorf("No req in GetAccessTokenArgs")
+		return out, fmt.Errorf("No req in TextCheckArgs")
 	}
 	return proto.Marshal(p.Req)
 }
 
-func (p *GetAccessTokenArgs) Unmarshal(in []byte) error {
-	msg := new(sts.GetAccessTokenReq)
+func (p *TextCheckArgs) Unmarshal(in []byte) error {
+	msg := new(sts.TextCheckReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -574,59 +575,59 @@ func (p *GetAccessTokenArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var GetAccessTokenArgs_Req_DEFAULT *sts.GetAccessTokenReq
+var TextCheckArgs_Req_DEFAULT *sts.TextCheckReq
 
-func (p *GetAccessTokenArgs) GetReq() *sts.GetAccessTokenReq {
+func (p *TextCheckArgs) GetReq() *sts.TextCheckReq {
 	if !p.IsSetReq() {
-		return GetAccessTokenArgs_Req_DEFAULT
+		return TextCheckArgs_Req_DEFAULT
 	}
 	return p.Req
 }
 
-func (p *GetAccessTokenArgs) IsSetReq() bool {
+func (p *TextCheckArgs) IsSetReq() bool {
 	return p.Req != nil
 }
 
-func (p *GetAccessTokenArgs) GetFirstArgument() interface{} {
+func (p *TextCheckArgs) GetFirstArgument() interface{} {
 	return p.Req
 }
 
-type GetAccessTokenResult struct {
-	Success *sts.GetAccessTokenResp
+type TextCheckResult struct {
+	Success *sts.TextCheckResp
 }
 
-var GetAccessTokenResult_Success_DEFAULT *sts.GetAccessTokenResp
+var TextCheckResult_Success_DEFAULT *sts.TextCheckResp
 
-func (p *GetAccessTokenResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *TextCheckResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(sts.GetAccessTokenResp)
+		p.Success = new(sts.TextCheckResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
 
-func (p *GetAccessTokenResult) FastWrite(buf []byte) (n int) {
+func (p *TextCheckResult) FastWrite(buf []byte) (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.FastWrite(buf)
 }
 
-func (p *GetAccessTokenResult) Size() (n int) {
+func (p *TextCheckResult) Size() (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.Size()
 }
 
-func (p *GetAccessTokenResult) Marshal(out []byte) ([]byte, error) {
+func (p *TextCheckResult) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetSuccess() {
-		return out, fmt.Errorf("No req in GetAccessTokenResult")
+		return out, fmt.Errorf("No req in TextCheckResult")
 	}
 	return proto.Marshal(p.Success)
 }
 
-func (p *GetAccessTokenResult) Unmarshal(in []byte) error {
-	msg := new(sts.GetAccessTokenResp)
+func (p *TextCheckResult) Unmarshal(in []byte) error {
+	msg := new(sts.TextCheckResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -634,22 +635,175 @@ func (p *GetAccessTokenResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *GetAccessTokenResult) GetSuccess() *sts.GetAccessTokenResp {
+func (p *TextCheckResult) GetSuccess() *sts.TextCheckResp {
 	if !p.IsSetSuccess() {
-		return GetAccessTokenResult_Success_DEFAULT
+		return TextCheckResult_Success_DEFAULT
 	}
 	return p.Success
 }
 
-func (p *GetAccessTokenResult) SetSuccess(x interface{}) {
-	p.Success = x.(*sts.GetAccessTokenResp)
+func (p *TextCheckResult) SetSuccess(x interface{}) {
+	p.Success = x.(*sts.TextCheckResp)
 }
 
-func (p *GetAccessTokenResult) IsSetSuccess() bool {
+func (p *TextCheckResult) IsSetSuccess() bool {
 	return p.Success != nil
 }
 
-func (p *GetAccessTokenResult) GetResult() interface{} {
+func (p *TextCheckResult) GetResult() interface{} {
+	return p.Success
+}
+
+func photoCheckHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(sts.PhotoCheckReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(sts.StsService).PhotoCheck(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *PhotoCheckArgs:
+		success, err := handler.(sts.StsService).PhotoCheck(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*PhotoCheckResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newPhotoCheckArgs() interface{} {
+	return &PhotoCheckArgs{}
+}
+
+func newPhotoCheckResult() interface{} {
+	return &PhotoCheckResult{}
+}
+
+type PhotoCheckArgs struct {
+	Req *sts.PhotoCheckReq
+}
+
+func (p *PhotoCheckArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(sts.PhotoCheckReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *PhotoCheckArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *PhotoCheckArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *PhotoCheckArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in PhotoCheckArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *PhotoCheckArgs) Unmarshal(in []byte) error {
+	msg := new(sts.PhotoCheckReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var PhotoCheckArgs_Req_DEFAULT *sts.PhotoCheckReq
+
+func (p *PhotoCheckArgs) GetReq() *sts.PhotoCheckReq {
+	if !p.IsSetReq() {
+		return PhotoCheckArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *PhotoCheckArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *PhotoCheckArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type PhotoCheckResult struct {
+	Success *sts.PhotoCheckResp
+}
+
+var PhotoCheckResult_Success_DEFAULT *sts.PhotoCheckResp
+
+func (p *PhotoCheckResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(sts.PhotoCheckResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *PhotoCheckResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *PhotoCheckResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *PhotoCheckResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in PhotoCheckResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *PhotoCheckResult) Unmarshal(in []byte) error {
+	msg := new(sts.PhotoCheckResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *PhotoCheckResult) GetSuccess() *sts.PhotoCheckResp {
+	if !p.IsSetSuccess() {
+		return PhotoCheckResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *PhotoCheckResult) SetSuccess(x interface{}) {
+	p.Success = x.(*sts.PhotoCheckResp)
+}
+
+func (p *PhotoCheckResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *PhotoCheckResult) GetResult() interface{} {
 	return p.Success
 }
 
@@ -693,11 +847,21 @@ func (p *kClient) DeleteObject(ctx context.Context, Req *sts.DeleteObjectReq) (r
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) GetAccessToken(ctx context.Context, Req *sts.GetAccessTokenReq) (r *sts.GetAccessTokenResp, err error) {
-	var _args GetAccessTokenArgs
+func (p *kClient) TextCheck(ctx context.Context, Req *sts.TextCheckReq) (r *sts.TextCheckResp, err error) {
+	var _args TextCheckArgs
 	_args.Req = Req
-	var _result GetAccessTokenResult
-	if err = p.c.Call(ctx, "GetAccessToken", &_args, &_result); err != nil {
+	var _result TextCheckResult
+	if err = p.c.Call(ctx, "textCheck", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) PhotoCheck(ctx context.Context, Req *sts.PhotoCheckReq) (r *sts.PhotoCheckResp, err error) {
+	var _args PhotoCheckArgs
+	_args.Req = Req
+	var _result PhotoCheckResult
+	if err = p.c.Call(ctx, "photoCheck", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

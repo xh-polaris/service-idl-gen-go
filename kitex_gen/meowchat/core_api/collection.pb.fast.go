@@ -5,8 +5,8 @@ package core_api
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
+	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/basic"
 	http "github.com/xh-polaris/service-idl-gen-go/kitex_gen/http"
-	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/basic"
 	collection "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/collection"
 )
 
@@ -1781,4 +1781,4 @@ var fieldIDToName_GetImageByCatResp = map[int32]string{
 
 var _ = http.File_http_http_proto
 var _ = collection.File_meowchat_collection_common_proto
-var _ = basic.File_meowchat_basic_basic_proto
+var _ = basic.File_basic_pagination_proto

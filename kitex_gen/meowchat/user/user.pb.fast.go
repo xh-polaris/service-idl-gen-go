@@ -5,7 +5,7 @@ package user
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
-	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/basic"
+	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/basic"
 )
 
 var (
@@ -114,7 +114,7 @@ ReadFieldError:
 }
 
 func (x *GetUserResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v basic.UserPreview
+	var v UserPreview
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -321,7 +321,7 @@ ReadFieldError:
 }
 
 func (x *SearchUserResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v basic.UserPreview
+	var v UserPreview
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -819,4 +819,4 @@ var fieldIDToName_SearchUserResp = map[int32]string{
 	3: "Token",
 }
 
-var _ = basic.File_meowchat_basic_basic_proto
+var _ = basic.File_basic_user_proto

@@ -5,8 +5,10 @@ package core_api
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
+	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/basic"
 	http "github.com/xh-polaris/service-idl-gen-go/kitex_gen/http"
-	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/basic"
+	system "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/system"
+	user "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/user"
 )
 
 var (
@@ -135,7 +137,7 @@ ReadFieldError:
 }
 
 func (x *UserPreviewWithRole) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v basic.UserPreview
+	var v user.UserPreview
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -145,7 +147,7 @@ func (x *UserPreviewWithRole) fastReadField1(buf []byte, _type int8) (offset int
 }
 
 func (x *UserPreviewWithRole) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	var v basic.Role
+	var v system.Role
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -342,7 +344,7 @@ ReadFieldError:
 }
 
 func (x *SearchUserResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v basic.UserPreview
+	var v user.UserPreview
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -1108,4 +1110,7 @@ var fieldIDToName_SearchUserForAdminResp = map[int32]string{
 }
 
 var _ = http.File_http_http_proto
-var _ = basic.File_meowchat_basic_basic_proto
+var _ = basic.File_basic_user_proto
+var _ = basic.File_basic_pagination_proto
+var _ = user.File_meowchat_user_common_proto
+var _ = system.File_meowchat_system_common_proto

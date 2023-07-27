@@ -6,7 +6,7 @@ import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
 	http "github.com/xh-polaris/service-idl-gen-go/kitex_gen/http"
-	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/basic"
+	user "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/user"
 )
 
 var (
@@ -75,7 +75,7 @@ func (x *Comment) fastReadField2(buf []byte, _type int8) (offset int, err error)
 }
 
 func (x *Comment) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	var v basic.UserPreview
+	var v user.UserPreview
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -712,4 +712,4 @@ var fieldIDToName_DeleteCommentReq = map[int32]string{
 var fieldIDToName_DeleteCommentResp = map[int32]string{}
 
 var _ = http.File_http_http_proto
-var _ = basic.File_meowchat_basic_basic_proto
+var _ = user.File_meowchat_user_common_proto

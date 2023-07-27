@@ -5,7 +5,6 @@ package system
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
-	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/basic"
 )
 
 var (
@@ -1297,41 +1296,6 @@ SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 }
 
-func (x *Role) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 2:
-		offset, err = x.fastReadField2(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_Role[number], err)
-}
-
-func (x *Role) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.Type, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *Role) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.CommunityId, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
 func (x *RetrieveUserRoleReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -1378,7 +1342,7 @@ ReadFieldError:
 }
 
 func (x *RetrieveUserRoleResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v basic.Role
+	var v Role
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -1418,7 +1382,7 @@ func (x *UpdateUserRoleReq) fastReadField1(buf []byte, _type int8) (offset int, 
 }
 
 func (x *UpdateUserRoleReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	var v basic.Role
+	var v Role
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -1476,7 +1440,7 @@ func (x *ContainsRoleReq) fastReadField1(buf []byte, _type int8) (offset int, er
 }
 
 func (x *ContainsRoleReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	var v basic.Role
+	var v Role
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -2792,31 +2756,6 @@ func (x *DeleteAdminResp) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *Role) FastWrite(buf []byte) (offset int) {
-	if x == nil {
-		return offset
-	}
-	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField2(buf[offset:])
-	return offset
-}
-
-func (x *Role) fastWriteField1(buf []byte) (offset int) {
-	if x.Type == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetType())
-	return offset
-}
-
-func (x *Role) fastWriteField2(buf []byte) (offset int) {
-	if x.CommunityId == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 2, x.GetCommunityId())
-	return offset
-}
-
 func (x *RetrieveUserRoleReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -4093,31 +4032,6 @@ func (x *DeleteAdminResp) Size() (n int) {
 	return n
 }
 
-func (x *Role) Size() (n int) {
-	if x == nil {
-		return n
-	}
-	n += x.sizeField1()
-	n += x.sizeField2()
-	return n
-}
-
-func (x *Role) sizeField1() (n int) {
-	if x.Type == "" {
-		return n
-	}
-	n += fastpb.SizeString(1, x.GetType())
-	return n
-}
-
-func (x *Role) sizeField2() (n int) {
-	if x.CommunityId == "" {
-		return n
-	}
-	n += fastpb.SizeString(2, x.GetCommunityId())
-	return n
-}
-
 func (x *RetrieveUserRoleReq) Size() (n int) {
 	if x == nil {
 		return n
@@ -4650,11 +4564,6 @@ var fieldIDToName_DeleteAdminReq = map[int32]string{
 
 var fieldIDToName_DeleteAdminResp = map[int32]string{}
 
-var fieldIDToName_Role = map[int32]string{
-	1: "Type",
-	2: "CommunityId",
-}
-
 var fieldIDToName_RetrieveUserRoleReq = map[int32]string{
 	1: "UserId",
 }
@@ -4728,5 +4637,3 @@ var fieldIDToName_DeleteCommunityReq = map[int32]string{
 }
 
 var fieldIDToName_DeleteCommunityResp = map[int32]string{}
-
-var _ = basic.File_meowchat_basic_basic_proto

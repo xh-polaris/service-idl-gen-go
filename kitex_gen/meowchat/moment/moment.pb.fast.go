@@ -5,7 +5,7 @@ package moment
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
-	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/basic"
+	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/basic"
 )
 
 var (
@@ -1469,4 +1469,4 @@ var fieldIDToName_DeleteMomentReq = map[int32]string{
 
 var fieldIDToName_DeleteMomentResp = map[int32]string{}
 
-var _ = basic.File_meowchat_basic_basic_proto
+var _ = basic.File_basic_pagination_proto
