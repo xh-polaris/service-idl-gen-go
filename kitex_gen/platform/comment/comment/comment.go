@@ -8,7 +8,7 @@ import (
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
 	streaming "github.com/cloudwego/kitex/pkg/streaming"
-	comment "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/comment"
+	comment "github.com/xh-polaris/service-idl-gen-go/kitex_gen/platform/comment"
 	proto "google.golang.org/protobuf/proto"
 )
 
@@ -32,7 +32,7 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		"listCommentByReplyToAndType":  kitex.NewMethodInfo(listCommentByReplyToAndTypeHandler, newListCommentByReplyToAndTypeArgs, newListCommentByReplyToAndTypeResult, false),
 	}
 	extra := map[string]interface{}{
-		"PackageName": "meowchat.comment",
+		"PackageName": "platform.comment",
 	}
 	svcInfo := &kitex.ServiceInfo{
 		ServiceName:     serviceName,

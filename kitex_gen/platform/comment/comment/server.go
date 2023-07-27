@@ -3,7 +3,7 @@ package comment
 
 import (
 	server "github.com/cloudwego/kitex/server"
-	comment "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/comment"
+	comment "github.com/xh-polaris/service-idl-gen-go/kitex_gen/platform/comment"
 )
 
 // NewServer creates a server.Server with the given handler and options.

@@ -6,7 +6,7 @@ import (
 	"context"
 	client "github.com/cloudwego/kitex/client"
 	callopt "github.com/cloudwego/kitex/client/callopt"
-	comment "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/comment"
+	comment "github.com/xh-polaris/service-idl-gen-go/kitex_gen/platform/comment"
 )
 
 // Client is designed to provide IDL-compatible methods with call-option parameter for kitex framework.

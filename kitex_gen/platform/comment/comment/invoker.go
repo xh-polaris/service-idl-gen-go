@@ -4,7 +4,7 @@ package comment
 
 import (
 	server "github.com/cloudwego/kitex/server"
-	comment "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/comment"
+	comment "github.com/xh-polaris/service-idl-gen-go/kitex_gen/platform/comment"
 )
 
 // NewInvoker creates a server.Invoker with the given handler and options.
