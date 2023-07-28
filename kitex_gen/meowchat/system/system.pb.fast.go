@@ -753,109 +753,6 @@ func (x *RetrieveAdminResp) fastReadField1(buf []byte, _type int8) (offset int, 
 	return offset, nil
 }
 
-func (x *HandleApplyReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_HandleApplyReq[number], err)
-}
-
-func (x *HandleApplyReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.ApplyId, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *HandleApplyReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.IsRejected, offset, err = fastpb.ReadBool(buf, _type)
-	return offset, err
-}
-
-func (x *HandleApplyResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-}
-
-func (x *ListApplyReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListApplyReq[number], err)
-}
-
-func (x *ListApplyReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.CommunityId, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *ListApplyResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListApplyResp[number], err)
-}
-
-func (x *ListApplyResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v Apply
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Apply = append(x.Apply, &v)
-	return offset, nil
-}
-
 func (x *ListAdminReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -1204,6 +1101,157 @@ SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 }
 
+func (x *HandleApplyReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_HandleApplyReq[number], err)
+}
+
+func (x *HandleApplyReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.ApplyId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *HandleApplyReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.IsRejected, offset, err = fastpb.ReadBool(buf, _type)
+	return offset, err
+}
+
+func (x *HandleApplyResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+}
+
+func (x *ListApplyReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListApplyReq[number], err)
+}
+
+func (x *ListApplyReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.CommunityId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *ListApplyResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListApplyResp[number], err)
+}
+
+func (x *ListApplyResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v Apply
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Apply = append(x.Apply, &v)
+	return offset, nil
+}
+
+func (x *CreateApplyReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CreateApplyReq[number], err)
+}
+
+func (x *CreateApplyReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.ApplicantId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *CreateApplyReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.CommunityId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *CreateApplyResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+}
+
 func (x *RetrieveUserRoleReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -1257,54 +1305,6 @@ func (x *RetrieveUserRoleResp) fastReadField1(buf []byte, _type int8) (offset in
 	}
 	x.Roles = append(x.Roles, &v)
 	return offset, nil
-}
-
-func (x *CreateApplyReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 2:
-		offset, err = x.fastReadField2(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CreateApplyReq[number], err)
-}
-
-func (x *CreateApplyReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.ApplicantId, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *CreateApplyReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.CommunityId, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *CreateApplyResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 }
 
 func (x *UpdateUserRoleReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -2321,72 +2321,6 @@ func (x *RetrieveAdminResp) fastWriteField1(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *HandleApplyReq) FastWrite(buf []byte) (offset int) {
-	if x == nil {
-		return offset
-	}
-	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
-	return offset
-}
-
-func (x *HandleApplyReq) fastWriteField1(buf []byte) (offset int) {
-	if x.ApplyId == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetApplyId())
-	return offset
-}
-
-func (x *HandleApplyReq) fastWriteField3(buf []byte) (offset int) {
-	if !x.IsRejected {
-		return offset
-	}
-	offset += fastpb.WriteBool(buf[offset:], 3, x.GetIsRejected())
-	return offset
-}
-
-func (x *HandleApplyResp) FastWrite(buf []byte) (offset int) {
-	if x == nil {
-		return offset
-	}
-	return offset
-}
-
-func (x *ListApplyReq) FastWrite(buf []byte) (offset int) {
-	if x == nil {
-		return offset
-	}
-	offset += x.fastWriteField1(buf[offset:])
-	return offset
-}
-
-func (x *ListApplyReq) fastWriteField1(buf []byte) (offset int) {
-	if x.CommunityId == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetCommunityId())
-	return offset
-}
-
-func (x *ListApplyResp) FastWrite(buf []byte) (offset int) {
-	if x == nil {
-		return offset
-	}
-	offset += x.fastWriteField1(buf[offset:])
-	return offset
-}
-
-func (x *ListApplyResp) fastWriteField1(buf []byte) (offset int) {
-	if x.Apply == nil {
-		return offset
-	}
-	for i := range x.GetApply() {
-		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetApply()[i])
-	}
-	return offset
-}
-
 func (x *ListAdminReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -2642,7 +2576,39 @@ func (x *DeleteAdminResp) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *RetrieveUserRoleReq) FastWrite(buf []byte) (offset int) {
+func (x *HandleApplyReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *HandleApplyReq) fastWriteField1(buf []byte) (offset int) {
+	if x.ApplyId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetApplyId())
+	return offset
+}
+
+func (x *HandleApplyReq) fastWriteField2(buf []byte) (offset int) {
+	if !x.IsRejected {
+		return offset
+	}
+	offset += fastpb.WriteBool(buf[offset:], 2, x.GetIsRejected())
+	return offset
+}
+
+func (x *HandleApplyResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	return offset
+}
+
+func (x *ListApplyReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -2650,15 +2616,15 @@ func (x *RetrieveUserRoleReq) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *RetrieveUserRoleReq) fastWriteField1(buf []byte) (offset int) {
-	if x.UserId == "" {
+func (x *ListApplyReq) fastWriteField1(buf []byte) (offset int) {
+	if x.CommunityId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetCommunityId())
 	return offset
 }
 
-func (x *RetrieveUserRoleResp) FastWrite(buf []byte) (offset int) {
+func (x *ListApplyResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -2666,12 +2632,12 @@ func (x *RetrieveUserRoleResp) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *RetrieveUserRoleResp) fastWriteField1(buf []byte) (offset int) {
-	if x.Roles == nil {
+func (x *ListApplyResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Apply == nil {
 		return offset
 	}
-	for i := range x.GetRoles() {
-		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetRoles()[i])
+	for i := range x.GetApply() {
+		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetApply()[i])
 	}
 	return offset
 }
@@ -2704,6 +2670,40 @@ func (x *CreateApplyReq) fastWriteField2(buf []byte) (offset int) {
 func (x *CreateApplyResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
+	}
+	return offset
+}
+
+func (x *RetrieveUserRoleReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *RetrieveUserRoleReq) fastWriteField1(buf []byte) (offset int) {
+	if x.UserId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
+	return offset
+}
+
+func (x *RetrieveUserRoleResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *RetrieveUserRoleResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Roles == nil {
+		return offset
+	}
+	for i := range x.GetRoles() {
+		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetRoles()[i])
 	}
 	return offset
 }
@@ -3548,72 +3548,6 @@ func (x *RetrieveAdminResp) sizeField1() (n int) {
 	return n
 }
 
-func (x *HandleApplyReq) Size() (n int) {
-	if x == nil {
-		return n
-	}
-	n += x.sizeField1()
-	n += x.sizeField3()
-	return n
-}
-
-func (x *HandleApplyReq) sizeField1() (n int) {
-	if x.ApplyId == "" {
-		return n
-	}
-	n += fastpb.SizeString(1, x.GetApplyId())
-	return n
-}
-
-func (x *HandleApplyReq) sizeField3() (n int) {
-	if !x.IsRejected {
-		return n
-	}
-	n += fastpb.SizeBool(3, x.GetIsRejected())
-	return n
-}
-
-func (x *HandleApplyResp) Size() (n int) {
-	if x == nil {
-		return n
-	}
-	return n
-}
-
-func (x *ListApplyReq) Size() (n int) {
-	if x == nil {
-		return n
-	}
-	n += x.sizeField1()
-	return n
-}
-
-func (x *ListApplyReq) sizeField1() (n int) {
-	if x.CommunityId == "" {
-		return n
-	}
-	n += fastpb.SizeString(1, x.GetCommunityId())
-	return n
-}
-
-func (x *ListApplyResp) Size() (n int) {
-	if x == nil {
-		return n
-	}
-	n += x.sizeField1()
-	return n
-}
-
-func (x *ListApplyResp) sizeField1() (n int) {
-	if x.Apply == nil {
-		return n
-	}
-	for i := range x.GetApply() {
-		n += fastpb.SizeMessage(1, x.GetApply()[i])
-	}
-	return n
-}
-
 func (x *ListAdminReq) Size() (n int) {
 	if x == nil {
 		return n
@@ -3869,7 +3803,39 @@ func (x *DeleteAdminResp) Size() (n int) {
 	return n
 }
 
-func (x *RetrieveUserRoleReq) Size() (n int) {
+func (x *HandleApplyReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *HandleApplyReq) sizeField1() (n int) {
+	if x.ApplyId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetApplyId())
+	return n
+}
+
+func (x *HandleApplyReq) sizeField2() (n int) {
+	if !x.IsRejected {
+		return n
+	}
+	n += fastpb.SizeBool(2, x.GetIsRejected())
+	return n
+}
+
+func (x *HandleApplyResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	return n
+}
+
+func (x *ListApplyReq) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -3877,15 +3843,15 @@ func (x *RetrieveUserRoleReq) Size() (n int) {
 	return n
 }
 
-func (x *RetrieveUserRoleReq) sizeField1() (n int) {
-	if x.UserId == "" {
+func (x *ListApplyReq) sizeField1() (n int) {
+	if x.CommunityId == "" {
 		return n
 	}
-	n += fastpb.SizeString(1, x.GetUserId())
+	n += fastpb.SizeString(1, x.GetCommunityId())
 	return n
 }
 
-func (x *RetrieveUserRoleResp) Size() (n int) {
+func (x *ListApplyResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -3893,12 +3859,12 @@ func (x *RetrieveUserRoleResp) Size() (n int) {
 	return n
 }
 
-func (x *RetrieveUserRoleResp) sizeField1() (n int) {
-	if x.Roles == nil {
+func (x *ListApplyResp) sizeField1() (n int) {
+	if x.Apply == nil {
 		return n
 	}
-	for i := range x.GetRoles() {
-		n += fastpb.SizeMessage(1, x.GetRoles()[i])
+	for i := range x.GetApply() {
+		n += fastpb.SizeMessage(1, x.GetApply()[i])
 	}
 	return n
 }
@@ -3931,6 +3897,40 @@ func (x *CreateApplyReq) sizeField2() (n int) {
 func (x *CreateApplyResp) Size() (n int) {
 	if x == nil {
 		return n
+	}
+	return n
+}
+
+func (x *RetrieveUserRoleReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *RetrieveUserRoleReq) sizeField1() (n int) {
+	if x.UserId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetUserId())
+	return n
+}
+
+func (x *RetrieveUserRoleResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *RetrieveUserRoleResp) sizeField1() (n int) {
+	if x.Roles == nil {
+		return n
+	}
+	for i := range x.GetRoles() {
+		n += fastpb.SizeMessage(1, x.GetRoles()[i])
 	}
 	return n
 }
@@ -4375,21 +4375,6 @@ var fieldIDToName_RetrieveAdminResp = map[int32]string{
 	1: "Admin",
 }
 
-var fieldIDToName_HandleApplyReq = map[int32]string{
-	1: "ApplyId",
-	3: "IsRejected",
-}
-
-var fieldIDToName_HandleApplyResp = map[int32]string{}
-
-var fieldIDToName_ListApplyReq = map[int32]string{
-	1: "CommunityId",
-}
-
-var fieldIDToName_ListApplyResp = map[int32]string{
-	1: "Apply",
-}
-
 var fieldIDToName_ListAdminReq = map[int32]string{
 	1: "CommunityId",
 	2: "Page",
@@ -4433,12 +4418,19 @@ var fieldIDToName_DeleteAdminReq = map[int32]string{
 
 var fieldIDToName_DeleteAdminResp = map[int32]string{}
 
-var fieldIDToName_RetrieveUserRoleReq = map[int32]string{
-	1: "UserId",
+var fieldIDToName_HandleApplyReq = map[int32]string{
+	1: "ApplyId",
+	2: "IsRejected",
 }
 
-var fieldIDToName_RetrieveUserRoleResp = map[int32]string{
-	1: "Roles",
+var fieldIDToName_HandleApplyResp = map[int32]string{}
+
+var fieldIDToName_ListApplyReq = map[int32]string{
+	1: "CommunityId",
+}
+
+var fieldIDToName_ListApplyResp = map[int32]string{
+	1: "Apply",
 }
 
 var fieldIDToName_CreateApplyReq = map[int32]string{
@@ -4447,6 +4439,14 @@ var fieldIDToName_CreateApplyReq = map[int32]string{
 }
 
 var fieldIDToName_CreateApplyResp = map[int32]string{}
+
+var fieldIDToName_RetrieveUserRoleReq = map[int32]string{
+	1: "UserId",
+}
+
+var fieldIDToName_RetrieveUserRoleResp = map[int32]string{
+	1: "Roles",
+}
 
 var fieldIDToName_UpdateUserRoleReq = map[int32]string{
 	1: "UserId",

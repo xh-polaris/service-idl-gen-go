@@ -298,8 +298,13 @@ ReadFieldError:
 }
 
 func (x *Role) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.RoleType, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
+	var v int32
+	v, offset, err = fastpb.ReadInt32(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.RoleType = RoleType(v)
+	return offset, nil
 }
 
 func (x *Role) fastReadField2(buf []byte, _type int8) (offset int, err error) {
@@ -571,10 +576,10 @@ func (x *Role) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *Role) fastWriteField1(buf []byte) (offset int) {
-	if x.RoleType == "" {
+	if x.RoleType == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetRoleType())
+	offset += fastpb.WriteInt32(buf[offset:], 1, int32(x.GetRoleType()))
 	return offset
 }
 
@@ -838,10 +843,10 @@ func (x *Role) Size() (n int) {
 }
 
 func (x *Role) sizeField1() (n int) {
-	if x.RoleType == "" {
+	if x.RoleType == 0 {
 		return n
 	}
-	n += fastpb.SizeString(1, x.GetRoleType())
+	n += fastpb.SizeInt32(1, int32(x.GetRoleType()))
 	return n
 }
 

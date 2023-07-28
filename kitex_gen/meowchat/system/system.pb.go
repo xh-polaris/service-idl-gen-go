@@ -1163,193 +1163,6 @@ func (x *RetrieveAdminResp) GetAdmin() *Admin {
 	return nil
 }
 
-type HandleApplyReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	ApplyId    string `protobuf:"bytes,1,opt,name=applyId,proto3" json:"applyId,omitempty"`
-	IsRejected bool   `protobuf:"varint,3,opt,name=isRejected,proto3" json:"isRejected,omitempty"`
-}
-
-func (x *HandleApplyReq) Reset() {
-	*x = HandleApplyReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[22]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *HandleApplyReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*HandleApplyReq) ProtoMessage() {}
-
-func (x *HandleApplyReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[22]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use HandleApplyReq.ProtoReflect.Descriptor instead.
-func (*HandleApplyReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_system_system_proto_rawDescGZIP(), []int{22}
-}
-
-func (x *HandleApplyReq) GetApplyId() string {
-	if x != nil {
-		return x.ApplyId
-	}
-	return ""
-}
-
-func (x *HandleApplyReq) GetIsRejected() bool {
-	if x != nil {
-		return x.IsRejected
-	}
-	return false
-}
-
-type HandleApplyResp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-}
-
-func (x *HandleApplyResp) Reset() {
-	*x = HandleApplyResp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[23]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *HandleApplyResp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*HandleApplyResp) ProtoMessage() {}
-
-func (x *HandleApplyResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[23]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use HandleApplyResp.ProtoReflect.Descriptor instead.
-func (*HandleApplyResp) Descriptor() ([]byte, []int) {
-	return file_meowchat_system_system_proto_rawDescGZIP(), []int{23}
-}
-
-type ListApplyReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	CommunityId string `protobuf:"bytes,1,opt,name=communityId,proto3" json:"communityId,omitempty"`
-}
-
-func (x *ListApplyReq) Reset() {
-	*x = ListApplyReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[24]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ListApplyReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListApplyReq) ProtoMessage() {}
-
-func (x *ListApplyReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[24]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListApplyReq.ProtoReflect.Descriptor instead.
-func (*ListApplyReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_system_system_proto_rawDescGZIP(), []int{24}
-}
-
-func (x *ListApplyReq) GetCommunityId() string {
-	if x != nil {
-		return x.CommunityId
-	}
-	return ""
-}
-
-type ListApplyResp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Apply []*Apply `protobuf:"bytes,1,rep,name=apply,proto3" json:"apply,omitempty"`
-}
-
-func (x *ListApplyResp) Reset() {
-	*x = ListApplyResp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[25]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ListApplyResp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListApplyResp) ProtoMessage() {}
-
-func (x *ListApplyResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[25]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListApplyResp.ProtoReflect.Descriptor instead.
-func (*ListApplyResp) Descriptor() ([]byte, []int) {
-	return file_meowchat_system_system_proto_rawDescGZIP(), []int{25}
-}
-
-func (x *ListApplyResp) GetApply() []*Apply {
-	if x != nil {
-		return x.Apply
-	}
-	return nil
-}
-
 type ListAdminReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -1364,7 +1177,7 @@ type ListAdminReq struct {
 func (x *ListAdminReq) Reset() {
 	*x = ListAdminReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[26]
+		mi := &file_meowchat_system_system_proto_msgTypes[22]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1377,7 +1190,7 @@ func (x *ListAdminReq) String() string {
 func (*ListAdminReq) ProtoMessage() {}
 
 func (x *ListAdminReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[26]
+	mi := &file_meowchat_system_system_proto_msgTypes[22]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1390,7 +1203,7 @@ func (x *ListAdminReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAdminReq.ProtoReflect.Descriptor instead.
 func (*ListAdminReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_system_system_proto_rawDescGZIP(), []int{26}
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{22}
 }
 
 func (x *ListAdminReq) GetCommunityId() string {
@@ -1433,7 +1246,7 @@ type ListAdminResp struct {
 func (x *ListAdminResp) Reset() {
 	*x = ListAdminResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[27]
+		mi := &file_meowchat_system_system_proto_msgTypes[23]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1446,7 +1259,7 @@ func (x *ListAdminResp) String() string {
 func (*ListAdminResp) ProtoMessage() {}
 
 func (x *ListAdminResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[27]
+	mi := &file_meowchat_system_system_proto_msgTypes[23]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1459,7 +1272,7 @@ func (x *ListAdminResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ListAdminResp.ProtoReflect.Descriptor instead.
 func (*ListAdminResp) Descriptor() ([]byte, []int) {
-	return file_meowchat_system_system_proto_rawDescGZIP(), []int{27}
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{23}
 }
 
 func (x *ListAdminResp) GetAdmins() []*Admin {
@@ -1492,7 +1305,7 @@ type CreateAdminReq struct {
 func (x *CreateAdminReq) Reset() {
 	*x = CreateAdminReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[28]
+		mi := &file_meowchat_system_system_proto_msgTypes[24]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1505,7 +1318,7 @@ func (x *CreateAdminReq) String() string {
 func (*CreateAdminReq) ProtoMessage() {}
 
 func (x *CreateAdminReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[28]
+	mi := &file_meowchat_system_system_proto_msgTypes[24]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1518,7 +1331,7 @@ func (x *CreateAdminReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAdminReq.ProtoReflect.Descriptor instead.
 func (*CreateAdminReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_system_system_proto_rawDescGZIP(), []int{28}
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{24}
 }
 
 func (x *CreateAdminReq) GetCommunityId() string {
@@ -1574,7 +1387,7 @@ type CreateAdminResp struct {
 func (x *CreateAdminResp) Reset() {
 	*x = CreateAdminResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[29]
+		mi := &file_meowchat_system_system_proto_msgTypes[25]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1587,7 +1400,7 @@ func (x *CreateAdminResp) String() string {
 func (*CreateAdminResp) ProtoMessage() {}
 
 func (x *CreateAdminResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[29]
+	mi := &file_meowchat_system_system_proto_msgTypes[25]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1600,7 +1413,7 @@ func (x *CreateAdminResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateAdminResp.ProtoReflect.Descriptor instead.
 func (*CreateAdminResp) Descriptor() ([]byte, []int) {
-	return file_meowchat_system_system_proto_rawDescGZIP(), []int{29}
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{25}
 }
 
 func (x *CreateAdminResp) GetId() string {
@@ -1627,7 +1440,7 @@ type UpdateAdminReq struct {
 func (x *UpdateAdminReq) Reset() {
 	*x = UpdateAdminReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[30]
+		mi := &file_meowchat_system_system_proto_msgTypes[26]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1640,7 +1453,7 @@ func (x *UpdateAdminReq) String() string {
 func (*UpdateAdminReq) ProtoMessage() {}
 
 func (x *UpdateAdminReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[30]
+	mi := &file_meowchat_system_system_proto_msgTypes[26]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1653,7 +1466,7 @@ func (x *UpdateAdminReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAdminReq.ProtoReflect.Descriptor instead.
 func (*UpdateAdminReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_system_system_proto_rawDescGZIP(), []int{30}
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{26}
 }
 
 func (x *UpdateAdminReq) GetId() string {
@@ -1714,7 +1527,7 @@ type UpdateAdminResp struct {
 func (x *UpdateAdminResp) Reset() {
 	*x = UpdateAdminResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[31]
+		mi := &file_meowchat_system_system_proto_msgTypes[27]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1727,7 +1540,7 @@ func (x *UpdateAdminResp) String() string {
 func (*UpdateAdminResp) ProtoMessage() {}
 
 func (x *UpdateAdminResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[31]
+	mi := &file_meowchat_system_system_proto_msgTypes[27]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1740,7 +1553,7 @@ func (x *UpdateAdminResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAdminResp.ProtoReflect.Descriptor instead.
 func (*UpdateAdminResp) Descriptor() ([]byte, []int) {
-	return file_meowchat_system_system_proto_rawDescGZIP(), []int{31}
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{27}
 }
 
 type DeleteAdminReq struct {
@@ -1754,7 +1567,7 @@ type DeleteAdminReq struct {
 func (x *DeleteAdminReq) Reset() {
 	*x = DeleteAdminReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[32]
+		mi := &file_meowchat_system_system_proto_msgTypes[28]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1767,7 +1580,7 @@ func (x *DeleteAdminReq) String() string {
 func (*DeleteAdminReq) ProtoMessage() {}
 
 func (x *DeleteAdminReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[32]
+	mi := &file_meowchat_system_system_proto_msgTypes[28]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1780,7 +1593,7 @@ func (x *DeleteAdminReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAdminReq.ProtoReflect.Descriptor instead.
 func (*DeleteAdminReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_system_system_proto_rawDescGZIP(), []int{32}
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{28}
 }
 
 func (x *DeleteAdminReq) GetId() string {
@@ -1799,7 +1612,7 @@ type DeleteAdminResp struct {
 func (x *DeleteAdminResp) Reset() {
 	*x = DeleteAdminResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[33]
+		mi := &file_meowchat_system_system_proto_msgTypes[29]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1812,7 +1625,7 @@ func (x *DeleteAdminResp) String() string {
 func (*DeleteAdminResp) ProtoMessage() {}
 
 func (x *DeleteAdminResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[33]
+	mi := &file_meowchat_system_system_proto_msgTypes[29]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1825,34 +1638,35 @@ func (x *DeleteAdminResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAdminResp.ProtoReflect.Descriptor instead.
 func (*DeleteAdminResp) Descriptor() ([]byte, []int) {
-	return file_meowchat_system_system_proto_rawDescGZIP(), []int{33}
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{29}
 }
 
-type RetrieveUserRoleReq struct {
+type HandleApplyReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	UserId string `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`
+	ApplyId    string `protobuf:"bytes,1,opt,name=applyId,proto3" json:"applyId,omitempty"`
+	IsRejected bool   `protobuf:"varint,2,opt,name=isRejected,proto3" json:"isRejected,omitempty"`
 }
 
-func (x *RetrieveUserRoleReq) Reset() {
-	*x = RetrieveUserRoleReq{}
+func (x *HandleApplyReq) Reset() {
+	*x = HandleApplyReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[34]
+		mi := &file_meowchat_system_system_proto_msgTypes[30]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *RetrieveUserRoleReq) String() string {
+func (x *HandleApplyReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RetrieveUserRoleReq) ProtoMessage() {}
+func (*HandleApplyReq) ProtoMessage() {}
 
-func (x *RetrieveUserRoleReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[34]
+func (x *HandleApplyReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowchat_system_system_proto_msgTypes[30]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1863,43 +1677,48 @@ func (x *RetrieveUserRoleReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RetrieveUserRoleReq.ProtoReflect.Descriptor instead.
-func (*RetrieveUserRoleReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_system_system_proto_rawDescGZIP(), []int{34}
+// Deprecated: Use HandleApplyReq.ProtoReflect.Descriptor instead.
+func (*HandleApplyReq) Descriptor() ([]byte, []int) {
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{30}
 }
 
-func (x *RetrieveUserRoleReq) GetUserId() string {
+func (x *HandleApplyReq) GetApplyId() string {
 	if x != nil {
-		return x.UserId
+		return x.ApplyId
 	}
 	return ""
 }
 
-type RetrieveUserRoleResp struct {
+func (x *HandleApplyReq) GetIsRejected() bool {
+	if x != nil {
+		return x.IsRejected
+	}
+	return false
+}
+
+type HandleApplyResp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
-
-	Roles []*Role `protobuf:"bytes,1,rep,name=roles,proto3" json:"roles,omitempty"`
 }
 
-func (x *RetrieveUserRoleResp) Reset() {
-	*x = RetrieveUserRoleResp{}
+func (x *HandleApplyResp) Reset() {
+	*x = HandleApplyResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[35]
+		mi := &file_meowchat_system_system_proto_msgTypes[31]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *RetrieveUserRoleResp) String() string {
+func (x *HandleApplyResp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*RetrieveUserRoleResp) ProtoMessage() {}
+func (*HandleApplyResp) ProtoMessage() {}
 
-func (x *RetrieveUserRoleResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[35]
+func (x *HandleApplyResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowchat_system_system_proto_msgTypes[31]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1910,14 +1729,101 @@ func (x *RetrieveUserRoleResp) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use RetrieveUserRoleResp.ProtoReflect.Descriptor instead.
-func (*RetrieveUserRoleResp) Descriptor() ([]byte, []int) {
-	return file_meowchat_system_system_proto_rawDescGZIP(), []int{35}
+// Deprecated: Use HandleApplyResp.ProtoReflect.Descriptor instead.
+func (*HandleApplyResp) Descriptor() ([]byte, []int) {
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{31}
 }
 
-func (x *RetrieveUserRoleResp) GetRoles() []*Role {
+type ListApplyReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	CommunityId string `protobuf:"bytes,1,opt,name=communityId,proto3" json:"communityId,omitempty"`
+}
+
+func (x *ListApplyReq) Reset() {
+	*x = ListApplyReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowchat_system_system_proto_msgTypes[32]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListApplyReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListApplyReq) ProtoMessage() {}
+
+func (x *ListApplyReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowchat_system_system_proto_msgTypes[32]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListApplyReq.ProtoReflect.Descriptor instead.
+func (*ListApplyReq) Descriptor() ([]byte, []int) {
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *ListApplyReq) GetCommunityId() string {
 	if x != nil {
-		return x.Roles
+		return x.CommunityId
+	}
+	return ""
+}
+
+type ListApplyResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Apply []*Apply `protobuf:"bytes,1,rep,name=apply,proto3" json:"apply,omitempty"`
+}
+
+func (x *ListApplyResp) Reset() {
+	*x = ListApplyResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowchat_system_system_proto_msgTypes[33]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListApplyResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListApplyResp) ProtoMessage() {}
+
+func (x *ListApplyResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowchat_system_system_proto_msgTypes[33]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListApplyResp.ProtoReflect.Descriptor instead.
+func (*ListApplyResp) Descriptor() ([]byte, []int) {
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *ListApplyResp) GetApply() []*Apply {
+	if x != nil {
+		return x.Apply
 	}
 	return nil
 }
@@ -1934,7 +1840,7 @@ type CreateApplyReq struct {
 func (x *CreateApplyReq) Reset() {
 	*x = CreateApplyReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[36]
+		mi := &file_meowchat_system_system_proto_msgTypes[34]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1947,7 +1853,7 @@ func (x *CreateApplyReq) String() string {
 func (*CreateApplyReq) ProtoMessage() {}
 
 func (x *CreateApplyReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[36]
+	mi := &file_meowchat_system_system_proto_msgTypes[34]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -1960,7 +1866,7 @@ func (x *CreateApplyReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateApplyReq.ProtoReflect.Descriptor instead.
 func (*CreateApplyReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_system_system_proto_rawDescGZIP(), []int{36}
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{34}
 }
 
 func (x *CreateApplyReq) GetApplicantId() string {
@@ -1986,7 +1892,7 @@ type CreateApplyResp struct {
 func (x *CreateApplyResp) Reset() {
 	*x = CreateApplyResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[37]
+		mi := &file_meowchat_system_system_proto_msgTypes[35]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -1999,7 +1905,7 @@ func (x *CreateApplyResp) String() string {
 func (*CreateApplyResp) ProtoMessage() {}
 
 func (x *CreateApplyResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[37]
+	mi := &file_meowchat_system_system_proto_msgTypes[35]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2012,7 +1918,101 @@ func (x *CreateApplyResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CreateApplyResp.ProtoReflect.Descriptor instead.
 func (*CreateApplyResp) Descriptor() ([]byte, []int) {
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{35}
+}
+
+type RetrieveUserRoleReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	UserId string `protobuf:"bytes,1,opt,name=userId,proto3" json:"userId,omitempty"`
+}
+
+func (x *RetrieveUserRoleReq) Reset() {
+	*x = RetrieveUserRoleReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowchat_system_system_proto_msgTypes[36]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RetrieveUserRoleReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RetrieveUserRoleReq) ProtoMessage() {}
+
+func (x *RetrieveUserRoleReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowchat_system_system_proto_msgTypes[36]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RetrieveUserRoleReq.ProtoReflect.Descriptor instead.
+func (*RetrieveUserRoleReq) Descriptor() ([]byte, []int) {
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *RetrieveUserRoleReq) GetUserId() string {
+	if x != nil {
+		return x.UserId
+	}
+	return ""
+}
+
+type RetrieveUserRoleResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Roles []*Role `protobuf:"bytes,1,rep,name=roles,proto3" json:"roles,omitempty"`
+}
+
+func (x *RetrieveUserRoleResp) Reset() {
+	*x = RetrieveUserRoleResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowchat_system_system_proto_msgTypes[37]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RetrieveUserRoleResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RetrieveUserRoleResp) ProtoMessage() {}
+
+func (x *RetrieveUserRoleResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowchat_system_system_proto_msgTypes[37]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RetrieveUserRoleResp.ProtoReflect.Descriptor instead.
+func (*RetrieveUserRoleResp) Descriptor() ([]byte, []int) {
 	return file_meowchat_system_system_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *RetrieveUserRoleResp) GetRoles() []*Role {
+	if x != nil {
+		return x.Roles
+	}
+	return nil
 }
 
 type UpdateUserRoleReq struct {
@@ -2935,20 +2935,7 @@ var file_meowchat_system_system_proto_rawDesc = []byte{
 	0x65, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x12, 0x2c, 0x0a, 0x05, 0x61, 0x64,
 	0x6d, 0x69, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x6d, 0x65, 0x6f, 0x77,
 	0x63, 0x68, 0x61, 0x74, 0x2e, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x2e, 0x41, 0x64, 0x6d, 0x69,
-	0x6e, 0x52, 0x05, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x22, 0x4a, 0x0a, 0x0e, 0x48, 0x61, 0x6e, 0x64,
-	0x6c, 0x65, 0x41, 0x70, 0x70, 0x6c, 0x79, 0x52, 0x65, 0x71, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x70,
-	0x70, 0x6c, 0x79, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x70, 0x70,
-	0x6c, 0x79, 0x49, 0x64, 0x12, 0x1e, 0x0a, 0x0a, 0x69, 0x73, 0x52, 0x65, 0x6a, 0x65, 0x63, 0x74,
-	0x65, 0x64, 0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x52, 0x0a, 0x69, 0x73, 0x52, 0x65, 0x6a, 0x65,
-	0x63, 0x74, 0x65, 0x64, 0x22, 0x11, 0x0a, 0x0f, 0x48, 0x61, 0x6e, 0x64, 0x6c, 0x65, 0x41, 0x70,
-	0x70, 0x6c, 0x79, 0x52, 0x65, 0x73, 0x70, 0x22, 0x30, 0x0a, 0x0c, 0x4c, 0x69, 0x73, 0x74, 0x41,
-	0x70, 0x70, 0x6c, 0x79, 0x52, 0x65, 0x71, 0x12, 0x20, 0x0a, 0x0b, 0x63, 0x6f, 0x6d, 0x6d, 0x75,
-	0x6e, 0x69, 0x74, 0x79, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x63, 0x6f,
-	0x6d, 0x6d, 0x75, 0x6e, 0x69, 0x74, 0x79, 0x49, 0x64, 0x22, 0x3d, 0x0a, 0x0d, 0x4c, 0x69, 0x73,
-	0x74, 0x41, 0x70, 0x70, 0x6c, 0x79, 0x52, 0x65, 0x73, 0x70, 0x12, 0x2c, 0x0a, 0x05, 0x61, 0x70,
-	0x70, 0x6c, 0x79, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x16, 0x2e, 0x6d, 0x65, 0x6f, 0x77,
-	0x63, 0x68, 0x61, 0x74, 0x2e, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x2e, 0x41, 0x70, 0x70, 0x6c,
-	0x79, 0x52, 0x05, 0x61, 0x70, 0x70, 0x6c, 0x79, 0x22, 0xce, 0x01, 0x0a, 0x0c, 0x4c, 0x69, 0x73,
+	0x6e, 0x52, 0x05, 0x61, 0x64, 0x6d, 0x69, 0x6e, 0x22, 0xce, 0x01, 0x0a, 0x0c, 0x4c, 0x69, 0x73,
 	0x74, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x52, 0x65, 0x71, 0x12, 0x20, 0x0a, 0x0b, 0x63, 0x6f, 0x6d,
 	0x6d, 0x75, 0x6e, 0x69, 0x74, 0x79, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b,
 	0x63, 0x6f, 0x6d, 0x6d, 0x75, 0x6e, 0x69, 0x74, 0x79, 0x49, 0x64, 0x12, 0x12, 0x0a, 0x04, 0x70,
@@ -2996,20 +2983,33 @@ var file_meowchat_system_system_proto_rawDesc = []byte{
 	0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x52, 0x65, 0x71, 0x12, 0x0e,
 	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x11,
 	0x0a, 0x0f, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x64, 0x6d, 0x69, 0x6e, 0x52, 0x65, 0x73,
-	0x70, 0x22, 0x2d, 0x0a, 0x13, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x65, 0x55, 0x73, 0x65,
-	0x72, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65, 0x71, 0x12, 0x16, 0x0a, 0x06, 0x75, 0x73, 0x65, 0x72,
-	0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64,
-	0x22, 0x43, 0x0a, 0x14, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x65, 0x55, 0x73, 0x65, 0x72,
-	0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x2b, 0x0a, 0x05, 0x72, 0x6f, 0x6c, 0x65,
-	0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x15, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x68,
-	0x61, 0x74, 0x2e, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x2e, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x05,
-	0x72, 0x6f, 0x6c, 0x65, 0x73, 0x22, 0x54, 0x0a, 0x0e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x41,
-	0x70, 0x70, 0x6c, 0x79, 0x52, 0x65, 0x71, 0x12, 0x20, 0x0a, 0x0b, 0x61, 0x70, 0x70, 0x6c, 0x69,
-	0x63, 0x61, 0x6e, 0x74, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x61, 0x70,
-	0x70, 0x6c, 0x69, 0x63, 0x61, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x20, 0x0a, 0x0b, 0x63, 0x6f, 0x6d,
-	0x6d, 0x75, 0x6e, 0x69, 0x74, 0x79, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b,
-	0x63, 0x6f, 0x6d, 0x6d, 0x75, 0x6e, 0x69, 0x74, 0x79, 0x49, 0x64, 0x22, 0x11, 0x0a, 0x0f, 0x43,
-	0x72, 0x65, 0x61, 0x74, 0x65, 0x41, 0x70, 0x70, 0x6c, 0x79, 0x52, 0x65, 0x73, 0x70, 0x22, 0x58,
+	0x70, 0x22, 0x4a, 0x0a, 0x0e, 0x48, 0x61, 0x6e, 0x64, 0x6c, 0x65, 0x41, 0x70, 0x70, 0x6c, 0x79,
+	0x52, 0x65, 0x71, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x70, 0x70, 0x6c, 0x79, 0x49, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x70, 0x70, 0x6c, 0x79, 0x49, 0x64, 0x12, 0x1e, 0x0a,
+	0x0a, 0x69, 0x73, 0x52, 0x65, 0x6a, 0x65, 0x63, 0x74, 0x65, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x08, 0x52, 0x0a, 0x69, 0x73, 0x52, 0x65, 0x6a, 0x65, 0x63, 0x74, 0x65, 0x64, 0x22, 0x11, 0x0a,
+	0x0f, 0x48, 0x61, 0x6e, 0x64, 0x6c, 0x65, 0x41, 0x70, 0x70, 0x6c, 0x79, 0x52, 0x65, 0x73, 0x70,
+	0x22, 0x30, 0x0a, 0x0c, 0x4c, 0x69, 0x73, 0x74, 0x41, 0x70, 0x70, 0x6c, 0x79, 0x52, 0x65, 0x71,
+	0x12, 0x20, 0x0a, 0x0b, 0x63, 0x6f, 0x6d, 0x6d, 0x75, 0x6e, 0x69, 0x74, 0x79, 0x49, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x63, 0x6f, 0x6d, 0x6d, 0x75, 0x6e, 0x69, 0x74, 0x79,
+	0x49, 0x64, 0x22, 0x3d, 0x0a, 0x0d, 0x4c, 0x69, 0x73, 0x74, 0x41, 0x70, 0x70, 0x6c, 0x79, 0x52,
+	0x65, 0x73, 0x70, 0x12, 0x2c, 0x0a, 0x05, 0x61, 0x70, 0x70, 0x6c, 0x79, 0x18, 0x01, 0x20, 0x03,
+	0x28, 0x0b, 0x32, 0x16, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x73, 0x79,
+	0x73, 0x74, 0x65, 0x6d, 0x2e, 0x41, 0x70, 0x70, 0x6c, 0x79, 0x52, 0x05, 0x61, 0x70, 0x70, 0x6c,
+	0x79, 0x22, 0x54, 0x0a, 0x0e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x41, 0x70, 0x70, 0x6c, 0x79,
+	0x52, 0x65, 0x71, 0x12, 0x20, 0x0a, 0x0b, 0x61, 0x70, 0x70, 0x6c, 0x69, 0x63, 0x61, 0x6e, 0x74,
+	0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x61, 0x70, 0x70, 0x6c, 0x69, 0x63,
+	0x61, 0x6e, 0x74, 0x49, 0x64, 0x12, 0x20, 0x0a, 0x0b, 0x63, 0x6f, 0x6d, 0x6d, 0x75, 0x6e, 0x69,
+	0x74, 0x79, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0b, 0x63, 0x6f, 0x6d, 0x6d,
+	0x75, 0x6e, 0x69, 0x74, 0x79, 0x49, 0x64, 0x22, 0x11, 0x0a, 0x0f, 0x43, 0x72, 0x65, 0x61, 0x74,
+	0x65, 0x41, 0x70, 0x70, 0x6c, 0x79, 0x52, 0x65, 0x73, 0x70, 0x22, 0x2d, 0x0a, 0x13, 0x52, 0x65,
+	0x74, 0x72, 0x69, 0x65, 0x76, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65,
+	0x71, 0x12, 0x16, 0x0a, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x22, 0x43, 0x0a, 0x14, 0x52, 0x65, 0x74,
+	0x72, 0x69, 0x65, 0x76, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x65, 0x73,
+	0x70, 0x12, 0x2b, 0x0a, 0x05, 0x72, 0x6f, 0x6c, 0x65, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b,
+	0x32, 0x15, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x73, 0x79, 0x73, 0x74,
+	0x65, 0x6d, 0x2e, 0x52, 0x6f, 0x6c, 0x65, 0x52, 0x05, 0x72, 0x6f, 0x6c, 0x65, 0x73, 0x22, 0x58,
 	0x0a, 0x11, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x55, 0x73, 0x65, 0x72, 0x52, 0x6f, 0x6c, 0x65,
 	0x52, 0x65, 0x71, 0x12, 0x16, 0x0a, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x18, 0x01, 0x20,
 	0x01, 0x28, 0x09, 0x52, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x12, 0x2b, 0x0a, 0x05, 0x72,
@@ -3270,22 +3270,22 @@ var file_meowchat_system_system_proto_goTypes = []interface{}{
 	(*DeleteNewsResp)(nil),        // 19: meowchat.system.DeleteNewsResp
 	(*RetrieveAdminReq)(nil),      // 20: meowchat.system.RetrieveAdminReq
 	(*RetrieveAdminResp)(nil),     // 21: meowchat.system.RetrieveAdminResp
-	(*HandleApplyReq)(nil),        // 22: meowchat.system.HandleApplyReq
-	(*HandleApplyResp)(nil),       // 23: meowchat.system.HandleApplyResp
-	(*ListApplyReq)(nil),          // 24: meowchat.system.ListApplyReq
-	(*ListApplyResp)(nil),         // 25: meowchat.system.ListApplyResp
-	(*ListAdminReq)(nil),          // 26: meowchat.system.ListAdminReq
-	(*ListAdminResp)(nil),         // 27: meowchat.system.ListAdminResp
-	(*CreateAdminReq)(nil),        // 28: meowchat.system.CreateAdminReq
-	(*CreateAdminResp)(nil),       // 29: meowchat.system.CreateAdminResp
-	(*UpdateAdminReq)(nil),        // 30: meowchat.system.UpdateAdminReq
-	(*UpdateAdminResp)(nil),       // 31: meowchat.system.UpdateAdminResp
-	(*DeleteAdminReq)(nil),        // 32: meowchat.system.DeleteAdminReq
-	(*DeleteAdminResp)(nil),       // 33: meowchat.system.DeleteAdminResp
-	(*RetrieveUserRoleReq)(nil),   // 34: meowchat.system.RetrieveUserRoleReq
-	(*RetrieveUserRoleResp)(nil),  // 35: meowchat.system.RetrieveUserRoleResp
-	(*CreateApplyReq)(nil),        // 36: meowchat.system.CreateApplyReq
-	(*CreateApplyResp)(nil),       // 37: meowchat.system.CreateApplyResp
+	(*ListAdminReq)(nil),          // 22: meowchat.system.ListAdminReq
+	(*ListAdminResp)(nil),         // 23: meowchat.system.ListAdminResp
+	(*CreateAdminReq)(nil),        // 24: meowchat.system.CreateAdminReq
+	(*CreateAdminResp)(nil),       // 25: meowchat.system.CreateAdminResp
+	(*UpdateAdminReq)(nil),        // 26: meowchat.system.UpdateAdminReq
+	(*UpdateAdminResp)(nil),       // 27: meowchat.system.UpdateAdminResp
+	(*DeleteAdminReq)(nil),        // 28: meowchat.system.DeleteAdminReq
+	(*DeleteAdminResp)(nil),       // 29: meowchat.system.DeleteAdminResp
+	(*HandleApplyReq)(nil),        // 30: meowchat.system.HandleApplyReq
+	(*HandleApplyResp)(nil),       // 31: meowchat.system.HandleApplyResp
+	(*ListApplyReq)(nil),          // 32: meowchat.system.ListApplyReq
+	(*ListApplyResp)(nil),         // 33: meowchat.system.ListApplyResp
+	(*CreateApplyReq)(nil),        // 34: meowchat.system.CreateApplyReq
+	(*CreateApplyResp)(nil),       // 35: meowchat.system.CreateApplyResp
+	(*RetrieveUserRoleReq)(nil),   // 36: meowchat.system.RetrieveUserRoleReq
+	(*RetrieveUserRoleResp)(nil),  // 37: meowchat.system.RetrieveUserRoleResp
 	(*UpdateUserRoleReq)(nil),     // 38: meowchat.system.UpdateUserRoleReq
 	(*UpdateUserRoleResp)(nil),    // 39: meowchat.system.UpdateUserRoleResp
 	(*ContainsRoleReq)(nil),       // 40: meowchat.system.ContainsRoleReq
@@ -3321,9 +3321,9 @@ var file_meowchat_system_system_proto_depIdxs = []int32{
 	55, // 4: meowchat.system.ListNewsReq.sort:type_name -> meowchat.system.ListNewsReq.SortEntry
 	59, // 5: meowchat.system.ListNewsResp.news:type_name -> meowchat.system.News
 	60, // 6: meowchat.system.RetrieveAdminResp.admin:type_name -> meowchat.system.Admin
-	61, // 7: meowchat.system.ListApplyResp.apply:type_name -> meowchat.system.Apply
-	56, // 8: meowchat.system.ListAdminReq.sort:type_name -> meowchat.system.ListAdminReq.SortEntry
-	60, // 9: meowchat.system.ListAdminResp.admins:type_name -> meowchat.system.Admin
+	56, // 7: meowchat.system.ListAdminReq.sort:type_name -> meowchat.system.ListAdminReq.SortEntry
+	60, // 8: meowchat.system.ListAdminResp.admins:type_name -> meowchat.system.Admin
+	61, // 9: meowchat.system.ListApplyResp.apply:type_name -> meowchat.system.Apply
 	62, // 10: meowchat.system.RetrieveUserRoleResp.roles:type_name -> meowchat.system.Role
 	62, // 11: meowchat.system.UpdateUserRoleReq.roles:type_name -> meowchat.system.Role
 	62, // 12: meowchat.system.ContainsRoleReq.role:type_name -> meowchat.system.Role
@@ -3341,17 +3341,17 @@ var file_meowchat_system_system_proto_depIdxs = []int32{
 	16, // 24: meowchat.system.system_rpc.UpdateNews:input_type -> meowchat.system.UpdateNewsReq
 	18, // 25: meowchat.system.system_rpc.DeleteNews:input_type -> meowchat.system.DeleteNewsReq
 	20, // 26: meowchat.system.system_rpc.RetrieveAdmin:input_type -> meowchat.system.RetrieveAdminReq
-	26, // 27: meowchat.system.system_rpc.ListAdmin:input_type -> meowchat.system.ListAdminReq
-	28, // 28: meowchat.system.system_rpc.CreateAdmin:input_type -> meowchat.system.CreateAdminReq
-	30, // 29: meowchat.system.system_rpc.UpdateAdmin:input_type -> meowchat.system.UpdateAdminReq
-	32, // 30: meowchat.system.system_rpc.DeleteAdmin:input_type -> meowchat.system.DeleteAdminReq
-	34, // 31: meowchat.system.system_rpc.RetrieveUserRole:input_type -> meowchat.system.RetrieveUserRoleReq
+	22, // 27: meowchat.system.system_rpc.ListAdmin:input_type -> meowchat.system.ListAdminReq
+	24, // 28: meowchat.system.system_rpc.CreateAdmin:input_type -> meowchat.system.CreateAdminReq
+	26, // 29: meowchat.system.system_rpc.UpdateAdmin:input_type -> meowchat.system.UpdateAdminReq
+	28, // 30: meowchat.system.system_rpc.DeleteAdmin:input_type -> meowchat.system.DeleteAdminReq
+	36, // 31: meowchat.system.system_rpc.RetrieveUserRole:input_type -> meowchat.system.RetrieveUserRoleReq
 	52, // 32: meowchat.system.system_rpc.ListUserIdByRole:input_type -> meowchat.system.ListUserIdByRoleReq
 	38, // 33: meowchat.system.system_rpc.UpdateUserRole:input_type -> meowchat.system.UpdateUserRoleReq
 	40, // 34: meowchat.system.system_rpc.ContainsRole:input_type -> meowchat.system.ContainsRoleReq
-	36, // 35: meowchat.system.system_rpc.CreateApply:input_type -> meowchat.system.CreateApplyReq
-	22, // 36: meowchat.system.system_rpc.HandleApply:input_type -> meowchat.system.HandleApplyReq
-	24, // 37: meowchat.system.system_rpc.ListApply:input_type -> meowchat.system.ListApplyReq
+	34, // 35: meowchat.system.system_rpc.CreateApply:input_type -> meowchat.system.CreateApplyReq
+	30, // 36: meowchat.system.system_rpc.HandleApply:input_type -> meowchat.system.HandleApplyReq
+	32, // 37: meowchat.system.system_rpc.ListApply:input_type -> meowchat.system.ListApplyReq
 	42, // 38: meowchat.system.system_rpc.RetrieveCommunity:input_type -> meowchat.system.RetrieveCommunityReq
 	44, // 39: meowchat.system.system_rpc.ListCommunity:input_type -> meowchat.system.ListCommunityReq
 	46, // 40: meowchat.system.system_rpc.CreateCommunity:input_type -> meowchat.system.CreateCommunityReq
@@ -3368,17 +3368,17 @@ var file_meowchat_system_system_proto_depIdxs = []int32{
 	17, // 51: meowchat.system.system_rpc.UpdateNews:output_type -> meowchat.system.UpdateNewsResp
 	19, // 52: meowchat.system.system_rpc.DeleteNews:output_type -> meowchat.system.DeleteNewsResp
 	21, // 53: meowchat.system.system_rpc.RetrieveAdmin:output_type -> meowchat.system.RetrieveAdminResp
-	27, // 54: meowchat.system.system_rpc.ListAdmin:output_type -> meowchat.system.ListAdminResp
-	29, // 55: meowchat.system.system_rpc.CreateAdmin:output_type -> meowchat.system.CreateAdminResp
-	31, // 56: meowchat.system.system_rpc.UpdateAdmin:output_type -> meowchat.system.UpdateAdminResp
-	33, // 57: meowchat.system.system_rpc.DeleteAdmin:output_type -> meowchat.system.DeleteAdminResp
-	35, // 58: meowchat.system.system_rpc.RetrieveUserRole:output_type -> meowchat.system.RetrieveUserRoleResp
+	23, // 54: meowchat.system.system_rpc.ListAdmin:output_type -> meowchat.system.ListAdminResp
+	25, // 55: meowchat.system.system_rpc.CreateAdmin:output_type -> meowchat.system.CreateAdminResp
+	27, // 56: meowchat.system.system_rpc.UpdateAdmin:output_type -> meowchat.system.UpdateAdminResp
+	29, // 57: meowchat.system.system_rpc.DeleteAdmin:output_type -> meowchat.system.DeleteAdminResp
+	37, // 58: meowchat.system.system_rpc.RetrieveUserRole:output_type -> meowchat.system.RetrieveUserRoleResp
 	53, // 59: meowchat.system.system_rpc.ListUserIdByRole:output_type -> meowchat.system.ListUserIdByRoleResp
 	39, // 60: meowchat.system.system_rpc.UpdateUserRole:output_type -> meowchat.system.UpdateUserRoleResp
 	41, // 61: meowchat.system.system_rpc.ContainsRole:output_type -> meowchat.system.ContainsRoleResp
-	37, // 62: meowchat.system.system_rpc.CreateApply:output_type -> meowchat.system.CreateApplyResp
-	23, // 63: meowchat.system.system_rpc.HandleApply:output_type -> meowchat.system.HandleApplyResp
-	25, // 64: meowchat.system.system_rpc.ListApply:output_type -> meowchat.system.ListApplyResp
+	35, // 62: meowchat.system.system_rpc.CreateApply:output_type -> meowchat.system.CreateApplyResp
+	31, // 63: meowchat.system.system_rpc.HandleApply:output_type -> meowchat.system.HandleApplyResp
+	33, // 64: meowchat.system.system_rpc.ListApply:output_type -> meowchat.system.ListApplyResp
 	43, // 65: meowchat.system.system_rpc.RetrieveCommunity:output_type -> meowchat.system.RetrieveCommunityResp
 	45, // 66: meowchat.system.system_rpc.ListCommunity:output_type -> meowchat.system.ListCommunityResp
 	47, // 67: meowchat.system.system_rpc.CreateCommunity:output_type -> meowchat.system.CreateCommunityResp
@@ -3663,54 +3663,6 @@ func file_meowchat_system_system_proto_init() {
 			}
 		}
 		file_meowchat_system_system_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*HandleApplyReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_meowchat_system_system_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*HandleApplyResp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_meowchat_system_system_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListApplyReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_meowchat_system_system_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListApplyResp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_meowchat_system_system_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListAdminReq); i {
 			case 0:
 				return &v.state
@@ -3722,7 +3674,7 @@ func file_meowchat_system_system_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_system_system_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
+		file_meowchat_system_system_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*ListAdminResp); i {
 			case 0:
 				return &v.state
@@ -3734,7 +3686,7 @@ func file_meowchat_system_system_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_system_system_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
+		file_meowchat_system_system_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreateAdminReq); i {
 			case 0:
 				return &v.state
@@ -3746,7 +3698,7 @@ func file_meowchat_system_system_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_system_system_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
+		file_meowchat_system_system_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreateAdminResp); i {
 			case 0:
 				return &v.state
@@ -3758,7 +3710,7 @@ func file_meowchat_system_system_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_system_system_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
+		file_meowchat_system_system_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UpdateAdminReq); i {
 			case 0:
 				return &v.state
@@ -3770,7 +3722,7 @@ func file_meowchat_system_system_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_system_system_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
+		file_meowchat_system_system_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UpdateAdminResp); i {
 			case 0:
 				return &v.state
@@ -3782,7 +3734,7 @@ func file_meowchat_system_system_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_system_system_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
+		file_meowchat_system_system_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteAdminReq); i {
 			case 0:
 				return &v.state
@@ -3794,7 +3746,7 @@ func file_meowchat_system_system_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_system_system_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
+		file_meowchat_system_system_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteAdminResp); i {
 			case 0:
 				return &v.state
@@ -3806,31 +3758,55 @@ func file_meowchat_system_system_proto_init() {
 				return nil
 			}
 		}
+		file_meowchat_system_system_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*HandleApplyReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowchat_system_system_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*HandleApplyResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowchat_system_system_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListApplyReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowchat_system_system_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListApplyResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 		file_meowchat_system_system_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RetrieveUserRoleReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_meowchat_system_system_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RetrieveUserRoleResp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_meowchat_system_system_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreateApplyReq); i {
 			case 0:
 				return &v.state
@@ -3842,8 +3818,32 @@ func file_meowchat_system_system_proto_init() {
 				return nil
 			}
 		}
-		file_meowchat_system_system_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
+		file_meowchat_system_system_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CreateApplyResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowchat_system_system_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RetrieveUserRoleReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowchat_system_system_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RetrieveUserRoleResp); i {
 			case 0:
 				return &v.state
 			case 1:
