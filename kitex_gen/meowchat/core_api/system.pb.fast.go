@@ -1353,12 +1353,18 @@ ReadFieldError:
 }
 
 func (x *RetrieveUserPreviewReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.RoleType, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
+	var v int32
+	v, offset, err = fastpb.ReadInt32(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.RoleType = system.RoleType(v)
+	return offset, nil
 }
 
 func (x *RetrieveUserPreviewReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.CommunityId, offset, err = fastpb.ReadString(buf, _type)
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.CommunityId = &tmp
 	return offset, err
 }
 
@@ -1418,8 +1424,13 @@ ReadFieldError:
 }
 
 func (x *GetUserByRoleReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.RoleType, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
+	var v int32
+	v, offset, err = fastpb.ReadInt32(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.RoleType = system.RoleType(v)
+	return offset, nil
 }
 
 func (x *GetUserByRoleReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
@@ -2378,15 +2389,15 @@ func (x *RetrieveUserPreviewReq) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *RetrieveUserPreviewReq) fastWriteField1(buf []byte) (offset int) {
-	if x.RoleType == "" {
+	if x.RoleType == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetRoleType())
+	offset += fastpb.WriteInt32(buf[offset:], 1, int32(x.GetRoleType()))
 	return offset
 }
 
 func (x *RetrieveUserPreviewReq) fastWriteField2(buf []byte) (offset int) {
-	if x.CommunityId == "" {
+	if x.CommunityId == nil {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 2, x.GetCommunityId())
@@ -2421,10 +2432,10 @@ func (x *GetUserByRoleReq) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *GetUserByRoleReq) fastWriteField1(buf []byte) (offset int) {
-	if x.RoleType == "" {
+	if x.RoleType == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetRoleType())
+	offset += fastpb.WriteInt32(buf[offset:], 1, int32(x.GetRoleType()))
 	return offset
 }
 
@@ -3375,15 +3386,15 @@ func (x *RetrieveUserPreviewReq) Size() (n int) {
 }
 
 func (x *RetrieveUserPreviewReq) sizeField1() (n int) {
-	if x.RoleType == "" {
+	if x.RoleType == 0 {
 		return n
 	}
-	n += fastpb.SizeString(1, x.GetRoleType())
+	n += fastpb.SizeInt32(1, int32(x.GetRoleType()))
 	return n
 }
 
 func (x *RetrieveUserPreviewReq) sizeField2() (n int) {
-	if x.CommunityId == "" {
+	if x.CommunityId == nil {
 		return n
 	}
 	n += fastpb.SizeString(2, x.GetCommunityId())
@@ -3418,10 +3429,10 @@ func (x *GetUserByRoleReq) Size() (n int) {
 }
 
 func (x *GetUserByRoleReq) sizeField1() (n int) {
-	if x.RoleType == "" {
+	if x.RoleType == 0 {
 		return n
 	}
-	n += fastpb.SizeString(1, x.GetRoleType())
+	n += fastpb.SizeInt32(1, int32(x.GetRoleType()))
 	return n
 }
 
