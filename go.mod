@@ -1,6 +1,6 @@
 module github.com/xh-polaris/service-idl-gen-go
 
-go 1.19
+go 1.18
 
 require (
 	github.com/cloudwego/fastpb v0.0.4
@@ -17,7 +17,7 @@ require (
 	github.com/choleraehyq/pid v0.0.16 // indirect
 	github.com/cloudwego/configmanager v0.2.0 // indirect
 	github.com/cloudwego/frugal v0.1.6 // indirect
-	github.com/cloudwego/netpoll v0.4.0 // indirect
+	github.com/cloudwego/netpoll v0.4.1 // indirect
 	github.com/cloudwego/thriftgo v0.2.11 // indirect
 	github.com/golang/protobuf v1.5.3 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect

@@ -113,7 +113,7 @@ func (x *ListNoticeReq) fastReadField2(buf []byte, _type int8) (offset int, err 
 }
 
 func (x *ListNoticeReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.Size, offset, err = fastpb.ReadInt64(buf, _type)
+	x.PageSize, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -426,7 +426,7 @@ func (x *ListNewsReq) fastReadField2(buf []byte, _type int8) (offset int, err er
 }
 
 func (x *ListNewsReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.Size, offset, err = fastpb.ReadInt64(buf, _type)
+	x.PageSize, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -799,7 +799,7 @@ func (x *ListAdminReq) fastReadField2(buf []byte, _type int8) (offset int, err e
 }
 
 func (x *ListAdminReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.Size, offset, err = fastpb.ReadInt64(buf, _type)
+	x.PageSize, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -1536,7 +1536,7 @@ func (x *ListCommunityReq) fastReadField2(buf []byte, _type int8) (offset int, e
 }
 
 func (x *ListCommunityReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.Size, offset, err = fastpb.ReadInt64(buf, _type)
+	x.PageSize, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -1883,10 +1883,10 @@ func (x *ListNoticeReq) fastWriteField2(buf []byte) (offset int) {
 }
 
 func (x *ListNoticeReq) fastWriteField3(buf []byte) (offset int) {
-	if x.Size == 0 {
+	if x.PageSize == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetSize())
+	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetPageSize())
 	return offset
 }
 
@@ -2089,10 +2089,10 @@ func (x *ListNewsReq) fastWriteField2(buf []byte) (offset int) {
 }
 
 func (x *ListNewsReq) fastWriteField3(buf []byte) (offset int) {
-	if x.Size == 0 {
+	if x.PageSize == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetSize())
+	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetPageSize())
 	return offset
 }
 
@@ -2349,10 +2349,10 @@ func (x *ListAdminReq) fastWriteField2(buf []byte) (offset int) {
 }
 
 func (x *ListAdminReq) fastWriteField3(buf []byte) (offset int) {
-	if x.Size == 0 {
+	if x.PageSize == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetSize())
+	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetPageSize())
 	return offset
 }
 
@@ -2852,10 +2852,10 @@ func (x *ListCommunityReq) fastWriteField2(buf []byte) (offset int) {
 }
 
 func (x *ListCommunityReq) fastWriteField3(buf []byte) (offset int) {
-	if x.Size == 0 {
+	if x.PageSize == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetSize())
+	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetPageSize())
 	return offset
 }
 
@@ -3110,10 +3110,10 @@ func (x *ListNoticeReq) sizeField2() (n int) {
 }
 
 func (x *ListNoticeReq) sizeField3() (n int) {
-	if x.Size == 0 {
+	if x.PageSize == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(3, x.GetSize())
+	n += fastpb.SizeInt64(3, x.GetPageSize())
 	return n
 }
 
@@ -3316,10 +3316,10 @@ func (x *ListNewsReq) sizeField2() (n int) {
 }
 
 func (x *ListNewsReq) sizeField3() (n int) {
-	if x.Size == 0 {
+	if x.PageSize == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(3, x.GetSize())
+	n += fastpb.SizeInt64(3, x.GetPageSize())
 	return n
 }
 
@@ -3576,10 +3576,10 @@ func (x *ListAdminReq) sizeField2() (n int) {
 }
 
 func (x *ListAdminReq) sizeField3() (n int) {
-	if x.Size == 0 {
+	if x.PageSize == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(3, x.GetSize())
+	n += fastpb.SizeInt64(3, x.GetPageSize())
 	return n
 }
 
@@ -4079,10 +4079,10 @@ func (x *ListCommunityReq) sizeField2() (n int) {
 }
 
 func (x *ListCommunityReq) sizeField3() (n int) {
-	if x.Size == 0 {
+	if x.PageSize == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(3, x.GetSize())
+	n += fastpb.SizeInt64(3, x.GetPageSize())
 	return n
 }
 
@@ -4288,7 +4288,7 @@ var fieldIDToName_RetrieveNoticeResp = map[int32]string{
 var fieldIDToName_ListNoticeReq = map[int32]string{
 	1: "CommunityId",
 	2: "Page",
-	3: "Size",
+	3: "PageSize",
 	4: "Sort",
 }
 
@@ -4330,7 +4330,7 @@ var fieldIDToName_RetrieveNewsResp = map[int32]string{
 var fieldIDToName_ListNewsReq = map[int32]string{
 	1: "CommunityId",
 	2: "Page",
-	3: "Size",
+	3: "PageSize",
 	4: "Sort",
 }
 
@@ -4378,7 +4378,7 @@ var fieldIDToName_RetrieveAdminResp = map[int32]string{
 var fieldIDToName_ListAdminReq = map[int32]string{
 	1: "CommunityId",
 	2: "Page",
-	3: "Size",
+	3: "PageSize",
 	4: "Sort",
 }
 
@@ -4476,7 +4476,7 @@ var fieldIDToName_RetrieveCommunityResp = map[int32]string{
 var fieldIDToName_ListCommunityReq = map[int32]string{
 	1: "ParentId",
 	2: "Page",
-	3: "Size",
+	3: "PageSize",
 	4: "Sort",
 }
 
