@@ -5,7 +5,7 @@ package core_api
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
-	http "github.com/xh-polaris/service-idl-gen-go/kitex_gen/http"
+	base "github.com/xh-polaris/service-idl-gen-go/kitex_gen/base"
 )
 
 var (
@@ -404,4 +404,4 @@ var fieldIDToName_ApplySignedUrlAsCommunityResp = map[int32]string{
 	2: "SessionToken",
 }
 
-var _ = http.File_http_http_proto
+var _ = base.File_http_http_proto

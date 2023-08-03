@@ -8,7 +8,7 @@ package core_api
 
 import (
 	context "context"
-	_ "github.com/xh-polaris/service-idl-gen-go/kitex_gen/http"
+	_ "github.com/xh-polaris/service-idl-gen-go/kitex_gen/base"
 	system "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/system"
 	user "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/user"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"

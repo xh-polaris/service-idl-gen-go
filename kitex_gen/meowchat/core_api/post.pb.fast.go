@@ -5,8 +5,8 @@ package core_api
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
+	base "github.com/xh-polaris/service-idl-gen-go/kitex_gen/base"
 	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/basic"
-	http "github.com/xh-polaris/service-idl-gen-go/kitex_gen/http"
 	user "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/user"
 )
 
@@ -1405,6 +1405,6 @@ var fieldIDToName_SetOfficialReq = map[int32]string{
 
 var fieldIDToName_SetOfficialResp = map[int32]string{}
 
-var _ = http.File_http_http_proto
+var _ = base.File_http_http_proto
 var _ = basic.File_basic_pagination_proto
 var _ = user.File_meowchat_user_common_proto

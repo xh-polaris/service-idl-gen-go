@@ -104,6 +104,11 @@ func (x *News) FastRead(buf []byte, _type int8, number int32) (offset int, err e
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 6:
+		offset, err = x.fastReadField6(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -139,6 +144,11 @@ func (x *News) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 
 func (x *News) fastReadField5(buf []byte, _type int8) (offset int, err error) {
 	x.Type, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *News) fastReadField6(buf []byte, _type int8) (offset int, err error) {
+	x.IsPublic, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -419,6 +429,7 @@ func (x *News) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
 	offset += x.fastWriteField5(buf[offset:])
+	offset += x.fastWriteField6(buf[offset:])
 	return offset
 }
 
@@ -459,6 +470,14 @@ func (x *News) fastWriteField5(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 5, x.GetType())
+	return offset
+}
+
+func (x *News) fastWriteField6(buf []byte) (offset int) {
+	if x.IsPublic == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 6, x.GetIsPublic())
 	return offset
 }
 
@@ -686,6 +705,7 @@ func (x *News) Size() (n int) {
 	n += x.sizeField3()
 	n += x.sizeField4()
 	n += x.sizeField5()
+	n += x.sizeField6()
 	return n
 }
 
@@ -726,6 +746,14 @@ func (x *News) sizeField5() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(5, x.GetType())
+	return n
+}
+
+func (x *News) sizeField6() (n int) {
+	if x.IsPublic == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(6, x.GetIsPublic())
 	return n
 }
 
@@ -906,6 +934,7 @@ var fieldIDToName_News = map[int32]string{
 	3: "ImageUrl",
 	4: "LinkUrl",
 	5: "Type",
+	6: "IsPublic",
 }
 
 var fieldIDToName_Admin = map[int32]string{

@@ -5,8 +5,8 @@ package core_api
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
+	base "github.com/xh-polaris/service-idl-gen-go/kitex_gen/base"
 	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/basic"
-	http "github.com/xh-polaris/service-idl-gen-go/kitex_gen/http"
 	system "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/system"
 	user "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/user"
 )
@@ -1109,7 +1109,7 @@ var fieldIDToName_SearchUserForAdminResp = map[int32]string{
 	3: "Token",
 }
 
-var _ = http.File_http_http_proto
+var _ = base.File_http_http_proto
 var _ = basic.File_basic_user_proto
 var _ = basic.File_basic_pagination_proto
 var _ = user.File_meowchat_user_common_proto

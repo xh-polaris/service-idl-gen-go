@@ -5,7 +5,7 @@ package core_api
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
-	http "github.com/xh-polaris/service-idl-gen-go/kitex_gen/http"
+	base "github.com/xh-polaris/service-idl-gen-go/kitex_gen/base"
 	user "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/user"
 )
 
@@ -711,5 +711,5 @@ var fieldIDToName_DeleteCommentReq = map[int32]string{
 
 var fieldIDToName_DeleteCommentResp = map[int32]string{}
 
-var _ = http.File_http_http_proto
+var _ = base.File_http_http_proto
 var _ = user.File_meowchat_user_common_proto
