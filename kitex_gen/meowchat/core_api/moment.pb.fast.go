@@ -116,7 +116,7 @@ func (x *Moment) fastReadField8(buf []byte, _type int8) (offset int, err error) 
 	if err != nil {
 		return offset, err
 	}
-	x.UserId = &v
+	x.User = &v
 	return offset, nil
 }
 
@@ -624,10 +624,10 @@ func (x *Moment) fastWriteField7(buf []byte) (offset int) {
 }
 
 func (x *Moment) fastWriteField8(buf []byte) (offset int) {
-	if x.UserId == nil {
+	if x.User == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 8, x.GetUserId())
+	offset += fastpb.WriteMessage(buf[offset:], 8, x.GetUser())
 	return offset
 }
 
@@ -997,10 +997,10 @@ func (x *Moment) sizeField7() (n int) {
 }
 
 func (x *Moment) sizeField8() (n int) {
-	if x.UserId == nil {
+	if x.User == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(8, x.GetUserId())
+	n += fastpb.SizeMessage(8, x.GetUser())
 	return n
 }
 
@@ -1304,7 +1304,7 @@ var fieldIDToName_Moment = map[int32]string{
 	5: "Title",
 	6: "Text",
 	7: "CommunityId",
-	8: "UserId",
+	8: "User",
 }
 
 var fieldIDToName_GetMomentPreviewsReq = map[int32]string{
