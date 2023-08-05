@@ -195,6 +195,11 @@ func (x *GetMomentPreviewsResp) FastRead(buf []byte, _type int8, number int32) (
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -220,6 +225,11 @@ func (x *GetMomentPreviewsResp) fastReadField1(buf []byte, _type int8) (offset i
 
 func (x *GetMomentPreviewsResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *GetMomentPreviewsResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.Token, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -670,6 +680,7 @@ func (x *GetMomentPreviewsResp) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
@@ -688,6 +699,14 @@ func (x *GetMomentPreviewsResp) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetTotal())
+	return offset
+}
+
+func (x *GetMomentPreviewsResp) fastWriteField3(buf []byte) (offset int) {
+	if x.Token == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetToken())
 	return offset
 }
 
@@ -1034,6 +1053,7 @@ func (x *GetMomentPreviewsResp) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
@@ -1052,6 +1072,14 @@ func (x *GetMomentPreviewsResp) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(2, x.GetTotal())
+	return n
+}
+
+func (x *GetMomentPreviewsResp) sizeField3() (n int) {
+	if x.Token == "" {
+		return n
+	}
+	n += fastpb.SizeString(3, x.GetToken())
 	return n
 }
 
@@ -1289,6 +1317,7 @@ var fieldIDToName_GetMomentPreviewsReq = map[int32]string{
 var fieldIDToName_GetMomentPreviewsResp = map[int32]string{
 	1: "Moments",
 	2: "Total",
+	3: "Token",
 }
 
 var fieldIDToName_GetMomentDetailReq = map[int32]string{
