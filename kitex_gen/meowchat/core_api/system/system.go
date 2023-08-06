@@ -38,6 +38,7 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		"UpdateCommunityAdmin": kitex.NewMethodInfo(updateCommunityAdminHandler, newUpdateCommunityAdminArgs, newUpdateCommunityAdminResult, false),
 		"UpdateSuperAdmin":     kitex.NewMethodInfo(updateSuperAdminHandler, newUpdateSuperAdminArgs, newUpdateSuperAdminResult, false),
 		"GetUserByRole":        kitex.NewMethodInfo(getUserByRoleHandler, newGetUserByRoleArgs, newGetUserByRoleResult, false),
+		"UpdateRole":           kitex.NewMethodInfo(updateRoleHandler, newUpdateRoleArgs, newUpdateRoleResult, false),
 		"ListApply":            kitex.NewMethodInfo(listApplyHandler, newListApplyArgs, newListApplyResult, false),
 		"HandleApply":          kitex.NewMethodInfo(handleApplyHandler, newHandleApplyArgs, newHandleApplyResult, false),
 		"CreateApply":          kitex.NewMethodInfo(createApplyHandler, newCreateApplyArgs, newCreateApplyResult, false),
@@ -2504,6 +2505,159 @@ func (p *GetUserByRoleResult) GetResult() interface{} {
 	return p.Success
 }
 
+func updateRoleHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.UpdateRoleReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.System).UpdateRole(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *UpdateRoleArgs:
+		success, err := handler.(core_api.System).UpdateRole(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*UpdateRoleResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newUpdateRoleArgs() interface{} {
+	return &UpdateRoleArgs{}
+}
+
+func newUpdateRoleResult() interface{} {
+	return &UpdateRoleResult{}
+}
+
+type UpdateRoleArgs struct {
+	Req *core_api.UpdateRoleReq
+}
+
+func (p *UpdateRoleArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.UpdateRoleReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *UpdateRoleArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *UpdateRoleArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *UpdateRoleArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in UpdateRoleArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *UpdateRoleArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.UpdateRoleReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var UpdateRoleArgs_Req_DEFAULT *core_api.UpdateRoleReq
+
+func (p *UpdateRoleArgs) GetReq() *core_api.UpdateRoleReq {
+	if !p.IsSetReq() {
+		return UpdateRoleArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *UpdateRoleArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *UpdateRoleArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type UpdateRoleResult struct {
+	Success *core_api.UpdateRoleResp
+}
+
+var UpdateRoleResult_Success_DEFAULT *core_api.UpdateRoleResp
+
+func (p *UpdateRoleResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.UpdateRoleResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *UpdateRoleResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *UpdateRoleResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *UpdateRoleResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in UpdateRoleResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *UpdateRoleResult) Unmarshal(in []byte) error {
+	msg := new(core_api.UpdateRoleResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *UpdateRoleResult) GetSuccess() *core_api.UpdateRoleResp {
+	if !p.IsSetSuccess() {
+		return UpdateRoleResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *UpdateRoleResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.UpdateRoleResp)
+}
+
+func (p *UpdateRoleResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *UpdateRoleResult) GetResult() interface{} {
+	return p.Success
+}
+
 func listApplyHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -3128,6 +3282,16 @@ func (p *kClient) GetUserByRole(ctx context.Context, Req *core_api.GetUserByRole
 	_args.Req = Req
 	var _result GetUserByRoleResult
 	if err = p.c.Call(ctx, "GetUserByRole", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) UpdateRole(ctx context.Context, Req *core_api.UpdateRoleReq) (r *core_api.UpdateRoleResp, err error) {
+	var _args UpdateRoleArgs
+	_args.Req = Req
+	var _result UpdateRoleResult
+	if err = p.c.Call(ctx, "UpdateRole", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

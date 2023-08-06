@@ -27,6 +27,7 @@ type Client interface {
 	UpdateCommunityAdmin(ctx context.Context, Req *core_api.UpdateCommunityAdminReq, callOptions ...callopt.Option) (r *core_api.UpdateCommunityAdminResp, err error)
 	UpdateSuperAdmin(ctx context.Context, Req *core_api.UpdateSuperAdminReq, callOptions ...callopt.Option) (r *core_api.UpdateSuperAdminResp, err error)
 	GetUserByRole(ctx context.Context, Req *core_api.GetUserByRoleReq, callOptions ...callopt.Option) (r *core_api.GetUserByRoleResp, err error)
+	UpdateRole(ctx context.Context, Req *core_api.UpdateRoleReq, callOptions ...callopt.Option) (r *core_api.UpdateRoleResp, err error)
 	ListApply(ctx context.Context, Req *core_api.ListApplyReq, callOptions ...callopt.Option) (r *core_api.ListApplyResp, err error)
 	HandleApply(ctx context.Context, Req *core_api.HandleApplyReq, callOptions ...callopt.Option) (r *core_api.HandleApplyResp, err error)
 	CreateApply(ctx context.Context, Req *core_api.CreateApplyReq, callOptions ...callopt.Option) (r *core_api.CreateApplyResp, err error)
@@ -139,6 +140,11 @@ func (p *kSystemClient) UpdateSuperAdmin(ctx context.Context, Req *core_api.Upda
 func (p *kSystemClient) GetUserByRole(ctx context.Context, Req *core_api.GetUserByRoleReq, callOptions ...callopt.Option) (r *core_api.GetUserByRoleResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.GetUserByRole(ctx, Req)
+}
+
+func (p *kSystemClient) UpdateRole(ctx context.Context, Req *core_api.UpdateRoleReq, callOptions ...callopt.Option) (r *core_api.UpdateRoleResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.UpdateRole(ctx, Req)
 }
 
 func (p *kSystemClient) ListApply(ctx context.Context, Req *core_api.ListApplyReq, callOptions ...callopt.Option) (r *core_api.ListApplyResp, err error) {

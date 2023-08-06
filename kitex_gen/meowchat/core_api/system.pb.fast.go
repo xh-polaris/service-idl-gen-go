@@ -1327,6 +1327,59 @@ SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 }
 
+func (x *UpdateRoleReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_UpdateRoleReq[number], err)
+}
+
+func (x *UpdateRoleReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *UpdateRoleReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	var v system.Role
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Roles = append(x.Roles, &v)
+	return offset, nil
+}
+
+func (x *UpdateRoleResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+}
+
 func (x *RetrieveUserPreviewReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -2379,6 +2432,40 @@ func (x *UpdateSuperAdminResp) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
+func (x *UpdateRoleReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *UpdateRoleReq) fastWriteField1(buf []byte) (offset int) {
+	if x.UserId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
+	return offset
+}
+
+func (x *UpdateRoleReq) fastWriteField2(buf []byte) (offset int) {
+	if x.Roles == nil {
+		return offset
+	}
+	for i := range x.GetRoles() {
+		offset += fastpb.WriteMessage(buf[offset:], 2, x.GetRoles()[i])
+	}
+	return offset
+}
+
+func (x *UpdateRoleResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	return offset
+}
+
 func (x *RetrieveUserPreviewReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -3376,6 +3463,40 @@ func (x *UpdateSuperAdminResp) Size() (n int) {
 	return n
 }
 
+func (x *UpdateRoleReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *UpdateRoleReq) sizeField1() (n int) {
+	if x.UserId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetUserId())
+	return n
+}
+
+func (x *UpdateRoleReq) sizeField2() (n int) {
+	if x.Roles == nil {
+		return n
+	}
+	for i := range x.GetRoles() {
+		n += fastpb.SizeMessage(2, x.GetRoles()[i])
+	}
+	return n
+}
+
+func (x *UpdateRoleResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	return n
+}
+
 func (x *RetrieveUserPreviewReq) Size() (n int) {
 	if x == nil {
 		return n
@@ -3643,6 +3764,13 @@ var fieldIDToName_UpdateSuperAdminReq = map[int32]string{
 }
 
 var fieldIDToName_UpdateSuperAdminResp = map[int32]string{}
+
+var fieldIDToName_UpdateRoleReq = map[int32]string{
+	1: "UserId",
+	2: "Roles",
+}
+
+var fieldIDToName_UpdateRoleResp = map[int32]string{}
 
 var fieldIDToName_RetrieveUserPreviewReq = map[int32]string{
 	1: "RoleType",
