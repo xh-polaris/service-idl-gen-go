@@ -543,17 +543,22 @@ func (x *Plan) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 }
 
 func (x *Plan) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	x.PlanType, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
+	var v int32
+	v, offset, err = fastpb.ReadInt32(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.PlanType = PlanType(v)
+	return offset, nil
 }
 
 func (x *Plan) fastReadField5(buf []byte, _type int8) (offset int, err error) {
-	x.StartTime, offset, err = fastpb.ReadString(buf, _type)
+	x.StartTime, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
 func (x *Plan) fastReadField6(buf []byte, _type int8) (offset int, err error) {
-	x.Duration, offset, err = fastpb.ReadString(buf, _type)
+	x.EndTime, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -568,7 +573,7 @@ func (x *Plan) fastReadField8(buf []byte, _type int8) (offset int, err error) {
 	if err != nil {
 		return offset, err
 	}
-	x.Initiators = append(x.Initiators, v)
+	x.InitiatorIds = append(x.InitiatorIds, v)
 	return offset, err
 }
 
@@ -578,7 +583,7 @@ func (x *Plan) fastReadField9(buf []byte, _type int8) (offset int, err error) {
 	if err != nil {
 		return offset, err
 	}
-	x.ImageUrl = append(x.ImageUrl, v)
+	x.ImageUrls = append(x.ImageUrls, v)
 	return offset, err
 }
 
@@ -1212,26 +1217,26 @@ func (x *Plan) fastWriteField3(buf []byte) (offset int) {
 }
 
 func (x *Plan) fastWriteField4(buf []byte) (offset int) {
-	if x.PlanType == "" {
+	if x.PlanType == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 4, x.GetPlanType())
+	offset += fastpb.WriteInt32(buf[offset:], 4, int32(x.GetPlanType()))
 	return offset
 }
 
 func (x *Plan) fastWriteField5(buf []byte) (offset int) {
-	if x.StartTime == "" {
+	if x.StartTime == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 5, x.GetStartTime())
+	offset += fastpb.WriteInt64(buf[offset:], 5, x.GetStartTime())
 	return offset
 }
 
 func (x *Plan) fastWriteField6(buf []byte) (offset int) {
-	if x.Duration == "" {
+	if x.EndTime == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 6, x.GetDuration())
+	offset += fastpb.WriteInt64(buf[offset:], 6, x.GetEndTime())
 	return offset
 }
 
@@ -1244,21 +1249,21 @@ func (x *Plan) fastWriteField7(buf []byte) (offset int) {
 }
 
 func (x *Plan) fastWriteField8(buf []byte) (offset int) {
-	if len(x.Initiators) == 0 {
+	if len(x.InitiatorIds) == 0 {
 		return offset
 	}
-	for i := range x.GetInitiators() {
-		offset += fastpb.WriteString(buf[offset:], 8, x.GetInitiators()[i])
+	for i := range x.GetInitiatorIds() {
+		offset += fastpb.WriteString(buf[offset:], 8, x.GetInitiatorIds()[i])
 	}
 	return offset
 }
 
 func (x *Plan) fastWriteField9(buf []byte) (offset int) {
-	if len(x.ImageUrl) == 0 {
+	if len(x.ImageUrls) == 0 {
 		return offset
 	}
-	for i := range x.GetImageUrl() {
-		offset += fastpb.WriteString(buf[offset:], 9, x.GetImageUrl()[i])
+	for i := range x.GetImageUrls() {
+		offset += fastpb.WriteString(buf[offset:], 9, x.GetImageUrls()[i])
 	}
 	return offset
 }
@@ -1823,26 +1828,26 @@ func (x *Plan) sizeField3() (n int) {
 }
 
 func (x *Plan) sizeField4() (n int) {
-	if x.PlanType == "" {
+	if x.PlanType == 0 {
 		return n
 	}
-	n += fastpb.SizeString(4, x.GetPlanType())
+	n += fastpb.SizeInt32(4, int32(x.GetPlanType()))
 	return n
 }
 
 func (x *Plan) sizeField5() (n int) {
-	if x.StartTime == "" {
+	if x.StartTime == 0 {
 		return n
 	}
-	n += fastpb.SizeString(5, x.GetStartTime())
+	n += fastpb.SizeInt64(5, x.GetStartTime())
 	return n
 }
 
 func (x *Plan) sizeField6() (n int) {
-	if x.Duration == "" {
+	if x.EndTime == 0 {
 		return n
 	}
-	n += fastpb.SizeString(6, x.GetDuration())
+	n += fastpb.SizeInt64(6, x.GetEndTime())
 	return n
 }
 
@@ -1855,21 +1860,21 @@ func (x *Plan) sizeField7() (n int) {
 }
 
 func (x *Plan) sizeField8() (n int) {
-	if len(x.Initiators) == 0 {
+	if len(x.InitiatorIds) == 0 {
 		return n
 	}
-	for i := range x.GetInitiators() {
-		n += fastpb.SizeString(8, x.GetInitiators()[i])
+	for i := range x.GetInitiatorIds() {
+		n += fastpb.SizeString(8, x.GetInitiatorIds()[i])
 	}
 	return n
 }
 
 func (x *Plan) sizeField9() (n int) {
-	if len(x.ImageUrl) == 0 {
+	if len(x.ImageUrls) == 0 {
 		return n
 	}
-	for i := range x.GetImageUrl() {
-		n += fastpb.SizeString(9, x.GetImageUrl()[i])
+	for i := range x.GetImageUrls() {
+		n += fastpb.SizeString(9, x.GetImageUrls()[i])
 	}
 	return n
 }
@@ -2084,10 +2089,10 @@ var fieldIDToName_Plan = map[int32]string{
 	3:  "Description",
 	4:  "PlanType",
 	5:  "StartTime",
-	6:  "Duration",
+	6:  "EndTime",
 	7:  "CatId",
-	8:  "Initiators",
-	9:  "ImageUrl",
+	8:  "InitiatorIds",
+	9:  "ImageUrls",
 	10: "CreateAt",
 }
 
