@@ -1458,6 +1458,377 @@ SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 }
 
+func (x *ListPlanReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListPlanReq[number], err)
+}
+
+func (x *ListPlanReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v SearchOptions
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.SearchOptions = &v
+	return offset, nil
+}
+
+func (x *ListPlanReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	var v PlanFilterOptions
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.FilterOptions = &v
+	return offset, nil
+}
+
+func (x *ListPlanReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	var v basic.PaginationOptions
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.PaginationOptions = &v
+	return offset, nil
+}
+
+func (x *ListPlanResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListPlanResp[number], err)
+}
+
+func (x *ListPlanResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v Plan
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Plans = append(x.Plans, &v)
+	return offset, nil
+}
+
+func (x *ListPlanResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *ListPlanResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.Token, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *CountPlanReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CountPlanReq[number], err)
+}
+
+func (x *CountPlanReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v SearchOptions
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.SearchOptions = &v
+	return offset, nil
+}
+
+func (x *CountPlanReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	var v PlanFilterOptions
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.FilterOptions = &v
+	return offset, nil
+}
+
+func (x *CountPlanResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CountPlanResp[number], err)
+}
+
+func (x *CountPlanResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *RetrievePlanReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_RetrievePlanReq[number], err)
+}
+
+func (x *RetrievePlanReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.PlanId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *RetrievePlanResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_RetrievePlanResp[number], err)
+}
+
+func (x *RetrievePlanResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v Plan
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Plan = &v
+	return offset, nil
+}
+
+func (x *CreatePlanReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CreatePlanReq[number], err)
+}
+
+func (x *CreatePlanReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v Plan
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Plan = &v
+	return offset, nil
+}
+
+func (x *CreatePlanResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CreatePlanResp[number], err)
+}
+
+func (x *CreatePlanResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.PlanId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *UpdatePlanReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_UpdatePlanReq[number], err)
+}
+
+func (x *UpdatePlanReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v Plan
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Plan = &v
+	return offset, nil
+}
+
+func (x *UpdatePlanResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+}
+
+func (x *DeletePlanReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DeletePlanReq[number], err)
+}
+
+func (x *DeletePlanReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.PlanId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *DeletePlanResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+}
+
 func (x *SearchCatReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -2381,6 +2752,227 @@ func (x *SetOfficialReq) fastWriteField2(buf []byte) (offset int) {
 }
 
 func (x *SetOfficialResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	return offset
+}
+
+func (x *ListPlanReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
+	return offset
+}
+
+func (x *ListPlanReq) fastWriteField1(buf []byte) (offset int) {
+	if x.SearchOptions == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetSearchOptions())
+	return offset
+}
+
+func (x *ListPlanReq) fastWriteField2(buf []byte) (offset int) {
+	if x.FilterOptions == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 2, x.GetFilterOptions())
+	return offset
+}
+
+func (x *ListPlanReq) fastWriteField3(buf []byte) (offset int) {
+	if x.PaginationOptions == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetPaginationOptions())
+	return offset
+}
+
+func (x *ListPlanResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
+	return offset
+}
+
+func (x *ListPlanResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Plans == nil {
+		return offset
+	}
+	for i := range x.GetPlans() {
+		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetPlans()[i])
+	}
+	return offset
+}
+
+func (x *ListPlanResp) fastWriteField2(buf []byte) (offset int) {
+	if x.Total == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetTotal())
+	return offset
+}
+
+func (x *ListPlanResp) fastWriteField3(buf []byte) (offset int) {
+	if x.Token == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetToken())
+	return offset
+}
+
+func (x *CountPlanReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *CountPlanReq) fastWriteField1(buf []byte) (offset int) {
+	if x.SearchOptions == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetSearchOptions())
+	return offset
+}
+
+func (x *CountPlanReq) fastWriteField2(buf []byte) (offset int) {
+	if x.FilterOptions == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 2, x.GetFilterOptions())
+	return offset
+}
+
+func (x *CountPlanResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *CountPlanResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Total == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetTotal())
+	return offset
+}
+
+func (x *RetrievePlanReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *RetrievePlanReq) fastWriteField1(buf []byte) (offset int) {
+	if x.PlanId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetPlanId())
+	return offset
+}
+
+func (x *RetrievePlanResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *RetrievePlanResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Plan == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetPlan())
+	return offset
+}
+
+func (x *CreatePlanReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *CreatePlanReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Plan == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetPlan())
+	return offset
+}
+
+func (x *CreatePlanResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *CreatePlanResp) fastWriteField1(buf []byte) (offset int) {
+	if x.PlanId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetPlanId())
+	return offset
+}
+
+func (x *UpdatePlanReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *UpdatePlanReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Plan == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetPlan())
+	return offset
+}
+
+func (x *UpdatePlanResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	return offset
+}
+
+func (x *DeletePlanReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *DeletePlanReq) fastWriteField1(buf []byte) (offset int) {
+	if x.PlanId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetPlanId())
+	return offset
+}
+
+func (x *DeletePlanResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -3316,6 +3908,227 @@ func (x *SetOfficialResp) Size() (n int) {
 	return n
 }
 
+func (x *ListPlanReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	n += x.sizeField3()
+	return n
+}
+
+func (x *ListPlanReq) sizeField1() (n int) {
+	if x.SearchOptions == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(1, x.GetSearchOptions())
+	return n
+}
+
+func (x *ListPlanReq) sizeField2() (n int) {
+	if x.FilterOptions == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(2, x.GetFilterOptions())
+	return n
+}
+
+func (x *ListPlanReq) sizeField3() (n int) {
+	if x.PaginationOptions == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(3, x.GetPaginationOptions())
+	return n
+}
+
+func (x *ListPlanResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	n += x.sizeField3()
+	return n
+}
+
+func (x *ListPlanResp) sizeField1() (n int) {
+	if x.Plans == nil {
+		return n
+	}
+	for i := range x.GetPlans() {
+		n += fastpb.SizeMessage(1, x.GetPlans()[i])
+	}
+	return n
+}
+
+func (x *ListPlanResp) sizeField2() (n int) {
+	if x.Total == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(2, x.GetTotal())
+	return n
+}
+
+func (x *ListPlanResp) sizeField3() (n int) {
+	if x.Token == "" {
+		return n
+	}
+	n += fastpb.SizeString(3, x.GetToken())
+	return n
+}
+
+func (x *CountPlanReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *CountPlanReq) sizeField1() (n int) {
+	if x.SearchOptions == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(1, x.GetSearchOptions())
+	return n
+}
+
+func (x *CountPlanReq) sizeField2() (n int) {
+	if x.FilterOptions == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(2, x.GetFilterOptions())
+	return n
+}
+
+func (x *CountPlanResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *CountPlanResp) sizeField1() (n int) {
+	if x.Total == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(1, x.GetTotal())
+	return n
+}
+
+func (x *RetrievePlanReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *RetrievePlanReq) sizeField1() (n int) {
+	if x.PlanId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetPlanId())
+	return n
+}
+
+func (x *RetrievePlanResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *RetrievePlanResp) sizeField1() (n int) {
+	if x.Plan == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(1, x.GetPlan())
+	return n
+}
+
+func (x *CreatePlanReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *CreatePlanReq) sizeField1() (n int) {
+	if x.Plan == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(1, x.GetPlan())
+	return n
+}
+
+func (x *CreatePlanResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *CreatePlanResp) sizeField1() (n int) {
+	if x.PlanId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetPlanId())
+	return n
+}
+
+func (x *UpdatePlanReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *UpdatePlanReq) sizeField1() (n int) {
+	if x.Plan == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(1, x.GetPlan())
+	return n
+}
+
+func (x *UpdatePlanResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	return n
+}
+
+func (x *DeletePlanReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *DeletePlanReq) sizeField1() (n int) {
+	if x.PlanId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetPlanId())
+	return n
+}
+
+func (x *DeletePlanResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	return n
+}
+
 var fieldIDToName_SearchCatReq = map[int32]string{
 	1: "Count",
 	2: "Skip",
@@ -3506,5 +4319,54 @@ var fieldIDToName_SetOfficialReq = map[int32]string{
 }
 
 var fieldIDToName_SetOfficialResp = map[int32]string{}
+
+var fieldIDToName_ListPlanReq = map[int32]string{
+	1: "SearchOptions",
+	2: "FilterOptions",
+	3: "PaginationOptions",
+}
+
+var fieldIDToName_ListPlanResp = map[int32]string{
+	1: "Plans",
+	2: "Total",
+	3: "Token",
+}
+
+var fieldIDToName_CountPlanReq = map[int32]string{
+	1: "SearchOptions",
+	2: "FilterOptions",
+}
+
+var fieldIDToName_CountPlanResp = map[int32]string{
+	1: "Total",
+}
+
+var fieldIDToName_RetrievePlanReq = map[int32]string{
+	1: "PlanId",
+}
+
+var fieldIDToName_RetrievePlanResp = map[int32]string{
+	1: "Plan",
+}
+
+var fieldIDToName_CreatePlanReq = map[int32]string{
+	1: "Plan",
+}
+
+var fieldIDToName_CreatePlanResp = map[int32]string{
+	1: "PlanId",
+}
+
+var fieldIDToName_UpdatePlanReq = map[int32]string{
+	1: "Plan",
+}
+
+var fieldIDToName_UpdatePlanResp = map[int32]string{}
+
+var fieldIDToName_DeletePlanReq = map[int32]string{
+	1: "PlanId",
+}
+
+var fieldIDToName_DeletePlanResp = map[int32]string{}
 
 var _ = basic.File_basic_pagination_proto

@@ -33,6 +33,12 @@ type Client interface {
 	ListPost(ctx context.Context, Req *content.ListPostReq, callOptions ...callopt.Option) (r *content.ListPostResp, err error)
 	CountPost(ctx context.Context, Req *content.CountPostReq, callOptions ...callopt.Option) (r *content.CountPostResp, err error)
 	SetOfficial(ctx context.Context, Req *content.SetOfficialReq, callOptions ...callopt.Option) (r *content.SetOfficialResp, err error)
+	ListPlan(ctx context.Context, Req *content.ListPlanReq, callOptions ...callopt.Option) (r *content.ListPlanResp, err error)
+	CountPlan(ctx context.Context, Req *content.CountPlanReq, callOptions ...callopt.Option) (r *content.CountPlanResp, err error)
+	RetrievePlan(ctx context.Context, Req *content.RetrievePlanReq, callOptions ...callopt.Option) (r *content.RetrievePlanResp, err error)
+	CreatePlan(ctx context.Context, Req *content.CreatePlanReq, callOptions ...callopt.Option) (r *content.CreatePlanResp, err error)
+	UpdatePlan(ctx context.Context, Req *content.UpdatePlanReq, callOptions ...callopt.Option) (r *content.UpdatePlanResp, err error)
+	DeletePlan(ctx context.Context, Req *content.DeletePlanReq, callOptions ...callopt.Option) (r *content.DeletePlanResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -172,4 +178,34 @@ func (p *kContentServiceClient) CountPost(ctx context.Context, Req *content.Coun
 func (p *kContentServiceClient) SetOfficial(ctx context.Context, Req *content.SetOfficialReq, callOptions ...callopt.Option) (r *content.SetOfficialResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.SetOfficial(ctx, Req)
+}
+
+func (p *kContentServiceClient) ListPlan(ctx context.Context, Req *content.ListPlanReq, callOptions ...callopt.Option) (r *content.ListPlanResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.ListPlan(ctx, Req)
+}
+
+func (p *kContentServiceClient) CountPlan(ctx context.Context, Req *content.CountPlanReq, callOptions ...callopt.Option) (r *content.CountPlanResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.CountPlan(ctx, Req)
+}
+
+func (p *kContentServiceClient) RetrievePlan(ctx context.Context, Req *content.RetrievePlanReq, callOptions ...callopt.Option) (r *content.RetrievePlanResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.RetrievePlan(ctx, Req)
+}
+
+func (p *kContentServiceClient) CreatePlan(ctx context.Context, Req *content.CreatePlanReq, callOptions ...callopt.Option) (r *content.CreatePlanResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.CreatePlan(ctx, Req)
+}
+
+func (p *kContentServiceClient) UpdatePlan(ctx context.Context, Req *content.UpdatePlanReq, callOptions ...callopt.Option) (r *content.UpdatePlanResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.UpdatePlan(ctx, Req)
+}
+
+func (p *kContentServiceClient) DeletePlan(ctx context.Context, Req *content.DeletePlanReq, callOptions ...callopt.Option) (r *content.DeletePlanResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.DeletePlan(ctx, Req)
 }

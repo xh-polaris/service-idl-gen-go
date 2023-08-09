@@ -44,6 +44,12 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		"ListPost":       kitex.NewMethodInfo(listPostHandler, newListPostArgs, newListPostResult, false),
 		"CountPost":      kitex.NewMethodInfo(countPostHandler, newCountPostArgs, newCountPostResult, false),
 		"SetOfficial":    kitex.NewMethodInfo(setOfficialHandler, newSetOfficialArgs, newSetOfficialResult, false),
+		"ListPlan":       kitex.NewMethodInfo(listPlanHandler, newListPlanArgs, newListPlanResult, false),
+		"CountPlan":      kitex.NewMethodInfo(countPlanHandler, newCountPlanArgs, newCountPlanResult, false),
+		"RetrievePlan":   kitex.NewMethodInfo(retrievePlanHandler, newRetrievePlanArgs, newRetrievePlanResult, false),
+		"CreatePlan":     kitex.NewMethodInfo(createPlanHandler, newCreatePlanArgs, newCreatePlanResult, false),
+		"UpdatePlan":     kitex.NewMethodInfo(updatePlanHandler, newUpdatePlanArgs, newUpdatePlanResult, false),
+		"DeletePlan":     kitex.NewMethodInfo(deletePlanHandler, newDeletePlanArgs, newDeletePlanResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName": "meowchat.content",
@@ -3425,6 +3431,924 @@ func (p *SetOfficialResult) GetResult() interface{} {
 	return p.Success
 }
 
+func listPlanHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(content.ListPlanReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(content.ContentService).ListPlan(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *ListPlanArgs:
+		success, err := handler.(content.ContentService).ListPlan(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*ListPlanResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newListPlanArgs() interface{} {
+	return &ListPlanArgs{}
+}
+
+func newListPlanResult() interface{} {
+	return &ListPlanResult{}
+}
+
+type ListPlanArgs struct {
+	Req *content.ListPlanReq
+}
+
+func (p *ListPlanArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(content.ListPlanReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *ListPlanArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *ListPlanArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *ListPlanArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in ListPlanArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *ListPlanArgs) Unmarshal(in []byte) error {
+	msg := new(content.ListPlanReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var ListPlanArgs_Req_DEFAULT *content.ListPlanReq
+
+func (p *ListPlanArgs) GetReq() *content.ListPlanReq {
+	if !p.IsSetReq() {
+		return ListPlanArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *ListPlanArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *ListPlanArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type ListPlanResult struct {
+	Success *content.ListPlanResp
+}
+
+var ListPlanResult_Success_DEFAULT *content.ListPlanResp
+
+func (p *ListPlanResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(content.ListPlanResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *ListPlanResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *ListPlanResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *ListPlanResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in ListPlanResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *ListPlanResult) Unmarshal(in []byte) error {
+	msg := new(content.ListPlanResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *ListPlanResult) GetSuccess() *content.ListPlanResp {
+	if !p.IsSetSuccess() {
+		return ListPlanResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *ListPlanResult) SetSuccess(x interface{}) {
+	p.Success = x.(*content.ListPlanResp)
+}
+
+func (p *ListPlanResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *ListPlanResult) GetResult() interface{} {
+	return p.Success
+}
+
+func countPlanHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(content.CountPlanReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(content.ContentService).CountPlan(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *CountPlanArgs:
+		success, err := handler.(content.ContentService).CountPlan(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*CountPlanResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newCountPlanArgs() interface{} {
+	return &CountPlanArgs{}
+}
+
+func newCountPlanResult() interface{} {
+	return &CountPlanResult{}
+}
+
+type CountPlanArgs struct {
+	Req *content.CountPlanReq
+}
+
+func (p *CountPlanArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(content.CountPlanReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *CountPlanArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *CountPlanArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *CountPlanArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in CountPlanArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *CountPlanArgs) Unmarshal(in []byte) error {
+	msg := new(content.CountPlanReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var CountPlanArgs_Req_DEFAULT *content.CountPlanReq
+
+func (p *CountPlanArgs) GetReq() *content.CountPlanReq {
+	if !p.IsSetReq() {
+		return CountPlanArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *CountPlanArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *CountPlanArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type CountPlanResult struct {
+	Success *content.CountPlanResp
+}
+
+var CountPlanResult_Success_DEFAULT *content.CountPlanResp
+
+func (p *CountPlanResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(content.CountPlanResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *CountPlanResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *CountPlanResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *CountPlanResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in CountPlanResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *CountPlanResult) Unmarshal(in []byte) error {
+	msg := new(content.CountPlanResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *CountPlanResult) GetSuccess() *content.CountPlanResp {
+	if !p.IsSetSuccess() {
+		return CountPlanResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *CountPlanResult) SetSuccess(x interface{}) {
+	p.Success = x.(*content.CountPlanResp)
+}
+
+func (p *CountPlanResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *CountPlanResult) GetResult() interface{} {
+	return p.Success
+}
+
+func retrievePlanHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(content.RetrievePlanReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(content.ContentService).RetrievePlan(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *RetrievePlanArgs:
+		success, err := handler.(content.ContentService).RetrievePlan(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*RetrievePlanResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newRetrievePlanArgs() interface{} {
+	return &RetrievePlanArgs{}
+}
+
+func newRetrievePlanResult() interface{} {
+	return &RetrievePlanResult{}
+}
+
+type RetrievePlanArgs struct {
+	Req *content.RetrievePlanReq
+}
+
+func (p *RetrievePlanArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(content.RetrievePlanReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *RetrievePlanArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *RetrievePlanArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *RetrievePlanArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in RetrievePlanArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *RetrievePlanArgs) Unmarshal(in []byte) error {
+	msg := new(content.RetrievePlanReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var RetrievePlanArgs_Req_DEFAULT *content.RetrievePlanReq
+
+func (p *RetrievePlanArgs) GetReq() *content.RetrievePlanReq {
+	if !p.IsSetReq() {
+		return RetrievePlanArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *RetrievePlanArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *RetrievePlanArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type RetrievePlanResult struct {
+	Success *content.RetrievePlanResp
+}
+
+var RetrievePlanResult_Success_DEFAULT *content.RetrievePlanResp
+
+func (p *RetrievePlanResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(content.RetrievePlanResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *RetrievePlanResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *RetrievePlanResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *RetrievePlanResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in RetrievePlanResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *RetrievePlanResult) Unmarshal(in []byte) error {
+	msg := new(content.RetrievePlanResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *RetrievePlanResult) GetSuccess() *content.RetrievePlanResp {
+	if !p.IsSetSuccess() {
+		return RetrievePlanResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *RetrievePlanResult) SetSuccess(x interface{}) {
+	p.Success = x.(*content.RetrievePlanResp)
+}
+
+func (p *RetrievePlanResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *RetrievePlanResult) GetResult() interface{} {
+	return p.Success
+}
+
+func createPlanHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(content.CreatePlanReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(content.ContentService).CreatePlan(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *CreatePlanArgs:
+		success, err := handler.(content.ContentService).CreatePlan(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*CreatePlanResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newCreatePlanArgs() interface{} {
+	return &CreatePlanArgs{}
+}
+
+func newCreatePlanResult() interface{} {
+	return &CreatePlanResult{}
+}
+
+type CreatePlanArgs struct {
+	Req *content.CreatePlanReq
+}
+
+func (p *CreatePlanArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(content.CreatePlanReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *CreatePlanArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *CreatePlanArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *CreatePlanArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in CreatePlanArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *CreatePlanArgs) Unmarshal(in []byte) error {
+	msg := new(content.CreatePlanReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var CreatePlanArgs_Req_DEFAULT *content.CreatePlanReq
+
+func (p *CreatePlanArgs) GetReq() *content.CreatePlanReq {
+	if !p.IsSetReq() {
+		return CreatePlanArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *CreatePlanArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *CreatePlanArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type CreatePlanResult struct {
+	Success *content.CreatePlanResp
+}
+
+var CreatePlanResult_Success_DEFAULT *content.CreatePlanResp
+
+func (p *CreatePlanResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(content.CreatePlanResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *CreatePlanResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *CreatePlanResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *CreatePlanResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in CreatePlanResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *CreatePlanResult) Unmarshal(in []byte) error {
+	msg := new(content.CreatePlanResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *CreatePlanResult) GetSuccess() *content.CreatePlanResp {
+	if !p.IsSetSuccess() {
+		return CreatePlanResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *CreatePlanResult) SetSuccess(x interface{}) {
+	p.Success = x.(*content.CreatePlanResp)
+}
+
+func (p *CreatePlanResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *CreatePlanResult) GetResult() interface{} {
+	return p.Success
+}
+
+func updatePlanHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(content.UpdatePlanReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(content.ContentService).UpdatePlan(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *UpdatePlanArgs:
+		success, err := handler.(content.ContentService).UpdatePlan(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*UpdatePlanResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newUpdatePlanArgs() interface{} {
+	return &UpdatePlanArgs{}
+}
+
+func newUpdatePlanResult() interface{} {
+	return &UpdatePlanResult{}
+}
+
+type UpdatePlanArgs struct {
+	Req *content.UpdatePlanReq
+}
+
+func (p *UpdatePlanArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(content.UpdatePlanReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *UpdatePlanArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *UpdatePlanArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *UpdatePlanArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in UpdatePlanArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *UpdatePlanArgs) Unmarshal(in []byte) error {
+	msg := new(content.UpdatePlanReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var UpdatePlanArgs_Req_DEFAULT *content.UpdatePlanReq
+
+func (p *UpdatePlanArgs) GetReq() *content.UpdatePlanReq {
+	if !p.IsSetReq() {
+		return UpdatePlanArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *UpdatePlanArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *UpdatePlanArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type UpdatePlanResult struct {
+	Success *content.UpdatePlanResp
+}
+
+var UpdatePlanResult_Success_DEFAULT *content.UpdatePlanResp
+
+func (p *UpdatePlanResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(content.UpdatePlanResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *UpdatePlanResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *UpdatePlanResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *UpdatePlanResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in UpdatePlanResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *UpdatePlanResult) Unmarshal(in []byte) error {
+	msg := new(content.UpdatePlanResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *UpdatePlanResult) GetSuccess() *content.UpdatePlanResp {
+	if !p.IsSetSuccess() {
+		return UpdatePlanResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *UpdatePlanResult) SetSuccess(x interface{}) {
+	p.Success = x.(*content.UpdatePlanResp)
+}
+
+func (p *UpdatePlanResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *UpdatePlanResult) GetResult() interface{} {
+	return p.Success
+}
+
+func deletePlanHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(content.DeletePlanReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(content.ContentService).DeletePlan(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *DeletePlanArgs:
+		success, err := handler.(content.ContentService).DeletePlan(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*DeletePlanResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newDeletePlanArgs() interface{} {
+	return &DeletePlanArgs{}
+}
+
+func newDeletePlanResult() interface{} {
+	return &DeletePlanResult{}
+}
+
+type DeletePlanArgs struct {
+	Req *content.DeletePlanReq
+}
+
+func (p *DeletePlanArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(content.DeletePlanReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *DeletePlanArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *DeletePlanArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *DeletePlanArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in DeletePlanArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *DeletePlanArgs) Unmarshal(in []byte) error {
+	msg := new(content.DeletePlanReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var DeletePlanArgs_Req_DEFAULT *content.DeletePlanReq
+
+func (p *DeletePlanArgs) GetReq() *content.DeletePlanReq {
+	if !p.IsSetReq() {
+		return DeletePlanArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *DeletePlanArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *DeletePlanArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type DeletePlanResult struct {
+	Success *content.DeletePlanResp
+}
+
+var DeletePlanResult_Success_DEFAULT *content.DeletePlanResp
+
+func (p *DeletePlanResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(content.DeletePlanResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *DeletePlanResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *DeletePlanResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *DeletePlanResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in DeletePlanResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *DeletePlanResult) Unmarshal(in []byte) error {
+	msg := new(content.DeletePlanResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *DeletePlanResult) GetSuccess() *content.DeletePlanResp {
+	if !p.IsSetSuccess() {
+		return DeletePlanResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *DeletePlanResult) SetSuccess(x interface{}) {
+	p.Success = x.(*content.DeletePlanResp)
+}
+
+func (p *DeletePlanResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *DeletePlanResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -3650,6 +4574,66 @@ func (p *kClient) SetOfficial(ctx context.Context, Req *content.SetOfficialReq) 
 	_args.Req = Req
 	var _result SetOfficialResult
 	if err = p.c.Call(ctx, "SetOfficial", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) ListPlan(ctx context.Context, Req *content.ListPlanReq) (r *content.ListPlanResp, err error) {
+	var _args ListPlanArgs
+	_args.Req = Req
+	var _result ListPlanResult
+	if err = p.c.Call(ctx, "ListPlan", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) CountPlan(ctx context.Context, Req *content.CountPlanReq) (r *content.CountPlanResp, err error) {
+	var _args CountPlanArgs
+	_args.Req = Req
+	var _result CountPlanResult
+	if err = p.c.Call(ctx, "CountPlan", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) RetrievePlan(ctx context.Context, Req *content.RetrievePlanReq) (r *content.RetrievePlanResp, err error) {
+	var _args RetrievePlanArgs
+	_args.Req = Req
+	var _result RetrievePlanResult
+	if err = p.c.Call(ctx, "RetrievePlan", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) CreatePlan(ctx context.Context, Req *content.CreatePlanReq) (r *content.CreatePlanResp, err error) {
+	var _args CreatePlanArgs
+	_args.Req = Req
+	var _result CreatePlanResult
+	if err = p.c.Call(ctx, "CreatePlan", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) UpdatePlan(ctx context.Context, Req *content.UpdatePlanReq) (r *content.UpdatePlanResp, err error) {
+	var _args UpdatePlanArgs
+	_args.Req = Req
+	var _result UpdatePlanResult
+	if err = p.c.Call(ctx, "UpdatePlan", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) DeletePlan(ctx context.Context, Req *content.DeletePlanReq) (r *content.DeletePlanResp, err error) {
+	var _args DeletePlanArgs
+	_args.Req = Req
+	var _result DeletePlanResult
+	if err = p.c.Call(ctx, "DeletePlan", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
