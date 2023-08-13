@@ -27,6 +27,9 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		"NewPlan":         kitex.NewMethodInfo(newPlanHandler, newNewPlanArgs, newNewPlanResult, false),
 		"DeletePlan":      kitex.NewMethodInfo(deletePlanHandler, newDeletePlanArgs, newDeletePlanResult, false),
 		"SearchPlan":      kitex.NewMethodInfo(searchPlanHandler, newSearchPlanArgs, newSearchPlanResult, false),
+		"DonateFish":      kitex.NewMethodInfo(donateFishHandler, newDonateFishArgs, newDonateFishResult, false),
+		"GetUserFish":     kitex.NewMethodInfo(getUserFishHandler, newGetUserFishArgs, newGetUserFishResult, false),
+		"ListFishByPlan":  kitex.NewMethodInfo(listFishByPlanHandler, newListFishByPlanArgs, newListFishByPlanResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName": "meowchat.core_api",
@@ -807,6 +810,465 @@ func (p *SearchPlanResult) GetResult() interface{} {
 	return p.Success
 }
 
+func donateFishHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.DonateFishReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.Plan).DonateFish(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *DonateFishArgs:
+		success, err := handler.(core_api.Plan).DonateFish(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*DonateFishResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newDonateFishArgs() interface{} {
+	return &DonateFishArgs{}
+}
+
+func newDonateFishResult() interface{} {
+	return &DonateFishResult{}
+}
+
+type DonateFishArgs struct {
+	Req *core_api.DonateFishReq
+}
+
+func (p *DonateFishArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.DonateFishReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *DonateFishArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *DonateFishArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *DonateFishArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in DonateFishArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *DonateFishArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.DonateFishReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var DonateFishArgs_Req_DEFAULT *core_api.DonateFishReq
+
+func (p *DonateFishArgs) GetReq() *core_api.DonateFishReq {
+	if !p.IsSetReq() {
+		return DonateFishArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *DonateFishArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *DonateFishArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type DonateFishResult struct {
+	Success *core_api.DonateFishResp
+}
+
+var DonateFishResult_Success_DEFAULT *core_api.DonateFishResp
+
+func (p *DonateFishResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.DonateFishResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *DonateFishResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *DonateFishResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *DonateFishResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in DonateFishResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *DonateFishResult) Unmarshal(in []byte) error {
+	msg := new(core_api.DonateFishResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *DonateFishResult) GetSuccess() *core_api.DonateFishResp {
+	if !p.IsSetSuccess() {
+		return DonateFishResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *DonateFishResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.DonateFishResp)
+}
+
+func (p *DonateFishResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *DonateFishResult) GetResult() interface{} {
+	return p.Success
+}
+
+func getUserFishHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.GetUserFishReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.Plan).GetUserFish(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *GetUserFishArgs:
+		success, err := handler.(core_api.Plan).GetUserFish(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetUserFishResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newGetUserFishArgs() interface{} {
+	return &GetUserFishArgs{}
+}
+
+func newGetUserFishResult() interface{} {
+	return &GetUserFishResult{}
+}
+
+type GetUserFishArgs struct {
+	Req *core_api.GetUserFishReq
+}
+
+func (p *GetUserFishArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.GetUserFishReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetUserFishArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetUserFishArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetUserFishArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in GetUserFishArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetUserFishArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.GetUserFishReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetUserFishArgs_Req_DEFAULT *core_api.GetUserFishReq
+
+func (p *GetUserFishArgs) GetReq() *core_api.GetUserFishReq {
+	if !p.IsSetReq() {
+		return GetUserFishArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetUserFishArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetUserFishArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetUserFishResult struct {
+	Success *core_api.GetUserFishResp
+}
+
+var GetUserFishResult_Success_DEFAULT *core_api.GetUserFishResp
+
+func (p *GetUserFishResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.GetUserFishResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetUserFishResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetUserFishResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetUserFishResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in GetUserFishResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetUserFishResult) Unmarshal(in []byte) error {
+	msg := new(core_api.GetUserFishResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetUserFishResult) GetSuccess() *core_api.GetUserFishResp {
+	if !p.IsSetSuccess() {
+		return GetUserFishResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetUserFishResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.GetUserFishResp)
+}
+
+func (p *GetUserFishResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetUserFishResult) GetResult() interface{} {
+	return p.Success
+}
+
+func listFishByPlanHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.ListFishByPlanReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.Plan).ListFishByPlan(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *ListFishByPlanArgs:
+		success, err := handler.(core_api.Plan).ListFishByPlan(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*ListFishByPlanResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newListFishByPlanArgs() interface{} {
+	return &ListFishByPlanArgs{}
+}
+
+func newListFishByPlanResult() interface{} {
+	return &ListFishByPlanResult{}
+}
+
+type ListFishByPlanArgs struct {
+	Req *core_api.ListFishByPlanReq
+}
+
+func (p *ListFishByPlanArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.ListFishByPlanReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *ListFishByPlanArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *ListFishByPlanArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *ListFishByPlanArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in ListFishByPlanArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *ListFishByPlanArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.ListFishByPlanReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var ListFishByPlanArgs_Req_DEFAULT *core_api.ListFishByPlanReq
+
+func (p *ListFishByPlanArgs) GetReq() *core_api.ListFishByPlanReq {
+	if !p.IsSetReq() {
+		return ListFishByPlanArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *ListFishByPlanArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *ListFishByPlanArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type ListFishByPlanResult struct {
+	Success *core_api.ListFishByPlanResp
+}
+
+var ListFishByPlanResult_Success_DEFAULT *core_api.ListFishByPlanResp
+
+func (p *ListFishByPlanResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.ListFishByPlanResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *ListFishByPlanResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *ListFishByPlanResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *ListFishByPlanResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in ListFishByPlanResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *ListFishByPlanResult) Unmarshal(in []byte) error {
+	msg := new(core_api.ListFishByPlanResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *ListFishByPlanResult) GetSuccess() *core_api.ListFishByPlanResp {
+	if !p.IsSetSuccess() {
+		return ListFishByPlanResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *ListFishByPlanResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.ListFishByPlanResp)
+}
+
+func (p *ListFishByPlanResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *ListFishByPlanResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -862,6 +1324,36 @@ func (p *kClient) SearchPlan(ctx context.Context, Req *core_api.SearchPlanReq) (
 	_args.Req = Req
 	var _result SearchPlanResult
 	if err = p.c.Call(ctx, "SearchPlan", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) DonateFish(ctx context.Context, Req *core_api.DonateFishReq) (r *core_api.DonateFishResp, err error) {
+	var _args DonateFishArgs
+	_args.Req = Req
+	var _result DonateFishResult
+	if err = p.c.Call(ctx, "DonateFish", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetUserFish(ctx context.Context, Req *core_api.GetUserFishReq) (r *core_api.GetUserFishResp, err error) {
+	var _args GetUserFishArgs
+	_args.Req = Req
+	var _result GetUserFishResult
+	if err = p.c.Call(ctx, "GetUserFish", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) ListFishByPlan(ctx context.Context, Req *core_api.ListFishByPlanReq) (r *core_api.ListFishByPlanResp, err error) {
+	var _args ListFishByPlanArgs
+	_args.Req = Req
+	var _result ListFishByPlanResult
+	if err = p.c.Call(ctx, "ListFishByPlan", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

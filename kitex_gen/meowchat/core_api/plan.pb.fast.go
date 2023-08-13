@@ -580,6 +580,187 @@ func (x *SearchPlanResp) fastReadField2(buf []byte, _type int8) (offset int, err
 	return offset, err
 }
 
+func (x *DonateFishReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DonateFishReq[number], err)
+}
+
+func (x *DonateFishReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.PlanId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *DonateFishReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Fish, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *DonateFishResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+}
+
+func (x *GetUserFishReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetUserFishReq[number], err)
+}
+
+func (x *GetUserFishReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.UserId = &tmp
+	return offset, err
+}
+
+func (x *GetUserFishResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetUserFishResp[number], err)
+}
+
+func (x *GetUserFishResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Fish, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *ListFishByPlanReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListFishByPlanReq[number], err)
+}
+
+func (x *ListFishByPlanReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.PlanId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *ListFishByPlanResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListFishByPlanResp[number], err)
+}
+
+func (x *ListFishByPlanResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v user.UserPreview
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Users = append(x.Users, &v)
+	return offset, nil
+}
+
+func (x *ListFishByPlanResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	if x.FishMap == nil {
+		x.FishMap = make(map[string]int64)
+	}
+	var key string
+	var value int64
+	offset, err = fastpb.ReadMapEntry(buf, _type,
+		func(buf []byte, _type int8) (offset int, err error) {
+			key, offset, err = fastpb.ReadString(buf, _type)
+			return offset, err
+		},
+		func(buf []byte, _type int8) (offset int, err error) {
+			value, offset, err = fastpb.ReadInt64(buf, _type)
+			return offset, err
+		})
+	if err != nil {
+		return offset, err
+	}
+	x.FishMap[key] = value
+	return offset, nil
+}
+
 func (x *Plan) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -970,6 +1151,121 @@ func (x *SearchPlanResp) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetTotal())
+	return offset
+}
+
+func (x *DonateFishReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *DonateFishReq) fastWriteField1(buf []byte) (offset int) {
+	if x.PlanId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetPlanId())
+	return offset
+}
+
+func (x *DonateFishReq) fastWriteField2(buf []byte) (offset int) {
+	if x.Fish == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetFish())
+	return offset
+}
+
+func (x *DonateFishResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	return offset
+}
+
+func (x *GetUserFishReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *GetUserFishReq) fastWriteField1(buf []byte) (offset int) {
+	if x.UserId == nil {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
+	return offset
+}
+
+func (x *GetUserFishResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *GetUserFishResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Fish == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetFish())
+	return offset
+}
+
+func (x *ListFishByPlanReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *ListFishByPlanReq) fastWriteField1(buf []byte) (offset int) {
+	if x.PlanId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetPlanId())
+	return offset
+}
+
+func (x *ListFishByPlanResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *ListFishByPlanResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Users == nil {
+		return offset
+	}
+	for i := range x.GetUsers() {
+		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetUsers()[i])
+	}
+	return offset
+}
+
+func (x *ListFishByPlanResp) fastWriteField2(buf []byte) (offset int) {
+	if x.FishMap == nil {
+		return offset
+	}
+	for k, v := range x.GetFishMap() {
+		offset += fastpb.WriteMapEntry(buf[offset:], 2,
+			func(buf []byte, numTagOrKey, numIdxOrVal int32) int {
+				offset := 0
+				offset += fastpb.WriteString(buf[offset:], numTagOrKey, k)
+				offset += fastpb.WriteInt64(buf[offset:], numIdxOrVal, v)
+				return offset
+			})
+	}
 	return offset
 }
 
@@ -1366,6 +1662,121 @@ func (x *SearchPlanResp) sizeField2() (n int) {
 	return n
 }
 
+func (x *DonateFishReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *DonateFishReq) sizeField1() (n int) {
+	if x.PlanId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetPlanId())
+	return n
+}
+
+func (x *DonateFishReq) sizeField2() (n int) {
+	if x.Fish == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(2, x.GetFish())
+	return n
+}
+
+func (x *DonateFishResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	return n
+}
+
+func (x *GetUserFishReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *GetUserFishReq) sizeField1() (n int) {
+	if x.UserId == nil {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetUserId())
+	return n
+}
+
+func (x *GetUserFishResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *GetUserFishResp) sizeField1() (n int) {
+	if x.Fish == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(1, x.GetFish())
+	return n
+}
+
+func (x *ListFishByPlanReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *ListFishByPlanReq) sizeField1() (n int) {
+	if x.PlanId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetPlanId())
+	return n
+}
+
+func (x *ListFishByPlanResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *ListFishByPlanResp) sizeField1() (n int) {
+	if x.Users == nil {
+		return n
+	}
+	for i := range x.GetUsers() {
+		n += fastpb.SizeMessage(1, x.GetUsers()[i])
+	}
+	return n
+}
+
+func (x *ListFishByPlanResp) sizeField2() (n int) {
+	if x.FishMap == nil {
+		return n
+	}
+	for k, v := range x.GetFishMap() {
+		n += fastpb.SizeMapEntry(2,
+			func(numTagOrKey, numIdxOrVal int32) int {
+				n := 0
+				n += fastpb.SizeString(numTagOrKey, k)
+				n += fastpb.SizeInt64(numIdxOrVal, v)
+				return n
+			})
+	}
+	return n
+}
+
 var fieldIDToName_Plan = map[int32]string{
 	1:  "Id",
 	2:  "Name",
@@ -1430,6 +1841,30 @@ var fieldIDToName_SearchPlanReq = map[int32]string{
 var fieldIDToName_SearchPlanResp = map[int32]string{
 	1: "Plans",
 	2: "Total",
+}
+
+var fieldIDToName_DonateFishReq = map[int32]string{
+	1: "PlanId",
+	2: "Fish",
+}
+
+var fieldIDToName_DonateFishResp = map[int32]string{}
+
+var fieldIDToName_GetUserFishReq = map[int32]string{
+	1: "UserId",
+}
+
+var fieldIDToName_GetUserFishResp = map[int32]string{
+	1: "Fish",
+}
+
+var fieldIDToName_ListFishByPlanReq = map[int32]string{
+	1: "PlanId",
+}
+
+var fieldIDToName_ListFishByPlanResp = map[int32]string{
+	1: "Users",
+	2: "FishMap",
 }
 
 var _ = http.File_http_http_proto

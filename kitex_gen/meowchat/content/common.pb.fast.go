@@ -514,6 +514,16 @@ func (x *Plan) FastRead(buf []byte, _type int8, number int32) (offset int, err e
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 11:
+		offset, err = x.fastReadField11(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 12:
+		offset, err = x.fastReadField12(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -589,6 +599,16 @@ func (x *Plan) fastReadField9(buf []byte, _type int8) (offset int, err error) {
 
 func (x *Plan) fastReadField10(buf []byte, _type int8) (offset int, err error) {
 	x.CreateAt, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *Plan) fastReadField11(buf []byte, _type int8) (offset int, err error) {
+	x.MaxFish, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *Plan) fastReadField12(buf []byte, _type int8) (offset int, err error) {
+	x.NowFish, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -1189,6 +1209,8 @@ func (x *Plan) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField8(buf[offset:])
 	offset += x.fastWriteField9(buf[offset:])
 	offset += x.fastWriteField10(buf[offset:])
+	offset += x.fastWriteField11(buf[offset:])
+	offset += x.fastWriteField12(buf[offset:])
 	return offset
 }
 
@@ -1273,6 +1295,22 @@ func (x *Plan) fastWriteField10(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 10, x.GetCreateAt())
+	return offset
+}
+
+func (x *Plan) fastWriteField11(buf []byte) (offset int) {
+	if x.MaxFish == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 11, x.GetMaxFish())
+	return offset
+}
+
+func (x *Plan) fastWriteField12(buf []byte) (offset int) {
+	if x.NowFish == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 12, x.GetNowFish())
 	return offset
 }
 
@@ -1800,6 +1838,8 @@ func (x *Plan) Size() (n int) {
 	n += x.sizeField8()
 	n += x.sizeField9()
 	n += x.sizeField10()
+	n += x.sizeField11()
+	n += x.sizeField12()
 	return n
 }
 
@@ -1884,6 +1924,22 @@ func (x *Plan) sizeField10() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(10, x.GetCreateAt())
+	return n
+}
+
+func (x *Plan) sizeField11() (n int) {
+	if x.MaxFish == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(11, x.GetMaxFish())
+	return n
+}
+
+func (x *Plan) sizeField12() (n int) {
+	if x.NowFish == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(12, x.GetNowFish())
 	return n
 }
 
@@ -2094,6 +2150,8 @@ var fieldIDToName_Plan = map[int32]string{
 	8:  "InitiatorIds",
 	9:  "ImageUrls",
 	10: "CreateAt",
+	11: "MaxFish",
+	12: "NowFish",
 }
 
 var fieldIDToName_SearchField = map[int32]string{

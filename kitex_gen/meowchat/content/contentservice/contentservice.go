@@ -22,34 +22,38 @@ func NewServiceInfo() *kitex.ServiceInfo {
 	serviceName := "ContentService"
 	handlerType := (*content.ContentService)(nil)
 	methods := map[string]kitex.MethodInfo{
-		"SearchCat":      kitex.NewMethodInfo(searchCatHandler, newSearchCatArgs, newSearchCatResult, false),
-		"ListCat":        kitex.NewMethodInfo(listCatHandler, newListCatArgs, newListCatResult, false),
-		"RetrieveCat":    kitex.NewMethodInfo(retrieveCatHandler, newRetrieveCatArgs, newRetrieveCatResult, false),
-		"CreateCat":      kitex.NewMethodInfo(createCatHandler, newCreateCatArgs, newCreateCatResult, false),
-		"UpdateCat":      kitex.NewMethodInfo(updateCatHandler, newUpdateCatArgs, newUpdateCatResult, false),
-		"DeleteCat":      kitex.NewMethodInfo(deleteCatHandler, newDeleteCatArgs, newDeleteCatResult, false),
-		"CreateImage":    kitex.NewMethodInfo(createImageHandler, newCreateImageArgs, newCreateImageResult, false),
-		"DeleteImage":    kitex.NewMethodInfo(deleteImageHandler, newDeleteImageArgs, newDeleteImageResult, false),
-		"ListImage":      kitex.NewMethodInfo(listImageHandler, newListImageArgs, newListImageResult, false),
-		"ListMoment":     kitex.NewMethodInfo(listMomentHandler, newListMomentArgs, newListMomentResult, false),
-		"CountMoment":    kitex.NewMethodInfo(countMomentHandler, newCountMomentArgs, newCountMomentResult, false),
-		"RetrieveMoment": kitex.NewMethodInfo(retrieveMomentHandler, newRetrieveMomentArgs, newRetrieveMomentResult, false),
-		"CreateMoment":   kitex.NewMethodInfo(createMomentHandler, newCreateMomentArgs, newCreateMomentResult, false),
-		"UpdateMoment":   kitex.NewMethodInfo(updateMomentHandler, newUpdateMomentArgs, newUpdateMomentResult, false),
-		"DeleteMoment":   kitex.NewMethodInfo(deleteMomentHandler, newDeleteMomentArgs, newDeleteMomentResult, false),
-		"CreatePost":     kitex.NewMethodInfo(createPostHandler, newCreatePostArgs, newCreatePostResult, false),
-		"RetrievePost":   kitex.NewMethodInfo(retrievePostHandler, newRetrievePostArgs, newRetrievePostResult, false),
-		"UpdatePost":     kitex.NewMethodInfo(updatePostHandler, newUpdatePostArgs, newUpdatePostResult, false),
-		"DeletePost":     kitex.NewMethodInfo(deletePostHandler, newDeletePostArgs, newDeletePostResult, false),
-		"ListPost":       kitex.NewMethodInfo(listPostHandler, newListPostArgs, newListPostResult, false),
-		"CountPost":      kitex.NewMethodInfo(countPostHandler, newCountPostArgs, newCountPostResult, false),
-		"SetOfficial":    kitex.NewMethodInfo(setOfficialHandler, newSetOfficialArgs, newSetOfficialResult, false),
-		"ListPlan":       kitex.NewMethodInfo(listPlanHandler, newListPlanArgs, newListPlanResult, false),
-		"CountPlan":      kitex.NewMethodInfo(countPlanHandler, newCountPlanArgs, newCountPlanResult, false),
-		"RetrievePlan":   kitex.NewMethodInfo(retrievePlanHandler, newRetrievePlanArgs, newRetrievePlanResult, false),
-		"CreatePlan":     kitex.NewMethodInfo(createPlanHandler, newCreatePlanArgs, newCreatePlanResult, false),
-		"UpdatePlan":     kitex.NewMethodInfo(updatePlanHandler, newUpdatePlanArgs, newUpdatePlanResult, false),
-		"DeletePlan":     kitex.NewMethodInfo(deletePlanHandler, newDeletePlanArgs, newDeletePlanResult, false),
+		"SearchCat":        kitex.NewMethodInfo(searchCatHandler, newSearchCatArgs, newSearchCatResult, false),
+		"ListCat":          kitex.NewMethodInfo(listCatHandler, newListCatArgs, newListCatResult, false),
+		"RetrieveCat":      kitex.NewMethodInfo(retrieveCatHandler, newRetrieveCatArgs, newRetrieveCatResult, false),
+		"CreateCat":        kitex.NewMethodInfo(createCatHandler, newCreateCatArgs, newCreateCatResult, false),
+		"UpdateCat":        kitex.NewMethodInfo(updateCatHandler, newUpdateCatArgs, newUpdateCatResult, false),
+		"DeleteCat":        kitex.NewMethodInfo(deleteCatHandler, newDeleteCatArgs, newDeleteCatResult, false),
+		"CreateImage":      kitex.NewMethodInfo(createImageHandler, newCreateImageArgs, newCreateImageResult, false),
+		"DeleteImage":      kitex.NewMethodInfo(deleteImageHandler, newDeleteImageArgs, newDeleteImageResult, false),
+		"ListImage":        kitex.NewMethodInfo(listImageHandler, newListImageArgs, newListImageResult, false),
+		"ListMoment":       kitex.NewMethodInfo(listMomentHandler, newListMomentArgs, newListMomentResult, false),
+		"CountMoment":      kitex.NewMethodInfo(countMomentHandler, newCountMomentArgs, newCountMomentResult, false),
+		"RetrieveMoment":   kitex.NewMethodInfo(retrieveMomentHandler, newRetrieveMomentArgs, newRetrieveMomentResult, false),
+		"CreateMoment":     kitex.NewMethodInfo(createMomentHandler, newCreateMomentArgs, newCreateMomentResult, false),
+		"UpdateMoment":     kitex.NewMethodInfo(updateMomentHandler, newUpdateMomentArgs, newUpdateMomentResult, false),
+		"DeleteMoment":     kitex.NewMethodInfo(deleteMomentHandler, newDeleteMomentArgs, newDeleteMomentResult, false),
+		"CreatePost":       kitex.NewMethodInfo(createPostHandler, newCreatePostArgs, newCreatePostResult, false),
+		"RetrievePost":     kitex.NewMethodInfo(retrievePostHandler, newRetrievePostArgs, newRetrievePostResult, false),
+		"UpdatePost":       kitex.NewMethodInfo(updatePostHandler, newUpdatePostArgs, newUpdatePostResult, false),
+		"DeletePost":       kitex.NewMethodInfo(deletePostHandler, newDeletePostArgs, newDeletePostResult, false),
+		"ListPost":         kitex.NewMethodInfo(listPostHandler, newListPostArgs, newListPostResult, false),
+		"CountPost":        kitex.NewMethodInfo(countPostHandler, newCountPostArgs, newCountPostResult, false),
+		"SetOfficial":      kitex.NewMethodInfo(setOfficialHandler, newSetOfficialArgs, newSetOfficialResult, false),
+		"ListPlan":         kitex.NewMethodInfo(listPlanHandler, newListPlanArgs, newListPlanResult, false),
+		"CountPlan":        kitex.NewMethodInfo(countPlanHandler, newCountPlanArgs, newCountPlanResult, false),
+		"RetrievePlan":     kitex.NewMethodInfo(retrievePlanHandler, newRetrievePlanArgs, newRetrievePlanResult, false),
+		"CreatePlan":       kitex.NewMethodInfo(createPlanHandler, newCreatePlanArgs, newCreatePlanResult, false),
+		"UpdatePlan":       kitex.NewMethodInfo(updatePlanHandler, newUpdatePlanArgs, newUpdatePlanResult, false),
+		"DeletePlan":       kitex.NewMethodInfo(deletePlanHandler, newDeletePlanArgs, newDeletePlanResult, false),
+		"DonateFish":       kitex.NewMethodInfo(donateFishHandler, newDonateFishArgs, newDonateFishResult, false),
+		"AddUserFish":      kitex.NewMethodInfo(addUserFishHandler, newAddUserFishArgs, newAddUserFishResult, false),
+		"ListFishByPlan":   kitex.NewMethodInfo(listFishByPlanHandler, newListFishByPlanArgs, newListFishByPlanResult, false),
+		"RetrieveUserFish": kitex.NewMethodInfo(retrieveUserFishHandler, newRetrieveUserFishArgs, newRetrieveUserFishResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName": "meowchat.content",
@@ -4349,6 +4353,618 @@ func (p *DeletePlanResult) GetResult() interface{} {
 	return p.Success
 }
 
+func donateFishHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(content.DonateFishReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(content.ContentService).DonateFish(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *DonateFishArgs:
+		success, err := handler.(content.ContentService).DonateFish(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*DonateFishResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newDonateFishArgs() interface{} {
+	return &DonateFishArgs{}
+}
+
+func newDonateFishResult() interface{} {
+	return &DonateFishResult{}
+}
+
+type DonateFishArgs struct {
+	Req *content.DonateFishReq
+}
+
+func (p *DonateFishArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(content.DonateFishReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *DonateFishArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *DonateFishArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *DonateFishArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in DonateFishArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *DonateFishArgs) Unmarshal(in []byte) error {
+	msg := new(content.DonateFishReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var DonateFishArgs_Req_DEFAULT *content.DonateFishReq
+
+func (p *DonateFishArgs) GetReq() *content.DonateFishReq {
+	if !p.IsSetReq() {
+		return DonateFishArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *DonateFishArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *DonateFishArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type DonateFishResult struct {
+	Success *content.DonateFishResp
+}
+
+var DonateFishResult_Success_DEFAULT *content.DonateFishResp
+
+func (p *DonateFishResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(content.DonateFishResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *DonateFishResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *DonateFishResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *DonateFishResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in DonateFishResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *DonateFishResult) Unmarshal(in []byte) error {
+	msg := new(content.DonateFishResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *DonateFishResult) GetSuccess() *content.DonateFishResp {
+	if !p.IsSetSuccess() {
+		return DonateFishResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *DonateFishResult) SetSuccess(x interface{}) {
+	p.Success = x.(*content.DonateFishResp)
+}
+
+func (p *DonateFishResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *DonateFishResult) GetResult() interface{} {
+	return p.Success
+}
+
+func addUserFishHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(content.AddUserFishReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(content.ContentService).AddUserFish(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *AddUserFishArgs:
+		success, err := handler.(content.ContentService).AddUserFish(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*AddUserFishResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newAddUserFishArgs() interface{} {
+	return &AddUserFishArgs{}
+}
+
+func newAddUserFishResult() interface{} {
+	return &AddUserFishResult{}
+}
+
+type AddUserFishArgs struct {
+	Req *content.AddUserFishReq
+}
+
+func (p *AddUserFishArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(content.AddUserFishReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *AddUserFishArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *AddUserFishArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *AddUserFishArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in AddUserFishArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *AddUserFishArgs) Unmarshal(in []byte) error {
+	msg := new(content.AddUserFishReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var AddUserFishArgs_Req_DEFAULT *content.AddUserFishReq
+
+func (p *AddUserFishArgs) GetReq() *content.AddUserFishReq {
+	if !p.IsSetReq() {
+		return AddUserFishArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *AddUserFishArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *AddUserFishArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type AddUserFishResult struct {
+	Success *content.AddUserFishResp
+}
+
+var AddUserFishResult_Success_DEFAULT *content.AddUserFishResp
+
+func (p *AddUserFishResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(content.AddUserFishResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *AddUserFishResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *AddUserFishResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *AddUserFishResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in AddUserFishResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *AddUserFishResult) Unmarshal(in []byte) error {
+	msg := new(content.AddUserFishResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *AddUserFishResult) GetSuccess() *content.AddUserFishResp {
+	if !p.IsSetSuccess() {
+		return AddUserFishResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *AddUserFishResult) SetSuccess(x interface{}) {
+	p.Success = x.(*content.AddUserFishResp)
+}
+
+func (p *AddUserFishResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *AddUserFishResult) GetResult() interface{} {
+	return p.Success
+}
+
+func listFishByPlanHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(content.ListFishByPlanReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(content.ContentService).ListFishByPlan(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *ListFishByPlanArgs:
+		success, err := handler.(content.ContentService).ListFishByPlan(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*ListFishByPlanResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newListFishByPlanArgs() interface{} {
+	return &ListFishByPlanArgs{}
+}
+
+func newListFishByPlanResult() interface{} {
+	return &ListFishByPlanResult{}
+}
+
+type ListFishByPlanArgs struct {
+	Req *content.ListFishByPlanReq
+}
+
+func (p *ListFishByPlanArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(content.ListFishByPlanReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *ListFishByPlanArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *ListFishByPlanArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *ListFishByPlanArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in ListFishByPlanArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *ListFishByPlanArgs) Unmarshal(in []byte) error {
+	msg := new(content.ListFishByPlanReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var ListFishByPlanArgs_Req_DEFAULT *content.ListFishByPlanReq
+
+func (p *ListFishByPlanArgs) GetReq() *content.ListFishByPlanReq {
+	if !p.IsSetReq() {
+		return ListFishByPlanArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *ListFishByPlanArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *ListFishByPlanArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type ListFishByPlanResult struct {
+	Success *content.ListFishByPlanResp
+}
+
+var ListFishByPlanResult_Success_DEFAULT *content.ListFishByPlanResp
+
+func (p *ListFishByPlanResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(content.ListFishByPlanResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *ListFishByPlanResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *ListFishByPlanResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *ListFishByPlanResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in ListFishByPlanResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *ListFishByPlanResult) Unmarshal(in []byte) error {
+	msg := new(content.ListFishByPlanResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *ListFishByPlanResult) GetSuccess() *content.ListFishByPlanResp {
+	if !p.IsSetSuccess() {
+		return ListFishByPlanResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *ListFishByPlanResult) SetSuccess(x interface{}) {
+	p.Success = x.(*content.ListFishByPlanResp)
+}
+
+func (p *ListFishByPlanResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *ListFishByPlanResult) GetResult() interface{} {
+	return p.Success
+}
+
+func retrieveUserFishHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(content.RetrieveUserFishReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(content.ContentService).RetrieveUserFish(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *RetrieveUserFishArgs:
+		success, err := handler.(content.ContentService).RetrieveUserFish(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*RetrieveUserFishResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newRetrieveUserFishArgs() interface{} {
+	return &RetrieveUserFishArgs{}
+}
+
+func newRetrieveUserFishResult() interface{} {
+	return &RetrieveUserFishResult{}
+}
+
+type RetrieveUserFishArgs struct {
+	Req *content.RetrieveUserFishReq
+}
+
+func (p *RetrieveUserFishArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(content.RetrieveUserFishReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *RetrieveUserFishArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *RetrieveUserFishArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *RetrieveUserFishArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, fmt.Errorf("No req in RetrieveUserFishArgs")
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *RetrieveUserFishArgs) Unmarshal(in []byte) error {
+	msg := new(content.RetrieveUserFishReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var RetrieveUserFishArgs_Req_DEFAULT *content.RetrieveUserFishReq
+
+func (p *RetrieveUserFishArgs) GetReq() *content.RetrieveUserFishReq {
+	if !p.IsSetReq() {
+		return RetrieveUserFishArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *RetrieveUserFishArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *RetrieveUserFishArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type RetrieveUserFishResult struct {
+	Success *content.RetrieveUserFishResp
+}
+
+var RetrieveUserFishResult_Success_DEFAULT *content.RetrieveUserFishResp
+
+func (p *RetrieveUserFishResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(content.RetrieveUserFishResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *RetrieveUserFishResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *RetrieveUserFishResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *RetrieveUserFishResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, fmt.Errorf("No req in RetrieveUserFishResult")
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *RetrieveUserFishResult) Unmarshal(in []byte) error {
+	msg := new(content.RetrieveUserFishResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *RetrieveUserFishResult) GetSuccess() *content.RetrieveUserFishResp {
+	if !p.IsSetSuccess() {
+		return RetrieveUserFishResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *RetrieveUserFishResult) SetSuccess(x interface{}) {
+	p.Success = x.(*content.RetrieveUserFishResp)
+}
+
+func (p *RetrieveUserFishResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *RetrieveUserFishResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -4634,6 +5250,46 @@ func (p *kClient) DeletePlan(ctx context.Context, Req *content.DeletePlanReq) (r
 	_args.Req = Req
 	var _result DeletePlanResult
 	if err = p.c.Call(ctx, "DeletePlan", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) DonateFish(ctx context.Context, Req *content.DonateFishReq) (r *content.DonateFishResp, err error) {
+	var _args DonateFishArgs
+	_args.Req = Req
+	var _result DonateFishResult
+	if err = p.c.Call(ctx, "DonateFish", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) AddUserFish(ctx context.Context, Req *content.AddUserFishReq) (r *content.AddUserFishResp, err error) {
+	var _args AddUserFishArgs
+	_args.Req = Req
+	var _result AddUserFishResult
+	if err = p.c.Call(ctx, "AddUserFish", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) ListFishByPlan(ctx context.Context, Req *content.ListFishByPlanReq) (r *content.ListFishByPlanResp, err error) {
+	var _args ListFishByPlanArgs
+	_args.Req = Req
+	var _result ListFishByPlanResult
+	if err = p.c.Call(ctx, "ListFishByPlan", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) RetrieveUserFish(ctx context.Context, Req *content.RetrieveUserFishReq) (r *content.RetrieveUserFishResp, err error) {
+	var _args RetrieveUserFishArgs
+	_args.Req = Req
+	var _result RetrieveUserFishResult
+	if err = p.c.Call(ctx, "RetrieveUserFish", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

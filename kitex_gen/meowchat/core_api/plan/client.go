@@ -16,6 +16,9 @@ type Client interface {
 	NewPlan(ctx context.Context, Req *core_api.NewPlanReq, callOptions ...callopt.Option) (r *core_api.NewPlanResp, err error)
 	DeletePlan(ctx context.Context, Req *core_api.DeletePlanReq, callOptions ...callopt.Option) (r *core_api.DeletePlanResp, err error)
 	SearchPlan(ctx context.Context, Req *core_api.SearchPlanReq, callOptions ...callopt.Option) (r *core_api.SearchPlanResp, err error)
+	DonateFish(ctx context.Context, Req *core_api.DonateFishReq, callOptions ...callopt.Option) (r *core_api.DonateFishResp, err error)
+	GetUserFish(ctx context.Context, Req *core_api.GetUserFishReq, callOptions ...callopt.Option) (r *core_api.GetUserFishResp, err error)
+	ListFishByPlan(ctx context.Context, Req *core_api.ListFishByPlanReq, callOptions ...callopt.Option) (r *core_api.ListFishByPlanResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -70,4 +73,19 @@ func (p *kPlanClient) DeletePlan(ctx context.Context, Req *core_api.DeletePlanRe
 func (p *kPlanClient) SearchPlan(ctx context.Context, Req *core_api.SearchPlanReq, callOptions ...callopt.Option) (r *core_api.SearchPlanResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.SearchPlan(ctx, Req)
+}
+
+func (p *kPlanClient) DonateFish(ctx context.Context, Req *core_api.DonateFishReq, callOptions ...callopt.Option) (r *core_api.DonateFishResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.DonateFish(ctx, Req)
+}
+
+func (p *kPlanClient) GetUserFish(ctx context.Context, Req *core_api.GetUserFishReq, callOptions ...callopt.Option) (r *core_api.GetUserFishResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetUserFish(ctx, Req)
+}
+
+func (p *kPlanClient) ListFishByPlan(ctx context.Context, Req *core_api.ListFishByPlanReq, callOptions ...callopt.Option) (r *core_api.ListFishByPlanResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.ListFishByPlan(ctx, Req)
 }

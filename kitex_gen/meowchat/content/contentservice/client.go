@@ -39,6 +39,10 @@ type Client interface {
 	CreatePlan(ctx context.Context, Req *content.CreatePlanReq, callOptions ...callopt.Option) (r *content.CreatePlanResp, err error)
 	UpdatePlan(ctx context.Context, Req *content.UpdatePlanReq, callOptions ...callopt.Option) (r *content.UpdatePlanResp, err error)
 	DeletePlan(ctx context.Context, Req *content.DeletePlanReq, callOptions ...callopt.Option) (r *content.DeletePlanResp, err error)
+	DonateFish(ctx context.Context, Req *content.DonateFishReq, callOptions ...callopt.Option) (r *content.DonateFishResp, err error)
+	AddUserFish(ctx context.Context, Req *content.AddUserFishReq, callOptions ...callopt.Option) (r *content.AddUserFishResp, err error)
+	ListFishByPlan(ctx context.Context, Req *content.ListFishByPlanReq, callOptions ...callopt.Option) (r *content.ListFishByPlanResp, err error)
+	RetrieveUserFish(ctx context.Context, Req *content.RetrieveUserFishReq, callOptions ...callopt.Option) (r *content.RetrieveUserFishResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -208,4 +212,24 @@ func (p *kContentServiceClient) UpdatePlan(ctx context.Context, Req *content.Upd
 func (p *kContentServiceClient) DeletePlan(ctx context.Context, Req *content.DeletePlanReq, callOptions ...callopt.Option) (r *content.DeletePlanResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.DeletePlan(ctx, Req)
+}
+
+func (p *kContentServiceClient) DonateFish(ctx context.Context, Req *content.DonateFishReq, callOptions ...callopt.Option) (r *content.DonateFishResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.DonateFish(ctx, Req)
+}
+
+func (p *kContentServiceClient) AddUserFish(ctx context.Context, Req *content.AddUserFishReq, callOptions ...callopt.Option) (r *content.AddUserFishResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.AddUserFish(ctx, Req)
+}
+
+func (p *kContentServiceClient) ListFishByPlan(ctx context.Context, Req *content.ListFishByPlanReq, callOptions ...callopt.Option) (r *content.ListFishByPlanResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.ListFishByPlan(ctx, Req)
+}
+
+func (p *kContentServiceClient) RetrieveUserFish(ctx context.Context, Req *content.RetrieveUserFishReq, callOptions ...callopt.Option) (r *content.RetrieveUserFishResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.RetrieveUserFish(ctx, Req)
 }
