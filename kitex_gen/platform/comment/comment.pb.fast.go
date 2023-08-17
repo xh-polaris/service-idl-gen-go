@@ -84,6 +84,11 @@ func (x *CreateCommentResp) FastRead(buf []byte, _type int8, number int32) (offs
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -99,6 +104,11 @@ ReadFieldError:
 
 func (x *CreateCommentResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *CreateCommentResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.IsFirst, offset, err = fastpb.ReadBool(buf, _type)
 	return offset, err
 }
 
@@ -645,6 +655,7 @@ func (x *CreateCommentResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
 	return offset
 }
 
@@ -653,6 +664,14 @@ func (x *CreateCommentResp) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
+	return offset
+}
+
+func (x *CreateCommentResp) fastWriteField2(buf []byte) (offset int) {
+	if !x.IsFirst {
+		return offset
+	}
+	offset += fastpb.WriteBool(buf[offset:], 2, x.GetIsFirst())
 	return offset
 }
 
@@ -1051,6 +1070,7 @@ func (x *CreateCommentResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
+	n += x.sizeField2()
 	return n
 }
 
@@ -1059,6 +1079,14 @@ func (x *CreateCommentResp) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(1, x.GetId())
+	return n
+}
+
+func (x *CreateCommentResp) sizeField2() (n int) {
+	if !x.IsFirst {
+		return n
+	}
+	n += fastpb.SizeBool(2, x.GetIsFirst())
 	return n
 }
 
@@ -1410,6 +1438,7 @@ var fieldIDToName_CreateCommentReq = map[int32]string{
 
 var fieldIDToName_CreateCommentResp = map[int32]string{
 	1: "Id",
+	2: "IsFirst",
 }
 
 var fieldIDToName_UpdateCommentReq = map[int32]string{
