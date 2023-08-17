@@ -500,7 +500,7 @@ func (x *SignInResp) fastReadField4(buf []byte, _type int8) (offset int, err err
 }
 
 func (x *SignInResp) fastReadField5(buf []byte, _type int8) (offset int, err error) {
-	x.IsFirst, offset, err = fastpb.ReadString(buf, _type)
+	x.IsFirst, offset, err = fastpb.ReadBool(buf, _type)
 	return offset, err
 }
 
@@ -940,10 +940,10 @@ func (x *SignInResp) fastWriteField4(buf []byte) (offset int) {
 }
 
 func (x *SignInResp) fastWriteField5(buf []byte) (offset int) {
-	if x.IsFirst == "" {
+	if !x.IsFirst {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 5, x.GetIsFirst())
+	offset += fastpb.WriteBool(buf[offset:], 5, x.GetIsFirst())
 	return offset
 }
 
@@ -1351,10 +1351,10 @@ func (x *SignInResp) sizeField4() (n int) {
 }
 
 func (x *SignInResp) sizeField5() (n int) {
-	if x.IsFirst == "" {
+	if !x.IsFirst {
 		return n
 	}
-	n += fastpb.SizeString(5, x.GetIsFirst())
+	n += fastpb.SizeBool(5, x.GetIsFirst())
 	return n
 }
 
