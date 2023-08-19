@@ -860,6 +860,16 @@ func (x *CreateMomentResp) FastRead(buf []byte, _type int8, number int32) (offse
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -875,6 +885,16 @@ ReadFieldError:
 
 func (x *CreateMomentResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.MomentId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *CreateMomentResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.GetFish, offset, err = fastpb.ReadBool(buf, _type)
+	return offset, err
+}
+
+func (x *CreateMomentResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.GetFishTimes, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -1036,6 +1056,16 @@ func (x *CreatePostResp) FastRead(buf []byte, _type int8, number int32) (offset 
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -1051,6 +1081,16 @@ ReadFieldError:
 
 func (x *CreatePostResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.PostId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *CreatePostResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.GetFish, offset, err = fastpb.ReadBool(buf, _type)
+	return offset, err
+}
+
+func (x *CreatePostResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.GetFishTimes, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -2610,6 +2650,8 @@ func (x *CreateMomentResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
@@ -2618,6 +2660,22 @@ func (x *CreateMomentResp) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 1, x.GetMomentId())
+	return offset
+}
+
+func (x *CreateMomentResp) fastWriteField2(buf []byte) (offset int) {
+	if !x.GetFish {
+		return offset
+	}
+	offset += fastpb.WriteBool(buf[offset:], 2, x.GetGetFish())
+	return offset
+}
+
+func (x *CreateMomentResp) fastWriteField3(buf []byte) (offset int) {
+	if x.GetFishTimes == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetGetFishTimes())
 	return offset
 }
 
@@ -2726,6 +2784,8 @@ func (x *CreatePostResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
@@ -2734,6 +2794,22 @@ func (x *CreatePostResp) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 1, x.GetPostId())
+	return offset
+}
+
+func (x *CreatePostResp) fastWriteField2(buf []byte) (offset int) {
+	if !x.GetFish {
+		return offset
+	}
+	offset += fastpb.WriteBool(buf[offset:], 2, x.GetGetFish())
+	return offset
+}
+
+func (x *CreatePostResp) fastWriteField3(buf []byte) (offset int) {
+	if x.GetFishTimes == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetGetFishTimes())
 	return offset
 }
 
@@ -3916,6 +3992,8 @@ func (x *CreateMomentResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
+	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
@@ -3924,6 +4002,22 @@ func (x *CreateMomentResp) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(1, x.GetMomentId())
+	return n
+}
+
+func (x *CreateMomentResp) sizeField2() (n int) {
+	if !x.GetFish {
+		return n
+	}
+	n += fastpb.SizeBool(2, x.GetGetFish())
+	return n
+}
+
+func (x *CreateMomentResp) sizeField3() (n int) {
+	if x.GetFishTimes == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(3, x.GetGetFishTimes())
 	return n
 }
 
@@ -4032,6 +4126,8 @@ func (x *CreatePostResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
+	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
@@ -4040,6 +4136,22 @@ func (x *CreatePostResp) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(1, x.GetPostId())
+	return n
+}
+
+func (x *CreatePostResp) sizeField2() (n int) {
+	if !x.GetFish {
+		return n
+	}
+	n += fastpb.SizeBool(2, x.GetGetFish())
+	return n
+}
+
+func (x *CreatePostResp) sizeField3() (n int) {
+	if x.GetFishTimes == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(3, x.GetGetFishTimes())
 	return n
 }
 
@@ -4792,6 +4904,8 @@ var fieldIDToName_CreateMomentReq = map[int32]string{
 
 var fieldIDToName_CreateMomentResp = map[int32]string{
 	1: "MomentId",
+	2: "GetFish",
+	3: "GetFishTimes",
 }
 
 var fieldIDToName_UpdateMomentReq = map[int32]string{
@@ -4816,6 +4930,8 @@ var fieldIDToName_CreatePostReq = map[int32]string{
 
 var fieldIDToName_CreatePostResp = map[int32]string{
 	1: "PostId",
+	2: "GetFish",
+	3: "GetFishTimes",
 }
 
 var fieldIDToName_RetrievePostReq = map[int32]string{

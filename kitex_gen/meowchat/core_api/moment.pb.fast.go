@@ -418,6 +418,16 @@ func (x *NewMomentResp) FastRead(buf []byte, _type int8, number int32) (offset i
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -433,6 +443,16 @@ ReadFieldError:
 
 func (x *NewMomentResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.MomentId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *NewMomentResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.GetFish, offset, err = fastpb.ReadBool(buf, _type)
+	return offset, err
+}
+
+func (x *NewMomentResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.GetFishTimes, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -833,6 +853,8 @@ func (x *NewMomentResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
@@ -841,6 +863,22 @@ func (x *NewMomentResp) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 1, x.GetMomentId())
+	return offset
+}
+
+func (x *NewMomentResp) fastWriteField2(buf []byte) (offset int) {
+	if !x.GetFish {
+		return offset
+	}
+	offset += fastpb.WriteBool(buf[offset:], 2, x.GetGetFish())
+	return offset
+}
+
+func (x *NewMomentResp) fastWriteField3(buf []byte) (offset int) {
+	if x.GetFishTimes == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetGetFishTimes())
 	return offset
 }
 
@@ -1206,6 +1244,8 @@ func (x *NewMomentResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
+	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
@@ -1214,6 +1254,22 @@ func (x *NewMomentResp) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(1, x.GetMomentId())
+	return n
+}
+
+func (x *NewMomentResp) sizeField2() (n int) {
+	if !x.GetFish {
+		return n
+	}
+	n += fastpb.SizeBool(2, x.GetGetFish())
+	return n
+}
+
+func (x *NewMomentResp) sizeField3() (n int) {
+	if x.GetFishTimes == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(3, x.GetGetFishTimes())
 	return n
 }
 
@@ -1345,6 +1401,8 @@ var fieldIDToName_NewMomentReq = map[int32]string{
 
 var fieldIDToName_NewMomentResp = map[int32]string{
 	1: "MomentId",
+	2: "GetFish",
+	3: "GetFishTimes",
 }
 
 var fieldIDToName_SearchMomentReq = map[int32]string{
