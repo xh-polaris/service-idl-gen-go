@@ -5,7 +5,6 @@ package user
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
-	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/basic"
 )
 
 var (
@@ -1555,5 +1554,3 @@ var fieldIDToName_GetLikedUsersReq = map[int32]string{
 var fieldIDToName_GetLikedUsersResp = map[int32]string{
 	1: "UserIds",
 }
-
-var _ = basic.File_basic_user_proto

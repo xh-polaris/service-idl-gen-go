@@ -583,5 +583,4 @@ var fieldIDToName_SendVerifyCodeReq = map[int32]string{
 
 var fieldIDToName_SendVerifyCodeResp = map[int32]string{}
 
-var _ = basic.File_basic_user_proto
 var _ = basic.File_basic_app_proto

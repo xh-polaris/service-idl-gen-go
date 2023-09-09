@@ -1137,7 +1137,6 @@ var fieldIDToName_SearchUserForAdminResp = map[int32]string{
 	3: "Token",
 }
 
-var _ = basic.File_basic_user_proto
 var _ = basic.File_basic_pagination_proto
 var _ = user.File_meowchat_user_common_proto
 var _ = system.File_meowchat_system_common_proto
