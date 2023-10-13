@@ -50,6 +50,11 @@ func (x *Comment) FastRead(buf []byte, _type int8, number int32) (offset int, er
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 8:
+		offset, err = x.fastReadField8(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -69,11 +74,16 @@ func (x *Comment) fastReadField1(buf []byte, _type int8) (offset int, err error)
 }
 
 func (x *Comment) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.Text, offset, err = fastpb.ReadString(buf, _type)
+	x.FirstLevelId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *Comment) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.Text, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *Comment) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 	var v user.UserPreview
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -83,22 +93,22 @@ func (x *Comment) fastReadField3(buf []byte, _type int8) (offset int, err error)
 	return offset, nil
 }
 
-func (x *Comment) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+func (x *Comment) fastReadField5(buf []byte, _type int8) (offset int, err error) {
 	x.ReplyName, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *Comment) fastReadField5(buf []byte, _type int8) (offset int, err error) {
+func (x *Comment) fastReadField6(buf []byte, _type int8) (offset int, err error) {
 	x.Comments, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *Comment) fastReadField6(buf []byte, _type int8) (offset int, err error) {
+func (x *Comment) fastReadField7(buf []byte, _type int8) (offset int, err error) {
 	x.UpdateAt, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *Comment) fastReadField7(buf []byte, _type int8) (offset int, err error) {
+func (x *Comment) fastReadField8(buf []byte, _type int8) (offset int, err error) {
 	x.CreateAt, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
@@ -117,6 +127,11 @@ func (x *NewCommentReq) FastRead(buf []byte, _type int8, number int32) (offset i
 		}
 	case 3:
 		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 4:
+		offset, err = x.fastReadField4(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -140,11 +155,16 @@ func (x *NewCommentReq) fastReadField1(buf []byte, _type int8) (offset int, err 
 }
 
 func (x *NewCommentReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.Text, offset, err = fastpb.ReadString(buf, _type)
+	x.FirstLevelId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *NewCommentReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.Text, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *NewCommentReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 	x.Scope, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
@@ -308,6 +328,7 @@ func (x *Comment) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField5(buf[offset:])
 	offset += x.fastWriteField6(buf[offset:])
 	offset += x.fastWriteField7(buf[offset:])
+	offset += x.fastWriteField8(buf[offset:])
 	return offset
 }
 
@@ -320,50 +341,58 @@ func (x *Comment) fastWriteField1(buf []byte) (offset int) {
 }
 
 func (x *Comment) fastWriteField2(buf []byte) (offset int) {
-	if x.Text == "" {
+	if x.FirstLevelId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 2, x.GetText())
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetFirstLevelId())
 	return offset
 }
 
 func (x *Comment) fastWriteField3(buf []byte) (offset int) {
-	if x.User == nil {
+	if x.Text == "" {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetUser())
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetText())
 	return offset
 }
 
 func (x *Comment) fastWriteField4(buf []byte) (offset int) {
-	if x.ReplyName == "" {
+	if x.User == nil {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 4, x.GetReplyName())
+	offset += fastpb.WriteMessage(buf[offset:], 4, x.GetUser())
 	return offset
 }
 
 func (x *Comment) fastWriteField5(buf []byte) (offset int) {
-	if x.Comments == 0 {
+	if x.ReplyName == "" {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 5, x.GetComments())
+	offset += fastpb.WriteString(buf[offset:], 5, x.GetReplyName())
 	return offset
 }
 
 func (x *Comment) fastWriteField6(buf []byte) (offset int) {
-	if x.UpdateAt == 0 {
+	if x.Comments == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 6, x.GetUpdateAt())
+	offset += fastpb.WriteInt64(buf[offset:], 6, x.GetComments())
 	return offset
 }
 
 func (x *Comment) fastWriteField7(buf []byte) (offset int) {
+	if x.UpdateAt == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 7, x.GetUpdateAt())
+	return offset
+}
+
+func (x *Comment) fastWriteField8(buf []byte) (offset int) {
 	if x.CreateAt == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 7, x.GetCreateAt())
+	offset += fastpb.WriteInt64(buf[offset:], 8, x.GetCreateAt())
 	return offset
 }
 
@@ -374,6 +403,7 @@ func (x *NewCommentReq) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField4(buf[offset:])
 	return offset
 }
 
@@ -386,18 +416,26 @@ func (x *NewCommentReq) fastWriteField1(buf []byte) (offset int) {
 }
 
 func (x *NewCommentReq) fastWriteField2(buf []byte) (offset int) {
-	if x.Text == "" {
+	if x.FirstLevelId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 2, x.GetText())
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetFirstLevelId())
 	return offset
 }
 
 func (x *NewCommentReq) fastWriteField3(buf []byte) (offset int) {
+	if x.Text == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetText())
+	return offset
+}
+
+func (x *NewCommentReq) fastWriteField4(buf []byte) (offset int) {
 	if x.Scope == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetScope())
+	offset += fastpb.WriteString(buf[offset:], 4, x.GetScope())
 	return offset
 }
 
@@ -512,6 +550,7 @@ func (x *Comment) Size() (n int) {
 	n += x.sizeField5()
 	n += x.sizeField6()
 	n += x.sizeField7()
+	n += x.sizeField8()
 	return n
 }
 
@@ -524,50 +563,58 @@ func (x *Comment) sizeField1() (n int) {
 }
 
 func (x *Comment) sizeField2() (n int) {
-	if x.Text == "" {
+	if x.FirstLevelId == "" {
 		return n
 	}
-	n += fastpb.SizeString(2, x.GetText())
+	n += fastpb.SizeString(2, x.GetFirstLevelId())
 	return n
 }
 
 func (x *Comment) sizeField3() (n int) {
-	if x.User == nil {
+	if x.Text == "" {
 		return n
 	}
-	n += fastpb.SizeMessage(3, x.GetUser())
+	n += fastpb.SizeString(3, x.GetText())
 	return n
 }
 
 func (x *Comment) sizeField4() (n int) {
-	if x.ReplyName == "" {
+	if x.User == nil {
 		return n
 	}
-	n += fastpb.SizeString(4, x.GetReplyName())
+	n += fastpb.SizeMessage(4, x.GetUser())
 	return n
 }
 
 func (x *Comment) sizeField5() (n int) {
-	if x.Comments == 0 {
+	if x.ReplyName == "" {
 		return n
 	}
-	n += fastpb.SizeInt64(5, x.GetComments())
+	n += fastpb.SizeString(5, x.GetReplyName())
 	return n
 }
 
 func (x *Comment) sizeField6() (n int) {
-	if x.UpdateAt == 0 {
+	if x.Comments == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(6, x.GetUpdateAt())
+	n += fastpb.SizeInt64(6, x.GetComments())
 	return n
 }
 
 func (x *Comment) sizeField7() (n int) {
+	if x.UpdateAt == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(7, x.GetUpdateAt())
+	return n
+}
+
+func (x *Comment) sizeField8() (n int) {
 	if x.CreateAt == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(7, x.GetCreateAt())
+	n += fastpb.SizeInt64(8, x.GetCreateAt())
 	return n
 }
 
@@ -578,6 +625,7 @@ func (x *NewCommentReq) Size() (n int) {
 	n += x.sizeField1()
 	n += x.sizeField2()
 	n += x.sizeField3()
+	n += x.sizeField4()
 	return n
 }
 
@@ -590,18 +638,26 @@ func (x *NewCommentReq) sizeField1() (n int) {
 }
 
 func (x *NewCommentReq) sizeField2() (n int) {
-	if x.Text == "" {
+	if x.FirstLevelId == "" {
 		return n
 	}
-	n += fastpb.SizeString(2, x.GetText())
+	n += fastpb.SizeString(2, x.GetFirstLevelId())
 	return n
 }
 
 func (x *NewCommentReq) sizeField3() (n int) {
+	if x.Text == "" {
+		return n
+	}
+	n += fastpb.SizeString(3, x.GetText())
+	return n
+}
+
+func (x *NewCommentReq) sizeField4() (n int) {
 	if x.Scope == "" {
 		return n
 	}
-	n += fastpb.SizeString(3, x.GetScope())
+	n += fastpb.SizeString(4, x.GetScope())
 	return n
 }
 
@@ -707,18 +763,20 @@ func (x *DeleteCommentResp) Size() (n int) {
 
 var fieldIDToName_Comment = map[int32]string{
 	1: "Id",
-	2: "Text",
-	3: "User",
-	4: "ReplyName",
-	5: "Comments",
-	6: "UpdateAt",
-	7: "CreateAt",
+	2: "FirstLevelId",
+	3: "Text",
+	4: "User",
+	5: "ReplyName",
+	6: "Comments",
+	7: "UpdateAt",
+	8: "CreateAt",
 }
 
 var fieldIDToName_NewCommentReq = map[int32]string{
 	1: "Id",
-	2: "Text",
-	3: "Scope",
+	2: "FirstLevelId",
+	3: "Text",
+	4: "Scope",
 }
 
 var fieldIDToName_NewCommentResp = map[int32]string{
