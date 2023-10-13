@@ -54,6 +54,11 @@ func (x *Comment) FastRead(buf []byte, _type int8, number int32) (offset int, er
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 9:
+		offset, err = x.fastReadField9(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -73,36 +78,41 @@ func (x *Comment) fastReadField1(buf []byte, _type int8) (offset int, err error)
 }
 
 func (x *Comment) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.Text, offset, err = fastpb.ReadString(buf, _type)
+	x.FirstLevelId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *Comment) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.AuthorId, offset, err = fastpb.ReadString(buf, _type)
+	x.Text, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *Comment) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	x.ReplyTo, offset, err = fastpb.ReadString(buf, _type)
+	x.AuthorId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *Comment) fastReadField5(buf []byte, _type int8) (offset int, err error) {
-	x.Type, offset, err = fastpb.ReadString(buf, _type)
+	x.ReplyTo, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *Comment) fastReadField6(buf []byte, _type int8) (offset int, err error) {
-	x.ParentId, offset, err = fastpb.ReadString(buf, _type)
+	x.Type, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *Comment) fastReadField7(buf []byte, _type int8) (offset int, err error) {
-	x.UpdateAt, offset, err = fastpb.ReadInt64(buf, _type)
+	x.ParentId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *Comment) fastReadField8(buf []byte, _type int8) (offset int, err error) {
+	x.UpdateAt, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *Comment) fastReadField9(buf []byte, _type int8) (offset int, err error) {
 	x.CreateAt, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
@@ -119,6 +129,7 @@ func (x *Comment) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField6(buf[offset:])
 	offset += x.fastWriteField7(buf[offset:])
 	offset += x.fastWriteField8(buf[offset:])
+	offset += x.fastWriteField9(buf[offset:])
 	return offset
 }
 
@@ -131,58 +142,66 @@ func (x *Comment) fastWriteField1(buf []byte) (offset int) {
 }
 
 func (x *Comment) fastWriteField2(buf []byte) (offset int) {
-	if x.Text == "" {
+	if x.FirstLevelId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 2, x.GetText())
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetFirstLevelId())
 	return offset
 }
 
 func (x *Comment) fastWriteField3(buf []byte) (offset int) {
-	if x.AuthorId == "" {
+	if x.Text == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetAuthorId())
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetText())
 	return offset
 }
 
 func (x *Comment) fastWriteField4(buf []byte) (offset int) {
-	if x.ReplyTo == "" {
+	if x.AuthorId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 4, x.GetReplyTo())
+	offset += fastpb.WriteString(buf[offset:], 4, x.GetAuthorId())
 	return offset
 }
 
 func (x *Comment) fastWriteField5(buf []byte) (offset int) {
-	if x.Type == "" {
+	if x.ReplyTo == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 5, x.GetType())
+	offset += fastpb.WriteString(buf[offset:], 5, x.GetReplyTo())
 	return offset
 }
 
 func (x *Comment) fastWriteField6(buf []byte) (offset int) {
-	if x.ParentId == "" {
+	if x.Type == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 6, x.GetParentId())
+	offset += fastpb.WriteString(buf[offset:], 6, x.GetType())
 	return offset
 }
 
 func (x *Comment) fastWriteField7(buf []byte) (offset int) {
-	if x.UpdateAt == 0 {
+	if x.ParentId == "" {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 7, x.GetUpdateAt())
+	offset += fastpb.WriteString(buf[offset:], 7, x.GetParentId())
 	return offset
 }
 
 func (x *Comment) fastWriteField8(buf []byte) (offset int) {
+	if x.UpdateAt == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 8, x.GetUpdateAt())
+	return offset
+}
+
+func (x *Comment) fastWriteField9(buf []byte) (offset int) {
 	if x.CreateAt == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 8, x.GetCreateAt())
+	offset += fastpb.WriteInt64(buf[offset:], 9, x.GetCreateAt())
 	return offset
 }
 
@@ -198,6 +217,7 @@ func (x *Comment) Size() (n int) {
 	n += x.sizeField6()
 	n += x.sizeField7()
 	n += x.sizeField8()
+	n += x.sizeField9()
 	return n
 }
 
@@ -210,68 +230,77 @@ func (x *Comment) sizeField1() (n int) {
 }
 
 func (x *Comment) sizeField2() (n int) {
-	if x.Text == "" {
+	if x.FirstLevelId == "" {
 		return n
 	}
-	n += fastpb.SizeString(2, x.GetText())
+	n += fastpb.SizeString(2, x.GetFirstLevelId())
 	return n
 }
 
 func (x *Comment) sizeField3() (n int) {
-	if x.AuthorId == "" {
+	if x.Text == "" {
 		return n
 	}
-	n += fastpb.SizeString(3, x.GetAuthorId())
+	n += fastpb.SizeString(3, x.GetText())
 	return n
 }
 
 func (x *Comment) sizeField4() (n int) {
-	if x.ReplyTo == "" {
+	if x.AuthorId == "" {
 		return n
 	}
-	n += fastpb.SizeString(4, x.GetReplyTo())
+	n += fastpb.SizeString(4, x.GetAuthorId())
 	return n
 }
 
 func (x *Comment) sizeField5() (n int) {
-	if x.Type == "" {
+	if x.ReplyTo == "" {
 		return n
 	}
-	n += fastpb.SizeString(5, x.GetType())
+	n += fastpb.SizeString(5, x.GetReplyTo())
 	return n
 }
 
 func (x *Comment) sizeField6() (n int) {
-	if x.ParentId == "" {
+	if x.Type == "" {
 		return n
 	}
-	n += fastpb.SizeString(6, x.GetParentId())
+	n += fastpb.SizeString(6, x.GetType())
 	return n
 }
 
 func (x *Comment) sizeField7() (n int) {
-	if x.UpdateAt == 0 {
+	if x.ParentId == "" {
 		return n
 	}
-	n += fastpb.SizeInt64(7, x.GetUpdateAt())
+	n += fastpb.SizeString(7, x.GetParentId())
 	return n
 }
 
 func (x *Comment) sizeField8() (n int) {
+	if x.UpdateAt == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(8, x.GetUpdateAt())
+	return n
+}
+
+func (x *Comment) sizeField9() (n int) {
 	if x.CreateAt == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(8, x.GetCreateAt())
+	n += fastpb.SizeInt64(9, x.GetCreateAt())
 	return n
 }
 
 var fieldIDToName_Comment = map[int32]string{
 	1: "Id",
-	2: "Text",
-	3: "AuthorId",
-	4: "ReplyTo",
-	5: "Type",
-	6: "ParentId",
-	7: "UpdateAt",
-	8: "CreateAt",
+	2: "FirstLevelId",
+	3: "Text",
+	4: "AuthorId",
+	5: "ReplyTo",
+	6: "Type",
+	7: "ParentId",
+	8: "UpdateAt",
+	9: "CreateAt",
 }
