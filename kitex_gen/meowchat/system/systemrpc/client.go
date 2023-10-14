@@ -38,6 +38,9 @@ type Client interface {
 	CreateCommunity(ctx context.Context, Req *system.CreateCommunityReq, callOptions ...callopt.Option) (r *system.CreateCommunityResp, err error)
 	UpdateCommunity(ctx context.Context, Req *system.UpdateCommunityReq, callOptions ...callopt.Option) (r *system.UpdateCommunityResp, err error)
 	DeleteCommunity(ctx context.Context, Req *system.DeleteCommunityReq, callOptions ...callopt.Option) (r *system.DeleteCommunityResp, err error)
+	ListNotification(ctx context.Context, Req *system.ListNotificationReq, callOptions ...callopt.Option) (r *system.ListNotificationResp, err error)
+	CleanNotification(ctx context.Context, Req *system.CleanNotificationReq, callOptions ...callopt.Option) (r *system.CleanNotificationResp, err error)
+	CountNotification(ctx context.Context, Req *system.CountNotificationReq, callOptions ...callopt.Option) (r *system.CountNotificationResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -202,4 +205,19 @@ func (p *kSystemRpcClient) UpdateCommunity(ctx context.Context, Req *system.Upda
 func (p *kSystemRpcClient) DeleteCommunity(ctx context.Context, Req *system.DeleteCommunityReq, callOptions ...callopt.Option) (r *system.DeleteCommunityResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.DeleteCommunity(ctx, Req)
+}
+
+func (p *kSystemRpcClient) ListNotification(ctx context.Context, Req *system.ListNotificationReq, callOptions ...callopt.Option) (r *system.ListNotificationResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.ListNotification(ctx, Req)
+}
+
+func (p *kSystemRpcClient) CleanNotification(ctx context.Context, Req *system.CleanNotificationReq, callOptions ...callopt.Option) (r *system.CleanNotificationResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.CleanNotification(ctx, Req)
+}
+
+func (p *kSystemRpcClient) CountNotification(ctx context.Context, Req *system.CountNotificationReq, callOptions ...callopt.Option) (r *system.CountNotificationResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.CountNotification(ctx, Req)
 }

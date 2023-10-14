@@ -48,6 +48,9 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		"CreateCommunity":   kitex.NewMethodInfo(createCommunityHandler, newCreateCommunityArgs, newCreateCommunityResult, false),
 		"UpdateCommunity":   kitex.NewMethodInfo(updateCommunityHandler, newUpdateCommunityArgs, newUpdateCommunityResult, false),
 		"DeleteCommunity":   kitex.NewMethodInfo(deleteCommunityHandler, newDeleteCommunityArgs, newDeleteCommunityResult, false),
+		"ListNotification":  kitex.NewMethodInfo(listNotificationHandler, newListNotificationArgs, newListNotificationResult, false),
+		"CleanNotification": kitex.NewMethodInfo(cleanNotificationHandler, newCleanNotificationArgs, newCleanNotificationResult, false),
+		"CountNotification": kitex.NewMethodInfo(countNotificationHandler, newCountNotificationArgs, newCountNotificationResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName":     "meowchat.system",
@@ -4195,6 +4198,465 @@ func (p *DeleteCommunityResult) GetResult() interface{} {
 	return p.Success
 }
 
+func listNotificationHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(system.ListNotificationReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(system.SystemRpc).ListNotification(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *ListNotificationArgs:
+		success, err := handler.(system.SystemRpc).ListNotification(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*ListNotificationResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newListNotificationArgs() interface{} {
+	return &ListNotificationArgs{}
+}
+
+func newListNotificationResult() interface{} {
+	return &ListNotificationResult{}
+}
+
+type ListNotificationArgs struct {
+	Req *system.ListNotificationReq
+}
+
+func (p *ListNotificationArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(system.ListNotificationReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *ListNotificationArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *ListNotificationArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *ListNotificationArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *ListNotificationArgs) Unmarshal(in []byte) error {
+	msg := new(system.ListNotificationReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var ListNotificationArgs_Req_DEFAULT *system.ListNotificationReq
+
+func (p *ListNotificationArgs) GetReq() *system.ListNotificationReq {
+	if !p.IsSetReq() {
+		return ListNotificationArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *ListNotificationArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *ListNotificationArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type ListNotificationResult struct {
+	Success *system.ListNotificationResp
+}
+
+var ListNotificationResult_Success_DEFAULT *system.ListNotificationResp
+
+func (p *ListNotificationResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(system.ListNotificationResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *ListNotificationResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *ListNotificationResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *ListNotificationResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *ListNotificationResult) Unmarshal(in []byte) error {
+	msg := new(system.ListNotificationResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *ListNotificationResult) GetSuccess() *system.ListNotificationResp {
+	if !p.IsSetSuccess() {
+		return ListNotificationResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *ListNotificationResult) SetSuccess(x interface{}) {
+	p.Success = x.(*system.ListNotificationResp)
+}
+
+func (p *ListNotificationResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *ListNotificationResult) GetResult() interface{} {
+	return p.Success
+}
+
+func cleanNotificationHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(system.CleanNotificationReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(system.SystemRpc).CleanNotification(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *CleanNotificationArgs:
+		success, err := handler.(system.SystemRpc).CleanNotification(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*CleanNotificationResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newCleanNotificationArgs() interface{} {
+	return &CleanNotificationArgs{}
+}
+
+func newCleanNotificationResult() interface{} {
+	return &CleanNotificationResult{}
+}
+
+type CleanNotificationArgs struct {
+	Req *system.CleanNotificationReq
+}
+
+func (p *CleanNotificationArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(system.CleanNotificationReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *CleanNotificationArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *CleanNotificationArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *CleanNotificationArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *CleanNotificationArgs) Unmarshal(in []byte) error {
+	msg := new(system.CleanNotificationReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var CleanNotificationArgs_Req_DEFAULT *system.CleanNotificationReq
+
+func (p *CleanNotificationArgs) GetReq() *system.CleanNotificationReq {
+	if !p.IsSetReq() {
+		return CleanNotificationArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *CleanNotificationArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *CleanNotificationArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type CleanNotificationResult struct {
+	Success *system.CleanNotificationResp
+}
+
+var CleanNotificationResult_Success_DEFAULT *system.CleanNotificationResp
+
+func (p *CleanNotificationResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(system.CleanNotificationResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *CleanNotificationResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *CleanNotificationResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *CleanNotificationResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *CleanNotificationResult) Unmarshal(in []byte) error {
+	msg := new(system.CleanNotificationResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *CleanNotificationResult) GetSuccess() *system.CleanNotificationResp {
+	if !p.IsSetSuccess() {
+		return CleanNotificationResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *CleanNotificationResult) SetSuccess(x interface{}) {
+	p.Success = x.(*system.CleanNotificationResp)
+}
+
+func (p *CleanNotificationResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *CleanNotificationResult) GetResult() interface{} {
+	return p.Success
+}
+
+func countNotificationHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(system.CountNotificationReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(system.SystemRpc).CountNotification(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *CountNotificationArgs:
+		success, err := handler.(system.SystemRpc).CountNotification(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*CountNotificationResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newCountNotificationArgs() interface{} {
+	return &CountNotificationArgs{}
+}
+
+func newCountNotificationResult() interface{} {
+	return &CountNotificationResult{}
+}
+
+type CountNotificationArgs struct {
+	Req *system.CountNotificationReq
+}
+
+func (p *CountNotificationArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(system.CountNotificationReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *CountNotificationArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *CountNotificationArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *CountNotificationArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *CountNotificationArgs) Unmarshal(in []byte) error {
+	msg := new(system.CountNotificationReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var CountNotificationArgs_Req_DEFAULT *system.CountNotificationReq
+
+func (p *CountNotificationArgs) GetReq() *system.CountNotificationReq {
+	if !p.IsSetReq() {
+		return CountNotificationArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *CountNotificationArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *CountNotificationArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type CountNotificationResult struct {
+	Success *system.CountNotificationResp
+}
+
+var CountNotificationResult_Success_DEFAULT *system.CountNotificationResp
+
+func (p *CountNotificationResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(system.CountNotificationResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *CountNotificationResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *CountNotificationResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *CountNotificationResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *CountNotificationResult) Unmarshal(in []byte) error {
+	msg := new(system.CountNotificationResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *CountNotificationResult) GetSuccess() *system.CountNotificationResp {
+	if !p.IsSetSuccess() {
+		return CountNotificationResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *CountNotificationResult) SetSuccess(x interface{}) {
+	p.Success = x.(*system.CountNotificationResp)
+}
+
+func (p *CountNotificationResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *CountNotificationResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -4470,6 +4932,36 @@ func (p *kClient) DeleteCommunity(ctx context.Context, Req *system.DeleteCommuni
 	_args.Req = Req
 	var _result DeleteCommunityResult
 	if err = p.c.Call(ctx, "DeleteCommunity", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) ListNotification(ctx context.Context, Req *system.ListNotificationReq) (r *system.ListNotificationResp, err error) {
+	var _args ListNotificationArgs
+	_args.Req = Req
+	var _result ListNotificationResult
+	if err = p.c.Call(ctx, "ListNotification", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) CleanNotification(ctx context.Context, Req *system.CleanNotificationReq) (r *system.CleanNotificationResp, err error) {
+	var _args CleanNotificationArgs
+	_args.Req = Req
+	var _result CleanNotificationResult
+	if err = p.c.Call(ctx, "CleanNotification", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) CountNotification(ctx context.Context, Req *system.CountNotificationReq) (r *system.CountNotificationResp, err error) {
+	var _args CountNotificationArgs
+	_args.Req = Req
+	var _result CountNotificationResult
+	if err = p.c.Call(ctx, "CountNotification", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

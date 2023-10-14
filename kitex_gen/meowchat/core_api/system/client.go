@@ -31,6 +31,9 @@ type Client interface {
 	ListApply(ctx context.Context, Req *core_api.ListApplyReq, callOptions ...callopt.Option) (r *core_api.ListApplyResp, err error)
 	HandleApply(ctx context.Context, Req *core_api.HandleApplyReq, callOptions ...callopt.Option) (r *core_api.HandleApplyResp, err error)
 	CreateApply(ctx context.Context, Req *core_api.CreateApplyReq, callOptions ...callopt.Option) (r *core_api.CreateApplyResp, err error)
+	ListNotification(ctx context.Context, Req *core_api.ListNotificationReq, callOptions ...callopt.Option) (r *core_api.ListNotificationResp, err error)
+	CleanNotification(ctx context.Context, Req *core_api.CleanNotificationReq, callOptions ...callopt.Option) (r *core_api.CleanNotificationResp, err error)
+	CountNotification(ctx context.Context, Req *core_api.CountNotificationReq, callOptions ...callopt.Option) (r *core_api.CountNotificationResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -160,4 +163,19 @@ func (p *kSystemClient) HandleApply(ctx context.Context, Req *core_api.HandleApp
 func (p *kSystemClient) CreateApply(ctx context.Context, Req *core_api.CreateApplyReq, callOptions ...callopt.Option) (r *core_api.CreateApplyResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.CreateApply(ctx, Req)
+}
+
+func (p *kSystemClient) ListNotification(ctx context.Context, Req *core_api.ListNotificationReq, callOptions ...callopt.Option) (r *core_api.ListNotificationResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.ListNotification(ctx, Req)
+}
+
+func (p *kSystemClient) CleanNotification(ctx context.Context, Req *core_api.CleanNotificationReq, callOptions ...callopt.Option) (r *core_api.CleanNotificationResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.CleanNotification(ctx, Req)
+}
+
+func (p *kSystemClient) CountNotification(ctx context.Context, Req *core_api.CountNotificationReq, callOptions ...callopt.Option) (r *core_api.CountNotificationResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.CountNotification(ctx, Req)
 }
