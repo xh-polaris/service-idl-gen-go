@@ -115,7 +115,8 @@ func (x *Post) fastReadField6(buf []byte, _type int8) (offset int, err error) {
 }
 
 func (x *Post) fastReadField7(buf []byte, _type int8) (offset int, err error) {
-	x.CoverUrl, offset, err = fastpb.ReadString(buf, _type)
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.CoverUrl = &tmp
 	return offset, err
 }
 
@@ -450,7 +451,8 @@ func (x *NewPostReq) fastReadField3(buf []byte, _type int8) (offset int, err err
 }
 
 func (x *NewPostReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	x.CoverUrl, offset, err = fastpb.ReadString(buf, _type)
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.CoverUrl = &tmp
 	return offset, err
 }
 
@@ -656,7 +658,7 @@ func (x *Post) fastWriteField6(buf []byte) (offset int) {
 }
 
 func (x *Post) fastWriteField7(buf []byte) (offset int) {
-	if x.CoverUrl == "" {
+	if x.CoverUrl == nil {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 7, x.GetCoverUrl())
@@ -904,7 +906,7 @@ func (x *NewPostReq) fastWriteField3(buf []byte) (offset int) {
 }
 
 func (x *NewPostReq) fastWriteField4(buf []byte) (offset int) {
-	if x.CoverUrl == "" {
+	if x.CoverUrl == nil {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 4, x.GetCoverUrl())
@@ -1070,7 +1072,7 @@ func (x *Post) sizeField6() (n int) {
 }
 
 func (x *Post) sizeField7() (n int) {
-	if x.CoverUrl == "" {
+	if x.CoverUrl == nil {
 		return n
 	}
 	n += fastpb.SizeString(7, x.GetCoverUrl())
@@ -1318,7 +1320,7 @@ func (x *NewPostReq) sizeField3() (n int) {
 }
 
 func (x *NewPostReq) sizeField4() (n int) {
-	if x.CoverUrl == "" {
+	if x.CoverUrl == nil {
 		return n
 	}
 	n += fastpb.SizeString(4, x.GetCoverUrl())

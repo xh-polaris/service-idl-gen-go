@@ -121,7 +121,8 @@ ReadFieldError:
 }
 
 func (x *GetCatPreviewsReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.Keyword, offset, err = fastpb.ReadString(buf, _type)
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.Keyword = &tmp
 	return offset, err
 }
 
@@ -795,7 +796,7 @@ func (x *GetCatPreviewsReq) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *GetCatPreviewsReq) fastWriteField1(buf []byte) (offset int) {
-	if x.Keyword == "" {
+	if x.Keyword == nil {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 1, x.GetKeyword())
@@ -1295,7 +1296,7 @@ func (x *GetCatPreviewsReq) Size() (n int) {
 }
 
 func (x *GetCatPreviewsReq) sizeField1() (n int) {
-	if x.Keyword == "" {
+	if x.Keyword == nil {
 		return n
 	}
 	n += fastpb.SizeString(1, x.GetKeyword())
