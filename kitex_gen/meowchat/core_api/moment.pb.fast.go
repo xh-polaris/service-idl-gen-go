@@ -56,6 +56,21 @@ func (x *Moment) FastRead(buf []byte, _type int8, number int32) (offset int, err
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 9:
+		offset, err = x.fastReadField9(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 10:
+		offset, err = x.fastReadField10(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 11:
+		offset, err = x.fastReadField11(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -80,8 +95,13 @@ func (x *Moment) fastReadField2(buf []byte, _type int8) (offset int, err error) 
 }
 
 func (x *Moment) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.CatId, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
+	var v CatPreview
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Cats = append(x.Cats, &v)
+	return offset, nil
 }
 
 func (x *Moment) fastReadField4(buf []byte, _type int8) (offset int, err error) {
@@ -119,6 +139,24 @@ func (x *Moment) fastReadField8(buf []byte, _type int8) (offset int, err error) 
 	return offset, nil
 }
 
+func (x *Moment) fastReadField9(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadInt64(buf, _type)
+	x.LikeCount = &tmp
+	return offset, err
+}
+
+func (x *Moment) fastReadField10(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadInt64(buf, _type)
+	x.CommentCount = &tmp
+	return offset, err
+}
+
+func (x *Moment) fastReadField11(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadBool(buf, _type)
+	x.IsLiked = &tmp
+	return offset, err
+}
+
 func (x *GetMomentPreviewsReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -138,6 +176,11 @@ func (x *GetMomentPreviewsReq) FastRead(buf []byte, _type int8, number int32) (o
 		}
 	case 4:
 		offset, err = x.fastReadField4(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 5:
+		offset, err = x.fastReadField5(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -173,6 +216,12 @@ func (x *GetMomentPreviewsReq) fastReadField3(buf []byte, _type int8) (offset in
 }
 
 func (x *GetMomentPreviewsReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.Keyword = &tmp
+	return offset, err
+}
+
+func (x *GetMomentPreviewsReq) fastReadField5(buf []byte, _type int8) (offset int, err error) {
 	var v basic.PaginationOptions
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -581,6 +630,9 @@ func (x *Moment) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField6(buf[offset:])
 	offset += x.fastWriteField7(buf[offset:])
 	offset += x.fastWriteField8(buf[offset:])
+	offset += x.fastWriteField9(buf[offset:])
+	offset += x.fastWriteField10(buf[offset:])
+	offset += x.fastWriteField11(buf[offset:])
 	return offset
 }
 
@@ -601,10 +653,12 @@ func (x *Moment) fastWriteField2(buf []byte) (offset int) {
 }
 
 func (x *Moment) fastWriteField3(buf []byte) (offset int) {
-	if x.CatId == "" {
+	if x.Cats == nil {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetCatId())
+	for i := range x.GetCats() {
+		offset += fastpb.WriteMessage(buf[offset:], 3, x.GetCats()[i])
+	}
 	return offset
 }
 
@@ -650,6 +704,30 @@ func (x *Moment) fastWriteField8(buf []byte) (offset int) {
 	return offset
 }
 
+func (x *Moment) fastWriteField9(buf []byte) (offset int) {
+	if x.LikeCount == nil {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 9, x.GetLikeCount())
+	return offset
+}
+
+func (x *Moment) fastWriteField10(buf []byte) (offset int) {
+	if x.CommentCount == nil {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 10, x.GetCommentCount())
+	return offset
+}
+
+func (x *Moment) fastWriteField11(buf []byte) (offset int) {
+	if x.IsLiked == nil {
+		return offset
+	}
+	offset += fastpb.WriteBool(buf[offset:], 11, x.GetIsLiked())
+	return offset
+}
+
 func (x *GetMomentPreviewsReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -658,6 +736,7 @@ func (x *GetMomentPreviewsReq) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
+	offset += x.fastWriteField5(buf[offset:])
 	return offset
 }
 
@@ -686,10 +765,18 @@ func (x *GetMomentPreviewsReq) fastWriteField3(buf []byte) (offset int) {
 }
 
 func (x *GetMomentPreviewsReq) fastWriteField4(buf []byte) (offset int) {
+	if x.Keyword == nil {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 4, x.GetKeyword())
+	return offset
+}
+
+func (x *GetMomentPreviewsReq) fastWriteField5(buf []byte) (offset int) {
 	if x.PaginationOption == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 4, x.GetPaginationOption())
+	offset += fastpb.WriteMessage(buf[offset:], 5, x.GetPaginationOption())
 	return offset
 }
 
@@ -972,6 +1059,9 @@ func (x *Moment) Size() (n int) {
 	n += x.sizeField6()
 	n += x.sizeField7()
 	n += x.sizeField8()
+	n += x.sizeField9()
+	n += x.sizeField10()
+	n += x.sizeField11()
 	return n
 }
 
@@ -992,10 +1082,12 @@ func (x *Moment) sizeField2() (n int) {
 }
 
 func (x *Moment) sizeField3() (n int) {
-	if x.CatId == "" {
+	if x.Cats == nil {
 		return n
 	}
-	n += fastpb.SizeString(3, x.GetCatId())
+	for i := range x.GetCats() {
+		n += fastpb.SizeMessage(3, x.GetCats()[i])
+	}
 	return n
 }
 
@@ -1041,6 +1133,30 @@ func (x *Moment) sizeField8() (n int) {
 	return n
 }
 
+func (x *Moment) sizeField9() (n int) {
+	if x.LikeCount == nil {
+		return n
+	}
+	n += fastpb.SizeInt64(9, x.GetLikeCount())
+	return n
+}
+
+func (x *Moment) sizeField10() (n int) {
+	if x.CommentCount == nil {
+		return n
+	}
+	n += fastpb.SizeInt64(10, x.GetCommentCount())
+	return n
+}
+
+func (x *Moment) sizeField11() (n int) {
+	if x.IsLiked == nil {
+		return n
+	}
+	n += fastpb.SizeBool(11, x.GetIsLiked())
+	return n
+}
+
 func (x *GetMomentPreviewsReq) Size() (n int) {
 	if x == nil {
 		return n
@@ -1049,6 +1165,7 @@ func (x *GetMomentPreviewsReq) Size() (n int) {
 	n += x.sizeField2()
 	n += x.sizeField3()
 	n += x.sizeField4()
+	n += x.sizeField5()
 	return n
 }
 
@@ -1077,10 +1194,18 @@ func (x *GetMomentPreviewsReq) sizeField3() (n int) {
 }
 
 func (x *GetMomentPreviewsReq) sizeField4() (n int) {
+	if x.Keyword == nil {
+		return n
+	}
+	n += fastpb.SizeString(4, x.GetKeyword())
+	return n
+}
+
+func (x *GetMomentPreviewsReq) sizeField5() (n int) {
 	if x.PaginationOption == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(4, x.GetPaginationOption())
+	n += fastpb.SizeMessage(5, x.GetPaginationOption())
 	return n
 }
 
@@ -1352,21 +1477,25 @@ func (x *SearchMomentResp) sizeField2() (n int) {
 }
 
 var fieldIDToName_Moment = map[int32]string{
-	1: "Id",
-	2: "CreateAt",
-	3: "CatId",
-	4: "Photos",
-	5: "Title",
-	6: "Text",
-	7: "CommunityId",
-	8: "User",
+	1:  "Id",
+	2:  "CreateAt",
+	3:  "Cats",
+	4:  "Photos",
+	5:  "Title",
+	6:  "Text",
+	7:  "CommunityId",
+	8:  "User",
+	9:  "LikeCount",
+	10: "CommentCount",
+	11: "IsLiked",
 }
 
 var fieldIDToName_GetMomentPreviewsReq = map[int32]string{
 	1: "CommunityId",
 	2: "IsParent",
 	3: "OnlyUserId",
-	4: "PaginationOption",
+	4: "Keyword",
+	5: "PaginationOption",
 }
 
 var fieldIDToName_GetMomentPreviewsResp = map[int32]string{

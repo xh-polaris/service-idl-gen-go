@@ -318,7 +318,8 @@ func (x *Moment) fastReadField2(buf []byte, _type int8) (offset int, err error) 
 }
 
 func (x *Moment) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.CatId, offset, err = fastpb.ReadString(buf, _type)
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.CatId = &tmp
 	return offset, err
 }
 
@@ -1056,7 +1057,7 @@ func (x *Moment) fastWriteField2(buf []byte) (offset int) {
 }
 
 func (x *Moment) fastWriteField3(buf []byte) (offset int) {
-	if x.CatId == "" {
+	if x.CatId == nil {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 3, x.GetCatId())
@@ -1685,7 +1686,7 @@ func (x *Moment) sizeField2() (n int) {
 }
 
 func (x *Moment) sizeField3() (n int) {
-	if x.CatId == "" {
+	if x.CatId == nil {
 		return n
 	}
 	n += fastpb.SizeString(3, x.GetCatId())

@@ -85,7 +85,8 @@ func (x *CatPreview) fastReadField5(buf []byte, _type int8) (offset int, err err
 }
 
 func (x *CatPreview) fastReadField6(buf []byte, _type int8) (offset int, err error) {
-	x.IsCollected, offset, err = fastpb.ReadBool(buf, _type)
+	tmp, offset, err := fastpb.ReadBool(buf, _type)
+	x.IsCollected = &tmp
 	return offset, err
 }
 
@@ -98,6 +99,11 @@ func (x *GetCatPreviewsReq) FastRead(buf []byte, _type int8, number int32) (offs
 		}
 	case 2:
 		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -115,12 +121,22 @@ ReadFieldError:
 }
 
 func (x *GetCatPreviewsReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.CommunityId, offset, err = fastpb.ReadString(buf, _type)
+	x.Keyword, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *GetCatPreviewsReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.Page, offset, err = fastpb.ReadInt64(buf, _type)
+	var v basic.PaginationOptions
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.PaginationOption = &v
+	return offset, nil
+}
+
+func (x *GetCatPreviewsReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.CommunityId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -761,7 +777,7 @@ func (x *CatPreview) fastWriteField5(buf []byte) (offset int) {
 }
 
 func (x *CatPreview) fastWriteField6(buf []byte) (offset int) {
-	if !x.IsCollected {
+	if x.IsCollected == nil {
 		return offset
 	}
 	offset += fastpb.WriteBool(buf[offset:], 6, x.GetIsCollected())
@@ -774,22 +790,31 @@ func (x *GetCatPreviewsReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
 func (x *GetCatPreviewsReq) fastWriteField1(buf []byte) (offset int) {
-	if x.CommunityId == "" {
+	if x.Keyword == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetCommunityId())
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetKeyword())
 	return offset
 }
 
 func (x *GetCatPreviewsReq) fastWriteField2(buf []byte) (offset int) {
-	if x.Page == 0 {
+	if x.PaginationOption == nil {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetPage())
+	offset += fastpb.WriteMessage(buf[offset:], 2, x.GetPaginationOption())
+	return offset
+}
+
+func (x *GetCatPreviewsReq) fastWriteField3(buf []byte) (offset int) {
+	if x.CommunityId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetCommunityId())
 	return offset
 }
 
@@ -1252,7 +1277,7 @@ func (x *CatPreview) sizeField5() (n int) {
 }
 
 func (x *CatPreview) sizeField6() (n int) {
-	if !x.IsCollected {
+	if x.IsCollected == nil {
 		return n
 	}
 	n += fastpb.SizeBool(6, x.GetIsCollected())
@@ -1265,22 +1290,31 @@ func (x *GetCatPreviewsReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
 func (x *GetCatPreviewsReq) sizeField1() (n int) {
-	if x.CommunityId == "" {
+	if x.Keyword == "" {
 		return n
 	}
-	n += fastpb.SizeString(1, x.GetCommunityId())
+	n += fastpb.SizeString(1, x.GetKeyword())
 	return n
 }
 
 func (x *GetCatPreviewsReq) sizeField2() (n int) {
-	if x.Page == 0 {
+	if x.PaginationOption == nil {
 		return n
 	}
-	n += fastpb.SizeInt64(2, x.GetPage())
+	n += fastpb.SizeMessage(2, x.GetPaginationOption())
+	return n
+}
+
+func (x *GetCatPreviewsReq) sizeField3() (n int) {
+	if x.CommunityId == "" {
+		return n
+	}
+	n += fastpb.SizeString(3, x.GetCommunityId())
 	return n
 }
 
@@ -1699,8 +1733,9 @@ var fieldIDToName_CatPreview = map[int32]string{
 }
 
 var fieldIDToName_GetCatPreviewsReq = map[int32]string{
-	1: "CommunityId",
-	2: "Page",
+	1: "Keyword",
+	2: "PaginationOption",
+	3: "CommunityId",
 }
 
 var fieldIDToName_GetCatPreviewsResp = map[int32]string{

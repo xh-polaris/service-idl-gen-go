@@ -14,7 +14,6 @@ type Client interface {
 	GetUserInfo(ctx context.Context, Req *core_api.GetUserInfoReq, callOptions ...callopt.Option) (r *core_api.GetUserInfoResp, err error)
 	UpdateUserInfo(ctx context.Context, Req *core_api.UpdateUserInfoReq, callOptions ...callopt.Option) (r *core_api.UpdateUserInfoResp, err error)
 	SearchUser(ctx context.Context, Req *core_api.SearchUserReq, callOptions ...callopt.Option) (r *core_api.SearchUserResp, err error)
-	SearchUserForAdmin(ctx context.Context, Req *core_api.SearchUserForAdminReq, callOptions ...callopt.Option) (r *core_api.SearchUserForAdminResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -59,9 +58,4 @@ func (p *kUserClient) UpdateUserInfo(ctx context.Context, Req *core_api.UpdateUs
 func (p *kUserClient) SearchUser(ctx context.Context, Req *core_api.SearchUserReq, callOptions ...callopt.Option) (r *core_api.SearchUserResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.SearchUser(ctx, Req)
-}
-
-func (p *kUserClient) SearchUserForAdmin(ctx context.Context, Req *core_api.SearchUserForAdminReq, callOptions ...callopt.Option) (r *core_api.SearchUserForAdminResp, err error) {
-	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.SearchUserForAdmin(ctx, Req)
 }

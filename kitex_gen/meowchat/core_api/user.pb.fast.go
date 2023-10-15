@@ -57,6 +57,21 @@ func (x *User) FastRead(buf []byte, _type int8, number int32) (offset int, err e
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 9:
+		offset, err = x.fastReadField9(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 10:
+		offset, err = x.fastReadField10(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 11:
+		offset, err = x.fastReadField11(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -86,66 +101,42 @@ func (x *User) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 }
 
 func (x *User) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	x.Motto, offset, err = fastpb.ReadString(buf, _type)
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.Motto = &tmp
 	return offset, err
 }
 
 func (x *User) fastReadField5(buf []byte, _type int8) (offset int, err error) {
-	x.Follower, offset, err = fastpb.ReadInt64(buf, _type)
+	tmp, offset, err := fastpb.ReadInt64(buf, _type)
+	x.Follower = &tmp
 	return offset, err
 }
 
 func (x *User) fastReadField6(buf []byte, _type int8) (offset int, err error) {
-	x.Following, offset, err = fastpb.ReadInt64(buf, _type)
+	tmp, offset, err := fastpb.ReadInt64(buf, _type)
+	x.Following = &tmp
 	return offset, err
 }
 
 func (x *User) fastReadField7(buf []byte, _type int8) (offset int, err error) {
-	x.Article, offset, err = fastpb.ReadInt64(buf, _type)
+	tmp, offset, err := fastpb.ReadInt64(buf, _type)
+	x.Article = &tmp
 	return offset, err
 }
 
 func (x *User) fastReadField8(buf []byte, _type int8) (offset int, err error) {
-	x.Like, offset, err = fastpb.ReadInt64(buf, _type)
+	tmp, offset, err := fastpb.ReadInt64(buf, _type)
+	x.Like = &tmp
 	return offset, err
 }
 
-func (x *UserPreviewWithRole) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 2:
-		offset, err = x.fastReadField2(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_UserPreviewWithRole[number], err)
+func (x *User) fastReadField9(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadBool(buf, _type)
+	x.IsFollowing = &tmp
+	return offset, err
 }
 
-func (x *UserPreviewWithRole) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v user.UserPreview
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.User = &v
-	return offset, nil
-}
-
-func (x *UserPreviewWithRole) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+func (x *User) fastReadField10(buf []byte, _type int8) (offset int, err error) {
 	var v system.Role
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -153,6 +144,12 @@ func (x *UserPreviewWithRole) fastReadField2(buf []byte, _type int8) (offset int
 	}
 	x.Roles = append(x.Roles, &v)
 	return offset, nil
+}
+
+func (x *User) fastReadField11(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadBool(buf, _type)
+	x.EnableDebug = &tmp
+	return offset, err
 }
 
 func (x *GetUserInfoReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -188,11 +185,6 @@ func (x *GetUserInfoResp) FastRead(buf []byte, _type int8, number int32) (offset
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 2:
-		offset, err = x.fastReadField2(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -214,11 +206,6 @@ func (x *GetUserInfoResp) fastReadField1(buf []byte, _type int8) (offset int, er
 	}
 	x.User = &v
 	return offset, nil
-}
-
-func (x *GetUserInfoResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.EnableDebug, offset, err = fastpb.ReadBool(buf, _type)
-	return offset, err
 }
 
 func (x *UpdateUserInfoReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -353,7 +340,7 @@ ReadFieldError:
 }
 
 func (x *SearchUserResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v user.UserPreview
+	var v User
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -372,96 +359,6 @@ func (x *SearchUserResp) fastReadField3(buf []byte, _type int8) (offset int, err
 	return offset, err
 }
 
-func (x *SearchUserForAdminReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 2:
-		offset, err = x.fastReadField2(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_SearchUserForAdminReq[number], err)
-}
-
-func (x *SearchUserForAdminReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.Keyword, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *SearchUserForAdminReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	var v basic.PaginationOptions
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.PaginationOption = &v
-	return offset, nil
-}
-
-func (x *SearchUserForAdminResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 2:
-		offset, err = x.fastReadField2(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_SearchUserForAdminResp[number], err)
-}
-
-func (x *SearchUserForAdminResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v UserPreviewWithRole
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Users = append(x.Users, &v)
-	return offset, nil
-}
-
-func (x *SearchUserForAdminResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
-	return offset, err
-}
-
-func (x *SearchUserForAdminResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.Token, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
 func (x *User) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -474,6 +371,9 @@ func (x *User) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField6(buf[offset:])
 	offset += x.fastWriteField7(buf[offset:])
 	offset += x.fastWriteField8(buf[offset:])
+	offset += x.fastWriteField9(buf[offset:])
+	offset += x.fastWriteField10(buf[offset:])
+	offset += x.fastWriteField11(buf[offset:])
 	return offset
 }
 
@@ -502,7 +402,7 @@ func (x *User) fastWriteField3(buf []byte) (offset int) {
 }
 
 func (x *User) fastWriteField4(buf []byte) (offset int) {
-	if x.Motto == "" {
+	if x.Motto == nil {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 4, x.GetMotto())
@@ -510,7 +410,7 @@ func (x *User) fastWriteField4(buf []byte) (offset int) {
 }
 
 func (x *User) fastWriteField5(buf []byte) (offset int) {
-	if x.Follower == 0 {
+	if x.Follower == nil {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 5, x.GetFollower())
@@ -518,7 +418,7 @@ func (x *User) fastWriteField5(buf []byte) (offset int) {
 }
 
 func (x *User) fastWriteField6(buf []byte) (offset int) {
-	if x.Following == 0 {
+	if x.Following == nil {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 6, x.GetFollowing())
@@ -526,7 +426,7 @@ func (x *User) fastWriteField6(buf []byte) (offset int) {
 }
 
 func (x *User) fastWriteField7(buf []byte) (offset int) {
-	if x.Article == 0 {
+	if x.Article == nil {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 7, x.GetArticle())
@@ -534,37 +434,36 @@ func (x *User) fastWriteField7(buf []byte) (offset int) {
 }
 
 func (x *User) fastWriteField8(buf []byte) (offset int) {
-	if x.Like == 0 {
+	if x.Like == nil {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 8, x.GetLike())
 	return offset
 }
 
-func (x *UserPreviewWithRole) FastWrite(buf []byte) (offset int) {
-	if x == nil {
+func (x *User) fastWriteField9(buf []byte) (offset int) {
+	if x.IsFollowing == nil {
 		return offset
 	}
-	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField2(buf[offset:])
+	offset += fastpb.WriteBool(buf[offset:], 9, x.GetIsFollowing())
 	return offset
 }
 
-func (x *UserPreviewWithRole) fastWriteField1(buf []byte) (offset int) {
-	if x.User == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetUser())
-	return offset
-}
-
-func (x *UserPreviewWithRole) fastWriteField2(buf []byte) (offset int) {
+func (x *User) fastWriteField10(buf []byte) (offset int) {
 	if x.Roles == nil {
 		return offset
 	}
 	for i := range x.GetRoles() {
-		offset += fastpb.WriteMessage(buf[offset:], 2, x.GetRoles()[i])
+		offset += fastpb.WriteMessage(buf[offset:], 10, x.GetRoles()[i])
 	}
+	return offset
+}
+
+func (x *User) fastWriteField11(buf []byte) (offset int) {
+	if x.EnableDebug == nil {
+		return offset
+	}
+	offset += fastpb.WriteBool(buf[offset:], 11, x.GetEnableDebug())
 	return offset
 }
 
@@ -589,7 +488,6 @@ func (x *GetUserInfoResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField2(buf[offset:])
 	return offset
 }
 
@@ -598,14 +496,6 @@ func (x *GetUserInfoResp) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetUser())
-	return offset
-}
-
-func (x *GetUserInfoResp) fastWriteField2(buf []byte) (offset int) {
-	if !x.EnableDebug {
-		return offset
-	}
-	offset += fastpb.WriteBool(buf[offset:], 2, x.GetEnableDebug())
 	return offset
 }
 
@@ -711,67 +601,6 @@ func (x *SearchUserResp) fastWriteField3(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *SearchUserForAdminReq) FastWrite(buf []byte) (offset int) {
-	if x == nil {
-		return offset
-	}
-	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField2(buf[offset:])
-	return offset
-}
-
-func (x *SearchUserForAdminReq) fastWriteField1(buf []byte) (offset int) {
-	if x.Keyword == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetKeyword())
-	return offset
-}
-
-func (x *SearchUserForAdminReq) fastWriteField2(buf []byte) (offset int) {
-	if x.PaginationOption == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 2, x.GetPaginationOption())
-	return offset
-}
-
-func (x *SearchUserForAdminResp) FastWrite(buf []byte) (offset int) {
-	if x == nil {
-		return offset
-	}
-	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
-	return offset
-}
-
-func (x *SearchUserForAdminResp) fastWriteField1(buf []byte) (offset int) {
-	if x.Users == nil {
-		return offset
-	}
-	for i := range x.GetUsers() {
-		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetUsers()[i])
-	}
-	return offset
-}
-
-func (x *SearchUserForAdminResp) fastWriteField2(buf []byte) (offset int) {
-	if x.Total == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetTotal())
-	return offset
-}
-
-func (x *SearchUserForAdminResp) fastWriteField3(buf []byte) (offset int) {
-	if x.Token == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetToken())
-	return offset
-}
-
 func (x *User) Size() (n int) {
 	if x == nil {
 		return n
@@ -784,6 +613,9 @@ func (x *User) Size() (n int) {
 	n += x.sizeField6()
 	n += x.sizeField7()
 	n += x.sizeField8()
+	n += x.sizeField9()
+	n += x.sizeField10()
+	n += x.sizeField11()
 	return n
 }
 
@@ -812,7 +644,7 @@ func (x *User) sizeField3() (n int) {
 }
 
 func (x *User) sizeField4() (n int) {
-	if x.Motto == "" {
+	if x.Motto == nil {
 		return n
 	}
 	n += fastpb.SizeString(4, x.GetMotto())
@@ -820,7 +652,7 @@ func (x *User) sizeField4() (n int) {
 }
 
 func (x *User) sizeField5() (n int) {
-	if x.Follower == 0 {
+	if x.Follower == nil {
 		return n
 	}
 	n += fastpb.SizeInt64(5, x.GetFollower())
@@ -828,7 +660,7 @@ func (x *User) sizeField5() (n int) {
 }
 
 func (x *User) sizeField6() (n int) {
-	if x.Following == 0 {
+	if x.Following == nil {
 		return n
 	}
 	n += fastpb.SizeInt64(6, x.GetFollowing())
@@ -836,7 +668,7 @@ func (x *User) sizeField6() (n int) {
 }
 
 func (x *User) sizeField7() (n int) {
-	if x.Article == 0 {
+	if x.Article == nil {
 		return n
 	}
 	n += fastpb.SizeInt64(7, x.GetArticle())
@@ -844,37 +676,36 @@ func (x *User) sizeField7() (n int) {
 }
 
 func (x *User) sizeField8() (n int) {
-	if x.Like == 0 {
+	if x.Like == nil {
 		return n
 	}
 	n += fastpb.SizeInt64(8, x.GetLike())
 	return n
 }
 
-func (x *UserPreviewWithRole) Size() (n int) {
-	if x == nil {
+func (x *User) sizeField9() (n int) {
+	if x.IsFollowing == nil {
 		return n
 	}
-	n += x.sizeField1()
-	n += x.sizeField2()
+	n += fastpb.SizeBool(9, x.GetIsFollowing())
 	return n
 }
 
-func (x *UserPreviewWithRole) sizeField1() (n int) {
-	if x.User == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(1, x.GetUser())
-	return n
-}
-
-func (x *UserPreviewWithRole) sizeField2() (n int) {
+func (x *User) sizeField10() (n int) {
 	if x.Roles == nil {
 		return n
 	}
 	for i := range x.GetRoles() {
-		n += fastpb.SizeMessage(2, x.GetRoles()[i])
+		n += fastpb.SizeMessage(10, x.GetRoles()[i])
 	}
+	return n
+}
+
+func (x *User) sizeField11() (n int) {
+	if x.EnableDebug == nil {
+		return n
+	}
+	n += fastpb.SizeBool(11, x.GetEnableDebug())
 	return n
 }
 
@@ -899,7 +730,6 @@ func (x *GetUserInfoResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
-	n += x.sizeField2()
 	return n
 }
 
@@ -908,14 +738,6 @@ func (x *GetUserInfoResp) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeMessage(1, x.GetUser())
-	return n
-}
-
-func (x *GetUserInfoResp) sizeField2() (n int) {
-	if !x.EnableDebug {
-		return n
-	}
-	n += fastpb.SizeBool(2, x.GetEnableDebug())
 	return n
 }
 
@@ -1021,81 +843,18 @@ func (x *SearchUserResp) sizeField3() (n int) {
 	return n
 }
 
-func (x *SearchUserForAdminReq) Size() (n int) {
-	if x == nil {
-		return n
-	}
-	n += x.sizeField1()
-	n += x.sizeField2()
-	return n
-}
-
-func (x *SearchUserForAdminReq) sizeField1() (n int) {
-	if x.Keyword == "" {
-		return n
-	}
-	n += fastpb.SizeString(1, x.GetKeyword())
-	return n
-}
-
-func (x *SearchUserForAdminReq) sizeField2() (n int) {
-	if x.PaginationOption == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(2, x.GetPaginationOption())
-	return n
-}
-
-func (x *SearchUserForAdminResp) Size() (n int) {
-	if x == nil {
-		return n
-	}
-	n += x.sizeField1()
-	n += x.sizeField2()
-	n += x.sizeField3()
-	return n
-}
-
-func (x *SearchUserForAdminResp) sizeField1() (n int) {
-	if x.Users == nil {
-		return n
-	}
-	for i := range x.GetUsers() {
-		n += fastpb.SizeMessage(1, x.GetUsers()[i])
-	}
-	return n
-}
-
-func (x *SearchUserForAdminResp) sizeField2() (n int) {
-	if x.Total == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(2, x.GetTotal())
-	return n
-}
-
-func (x *SearchUserForAdminResp) sizeField3() (n int) {
-	if x.Token == "" {
-		return n
-	}
-	n += fastpb.SizeString(3, x.GetToken())
-	return n
-}
-
 var fieldIDToName_User = map[int32]string{
-	1: "Id",
-	2: "Nickname",
-	3: "AvatarUrl",
-	4: "Motto",
-	5: "Follower",
-	6: "Following",
-	7: "Article",
-	8: "Like",
-}
-
-var fieldIDToName_UserPreviewWithRole = map[int32]string{
-	1: "User",
-	2: "Roles",
+	1:  "Id",
+	2:  "Nickname",
+	3:  "AvatarUrl",
+	4:  "Motto",
+	5:  "Follower",
+	6:  "Following",
+	7:  "Article",
+	8:  "Like",
+	9:  "IsFollowing",
+	10: "Roles",
+	11: "EnableDebug",
 }
 
 var fieldIDToName_GetUserInfoReq = map[int32]string{
@@ -1104,7 +863,6 @@ var fieldIDToName_GetUserInfoReq = map[int32]string{
 
 var fieldIDToName_GetUserInfoResp = map[int32]string{
 	1: "User",
-	2: "EnableDebug",
 }
 
 var fieldIDToName_UpdateUserInfoReq = map[int32]string{
@@ -1121,17 +879,6 @@ var fieldIDToName_SearchUserReq = map[int32]string{
 }
 
 var fieldIDToName_SearchUserResp = map[int32]string{
-	1: "Users",
-	2: "Total",
-	3: "Token",
-}
-
-var fieldIDToName_SearchUserForAdminReq = map[int32]string{
-	1: "Keyword",
-	2: "PaginationOption",
-}
-
-var fieldIDToName_SearchUserForAdminResp = map[int32]string{
 	1: "Users",
 	2: "Total",
 	3: "Token",

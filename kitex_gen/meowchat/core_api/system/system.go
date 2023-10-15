@@ -44,6 +44,7 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		"ListNotification":     kitex.NewMethodInfo(listNotificationHandler, newListNotificationArgs, newListNotificationResult, false),
 		"CleanNotification":    kitex.NewMethodInfo(cleanNotificationHandler, newCleanNotificationArgs, newCleanNotificationResult, false),
 		"CountNotification":    kitex.NewMethodInfo(countNotificationHandler, newCountNotificationArgs, newCountNotificationResult, false),
+		"Prefetch":             kitex.NewMethodInfo(prefetchHandler, newPrefetchArgs, newPrefetchResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName":     "meowchat.core_api",
@@ -3579,6 +3580,159 @@ func (p *CountNotificationResult) GetResult() interface{} {
 	return p.Success
 }
 
+func prefetchHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.PrefetchReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.System).Prefetch(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *PrefetchArgs:
+		success, err := handler.(core_api.System).Prefetch(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*PrefetchResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newPrefetchArgs() interface{} {
+	return &PrefetchArgs{}
+}
+
+func newPrefetchResult() interface{} {
+	return &PrefetchResult{}
+}
+
+type PrefetchArgs struct {
+	Req *core_api.PrefetchReq
+}
+
+func (p *PrefetchArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.PrefetchReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *PrefetchArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *PrefetchArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *PrefetchArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *PrefetchArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.PrefetchReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var PrefetchArgs_Req_DEFAULT *core_api.PrefetchReq
+
+func (p *PrefetchArgs) GetReq() *core_api.PrefetchReq {
+	if !p.IsSetReq() {
+		return PrefetchArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *PrefetchArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *PrefetchArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type PrefetchResult struct {
+	Success *core_api.PrefetchResp
+}
+
+var PrefetchResult_Success_DEFAULT *core_api.PrefetchResp
+
+func (p *PrefetchResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.PrefetchResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *PrefetchResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *PrefetchResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *PrefetchResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *PrefetchResult) Unmarshal(in []byte) error {
+	msg := new(core_api.PrefetchResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *PrefetchResult) GetSuccess() *core_api.PrefetchResp {
+	if !p.IsSetSuccess() {
+		return PrefetchResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *PrefetchResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.PrefetchResp)
+}
+
+func (p *PrefetchResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *PrefetchResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -3814,6 +3968,16 @@ func (p *kClient) CountNotification(ctx context.Context, Req *core_api.CountNoti
 	_args.Req = Req
 	var _result CountNotificationResult
 	if err = p.c.Call(ctx, "CountNotification", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) Prefetch(ctx context.Context, Req *core_api.PrefetchReq) (r *core_api.PrefetchResp, err error) {
+	var _args PrefetchArgs
+	_args.Req = Req
+	var _result PrefetchResult
+	if err = p.c.Call(ctx, "Prefetch", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

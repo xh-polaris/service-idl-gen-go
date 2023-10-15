@@ -21,10 +21,9 @@ func NewServiceInfo() *kitex.ServiceInfo {
 	serviceName := "user"
 	handlerType := (*core_api.User)(nil)
 	methods := map[string]kitex.MethodInfo{
-		"GetUserInfo":        kitex.NewMethodInfo(getUserInfoHandler, newGetUserInfoArgs, newGetUserInfoResult, false),
-		"UpdateUserInfo":     kitex.NewMethodInfo(updateUserInfoHandler, newUpdateUserInfoArgs, newUpdateUserInfoResult, false),
-		"SearchUser":         kitex.NewMethodInfo(searchUserHandler, newSearchUserArgs, newSearchUserResult, false),
-		"SearchUserForAdmin": kitex.NewMethodInfo(searchUserForAdminHandler, newSearchUserForAdminArgs, newSearchUserForAdminResult, false),
+		"GetUserInfo":    kitex.NewMethodInfo(getUserInfoHandler, newGetUserInfoArgs, newGetUserInfoResult, false),
+		"UpdateUserInfo": kitex.NewMethodInfo(updateUserInfoHandler, newUpdateUserInfoArgs, newUpdateUserInfoResult, false),
+		"SearchUser":     kitex.NewMethodInfo(searchUserHandler, newSearchUserArgs, newSearchUserResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName":     "meowchat.core_api",
@@ -500,159 +499,6 @@ func (p *SearchUserResult) GetResult() interface{} {
 	return p.Success
 }
 
-func searchUserForAdminHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	switch s := arg.(type) {
-	case *streaming.Args:
-		st := s.Stream
-		req := new(core_api.SearchUserForAdminReq)
-		if err := st.RecvMsg(req); err != nil {
-			return err
-		}
-		resp, err := handler.(core_api.User).SearchUserForAdmin(ctx, req)
-		if err != nil {
-			return err
-		}
-		if err := st.SendMsg(resp); err != nil {
-			return err
-		}
-	case *SearchUserForAdminArgs:
-		success, err := handler.(core_api.User).SearchUserForAdmin(ctx, s.Req)
-		if err != nil {
-			return err
-		}
-		realResult := result.(*SearchUserForAdminResult)
-		realResult.Success = success
-	}
-	return nil
-}
-func newSearchUserForAdminArgs() interface{} {
-	return &SearchUserForAdminArgs{}
-}
-
-func newSearchUserForAdminResult() interface{} {
-	return &SearchUserForAdminResult{}
-}
-
-type SearchUserForAdminArgs struct {
-	Req *core_api.SearchUserForAdminReq
-}
-
-func (p *SearchUserForAdminArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetReq() {
-		p.Req = new(core_api.SearchUserForAdminReq)
-	}
-	return p.Req.FastRead(buf, _type, number)
-}
-
-func (p *SearchUserForAdminArgs) FastWrite(buf []byte) (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.FastWrite(buf)
-}
-
-func (p *SearchUserForAdminArgs) Size() (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.Size()
-}
-
-func (p *SearchUserForAdminArgs) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetReq() {
-		return out, nil
-	}
-	return proto.Marshal(p.Req)
-}
-
-func (p *SearchUserForAdminArgs) Unmarshal(in []byte) error {
-	msg := new(core_api.SearchUserForAdminReq)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Req = msg
-	return nil
-}
-
-var SearchUserForAdminArgs_Req_DEFAULT *core_api.SearchUserForAdminReq
-
-func (p *SearchUserForAdminArgs) GetReq() *core_api.SearchUserForAdminReq {
-	if !p.IsSetReq() {
-		return SearchUserForAdminArgs_Req_DEFAULT
-	}
-	return p.Req
-}
-
-func (p *SearchUserForAdminArgs) IsSetReq() bool {
-	return p.Req != nil
-}
-
-func (p *SearchUserForAdminArgs) GetFirstArgument() interface{} {
-	return p.Req
-}
-
-type SearchUserForAdminResult struct {
-	Success *core_api.SearchUserForAdminResp
-}
-
-var SearchUserForAdminResult_Success_DEFAULT *core_api.SearchUserForAdminResp
-
-func (p *SearchUserForAdminResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetSuccess() {
-		p.Success = new(core_api.SearchUserForAdminResp)
-	}
-	return p.Success.FastRead(buf, _type, number)
-}
-
-func (p *SearchUserForAdminResult) FastWrite(buf []byte) (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.FastWrite(buf)
-}
-
-func (p *SearchUserForAdminResult) Size() (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.Size()
-}
-
-func (p *SearchUserForAdminResult) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetSuccess() {
-		return out, nil
-	}
-	return proto.Marshal(p.Success)
-}
-
-func (p *SearchUserForAdminResult) Unmarshal(in []byte) error {
-	msg := new(core_api.SearchUserForAdminResp)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Success = msg
-	return nil
-}
-
-func (p *SearchUserForAdminResult) GetSuccess() *core_api.SearchUserForAdminResp {
-	if !p.IsSetSuccess() {
-		return SearchUserForAdminResult_Success_DEFAULT
-	}
-	return p.Success
-}
-
-func (p *SearchUserForAdminResult) SetSuccess(x interface{}) {
-	p.Success = x.(*core_api.SearchUserForAdminResp)
-}
-
-func (p *SearchUserForAdminResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *SearchUserForAdminResult) GetResult() interface{} {
-	return p.Success
-}
-
 type kClient struct {
 	c client.Client
 }
@@ -688,16 +534,6 @@ func (p *kClient) SearchUser(ctx context.Context, Req *core_api.SearchUserReq) (
 	_args.Req = Req
 	var _result SearchUserResult
 	if err = p.c.Call(ctx, "SearchUser", &_args, &_result); err != nil {
-		return
-	}
-	return _result.GetSuccess(), nil
-}
-
-func (p *kClient) SearchUserForAdmin(ctx context.Context, Req *core_api.SearchUserForAdminReq) (r *core_api.SearchUserForAdminResp, err error) {
-	var _args SearchUserForAdminArgs
-	_args.Req = Req
-	var _result SearchUserForAdminResult
-	if err = p.c.Call(ctx, "SearchUserForAdmin", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

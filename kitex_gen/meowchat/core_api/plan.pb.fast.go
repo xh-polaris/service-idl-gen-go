@@ -182,6 +182,11 @@ func (x *GetPlanPreviewsReq) FastRead(buf []byte, _type int8, number int32) (off
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 4:
+		offset, err = x.fastReadField4(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -208,6 +213,12 @@ func (x *GetPlanPreviewsReq) fastReadField2(buf []byte, _type int8) (offset int,
 }
 
 func (x *GetPlanPreviewsReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.Keyword = &tmp
+	return offset, err
+}
+
+func (x *GetPlanPreviewsReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 	var v basic.PaginationOptions
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -504,109 +515,6 @@ ReadFieldError:
 
 func (x *NewPlanResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.PlanId, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *SearchPlanReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 4:
-		offset, err = x.fastReadField4(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 5:
-		offset, err = x.fastReadField5(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_SearchPlanReq[number], err)
-}
-
-func (x *SearchPlanReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	tmp, offset, err := fastpb.ReadString(buf, _type)
-	x.CatId = &tmp
-	return offset, err
-}
-
-func (x *SearchPlanReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	tmp, offset, err := fastpb.ReadString(buf, _type)
-	x.OnlyUserId = &tmp
-	return offset, err
-}
-
-func (x *SearchPlanReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	tmp, offset, err := fastpb.ReadString(buf, _type)
-	x.Keyword = &tmp
-	return offset, err
-}
-
-func (x *SearchPlanReq) fastReadField5(buf []byte, _type int8) (offset int, err error) {
-	var v basic.PaginationOptions
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.PaginationOption = &v
-	return offset, nil
-}
-
-func (x *SearchPlanResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 2:
-		offset, err = x.fastReadField2(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_SearchPlanResp[number], err)
-}
-
-func (x *SearchPlanResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v Plan
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Plans = append(x.Plans, &v)
-	return offset, nil
-}
-
-func (x *SearchPlanResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -917,6 +825,7 @@ func (x *GetPlanPreviewsReq) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField4(buf[offset:])
 	return offset
 }
 
@@ -937,10 +846,18 @@ func (x *GetPlanPreviewsReq) fastWriteField2(buf []byte) (offset int) {
 }
 
 func (x *GetPlanPreviewsReq) fastWriteField3(buf []byte) (offset int) {
+	if x.Keyword == nil {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetKeyword())
+	return offset
+}
+
+func (x *GetPlanPreviewsReq) fastWriteField4(buf []byte) (offset int) {
 	if x.PaginationOption == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetPaginationOption())
+	offset += fastpb.WriteMessage(buf[offset:], 4, x.GetPaginationOption())
 	return offset
 }
 
@@ -1138,76 +1055,6 @@ func (x *NewPlanResp) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 1, x.GetPlanId())
-	return offset
-}
-
-func (x *SearchPlanReq) FastWrite(buf []byte) (offset int) {
-	if x == nil {
-		return offset
-	}
-	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
-	offset += x.fastWriteField4(buf[offset:])
-	offset += x.fastWriteField5(buf[offset:])
-	return offset
-}
-
-func (x *SearchPlanReq) fastWriteField1(buf []byte) (offset int) {
-	if x.CatId == nil {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetCatId())
-	return offset
-}
-
-func (x *SearchPlanReq) fastWriteField3(buf []byte) (offset int) {
-	if x.OnlyUserId == nil {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetOnlyUserId())
-	return offset
-}
-
-func (x *SearchPlanReq) fastWriteField4(buf []byte) (offset int) {
-	if x.Keyword == nil {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 4, x.GetKeyword())
-	return offset
-}
-
-func (x *SearchPlanReq) fastWriteField5(buf []byte) (offset int) {
-	if x.PaginationOption == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 5, x.GetPaginationOption())
-	return offset
-}
-
-func (x *SearchPlanResp) FastWrite(buf []byte) (offset int) {
-	if x == nil {
-		return offset
-	}
-	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField2(buf[offset:])
-	return offset
-}
-
-func (x *SearchPlanResp) fastWriteField1(buf []byte) (offset int) {
-	if x.Plans == nil {
-		return offset
-	}
-	for i := range x.GetPlans() {
-		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetPlans()[i])
-	}
-	return offset
-}
-
-func (x *SearchPlanResp) fastWriteField2(buf []byte) (offset int) {
-	if x.Total == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetTotal())
 	return offset
 }
 
@@ -1452,6 +1299,7 @@ func (x *GetPlanPreviewsReq) Size() (n int) {
 	n += x.sizeField1()
 	n += x.sizeField2()
 	n += x.sizeField3()
+	n += x.sizeField4()
 	return n
 }
 
@@ -1472,10 +1320,18 @@ func (x *GetPlanPreviewsReq) sizeField2() (n int) {
 }
 
 func (x *GetPlanPreviewsReq) sizeField3() (n int) {
+	if x.Keyword == nil {
+		return n
+	}
+	n += fastpb.SizeString(3, x.GetKeyword())
+	return n
+}
+
+func (x *GetPlanPreviewsReq) sizeField4() (n int) {
 	if x.PaginationOption == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(3, x.GetPaginationOption())
+	n += fastpb.SizeMessage(4, x.GetPaginationOption())
 	return n
 }
 
@@ -1676,76 +1532,6 @@ func (x *NewPlanResp) sizeField1() (n int) {
 	return n
 }
 
-func (x *SearchPlanReq) Size() (n int) {
-	if x == nil {
-		return n
-	}
-	n += x.sizeField1()
-	n += x.sizeField3()
-	n += x.sizeField4()
-	n += x.sizeField5()
-	return n
-}
-
-func (x *SearchPlanReq) sizeField1() (n int) {
-	if x.CatId == nil {
-		return n
-	}
-	n += fastpb.SizeString(1, x.GetCatId())
-	return n
-}
-
-func (x *SearchPlanReq) sizeField3() (n int) {
-	if x.OnlyUserId == nil {
-		return n
-	}
-	n += fastpb.SizeString(3, x.GetOnlyUserId())
-	return n
-}
-
-func (x *SearchPlanReq) sizeField4() (n int) {
-	if x.Keyword == nil {
-		return n
-	}
-	n += fastpb.SizeString(4, x.GetKeyword())
-	return n
-}
-
-func (x *SearchPlanReq) sizeField5() (n int) {
-	if x.PaginationOption == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(5, x.GetPaginationOption())
-	return n
-}
-
-func (x *SearchPlanResp) Size() (n int) {
-	if x == nil {
-		return n
-	}
-	n += x.sizeField1()
-	n += x.sizeField2()
-	return n
-}
-
-func (x *SearchPlanResp) sizeField1() (n int) {
-	if x.Plans == nil {
-		return n
-	}
-	for i := range x.GetPlans() {
-		n += fastpb.SizeMessage(1, x.GetPlans()[i])
-	}
-	return n
-}
-
-func (x *SearchPlanResp) sizeField2() (n int) {
-	if x.Total == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(2, x.GetTotal())
-	return n
-}
-
 func (x *DonateFishReq) Size() (n int) {
 	if x == nil {
 		return n
@@ -1879,7 +1665,8 @@ var fieldIDToName_Plan = map[int32]string{
 var fieldIDToName_GetPlanPreviewsReq = map[int32]string{
 	1: "CatId",
 	2: "OnlyUserId",
-	3: "PaginationOption",
+	3: "Keyword",
+	4: "PaginationOption",
 }
 
 var fieldIDToName_GetPlanPreviewsResp = map[int32]string{
@@ -1916,18 +1703,6 @@ var fieldIDToName_NewPlanReq = map[int32]string{
 
 var fieldIDToName_NewPlanResp = map[int32]string{
 	1: "PlanId",
-}
-
-var fieldIDToName_SearchPlanReq = map[int32]string{
-	1: "CatId",
-	3: "OnlyUserId",
-	4: "Keyword",
-	5: "PaginationOption",
-}
-
-var fieldIDToName_SearchPlanResp = map[int32]string{
-	1: "Plans",
-	2: "Total",
 }
 
 var fieldIDToName_DonateFishReq = map[int32]string{

@@ -15,7 +15,6 @@ type Client interface {
 	GetPlanDetail(ctx context.Context, Req *core_api.GetPlanDetailReq, callOptions ...callopt.Option) (r *core_api.GetPlanDetailResp, err error)
 	NewPlan(ctx context.Context, Req *core_api.NewPlanReq, callOptions ...callopt.Option) (r *core_api.NewPlanResp, err error)
 	DeletePlan(ctx context.Context, Req *core_api.DeletePlanReq, callOptions ...callopt.Option) (r *core_api.DeletePlanResp, err error)
-	SearchPlan(ctx context.Context, Req *core_api.SearchPlanReq, callOptions ...callopt.Option) (r *core_api.SearchPlanResp, err error)
 	DonateFish(ctx context.Context, Req *core_api.DonateFishReq, callOptions ...callopt.Option) (r *core_api.DonateFishResp, err error)
 	GetUserFish(ctx context.Context, Req *core_api.GetUserFishReq, callOptions ...callopt.Option) (r *core_api.GetUserFishResp, err error)
 	ListFishByPlan(ctx context.Context, Req *core_api.ListFishByPlanReq, callOptions ...callopt.Option) (r *core_api.ListFishByPlanResp, err error)
@@ -68,11 +67,6 @@ func (p *kPlanClient) NewPlan(ctx context.Context, Req *core_api.NewPlanReq, cal
 func (p *kPlanClient) DeletePlan(ctx context.Context, Req *core_api.DeletePlanReq, callOptions ...callopt.Option) (r *core_api.DeletePlanResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.DeletePlan(ctx, Req)
-}
-
-func (p *kPlanClient) SearchPlan(ctx context.Context, Req *core_api.SearchPlanReq, callOptions ...callopt.Option) (r *core_api.SearchPlanResp, err error) {
-	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.SearchPlan(ctx, Req)
 }
 
 func (p *kPlanClient) DonateFish(ctx context.Context, Req *core_api.DonateFishReq, callOptions ...callopt.Option) (r *core_api.DonateFishResp, err error) {

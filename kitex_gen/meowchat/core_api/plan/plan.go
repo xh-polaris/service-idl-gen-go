@@ -25,7 +25,6 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		"GetPlanDetail":   kitex.NewMethodInfo(getPlanDetailHandler, newGetPlanDetailArgs, newGetPlanDetailResult, false),
 		"NewPlan":         kitex.NewMethodInfo(newPlanHandler, newNewPlanArgs, newNewPlanResult, false),
 		"DeletePlan":      kitex.NewMethodInfo(deletePlanHandler, newDeletePlanArgs, newDeletePlanResult, false),
-		"SearchPlan":      kitex.NewMethodInfo(searchPlanHandler, newSearchPlanArgs, newSearchPlanResult, false),
 		"DonateFish":      kitex.NewMethodInfo(donateFishHandler, newDonateFishArgs, newDonateFishResult, false),
 		"GetUserFish":     kitex.NewMethodInfo(getUserFishHandler, newGetUserFishArgs, newGetUserFishResult, false),
 		"ListFishByPlan":  kitex.NewMethodInfo(listFishByPlanHandler, newListFishByPlanArgs, newListFishByPlanResult, false),
@@ -657,159 +656,6 @@ func (p *DeletePlanResult) GetResult() interface{} {
 	return p.Success
 }
 
-func searchPlanHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	switch s := arg.(type) {
-	case *streaming.Args:
-		st := s.Stream
-		req := new(core_api.SearchPlanReq)
-		if err := st.RecvMsg(req); err != nil {
-			return err
-		}
-		resp, err := handler.(core_api.Plan).SearchPlan(ctx, req)
-		if err != nil {
-			return err
-		}
-		if err := st.SendMsg(resp); err != nil {
-			return err
-		}
-	case *SearchPlanArgs:
-		success, err := handler.(core_api.Plan).SearchPlan(ctx, s.Req)
-		if err != nil {
-			return err
-		}
-		realResult := result.(*SearchPlanResult)
-		realResult.Success = success
-	}
-	return nil
-}
-func newSearchPlanArgs() interface{} {
-	return &SearchPlanArgs{}
-}
-
-func newSearchPlanResult() interface{} {
-	return &SearchPlanResult{}
-}
-
-type SearchPlanArgs struct {
-	Req *core_api.SearchPlanReq
-}
-
-func (p *SearchPlanArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetReq() {
-		p.Req = new(core_api.SearchPlanReq)
-	}
-	return p.Req.FastRead(buf, _type, number)
-}
-
-func (p *SearchPlanArgs) FastWrite(buf []byte) (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.FastWrite(buf)
-}
-
-func (p *SearchPlanArgs) Size() (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.Size()
-}
-
-func (p *SearchPlanArgs) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetReq() {
-		return out, nil
-	}
-	return proto.Marshal(p.Req)
-}
-
-func (p *SearchPlanArgs) Unmarshal(in []byte) error {
-	msg := new(core_api.SearchPlanReq)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Req = msg
-	return nil
-}
-
-var SearchPlanArgs_Req_DEFAULT *core_api.SearchPlanReq
-
-func (p *SearchPlanArgs) GetReq() *core_api.SearchPlanReq {
-	if !p.IsSetReq() {
-		return SearchPlanArgs_Req_DEFAULT
-	}
-	return p.Req
-}
-
-func (p *SearchPlanArgs) IsSetReq() bool {
-	return p.Req != nil
-}
-
-func (p *SearchPlanArgs) GetFirstArgument() interface{} {
-	return p.Req
-}
-
-type SearchPlanResult struct {
-	Success *core_api.SearchPlanResp
-}
-
-var SearchPlanResult_Success_DEFAULT *core_api.SearchPlanResp
-
-func (p *SearchPlanResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetSuccess() {
-		p.Success = new(core_api.SearchPlanResp)
-	}
-	return p.Success.FastRead(buf, _type, number)
-}
-
-func (p *SearchPlanResult) FastWrite(buf []byte) (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.FastWrite(buf)
-}
-
-func (p *SearchPlanResult) Size() (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.Size()
-}
-
-func (p *SearchPlanResult) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetSuccess() {
-		return out, nil
-	}
-	return proto.Marshal(p.Success)
-}
-
-func (p *SearchPlanResult) Unmarshal(in []byte) error {
-	msg := new(core_api.SearchPlanResp)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Success = msg
-	return nil
-}
-
-func (p *SearchPlanResult) GetSuccess() *core_api.SearchPlanResp {
-	if !p.IsSetSuccess() {
-		return SearchPlanResult_Success_DEFAULT
-	}
-	return p.Success
-}
-
-func (p *SearchPlanResult) SetSuccess(x interface{}) {
-	p.Success = x.(*core_api.SearchPlanResp)
-}
-
-func (p *SearchPlanResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *SearchPlanResult) GetResult() interface{} {
-	return p.Success
-}
-
 func donateFishHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -1314,16 +1160,6 @@ func (p *kClient) DeletePlan(ctx context.Context, Req *core_api.DeletePlanReq) (
 	_args.Req = Req
 	var _result DeletePlanResult
 	if err = p.c.Call(ctx, "DeletePlan", &_args, &_result); err != nil {
-		return
-	}
-	return _result.GetSuccess(), nil
-}
-
-func (p *kClient) SearchPlan(ctx context.Context, Req *core_api.SearchPlanReq) (r *core_api.SearchPlanResp, err error) {
-	var _args SearchPlanArgs
-	_args.Req = Req
-	var _result SearchPlanResult
-	if err = p.c.Call(ctx, "SearchPlan", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
