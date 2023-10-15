@@ -21,14 +21,14 @@ func NewServiceInfo() *kitex.ServiceInfo {
 	serviceName := "CommentService"
 	handlerType := (*comment.CommentService)(nil)
 	methods := map[string]kitex.MethodInfo{
-		"createComment":                     kitex.NewMethodInfo(createCommentHandler, newCreateCommentArgs, newCreateCommentResult, false),
-		"updateComment":                     kitex.NewMethodInfo(updateCommentHandler, newUpdateCommentArgs, newUpdateCommentResult, false),
-		"deleteComment":                     kitex.NewMethodInfo(deleteCommentHandler, newDeleteCommentArgs, newDeleteCommentResult, false),
-		"listCommentByParentOrFirstLevelId": kitex.NewMethodInfo(listCommentByParentOrFirstLevelIdHandler, newListCommentByParentOrFirstLevelIdArgs, newListCommentByParentOrFirstLevelIdResult, false),
-		"countCommentByParent":              kitex.NewMethodInfo(countCommentByParentHandler, newCountCommentByParentArgs, newCountCommentByParentResult, false),
-		"retrieveCommentById":               kitex.NewMethodInfo(retrieveCommentByIdHandler, newRetrieveCommentByIdArgs, newRetrieveCommentByIdResult, false),
-		"listCommentByAuthorIdAndType":      kitex.NewMethodInfo(listCommentByAuthorIdAndTypeHandler, newListCommentByAuthorIdAndTypeArgs, newListCommentByAuthorIdAndTypeResult, false),
-		"listCommentByReplyToAndType":       kitex.NewMethodInfo(listCommentByReplyToAndTypeHandler, newListCommentByReplyToAndTypeArgs, newListCommentByReplyToAndTypeResult, false),
+		"createComment":                kitex.NewMethodInfo(createCommentHandler, newCreateCommentArgs, newCreateCommentResult, false),
+		"updateComment":                kitex.NewMethodInfo(updateCommentHandler, newUpdateCommentArgs, newUpdateCommentResult, false),
+		"deleteComment":                kitex.NewMethodInfo(deleteCommentHandler, newDeleteCommentArgs, newDeleteCommentResult, false),
+		"listCommentByParent":          kitex.NewMethodInfo(listCommentByParentHandler, newListCommentByParentArgs, newListCommentByParentResult, false),
+		"countCommentByParent":         kitex.NewMethodInfo(countCommentByParentHandler, newCountCommentByParentArgs, newCountCommentByParentResult, false),
+		"retrieveCommentById":          kitex.NewMethodInfo(retrieveCommentByIdHandler, newRetrieveCommentByIdArgs, newRetrieveCommentByIdResult, false),
+		"listCommentByAuthorIdAndType": kitex.NewMethodInfo(listCommentByAuthorIdAndTypeHandler, newListCommentByAuthorIdAndTypeArgs, newListCommentByAuthorIdAndTypeResult, false),
+		"listCommentByReplyToAndType":  kitex.NewMethodInfo(listCommentByReplyToAndTypeHandler, newListCommentByReplyToAndTypeArgs, newListCommentByReplyToAndTypeResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName":     "platform.comment",
@@ -504,73 +504,73 @@ func (p *DeleteCommentResult) GetResult() interface{} {
 	return p.Success
 }
 
-func listCommentByParentOrFirstLevelIdHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+func listCommentByParentHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(comment.ListCommentByParentOrFirstLevelIdReq)
+		req := new(comment.ListCommentByParentReq)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
-		resp, err := handler.(comment.CommentService).ListCommentByParentOrFirstLevelId(ctx, req)
+		resp, err := handler.(comment.CommentService).ListCommentByParent(ctx, req)
 		if err != nil {
 			return err
 		}
 		if err := st.SendMsg(resp); err != nil {
 			return err
 		}
-	case *ListCommentByParentOrFirstLevelIdArgs:
-		success, err := handler.(comment.CommentService).ListCommentByParentOrFirstLevelId(ctx, s.Req)
+	case *ListCommentByParentArgs:
+		success, err := handler.(comment.CommentService).ListCommentByParent(ctx, s.Req)
 		if err != nil {
 			return err
 		}
-		realResult := result.(*ListCommentByParentOrFirstLevelIdResult)
+		realResult := result.(*ListCommentByParentResult)
 		realResult.Success = success
 	}
 	return nil
 }
-func newListCommentByParentOrFirstLevelIdArgs() interface{} {
-	return &ListCommentByParentOrFirstLevelIdArgs{}
+func newListCommentByParentArgs() interface{} {
+	return &ListCommentByParentArgs{}
 }
 
-func newListCommentByParentOrFirstLevelIdResult() interface{} {
-	return &ListCommentByParentOrFirstLevelIdResult{}
+func newListCommentByParentResult() interface{} {
+	return &ListCommentByParentResult{}
 }
 
-type ListCommentByParentOrFirstLevelIdArgs struct {
-	Req *comment.ListCommentByParentOrFirstLevelIdReq
+type ListCommentByParentArgs struct {
+	Req *comment.ListCommentByParentReq
 }
 
-func (p *ListCommentByParentOrFirstLevelIdArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *ListCommentByParentArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(comment.ListCommentByParentOrFirstLevelIdReq)
+		p.Req = new(comment.ListCommentByParentReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
 
-func (p *ListCommentByParentOrFirstLevelIdArgs) FastWrite(buf []byte) (n int) {
+func (p *ListCommentByParentArgs) FastWrite(buf []byte) (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.FastWrite(buf)
 }
 
-func (p *ListCommentByParentOrFirstLevelIdArgs) Size() (n int) {
+func (p *ListCommentByParentArgs) Size() (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.Size()
 }
 
-func (p *ListCommentByParentOrFirstLevelIdArgs) Marshal(out []byte) ([]byte, error) {
+func (p *ListCommentByParentArgs) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetReq() {
 		return out, nil
 	}
 	return proto.Marshal(p.Req)
 }
 
-func (p *ListCommentByParentOrFirstLevelIdArgs) Unmarshal(in []byte) error {
-	msg := new(comment.ListCommentByParentOrFirstLevelIdReq)
+func (p *ListCommentByParentArgs) Unmarshal(in []byte) error {
+	msg := new(comment.ListCommentByParentReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -578,59 +578,59 @@ func (p *ListCommentByParentOrFirstLevelIdArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var ListCommentByParentOrFirstLevelIdArgs_Req_DEFAULT *comment.ListCommentByParentOrFirstLevelIdReq
+var ListCommentByParentArgs_Req_DEFAULT *comment.ListCommentByParentReq
 
-func (p *ListCommentByParentOrFirstLevelIdArgs) GetReq() *comment.ListCommentByParentOrFirstLevelIdReq {
+func (p *ListCommentByParentArgs) GetReq() *comment.ListCommentByParentReq {
 	if !p.IsSetReq() {
-		return ListCommentByParentOrFirstLevelIdArgs_Req_DEFAULT
+		return ListCommentByParentArgs_Req_DEFAULT
 	}
 	return p.Req
 }
 
-func (p *ListCommentByParentOrFirstLevelIdArgs) IsSetReq() bool {
+func (p *ListCommentByParentArgs) IsSetReq() bool {
 	return p.Req != nil
 }
 
-func (p *ListCommentByParentOrFirstLevelIdArgs) GetFirstArgument() interface{} {
+func (p *ListCommentByParentArgs) GetFirstArgument() interface{} {
 	return p.Req
 }
 
-type ListCommentByParentOrFirstLevelIdResult struct {
-	Success *comment.ListCommentByParentOrFirstLevelIdResp
+type ListCommentByParentResult struct {
+	Success *comment.ListCommentByParentResp
 }
 
-var ListCommentByParentOrFirstLevelIdResult_Success_DEFAULT *comment.ListCommentByParentOrFirstLevelIdResp
+var ListCommentByParentResult_Success_DEFAULT *comment.ListCommentByParentResp
 
-func (p *ListCommentByParentOrFirstLevelIdResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *ListCommentByParentResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(comment.ListCommentByParentOrFirstLevelIdResp)
+		p.Success = new(comment.ListCommentByParentResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
 
-func (p *ListCommentByParentOrFirstLevelIdResult) FastWrite(buf []byte) (n int) {
+func (p *ListCommentByParentResult) FastWrite(buf []byte) (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.FastWrite(buf)
 }
 
-func (p *ListCommentByParentOrFirstLevelIdResult) Size() (n int) {
+func (p *ListCommentByParentResult) Size() (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.Size()
 }
 
-func (p *ListCommentByParentOrFirstLevelIdResult) Marshal(out []byte) ([]byte, error) {
+func (p *ListCommentByParentResult) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetSuccess() {
 		return out, nil
 	}
 	return proto.Marshal(p.Success)
 }
 
-func (p *ListCommentByParentOrFirstLevelIdResult) Unmarshal(in []byte) error {
-	msg := new(comment.ListCommentByParentOrFirstLevelIdResp)
+func (p *ListCommentByParentResult) Unmarshal(in []byte) error {
+	msg := new(comment.ListCommentByParentResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -638,22 +638,22 @@ func (p *ListCommentByParentOrFirstLevelIdResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *ListCommentByParentOrFirstLevelIdResult) GetSuccess() *comment.ListCommentByParentOrFirstLevelIdResp {
+func (p *ListCommentByParentResult) GetSuccess() *comment.ListCommentByParentResp {
 	if !p.IsSetSuccess() {
-		return ListCommentByParentOrFirstLevelIdResult_Success_DEFAULT
+		return ListCommentByParentResult_Success_DEFAULT
 	}
 	return p.Success
 }
 
-func (p *ListCommentByParentOrFirstLevelIdResult) SetSuccess(x interface{}) {
-	p.Success = x.(*comment.ListCommentByParentOrFirstLevelIdResp)
+func (p *ListCommentByParentResult) SetSuccess(x interface{}) {
+	p.Success = x.(*comment.ListCommentByParentResp)
 }
 
-func (p *ListCommentByParentOrFirstLevelIdResult) IsSetSuccess() bool {
+func (p *ListCommentByParentResult) IsSetSuccess() bool {
 	return p.Success != nil
 }
 
-func (p *ListCommentByParentOrFirstLevelIdResult) GetResult() interface{} {
+func (p *ListCommentByParentResult) GetResult() interface{} {
 	return p.Success
 }
 
@@ -1309,11 +1309,11 @@ func (p *kClient) DeleteComment(ctx context.Context, Req *comment.DeleteCommentB
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) ListCommentByParentOrFirstLevelId(ctx context.Context, Req *comment.ListCommentByParentOrFirstLevelIdReq) (r *comment.ListCommentByParentOrFirstLevelIdResp, err error) {
-	var _args ListCommentByParentOrFirstLevelIdArgs
+func (p *kClient) ListCommentByParent(ctx context.Context, Req *comment.ListCommentByParentReq) (r *comment.ListCommentByParentResp, err error) {
+	var _args ListCommentByParentArgs
 	_args.Req = Req
-	var _result ListCommentByParentOrFirstLevelIdResult
-	if err = p.c.Call(ctx, "listCommentByParentOrFirstLevelId", &_args, &_result); err != nil {
+	var _result ListCommentByParentResult
+	if err = p.c.Call(ctx, "listCommentByParent", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

@@ -213,7 +213,7 @@ SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 }
 
-func (x *ListCommentByParentOrFirstLevelIdReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *ListCommentByParentReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -235,6 +235,11 @@ func (x *ListCommentByParentOrFirstLevelIdReq) FastRead(buf []byte, _type int8, 
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 5:
+		offset, err = x.fastReadField5(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -245,10 +250,10 @@ func (x *ListCommentByParentOrFirstLevelIdReq) FastRead(buf []byte, _type int8, 
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListCommentByParentOrFirstLevelIdReq[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListCommentByParentReq[number], err)
 }
 
-func (x *ListCommentByParentOrFirstLevelIdReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByParentReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	var v int32
 	v, offset, err = fastpb.ReadInt32(buf, _type)
 	if err != nil {
@@ -258,22 +263,28 @@ func (x *ListCommentByParentOrFirstLevelIdReq) fastReadField1(buf []byte, _type 
 	return offset, nil
 }
 
-func (x *ListCommentByParentOrFirstLevelIdReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByParentReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Id, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *ListCommentByParentOrFirstLevelIdReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByParentReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	x.Skip, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *ListCommentByParentOrFirstLevelIdReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByParentReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 	x.Limit, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *ListCommentByParentOrFirstLevelIdResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *ListCommentByParentReq) fastReadField5(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadBool(buf, _type)
+	x.OnlyFirstLevel = &tmp
+	return offset, err
+}
+
+func (x *ListCommentByParentResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -295,10 +306,10 @@ func (x *ListCommentByParentOrFirstLevelIdResp) FastRead(buf []byte, _type int8,
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListCommentByParentOrFirstLevelIdResp[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListCommentByParentResp[number], err)
 }
 
-func (x *ListCommentByParentOrFirstLevelIdResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByParentResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	var v Comment
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -308,7 +319,7 @@ func (x *ListCommentByParentOrFirstLevelIdResp) fastReadField1(buf []byte, _type
 	return offset, nil
 }
 
-func (x *ListCommentByParentOrFirstLevelIdResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+func (x *ListCommentByParentResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
@@ -322,6 +333,11 @@ func (x *CountCommentByParentReq) FastRead(buf []byte, _type int8, number int32)
 		}
 	case 2:
 		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -350,6 +366,12 @@ func (x *CountCommentByParentReq) fastReadField1(buf []byte, _type int8) (offset
 
 func (x *CountCommentByParentReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.ParentId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *CountCommentByParentReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadBool(buf, _type)
+	x.OnlyFirstLevel = &tmp
 	return offset, err
 }
 
@@ -774,7 +796,7 @@ func (x *DeleteCommentByIdResp) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *ListCommentByParentOrFirstLevelIdReq) FastWrite(buf []byte) (offset int) {
+func (x *ListCommentByParentReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -782,10 +804,11 @@ func (x *ListCommentByParentOrFirstLevelIdReq) FastWrite(buf []byte) (offset int
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
+	offset += x.fastWriteField5(buf[offset:])
 	return offset
 }
 
-func (x *ListCommentByParentOrFirstLevelIdReq) fastWriteField1(buf []byte) (offset int) {
+func (x *ListCommentByParentReq) fastWriteField1(buf []byte) (offset int) {
 	if x.Type == 0 {
 		return offset
 	}
@@ -793,7 +816,7 @@ func (x *ListCommentByParentOrFirstLevelIdReq) fastWriteField1(buf []byte) (offs
 	return offset
 }
 
-func (x *ListCommentByParentOrFirstLevelIdReq) fastWriteField2(buf []byte) (offset int) {
+func (x *ListCommentByParentReq) fastWriteField2(buf []byte) (offset int) {
 	if x.Id == "" {
 		return offset
 	}
@@ -801,7 +824,7 @@ func (x *ListCommentByParentOrFirstLevelIdReq) fastWriteField2(buf []byte) (offs
 	return offset
 }
 
-func (x *ListCommentByParentOrFirstLevelIdReq) fastWriteField3(buf []byte) (offset int) {
+func (x *ListCommentByParentReq) fastWriteField3(buf []byte) (offset int) {
 	if x.Skip == 0 {
 		return offset
 	}
@@ -809,7 +832,7 @@ func (x *ListCommentByParentOrFirstLevelIdReq) fastWriteField3(buf []byte) (offs
 	return offset
 }
 
-func (x *ListCommentByParentOrFirstLevelIdReq) fastWriteField4(buf []byte) (offset int) {
+func (x *ListCommentByParentReq) fastWriteField4(buf []byte) (offset int) {
 	if x.Limit == 0 {
 		return offset
 	}
@@ -817,7 +840,15 @@ func (x *ListCommentByParentOrFirstLevelIdReq) fastWriteField4(buf []byte) (offs
 	return offset
 }
 
-func (x *ListCommentByParentOrFirstLevelIdResp) FastWrite(buf []byte) (offset int) {
+func (x *ListCommentByParentReq) fastWriteField5(buf []byte) (offset int) {
+	if x.OnlyFirstLevel == nil {
+		return offset
+	}
+	offset += fastpb.WriteBool(buf[offset:], 5, x.GetOnlyFirstLevel())
+	return offset
+}
+
+func (x *ListCommentByParentResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -826,7 +857,7 @@ func (x *ListCommentByParentOrFirstLevelIdResp) FastWrite(buf []byte) (offset in
 	return offset
 }
 
-func (x *ListCommentByParentOrFirstLevelIdResp) fastWriteField1(buf []byte) (offset int) {
+func (x *ListCommentByParentResp) fastWriteField1(buf []byte) (offset int) {
 	if x.Comments == nil {
 		return offset
 	}
@@ -836,7 +867,7 @@ func (x *ListCommentByParentOrFirstLevelIdResp) fastWriteField1(buf []byte) (off
 	return offset
 }
 
-func (x *ListCommentByParentOrFirstLevelIdResp) fastWriteField2(buf []byte) (offset int) {
+func (x *ListCommentByParentResp) fastWriteField2(buf []byte) (offset int) {
 	if x.Total == 0 {
 		return offset
 	}
@@ -850,6 +881,7 @@ func (x *CountCommentByParentReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
@@ -866,6 +898,14 @@ func (x *CountCommentByParentReq) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 2, x.GetParentId())
+	return offset
+}
+
+func (x *CountCommentByParentReq) fastWriteField3(buf []byte) (offset int) {
+	if x.OnlyFirstLevel == nil {
+		return offset
+	}
+	offset += fastpb.WriteBool(buf[offset:], 3, x.GetOnlyFirstLevel())
 	return offset
 }
 
@@ -1198,7 +1238,7 @@ func (x *DeleteCommentByIdResp) Size() (n int) {
 	return n
 }
 
-func (x *ListCommentByParentOrFirstLevelIdReq) Size() (n int) {
+func (x *ListCommentByParentReq) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -1206,10 +1246,11 @@ func (x *ListCommentByParentOrFirstLevelIdReq) Size() (n int) {
 	n += x.sizeField2()
 	n += x.sizeField3()
 	n += x.sizeField4()
+	n += x.sizeField5()
 	return n
 }
 
-func (x *ListCommentByParentOrFirstLevelIdReq) sizeField1() (n int) {
+func (x *ListCommentByParentReq) sizeField1() (n int) {
 	if x.Type == 0 {
 		return n
 	}
@@ -1217,7 +1258,7 @@ func (x *ListCommentByParentOrFirstLevelIdReq) sizeField1() (n int) {
 	return n
 }
 
-func (x *ListCommentByParentOrFirstLevelIdReq) sizeField2() (n int) {
+func (x *ListCommentByParentReq) sizeField2() (n int) {
 	if x.Id == "" {
 		return n
 	}
@@ -1225,7 +1266,7 @@ func (x *ListCommentByParentOrFirstLevelIdReq) sizeField2() (n int) {
 	return n
 }
 
-func (x *ListCommentByParentOrFirstLevelIdReq) sizeField3() (n int) {
+func (x *ListCommentByParentReq) sizeField3() (n int) {
 	if x.Skip == 0 {
 		return n
 	}
@@ -1233,7 +1274,7 @@ func (x *ListCommentByParentOrFirstLevelIdReq) sizeField3() (n int) {
 	return n
 }
 
-func (x *ListCommentByParentOrFirstLevelIdReq) sizeField4() (n int) {
+func (x *ListCommentByParentReq) sizeField4() (n int) {
 	if x.Limit == 0 {
 		return n
 	}
@@ -1241,7 +1282,15 @@ func (x *ListCommentByParentOrFirstLevelIdReq) sizeField4() (n int) {
 	return n
 }
 
-func (x *ListCommentByParentOrFirstLevelIdResp) Size() (n int) {
+func (x *ListCommentByParentReq) sizeField5() (n int) {
+	if x.OnlyFirstLevel == nil {
+		return n
+	}
+	n += fastpb.SizeBool(5, x.GetOnlyFirstLevel())
+	return n
+}
+
+func (x *ListCommentByParentResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -1250,7 +1299,7 @@ func (x *ListCommentByParentOrFirstLevelIdResp) Size() (n int) {
 	return n
 }
 
-func (x *ListCommentByParentOrFirstLevelIdResp) sizeField1() (n int) {
+func (x *ListCommentByParentResp) sizeField1() (n int) {
 	if x.Comments == nil {
 		return n
 	}
@@ -1260,7 +1309,7 @@ func (x *ListCommentByParentOrFirstLevelIdResp) sizeField1() (n int) {
 	return n
 }
 
-func (x *ListCommentByParentOrFirstLevelIdResp) sizeField2() (n int) {
+func (x *ListCommentByParentResp) sizeField2() (n int) {
 	if x.Total == 0 {
 		return n
 	}
@@ -1274,6 +1323,7 @@ func (x *CountCommentByParentReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
@@ -1290,6 +1340,14 @@ func (x *CountCommentByParentReq) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(2, x.GetParentId())
+	return n
+}
+
+func (x *CountCommentByParentReq) sizeField3() (n int) {
+	if x.OnlyFirstLevel == nil {
+		return n
+	}
+	n += fastpb.SizeBool(3, x.GetOnlyFirstLevel())
 	return n
 }
 
@@ -1508,14 +1566,15 @@ var fieldIDToName_DeleteCommentByIdReq = map[int32]string{
 
 var fieldIDToName_DeleteCommentByIdResp = map[int32]string{}
 
-var fieldIDToName_ListCommentByParentOrFirstLevelIdReq = map[int32]string{
+var fieldIDToName_ListCommentByParentReq = map[int32]string{
 	1: "Type",
 	2: "Id",
 	3: "Skip",
 	4: "Limit",
+	5: "OnlyFirstLevel",
 }
 
-var fieldIDToName_ListCommentByParentOrFirstLevelIdResp = map[int32]string{
+var fieldIDToName_ListCommentByParentResp = map[int32]string{
 	1: "Comments",
 	2: "Total",
 }
@@ -1523,6 +1582,7 @@ var fieldIDToName_ListCommentByParentOrFirstLevelIdResp = map[int32]string{
 var fieldIDToName_CountCommentByParentReq = map[int32]string{
 	1: "Type",
 	2: "ParentId",
+	3: "OnlyFirstLevel",
 }
 
 var fieldIDToName_CountCommentByParentResp = map[int32]string{

@@ -5,6 +5,7 @@ package core_api
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
+	comment "github.com/xh-polaris/service-idl-gen-go/kitex_gen/platform/comment"
 )
 
 var (
@@ -184,8 +185,13 @@ func (x *NewCommentReq) fastReadField3(buf []byte, _type int8) (offset int, err 
 }
 
 func (x *NewCommentReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	x.Scope, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
+	var v int32
+	v, offset, err = fastpb.ReadInt32(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.Type = comment.CommentType(v)
+	return offset, nil
 }
 
 func (x *NewCommentResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -249,8 +255,13 @@ func (x *GetCommentsReq) fastReadField1(buf []byte, _type int8) (offset int, err
 }
 
 func (x *GetCommentsReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.Scope, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
+	var v int32
+	v, offset, err = fastpb.ReadInt32(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.Type = comment.CommentType(v)
+	return offset, nil
 }
 
 func (x *GetCommentsReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
@@ -460,10 +471,10 @@ func (x *NewCommentReq) fastWriteField3(buf []byte) (offset int) {
 }
 
 func (x *NewCommentReq) fastWriteField4(buf []byte) (offset int) {
-	if x.Scope == "" {
+	if x.Type == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 4, x.GetScope())
+	offset += fastpb.WriteInt32(buf[offset:], 4, int32(x.GetType()))
 	return offset
 }
 
@@ -502,10 +513,10 @@ func (x *GetCommentsReq) fastWriteField1(buf []byte) (offset int) {
 }
 
 func (x *GetCommentsReq) fastWriteField2(buf []byte) (offset int) {
-	if x.Scope == "" {
+	if x.Type == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 2, x.GetScope())
+	offset += fastpb.WriteInt32(buf[offset:], 2, int32(x.GetType()))
 	return offset
 }
 
@@ -691,10 +702,10 @@ func (x *NewCommentReq) sizeField3() (n int) {
 }
 
 func (x *NewCommentReq) sizeField4() (n int) {
-	if x.Scope == "" {
+	if x.Type == 0 {
 		return n
 	}
-	n += fastpb.SizeString(4, x.GetScope())
+	n += fastpb.SizeInt32(4, int32(x.GetType()))
 	return n
 }
 
@@ -733,10 +744,10 @@ func (x *GetCommentsReq) sizeField1() (n int) {
 }
 
 func (x *GetCommentsReq) sizeField2() (n int) {
-	if x.Scope == "" {
+	if x.Type == 0 {
 		return n
 	}
-	n += fastpb.SizeString(2, x.GetScope())
+	n += fastpb.SizeInt32(2, int32(x.GetType()))
 	return n
 }
 
@@ -814,7 +825,7 @@ var fieldIDToName_NewCommentReq = map[int32]string{
 	1: "Id",
 	2: "FirstLevelId",
 	3: "Text",
-	4: "Scope",
+	4: "Type",
 }
 
 var fieldIDToName_NewCommentResp = map[int32]string{
@@ -823,7 +834,7 @@ var fieldIDToName_NewCommentResp = map[int32]string{
 
 var fieldIDToName_GetCommentsReq = map[int32]string{
 	1: "Id",
-	2: "Scope",
+	2: "Type",
 	3: "Page",
 }
 
@@ -837,3 +848,5 @@ var fieldIDToName_DeleteCommentReq = map[int32]string{
 }
 
 var fieldIDToName_DeleteCommentResp = map[int32]string{}
+
+var _ = comment.File_platform_comment_common_proto

@@ -14,7 +14,7 @@ type Client interface {
 	CreateComment(ctx context.Context, Req *comment.CreateCommentReq, callOptions ...callopt.Option) (r *comment.CreateCommentResp, err error)
 	UpdateComment(ctx context.Context, Req *comment.UpdateCommentReq, callOptions ...callopt.Option) (r *comment.UpdateCommentResp, err error)
 	DeleteComment(ctx context.Context, Req *comment.DeleteCommentByIdReq, callOptions ...callopt.Option) (r *comment.DeleteCommentByIdResp, err error)
-	ListCommentByParentOrFirstLevelId(ctx context.Context, Req *comment.ListCommentByParentOrFirstLevelIdReq, callOptions ...callopt.Option) (r *comment.ListCommentByParentOrFirstLevelIdResp, err error)
+	ListCommentByParent(ctx context.Context, Req *comment.ListCommentByParentReq, callOptions ...callopt.Option) (r *comment.ListCommentByParentResp, err error)
 	CountCommentByParent(ctx context.Context, Req *comment.CountCommentByParentReq, callOptions ...callopt.Option) (r *comment.CountCommentByParentResp, err error)
 	RetrieveCommentById(ctx context.Context, Req *comment.RetrieveCommentByIdReq, callOptions ...callopt.Option) (r *comment.RetrieveCommentByIdResp, err error)
 	ListCommentByAuthorIdAndType(ctx context.Context, Req *comment.ListCommentByAuthorIdAndTypeReq, callOptions ...callopt.Option) (r *comment.ListCommentByAuthorIdAndTypeResp, err error)
@@ -65,9 +65,9 @@ func (p *kCommentServiceClient) DeleteComment(ctx context.Context, Req *comment.
 	return p.kClient.DeleteComment(ctx, Req)
 }
 
-func (p *kCommentServiceClient) ListCommentByParentOrFirstLevelId(ctx context.Context, Req *comment.ListCommentByParentOrFirstLevelIdReq, callOptions ...callopt.Option) (r *comment.ListCommentByParentOrFirstLevelIdResp, err error) {
+func (p *kCommentServiceClient) ListCommentByParent(ctx context.Context, Req *comment.ListCommentByParentReq, callOptions ...callopt.Option) (r *comment.ListCommentByParentResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.ListCommentByParentOrFirstLevelId(ctx, Req)
+	return p.kClient.ListCommentByParent(ctx, Req)
 }
 
 func (p *kCommentServiceClient) CountCommentByParent(ctx context.Context, Req *comment.CountCommentByParentReq, callOptions ...callopt.Option) (r *comment.CountCommentByParentResp, err error) {
