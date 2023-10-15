@@ -135,6 +135,11 @@ func (x *NewCommentReq) FastRead(buf []byte, _type int8, number int32) (offset i
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 5:
+		offset, err = x.fastReadField5(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -160,11 +165,16 @@ func (x *NewCommentReq) fastReadField2(buf []byte, _type int8) (offset int, err 
 }
 
 func (x *NewCommentReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.Text, offset, err = fastpb.ReadString(buf, _type)
+	x.ReplyTo, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *NewCommentReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+	x.Text, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *NewCommentReq) fastReadField5(buf []byte, _type int8) (offset int, err error) {
 	x.Scope, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
@@ -404,6 +414,7 @@ func (x *NewCommentReq) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
+	offset += x.fastWriteField5(buf[offset:])
 	return offset
 }
 
@@ -424,18 +435,26 @@ func (x *NewCommentReq) fastWriteField2(buf []byte) (offset int) {
 }
 
 func (x *NewCommentReq) fastWriteField3(buf []byte) (offset int) {
-	if x.Text == "" {
+	if x.ReplyTo == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetText())
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetReplyTo())
 	return offset
 }
 
 func (x *NewCommentReq) fastWriteField4(buf []byte) (offset int) {
+	if x.Text == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 4, x.GetText())
+	return offset
+}
+
+func (x *NewCommentReq) fastWriteField5(buf []byte) (offset int) {
 	if x.Scope == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 4, x.GetScope())
+	offset += fastpb.WriteString(buf[offset:], 5, x.GetScope())
 	return offset
 }
 
@@ -626,6 +645,7 @@ func (x *NewCommentReq) Size() (n int) {
 	n += x.sizeField2()
 	n += x.sizeField3()
 	n += x.sizeField4()
+	n += x.sizeField5()
 	return n
 }
 
@@ -646,18 +666,26 @@ func (x *NewCommentReq) sizeField2() (n int) {
 }
 
 func (x *NewCommentReq) sizeField3() (n int) {
-	if x.Text == "" {
+	if x.ReplyTo == "" {
 		return n
 	}
-	n += fastpb.SizeString(3, x.GetText())
+	n += fastpb.SizeString(3, x.GetReplyTo())
 	return n
 }
 
 func (x *NewCommentReq) sizeField4() (n int) {
+	if x.Text == "" {
+		return n
+	}
+	n += fastpb.SizeString(4, x.GetText())
+	return n
+}
+
+func (x *NewCommentReq) sizeField5() (n int) {
 	if x.Scope == "" {
 		return n
 	}
-	n += fastpb.SizeString(4, x.GetScope())
+	n += fastpb.SizeString(5, x.GetScope())
 	return n
 }
 
@@ -775,8 +803,9 @@ var fieldIDToName_Comment = map[int32]string{
 var fieldIDToName_NewCommentReq = map[int32]string{
 	1: "Id",
 	2: "FirstLevelId",
-	3: "Text",
-	4: "Scope",
+	3: "ReplyTo",
+	4: "Text",
+	5: "Scope",
 }
 
 var fieldIDToName_NewCommentResp = map[int32]string{
