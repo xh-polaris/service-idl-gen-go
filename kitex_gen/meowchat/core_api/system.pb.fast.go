@@ -1096,7 +1096,8 @@ func (x *Community) fastReadField2(buf []byte, _type int8) (offset int, err erro
 }
 
 func (x *Community) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.ParentId, offset, err = fastpb.ReadString(buf, _type)
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.ParentId = &tmp
 	return offset, err
 }
 
@@ -1121,7 +1122,8 @@ ReadFieldError:
 }
 
 func (x *ListCommunityReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.ParentId, offset, err = fastpb.ReadString(buf, _type)
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.ParentId = &tmp
 	return offset, err
 }
 
@@ -1196,7 +1198,8 @@ func (x *NewCommunityReq) fastReadField2(buf []byte, _type int8) (offset int, er
 }
 
 func (x *NewCommunityReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.ParentId, offset, err = fastpb.ReadString(buf, _type)
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.ParentId = &tmp
 	return offset, err
 }
 
@@ -2510,7 +2513,7 @@ func (x *Community) fastWriteField2(buf []byte) (offset int) {
 }
 
 func (x *Community) fastWriteField3(buf []byte) (offset int) {
-	if x.ParentId == "" {
+	if x.ParentId == nil {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 3, x.GetParentId())
@@ -2526,7 +2529,7 @@ func (x *ListCommunityReq) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *ListCommunityReq) fastWriteField1(buf []byte) (offset int) {
-	if x.ParentId == "" {
+	if x.ParentId == nil {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 1, x.GetParentId())
@@ -2578,7 +2581,7 @@ func (x *NewCommunityReq) fastWriteField2(buf []byte) (offset int) {
 }
 
 func (x *NewCommunityReq) fastWriteField3(buf []byte) (offset int) {
-	if x.ParentId == "" {
+	if x.ParentId == nil {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 3, x.GetParentId())
@@ -3691,7 +3694,7 @@ func (x *Community) sizeField2() (n int) {
 }
 
 func (x *Community) sizeField3() (n int) {
-	if x.ParentId == "" {
+	if x.ParentId == nil {
 		return n
 	}
 	n += fastpb.SizeString(3, x.GetParentId())
@@ -3707,7 +3710,7 @@ func (x *ListCommunityReq) Size() (n int) {
 }
 
 func (x *ListCommunityReq) sizeField1() (n int) {
-	if x.ParentId == "" {
+	if x.ParentId == nil {
 		return n
 	}
 	n += fastpb.SizeString(1, x.GetParentId())
@@ -3759,7 +3762,7 @@ func (x *NewCommunityReq) sizeField2() (n int) {
 }
 
 func (x *NewCommunityReq) sizeField3() (n int) {
-	if x.ParentId == "" {
+	if x.ParentId == nil {
 		return n
 	}
 	n += fastpb.SizeString(3, x.GetParentId())
