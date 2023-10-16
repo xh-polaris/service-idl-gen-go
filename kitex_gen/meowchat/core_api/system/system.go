@@ -45,6 +45,7 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		"CleanNotification":    kitex.NewMethodInfo(cleanNotificationHandler, newCleanNotificationArgs, newCleanNotificationResult, false),
 		"CountNotification":    kitex.NewMethodInfo(countNotificationHandler, newCountNotificationArgs, newCountNotificationResult, false),
 		"Prefetch":             kitex.NewMethodInfo(prefetchHandler, newPrefetchArgs, newPrefetchResult, false),
+		"GetMinVersion":        kitex.NewMethodInfo(getMinVersionHandler, newGetMinVersionArgs, newGetMinVersionResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName":     "meowchat.core_api",
@@ -3733,6 +3734,159 @@ func (p *PrefetchResult) GetResult() interface{} {
 	return p.Success
 }
 
+func getMinVersionHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.GetMinVersionReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.System).GetMinVersion(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *GetMinVersionArgs:
+		success, err := handler.(core_api.System).GetMinVersion(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetMinVersionResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newGetMinVersionArgs() interface{} {
+	return &GetMinVersionArgs{}
+}
+
+func newGetMinVersionResult() interface{} {
+	return &GetMinVersionResult{}
+}
+
+type GetMinVersionArgs struct {
+	Req *core_api.GetMinVersionReq
+}
+
+func (p *GetMinVersionArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.GetMinVersionReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetMinVersionArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetMinVersionArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetMinVersionArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetMinVersionArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.GetMinVersionReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetMinVersionArgs_Req_DEFAULT *core_api.GetMinVersionReq
+
+func (p *GetMinVersionArgs) GetReq() *core_api.GetMinVersionReq {
+	if !p.IsSetReq() {
+		return GetMinVersionArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetMinVersionArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetMinVersionArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetMinVersionResult struct {
+	Success *core_api.GetMinVersionResp
+}
+
+var GetMinVersionResult_Success_DEFAULT *core_api.GetMinVersionResp
+
+func (p *GetMinVersionResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.GetMinVersionResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetMinVersionResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetMinVersionResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetMinVersionResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetMinVersionResult) Unmarshal(in []byte) error {
+	msg := new(core_api.GetMinVersionResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetMinVersionResult) GetSuccess() *core_api.GetMinVersionResp {
+	if !p.IsSetSuccess() {
+		return GetMinVersionResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetMinVersionResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.GetMinVersionResp)
+}
+
+func (p *GetMinVersionResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetMinVersionResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -3978,6 +4132,16 @@ func (p *kClient) Prefetch(ctx context.Context, Req *core_api.PrefetchReq) (r *c
 	_args.Req = Req
 	var _result PrefetchResult
 	if err = p.c.Call(ctx, "Prefetch", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetMinVersion(ctx context.Context, Req *core_api.GetMinVersionReq) (r *core_api.GetMinVersionResp, err error) {
+	var _args GetMinVersionArgs
+	_args.Req = Req
+	var _result GetMinVersionResult
+	if err = p.c.Call(ctx, "GetMinVersion", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

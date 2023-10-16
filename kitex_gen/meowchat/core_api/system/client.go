@@ -35,6 +35,7 @@ type Client interface {
 	CleanNotification(ctx context.Context, Req *core_api.CleanNotificationReq, callOptions ...callopt.Option) (r *core_api.CleanNotificationResp, err error)
 	CountNotification(ctx context.Context, Req *core_api.CountNotificationReq, callOptions ...callopt.Option) (r *core_api.CountNotificationResp, err error)
 	Prefetch(ctx context.Context, Req *core_api.PrefetchReq, callOptions ...callopt.Option) (r *core_api.PrefetchResp, err error)
+	GetMinVersion(ctx context.Context, Req *core_api.GetMinVersionReq, callOptions ...callopt.Option) (r *core_api.GetMinVersionResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -184,4 +185,9 @@ func (p *kSystemClient) CountNotification(ctx context.Context, Req *core_api.Cou
 func (p *kSystemClient) Prefetch(ctx context.Context, Req *core_api.PrefetchReq, callOptions ...callopt.Option) (r *core_api.PrefetchResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.Prefetch(ctx, Req)
+}
+
+func (p *kSystemClient) GetMinVersion(ctx context.Context, Req *core_api.GetMinVersionReq, callOptions ...callopt.Option) (r *core_api.GetMinVersionResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetMinVersion(ctx, Req)
 }
