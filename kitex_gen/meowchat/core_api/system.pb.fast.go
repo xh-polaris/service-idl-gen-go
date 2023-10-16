@@ -514,7 +514,8 @@ ReadFieldError:
 }
 
 func (x *NewAdminReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.Id = &tmp
 	return offset, err
 }
 
@@ -659,7 +660,8 @@ ReadFieldError:
 }
 
 func (x *NewNoticeReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.Id = &tmp
 	return offset, err
 }
 
@@ -744,7 +746,8 @@ ReadFieldError:
 }
 
 func (x *NewNewsReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.Id = &tmp
 	return offset, err
 }
 
@@ -1188,7 +1191,8 @@ ReadFieldError:
 }
 
 func (x *NewCommunityReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.Id = &tmp
 	return offset, err
 }
 
@@ -2094,7 +2098,7 @@ func (x *NewAdminReq) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *NewAdminReq) fastWriteField1(buf []byte) (offset int) {
-	if x.Id == "" {
+	if x.Id == nil {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
@@ -2210,7 +2214,7 @@ func (x *NewNoticeReq) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *NewNoticeReq) fastWriteField1(buf []byte) (offset int) {
-	if x.Id == "" {
+	if x.Id == nil {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
@@ -2263,7 +2267,7 @@ func (x *NewNewsReq) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *NewNewsReq) fastWriteField1(buf []byte) (offset int) {
-	if x.Id == "" {
+	if x.Id == nil {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
@@ -2565,7 +2569,7 @@ func (x *NewCommunityReq) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *NewCommunityReq) fastWriteField1(buf []byte) (offset int) {
-	if x.Id == "" {
+	if x.Id == nil {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
@@ -3275,7 +3279,7 @@ func (x *NewAdminReq) Size() (n int) {
 }
 
 func (x *NewAdminReq) sizeField1() (n int) {
-	if x.Id == "" {
+	if x.Id == nil {
 		return n
 	}
 	n += fastpb.SizeString(1, x.GetId())
@@ -3391,7 +3395,7 @@ func (x *NewNoticeReq) Size() (n int) {
 }
 
 func (x *NewNoticeReq) sizeField1() (n int) {
-	if x.Id == "" {
+	if x.Id == nil {
 		return n
 	}
 	n += fastpb.SizeString(1, x.GetId())
@@ -3444,7 +3448,7 @@ func (x *NewNewsReq) Size() (n int) {
 }
 
 func (x *NewNewsReq) sizeField1() (n int) {
-	if x.Id == "" {
+	if x.Id == nil {
 		return n
 	}
 	n += fastpb.SizeString(1, x.GetId())
@@ -3746,7 +3750,7 @@ func (x *NewCommunityReq) Size() (n int) {
 }
 
 func (x *NewCommunityReq) sizeField1() (n int) {
-	if x.Id == "" {
+	if x.Id == nil {
 		return n
 	}
 	n += fastpb.SizeString(1, x.GetId())
