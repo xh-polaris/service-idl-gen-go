@@ -139,6 +139,11 @@ func (x *PrefetchResp) FastRead(buf []byte, _type int8, number int32) (offset in
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 8:
+		offset, err = x.fastReadField8(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -222,6 +227,12 @@ func (x *PrefetchResp) fastReadField7(buf []byte, _type int8) (offset int, err e
 	return offset, nil
 }
 
+func (x *PrefetchResp) fastReadField8(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.Token = &tmp
+	return offset, err
+}
+
 func (x *PrefetchReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -303,6 +314,7 @@ func (x *PrefetchResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField5(buf[offset:])
 	offset += x.fastWriteField6(buf[offset:])
 	offset += x.fastWriteField7(buf[offset:])
+	offset += x.fastWriteField8(buf[offset:])
 	return offset
 }
 
@@ -359,6 +371,14 @@ func (x *PrefetchResp) fastWriteField7(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteMessage(buf[offset:], 7, x.GetGetNewsResp())
+	return offset
+}
+
+func (x *PrefetchResp) fastWriteField8(buf []byte) (offset int) {
+	if x.Token == nil {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 8, x.GetToken())
 	return offset
 }
 
@@ -443,6 +463,7 @@ func (x *PrefetchResp) Size() (n int) {
 	n += x.sizeField5()
 	n += x.sizeField6()
 	n += x.sizeField7()
+	n += x.sizeField8()
 	return n
 }
 
@@ -502,6 +523,14 @@ func (x *PrefetchResp) sizeField7() (n int) {
 	return n
 }
 
+func (x *PrefetchResp) sizeField8() (n int) {
+	if x.Token == nil {
+		return n
+	}
+	n += fastpb.SizeString(8, x.GetToken())
+	return n
+}
+
 var fieldIDToName_PrefetchReq = map[int32]string{
 	1: "Appid",
 	2: "Token",
@@ -520,4 +549,5 @@ var fieldIDToName_PrefetchResp = map[int32]string{
 	5: "FirstMomentPreviewsResp",
 	6: "FirstCatPreviewsResp",
 	7: "GetNewsResp",
+	8: "Token",
 }
