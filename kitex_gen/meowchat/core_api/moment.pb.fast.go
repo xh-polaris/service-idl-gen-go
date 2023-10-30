@@ -476,6 +476,11 @@ func (x *NewMomentResp) FastRead(buf []byte, _type int8, number int32) (offset i
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 4:
+		offset, err = x.fastReadField4(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -501,6 +506,11 @@ func (x *NewMomentResp) fastReadField2(buf []byte, _type int8) (offset int, err 
 
 func (x *NewMomentResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	x.GetFishTimes, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *NewMomentResp) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+	x.GetFishNum, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -941,6 +951,7 @@ func (x *NewMomentResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField4(buf[offset:])
 	return offset
 }
 
@@ -965,6 +976,14 @@ func (x *NewMomentResp) fastWriteField3(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetGetFishTimes())
+	return offset
+}
+
+func (x *NewMomentResp) fastWriteField4(buf []byte) (offset int) {
+	if x.GetFishNum == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 4, x.GetGetFishNum())
 	return offset
 }
 
@@ -1370,6 +1389,7 @@ func (x *NewMomentResp) Size() (n int) {
 	n += x.sizeField1()
 	n += x.sizeField2()
 	n += x.sizeField3()
+	n += x.sizeField4()
 	return n
 }
 
@@ -1394,6 +1414,14 @@ func (x *NewMomentResp) sizeField3() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(3, x.GetGetFishTimes())
+	return n
+}
+
+func (x *NewMomentResp) sizeField4() (n int) {
+	if x.GetFishNum == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(4, x.GetGetFishNum())
 	return n
 }
 
@@ -1531,6 +1559,7 @@ var fieldIDToName_NewMomentResp = map[int32]string{
 	1: "MomentId",
 	2: "GetFish",
 	3: "GetFishTimes",
+	4: "GetFishNum",
 }
 
 var fieldIDToName_SearchMomentReq = map[int32]string{

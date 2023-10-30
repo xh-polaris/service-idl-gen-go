@@ -117,6 +117,11 @@ func (x *SignInResp) FastRead(buf []byte, _type int8, number int32) (offset int,
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 5:
+		offset, err = x.fastReadField5(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -147,6 +152,11 @@ func (x *SignInResp) fastReadField3(buf []byte, _type int8) (offset int, err err
 
 func (x *SignInResp) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 	x.IsFirst, offset, err = fastpb.ReadBool(buf, _type)
+	return offset, err
+}
+
+func (x *SignInResp) fastReadField5(buf []byte, _type int8) (offset int, err error) {
+	x.GetFishNum, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -305,6 +315,7 @@ func (x *SignInResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
+	offset += x.fastWriteField5(buf[offset:])
 	return offset
 }
 
@@ -337,6 +348,14 @@ func (x *SignInResp) fastWriteField4(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteBool(buf[offset:], 4, x.GetIsFirst())
+	return offset
+}
+
+func (x *SignInResp) fastWriteField5(buf []byte) (offset int) {
+	if x.GetFishNum == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 5, x.GetGetFishNum())
 	return offset
 }
 
@@ -464,6 +483,7 @@ func (x *SignInResp) Size() (n int) {
 	n += x.sizeField2()
 	n += x.sizeField3()
 	n += x.sizeField4()
+	n += x.sizeField5()
 	return n
 }
 
@@ -496,6 +516,14 @@ func (x *SignInResp) sizeField4() (n int) {
 		return n
 	}
 	n += fastpb.SizeBool(4, x.GetIsFirst())
+	return n
+}
+
+func (x *SignInResp) sizeField5() (n int) {
+	if x.GetFishNum == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(5, x.GetGetFishNum())
 	return n
 }
 
@@ -568,6 +596,7 @@ var fieldIDToName_SignInResp = map[int32]string{
 	2: "AccessToken",
 	3: "AccessExpire",
 	4: "IsFirst",
+	5: "GetFishNum",
 }
 
 var fieldIDToName_SetPasswordReq = map[int32]string{

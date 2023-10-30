@@ -104,6 +104,11 @@ func (x *CreateCommentResp) FastRead(buf []byte, _type int8, number int32) (offs
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -123,7 +128,12 @@ func (x *CreateCommentResp) fastReadField1(buf []byte, _type int8) (offset int, 
 }
 
 func (x *CreateCommentResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.IsFirst, offset, err = fastpb.ReadBool(buf, _type)
+	x.GetFish, offset, err = fastpb.ReadBool(buf, _type)
+	return offset, err
+}
+
+func (x *CreateCommentResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.GetFishTimes, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -722,6 +732,7 @@ func (x *CreateCommentResp) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
@@ -734,10 +745,18 @@ func (x *CreateCommentResp) fastWriteField1(buf []byte) (offset int) {
 }
 
 func (x *CreateCommentResp) fastWriteField2(buf []byte) (offset int) {
-	if !x.IsFirst {
+	if !x.GetFish {
 		return offset
 	}
-	offset += fastpb.WriteBool(buf[offset:], 2, x.GetIsFirst())
+	offset += fastpb.WriteBool(buf[offset:], 2, x.GetGetFish())
+	return offset
+}
+
+func (x *CreateCommentResp) fastWriteField3(buf []byte) (offset int) {
+	if x.GetFishTimes == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetGetFishTimes())
 	return offset
 }
 
@@ -1164,6 +1183,7 @@ func (x *CreateCommentResp) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
@@ -1176,10 +1196,18 @@ func (x *CreateCommentResp) sizeField1() (n int) {
 }
 
 func (x *CreateCommentResp) sizeField2() (n int) {
-	if !x.IsFirst {
+	if !x.GetFish {
 		return n
 	}
-	n += fastpb.SizeBool(2, x.GetIsFirst())
+	n += fastpb.SizeBool(2, x.GetGetFish())
+	return n
+}
+
+func (x *CreateCommentResp) sizeField3() (n int) {
+	if x.GetFishTimes == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(3, x.GetGetFishTimes())
 	return n
 }
 
@@ -1550,7 +1578,8 @@ var fieldIDToName_CreateCommentReq = map[int32]string{
 
 var fieldIDToName_CreateCommentResp = map[int32]string{
 	1: "Id",
-	2: "IsFirst",
+	2: "GetFish",
+	3: "GetFishTimes",
 }
 
 var fieldIDToName_UpdateCommentReq = map[int32]string{

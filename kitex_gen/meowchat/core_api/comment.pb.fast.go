@@ -201,6 +201,16 @@ func (x *NewCommentResp) FastRead(buf []byte, _type int8, number int32) (offset 
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -215,7 +225,17 @@ ReadFieldError:
 }
 
 func (x *NewCommentResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.IsFirst, offset, err = fastpb.ReadBool(buf, _type)
+	x.GetFish, offset, err = fastpb.ReadBool(buf, _type)
+	return offset, err
+}
+
+func (x *NewCommentResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.GetFishTimes, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *NewCommentResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.GetFishNum, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -483,14 +503,32 @@ func (x *NewCommentResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
 func (x *NewCommentResp) fastWriteField1(buf []byte) (offset int) {
-	if !x.IsFirst {
+	if !x.GetFish {
 		return offset
 	}
-	offset += fastpb.WriteBool(buf[offset:], 1, x.GetIsFirst())
+	offset += fastpb.WriteBool(buf[offset:], 1, x.GetGetFish())
+	return offset
+}
+
+func (x *NewCommentResp) fastWriteField2(buf []byte) (offset int) {
+	if x.GetFishTimes == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetGetFishTimes())
+	return offset
+}
+
+func (x *NewCommentResp) fastWriteField3(buf []byte) (offset int) {
+	if x.GetFishNum == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetGetFishNum())
 	return offset
 }
 
@@ -714,14 +752,32 @@ func (x *NewCommentResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
+	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
 func (x *NewCommentResp) sizeField1() (n int) {
-	if !x.IsFirst {
+	if !x.GetFish {
 		return n
 	}
-	n += fastpb.SizeBool(1, x.GetIsFirst())
+	n += fastpb.SizeBool(1, x.GetGetFish())
+	return n
+}
+
+func (x *NewCommentResp) sizeField2() (n int) {
+	if x.GetFishTimes == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(2, x.GetGetFishTimes())
+	return n
+}
+
+func (x *NewCommentResp) sizeField3() (n int) {
+	if x.GetFishNum == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(3, x.GetGetFishNum())
 	return n
 }
 
@@ -829,7 +885,9 @@ var fieldIDToName_NewCommentReq = map[int32]string{
 }
 
 var fieldIDToName_NewCommentResp = map[int32]string{
-	1: "IsFirst",
+	1: "GetFish",
+	2: "GetFishTimes",
+	3: "GetFishNum",
 }
 
 var fieldIDToName_GetCommentsReq = map[int32]string{

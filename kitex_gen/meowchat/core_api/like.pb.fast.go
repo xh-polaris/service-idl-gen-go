@@ -60,6 +60,11 @@ func (x *DoLikeResp) FastRead(buf []byte, _type int8, number int32) (offset int,
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -75,6 +80,11 @@ ReadFieldError:
 
 func (x *DoLikeResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.IsFirst, offset, err = fastpb.ReadBool(buf, _type)
+	return offset, err
+}
+
+func (x *DoLikeResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.GetFishNum, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -378,6 +388,7 @@ func (x *DoLikeResp) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
 	return offset
 }
 
@@ -386,6 +397,14 @@ func (x *DoLikeResp) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteBool(buf[offset:], 1, x.GetIsFirst())
+	return offset
+}
+
+func (x *DoLikeResp) fastWriteField2(buf []byte) (offset int) {
+	if x.GetFishNum == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetGetFishNum())
 	return offset
 }
 
@@ -587,6 +606,7 @@ func (x *DoLikeResp) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
+	n += x.sizeField2()
 	return n
 }
 
@@ -595,6 +615,14 @@ func (x *DoLikeResp) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeBool(1, x.GetIsFirst())
+	return n
+}
+
+func (x *DoLikeResp) sizeField2() (n int) {
+	if x.GetFishNum == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(2, x.GetGetFishNum())
 	return n
 }
 
@@ -773,6 +801,7 @@ var fieldIDToName_DoLikeReq = map[int32]string{
 
 var fieldIDToName_DoLikeResp = map[int32]string{
 	1: "IsFirst",
+	2: "GetFishNum",
 }
 
 var fieldIDToName_GetUserLikedReq = map[int32]string{
