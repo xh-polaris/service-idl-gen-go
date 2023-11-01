@@ -15,6 +15,7 @@ type Client interface {
 	GetUserDetail(ctx context.Context, Req *user.GetUserDetailReq, callOptions ...callopt.Option) (r *user.GetUserDetailResp, err error)
 	UpdateUser(ctx context.Context, Req *user.UpdateUserReq, callOptions ...callopt.Option) (r *user.UpdateUserResp, err error)
 	SearchUser(ctx context.Context, Req *user.SearchUserReq, callOptions ...callopt.Option) (r *user.SearchUserResp, err error)
+	CheckIn(ctx context.Context, Req *user.CheckInReq, callOptions ...callopt.Option) (r *user.CheckInResp, err error)
 	DoLike(ctx context.Context, Req *user.DoLikeReq, callOptions ...callopt.Option) (r *user.DoLikeResp, err error)
 	GetUserLike(ctx context.Context, Req *user.GetUserLikedReq, callOptions ...callopt.Option) (r *user.GetUserLikedResp, err error)
 	GetTargetLikes(ctx context.Context, Req *user.GetTargetLikesReq, callOptions ...callopt.Option) (r *user.GetTargetLikesResp, err error)
@@ -69,6 +70,11 @@ func (p *kUserServiceClient) UpdateUser(ctx context.Context, Req *user.UpdateUse
 func (p *kUserServiceClient) SearchUser(ctx context.Context, Req *user.SearchUserReq, callOptions ...callopt.Option) (r *user.SearchUserResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.SearchUser(ctx, Req)
+}
+
+func (p *kUserServiceClient) CheckIn(ctx context.Context, Req *user.CheckInReq, callOptions ...callopt.Option) (r *user.CheckInResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.CheckIn(ctx, Req)
 }
 
 func (p *kUserServiceClient) DoLike(ctx context.Context, Req *user.DoLikeReq, callOptions ...callopt.Option) (r *user.DoLikeResp, err error) {

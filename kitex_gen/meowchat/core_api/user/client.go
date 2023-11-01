@@ -14,6 +14,7 @@ type Client interface {
 	GetUserInfo(ctx context.Context, Req *core_api.GetUserInfoReq, callOptions ...callopt.Option) (r *core_api.GetUserInfoResp, err error)
 	UpdateUserInfo(ctx context.Context, Req *core_api.UpdateUserInfoReq, callOptions ...callopt.Option) (r *core_api.UpdateUserInfoResp, err error)
 	SearchUser(ctx context.Context, Req *core_api.SearchUserReq, callOptions ...callopt.Option) (r *core_api.SearchUserResp, err error)
+	CheckIn(ctx context.Context, Req *core_api.CheckInReq, callOptions ...callopt.Option) (r *core_api.CheckInResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -58,4 +59,9 @@ func (p *kUserClient) UpdateUserInfo(ctx context.Context, Req *core_api.UpdateUs
 func (p *kUserClient) SearchUser(ctx context.Context, Req *core_api.SearchUserReq, callOptions ...callopt.Option) (r *core_api.SearchUserResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.SearchUser(ctx, Req)
+}
+
+func (p *kUserClient) CheckIn(ctx context.Context, Req *core_api.CheckInReq, callOptions ...callopt.Option) (r *core_api.CheckInResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.CheckIn(ctx, Req)
 }

@@ -25,6 +25,7 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		"GetUserDetail":  kitex.NewMethodInfo(getUserDetailHandler, newGetUserDetailArgs, newGetUserDetailResult, false),
 		"UpdateUser":     kitex.NewMethodInfo(updateUserHandler, newUpdateUserArgs, newUpdateUserResult, false),
 		"SearchUser":     kitex.NewMethodInfo(searchUserHandler, newSearchUserArgs, newSearchUserResult, false),
+		"CheckIn":        kitex.NewMethodInfo(checkInHandler, newCheckInArgs, newCheckInResult, false),
 		"DoLike":         kitex.NewMethodInfo(doLikeHandler, newDoLikeArgs, newDoLikeResult, false),
 		"GetUserLike":    kitex.NewMethodInfo(getUserLikeHandler, newGetUserLikeArgs, newGetUserLikeResult, false),
 		"GetTargetLikes": kitex.NewMethodInfo(getTargetLikesHandler, newGetTargetLikesArgs, newGetTargetLikesResult, false),
@@ -655,6 +656,159 @@ func (p *SearchUserResult) IsSetSuccess() bool {
 }
 
 func (p *SearchUserResult) GetResult() interface{} {
+	return p.Success
+}
+
+func checkInHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.CheckInReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).CheckIn(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *CheckInArgs:
+		success, err := handler.(user.UserService).CheckIn(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*CheckInResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newCheckInArgs() interface{} {
+	return &CheckInArgs{}
+}
+
+func newCheckInResult() interface{} {
+	return &CheckInResult{}
+}
+
+type CheckInArgs struct {
+	Req *user.CheckInReq
+}
+
+func (p *CheckInArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.CheckInReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *CheckInArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *CheckInArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *CheckInArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *CheckInArgs) Unmarshal(in []byte) error {
+	msg := new(user.CheckInReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var CheckInArgs_Req_DEFAULT *user.CheckInReq
+
+func (p *CheckInArgs) GetReq() *user.CheckInReq {
+	if !p.IsSetReq() {
+		return CheckInArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *CheckInArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *CheckInArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type CheckInResult struct {
+	Success *user.CheckInResp
+}
+
+var CheckInResult_Success_DEFAULT *user.CheckInResp
+
+func (p *CheckInResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.CheckInResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *CheckInResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *CheckInResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *CheckInResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *CheckInResult) Unmarshal(in []byte) error {
+	msg := new(user.CheckInResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *CheckInResult) GetSuccess() *user.CheckInResp {
+	if !p.IsSetSuccess() {
+		return CheckInResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *CheckInResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.CheckInResp)
+}
+
+func (p *CheckInResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *CheckInResult) GetResult() interface{} {
 	return p.Success
 }
 
@@ -1468,6 +1622,16 @@ func (p *kClient) SearchUser(ctx context.Context, Req *user.SearchUserReq) (r *u
 	_args.Req = Req
 	var _result SearchUserResult
 	if err = p.c.Call(ctx, "SearchUser", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) CheckIn(ctx context.Context, Req *user.CheckInReq) (r *user.CheckInResp, err error) {
+	var _args CheckInArgs
+	_args.Req = Req
+	var _result CheckInResult
+	if err = p.c.Call(ctx, "CheckIn", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
