@@ -92,6 +92,11 @@ func (x *Plan) FastRead(buf []byte, _type int8, number int32) (offset int, err e
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 16:
+		offset, err = x.fastReadField16(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -156,6 +161,11 @@ func (x *Plan) fastReadField9(buf []byte, _type int8) (offset int, err error) {
 }
 
 func (x *Plan) fastReadField10(buf []byte, _type int8) (offset int, err error) {
+	x.CommunityId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *Plan) fastReadField11(buf []byte, _type int8) (offset int, err error) {
 	var v user.UserPreview
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -165,7 +175,7 @@ func (x *Plan) fastReadField10(buf []byte, _type int8) (offset int, err error) {
 	return offset, nil
 }
 
-func (x *Plan) fastReadField11(buf []byte, _type int8) (offset int, err error) {
+func (x *Plan) fastReadField12(buf []byte, _type int8) (offset int, err error) {
 	var v string
 	v, offset, err = fastpb.ReadString(buf, _type)
 	if err != nil {
@@ -175,22 +185,22 @@ func (x *Plan) fastReadField11(buf []byte, _type int8) (offset int, err error) {
 	return offset, err
 }
 
-func (x *Plan) fastReadField12(buf []byte, _type int8) (offset int, err error) {
+func (x *Plan) fastReadField13(buf []byte, _type int8) (offset int, err error) {
 	x.CreateAt, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *Plan) fastReadField13(buf []byte, _type int8) (offset int, err error) {
+func (x *Plan) fastReadField14(buf []byte, _type int8) (offset int, err error) {
 	x.MaxFish, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *Plan) fastReadField14(buf []byte, _type int8) (offset int, err error) {
+func (x *Plan) fastReadField15(buf []byte, _type int8) (offset int, err error) {
 	x.NowFish, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *Plan) fastReadField15(buf []byte, _type int8) (offset int, err error) {
+func (x *Plan) fastReadField16(buf []byte, _type int8) (offset int, err error) {
 	x.Summary, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
@@ -214,6 +224,16 @@ func (x *GetPlanPreviewsReq) FastRead(buf []byte, _type int8, number int32) (off
 		}
 	case 4:
 		offset, err = x.fastReadField4(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 5:
+		offset, err = x.fastReadField5(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 6:
+		offset, err = x.fastReadField6(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -244,11 +264,23 @@ func (x *GetPlanPreviewsReq) fastReadField2(buf []byte, _type int8) (offset int,
 
 func (x *GetPlanPreviewsReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	tmp, offset, err := fastpb.ReadString(buf, _type)
-	x.Keyword = &tmp
+	x.OnlyCommunityId = &tmp
 	return offset, err
 }
 
 func (x *GetPlanPreviewsReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadBool(buf, _type)
+	x.IncludeGlobal = &tmp
+	return offset, err
+}
+
+func (x *GetPlanPreviewsReq) fastReadField5(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.Keyword = &tmp
+	return offset, err
+}
+
+func (x *GetPlanPreviewsReq) fastReadField6(buf []byte, _type int8) (offset int, err error) {
 	var v basic.PaginationOptions
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -468,6 +500,11 @@ func (x *NewPlanReq) FastRead(buf []byte, _type int8, number int32) (offset int,
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 14:
+		offset, err = x.fastReadField14(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -540,12 +577,18 @@ func (x *NewPlanReq) fastReadField9(buf []byte, _type int8) (offset int, err err
 }
 
 func (x *NewPlanReq) fastReadField10(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.CommunityId = &tmp
+	return offset, err
+}
+
+func (x *NewPlanReq) fastReadField11(buf []byte, _type int8) (offset int, err error) {
 	tmp, offset, err := fastpb.ReadInt64(buf, _type)
 	x.MaxFish = &tmp
 	return offset, err
 }
 
-func (x *NewPlanReq) fastReadField11(buf []byte, _type int8) (offset int, err error) {
+func (x *NewPlanReq) fastReadField12(buf []byte, _type int8) (offset int, err error) {
 	var v string
 	v, offset, err = fastpb.ReadString(buf, _type)
 	if err != nil {
@@ -555,13 +598,13 @@ func (x *NewPlanReq) fastReadField11(buf []byte, _type int8) (offset int, err er
 	return offset, err
 }
 
-func (x *NewPlanReq) fastReadField12(buf []byte, _type int8) (offset int, err error) {
+func (x *NewPlanReq) fastReadField13(buf []byte, _type int8) (offset int, err error) {
 	tmp, offset, err := fastpb.ReadString(buf, _type)
 	x.Summary = &tmp
 	return offset, err
 }
 
-func (x *NewPlanReq) fastReadField13(buf []byte, _type int8) (offset int, err error) {
+func (x *NewPlanReq) fastReadField14(buf []byte, _type int8) (offset int, err error) {
 	var v int32
 	v, offset, err = fastpb.ReadInt32(buf, _type)
 	if err != nil {
@@ -796,6 +839,7 @@ func (x *Plan) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField13(buf[offset:])
 	offset += x.fastWriteField14(buf[offset:])
 	offset += x.fastWriteField15(buf[offset:])
+	offset += x.fastWriteField16(buf[offset:])
 	return offset
 }
 
@@ -872,52 +916,60 @@ func (x *Plan) fastWriteField9(buf []byte) (offset int) {
 }
 
 func (x *Plan) fastWriteField10(buf []byte) (offset int) {
-	if x.User == nil {
+	if x.CommunityId == "" {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 10, x.GetUser())
+	offset += fastpb.WriteString(buf[offset:], 10, x.GetCommunityId())
 	return offset
 }
 
 func (x *Plan) fastWriteField11(buf []byte) (offset int) {
-	if len(x.ImageUrls) == 0 {
+	if x.User == nil {
 		return offset
 	}
-	for i := range x.GetImageUrls() {
-		offset += fastpb.WriteString(buf[offset:], 11, x.GetImageUrls()[i])
-	}
+	offset += fastpb.WriteMessage(buf[offset:], 11, x.GetUser())
 	return offset
 }
 
 func (x *Plan) fastWriteField12(buf []byte) (offset int) {
-	if x.CreateAt == 0 {
+	if len(x.ImageUrls) == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 12, x.GetCreateAt())
+	for i := range x.GetImageUrls() {
+		offset += fastpb.WriteString(buf[offset:], 12, x.GetImageUrls()[i])
+	}
 	return offset
 }
 
 func (x *Plan) fastWriteField13(buf []byte) (offset int) {
-	if x.MaxFish == 0 {
+	if x.CreateAt == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 13, x.GetMaxFish())
+	offset += fastpb.WriteInt64(buf[offset:], 13, x.GetCreateAt())
 	return offset
 }
 
 func (x *Plan) fastWriteField14(buf []byte) (offset int) {
-	if x.NowFish == 0 {
+	if x.MaxFish == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 14, x.GetNowFish())
+	offset += fastpb.WriteInt64(buf[offset:], 14, x.GetMaxFish())
 	return offset
 }
 
 func (x *Plan) fastWriteField15(buf []byte) (offset int) {
+	if x.NowFish == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 15, x.GetNowFish())
+	return offset
+}
+
+func (x *Plan) fastWriteField16(buf []byte) (offset int) {
 	if x.Summary == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 15, x.GetSummary())
+	offset += fastpb.WriteString(buf[offset:], 16, x.GetSummary())
 	return offset
 }
 
@@ -929,6 +981,8 @@ func (x *GetPlanPreviewsReq) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
+	offset += x.fastWriteField5(buf[offset:])
+	offset += x.fastWriteField6(buf[offset:])
 	return offset
 }
 
@@ -949,18 +1003,34 @@ func (x *GetPlanPreviewsReq) fastWriteField2(buf []byte) (offset int) {
 }
 
 func (x *GetPlanPreviewsReq) fastWriteField3(buf []byte) (offset int) {
-	if x.Keyword == nil {
+	if x.OnlyCommunityId == nil {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetKeyword())
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetOnlyCommunityId())
 	return offset
 }
 
 func (x *GetPlanPreviewsReq) fastWriteField4(buf []byte) (offset int) {
+	if x.IncludeGlobal == nil {
+		return offset
+	}
+	offset += fastpb.WriteBool(buf[offset:], 4, x.GetIncludeGlobal())
+	return offset
+}
+
+func (x *GetPlanPreviewsReq) fastWriteField5(buf []byte) (offset int) {
+	if x.Keyword == nil {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 5, x.GetKeyword())
+	return offset
+}
+
+func (x *GetPlanPreviewsReq) fastWriteField6(buf []byte) (offset int) {
 	if x.PaginationOption == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 4, x.GetPaginationOption())
+	offset += fastpb.WriteMessage(buf[offset:], 6, x.GetPaginationOption())
 	return offset
 }
 
@@ -1072,6 +1142,7 @@ func (x *NewPlanReq) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField11(buf[offset:])
 	offset += x.fastWriteField12(buf[offset:])
 	offset += x.fastWriteField13(buf[offset:])
+	offset += x.fastWriteField14(buf[offset:])
 	return offset
 }
 
@@ -1148,36 +1219,44 @@ func (x *NewPlanReq) fastWriteField9(buf []byte) (offset int) {
 }
 
 func (x *NewPlanReq) fastWriteField10(buf []byte) (offset int) {
-	if x.MaxFish == nil {
+	if x.CommunityId == nil {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 10, x.GetMaxFish())
+	offset += fastpb.WriteString(buf[offset:], 10, x.GetCommunityId())
 	return offset
 }
 
 func (x *NewPlanReq) fastWriteField11(buf []byte) (offset int) {
-	if len(x.ImageUrls) == 0 {
+	if x.MaxFish == nil {
 		return offset
 	}
-	for i := range x.GetImageUrls() {
-		offset += fastpb.WriteString(buf[offset:], 11, x.GetImageUrls()[i])
-	}
+	offset += fastpb.WriteInt64(buf[offset:], 11, x.GetMaxFish())
 	return offset
 }
 
 func (x *NewPlanReq) fastWriteField12(buf []byte) (offset int) {
-	if x.Summary == nil {
+	if len(x.ImageUrls) == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 12, x.GetSummary())
+	for i := range x.GetImageUrls() {
+		offset += fastpb.WriteString(buf[offset:], 12, x.GetImageUrls()[i])
+	}
 	return offset
 }
 
 func (x *NewPlanReq) fastWriteField13(buf []byte) (offset int) {
+	if x.Summary == nil {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 13, x.GetSummary())
+	return offset
+}
+
+func (x *NewPlanReq) fastWriteField14(buf []byte) (offset int) {
 	if x.PlanState == nil {
 		return offset
 	}
-	offset += fastpb.WriteInt32(buf[offset:], 13, int32(x.GetPlanState()))
+	offset += fastpb.WriteInt32(buf[offset:], 14, int32(x.GetPlanState()))
 	return offset
 }
 
@@ -1331,6 +1410,7 @@ func (x *Plan) Size() (n int) {
 	n += x.sizeField13()
 	n += x.sizeField14()
 	n += x.sizeField15()
+	n += x.sizeField16()
 	return n
 }
 
@@ -1407,52 +1487,60 @@ func (x *Plan) sizeField9() (n int) {
 }
 
 func (x *Plan) sizeField10() (n int) {
-	if x.User == nil {
+	if x.CommunityId == "" {
 		return n
 	}
-	n += fastpb.SizeMessage(10, x.GetUser())
+	n += fastpb.SizeString(10, x.GetCommunityId())
 	return n
 }
 
 func (x *Plan) sizeField11() (n int) {
-	if len(x.ImageUrls) == 0 {
+	if x.User == nil {
 		return n
 	}
-	for i := range x.GetImageUrls() {
-		n += fastpb.SizeString(11, x.GetImageUrls()[i])
-	}
+	n += fastpb.SizeMessage(11, x.GetUser())
 	return n
 }
 
 func (x *Plan) sizeField12() (n int) {
-	if x.CreateAt == 0 {
+	if len(x.ImageUrls) == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(12, x.GetCreateAt())
+	for i := range x.GetImageUrls() {
+		n += fastpb.SizeString(12, x.GetImageUrls()[i])
+	}
 	return n
 }
 
 func (x *Plan) sizeField13() (n int) {
-	if x.MaxFish == 0 {
+	if x.CreateAt == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(13, x.GetMaxFish())
+	n += fastpb.SizeInt64(13, x.GetCreateAt())
 	return n
 }
 
 func (x *Plan) sizeField14() (n int) {
-	if x.NowFish == 0 {
+	if x.MaxFish == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(14, x.GetNowFish())
+	n += fastpb.SizeInt64(14, x.GetMaxFish())
 	return n
 }
 
 func (x *Plan) sizeField15() (n int) {
+	if x.NowFish == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(15, x.GetNowFish())
+	return n
+}
+
+func (x *Plan) sizeField16() (n int) {
 	if x.Summary == "" {
 		return n
 	}
-	n += fastpb.SizeString(15, x.GetSummary())
+	n += fastpb.SizeString(16, x.GetSummary())
 	return n
 }
 
@@ -1464,6 +1552,8 @@ func (x *GetPlanPreviewsReq) Size() (n int) {
 	n += x.sizeField2()
 	n += x.sizeField3()
 	n += x.sizeField4()
+	n += x.sizeField5()
+	n += x.sizeField6()
 	return n
 }
 
@@ -1484,18 +1574,34 @@ func (x *GetPlanPreviewsReq) sizeField2() (n int) {
 }
 
 func (x *GetPlanPreviewsReq) sizeField3() (n int) {
-	if x.Keyword == nil {
+	if x.OnlyCommunityId == nil {
 		return n
 	}
-	n += fastpb.SizeString(3, x.GetKeyword())
+	n += fastpb.SizeString(3, x.GetOnlyCommunityId())
 	return n
 }
 
 func (x *GetPlanPreviewsReq) sizeField4() (n int) {
+	if x.IncludeGlobal == nil {
+		return n
+	}
+	n += fastpb.SizeBool(4, x.GetIncludeGlobal())
+	return n
+}
+
+func (x *GetPlanPreviewsReq) sizeField5() (n int) {
+	if x.Keyword == nil {
+		return n
+	}
+	n += fastpb.SizeString(5, x.GetKeyword())
+	return n
+}
+
+func (x *GetPlanPreviewsReq) sizeField6() (n int) {
 	if x.PaginationOption == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(4, x.GetPaginationOption())
+	n += fastpb.SizeMessage(6, x.GetPaginationOption())
 	return n
 }
 
@@ -1607,6 +1713,7 @@ func (x *NewPlanReq) Size() (n int) {
 	n += x.sizeField11()
 	n += x.sizeField12()
 	n += x.sizeField13()
+	n += x.sizeField14()
 	return n
 }
 
@@ -1683,36 +1790,44 @@ func (x *NewPlanReq) sizeField9() (n int) {
 }
 
 func (x *NewPlanReq) sizeField10() (n int) {
-	if x.MaxFish == nil {
+	if x.CommunityId == nil {
 		return n
 	}
-	n += fastpb.SizeInt64(10, x.GetMaxFish())
+	n += fastpb.SizeString(10, x.GetCommunityId())
 	return n
 }
 
 func (x *NewPlanReq) sizeField11() (n int) {
-	if len(x.ImageUrls) == 0 {
+	if x.MaxFish == nil {
 		return n
 	}
-	for i := range x.GetImageUrls() {
-		n += fastpb.SizeString(11, x.GetImageUrls()[i])
-	}
+	n += fastpb.SizeInt64(11, x.GetMaxFish())
 	return n
 }
 
 func (x *NewPlanReq) sizeField12() (n int) {
-	if x.Summary == nil {
+	if len(x.ImageUrls) == 0 {
 		return n
 	}
-	n += fastpb.SizeString(12, x.GetSummary())
+	for i := range x.GetImageUrls() {
+		n += fastpb.SizeString(12, x.GetImageUrls()[i])
+	}
 	return n
 }
 
 func (x *NewPlanReq) sizeField13() (n int) {
+	if x.Summary == nil {
+		return n
+	}
+	n += fastpb.SizeString(13, x.GetSummary())
+	return n
+}
+
+func (x *NewPlanReq) sizeField14() (n int) {
 	if x.PlanState == nil {
 		return n
 	}
-	n += fastpb.SizeInt32(13, int32(x.GetPlanState()))
+	n += fastpb.SizeInt32(14, int32(x.GetPlanState()))
 	return n
 }
 
@@ -1857,19 +1972,22 @@ var fieldIDToName_Plan = map[int32]string{
 	7:  "StartTime",
 	8:  "EndTime",
 	9:  "CatId",
-	10: "User",
-	11: "ImageUrls",
-	12: "CreateAt",
-	13: "MaxFish",
-	14: "NowFish",
-	15: "Summary",
+	10: "CommunityId",
+	11: "User",
+	12: "ImageUrls",
+	13: "CreateAt",
+	14: "MaxFish",
+	15: "NowFish",
+	16: "Summary",
 }
 
 var fieldIDToName_GetPlanPreviewsReq = map[int32]string{
 	1: "CatId",
 	2: "OnlyUserId",
-	3: "Keyword",
-	4: "PaginationOption",
+	3: "OnlyCommunityId",
+	4: "IncludeGlobal",
+	5: "Keyword",
+	6: "PaginationOption",
 }
 
 var fieldIDToName_GetPlanPreviewsResp = map[int32]string{
@@ -1902,10 +2020,11 @@ var fieldIDToName_NewPlanReq = map[int32]string{
 	7:  "StartTime",
 	8:  "EndTime",
 	9:  "CatId",
-	10: "MaxFish",
-	11: "ImageUrls",
-	12: "Summary",
-	13: "PlanState",
+	10: "CommunityId",
+	11: "MaxFish",
+	12: "ImageUrls",
+	13: "Summary",
+	14: "PlanState",
 }
 
 var fieldIDToName_NewPlanResp = map[int32]string{

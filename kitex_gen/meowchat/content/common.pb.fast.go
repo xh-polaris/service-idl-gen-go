@@ -545,6 +545,11 @@ func (x *Plan) FastRead(buf []byte, _type int8, number int32) (offset int, err e
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 17:
+		offset, err = x.fastReadField17(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -609,11 +614,16 @@ func (x *Plan) fastReadField9(buf []byte, _type int8) (offset int, err error) {
 }
 
 func (x *Plan) fastReadField10(buf []byte, _type int8) (offset int, err error) {
-	x.InitiatorId, offset, err = fastpb.ReadString(buf, _type)
+	x.CommunityId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *Plan) fastReadField11(buf []byte, _type int8) (offset int, err error) {
+	x.InitiatorId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *Plan) fastReadField12(buf []byte, _type int8) (offset int, err error) {
 	var v string
 	v, offset, err = fastpb.ReadString(buf, _type)
 	if err != nil {
@@ -623,27 +633,27 @@ func (x *Plan) fastReadField11(buf []byte, _type int8) (offset int, err error) {
 	return offset, err
 }
 
-func (x *Plan) fastReadField12(buf []byte, _type int8) (offset int, err error) {
+func (x *Plan) fastReadField13(buf []byte, _type int8) (offset int, err error) {
 	x.CreateAt, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *Plan) fastReadField13(buf []byte, _type int8) (offset int, err error) {
+func (x *Plan) fastReadField14(buf []byte, _type int8) (offset int, err error) {
 	x.MaxFish, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *Plan) fastReadField14(buf []byte, _type int8) (offset int, err error) {
+func (x *Plan) fastReadField15(buf []byte, _type int8) (offset int, err error) {
 	x.NowFish, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *Plan) fastReadField15(buf []byte, _type int8) (offset int, err error) {
+func (x *Plan) fastReadField16(buf []byte, _type int8) (offset int, err error) {
 	x.Summary, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *Plan) fastReadField16(buf []byte, _type int8) (offset int, err error) {
+func (x *Plan) fastReadField17(buf []byte, _type int8) (offset int, err error) {
 	var v int32
 	v, offset, err = fastpb.ReadInt32(buf, _type)
 	if err != nil {
@@ -846,6 +856,16 @@ func (x *PlanFilterOptions) FastRead(buf []byte, _type int8, number int32) (offs
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 4:
+		offset, err = x.fastReadField4(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -868,6 +888,18 @@ func (x *PlanFilterOptions) fastReadField1(buf []byte, _type int8) (offset int, 
 func (x *PlanFilterOptions) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	tmp, offset, err := fastpb.ReadString(buf, _type)
 	x.OnlyUserId = &tmp
+	return offset, err
+}
+
+func (x *PlanFilterOptions) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.OnlyCommunityId = &tmp
+	return offset, err
+}
+
+func (x *PlanFilterOptions) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadBool(buf, _type)
+	x.IncludeGlobal = &tmp
 	return offset, err
 }
 
@@ -1256,6 +1288,7 @@ func (x *Plan) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField14(buf[offset:])
 	offset += x.fastWriteField15(buf[offset:])
 	offset += x.fastWriteField16(buf[offset:])
+	offset += x.fastWriteField17(buf[offset:])
 	return offset
 }
 
@@ -1332,60 +1365,68 @@ func (x *Plan) fastWriteField9(buf []byte) (offset int) {
 }
 
 func (x *Plan) fastWriteField10(buf []byte) (offset int) {
-	if x.InitiatorId == "" {
+	if x.CommunityId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 10, x.GetInitiatorId())
+	offset += fastpb.WriteString(buf[offset:], 10, x.GetCommunityId())
 	return offset
 }
 
 func (x *Plan) fastWriteField11(buf []byte) (offset int) {
-	if len(x.ImageUrls) == 0 {
+	if x.InitiatorId == "" {
 		return offset
 	}
-	for i := range x.GetImageUrls() {
-		offset += fastpb.WriteString(buf[offset:], 11, x.GetImageUrls()[i])
-	}
+	offset += fastpb.WriteString(buf[offset:], 11, x.GetInitiatorId())
 	return offset
 }
 
 func (x *Plan) fastWriteField12(buf []byte) (offset int) {
-	if x.CreateAt == 0 {
+	if len(x.ImageUrls) == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 12, x.GetCreateAt())
+	for i := range x.GetImageUrls() {
+		offset += fastpb.WriteString(buf[offset:], 12, x.GetImageUrls()[i])
+	}
 	return offset
 }
 
 func (x *Plan) fastWriteField13(buf []byte) (offset int) {
-	if x.MaxFish == 0 {
+	if x.CreateAt == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 13, x.GetMaxFish())
+	offset += fastpb.WriteInt64(buf[offset:], 13, x.GetCreateAt())
 	return offset
 }
 
 func (x *Plan) fastWriteField14(buf []byte) (offset int) {
-	if x.NowFish == 0 {
+	if x.MaxFish == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 14, x.GetNowFish())
+	offset += fastpb.WriteInt64(buf[offset:], 14, x.GetMaxFish())
 	return offset
 }
 
 func (x *Plan) fastWriteField15(buf []byte) (offset int) {
-	if x.Summary == "" {
+	if x.NowFish == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 15, x.GetSummary())
+	offset += fastpb.WriteInt64(buf[offset:], 15, x.GetNowFish())
 	return offset
 }
 
 func (x *Plan) fastWriteField16(buf []byte) (offset int) {
+	if x.Summary == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 16, x.GetSummary())
+	return offset
+}
+
+func (x *Plan) fastWriteField17(buf []byte) (offset int) {
 	if x.PlanState == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt32(buf[offset:], 16, int32(x.GetPlanState()))
+	offset += fastpb.WriteInt32(buf[offset:], 17, int32(x.GetPlanState()))
 	return offset
 }
 
@@ -1515,6 +1556,8 @@ func (x *PlanFilterOptions) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField4(buf[offset:])
 	return offset
 }
 
@@ -1531,6 +1574,22 @@ func (x *PlanFilterOptions) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 2, x.GetOnlyUserId())
+	return offset
+}
+
+func (x *PlanFilterOptions) fastWriteField3(buf []byte) (offset int) {
+	if x.OnlyCommunityId == nil {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetOnlyCommunityId())
+	return offset
+}
+
+func (x *PlanFilterOptions) fastWriteField4(buf []byte) (offset int) {
+	if x.IncludeGlobal == nil {
+		return offset
+	}
+	offset += fastpb.WriteBool(buf[offset:], 4, x.GetIncludeGlobal())
 	return offset
 }
 
@@ -1919,6 +1978,7 @@ func (x *Plan) Size() (n int) {
 	n += x.sizeField14()
 	n += x.sizeField15()
 	n += x.sizeField16()
+	n += x.sizeField17()
 	return n
 }
 
@@ -1995,60 +2055,68 @@ func (x *Plan) sizeField9() (n int) {
 }
 
 func (x *Plan) sizeField10() (n int) {
-	if x.InitiatorId == "" {
+	if x.CommunityId == "" {
 		return n
 	}
-	n += fastpb.SizeString(10, x.GetInitiatorId())
+	n += fastpb.SizeString(10, x.GetCommunityId())
 	return n
 }
 
 func (x *Plan) sizeField11() (n int) {
-	if len(x.ImageUrls) == 0 {
+	if x.InitiatorId == "" {
 		return n
 	}
-	for i := range x.GetImageUrls() {
-		n += fastpb.SizeString(11, x.GetImageUrls()[i])
-	}
+	n += fastpb.SizeString(11, x.GetInitiatorId())
 	return n
 }
 
 func (x *Plan) sizeField12() (n int) {
-	if x.CreateAt == 0 {
+	if len(x.ImageUrls) == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(12, x.GetCreateAt())
+	for i := range x.GetImageUrls() {
+		n += fastpb.SizeString(12, x.GetImageUrls()[i])
+	}
 	return n
 }
 
 func (x *Plan) sizeField13() (n int) {
-	if x.MaxFish == 0 {
+	if x.CreateAt == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(13, x.GetMaxFish())
+	n += fastpb.SizeInt64(13, x.GetCreateAt())
 	return n
 }
 
 func (x *Plan) sizeField14() (n int) {
-	if x.NowFish == 0 {
+	if x.MaxFish == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(14, x.GetNowFish())
+	n += fastpb.SizeInt64(14, x.GetMaxFish())
 	return n
 }
 
 func (x *Plan) sizeField15() (n int) {
-	if x.Summary == "" {
+	if x.NowFish == 0 {
 		return n
 	}
-	n += fastpb.SizeString(15, x.GetSummary())
+	n += fastpb.SizeInt64(15, x.GetNowFish())
 	return n
 }
 
 func (x *Plan) sizeField16() (n int) {
+	if x.Summary == "" {
+		return n
+	}
+	n += fastpb.SizeString(16, x.GetSummary())
+	return n
+}
+
+func (x *Plan) sizeField17() (n int) {
 	if x.PlanState == 0 {
 		return n
 	}
-	n += fastpb.SizeInt32(16, int32(x.GetPlanState()))
+	n += fastpb.SizeInt32(17, int32(x.GetPlanState()))
 	return n
 }
 
@@ -2178,6 +2246,8 @@ func (x *PlanFilterOptions) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
+	n += x.sizeField3()
+	n += x.sizeField4()
 	return n
 }
 
@@ -2194,6 +2264,22 @@ func (x *PlanFilterOptions) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(2, x.GetOnlyUserId())
+	return n
+}
+
+func (x *PlanFilterOptions) sizeField3() (n int) {
+	if x.OnlyCommunityId == nil {
+		return n
+	}
+	n += fastpb.SizeString(3, x.GetOnlyCommunityId())
+	return n
+}
+
+func (x *PlanFilterOptions) sizeField4() (n int) {
+	if x.IncludeGlobal == nil {
+		return n
+	}
+	n += fastpb.SizeBool(4, x.GetIncludeGlobal())
 	return n
 }
 
@@ -2258,13 +2344,14 @@ var fieldIDToName_Plan = map[int32]string{
 	7:  "StartTime",
 	8:  "EndTime",
 	9:  "CatId",
-	10: "InitiatorId",
-	11: "ImageUrls",
-	12: "CreateAt",
-	13: "MaxFish",
-	14: "NowFish",
-	15: "Summary",
-	16: "PlanState",
+	10: "CommunityId",
+	11: "InitiatorId",
+	12: "ImageUrls",
+	13: "CreateAt",
+	14: "MaxFish",
+	15: "NowFish",
+	16: "Summary",
+	17: "PlanState",
 }
 
 var fieldIDToName_SearchField = map[int32]string{
@@ -2292,4 +2379,6 @@ var fieldIDToName_PostFilterOptions = map[int32]string{
 var fieldIDToName_PlanFilterOptions = map[int32]string{
 	1: "OnlyCatId",
 	2: "OnlyUserId",
+	3: "OnlyCommunityId",
+	4: "IncludeGlobal",
 }
