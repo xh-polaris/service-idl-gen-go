@@ -41,6 +41,7 @@ type Client interface {
 	DeletePlan(ctx context.Context, Req *content.DeletePlanReq, callOptions ...callopt.Option) (r *content.DeletePlanResp, err error)
 	DonateFish(ctx context.Context, Req *content.DonateFishReq, callOptions ...callopt.Option) (r *content.DonateFishResp, err error)
 	AddUserFish(ctx context.Context, Req *content.AddUserFishReq, callOptions ...callopt.Option) (r *content.AddUserFishResp, err error)
+	ListDonateByUser(ctx context.Context, Req *content.ListDonateByUserReq, callOptions ...callopt.Option) (r *content.ListDonateByUserResp, err error)
 	ListFishByPlan(ctx context.Context, Req *content.ListFishByPlanReq, callOptions ...callopt.Option) (r *content.ListFishByPlanResp, err error)
 	RetrieveUserFish(ctx context.Context, Req *content.RetrieveUserFishReq, callOptions ...callopt.Option) (r *content.RetrieveUserFishResp, err error)
 }
@@ -222,6 +223,11 @@ func (p *kContentServiceClient) DonateFish(ctx context.Context, Req *content.Don
 func (p *kContentServiceClient) AddUserFish(ctx context.Context, Req *content.AddUserFishReq, callOptions ...callopt.Option) (r *content.AddUserFishResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.AddUserFish(ctx, Req)
+}
+
+func (p *kContentServiceClient) ListDonateByUser(ctx context.Context, Req *content.ListDonateByUserReq, callOptions ...callopt.Option) (r *content.ListDonateByUserResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.ListDonateByUser(ctx, Req)
 }
 
 func (p *kContentServiceClient) ListFishByPlan(ctx context.Context, Req *content.ListFishByPlanReq, callOptions ...callopt.Option) (r *content.ListFishByPlanResp, err error) {

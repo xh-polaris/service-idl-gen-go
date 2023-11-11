@@ -51,6 +51,7 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		"DeletePlan":       kitex.NewMethodInfo(deletePlanHandler, newDeletePlanArgs, newDeletePlanResult, false),
 		"DonateFish":       kitex.NewMethodInfo(donateFishHandler, newDonateFishArgs, newDonateFishResult, false),
 		"AddUserFish":      kitex.NewMethodInfo(addUserFishHandler, newAddUserFishArgs, newAddUserFishResult, false),
+		"ListDonateByUser": kitex.NewMethodInfo(listDonateByUserHandler, newListDonateByUserArgs, newListDonateByUserResult, false),
 		"ListFishByPlan":   kitex.NewMethodInfo(listFishByPlanHandler, newListFishByPlanArgs, newListFishByPlanResult, false),
 		"RetrieveUserFish": kitex.NewMethodInfo(retrieveUserFishHandler, newRetrieveUserFishArgs, newRetrieveUserFishResult, false),
 	}
@@ -4659,6 +4660,159 @@ func (p *AddUserFishResult) GetResult() interface{} {
 	return p.Success
 }
 
+func listDonateByUserHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(content.ListDonateByUserReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(content.ContentService).ListDonateByUser(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *ListDonateByUserArgs:
+		success, err := handler.(content.ContentService).ListDonateByUser(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*ListDonateByUserResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newListDonateByUserArgs() interface{} {
+	return &ListDonateByUserArgs{}
+}
+
+func newListDonateByUserResult() interface{} {
+	return &ListDonateByUserResult{}
+}
+
+type ListDonateByUserArgs struct {
+	Req *content.ListDonateByUserReq
+}
+
+func (p *ListDonateByUserArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(content.ListDonateByUserReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *ListDonateByUserArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *ListDonateByUserArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *ListDonateByUserArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *ListDonateByUserArgs) Unmarshal(in []byte) error {
+	msg := new(content.ListDonateByUserReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var ListDonateByUserArgs_Req_DEFAULT *content.ListDonateByUserReq
+
+func (p *ListDonateByUserArgs) GetReq() *content.ListDonateByUserReq {
+	if !p.IsSetReq() {
+		return ListDonateByUserArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *ListDonateByUserArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *ListDonateByUserArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type ListDonateByUserResult struct {
+	Success *content.ListDonateByUserResp
+}
+
+var ListDonateByUserResult_Success_DEFAULT *content.ListDonateByUserResp
+
+func (p *ListDonateByUserResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(content.ListDonateByUserResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *ListDonateByUserResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *ListDonateByUserResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *ListDonateByUserResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *ListDonateByUserResult) Unmarshal(in []byte) error {
+	msg := new(content.ListDonateByUserResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *ListDonateByUserResult) GetSuccess() *content.ListDonateByUserResp {
+	if !p.IsSetSuccess() {
+		return ListDonateByUserResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *ListDonateByUserResult) SetSuccess(x interface{}) {
+	p.Success = x.(*content.ListDonateByUserResp)
+}
+
+func (p *ListDonateByUserResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *ListDonateByUserResult) GetResult() interface{} {
+	return p.Success
+}
+
 func listFishByPlanHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -5270,6 +5424,16 @@ func (p *kClient) AddUserFish(ctx context.Context, Req *content.AddUserFishReq) 
 	_args.Req = Req
 	var _result AddUserFishResult
 	if err = p.c.Call(ctx, "AddUserFish", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) ListDonateByUser(ctx context.Context, Req *content.ListDonateByUserReq) (r *content.ListDonateByUserResp, err error) {
+	var _args ListDonateByUserArgs
+	_args.Req = Req
+	var _result ListDonateByUserResult
+	if err = p.c.Call(ctx, "ListDonateByUser", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
