@@ -18,6 +18,7 @@ type Client interface {
 	DonateFish(ctx context.Context, Req *core_api.DonateFishReq, callOptions ...callopt.Option) (r *core_api.DonateFishResp, err error)
 	GetUserFish(ctx context.Context, Req *core_api.GetUserFishReq, callOptions ...callopt.Option) (r *core_api.GetUserFishResp, err error)
 	ListFishByPlan(ctx context.Context, Req *core_api.ListFishByPlanReq, callOptions ...callopt.Option) (r *core_api.ListFishByPlanResp, err error)
+	ListDonateByUser(ctx context.Context, Req *core_api.ListDonateByUserReq, callOptions ...callopt.Option) (r *core_api.ListDonateByUserResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -82,4 +83,9 @@ func (p *kPlanClient) GetUserFish(ctx context.Context, Req *core_api.GetUserFish
 func (p *kPlanClient) ListFishByPlan(ctx context.Context, Req *core_api.ListFishByPlanReq, callOptions ...callopt.Option) (r *core_api.ListFishByPlanResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.ListFishByPlan(ctx, Req)
+}
+
+func (p *kPlanClient) ListDonateByUser(ctx context.Context, Req *core_api.ListDonateByUserReq, callOptions ...callopt.Option) (r *core_api.ListDonateByUserResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.ListDonateByUser(ctx, Req)
 }
