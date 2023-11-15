@@ -2293,7 +2293,7 @@ ReadFieldError:
 }
 
 func (x *CountDonateByPlanReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	x.PlanId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -3784,10 +3784,10 @@ func (x *CountDonateByPlanReq) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *CountDonateByPlanReq) fastWriteField1(buf []byte) (offset int) {
-	if x.UserId == "" {
+	if x.PlanId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetPlanId())
 	return offset
 }
 
@@ -5269,10 +5269,10 @@ func (x *CountDonateByPlanReq) Size() (n int) {
 }
 
 func (x *CountDonateByPlanReq) sizeField1() (n int) {
-	if x.UserId == "" {
+	if x.PlanId == "" {
 		return n
 	}
-	n += fastpb.SizeString(1, x.GetUserId())
+	n += fastpb.SizeString(1, x.GetPlanId())
 	return n
 }
 
@@ -5590,7 +5590,7 @@ var fieldIDToName_CountDonateByUserResp = map[int32]string{
 }
 
 var fieldIDToName_CountDonateByPlanReq = map[int32]string{
-	1: "UserId",
+	1: "PlanId",
 }
 
 var fieldIDToName_CountDonateByPlanResp = map[int32]string{
