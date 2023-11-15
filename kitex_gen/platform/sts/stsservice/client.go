@@ -19,6 +19,7 @@ type Client interface {
 	SignIn(ctx context.Context, Req *sts.SignInReq, callOptions ...callopt.Option) (r *sts.SignInResp, err error)
 	SetPassword(ctx context.Context, Req *sts.SetPasswordReq, callOptions ...callopt.Option) (r *sts.SetPasswordResp, err error)
 	SendVerifyCode(ctx context.Context, Req *sts.SendVerifyCodeReq, callOptions ...callopt.Option) (r *sts.SendVerifyCodeResp, err error)
+	AddUserAuth(ctx context.Context, Req *sts.AddUserAuthReq, callOptions ...callopt.Option) (r *sts.AddUserAuthResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -88,4 +89,9 @@ func (p *kStsServiceClient) SetPassword(ctx context.Context, Req *sts.SetPasswor
 func (p *kStsServiceClient) SendVerifyCode(ctx context.Context, Req *sts.SendVerifyCodeReq, callOptions ...callopt.Option) (r *sts.SendVerifyCodeResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.SendVerifyCode(ctx, Req)
+}
+
+func (p *kStsServiceClient) AddUserAuth(ctx context.Context, Req *sts.AddUserAuthReq, callOptions ...callopt.Option) (r *sts.AddUserAuthResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.AddUserAuth(ctx, Req)
 }
