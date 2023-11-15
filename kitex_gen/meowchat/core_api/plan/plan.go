@@ -21,14 +21,16 @@ func NewServiceInfo() *kitex.ServiceInfo {
 	serviceName := "plan"
 	handlerType := (*core_api.Plan)(nil)
 	methods := map[string]kitex.MethodInfo{
-		"GetPlanPreviews":  kitex.NewMethodInfo(getPlanPreviewsHandler, newGetPlanPreviewsArgs, newGetPlanPreviewsResult, false),
-		"GetPlanDetail":    kitex.NewMethodInfo(getPlanDetailHandler, newGetPlanDetailArgs, newGetPlanDetailResult, false),
-		"NewPlan":          kitex.NewMethodInfo(newPlanHandler, newNewPlanArgs, newNewPlanResult, false),
-		"DeletePlan":       kitex.NewMethodInfo(deletePlanHandler, newDeletePlanArgs, newDeletePlanResult, false),
-		"DonateFish":       kitex.NewMethodInfo(donateFishHandler, newDonateFishArgs, newDonateFishResult, false),
-		"GetUserFish":      kitex.NewMethodInfo(getUserFishHandler, newGetUserFishArgs, newGetUserFishResult, false),
-		"ListFishByPlan":   kitex.NewMethodInfo(listFishByPlanHandler, newListFishByPlanArgs, newListFishByPlanResult, false),
-		"ListDonateByUser": kitex.NewMethodInfo(listDonateByUserHandler, newListDonateByUserArgs, newListDonateByUserResult, false),
+		"GetPlanPreviews":   kitex.NewMethodInfo(getPlanPreviewsHandler, newGetPlanPreviewsArgs, newGetPlanPreviewsResult, false),
+		"GetPlanDetail":     kitex.NewMethodInfo(getPlanDetailHandler, newGetPlanDetailArgs, newGetPlanDetailResult, false),
+		"NewPlan":           kitex.NewMethodInfo(newPlanHandler, newNewPlanArgs, newNewPlanResult, false),
+		"DeletePlan":        kitex.NewMethodInfo(deletePlanHandler, newDeletePlanArgs, newDeletePlanResult, false),
+		"DonateFish":        kitex.NewMethodInfo(donateFishHandler, newDonateFishArgs, newDonateFishResult, false),
+		"GetUserFish":       kitex.NewMethodInfo(getUserFishHandler, newGetUserFishArgs, newGetUserFishResult, false),
+		"ListFishByPlan":    kitex.NewMethodInfo(listFishByPlanHandler, newListFishByPlanArgs, newListFishByPlanResult, false),
+		"ListDonateByUser":  kitex.NewMethodInfo(listDonateByUserHandler, newListDonateByUserArgs, newListDonateByUserResult, false),
+		"CountDonateByUser": kitex.NewMethodInfo(countDonateByUserHandler, newCountDonateByUserArgs, newCountDonateByUserResult, false),
+		"CountDonateByPlan": kitex.NewMethodInfo(countDonateByPlanHandler, newCountDonateByPlanArgs, newCountDonateByPlanResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName":     "meowchat.core_api",
@@ -1269,6 +1271,312 @@ func (p *ListDonateByUserResult) GetResult() interface{} {
 	return p.Success
 }
 
+func countDonateByUserHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.CountDonateByUserReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.Plan).CountDonateByUser(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *CountDonateByUserArgs:
+		success, err := handler.(core_api.Plan).CountDonateByUser(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*CountDonateByUserResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newCountDonateByUserArgs() interface{} {
+	return &CountDonateByUserArgs{}
+}
+
+func newCountDonateByUserResult() interface{} {
+	return &CountDonateByUserResult{}
+}
+
+type CountDonateByUserArgs struct {
+	Req *core_api.CountDonateByUserReq
+}
+
+func (p *CountDonateByUserArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.CountDonateByUserReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *CountDonateByUserArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *CountDonateByUserArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *CountDonateByUserArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *CountDonateByUserArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.CountDonateByUserReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var CountDonateByUserArgs_Req_DEFAULT *core_api.CountDonateByUserReq
+
+func (p *CountDonateByUserArgs) GetReq() *core_api.CountDonateByUserReq {
+	if !p.IsSetReq() {
+		return CountDonateByUserArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *CountDonateByUserArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *CountDonateByUserArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type CountDonateByUserResult struct {
+	Success *core_api.CountDonateByUserResp
+}
+
+var CountDonateByUserResult_Success_DEFAULT *core_api.CountDonateByUserResp
+
+func (p *CountDonateByUserResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.CountDonateByUserResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *CountDonateByUserResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *CountDonateByUserResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *CountDonateByUserResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *CountDonateByUserResult) Unmarshal(in []byte) error {
+	msg := new(core_api.CountDonateByUserResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *CountDonateByUserResult) GetSuccess() *core_api.CountDonateByUserResp {
+	if !p.IsSetSuccess() {
+		return CountDonateByUserResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *CountDonateByUserResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.CountDonateByUserResp)
+}
+
+func (p *CountDonateByUserResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *CountDonateByUserResult) GetResult() interface{} {
+	return p.Success
+}
+
+func countDonateByPlanHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.CountDonateByPlanReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.Plan).CountDonateByPlan(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *CountDonateByPlanArgs:
+		success, err := handler.(core_api.Plan).CountDonateByPlan(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*CountDonateByPlanResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newCountDonateByPlanArgs() interface{} {
+	return &CountDonateByPlanArgs{}
+}
+
+func newCountDonateByPlanResult() interface{} {
+	return &CountDonateByPlanResult{}
+}
+
+type CountDonateByPlanArgs struct {
+	Req *core_api.CountDonateByPlanReq
+}
+
+func (p *CountDonateByPlanArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.CountDonateByPlanReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *CountDonateByPlanArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *CountDonateByPlanArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *CountDonateByPlanArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *CountDonateByPlanArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.CountDonateByPlanReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var CountDonateByPlanArgs_Req_DEFAULT *core_api.CountDonateByPlanReq
+
+func (p *CountDonateByPlanArgs) GetReq() *core_api.CountDonateByPlanReq {
+	if !p.IsSetReq() {
+		return CountDonateByPlanArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *CountDonateByPlanArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *CountDonateByPlanArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type CountDonateByPlanResult struct {
+	Success *core_api.CountDonateByPlanResp
+}
+
+var CountDonateByPlanResult_Success_DEFAULT *core_api.CountDonateByPlanResp
+
+func (p *CountDonateByPlanResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.CountDonateByPlanResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *CountDonateByPlanResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *CountDonateByPlanResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *CountDonateByPlanResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *CountDonateByPlanResult) Unmarshal(in []byte) error {
+	msg := new(core_api.CountDonateByPlanResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *CountDonateByPlanResult) GetSuccess() *core_api.CountDonateByPlanResp {
+	if !p.IsSetSuccess() {
+		return CountDonateByPlanResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *CountDonateByPlanResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.CountDonateByPlanResp)
+}
+
+func (p *CountDonateByPlanResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *CountDonateByPlanResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -1354,6 +1662,26 @@ func (p *kClient) ListDonateByUser(ctx context.Context, Req *core_api.ListDonate
 	_args.Req = Req
 	var _result ListDonateByUserResult
 	if err = p.c.Call(ctx, "ListDonateByUser", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) CountDonateByUser(ctx context.Context, Req *core_api.CountDonateByUserReq) (r *core_api.CountDonateByUserResp, err error) {
+	var _args CountDonateByUserArgs
+	_args.Req = Req
+	var _result CountDonateByUserResult
+	if err = p.c.Call(ctx, "CountDonateByUser", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) CountDonateByPlan(ctx context.Context, Req *core_api.CountDonateByPlanReq) (r *core_api.CountDonateByPlanResp, err error) {
+	var _args CountDonateByPlanArgs
+	_args.Req = Req
+	var _result CountDonateByPlanResult
+	if err = p.c.Call(ctx, "CountDonateByPlan", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

@@ -44,6 +44,8 @@ type Client interface {
 	ListDonateByUser(ctx context.Context, Req *content.ListDonateByUserReq, callOptions ...callopt.Option) (r *content.ListDonateByUserResp, err error)
 	ListFishByPlan(ctx context.Context, Req *content.ListFishByPlanReq, callOptions ...callopt.Option) (r *content.ListFishByPlanResp, err error)
 	RetrieveUserFish(ctx context.Context, Req *content.RetrieveUserFishReq, callOptions ...callopt.Option) (r *content.RetrieveUserFishResp, err error)
+	CountDonateByUser(ctx context.Context, Req *content.CountDonateByUserReq, callOptions ...callopt.Option) (r *content.CountDonateByUserResp, err error)
+	CountDonateByPlan(ctx context.Context, Req *content.CountDonateByPlanReq, callOptions ...callopt.Option) (r *content.CountDonateByPlanResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -238,4 +240,14 @@ func (p *kContentServiceClient) ListFishByPlan(ctx context.Context, Req *content
 func (p *kContentServiceClient) RetrieveUserFish(ctx context.Context, Req *content.RetrieveUserFishReq, callOptions ...callopt.Option) (r *content.RetrieveUserFishResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.RetrieveUserFish(ctx, Req)
+}
+
+func (p *kContentServiceClient) CountDonateByUser(ctx context.Context, Req *content.CountDonateByUserReq, callOptions ...callopt.Option) (r *content.CountDonateByUserResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.CountDonateByUser(ctx, Req)
+}
+
+func (p *kContentServiceClient) CountDonateByPlan(ctx context.Context, Req *content.CountDonateByPlanReq, callOptions ...callopt.Option) (r *content.CountDonateByPlanResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.CountDonateByPlan(ctx, Req)
 }

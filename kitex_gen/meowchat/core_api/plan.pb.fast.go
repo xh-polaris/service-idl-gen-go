@@ -870,11 +870,6 @@ func (x *ListFishByPlanResp) FastRead(buf []byte, _type int8, number int32) (off
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 4:
-		offset, err = x.fastReadField4(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -922,11 +917,6 @@ func (x *ListFishByPlanResp) fastReadField2(buf []byte, _type int8) (offset int,
 
 func (x *ListFishByPlanResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
-	return offset, err
-}
-
-func (x *ListFishByPlanResp) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	x.Token, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -1018,6 +1008,107 @@ func (x *ListDonateByUserResp) fastReadField2(buf []byte, _type int8) (offset in
 
 func (x *ListDonateByUserResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	x.Token, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *CountDonateByUserReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CountDonateByUserReq[number], err)
+}
+
+func (x *CountDonateByUserReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.UserId = &tmp
+	return offset, err
+}
+
+func (x *CountDonateByUserResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CountDonateByUserResp[number], err)
+}
+
+func (x *CountDonateByUserResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *CountDonateByPlanReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CountDonateByPlanReq[number], err)
+}
+
+func (x *CountDonateByPlanReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.PlanId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *CountDonateByPlanResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CountDonateByPlanResp[number], err)
+}
+
+func (x *CountDonateByPlanResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -1634,7 +1725,6 @@ func (x *ListFishByPlanResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
-	offset += x.fastWriteField4(buf[offset:])
 	return offset
 }
 
@@ -1669,14 +1759,6 @@ func (x *ListFishByPlanResp) fastWriteField3(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetTotal())
-	return offset
-}
-
-func (x *ListFishByPlanResp) fastWriteField4(buf []byte) (offset int) {
-	if x.Token == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 4, x.GetToken())
 	return offset
 }
 
@@ -1738,6 +1820,70 @@ func (x *ListDonateByUserResp) fastWriteField3(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 3, x.GetToken())
+	return offset
+}
+
+func (x *CountDonateByUserReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *CountDonateByUserReq) fastWriteField1(buf []byte) (offset int) {
+	if x.UserId == nil {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
+	return offset
+}
+
+func (x *CountDonateByUserResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *CountDonateByUserResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Total == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetTotal())
+	return offset
+}
+
+func (x *CountDonateByPlanReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *CountDonateByPlanReq) fastWriteField1(buf []byte) (offset int) {
+	if x.PlanId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetPlanId())
+	return offset
+}
+
+func (x *CountDonateByPlanResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *CountDonateByPlanResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Total == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetTotal())
 	return offset
 }
 
@@ -2354,7 +2500,6 @@ func (x *ListFishByPlanResp) Size() (n int) {
 	n += x.sizeField1()
 	n += x.sizeField2()
 	n += x.sizeField3()
-	n += x.sizeField4()
 	return n
 }
 
@@ -2389,14 +2534,6 @@ func (x *ListFishByPlanResp) sizeField3() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(3, x.GetTotal())
-	return n
-}
-
-func (x *ListFishByPlanResp) sizeField4() (n int) {
-	if x.Token == "" {
-		return n
-	}
-	n += fastpb.SizeString(4, x.GetToken())
 	return n
 }
 
@@ -2458,6 +2595,70 @@ func (x *ListDonateByUserResp) sizeField3() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(3, x.GetToken())
+	return n
+}
+
+func (x *CountDonateByUserReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *CountDonateByUserReq) sizeField1() (n int) {
+	if x.UserId == nil {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetUserId())
+	return n
+}
+
+func (x *CountDonateByUserResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *CountDonateByUserResp) sizeField1() (n int) {
+	if x.Total == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(1, x.GetTotal())
+	return n
+}
+
+func (x *CountDonateByPlanReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *CountDonateByPlanReq) sizeField1() (n int) {
+	if x.PlanId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetPlanId())
+	return n
+}
+
+func (x *CountDonateByPlanResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *CountDonateByPlanResp) sizeField1() (n int) {
+	if x.Total == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(1, x.GetTotal())
 	return n
 }
 
@@ -2563,7 +2764,6 @@ var fieldIDToName_ListFishByPlanResp = map[int32]string{
 	1: "Users",
 	2: "FishMap",
 	3: "Total",
-	4: "Token",
 }
 
 var fieldIDToName_ListDonateByUserReq = map[int32]string{
@@ -2575,6 +2775,22 @@ var fieldIDToName_ListDonateByUserResp = map[int32]string{
 	1: "PlanPreviews",
 	2: "Total",
 	3: "Token",
+}
+
+var fieldIDToName_CountDonateByUserReq = map[int32]string{
+	1: "UserId",
+}
+
+var fieldIDToName_CountDonateByUserResp = map[int32]string{
+	1: "Total",
+}
+
+var fieldIDToName_CountDonateByPlanReq = map[int32]string{
+	1: "PlanId",
+}
+
+var fieldIDToName_CountDonateByPlanResp = map[int32]string{
+	1: "Total",
 }
 
 var _ = basic.File_basic_pagination_proto
