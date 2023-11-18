@@ -102,6 +102,11 @@ func (x *Plan) FastRead(buf []byte, _type int8, number int32) (offset int, err e
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 18:
+		offset, err = x.fastReadField18(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -213,6 +218,16 @@ func (x *Plan) fastReadField16(buf []byte, _type int8) (offset int, err error) {
 func (x *Plan) fastReadField17(buf []byte, _type int8) (offset int, err error) {
 	x.CatName, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
+}
+
+func (x *Plan) fastReadField18(buf []byte, _type int8) (offset int, err error) {
+	var v int32
+	v, offset, err = fastpb.ReadInt32(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.PlanState = content.PlanState(v)
+	return offset, nil
 }
 
 func (x *PlanPre) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -1133,6 +1148,7 @@ func (x *Plan) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField15(buf[offset:])
 	offset += x.fastWriteField16(buf[offset:])
 	offset += x.fastWriteField17(buf[offset:])
+	offset += x.fastWriteField18(buf[offset:])
 	return offset
 }
 
@@ -1271,6 +1287,14 @@ func (x *Plan) fastWriteField17(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 17, x.GetCatName())
+	return offset
+}
+
+func (x *Plan) fastWriteField18(buf []byte) (offset int) {
+	if x.PlanState == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt32(buf[offset:], 18, int32(x.GetPlanState()))
 	return offset
 }
 
@@ -1908,6 +1932,7 @@ func (x *Plan) Size() (n int) {
 	n += x.sizeField15()
 	n += x.sizeField16()
 	n += x.sizeField17()
+	n += x.sizeField18()
 	return n
 }
 
@@ -2046,6 +2071,14 @@ func (x *Plan) sizeField17() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(17, x.GetCatName())
+	return n
+}
+
+func (x *Plan) sizeField18() (n int) {
+	if x.PlanState == 0 {
+		return n
+	}
+	n += fastpb.SizeInt32(18, int32(x.GetPlanState()))
 	return n
 }
 
@@ -2680,6 +2713,7 @@ var fieldIDToName_Plan = map[int32]string{
 	15: "NowFish",
 	16: "Summary",
 	17: "CatName",
+	18: "PlanState",
 }
 
 var fieldIDToName_PlanPre = map[int32]string{
