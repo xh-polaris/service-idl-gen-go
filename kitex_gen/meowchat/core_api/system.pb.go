@@ -2652,6 +2652,91 @@ func (x *ListNotificationResp) GetTotal() int64 {
 	return 0
 }
 
+type ReadNotificationReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	NotificationId string `protobuf:"bytes,1,opt,name=notificationId,proto3" json:"notificationId,omitempty"`
+}
+
+func (x *ReadNotificationReq) Reset() {
+	*x = ReadNotificationReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowchat_core_api_system_proto_msgTypes[50]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ReadNotificationReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReadNotificationReq) ProtoMessage() {}
+
+func (x *ReadNotificationReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowchat_core_api_system_proto_msgTypes[50]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReadNotificationReq.ProtoReflect.Descriptor instead.
+func (*ReadNotificationReq) Descriptor() ([]byte, []int) {
+	return file_meowchat_core_api_system_proto_rawDescGZIP(), []int{50}
+}
+
+func (x *ReadNotificationReq) GetNotificationId() string {
+	if x != nil {
+		return x.NotificationId
+	}
+	return ""
+}
+
+type ReadNotificationResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *ReadNotificationResp) Reset() {
+	*x = ReadNotificationResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowchat_core_api_system_proto_msgTypes[51]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ReadNotificationResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ReadNotificationResp) ProtoMessage() {}
+
+func (x *ReadNotificationResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowchat_core_api_system_proto_msgTypes[51]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ReadNotificationResp.ProtoReflect.Descriptor instead.
+func (*ReadNotificationResp) Descriptor() ([]byte, []int) {
+	return file_meowchat_core_api_system_proto_rawDescGZIP(), []int{51}
+}
+
 type CleanNotificationReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2661,7 +2746,7 @@ type CleanNotificationReq struct {
 func (x *CleanNotificationReq) Reset() {
 	*x = CleanNotificationReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_core_api_system_proto_msgTypes[50]
+		mi := &file_meowchat_core_api_system_proto_msgTypes[52]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2674,7 +2759,7 @@ func (x *CleanNotificationReq) String() string {
 func (*CleanNotificationReq) ProtoMessage() {}
 
 func (x *CleanNotificationReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_core_api_system_proto_msgTypes[50]
+	mi := &file_meowchat_core_api_system_proto_msgTypes[52]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2687,7 +2772,7 @@ func (x *CleanNotificationReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CleanNotificationReq.ProtoReflect.Descriptor instead.
 func (*CleanNotificationReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_core_api_system_proto_rawDescGZIP(), []int{50}
+	return file_meowchat_core_api_system_proto_rawDescGZIP(), []int{52}
 }
 
 type CleanNotificationResp struct {
@@ -2699,7 +2784,7 @@ type CleanNotificationResp struct {
 func (x *CleanNotificationResp) Reset() {
 	*x = CleanNotificationResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_core_api_system_proto_msgTypes[51]
+		mi := &file_meowchat_core_api_system_proto_msgTypes[53]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2712,7 +2797,7 @@ func (x *CleanNotificationResp) String() string {
 func (*CleanNotificationResp) ProtoMessage() {}
 
 func (x *CleanNotificationResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_core_api_system_proto_msgTypes[51]
+	mi := &file_meowchat_core_api_system_proto_msgTypes[53]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2725,7 +2810,7 @@ func (x *CleanNotificationResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CleanNotificationResp.ProtoReflect.Descriptor instead.
 func (*CleanNotificationResp) Descriptor() ([]byte, []int) {
-	return file_meowchat_core_api_system_proto_rawDescGZIP(), []int{51}
+	return file_meowchat_core_api_system_proto_rawDescGZIP(), []int{53}
 }
 
 type CountNotificationReq struct {
@@ -2737,7 +2822,7 @@ type CountNotificationReq struct {
 func (x *CountNotificationReq) Reset() {
 	*x = CountNotificationReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_core_api_system_proto_msgTypes[52]
+		mi := &file_meowchat_core_api_system_proto_msgTypes[54]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2750,7 +2835,7 @@ func (x *CountNotificationReq) String() string {
 func (*CountNotificationReq) ProtoMessage() {}
 
 func (x *CountNotificationReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_core_api_system_proto_msgTypes[52]
+	mi := &file_meowchat_core_api_system_proto_msgTypes[54]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2763,7 +2848,7 @@ func (x *CountNotificationReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountNotificationReq.ProtoReflect.Descriptor instead.
 func (*CountNotificationReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_core_api_system_proto_rawDescGZIP(), []int{52}
+	return file_meowchat_core_api_system_proto_rawDescGZIP(), []int{54}
 }
 
 type CountNotificationResp struct {
@@ -2777,7 +2862,7 @@ type CountNotificationResp struct {
 func (x *CountNotificationResp) Reset() {
 	*x = CountNotificationResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_core_api_system_proto_msgTypes[53]
+		mi := &file_meowchat_core_api_system_proto_msgTypes[55]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2790,7 +2875,7 @@ func (x *CountNotificationResp) String() string {
 func (*CountNotificationResp) ProtoMessage() {}
 
 func (x *CountNotificationResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_core_api_system_proto_msgTypes[53]
+	mi := &file_meowchat_core_api_system_proto_msgTypes[55]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2803,7 +2888,7 @@ func (x *CountNotificationResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountNotificationResp.ProtoReflect.Descriptor instead.
 func (*CountNotificationResp) Descriptor() ([]byte, []int) {
-	return file_meowchat_core_api_system_proto_rawDescGZIP(), []int{53}
+	return file_meowchat_core_api_system_proto_rawDescGZIP(), []int{55}
 }
 
 func (x *CountNotificationResp) GetNotRead() int64 {
@@ -2822,7 +2907,7 @@ type GetMinVersionReq struct {
 func (x *GetMinVersionReq) Reset() {
 	*x = GetMinVersionReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_core_api_system_proto_msgTypes[54]
+		mi := &file_meowchat_core_api_system_proto_msgTypes[56]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2835,7 +2920,7 @@ func (x *GetMinVersionReq) String() string {
 func (*GetMinVersionReq) ProtoMessage() {}
 
 func (x *GetMinVersionReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_core_api_system_proto_msgTypes[54]
+	mi := &file_meowchat_core_api_system_proto_msgTypes[56]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2848,7 +2933,7 @@ func (x *GetMinVersionReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMinVersionReq.ProtoReflect.Descriptor instead.
 func (*GetMinVersionReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_core_api_system_proto_rawDescGZIP(), []int{54}
+	return file_meowchat_core_api_system_proto_rawDescGZIP(), []int{56}
 }
 
 type GetMinVersionResp struct {
@@ -2862,7 +2947,7 @@ type GetMinVersionResp struct {
 func (x *GetMinVersionResp) Reset() {
 	*x = GetMinVersionResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_core_api_system_proto_msgTypes[55]
+		mi := &file_meowchat_core_api_system_proto_msgTypes[57]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2875,7 +2960,7 @@ func (x *GetMinVersionResp) String() string {
 func (*GetMinVersionResp) ProtoMessage() {}
 
 func (x *GetMinVersionResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_core_api_system_proto_msgTypes[55]
+	mi := &file_meowchat_core_api_system_proto_msgTypes[57]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2888,7 +2973,7 @@ func (x *GetMinVersionResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMinVersionResp.ProtoReflect.Descriptor instead.
 func (*GetMinVersionResp) Descriptor() ([]byte, []int) {
-	return file_meowchat_core_api_system_proto_rawDescGZIP(), []int{55}
+	return file_meowchat_core_api_system_proto_rawDescGZIP(), []int{57}
 }
 
 func (x *GetMinVersionResp) GetMinVersion() int64 {
@@ -3137,28 +3222,33 @@ var file_meowchat_core_api_system_proto_rawDesc = []byte{
 	0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x4e,
 	0x6f, 0x74, 0x52, 0x65, 0x61, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x4e, 0x6f,
 	0x74, 0x52, 0x65, 0x61, 0x64, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x18, 0x03,
-	0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x22, 0x16, 0x0a, 0x14, 0x43,
-	0x6c, 0x65, 0x61, 0x6e, 0x4e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x52, 0x65, 0x71, 0x22, 0x17, 0x0a, 0x15, 0x43, 0x6c, 0x65, 0x61, 0x6e, 0x4e, 0x6f, 0x74, 0x69,
-	0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x22, 0x16, 0x0a, 0x14,
-	0x43, 0x6f, 0x75, 0x6e, 0x74, 0x4e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x52, 0x65, 0x71, 0x22, 0x31, 0x0a, 0x15, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x4e, 0x6f, 0x74,
-	0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x12, 0x18, 0x0a,
-	0x07, 0x4e, 0x6f, 0x74, 0x52, 0x65, 0x61, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07,
-	0x4e, 0x6f, 0x74, 0x52, 0x65, 0x61, 0x64, 0x22, 0x12, 0x0a, 0x10, 0x47, 0x65, 0x74, 0x4d, 0x69,
-	0x6e, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x22, 0x33, 0x0a, 0x11, 0x47,
-	0x65, 0x74, 0x4d, 0x69, 0x6e, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70,
-	0x12, 0x1e, 0x0a, 0x0a, 0x4d, 0x69, 0x6e, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x4d, 0x69, 0x6e, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e,
-	0x42, 0x7c, 0x0a, 0x25, 0x63, 0x6f, 0x6d, 0x2e, 0x78, 0x68, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69,
-	0x73, 0x2e, 0x69, 0x64, 0x6c, 0x67, 0x65, 0x6e, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x68, 0x61,
-	0x74, 0x2e, 0x63, 0x6f, 0x72, 0x65, 0x61, 0x70, 0x69, 0x42, 0x0b, 0x53, 0x79, 0x73, 0x74, 0x65,
-	0x6d, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x44, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62,
-	0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x68, 0x2d, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2f,
-	0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2d, 0x69, 0x64, 0x6c, 0x2d, 0x67, 0x65, 0x6e, 0x2d,
-	0x67, 0x6f, 0x2f, 0x6b, 0x69, 0x74, 0x65, 0x78, 0x5f, 0x67, 0x65, 0x6e, 0x2f, 0x6d, 0x65, 0x6f,
-	0x77, 0x63, 0x68, 0x61, 0x74, 0x2f, 0x63, 0x6f, 0x72, 0x65, 0x5f, 0x61, 0x70, 0x69, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x22, 0x3d, 0x0a, 0x13, 0x52,
+	0x65, 0x61, 0x64, 0x4e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52,
+	0x65, 0x71, 0x12, 0x26, 0x0a, 0x0e, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x0e, 0x6e, 0x6f, 0x74, 0x69,
+	0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x49, 0x64, 0x22, 0x16, 0x0a, 0x14, 0x52, 0x65,
+	0x61, 0x64, 0x4e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65,
+	0x73, 0x70, 0x22, 0x16, 0x0a, 0x14, 0x43, 0x6c, 0x65, 0x61, 0x6e, 0x4e, 0x6f, 0x74, 0x69, 0x66,
+	0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x22, 0x17, 0x0a, 0x15, 0x43, 0x6c,
+	0x65, 0x61, 0x6e, 0x4e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52,
+	0x65, 0x73, 0x70, 0x22, 0x16, 0x0a, 0x14, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x4e, 0x6f, 0x74, 0x69,
+	0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x22, 0x31, 0x0a, 0x15, 0x43,
+	0x6f, 0x75, 0x6e, 0x74, 0x4e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x52, 0x65, 0x73, 0x70, 0x12, 0x18, 0x0a, 0x07, 0x4e, 0x6f, 0x74, 0x52, 0x65, 0x61, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x4e, 0x6f, 0x74, 0x52, 0x65, 0x61, 0x64, 0x22, 0x12,
+	0x0a, 0x10, 0x47, 0x65, 0x74, 0x4d, 0x69, 0x6e, 0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x52,
+	0x65, 0x71, 0x22, 0x33, 0x0a, 0x11, 0x47, 0x65, 0x74, 0x4d, 0x69, 0x6e, 0x56, 0x65, 0x72, 0x73,
+	0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x12, 0x1e, 0x0a, 0x0a, 0x4d, 0x69, 0x6e, 0x56, 0x65,
+	0x72, 0x73, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0a, 0x4d, 0x69, 0x6e,
+	0x56, 0x65, 0x72, 0x73, 0x69, 0x6f, 0x6e, 0x42, 0x7c, 0x0a, 0x25, 0x63, 0x6f, 0x6d, 0x2e, 0x78,
+	0x68, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2e, 0x69, 0x64, 0x6c, 0x67, 0x65, 0x6e, 0x2e,
+	0x6d, 0x65, 0x6f, 0x77, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x63, 0x6f, 0x72, 0x65, 0x61, 0x70, 0x69,
+	0x42, 0x0b, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a,
+	0x44, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x68, 0x2d, 0x70,
+	0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2d, 0x69,
+	0x64, 0x6c, 0x2d, 0x67, 0x65, 0x6e, 0x2d, 0x67, 0x6f, 0x2f, 0x6b, 0x69, 0x74, 0x65, 0x78, 0x5f,
+	0x67, 0x65, 0x6e, 0x2f, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x68, 0x61, 0x74, 0x2f, 0x63, 0x6f, 0x72,
+	0x65, 0x5f, 0x61, 0x70, 0x69, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -3173,7 +3263,7 @@ func file_meowchat_core_api_system_proto_rawDescGZIP() []byte {
 	return file_meowchat_core_api_system_proto_rawDescData
 }
 
-var file_meowchat_core_api_system_proto_msgTypes = make([]protoimpl.MessageInfo, 56)
+var file_meowchat_core_api_system_proto_msgTypes = make([]protoimpl.MessageInfo, 58)
 var file_meowchat_core_api_system_proto_goTypes = []interface{}{
 	(*News)(nil),                     // 0: meowchat.core_api.News
 	(*Admin)(nil),                    // 1: meowchat.core_api.Admin
@@ -3225,34 +3315,36 @@ var file_meowchat_core_api_system_proto_goTypes = []interface{}{
 	(*GetUserByRoleResp)(nil),        // 47: meowchat.core_api.GetUserByRoleResp
 	(*ListNotificationReq)(nil),      // 48: meowchat.core_api.ListNotificationReq
 	(*ListNotificationResp)(nil),     // 49: meowchat.core_api.ListNotificationResp
-	(*CleanNotificationReq)(nil),     // 50: meowchat.core_api.CleanNotificationReq
-	(*CleanNotificationResp)(nil),    // 51: meowchat.core_api.CleanNotificationResp
-	(*CountNotificationReq)(nil),     // 52: meowchat.core_api.CountNotificationReq
-	(*CountNotificationResp)(nil),    // 53: meowchat.core_api.CountNotificationResp
-	(*GetMinVersionReq)(nil),         // 54: meowchat.core_api.GetMinVersionReq
-	(*GetMinVersionResp)(nil),        // 55: meowchat.core_api.GetMinVersionResp
-	(*user.UserPreview)(nil),         // 56: meowchat.user.UserPreview
-	(system.NotificationType)(0),     // 57: meowchat.system.NotificationType
-	(*system.Role)(nil),              // 58: meowchat.system.Role
-	(system.RoleType)(0),             // 59: meowchat.system.RoleType
-	(*basic.PaginationOptions)(nil),  // 60: basic.PaginationOptions
+	(*ReadNotificationReq)(nil),      // 50: meowchat.core_api.ReadNotificationReq
+	(*ReadNotificationResp)(nil),     // 51: meowchat.core_api.ReadNotificationResp
+	(*CleanNotificationReq)(nil),     // 52: meowchat.core_api.CleanNotificationReq
+	(*CleanNotificationResp)(nil),    // 53: meowchat.core_api.CleanNotificationResp
+	(*CountNotificationReq)(nil),     // 54: meowchat.core_api.CountNotificationReq
+	(*CountNotificationResp)(nil),    // 55: meowchat.core_api.CountNotificationResp
+	(*GetMinVersionReq)(nil),         // 56: meowchat.core_api.GetMinVersionReq
+	(*GetMinVersionResp)(nil),        // 57: meowchat.core_api.GetMinVersionResp
+	(*user.UserPreview)(nil),         // 58: meowchat.user.UserPreview
+	(system.NotificationType)(0),     // 59: meowchat.system.NotificationType
+	(*system.Role)(nil),              // 60: meowchat.system.Role
+	(system.RoleType)(0),             // 61: meowchat.system.RoleType
+	(*basic.PaginationOptions)(nil),  // 62: basic.PaginationOptions
 }
 var file_meowchat_core_api_system_proto_depIdxs = []int32{
-	56, // 0: meowchat.core_api.Notification.user:type_name -> meowchat.user.UserPreview
-	57, // 1: meowchat.core_api.Notification.types:type_name -> meowchat.system.NotificationType
+	58, // 0: meowchat.core_api.Notification.user:type_name -> meowchat.user.UserPreview
+	59, // 1: meowchat.core_api.Notification.types:type_name -> meowchat.system.NotificationType
 	0,  // 2: meowchat.core_api.GetNewsResp.news:type_name -> meowchat.core_api.News
 	1,  // 3: meowchat.core_api.GetAdminsResp.Admins:type_name -> meowchat.core_api.Admin
 	2,  // 4: meowchat.core_api.GetNoticesResp.notices:type_name -> meowchat.core_api.Notice
-	56, // 5: meowchat.core_api.ApplyInfo.user:type_name -> meowchat.user.UserPreview
+	58, // 5: meowchat.core_api.ApplyInfo.user:type_name -> meowchat.user.UserPreview
 	22, // 6: meowchat.core_api.ListApplyResp.applyInfo:type_name -> meowchat.core_api.ApplyInfo
 	29, // 7: meowchat.core_api.ListCommunityResp.communities:type_name -> meowchat.core_api.Community
-	58, // 8: meowchat.core_api.GetUserRolesResp.roles:type_name -> meowchat.system.Role
-	58, // 9: meowchat.core_api.UpdateRoleReq.roles:type_name -> meowchat.system.Role
-	59, // 10: meowchat.core_api.RetrieveUserPreviewReq.roleType:type_name -> meowchat.system.RoleType
-	56, // 11: meowchat.core_api.RetrieveUserPreviewResp.users:type_name -> meowchat.user.UserPreview
-	59, // 12: meowchat.core_api.GetUserByRoleReq.roleType:type_name -> meowchat.system.RoleType
-	56, // 13: meowchat.core_api.GetUserByRoleResp.users:type_name -> meowchat.user.UserPreview
-	60, // 14: meowchat.core_api.ListNotificationReq.paginationOptions:type_name -> basic.PaginationOptions
+	60, // 8: meowchat.core_api.GetUserRolesResp.roles:type_name -> meowchat.system.Role
+	60, // 9: meowchat.core_api.UpdateRoleReq.roles:type_name -> meowchat.system.Role
+	61, // 10: meowchat.core_api.RetrieveUserPreviewReq.roleType:type_name -> meowchat.system.RoleType
+	58, // 11: meowchat.core_api.RetrieveUserPreviewResp.users:type_name -> meowchat.user.UserPreview
+	61, // 12: meowchat.core_api.GetUserByRoleReq.roleType:type_name -> meowchat.system.RoleType
+	58, // 13: meowchat.core_api.GetUserByRoleResp.users:type_name -> meowchat.user.UserPreview
+	62, // 14: meowchat.core_api.ListNotificationReq.paginationOptions:type_name -> basic.PaginationOptions
 	3,  // 15: meowchat.core_api.ListNotificationResp.notifications:type_name -> meowchat.core_api.Notification
 	16, // [16:16] is the sub-list for method output_type
 	16, // [16:16] is the sub-list for method input_type
@@ -3868,7 +3960,7 @@ func file_meowchat_core_api_system_proto_init() {
 			}
 		}
 		file_meowchat_core_api_system_proto_msgTypes[50].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CleanNotificationReq); i {
+			switch v := v.(*ReadNotificationReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3880,7 +3972,7 @@ func file_meowchat_core_api_system_proto_init() {
 			}
 		}
 		file_meowchat_core_api_system_proto_msgTypes[51].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CleanNotificationResp); i {
+			switch v := v.(*ReadNotificationResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3892,7 +3984,7 @@ func file_meowchat_core_api_system_proto_init() {
 			}
 		}
 		file_meowchat_core_api_system_proto_msgTypes[52].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CountNotificationReq); i {
+			switch v := v.(*CleanNotificationReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3904,7 +3996,7 @@ func file_meowchat_core_api_system_proto_init() {
 			}
 		}
 		file_meowchat_core_api_system_proto_msgTypes[53].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CountNotificationResp); i {
+			switch v := v.(*CleanNotificationResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3916,7 +4008,7 @@ func file_meowchat_core_api_system_proto_init() {
 			}
 		}
 		file_meowchat_core_api_system_proto_msgTypes[54].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*GetMinVersionReq); i {
+			switch v := v.(*CountNotificationReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -3928,6 +4020,30 @@ func file_meowchat_core_api_system_proto_init() {
 			}
 		}
 		file_meowchat_core_api_system_proto_msgTypes[55].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CountNotificationResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowchat_core_api_system_proto_msgTypes[56].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetMinVersionReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowchat_core_api_system_proto_msgTypes[57].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*GetMinVersionResp); i {
 			case 0:
 				return &v.state
@@ -3954,7 +4070,7 @@ func file_meowchat_core_api_system_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_meowchat_core_api_system_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   56,
+			NumMessages:   58,
 			NumExtensions: 0,
 			NumServices:   0,
 		},

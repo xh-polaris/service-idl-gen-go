@@ -1693,6 +1693,44 @@ func (x *ListNotificationResp) fastReadField3(buf []byte, _type int8) (offset in
 	return offset, err
 }
 
+func (x *ReadNotificationReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ReadNotificationReq[number], err)
+}
+
+func (x *ReadNotificationReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.NotificationId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *ReadNotificationResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+}
+
 func (x *CleanNotificationReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	default:
@@ -2939,6 +2977,29 @@ func (x *ListNotificationResp) fastWriteField3(buf []byte) (offset int) {
 	return offset
 }
 
+func (x *ReadNotificationReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *ReadNotificationReq) fastWriteField1(buf []byte) (offset int) {
+	if x.NotificationId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetNotificationId())
+	return offset
+}
+
+func (x *ReadNotificationResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	return offset
+}
+
 func (x *CleanNotificationReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -4143,6 +4204,29 @@ func (x *ListNotificationResp) sizeField3() (n int) {
 	return n
 }
 
+func (x *ReadNotificationReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *ReadNotificationReq) sizeField1() (n int) {
+	if x.NotificationId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetNotificationId())
+	return n
+}
+
+func (x *ReadNotificationResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	return n
+}
+
 func (x *CleanNotificationReq) Size() (n int) {
 	if x == nil {
 		return n
@@ -4428,6 +4512,12 @@ var fieldIDToName_ListNotificationResp = map[int32]string{
 	2: "NotRead",
 	3: "Total",
 }
+
+var fieldIDToName_ReadNotificationReq = map[int32]string{
+	1: "NotificationId",
+}
+
+var fieldIDToName_ReadNotificationResp = map[int32]string{}
 
 var fieldIDToName_CleanNotificationReq = map[int32]string{}
 

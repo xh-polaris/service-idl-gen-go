@@ -44,6 +44,7 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		"ListNotification":     kitex.NewMethodInfo(listNotificationHandler, newListNotificationArgs, newListNotificationResult, false),
 		"CleanNotification":    kitex.NewMethodInfo(cleanNotificationHandler, newCleanNotificationArgs, newCleanNotificationResult, false),
 		"CountNotification":    kitex.NewMethodInfo(countNotificationHandler, newCountNotificationArgs, newCountNotificationResult, false),
+		"ReadNotification":     kitex.NewMethodInfo(readNotificationHandler, newReadNotificationArgs, newReadNotificationResult, false),
 		"Prefetch":             kitex.NewMethodInfo(prefetchHandler, newPrefetchArgs, newPrefetchResult, false),
 		"GetMinVersion":        kitex.NewMethodInfo(getMinVersionHandler, newGetMinVersionArgs, newGetMinVersionResult, false),
 	}
@@ -3581,6 +3582,159 @@ func (p *CountNotificationResult) GetResult() interface{} {
 	return p.Success
 }
 
+func readNotificationHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.ReadNotificationReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.System).ReadNotification(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *ReadNotificationArgs:
+		success, err := handler.(core_api.System).ReadNotification(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*ReadNotificationResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newReadNotificationArgs() interface{} {
+	return &ReadNotificationArgs{}
+}
+
+func newReadNotificationResult() interface{} {
+	return &ReadNotificationResult{}
+}
+
+type ReadNotificationArgs struct {
+	Req *core_api.ReadNotificationReq
+}
+
+func (p *ReadNotificationArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.ReadNotificationReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *ReadNotificationArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *ReadNotificationArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *ReadNotificationArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *ReadNotificationArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.ReadNotificationReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var ReadNotificationArgs_Req_DEFAULT *core_api.ReadNotificationReq
+
+func (p *ReadNotificationArgs) GetReq() *core_api.ReadNotificationReq {
+	if !p.IsSetReq() {
+		return ReadNotificationArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *ReadNotificationArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *ReadNotificationArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type ReadNotificationResult struct {
+	Success *core_api.ReadNotificationResp
+}
+
+var ReadNotificationResult_Success_DEFAULT *core_api.ReadNotificationResp
+
+func (p *ReadNotificationResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.ReadNotificationResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *ReadNotificationResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *ReadNotificationResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *ReadNotificationResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *ReadNotificationResult) Unmarshal(in []byte) error {
+	msg := new(core_api.ReadNotificationResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *ReadNotificationResult) GetSuccess() *core_api.ReadNotificationResp {
+	if !p.IsSetSuccess() {
+		return ReadNotificationResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *ReadNotificationResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.ReadNotificationResp)
+}
+
+func (p *ReadNotificationResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *ReadNotificationResult) GetResult() interface{} {
+	return p.Success
+}
+
 func prefetchHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -4122,6 +4276,16 @@ func (p *kClient) CountNotification(ctx context.Context, Req *core_api.CountNoti
 	_args.Req = Req
 	var _result CountNotificationResult
 	if err = p.c.Call(ctx, "CountNotification", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) ReadNotification(ctx context.Context, Req *core_api.ReadNotificationReq) (r *core_api.ReadNotificationResp, err error) {
+	var _args ReadNotificationArgs
+	_args.Req = Req
+	var _result ReadNotificationResult
+	if err = p.c.Call(ctx, "ReadNotification", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
