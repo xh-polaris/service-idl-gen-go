@@ -306,6 +306,11 @@ func (x *DoLikeReq) FastRead(buf []byte, _type int8, number int32) (offset int, 
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 5:
+		offset, err = x.fastReadField5(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -341,6 +346,11 @@ func (x *DoLikeReq) fastReadField3(buf []byte, _type int8) (offset int, err erro
 
 func (x *DoLikeReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 	x.AssociatedId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *DoLikeReq) fastReadField5(buf []byte, _type int8) (offset int, err error) {
+	x.LikedUserId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -882,6 +892,7 @@ func (x *DoLikeReq) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
+	offset += x.fastWriteField5(buf[offset:])
 	return offset
 }
 
@@ -914,6 +925,14 @@ func (x *DoLikeReq) fastWriteField4(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 4, x.GetAssociatedId())
+	return offset
+}
+
+func (x *DoLikeReq) fastWriteField5(buf []byte) (offset int) {
+	if x.LikedUserId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 5, x.GetLikedUserId())
 	return offset
 }
 
@@ -1325,6 +1344,7 @@ func (x *DoLikeReq) Size() (n int) {
 	n += x.sizeField2()
 	n += x.sizeField3()
 	n += x.sizeField4()
+	n += x.sizeField5()
 	return n
 }
 
@@ -1357,6 +1377,14 @@ func (x *DoLikeReq) sizeField4() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(4, x.GetAssociatedId())
+	return n
+}
+
+func (x *DoLikeReq) sizeField5() (n int) {
+	if x.LikedUserId == "" {
+		return n
+	}
+	n += fastpb.SizeString(5, x.GetLikedUserId())
 	return n
 }
 
@@ -1626,6 +1654,7 @@ var fieldIDToName_DoLikeReq = map[int32]string{
 	2: "TargetId",
 	3: "Type",
 	4: "AssociatedId",
+	5: "LikedUserId",
 }
 
 var fieldIDToName_DoLikeResp = map[int32]string{

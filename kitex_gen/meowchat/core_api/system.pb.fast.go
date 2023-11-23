@@ -1649,7 +1649,7 @@ func (x *ListNotificationReq) fastReadField3(buf []byte, _type int8) (offset int
 	if err != nil {
 		return offset, err
 	}
-	x.PaginationOptions = &v
+	x.PaginationOption = &v
 	return offset, nil
 }
 
@@ -2953,10 +2953,10 @@ func (x *ListNotificationReq) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *ListNotificationReq) fastWriteField3(buf []byte) (offset int) {
-	if x.PaginationOptions == nil {
+	if x.PaginationOption == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetPaginationOptions())
+	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetPaginationOption())
 	return offset
 }
 
@@ -4189,10 +4189,10 @@ func (x *ListNotificationReq) Size() (n int) {
 }
 
 func (x *ListNotificationReq) sizeField3() (n int) {
-	if x.PaginationOptions == nil {
+	if x.PaginationOption == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(3, x.GetPaginationOptions())
+	n += fastpb.SizeMessage(3, x.GetPaginationOption())
 	return n
 }
 
@@ -4533,7 +4533,7 @@ var fieldIDToName_GetUserByRoleResp = map[int32]string{
 }
 
 var fieldIDToName_ListNotificationReq = map[int32]string{
-	3: "PaginationOptions",
+	3: "PaginationOption",
 }
 
 var fieldIDToName_ListNotificationResp = map[int32]string{
