@@ -690,6 +690,11 @@ func (x *PlanPreview) FastRead(buf []byte, _type int8, number int32) (offset int
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 6:
+		offset, err = x.fastReadField6(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -725,6 +730,11 @@ func (x *PlanPreview) fastReadField4(buf []byte, _type int8) (offset int, err er
 
 func (x *PlanPreview) fastReadField5(buf []byte, _type int8) (offset int, err error) {
 	x.DonateTime, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *PlanPreview) fastReadField6(buf []byte, _type int8) (offset int, err error) {
+	x.CoverUrl, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -1504,6 +1514,7 @@ func (x *PlanPreview) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
 	offset += x.fastWriteField5(buf[offset:])
+	offset += x.fastWriteField6(buf[offset:])
 	return offset
 }
 
@@ -1544,6 +1555,14 @@ func (x *PlanPreview) fastWriteField5(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 5, x.GetDonateTime())
+	return offset
+}
+
+func (x *PlanPreview) fastWriteField6(buf []byte) (offset int) {
+	if x.CoverUrl == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 6, x.GetCoverUrl())
 	return offset
 }
 
@@ -2246,6 +2265,7 @@ func (x *PlanPreview) Size() (n int) {
 	n += x.sizeField3()
 	n += x.sizeField4()
 	n += x.sizeField5()
+	n += x.sizeField6()
 	return n
 }
 
@@ -2286,6 +2306,14 @@ func (x *PlanPreview) sizeField5() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(5, x.GetDonateTime())
+	return n
+}
+
+func (x *PlanPreview) sizeField6() (n int) {
+	if x.CoverUrl == "" {
+		return n
+	}
+	n += fastpb.SizeString(6, x.GetCoverUrl())
 	return n
 }
 
@@ -2529,6 +2557,7 @@ var fieldIDToName_PlanPreview = map[int32]string{
 	3: "CatId",
 	4: "DonateNum",
 	5: "DonateTime",
+	6: "CoverUrl",
 }
 
 var fieldIDToName_SearchField = map[int32]string{
