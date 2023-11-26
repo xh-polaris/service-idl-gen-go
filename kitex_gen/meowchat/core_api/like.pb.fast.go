@@ -84,7 +84,7 @@ ReadFieldError:
 }
 
 func (x *DoLikeResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.IsFirst, offset, err = fastpb.ReadBool(buf, _type)
+	x.GetFish, offset, err = fastpb.ReadBool(buf, _type)
 	return offset, err
 }
 
@@ -404,10 +404,10 @@ func (x *DoLikeResp) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *DoLikeResp) fastWriteField1(buf []byte) (offset int) {
-	if !x.IsFirst {
+	if !x.GetFish {
 		return offset
 	}
-	offset += fastpb.WriteBool(buf[offset:], 1, x.GetIsFirst())
+	offset += fastpb.WriteBool(buf[offset:], 1, x.GetGetFish())
 	return offset
 }
 
@@ -631,10 +631,10 @@ func (x *DoLikeResp) Size() (n int) {
 }
 
 func (x *DoLikeResp) sizeField1() (n int) {
-	if !x.IsFirst {
+	if !x.GetFish {
 		return n
 	}
-	n += fastpb.SizeBool(1, x.GetIsFirst())
+	n += fastpb.SizeBool(1, x.GetGetFish())
 	return n
 }
 
@@ -828,7 +828,7 @@ var fieldIDToName_DoLikeReq = map[int32]string{
 }
 
 var fieldIDToName_DoLikeResp = map[int32]string{
-	1: "IsFirst",
+	1: "GetFish",
 	2: "GetFishNum",
 	3: "GetFishTimes",
 }

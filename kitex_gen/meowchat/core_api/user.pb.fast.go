@@ -403,7 +403,7 @@ ReadFieldError:
 }
 
 func (x *CheckInResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.IsFirst, offset, err = fastpb.ReadBool(buf, _type)
+	x.GetFish, offset, err = fastpb.ReadBool(buf, _type)
 	return offset, err
 }
 
@@ -677,10 +677,10 @@ func (x *CheckInResp) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *CheckInResp) fastWriteField1(buf []byte) (offset int) {
-	if !x.IsFirst {
+	if !x.GetFish {
 		return offset
 	}
-	offset += fastpb.WriteBool(buf[offset:], 1, x.GetIsFirst())
+	offset += fastpb.WriteBool(buf[offset:], 1, x.GetGetFish())
 	return offset
 }
 
@@ -960,10 +960,10 @@ func (x *CheckInResp) Size() (n int) {
 }
 
 func (x *CheckInResp) sizeField1() (n int) {
-	if !x.IsFirst {
+	if !x.GetFish {
 		return n
 	}
-	n += fastpb.SizeBool(1, x.GetIsFirst())
+	n += fastpb.SizeBool(1, x.GetGetFish())
 	return n
 }
 
@@ -1027,7 +1027,7 @@ var fieldIDToName_SearchUserResp = map[int32]string{
 var fieldIDToName_CheckInReq = map[int32]string{}
 
 var fieldIDToName_CheckInResp = map[int32]string{
-	1: "IsFirst",
+	1: "GetFish",
 	2: "GetFishTimes",
 	3: "GetFishNum",
 }
