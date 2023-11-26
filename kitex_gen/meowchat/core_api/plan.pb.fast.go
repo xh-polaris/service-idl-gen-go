@@ -257,6 +257,11 @@ func (x *PlanPre) FastRead(buf []byte, _type int8, number int32) (offset int, er
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 6:
+		offset, err = x.fastReadField6(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -292,6 +297,11 @@ func (x *PlanPre) fastReadField4(buf []byte, _type int8) (offset int, err error)
 
 func (x *PlanPre) fastReadField5(buf []byte, _type int8) (offset int, err error) {
 	x.DonateTime, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *PlanPre) fastReadField6(buf []byte, _type int8) (offset int, err error) {
+	x.CoverUrl, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -1307,6 +1317,7 @@ func (x *PlanPre) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
 	offset += x.fastWriteField5(buf[offset:])
+	offset += x.fastWriteField6(buf[offset:])
 	return offset
 }
 
@@ -1347,6 +1358,14 @@ func (x *PlanPre) fastWriteField5(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 5, x.GetDonateTime())
+	return offset
+}
+
+func (x *PlanPre) fastWriteField6(buf []byte) (offset int) {
+	if x.CoverUrl == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 6, x.GetCoverUrl())
 	return offset
 }
 
@@ -2091,6 +2110,7 @@ func (x *PlanPre) Size() (n int) {
 	n += x.sizeField3()
 	n += x.sizeField4()
 	n += x.sizeField5()
+	n += x.sizeField6()
 	return n
 }
 
@@ -2131,6 +2151,14 @@ func (x *PlanPre) sizeField5() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(5, x.GetDonateTime())
+	return n
+}
+
+func (x *PlanPre) sizeField6() (n int) {
+	if x.CoverUrl == "" {
+		return n
+	}
+	n += fastpb.SizeString(6, x.GetCoverUrl())
 	return n
 }
 
@@ -2722,6 +2750,7 @@ var fieldIDToName_PlanPre = map[int32]string{
 	3: "CatName",
 	4: "DonateNum",
 	5: "DonateTime",
+	6: "CoverUrl",
 }
 
 var fieldIDToName_GetPlanPreviewsReq = map[int32]string{
