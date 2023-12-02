@@ -21,11 +21,12 @@ func NewServiceInfo() *kitex.ServiceInfo {
 	serviceName := "like"
 	handlerType := (*core_api.Like)(nil)
 	methods := map[string]kitex.MethodInfo{
-		"DoLike":        kitex.NewMethodInfo(doLikeHandler, newDoLikeArgs, newDoLikeResult, false),
-		"GetUserLiked":  kitex.NewMethodInfo(getUserLikedHandler, newGetUserLikedArgs, newGetUserLikedResult, false),
-		"GetLikedCount": kitex.NewMethodInfo(getLikedCountHandler, newGetLikedCountArgs, newGetLikedCountResult, false),
-		"GetLikedUsers": kitex.NewMethodInfo(getLikedUsersHandler, newGetLikedUsersArgs, newGetLikedUsersResult, false),
-		"GetUserLikes":  kitex.NewMethodInfo(getUserLikesHandler, newGetUserLikesArgs, newGetUserLikesResult, false),
+		"DoLike":              kitex.NewMethodInfo(doLikeHandler, newDoLikeArgs, newDoLikeResult, false),
+		"GetUserLiked":        kitex.NewMethodInfo(getUserLikedHandler, newGetUserLikedArgs, newGetUserLikedResult, false),
+		"GetLikedCount":       kitex.NewMethodInfo(getLikedCountHandler, newGetLikedCountArgs, newGetLikedCountResult, false),
+		"GetLikedUsers":       kitex.NewMethodInfo(getLikedUsersHandler, newGetLikedUsersArgs, newGetLikedUsersResult, false),
+		"GetUserLikes":        kitex.NewMethodInfo(getUserLikesHandler, newGetUserLikesArgs, newGetUserLikesResult, false),
+		"GetUserLikeContents": kitex.NewMethodInfo(getUserLikeContentsHandler, newGetUserLikeContentsArgs, newGetUserLikeContentsResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName":     "meowchat.core_api",
@@ -807,6 +808,159 @@ func (p *GetUserLikesResult) GetResult() interface{} {
 	return p.Success
 }
 
+func getUserLikeContentsHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.GetUserLikeContentsReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.Like).GetUserLikeContents(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *GetUserLikeContentsArgs:
+		success, err := handler.(core_api.Like).GetUserLikeContents(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetUserLikeContentsResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newGetUserLikeContentsArgs() interface{} {
+	return &GetUserLikeContentsArgs{}
+}
+
+func newGetUserLikeContentsResult() interface{} {
+	return &GetUserLikeContentsResult{}
+}
+
+type GetUserLikeContentsArgs struct {
+	Req *core_api.GetUserLikeContentsReq
+}
+
+func (p *GetUserLikeContentsArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.GetUserLikeContentsReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetUserLikeContentsArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetUserLikeContentsArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetUserLikeContentsArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetUserLikeContentsArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.GetUserLikeContentsReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetUserLikeContentsArgs_Req_DEFAULT *core_api.GetUserLikeContentsReq
+
+func (p *GetUserLikeContentsArgs) GetReq() *core_api.GetUserLikeContentsReq {
+	if !p.IsSetReq() {
+		return GetUserLikeContentsArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetUserLikeContentsArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetUserLikeContentsArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetUserLikeContentsResult struct {
+	Success *core_api.GetUserLikeContentsResp
+}
+
+var GetUserLikeContentsResult_Success_DEFAULT *core_api.GetUserLikeContentsResp
+
+func (p *GetUserLikeContentsResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.GetUserLikeContentsResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetUserLikeContentsResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetUserLikeContentsResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetUserLikeContentsResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetUserLikeContentsResult) Unmarshal(in []byte) error {
+	msg := new(core_api.GetUserLikeContentsResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetUserLikeContentsResult) GetSuccess() *core_api.GetUserLikeContentsResp {
+	if !p.IsSetSuccess() {
+		return GetUserLikeContentsResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetUserLikeContentsResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.GetUserLikeContentsResp)
+}
+
+func (p *GetUserLikeContentsResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetUserLikeContentsResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -862,6 +1016,16 @@ func (p *kClient) GetUserLikes(ctx context.Context, Req *core_api.GetUserLikesRe
 	_args.Req = Req
 	var _result GetUserLikesResult
 	if err = p.c.Call(ctx, "GetUserLikes", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetUserLikeContents(ctx context.Context, Req *core_api.GetUserLikeContentsReq) (r *core_api.GetUserLikeContentsResp, err error) {
+	var _args GetUserLikeContentsArgs
+	_args.Req = Req
+	var _result GetUserLikeContentsResult
+	if err = p.c.Call(ctx, "GetUserLikeContents", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

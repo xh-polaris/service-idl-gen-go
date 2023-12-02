@@ -16,6 +16,7 @@ type Client interface {
 	GetLikedCount(ctx context.Context, Req *core_api.GetLikedCountReq, callOptions ...callopt.Option) (r *core_api.GetLikedCountResp, err error)
 	GetLikedUsers(ctx context.Context, Req *core_api.GetLikedUsersReq, callOptions ...callopt.Option) (r *core_api.GetLikedUsersResp, err error)
 	GetUserLikes(ctx context.Context, Req *core_api.GetUserLikesReq, callOptions ...callopt.Option) (r *core_api.GetUserLikesResp, err error)
+	GetUserLikeContents(ctx context.Context, Req *core_api.GetUserLikeContentsReq, callOptions ...callopt.Option) (r *core_api.GetUserLikeContentsResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -70,4 +71,9 @@ func (p *kLikeClient) GetLikedUsers(ctx context.Context, Req *core_api.GetLikedU
 func (p *kLikeClient) GetUserLikes(ctx context.Context, Req *core_api.GetUserLikesReq, callOptions ...callopt.Option) (r *core_api.GetUserLikesResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.GetUserLikes(ctx, Req)
+}
+
+func (p *kLikeClient) GetUserLikeContents(ctx context.Context, Req *core_api.GetUserLikeContentsReq, callOptions ...callopt.Option) (r *core_api.GetUserLikeContentsResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetUserLikeContents(ctx, Req)
 }

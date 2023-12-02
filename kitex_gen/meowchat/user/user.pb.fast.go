@@ -5,6 +5,7 @@ package user
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
+	basic "github.com/xh-polaris/service-idl-gen-go/kitex_gen/basic"
 )
 
 var (
@@ -541,6 +542,11 @@ func (x *GetUserLikesReq) FastRead(buf []byte, _type int8, number int32) (offset
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -569,10 +575,30 @@ func (x *GetUserLikesReq) fastReadField2(buf []byte, _type int8) (offset int, er
 	return offset, nil
 }
 
+func (x *GetUserLikesReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	var v basic.PaginationOptions
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.PaginationOptions = &v
+	return offset, nil
+}
+
 func (x *GetUserLikesResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -597,6 +623,16 @@ func (x *GetUserLikesResp) fastReadField1(buf []byte, _type int8) (offset int, e
 	}
 	x.Likes = append(x.Likes, &v)
 	return offset, nil
+}
+
+func (x *GetUserLikesResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *GetUserLikesResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.Token, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
 }
 
 func (x *GetLikedUsersReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -1078,6 +1114,7 @@ func (x *GetUserLikesReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
@@ -1097,11 +1134,21 @@ func (x *GetUserLikesReq) fastWriteField2(buf []byte) (offset int) {
 	return offset
 }
 
+func (x *GetUserLikesReq) fastWriteField3(buf []byte) (offset int) {
+	if x.PaginationOptions == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetPaginationOptions())
+	return offset
+}
+
 func (x *GetUserLikesResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
@@ -1112,6 +1159,22 @@ func (x *GetUserLikesResp) fastWriteField1(buf []byte) (offset int) {
 	for i := range x.GetLikes() {
 		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetLikes()[i])
 	}
+	return offset
+}
+
+func (x *GetUserLikesResp) fastWriteField2(buf []byte) (offset int) {
+	if x.Total == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetTotal())
+	return offset
+}
+
+func (x *GetUserLikesResp) fastWriteField3(buf []byte) (offset int) {
+	if x.Token == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetToken())
 	return offset
 }
 
@@ -1548,6 +1611,7 @@ func (x *GetUserLikesReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
@@ -1567,11 +1631,21 @@ func (x *GetUserLikesReq) sizeField2() (n int) {
 	return n
 }
 
+func (x *GetUserLikesReq) sizeField3() (n int) {
+	if x.PaginationOptions == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(3, x.GetPaginationOptions())
+	return n
+}
+
 func (x *GetUserLikesResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
 	n += x.sizeField1()
+	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
@@ -1582,6 +1656,22 @@ func (x *GetUserLikesResp) sizeField1() (n int) {
 	for i := range x.GetLikes() {
 		n += fastpb.SizeMessage(1, x.GetLikes()[i])
 	}
+	return n
+}
+
+func (x *GetUserLikesResp) sizeField2() (n int) {
+	if x.Total == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(2, x.GetTotal())
+	return n
+}
+
+func (x *GetUserLikesResp) sizeField3() (n int) {
+	if x.Token == "" {
+		return n
+	}
+	n += fastpb.SizeString(3, x.GetToken())
 	return n
 }
 
@@ -1740,10 +1830,13 @@ var fieldIDToName_GetTargetLikesResp = map[int32]string{
 var fieldIDToName_GetUserLikesReq = map[int32]string{
 	1: "UserId",
 	2: "Type",
+	3: "PaginationOptions",
 }
 
 var fieldIDToName_GetUserLikesResp = map[int32]string{
 	1: "Likes",
+	2: "Total",
+	3: "Token",
 }
 
 var fieldIDToName_GetLikedUsersReq = map[int32]string{
@@ -1763,3 +1856,5 @@ var fieldIDToName_CheckInResp = map[int32]string{
 	1: "GetFish",
 	2: "GetFishTimes",
 }
+
+var _ = basic.File_basic_pagination_proto
