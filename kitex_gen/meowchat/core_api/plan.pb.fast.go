@@ -107,6 +107,11 @@ func (x *Plan) FastRead(buf []byte, _type int8, number int32) (offset int, err e
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 19:
+		offset, err = x.fastReadField19(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -221,11 +226,6 @@ func (x *Plan) fastReadField16(buf []byte, _type int8) (offset int, err error) {
 }
 
 func (x *Plan) fastReadField17(buf []byte, _type int8) (offset int, err error) {
-	x.CatName, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *Plan) fastReadField18(buf []byte, _type int8) (offset int, err error) {
 	var v int32
 	v, offset, err = fastpb.ReadInt32(buf, _type)
 	if err != nil {
@@ -233,6 +233,16 @@ func (x *Plan) fastReadField18(buf []byte, _type int8) (offset int, err error) {
 	}
 	x.PlanState = content.PlanState(v)
 	return offset, nil
+}
+
+func (x *Plan) fastReadField18(buf []byte, _type int8) (offset int, err error) {
+	x.DonateTime, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *Plan) fastReadField19(buf []byte, _type int8) (offset int, err error) {
+	x.DonateNum, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
 }
 
 func (x *GetPlanPreviewsReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -1089,6 +1099,7 @@ func (x *Plan) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField16(buf[offset:])
 	offset += x.fastWriteField17(buf[offset:])
 	offset += x.fastWriteField18(buf[offset:])
+	offset += x.fastWriteField19(buf[offset:])
 	return offset
 }
 
@@ -1223,18 +1234,26 @@ func (x *Plan) fastWriteField16(buf []byte) (offset int) {
 }
 
 func (x *Plan) fastWriteField17(buf []byte) (offset int) {
-	if x.CatName == "" {
+	if x.PlanState == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 17, x.GetCatName())
+	offset += fastpb.WriteInt32(buf[offset:], 17, int32(x.GetPlanState()))
 	return offset
 }
 
 func (x *Plan) fastWriteField18(buf []byte) (offset int) {
-	if x.PlanState == 0 {
+	if x.DonateTime == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt32(buf[offset:], 18, int32(x.GetPlanState()))
+	offset += fastpb.WriteInt64(buf[offset:], 18, x.GetDonateTime())
+	return offset
+}
+
+func (x *Plan) fastWriteField19(buf []byte) (offset int) {
+	if x.DonateNum == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 19, x.GetDonateNum())
 	return offset
 }
 
@@ -1821,6 +1840,7 @@ func (x *Plan) Size() (n int) {
 	n += x.sizeField16()
 	n += x.sizeField17()
 	n += x.sizeField18()
+	n += x.sizeField19()
 	return n
 }
 
@@ -1955,18 +1975,26 @@ func (x *Plan) sizeField16() (n int) {
 }
 
 func (x *Plan) sizeField17() (n int) {
-	if x.CatName == "" {
+	if x.PlanState == 0 {
 		return n
 	}
-	n += fastpb.SizeString(17, x.GetCatName())
+	n += fastpb.SizeInt32(17, int32(x.GetPlanState()))
 	return n
 }
 
 func (x *Plan) sizeField18() (n int) {
-	if x.PlanState == 0 {
+	if x.DonateTime == 0 {
 		return n
 	}
-	n += fastpb.SizeInt32(18, int32(x.GetPlanState()))
+	n += fastpb.SizeInt64(18, x.GetDonateTime())
+	return n
+}
+
+func (x *Plan) sizeField19() (n int) {
+	if x.DonateNum == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(19, x.GetDonateNum())
 	return n
 }
 
@@ -2548,8 +2576,9 @@ var fieldIDToName_Plan = map[int32]string{
 	14: "MaxFish",
 	15: "NowFish",
 	16: "Summary",
-	17: "CatName",
-	18: "PlanState",
+	17: "PlanState",
+	18: "DonateTime",
+	19: "DonateNum",
 }
 
 var fieldIDToName_GetPlanPreviewsReq = map[int32]string{
