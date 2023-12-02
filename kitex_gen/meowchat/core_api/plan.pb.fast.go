@@ -166,8 +166,13 @@ func (x *Plan) fastReadField8(buf []byte, _type int8) (offset int, err error) {
 }
 
 func (x *Plan) fastReadField9(buf []byte, _type int8) (offset int, err error) {
-	x.CatId, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
+	var v content.Cat
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Cat = &v
+	return offset, nil
 }
 
 func (x *Plan) fastReadField10(buf []byte, _type int8) (offset int, err error) {
@@ -228,81 +233,6 @@ func (x *Plan) fastReadField18(buf []byte, _type int8) (offset int, err error) {
 	}
 	x.PlanState = content.PlanState(v)
 	return offset, nil
-}
-
-func (x *PlanPre) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 2:
-		offset, err = x.fastReadField2(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 4:
-		offset, err = x.fastReadField4(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 5:
-		offset, err = x.fastReadField5(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 6:
-		offset, err = x.fastReadField6(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_PlanPre[number], err)
-}
-
-func (x *PlanPre) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.Id, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *PlanPre) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.Name, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *PlanPre) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.CatName, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *PlanPre) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	x.DonateNum, offset, err = fastpb.ReadInt64(buf, _type)
-	return offset, err
-}
-
-func (x *PlanPre) fastReadField5(buf []byte, _type int8) (offset int, err error) {
-	x.DonateTime, offset, err = fastpb.ReadInt64(buf, _type)
-	return offset, err
-}
-
-func (x *PlanPre) fastReadField6(buf []byte, _type int8) (offset int, err error) {
-	x.CoverUrl, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
 }
 
 func (x *GetPlanPreviewsReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -1017,12 +947,12 @@ ReadFieldError:
 }
 
 func (x *ListDonateByUserResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v PlanPre
+	var v Plan
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
 	}
-	x.PlanPreviews = append(x.PlanPreviews, &v)
+	x.Plans = append(x.Plans, &v)
 	return offset, nil
 }
 
@@ -1227,10 +1157,10 @@ func (x *Plan) fastWriteField8(buf []byte) (offset int) {
 }
 
 func (x *Plan) fastWriteField9(buf []byte) (offset int) {
-	if x.CatId == "" {
+	if x.Cat == nil {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 9, x.GetCatId())
+	offset += fastpb.WriteMessage(buf[offset:], 9, x.GetCat())
 	return offset
 }
 
@@ -1305,67 +1235,6 @@ func (x *Plan) fastWriteField18(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt32(buf[offset:], 18, int32(x.GetPlanState()))
-	return offset
-}
-
-func (x *PlanPre) FastWrite(buf []byte) (offset int) {
-	if x == nil {
-		return offset
-	}
-	offset += x.fastWriteField1(buf[offset:])
-	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
-	offset += x.fastWriteField4(buf[offset:])
-	offset += x.fastWriteField5(buf[offset:])
-	offset += x.fastWriteField6(buf[offset:])
-	return offset
-}
-
-func (x *PlanPre) fastWriteField1(buf []byte) (offset int) {
-	if x.Id == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
-	return offset
-}
-
-func (x *PlanPre) fastWriteField2(buf []byte) (offset int) {
-	if x.Name == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 2, x.GetName())
-	return offset
-}
-
-func (x *PlanPre) fastWriteField3(buf []byte) (offset int) {
-	if x.CatName == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetCatName())
-	return offset
-}
-
-func (x *PlanPre) fastWriteField4(buf []byte) (offset int) {
-	if x.DonateNum == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 4, x.GetDonateNum())
-	return offset
-}
-
-func (x *PlanPre) fastWriteField5(buf []byte) (offset int) {
-	if x.DonateTime == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 5, x.GetDonateTime())
-	return offset
-}
-
-func (x *PlanPre) fastWriteField6(buf []byte) (offset int) {
-	if x.CoverUrl == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 6, x.GetCoverUrl())
 	return offset
 }
 
@@ -1841,11 +1710,11 @@ func (x *ListDonateByUserResp) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *ListDonateByUserResp) fastWriteField1(buf []byte) (offset int) {
-	if x.PlanPreviews == nil {
+	if x.Plans == nil {
 		return offset
 	}
-	for i := range x.GetPlanPreviews() {
-		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetPlanPreviews()[i])
+	for i := range x.GetPlans() {
+		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetPlans()[i])
 	}
 	return offset
 }
@@ -2020,10 +1889,10 @@ func (x *Plan) sizeField8() (n int) {
 }
 
 func (x *Plan) sizeField9() (n int) {
-	if x.CatId == "" {
+	if x.Cat == nil {
 		return n
 	}
-	n += fastpb.SizeString(9, x.GetCatId())
+	n += fastpb.SizeMessage(9, x.GetCat())
 	return n
 }
 
@@ -2098,67 +1967,6 @@ func (x *Plan) sizeField18() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt32(18, int32(x.GetPlanState()))
-	return n
-}
-
-func (x *PlanPre) Size() (n int) {
-	if x == nil {
-		return n
-	}
-	n += x.sizeField1()
-	n += x.sizeField2()
-	n += x.sizeField3()
-	n += x.sizeField4()
-	n += x.sizeField5()
-	n += x.sizeField6()
-	return n
-}
-
-func (x *PlanPre) sizeField1() (n int) {
-	if x.Id == "" {
-		return n
-	}
-	n += fastpb.SizeString(1, x.GetId())
-	return n
-}
-
-func (x *PlanPre) sizeField2() (n int) {
-	if x.Name == "" {
-		return n
-	}
-	n += fastpb.SizeString(2, x.GetName())
-	return n
-}
-
-func (x *PlanPre) sizeField3() (n int) {
-	if x.CatName == "" {
-		return n
-	}
-	n += fastpb.SizeString(3, x.GetCatName())
-	return n
-}
-
-func (x *PlanPre) sizeField4() (n int) {
-	if x.DonateNum == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(4, x.GetDonateNum())
-	return n
-}
-
-func (x *PlanPre) sizeField5() (n int) {
-	if x.DonateTime == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(5, x.GetDonateTime())
-	return n
-}
-
-func (x *PlanPre) sizeField6() (n int) {
-	if x.CoverUrl == "" {
-		return n
-	}
-	n += fastpb.SizeString(6, x.GetCoverUrl())
 	return n
 }
 
@@ -2634,11 +2442,11 @@ func (x *ListDonateByUserResp) Size() (n int) {
 }
 
 func (x *ListDonateByUserResp) sizeField1() (n int) {
-	if x.PlanPreviews == nil {
+	if x.Plans == nil {
 		return n
 	}
-	for i := range x.GetPlanPreviews() {
-		n += fastpb.SizeMessage(1, x.GetPlanPreviews()[i])
+	for i := range x.GetPlans() {
+		n += fastpb.SizeMessage(1, x.GetPlans()[i])
 	}
 	return n
 }
@@ -2732,7 +2540,7 @@ var fieldIDToName_Plan = map[int32]string{
 	6:  "Instruction",
 	7:  "StartTime",
 	8:  "EndTime",
-	9:  "CatId",
+	9:  "Cat",
 	10: "CommunityId",
 	11: "User",
 	12: "ImageUrls",
@@ -2742,15 +2550,6 @@ var fieldIDToName_Plan = map[int32]string{
 	16: "Summary",
 	17: "CatName",
 	18: "PlanState",
-}
-
-var fieldIDToName_PlanPre = map[int32]string{
-	1: "Id",
-	2: "Name",
-	3: "CatName",
-	4: "DonateNum",
-	5: "DonateTime",
-	6: "CoverUrl",
 }
 
 var fieldIDToName_GetPlanPreviewsReq = map[int32]string{
@@ -2835,7 +2634,7 @@ var fieldIDToName_ListDonateByUserReq = map[int32]string{
 }
 
 var fieldIDToName_ListDonateByUserResp = map[int32]string{
-	1: "PlanPreviews",
+	1: "Plans",
 	2: "Total",
 	3: "Token",
 }
