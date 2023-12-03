@@ -242,6 +242,11 @@ func (x *Donation) FastRead(buf []byte, _type int8, number int32) (offset int, e
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 4:
+		offset, err = x.fastReadField4(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -272,6 +277,11 @@ func (x *Donation) fastReadField2(buf []byte, _type int8) (offset int, err error
 
 func (x *Donation) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	x.DonateNum, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *Donation) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+	x.DonateId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -1276,6 +1286,7 @@ func (x *Donation) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField4(buf[offset:])
 	return offset
 }
 
@@ -1300,6 +1311,14 @@ func (x *Donation) fastWriteField3(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetDonateNum())
+	return offset
+}
+
+func (x *Donation) fastWriteField4(buf []byte) (offset int) {
+	if x.DonateId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 4, x.GetDonateId())
 	return offset
 }
 
@@ -2033,6 +2052,7 @@ func (x *Donation) Size() (n int) {
 	n += x.sizeField1()
 	n += x.sizeField2()
 	n += x.sizeField3()
+	n += x.sizeField4()
 	return n
 }
 
@@ -2057,6 +2077,14 @@ func (x *Donation) sizeField3() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(3, x.GetDonateNum())
+	return n
+}
+
+func (x *Donation) sizeField4() (n int) {
+	if x.DonateId == "" {
+		return n
+	}
+	n += fastpb.SizeString(4, x.GetDonateId())
 	return n
 }
 
@@ -2645,6 +2673,7 @@ var fieldIDToName_Donation = map[int32]string{
 	1: "Plan",
 	2: "DonateTime",
 	3: "DonateNum",
+	4: "DonateId",
 }
 
 var fieldIDToName_GetPlanPreviewsReq = map[int32]string{
