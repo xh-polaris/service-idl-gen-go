@@ -2153,12 +2153,12 @@ ReadFieldError:
 }
 
 func (x *ListDonateByUserResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v Plan
+	var v Donation
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
 	}
-	x.Plans = append(x.Plans, &v)
+	x.Donations = append(x.Donations, &v)
 	return offset, nil
 }
 
@@ -3686,11 +3686,11 @@ func (x *ListDonateByUserResp) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *ListDonateByUserResp) fastWriteField1(buf []byte) (offset int) {
-	if x.Plans == nil {
+	if x.Donations == nil {
 		return offset
 	}
-	for i := range x.GetPlans() {
-		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetPlans()[i])
+	for i := range x.GetDonations() {
+		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetDonations()[i])
 	}
 	return offset
 }
@@ -5171,11 +5171,11 @@ func (x *ListDonateByUserResp) Size() (n int) {
 }
 
 func (x *ListDonateByUserResp) sizeField1() (n int) {
-	if x.Plans == nil {
+	if x.Donations == nil {
 		return n
 	}
-	for i := range x.GetPlans() {
-		n += fastpb.SizeMessage(1, x.GetPlans()[i])
+	for i := range x.GetDonations() {
+		n += fastpb.SizeMessage(1, x.GetDonations()[i])
 	}
 	return n
 }
@@ -5568,7 +5568,7 @@ var fieldIDToName_ListDonateByUserReq = map[int32]string{
 }
 
 var fieldIDToName_ListDonateByUserResp = map[int32]string{
-	1: "Plans",
+	1: "Donations",
 	2: "Total",
 	3: "Token",
 }
