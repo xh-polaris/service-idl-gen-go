@@ -52,6 +52,7 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		"CleanNotification": kitex.NewMethodInfo(cleanNotificationHandler, newCleanNotificationArgs, newCleanNotificationResult, false),
 		"CountNotification": kitex.NewMethodInfo(countNotificationHandler, newCountNotificationArgs, newCountNotificationResult, false),
 		"ReadNotification":  kitex.NewMethodInfo(readNotificationHandler, newReadNotificationArgs, newReadNotificationResult, false),
+		"AddNotification":   kitex.NewMethodInfo(addNotificationHandler, newAddNotificationArgs, newAddNotificationResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName":     "meowchat.system",
@@ -4811,6 +4812,159 @@ func (p *ReadNotificationResult) GetResult() interface{} {
 	return p.Success
 }
 
+func addNotificationHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(system.AddNotificationReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(system.SystemRpc).AddNotification(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *AddNotificationArgs:
+		success, err := handler.(system.SystemRpc).AddNotification(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*AddNotificationResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newAddNotificationArgs() interface{} {
+	return &AddNotificationArgs{}
+}
+
+func newAddNotificationResult() interface{} {
+	return &AddNotificationResult{}
+}
+
+type AddNotificationArgs struct {
+	Req *system.AddNotificationReq
+}
+
+func (p *AddNotificationArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(system.AddNotificationReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *AddNotificationArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *AddNotificationArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *AddNotificationArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *AddNotificationArgs) Unmarshal(in []byte) error {
+	msg := new(system.AddNotificationReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var AddNotificationArgs_Req_DEFAULT *system.AddNotificationReq
+
+func (p *AddNotificationArgs) GetReq() *system.AddNotificationReq {
+	if !p.IsSetReq() {
+		return AddNotificationArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *AddNotificationArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *AddNotificationArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type AddNotificationResult struct {
+	Success *system.AddNotificationResp
+}
+
+var AddNotificationResult_Success_DEFAULT *system.AddNotificationResp
+
+func (p *AddNotificationResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(system.AddNotificationResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *AddNotificationResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *AddNotificationResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *AddNotificationResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *AddNotificationResult) Unmarshal(in []byte) error {
+	msg := new(system.AddNotificationResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *AddNotificationResult) GetSuccess() *system.AddNotificationResp {
+	if !p.IsSetSuccess() {
+		return AddNotificationResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *AddNotificationResult) SetSuccess(x interface{}) {
+	p.Success = x.(*system.AddNotificationResp)
+}
+
+func (p *AddNotificationResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *AddNotificationResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -5126,6 +5280,16 @@ func (p *kClient) ReadNotification(ctx context.Context, Req *system.ReadNotifica
 	_args.Req = Req
 	var _result ReadNotificationResult
 	if err = p.c.Call(ctx, "ReadNotification", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) AddNotification(ctx context.Context, Req *system.AddNotificationReq) (r *system.AddNotificationResp, err error) {
+	var _args AddNotificationArgs
+	_args.Req = Req
+	var _result AddNotificationResult
+	if err = p.c.Call(ctx, "AddNotification", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

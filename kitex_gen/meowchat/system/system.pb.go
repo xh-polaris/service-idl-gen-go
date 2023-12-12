@@ -2943,6 +2943,91 @@ func (x *ListNotificationResp) GetTotal() int64 {
 	return 0
 }
 
+type AddNotificationReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Notification *Notification `protobuf:"bytes,1,opt,name=notification,proto3" json:"notification,omitempty"`
+}
+
+func (x *AddNotificationReq) Reset() {
+	*x = AddNotificationReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowchat_system_system_proto_msgTypes[56]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddNotificationReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddNotificationReq) ProtoMessage() {}
+
+func (x *AddNotificationReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowchat_system_system_proto_msgTypes[56]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddNotificationReq.ProtoReflect.Descriptor instead.
+func (*AddNotificationReq) Descriptor() ([]byte, []int) {
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{56}
+}
+
+func (x *AddNotificationReq) GetNotification() *Notification {
+	if x != nil {
+		return x.Notification
+	}
+	return nil
+}
+
+type AddNotificationResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *AddNotificationResp) Reset() {
+	*x = AddNotificationResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowchat_system_system_proto_msgTypes[57]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddNotificationResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddNotificationResp) ProtoMessage() {}
+
+func (x *AddNotificationResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowchat_system_system_proto_msgTypes[57]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddNotificationResp.ProtoReflect.Descriptor instead.
+func (*AddNotificationResp) Descriptor() ([]byte, []int) {
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{57}
+}
+
 type CleanNotificationReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
@@ -2954,7 +3039,7 @@ type CleanNotificationReq struct {
 func (x *CleanNotificationReq) Reset() {
 	*x = CleanNotificationReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[56]
+		mi := &file_meowchat_system_system_proto_msgTypes[58]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -2967,7 +3052,7 @@ func (x *CleanNotificationReq) String() string {
 func (*CleanNotificationReq) ProtoMessage() {}
 
 func (x *CleanNotificationReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[56]
+	mi := &file_meowchat_system_system_proto_msgTypes[58]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2980,7 +3065,7 @@ func (x *CleanNotificationReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CleanNotificationReq.ProtoReflect.Descriptor instead.
 func (*CleanNotificationReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_system_system_proto_rawDescGZIP(), []int{56}
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{58}
 }
 
 func (x *CleanNotificationReq) GetUserId() string {
@@ -2999,7 +3084,7 @@ type CleanNotificationResp struct {
 func (x *CleanNotificationResp) Reset() {
 	*x = CleanNotificationResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[57]
+		mi := &file_meowchat_system_system_proto_msgTypes[59]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3012,7 +3097,7 @@ func (x *CleanNotificationResp) String() string {
 func (*CleanNotificationResp) ProtoMessage() {}
 
 func (x *CleanNotificationResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[57]
+	mi := &file_meowchat_system_system_proto_msgTypes[59]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3025,7 +3110,7 @@ func (x *CleanNotificationResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CleanNotificationResp.ProtoReflect.Descriptor instead.
 func (*CleanNotificationResp) Descriptor() ([]byte, []int) {
-	return file_meowchat_system_system_proto_rawDescGZIP(), []int{57}
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{59}
 }
 
 type ReadNotificationReq struct {
@@ -3039,7 +3124,7 @@ type ReadNotificationReq struct {
 func (x *ReadNotificationReq) Reset() {
 	*x = ReadNotificationReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[58]
+		mi := &file_meowchat_system_system_proto_msgTypes[60]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3052,7 +3137,7 @@ func (x *ReadNotificationReq) String() string {
 func (*ReadNotificationReq) ProtoMessage() {}
 
 func (x *ReadNotificationReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[58]
+	mi := &file_meowchat_system_system_proto_msgTypes[60]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3065,7 +3150,7 @@ func (x *ReadNotificationReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReadNotificationReq.ProtoReflect.Descriptor instead.
 func (*ReadNotificationReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_system_system_proto_rawDescGZIP(), []int{58}
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{60}
 }
 
 func (x *ReadNotificationReq) GetNotificationId() string {
@@ -3084,7 +3169,7 @@ type ReadNotificationResp struct {
 func (x *ReadNotificationResp) Reset() {
 	*x = ReadNotificationResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[59]
+		mi := &file_meowchat_system_system_proto_msgTypes[61]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3097,7 +3182,7 @@ func (x *ReadNotificationResp) String() string {
 func (*ReadNotificationResp) ProtoMessage() {}
 
 func (x *ReadNotificationResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[59]
+	mi := &file_meowchat_system_system_proto_msgTypes[61]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3110,7 +3195,7 @@ func (x *ReadNotificationResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use ReadNotificationResp.ProtoReflect.Descriptor instead.
 func (*ReadNotificationResp) Descriptor() ([]byte, []int) {
-	return file_meowchat_system_system_proto_rawDescGZIP(), []int{59}
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{61}
 }
 
 type CountNotificationReq struct {
@@ -3124,7 +3209,7 @@ type CountNotificationReq struct {
 func (x *CountNotificationReq) Reset() {
 	*x = CountNotificationReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[60]
+		mi := &file_meowchat_system_system_proto_msgTypes[62]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3137,7 +3222,7 @@ func (x *CountNotificationReq) String() string {
 func (*CountNotificationReq) ProtoMessage() {}
 
 func (x *CountNotificationReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[60]
+	mi := &file_meowchat_system_system_proto_msgTypes[62]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3150,7 +3235,7 @@ func (x *CountNotificationReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountNotificationReq.ProtoReflect.Descriptor instead.
 func (*CountNotificationReq) Descriptor() ([]byte, []int) {
-	return file_meowchat_system_system_proto_rawDescGZIP(), []int{60}
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{62}
 }
 
 func (x *CountNotificationReq) GetUserId() string {
@@ -3171,7 +3256,7 @@ type CountNotificationResp struct {
 func (x *CountNotificationResp) Reset() {
 	*x = CountNotificationResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowchat_system_system_proto_msgTypes[61]
+		mi := &file_meowchat_system_system_proto_msgTypes[63]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -3184,7 +3269,7 @@ func (x *CountNotificationResp) String() string {
 func (*CountNotificationResp) ProtoMessage() {}
 
 func (x *CountNotificationResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowchat_system_system_proto_msgTypes[61]
+	mi := &file_meowchat_system_system_proto_msgTypes[63]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3197,7 +3282,7 @@ func (x *CountNotificationResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use CountNotificationResp.ProtoReflect.Descriptor instead.
 func (*CountNotificationResp) Descriptor() ([]byte, []int) {
-	return file_meowchat_system_system_proto_rawDescGZIP(), []int{61}
+	return file_meowchat_system_system_proto_rawDescGZIP(), []int{63}
 }
 
 func (x *CountNotificationResp) GetNotificationCount() int64 {
@@ -3476,7 +3561,14 @@ var file_meowchat_system_system_proto_rawDesc = []byte{
 	0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x12, 0x18, 0x0a, 0x07, 0x6e, 0x6f, 0x74, 0x52, 0x65,
 	0x61, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x07, 0x6e, 0x6f, 0x74, 0x52, 0x65, 0x61,
 	0x64, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x18, 0x03, 0x20, 0x01, 0x28, 0x03,
-	0x52, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x22, 0x2e, 0x0a, 0x14, 0x43, 0x6c, 0x65, 0x61, 0x6e,
+	0x52, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x22, 0x57, 0x0a, 0x12, 0x41, 0x64, 0x64, 0x4e, 0x6f,
+	0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x12, 0x41, 0x0a,
+	0x0c, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x1d, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x73,
+	0x79, 0x73, 0x74, 0x65, 0x6d, 0x2e, 0x4e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x52, 0x0c, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x22, 0x15, 0x0a, 0x13, 0x41, 0x64, 0x64, 0x4e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74,
+	0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x22, 0x2e, 0x0a, 0x14, 0x43, 0x6c, 0x65, 0x61, 0x6e,
 	0x4e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x12,
 	0x16, 0x0a, 0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
 	0x06, 0x75, 0x73, 0x65, 0x72, 0x49, 0x64, 0x22, 0x17, 0x0a, 0x15, 0x43, 0x6c, 0x65, 0x61, 0x6e,
@@ -3493,7 +3585,7 @@ var file_meowchat_system_system_proto_rawDesc = []byte{
 	0x4e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70,
 	0x12, 0x2c, 0x0a, 0x11, 0x6e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e,
 	0x43, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x11, 0x6e, 0x6f, 0x74,
-	0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x32, 0x9c,
+	0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x43, 0x6f, 0x75, 0x6e, 0x74, 0x32, 0xfa,
 	0x15, 0x0a, 0x0a, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x5f, 0x72, 0x70, 0x63, 0x12, 0x59, 0x0a,
 	0x0e, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x65, 0x4e, 0x6f, 0x74, 0x69, 0x63, 0x65, 0x12,
 	0x22, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x73, 0x79, 0x73, 0x74, 0x65,
@@ -3663,15 +3755,21 @@ var file_meowchat_system_system_proto_rawDesc = []byte{
 	0x65, 0x6d, 0x2e, 0x52, 0x65, 0x61, 0x64, 0x4e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74,
 	0x69, 0x6f, 0x6e, 0x52, 0x65, 0x71, 0x1a, 0x25, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x68, 0x61,
 	0x74, 0x2e, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x2e, 0x52, 0x65, 0x61, 0x64, 0x4e, 0x6f, 0x74,
-	0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x42, 0x79, 0x0a,
-	0x24, 0x63, 0x6f, 0x6d, 0x2e, 0x78, 0x68, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2e, 0x69,
-	0x64, 0x6c, 0x67, 0x65, 0x6e, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x73,
-	0x79, 0x73, 0x74, 0x65, 0x6d, 0x42, 0x0b, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x50, 0x72, 0x6f,
-	0x74, 0x6f, 0x50, 0x01, 0x5a, 0x42, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
-	0x2f, 0x78, 0x68, 0x2d, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2f, 0x73, 0x65, 0x72, 0x76,
-	0x69, 0x63, 0x65, 0x2d, 0x69, 0x64, 0x6c, 0x2d, 0x67, 0x65, 0x6e, 0x2d, 0x67, 0x6f, 0x2f, 0x6b,
-	0x69, 0x74, 0x65, 0x78, 0x5f, 0x67, 0x65, 0x6e, 0x2f, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x68, 0x61,
-	0x74, 0x2f, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x12, 0x5c, 0x0a,
+	0x0f, 0x41, 0x64, 0x64, 0x4e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e,
+	0x12, 0x23, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x73, 0x79, 0x73, 0x74,
+	0x65, 0x6d, 0x2e, 0x41, 0x64, 0x64, 0x4e, 0x6f, 0x74, 0x69, 0x66, 0x69, 0x63, 0x61, 0x74, 0x69,
+	0x6f, 0x6e, 0x52, 0x65, 0x71, 0x1a, 0x24, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x68, 0x61, 0x74,
+	0x2e, 0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x2e, 0x41, 0x64, 0x64, 0x4e, 0x6f, 0x74, 0x69, 0x66,
+	0x69, 0x63, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x52, 0x65, 0x73, 0x70, 0x42, 0x79, 0x0a, 0x24, 0x63,
+	0x6f, 0x6d, 0x2e, 0x78, 0x68, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2e, 0x69, 0x64, 0x6c,
+	0x67, 0x65, 0x6e, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x68, 0x61, 0x74, 0x2e, 0x73, 0x79, 0x73,
+	0x74, 0x65, 0x6d, 0x42, 0x0b, 0x53, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x50, 0x72, 0x6f, 0x74, 0x6f,
+	0x50, 0x01, 0x5a, 0x42, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x78,
+	0x68, 0x2d, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x2d, 0x69, 0x64, 0x6c, 0x2d, 0x67, 0x65, 0x6e, 0x2d, 0x67, 0x6f, 0x2f, 0x6b, 0x69, 0x74,
+	0x65, 0x78, 0x5f, 0x67, 0x65, 0x6e, 0x2f, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x68, 0x61, 0x74, 0x2f,
+	0x73, 0x79, 0x73, 0x74, 0x65, 0x6d, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -3686,7 +3784,7 @@ func file_meowchat_system_system_proto_rawDescGZIP() []byte {
 	return file_meowchat_system_system_proto_rawDescData
 }
 
-var file_meowchat_system_system_proto_msgTypes = make([]protoimpl.MessageInfo, 66)
+var file_meowchat_system_system_proto_msgTypes = make([]protoimpl.MessageInfo, 68)
 var file_meowchat_system_system_proto_goTypes = []interface{}{
 	(*RetrieveNoticeReq)(nil),       // 0: meowchat.system.RetrieveNoticeReq
 	(*RetrieveNoticeResp)(nil),      // 1: meowchat.system.RetrieveNoticeResp
@@ -3744,112 +3842,117 @@ var file_meowchat_system_system_proto_goTypes = []interface{}{
 	(*ListUserIdByRoleResp)(nil),    // 53: meowchat.system.ListUserIdByRoleResp
 	(*ListNotificationReq)(nil),     // 54: meowchat.system.ListNotificationReq
 	(*ListNotificationResp)(nil),    // 55: meowchat.system.ListNotificationResp
-	(*CleanNotificationReq)(nil),    // 56: meowchat.system.CleanNotificationReq
-	(*CleanNotificationResp)(nil),   // 57: meowchat.system.CleanNotificationResp
-	(*ReadNotificationReq)(nil),     // 58: meowchat.system.ReadNotificationReq
-	(*ReadNotificationResp)(nil),    // 59: meowchat.system.ReadNotificationResp
-	(*CountNotificationReq)(nil),    // 60: meowchat.system.CountNotificationReq
-	(*CountNotificationResp)(nil),   // 61: meowchat.system.CountNotificationResp
-	nil,                             // 62: meowchat.system.ListNoticeReq.SortEntry
-	nil,                             // 63: meowchat.system.ListNewsReq.SortEntry
-	nil,                             // 64: meowchat.system.ListAdminReq.SortEntry
-	nil,                             // 65: meowchat.system.ListCommunityReq.SortEntry
-	(*Notice)(nil),                  // 66: meowchat.system.Notice
-	(*News)(nil),                    // 67: meowchat.system.News
-	(*Admin)(nil),                   // 68: meowchat.system.Admin
-	(*Apply)(nil),                   // 69: meowchat.system.Apply
-	(*Role)(nil),                    // 70: meowchat.system.Role
-	(*Community)(nil),               // 71: meowchat.system.Community
-	(*basic.PaginationOptions)(nil), // 72: basic.PaginationOptions
-	(*Notification)(nil),            // 73: meowchat.system.Notification
+	(*AddNotificationReq)(nil),      // 56: meowchat.system.AddNotificationReq
+	(*AddNotificationResp)(nil),     // 57: meowchat.system.AddNotificationResp
+	(*CleanNotificationReq)(nil),    // 58: meowchat.system.CleanNotificationReq
+	(*CleanNotificationResp)(nil),   // 59: meowchat.system.CleanNotificationResp
+	(*ReadNotificationReq)(nil),     // 60: meowchat.system.ReadNotificationReq
+	(*ReadNotificationResp)(nil),    // 61: meowchat.system.ReadNotificationResp
+	(*CountNotificationReq)(nil),    // 62: meowchat.system.CountNotificationReq
+	(*CountNotificationResp)(nil),   // 63: meowchat.system.CountNotificationResp
+	nil,                             // 64: meowchat.system.ListNoticeReq.SortEntry
+	nil,                             // 65: meowchat.system.ListNewsReq.SortEntry
+	nil,                             // 66: meowchat.system.ListAdminReq.SortEntry
+	nil,                             // 67: meowchat.system.ListCommunityReq.SortEntry
+	(*Notice)(nil),                  // 68: meowchat.system.Notice
+	(*News)(nil),                    // 69: meowchat.system.News
+	(*Admin)(nil),                   // 70: meowchat.system.Admin
+	(*Apply)(nil),                   // 71: meowchat.system.Apply
+	(*Role)(nil),                    // 72: meowchat.system.Role
+	(*Community)(nil),               // 73: meowchat.system.Community
+	(*basic.PaginationOptions)(nil), // 74: basic.PaginationOptions
+	(*Notification)(nil),            // 75: meowchat.system.Notification
 }
 var file_meowchat_system_system_proto_depIdxs = []int32{
-	66, // 0: meowchat.system.RetrieveNoticeResp.notice:type_name -> meowchat.system.Notice
-	62, // 1: meowchat.system.ListNoticeReq.sort:type_name -> meowchat.system.ListNoticeReq.SortEntry
-	66, // 2: meowchat.system.ListNoticeResp.notices:type_name -> meowchat.system.Notice
-	67, // 3: meowchat.system.RetrieveNewsResp.news:type_name -> meowchat.system.News
-	63, // 4: meowchat.system.ListNewsReq.sort:type_name -> meowchat.system.ListNewsReq.SortEntry
-	67, // 5: meowchat.system.ListNewsResp.news:type_name -> meowchat.system.News
-	68, // 6: meowchat.system.RetrieveAdminResp.admin:type_name -> meowchat.system.Admin
-	64, // 7: meowchat.system.ListAdminReq.sort:type_name -> meowchat.system.ListAdminReq.SortEntry
-	68, // 8: meowchat.system.ListAdminResp.admins:type_name -> meowchat.system.Admin
-	69, // 9: meowchat.system.ListApplyResp.apply:type_name -> meowchat.system.Apply
-	70, // 10: meowchat.system.RetrieveUserRoleResp.roles:type_name -> meowchat.system.Role
-	70, // 11: meowchat.system.UpdateUserRoleReq.roles:type_name -> meowchat.system.Role
-	70, // 12: meowchat.system.ContainsRoleReq.role:type_name -> meowchat.system.Role
-	71, // 13: meowchat.system.RetrieveCommunityResp.community:type_name -> meowchat.system.Community
-	65, // 14: meowchat.system.ListCommunityReq.sort:type_name -> meowchat.system.ListCommunityReq.SortEntry
-	71, // 15: meowchat.system.ListCommunityResp.communities:type_name -> meowchat.system.Community
-	70, // 16: meowchat.system.ListUserIdByRoleReq.role:type_name -> meowchat.system.Role
-	72, // 17: meowchat.system.ListNotificationReq.paginationOptions:type_name -> basic.PaginationOptions
-	73, // 18: meowchat.system.ListNotificationResp.notifications:type_name -> meowchat.system.Notification
-	0,  // 19: meowchat.system.system_rpc.RetrieveNotice:input_type -> meowchat.system.RetrieveNoticeReq
-	2,  // 20: meowchat.system.system_rpc.ListNotice:input_type -> meowchat.system.ListNoticeReq
-	4,  // 21: meowchat.system.system_rpc.CreateNotice:input_type -> meowchat.system.CreateNoticeReq
-	6,  // 22: meowchat.system.system_rpc.UpdateNotice:input_type -> meowchat.system.UpdateNoticeReq
-	8,  // 23: meowchat.system.system_rpc.DeleteNotice:input_type -> meowchat.system.DeleteNoticeReq
-	10, // 24: meowchat.system.system_rpc.RetrieveNews:input_type -> meowchat.system.RetrieveNewsReq
-	12, // 25: meowchat.system.system_rpc.ListNews:input_type -> meowchat.system.ListNewsReq
-	14, // 26: meowchat.system.system_rpc.CreateNews:input_type -> meowchat.system.CreateNewsReq
-	16, // 27: meowchat.system.system_rpc.UpdateNews:input_type -> meowchat.system.UpdateNewsReq
-	18, // 28: meowchat.system.system_rpc.DeleteNews:input_type -> meowchat.system.DeleteNewsReq
-	20, // 29: meowchat.system.system_rpc.RetrieveAdmin:input_type -> meowchat.system.RetrieveAdminReq
-	22, // 30: meowchat.system.system_rpc.ListAdmin:input_type -> meowchat.system.ListAdminReq
-	24, // 31: meowchat.system.system_rpc.CreateAdmin:input_type -> meowchat.system.CreateAdminReq
-	26, // 32: meowchat.system.system_rpc.UpdateAdmin:input_type -> meowchat.system.UpdateAdminReq
-	28, // 33: meowchat.system.system_rpc.DeleteAdmin:input_type -> meowchat.system.DeleteAdminReq
-	36, // 34: meowchat.system.system_rpc.RetrieveUserRole:input_type -> meowchat.system.RetrieveUserRoleReq
-	52, // 35: meowchat.system.system_rpc.ListUserIdByRole:input_type -> meowchat.system.ListUserIdByRoleReq
-	38, // 36: meowchat.system.system_rpc.UpdateUserRole:input_type -> meowchat.system.UpdateUserRoleReq
-	40, // 37: meowchat.system.system_rpc.ContainsRole:input_type -> meowchat.system.ContainsRoleReq
-	34, // 38: meowchat.system.system_rpc.CreateApply:input_type -> meowchat.system.CreateApplyReq
-	30, // 39: meowchat.system.system_rpc.HandleApply:input_type -> meowchat.system.HandleApplyReq
-	32, // 40: meowchat.system.system_rpc.ListApply:input_type -> meowchat.system.ListApplyReq
-	42, // 41: meowchat.system.system_rpc.RetrieveCommunity:input_type -> meowchat.system.RetrieveCommunityReq
-	44, // 42: meowchat.system.system_rpc.ListCommunity:input_type -> meowchat.system.ListCommunityReq
-	46, // 43: meowchat.system.system_rpc.CreateCommunity:input_type -> meowchat.system.CreateCommunityReq
-	48, // 44: meowchat.system.system_rpc.UpdateCommunity:input_type -> meowchat.system.UpdateCommunityReq
-	50, // 45: meowchat.system.system_rpc.DeleteCommunity:input_type -> meowchat.system.DeleteCommunityReq
-	54, // 46: meowchat.system.system_rpc.ListNotification:input_type -> meowchat.system.ListNotificationReq
-	56, // 47: meowchat.system.system_rpc.CleanNotification:input_type -> meowchat.system.CleanNotificationReq
-	60, // 48: meowchat.system.system_rpc.CountNotification:input_type -> meowchat.system.CountNotificationReq
-	58, // 49: meowchat.system.system_rpc.ReadNotification:input_type -> meowchat.system.ReadNotificationReq
-	1,  // 50: meowchat.system.system_rpc.RetrieveNotice:output_type -> meowchat.system.RetrieveNoticeResp
-	3,  // 51: meowchat.system.system_rpc.ListNotice:output_type -> meowchat.system.ListNoticeResp
-	5,  // 52: meowchat.system.system_rpc.CreateNotice:output_type -> meowchat.system.CreateNoticeResp
-	7,  // 53: meowchat.system.system_rpc.UpdateNotice:output_type -> meowchat.system.UpdateNoticeResp
-	9,  // 54: meowchat.system.system_rpc.DeleteNotice:output_type -> meowchat.system.DeleteNoticeResp
-	11, // 55: meowchat.system.system_rpc.RetrieveNews:output_type -> meowchat.system.RetrieveNewsResp
-	13, // 56: meowchat.system.system_rpc.ListNews:output_type -> meowchat.system.ListNewsResp
-	15, // 57: meowchat.system.system_rpc.CreateNews:output_type -> meowchat.system.CreateNewsResp
-	17, // 58: meowchat.system.system_rpc.UpdateNews:output_type -> meowchat.system.UpdateNewsResp
-	19, // 59: meowchat.system.system_rpc.DeleteNews:output_type -> meowchat.system.DeleteNewsResp
-	21, // 60: meowchat.system.system_rpc.RetrieveAdmin:output_type -> meowchat.system.RetrieveAdminResp
-	23, // 61: meowchat.system.system_rpc.ListAdmin:output_type -> meowchat.system.ListAdminResp
-	25, // 62: meowchat.system.system_rpc.CreateAdmin:output_type -> meowchat.system.CreateAdminResp
-	27, // 63: meowchat.system.system_rpc.UpdateAdmin:output_type -> meowchat.system.UpdateAdminResp
-	29, // 64: meowchat.system.system_rpc.DeleteAdmin:output_type -> meowchat.system.DeleteAdminResp
-	37, // 65: meowchat.system.system_rpc.RetrieveUserRole:output_type -> meowchat.system.RetrieveUserRoleResp
-	53, // 66: meowchat.system.system_rpc.ListUserIdByRole:output_type -> meowchat.system.ListUserIdByRoleResp
-	39, // 67: meowchat.system.system_rpc.UpdateUserRole:output_type -> meowchat.system.UpdateUserRoleResp
-	41, // 68: meowchat.system.system_rpc.ContainsRole:output_type -> meowchat.system.ContainsRoleResp
-	35, // 69: meowchat.system.system_rpc.CreateApply:output_type -> meowchat.system.CreateApplyResp
-	31, // 70: meowchat.system.system_rpc.HandleApply:output_type -> meowchat.system.HandleApplyResp
-	33, // 71: meowchat.system.system_rpc.ListApply:output_type -> meowchat.system.ListApplyResp
-	43, // 72: meowchat.system.system_rpc.RetrieveCommunity:output_type -> meowchat.system.RetrieveCommunityResp
-	45, // 73: meowchat.system.system_rpc.ListCommunity:output_type -> meowchat.system.ListCommunityResp
-	47, // 74: meowchat.system.system_rpc.CreateCommunity:output_type -> meowchat.system.CreateCommunityResp
-	49, // 75: meowchat.system.system_rpc.UpdateCommunity:output_type -> meowchat.system.UpdateCommunityResp
-	51, // 76: meowchat.system.system_rpc.DeleteCommunity:output_type -> meowchat.system.DeleteCommunityResp
-	55, // 77: meowchat.system.system_rpc.ListNotification:output_type -> meowchat.system.ListNotificationResp
-	57, // 78: meowchat.system.system_rpc.CleanNotification:output_type -> meowchat.system.CleanNotificationResp
-	61, // 79: meowchat.system.system_rpc.CountNotification:output_type -> meowchat.system.CountNotificationResp
-	59, // 80: meowchat.system.system_rpc.ReadNotification:output_type -> meowchat.system.ReadNotificationResp
-	50, // [50:81] is the sub-list for method output_type
-	19, // [19:50] is the sub-list for method input_type
-	19, // [19:19] is the sub-list for extension type_name
-	19, // [19:19] is the sub-list for extension extendee
-	0,  // [0:19] is the sub-list for field type_name
+	68, // 0: meowchat.system.RetrieveNoticeResp.notice:type_name -> meowchat.system.Notice
+	64, // 1: meowchat.system.ListNoticeReq.sort:type_name -> meowchat.system.ListNoticeReq.SortEntry
+	68, // 2: meowchat.system.ListNoticeResp.notices:type_name -> meowchat.system.Notice
+	69, // 3: meowchat.system.RetrieveNewsResp.news:type_name -> meowchat.system.News
+	65, // 4: meowchat.system.ListNewsReq.sort:type_name -> meowchat.system.ListNewsReq.SortEntry
+	69, // 5: meowchat.system.ListNewsResp.news:type_name -> meowchat.system.News
+	70, // 6: meowchat.system.RetrieveAdminResp.admin:type_name -> meowchat.system.Admin
+	66, // 7: meowchat.system.ListAdminReq.sort:type_name -> meowchat.system.ListAdminReq.SortEntry
+	70, // 8: meowchat.system.ListAdminResp.admins:type_name -> meowchat.system.Admin
+	71, // 9: meowchat.system.ListApplyResp.apply:type_name -> meowchat.system.Apply
+	72, // 10: meowchat.system.RetrieveUserRoleResp.roles:type_name -> meowchat.system.Role
+	72, // 11: meowchat.system.UpdateUserRoleReq.roles:type_name -> meowchat.system.Role
+	72, // 12: meowchat.system.ContainsRoleReq.role:type_name -> meowchat.system.Role
+	73, // 13: meowchat.system.RetrieveCommunityResp.community:type_name -> meowchat.system.Community
+	67, // 14: meowchat.system.ListCommunityReq.sort:type_name -> meowchat.system.ListCommunityReq.SortEntry
+	73, // 15: meowchat.system.ListCommunityResp.communities:type_name -> meowchat.system.Community
+	72, // 16: meowchat.system.ListUserIdByRoleReq.role:type_name -> meowchat.system.Role
+	74, // 17: meowchat.system.ListNotificationReq.paginationOptions:type_name -> basic.PaginationOptions
+	75, // 18: meowchat.system.ListNotificationResp.notifications:type_name -> meowchat.system.Notification
+	75, // 19: meowchat.system.AddNotificationReq.notification:type_name -> meowchat.system.Notification
+	0,  // 20: meowchat.system.system_rpc.RetrieveNotice:input_type -> meowchat.system.RetrieveNoticeReq
+	2,  // 21: meowchat.system.system_rpc.ListNotice:input_type -> meowchat.system.ListNoticeReq
+	4,  // 22: meowchat.system.system_rpc.CreateNotice:input_type -> meowchat.system.CreateNoticeReq
+	6,  // 23: meowchat.system.system_rpc.UpdateNotice:input_type -> meowchat.system.UpdateNoticeReq
+	8,  // 24: meowchat.system.system_rpc.DeleteNotice:input_type -> meowchat.system.DeleteNoticeReq
+	10, // 25: meowchat.system.system_rpc.RetrieveNews:input_type -> meowchat.system.RetrieveNewsReq
+	12, // 26: meowchat.system.system_rpc.ListNews:input_type -> meowchat.system.ListNewsReq
+	14, // 27: meowchat.system.system_rpc.CreateNews:input_type -> meowchat.system.CreateNewsReq
+	16, // 28: meowchat.system.system_rpc.UpdateNews:input_type -> meowchat.system.UpdateNewsReq
+	18, // 29: meowchat.system.system_rpc.DeleteNews:input_type -> meowchat.system.DeleteNewsReq
+	20, // 30: meowchat.system.system_rpc.RetrieveAdmin:input_type -> meowchat.system.RetrieveAdminReq
+	22, // 31: meowchat.system.system_rpc.ListAdmin:input_type -> meowchat.system.ListAdminReq
+	24, // 32: meowchat.system.system_rpc.CreateAdmin:input_type -> meowchat.system.CreateAdminReq
+	26, // 33: meowchat.system.system_rpc.UpdateAdmin:input_type -> meowchat.system.UpdateAdminReq
+	28, // 34: meowchat.system.system_rpc.DeleteAdmin:input_type -> meowchat.system.DeleteAdminReq
+	36, // 35: meowchat.system.system_rpc.RetrieveUserRole:input_type -> meowchat.system.RetrieveUserRoleReq
+	52, // 36: meowchat.system.system_rpc.ListUserIdByRole:input_type -> meowchat.system.ListUserIdByRoleReq
+	38, // 37: meowchat.system.system_rpc.UpdateUserRole:input_type -> meowchat.system.UpdateUserRoleReq
+	40, // 38: meowchat.system.system_rpc.ContainsRole:input_type -> meowchat.system.ContainsRoleReq
+	34, // 39: meowchat.system.system_rpc.CreateApply:input_type -> meowchat.system.CreateApplyReq
+	30, // 40: meowchat.system.system_rpc.HandleApply:input_type -> meowchat.system.HandleApplyReq
+	32, // 41: meowchat.system.system_rpc.ListApply:input_type -> meowchat.system.ListApplyReq
+	42, // 42: meowchat.system.system_rpc.RetrieveCommunity:input_type -> meowchat.system.RetrieveCommunityReq
+	44, // 43: meowchat.system.system_rpc.ListCommunity:input_type -> meowchat.system.ListCommunityReq
+	46, // 44: meowchat.system.system_rpc.CreateCommunity:input_type -> meowchat.system.CreateCommunityReq
+	48, // 45: meowchat.system.system_rpc.UpdateCommunity:input_type -> meowchat.system.UpdateCommunityReq
+	50, // 46: meowchat.system.system_rpc.DeleteCommunity:input_type -> meowchat.system.DeleteCommunityReq
+	54, // 47: meowchat.system.system_rpc.ListNotification:input_type -> meowchat.system.ListNotificationReq
+	58, // 48: meowchat.system.system_rpc.CleanNotification:input_type -> meowchat.system.CleanNotificationReq
+	62, // 49: meowchat.system.system_rpc.CountNotification:input_type -> meowchat.system.CountNotificationReq
+	60, // 50: meowchat.system.system_rpc.ReadNotification:input_type -> meowchat.system.ReadNotificationReq
+	56, // 51: meowchat.system.system_rpc.AddNotification:input_type -> meowchat.system.AddNotificationReq
+	1,  // 52: meowchat.system.system_rpc.RetrieveNotice:output_type -> meowchat.system.RetrieveNoticeResp
+	3,  // 53: meowchat.system.system_rpc.ListNotice:output_type -> meowchat.system.ListNoticeResp
+	5,  // 54: meowchat.system.system_rpc.CreateNotice:output_type -> meowchat.system.CreateNoticeResp
+	7,  // 55: meowchat.system.system_rpc.UpdateNotice:output_type -> meowchat.system.UpdateNoticeResp
+	9,  // 56: meowchat.system.system_rpc.DeleteNotice:output_type -> meowchat.system.DeleteNoticeResp
+	11, // 57: meowchat.system.system_rpc.RetrieveNews:output_type -> meowchat.system.RetrieveNewsResp
+	13, // 58: meowchat.system.system_rpc.ListNews:output_type -> meowchat.system.ListNewsResp
+	15, // 59: meowchat.system.system_rpc.CreateNews:output_type -> meowchat.system.CreateNewsResp
+	17, // 60: meowchat.system.system_rpc.UpdateNews:output_type -> meowchat.system.UpdateNewsResp
+	19, // 61: meowchat.system.system_rpc.DeleteNews:output_type -> meowchat.system.DeleteNewsResp
+	21, // 62: meowchat.system.system_rpc.RetrieveAdmin:output_type -> meowchat.system.RetrieveAdminResp
+	23, // 63: meowchat.system.system_rpc.ListAdmin:output_type -> meowchat.system.ListAdminResp
+	25, // 64: meowchat.system.system_rpc.CreateAdmin:output_type -> meowchat.system.CreateAdminResp
+	27, // 65: meowchat.system.system_rpc.UpdateAdmin:output_type -> meowchat.system.UpdateAdminResp
+	29, // 66: meowchat.system.system_rpc.DeleteAdmin:output_type -> meowchat.system.DeleteAdminResp
+	37, // 67: meowchat.system.system_rpc.RetrieveUserRole:output_type -> meowchat.system.RetrieveUserRoleResp
+	53, // 68: meowchat.system.system_rpc.ListUserIdByRole:output_type -> meowchat.system.ListUserIdByRoleResp
+	39, // 69: meowchat.system.system_rpc.UpdateUserRole:output_type -> meowchat.system.UpdateUserRoleResp
+	41, // 70: meowchat.system.system_rpc.ContainsRole:output_type -> meowchat.system.ContainsRoleResp
+	35, // 71: meowchat.system.system_rpc.CreateApply:output_type -> meowchat.system.CreateApplyResp
+	31, // 72: meowchat.system.system_rpc.HandleApply:output_type -> meowchat.system.HandleApplyResp
+	33, // 73: meowchat.system.system_rpc.ListApply:output_type -> meowchat.system.ListApplyResp
+	43, // 74: meowchat.system.system_rpc.RetrieveCommunity:output_type -> meowchat.system.RetrieveCommunityResp
+	45, // 75: meowchat.system.system_rpc.ListCommunity:output_type -> meowchat.system.ListCommunityResp
+	47, // 76: meowchat.system.system_rpc.CreateCommunity:output_type -> meowchat.system.CreateCommunityResp
+	49, // 77: meowchat.system.system_rpc.UpdateCommunity:output_type -> meowchat.system.UpdateCommunityResp
+	51, // 78: meowchat.system.system_rpc.DeleteCommunity:output_type -> meowchat.system.DeleteCommunityResp
+	55, // 79: meowchat.system.system_rpc.ListNotification:output_type -> meowchat.system.ListNotificationResp
+	59, // 80: meowchat.system.system_rpc.CleanNotification:output_type -> meowchat.system.CleanNotificationResp
+	63, // 81: meowchat.system.system_rpc.CountNotification:output_type -> meowchat.system.CountNotificationResp
+	61, // 82: meowchat.system.system_rpc.ReadNotification:output_type -> meowchat.system.ReadNotificationResp
+	57, // 83: meowchat.system.system_rpc.AddNotification:output_type -> meowchat.system.AddNotificationResp
+	52, // [52:84] is the sub-list for method output_type
+	20, // [20:52] is the sub-list for method input_type
+	20, // [20:20] is the sub-list for extension type_name
+	20, // [20:20] is the sub-list for extension extendee
+	0,  // [0:20] is the sub-list for field type_name
 }
 
 func init() { file_meowchat_system_system_proto_init() }
@@ -4532,7 +4635,7 @@ func file_meowchat_system_system_proto_init() {
 			}
 		}
 		file_meowchat_system_system_proto_msgTypes[56].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CleanNotificationReq); i {
+			switch v := v.(*AddNotificationReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4544,7 +4647,7 @@ func file_meowchat_system_system_proto_init() {
 			}
 		}
 		file_meowchat_system_system_proto_msgTypes[57].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CleanNotificationResp); i {
+			switch v := v.(*AddNotificationResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4556,7 +4659,7 @@ func file_meowchat_system_system_proto_init() {
 			}
 		}
 		file_meowchat_system_system_proto_msgTypes[58].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReadNotificationReq); i {
+			switch v := v.(*CleanNotificationReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4568,7 +4671,7 @@ func file_meowchat_system_system_proto_init() {
 			}
 		}
 		file_meowchat_system_system_proto_msgTypes[59].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ReadNotificationResp); i {
+			switch v := v.(*CleanNotificationResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4580,7 +4683,7 @@ func file_meowchat_system_system_proto_init() {
 			}
 		}
 		file_meowchat_system_system_proto_msgTypes[60].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CountNotificationReq); i {
+			switch v := v.(*ReadNotificationReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -4592,6 +4695,30 @@ func file_meowchat_system_system_proto_init() {
 			}
 		}
 		file_meowchat_system_system_proto_msgTypes[61].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ReadNotificationResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowchat_system_system_proto_msgTypes[62].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*CountNotificationReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowchat_system_system_proto_msgTypes[63].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*CountNotificationResp); i {
 			case 0:
 				return &v.state
@@ -4611,7 +4738,7 @@ func file_meowchat_system_system_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_meowchat_system_system_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   66,
+			NumMessages:   68,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
@@ -4661,4 +4788,5 @@ type SystemRpc interface {
 	CleanNotification(ctx context.Context, req *CleanNotificationReq) (res *CleanNotificationResp, err error)
 	CountNotification(ctx context.Context, req *CountNotificationReq) (res *CountNotificationResp, err error)
 	ReadNotification(ctx context.Context, req *ReadNotificationReq) (res *ReadNotificationResp, err error)
+	AddNotification(ctx context.Context, req *AddNotificationReq) (res *AddNotificationResp, err error)
 }

@@ -42,6 +42,7 @@ type Client interface {
 	CleanNotification(ctx context.Context, Req *system.CleanNotificationReq, callOptions ...callopt.Option) (r *system.CleanNotificationResp, err error)
 	CountNotification(ctx context.Context, Req *system.CountNotificationReq, callOptions ...callopt.Option) (r *system.CountNotificationResp, err error)
 	ReadNotification(ctx context.Context, Req *system.ReadNotificationReq, callOptions ...callopt.Option) (r *system.ReadNotificationResp, err error)
+	AddNotification(ctx context.Context, Req *system.AddNotificationReq, callOptions ...callopt.Option) (r *system.AddNotificationResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -226,4 +227,9 @@ func (p *kSystemRpcClient) CountNotification(ctx context.Context, Req *system.Co
 func (p *kSystemRpcClient) ReadNotification(ctx context.Context, Req *system.ReadNotificationReq, callOptions ...callopt.Option) (r *system.ReadNotificationResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.ReadNotification(ctx, Req)
+}
+
+func (p *kSystemRpcClient) AddNotification(ctx context.Context, Req *system.AddNotificationReq, callOptions ...callopt.Option) (r *system.AddNotificationResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.AddNotification(ctx, Req)
 }
