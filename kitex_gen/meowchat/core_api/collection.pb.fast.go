@@ -90,6 +90,73 @@ func (x *CatPreview) fastReadField6(buf []byte, _type int8) (offset int, err err
 	return offset, err
 }
 
+func (x *Image) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 4:
+		offset, err = x.fastReadField4(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 5:
+		offset, err = x.fastReadField5(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_Image[number], err)
+}
+
+func (x *Image) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *Image) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Url, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *Image) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.CatId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *Image) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadInt64(buf, _type)
+	x.Likes = &tmp
+	return offset, err
+}
+
+func (x *Image) fastReadField5(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadBool(buf, _type)
+	x.IsLiked = &tmp
+	return offset, err
+}
+
 func (x *GetCatPreviewsReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -710,7 +777,7 @@ ReadFieldError:
 }
 
 func (x *GetImageByCatResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v content.Image
+	var v Image
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -782,6 +849,58 @@ func (x *CatPreview) fastWriteField6(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteBool(buf[offset:], 6, x.GetIsCollected())
+	return offset
+}
+
+func (x *Image) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField4(buf[offset:])
+	offset += x.fastWriteField5(buf[offset:])
+	return offset
+}
+
+func (x *Image) fastWriteField1(buf []byte) (offset int) {
+	if x.Id == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
+	return offset
+}
+
+func (x *Image) fastWriteField2(buf []byte) (offset int) {
+	if x.Url == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetUrl())
+	return offset
+}
+
+func (x *Image) fastWriteField3(buf []byte) (offset int) {
+	if x.CatId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetCatId())
+	return offset
+}
+
+func (x *Image) fastWriteField4(buf []byte) (offset int) {
+	if x.Likes == nil {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 4, x.GetLikes())
+	return offset
+}
+
+func (x *Image) fastWriteField5(buf []byte) (offset int) {
+	if x.IsLiked == nil {
+		return offset
+	}
+	offset += fastpb.WriteBool(buf[offset:], 5, x.GetIsLiked())
 	return offset
 }
 
@@ -1285,6 +1404,58 @@ func (x *CatPreview) sizeField6() (n int) {
 	return n
 }
 
+func (x *Image) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	n += x.sizeField3()
+	n += x.sizeField4()
+	n += x.sizeField5()
+	return n
+}
+
+func (x *Image) sizeField1() (n int) {
+	if x.Id == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetId())
+	return n
+}
+
+func (x *Image) sizeField2() (n int) {
+	if x.Url == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetUrl())
+	return n
+}
+
+func (x *Image) sizeField3() (n int) {
+	if x.CatId == "" {
+		return n
+	}
+	n += fastpb.SizeString(3, x.GetCatId())
+	return n
+}
+
+func (x *Image) sizeField4() (n int) {
+	if x.Likes == nil {
+		return n
+	}
+	n += fastpb.SizeInt64(4, x.GetLikes())
+	return n
+}
+
+func (x *Image) sizeField5() (n int) {
+	if x.IsLiked == nil {
+		return n
+	}
+	n += fastpb.SizeBool(5, x.GetIsLiked())
+	return n
+}
+
 func (x *GetCatPreviewsReq) Size() (n int) {
 	if x == nil {
 		return n
@@ -1731,6 +1902,14 @@ var fieldIDToName_CatPreview = map[int32]string{
 	4: "Color",
 	5: "AvatarUrl",
 	6: "IsCollected",
+}
+
+var fieldIDToName_Image = map[int32]string{
+	1: "Id",
+	2: "Url",
+	3: "CatId",
+	4: "Likes",
+	5: "IsLiked",
 }
 
 var fieldIDToName_GetCatPreviewsReq = map[int32]string{
