@@ -56,7 +56,8 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		"RetrieveUserFish":  kitex.NewMethodInfo(retrieveUserFishHandler, newRetrieveUserFishArgs, newRetrieveUserFishResult, false),
 		"CountDonateByUser": kitex.NewMethodInfo(countDonateByUserHandler, newCountDonateByUserArgs, newCountDonateByUserResult, false),
 		"CountDonateByPlan": kitex.NewMethodInfo(countDonateByPlanHandler, newCountDonateByPlanArgs, newCountDonateByPlanResult, false),
-		"GetContentMission": kitex.NewMethodInfo(getContentMissionHandler, newGetContentMissionArgs, newGetContentMissionResult, false),
+		"GetMission":        kitex.NewMethodInfo(getMissionHandler, newGetMissionArgs, newGetMissionResult, false),
+		"CheckIn":           kitex.NewMethodInfo(checkInHandler, newCheckInArgs, newCheckInResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName":     "meowchat.content",
@@ -5428,73 +5429,73 @@ func (p *CountDonateByPlanResult) GetResult() interface{} {
 	return p.Success
 }
 
-func getContentMissionHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+func getMissionHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(content.GetContentMissionReq)
+		req := new(content.GetMissionReq)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
-		resp, err := handler.(content.ContentService).GetContentMission(ctx, req)
+		resp, err := handler.(content.ContentService).GetMission(ctx, req)
 		if err != nil {
 			return err
 		}
 		if err := st.SendMsg(resp); err != nil {
 			return err
 		}
-	case *GetContentMissionArgs:
-		success, err := handler.(content.ContentService).GetContentMission(ctx, s.Req)
+	case *GetMissionArgs:
+		success, err := handler.(content.ContentService).GetMission(ctx, s.Req)
 		if err != nil {
 			return err
 		}
-		realResult := result.(*GetContentMissionResult)
+		realResult := result.(*GetMissionResult)
 		realResult.Success = success
 	}
 	return nil
 }
-func newGetContentMissionArgs() interface{} {
-	return &GetContentMissionArgs{}
+func newGetMissionArgs() interface{} {
+	return &GetMissionArgs{}
 }
 
-func newGetContentMissionResult() interface{} {
-	return &GetContentMissionResult{}
+func newGetMissionResult() interface{} {
+	return &GetMissionResult{}
 }
 
-type GetContentMissionArgs struct {
-	Req *content.GetContentMissionReq
+type GetMissionArgs struct {
+	Req *content.GetMissionReq
 }
 
-func (p *GetContentMissionArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *GetMissionArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(content.GetContentMissionReq)
+		p.Req = new(content.GetMissionReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
 
-func (p *GetContentMissionArgs) FastWrite(buf []byte) (n int) {
+func (p *GetMissionArgs) FastWrite(buf []byte) (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.FastWrite(buf)
 }
 
-func (p *GetContentMissionArgs) Size() (n int) {
+func (p *GetMissionArgs) Size() (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.Size()
 }
 
-func (p *GetContentMissionArgs) Marshal(out []byte) ([]byte, error) {
+func (p *GetMissionArgs) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetReq() {
 		return out, nil
 	}
 	return proto.Marshal(p.Req)
 }
 
-func (p *GetContentMissionArgs) Unmarshal(in []byte) error {
-	msg := new(content.GetContentMissionReq)
+func (p *GetMissionArgs) Unmarshal(in []byte) error {
+	msg := new(content.GetMissionReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -5502,59 +5503,59 @@ func (p *GetContentMissionArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var GetContentMissionArgs_Req_DEFAULT *content.GetContentMissionReq
+var GetMissionArgs_Req_DEFAULT *content.GetMissionReq
 
-func (p *GetContentMissionArgs) GetReq() *content.GetContentMissionReq {
+func (p *GetMissionArgs) GetReq() *content.GetMissionReq {
 	if !p.IsSetReq() {
-		return GetContentMissionArgs_Req_DEFAULT
+		return GetMissionArgs_Req_DEFAULT
 	}
 	return p.Req
 }
 
-func (p *GetContentMissionArgs) IsSetReq() bool {
+func (p *GetMissionArgs) IsSetReq() bool {
 	return p.Req != nil
 }
 
-func (p *GetContentMissionArgs) GetFirstArgument() interface{} {
+func (p *GetMissionArgs) GetFirstArgument() interface{} {
 	return p.Req
 }
 
-type GetContentMissionResult struct {
-	Success *content.GetContentMissionResp
+type GetMissionResult struct {
+	Success *content.GetMissionResp
 }
 
-var GetContentMissionResult_Success_DEFAULT *content.GetContentMissionResp
+var GetMissionResult_Success_DEFAULT *content.GetMissionResp
 
-func (p *GetContentMissionResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *GetMissionResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(content.GetContentMissionResp)
+		p.Success = new(content.GetMissionResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
 
-func (p *GetContentMissionResult) FastWrite(buf []byte) (n int) {
+func (p *GetMissionResult) FastWrite(buf []byte) (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.FastWrite(buf)
 }
 
-func (p *GetContentMissionResult) Size() (n int) {
+func (p *GetMissionResult) Size() (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.Size()
 }
 
-func (p *GetContentMissionResult) Marshal(out []byte) ([]byte, error) {
+func (p *GetMissionResult) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetSuccess() {
 		return out, nil
 	}
 	return proto.Marshal(p.Success)
 }
 
-func (p *GetContentMissionResult) Unmarshal(in []byte) error {
-	msg := new(content.GetContentMissionResp)
+func (p *GetMissionResult) Unmarshal(in []byte) error {
+	msg := new(content.GetMissionResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -5562,22 +5563,175 @@ func (p *GetContentMissionResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *GetContentMissionResult) GetSuccess() *content.GetContentMissionResp {
+func (p *GetMissionResult) GetSuccess() *content.GetMissionResp {
 	if !p.IsSetSuccess() {
-		return GetContentMissionResult_Success_DEFAULT
+		return GetMissionResult_Success_DEFAULT
 	}
 	return p.Success
 }
 
-func (p *GetContentMissionResult) SetSuccess(x interface{}) {
-	p.Success = x.(*content.GetContentMissionResp)
+func (p *GetMissionResult) SetSuccess(x interface{}) {
+	p.Success = x.(*content.GetMissionResp)
 }
 
-func (p *GetContentMissionResult) IsSetSuccess() bool {
+func (p *GetMissionResult) IsSetSuccess() bool {
 	return p.Success != nil
 }
 
-func (p *GetContentMissionResult) GetResult() interface{} {
+func (p *GetMissionResult) GetResult() interface{} {
+	return p.Success
+}
+
+func checkInHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(content.CheckInReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(content.ContentService).CheckIn(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *CheckInArgs:
+		success, err := handler.(content.ContentService).CheckIn(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*CheckInResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newCheckInArgs() interface{} {
+	return &CheckInArgs{}
+}
+
+func newCheckInResult() interface{} {
+	return &CheckInResult{}
+}
+
+type CheckInArgs struct {
+	Req *content.CheckInReq
+}
+
+func (p *CheckInArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(content.CheckInReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *CheckInArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *CheckInArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *CheckInArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *CheckInArgs) Unmarshal(in []byte) error {
+	msg := new(content.CheckInReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var CheckInArgs_Req_DEFAULT *content.CheckInReq
+
+func (p *CheckInArgs) GetReq() *content.CheckInReq {
+	if !p.IsSetReq() {
+		return CheckInArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *CheckInArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *CheckInArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type CheckInResult struct {
+	Success *content.CheckInResp
+}
+
+var CheckInResult_Success_DEFAULT *content.CheckInResp
+
+func (p *CheckInResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(content.CheckInResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *CheckInResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *CheckInResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *CheckInResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *CheckInResult) Unmarshal(in []byte) error {
+	msg := new(content.CheckInResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *CheckInResult) GetSuccess() *content.CheckInResp {
+	if !p.IsSetSuccess() {
+		return CheckInResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *CheckInResult) SetSuccess(x interface{}) {
+	p.Success = x.(*content.CheckInResp)
+}
+
+func (p *CheckInResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *CheckInResult) GetResult() interface{} {
 	return p.Success
 }
 
@@ -5941,11 +6095,21 @@ func (p *kClient) CountDonateByPlan(ctx context.Context, Req *content.CountDonat
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) GetContentMission(ctx context.Context, Req *content.GetContentMissionReq) (r *content.GetContentMissionResp, err error) {
-	var _args GetContentMissionArgs
+func (p *kClient) GetMission(ctx context.Context, Req *content.GetMissionReq) (r *content.GetMissionResp, err error) {
+	var _args GetMissionArgs
 	_args.Req = Req
-	var _result GetContentMissionResult
-	if err = p.c.Call(ctx, "GetContentMission", &_args, &_result); err != nil {
+	var _result GetMissionResult
+	if err = p.c.Call(ctx, "GetMission", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) CheckIn(ctx context.Context, Req *content.CheckInReq) (r *content.CheckInResp, err error) {
+	var _args CheckInArgs
+	_args.Req = Req
+	var _result CheckInResult
+	if err = p.c.Call(ctx, "CheckIn", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

@@ -29,7 +29,6 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		"retrieveCommentById":          kitex.NewMethodInfo(retrieveCommentByIdHandler, newRetrieveCommentByIdArgs, newRetrieveCommentByIdResult, false),
 		"listCommentByAuthorIdAndType": kitex.NewMethodInfo(listCommentByAuthorIdAndTypeHandler, newListCommentByAuthorIdAndTypeArgs, newListCommentByAuthorIdAndTypeResult, false),
 		"listCommentByReplyToAndType":  kitex.NewMethodInfo(listCommentByReplyToAndTypeHandler, newListCommentByReplyToAndTypeArgs, newListCommentByReplyToAndTypeResult, false),
-		"GetCommentMission":            kitex.NewMethodInfo(getCommentMissionHandler, newGetCommentMissionArgs, newGetCommentMissionResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName":     "platform.comment",
@@ -1270,159 +1269,6 @@ func (p *ListCommentByReplyToAndTypeResult) GetResult() interface{} {
 	return p.Success
 }
 
-func getCommentMissionHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	switch s := arg.(type) {
-	case *streaming.Args:
-		st := s.Stream
-		req := new(comment.GetCommentMissionReq)
-		if err := st.RecvMsg(req); err != nil {
-			return err
-		}
-		resp, err := handler.(comment.CommentService).GetCommentMission(ctx, req)
-		if err != nil {
-			return err
-		}
-		if err := st.SendMsg(resp); err != nil {
-			return err
-		}
-	case *GetCommentMissionArgs:
-		success, err := handler.(comment.CommentService).GetCommentMission(ctx, s.Req)
-		if err != nil {
-			return err
-		}
-		realResult := result.(*GetCommentMissionResult)
-		realResult.Success = success
-	}
-	return nil
-}
-func newGetCommentMissionArgs() interface{} {
-	return &GetCommentMissionArgs{}
-}
-
-func newGetCommentMissionResult() interface{} {
-	return &GetCommentMissionResult{}
-}
-
-type GetCommentMissionArgs struct {
-	Req *comment.GetCommentMissionReq
-}
-
-func (p *GetCommentMissionArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetReq() {
-		p.Req = new(comment.GetCommentMissionReq)
-	}
-	return p.Req.FastRead(buf, _type, number)
-}
-
-func (p *GetCommentMissionArgs) FastWrite(buf []byte) (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.FastWrite(buf)
-}
-
-func (p *GetCommentMissionArgs) Size() (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.Size()
-}
-
-func (p *GetCommentMissionArgs) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetReq() {
-		return out, nil
-	}
-	return proto.Marshal(p.Req)
-}
-
-func (p *GetCommentMissionArgs) Unmarshal(in []byte) error {
-	msg := new(comment.GetCommentMissionReq)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Req = msg
-	return nil
-}
-
-var GetCommentMissionArgs_Req_DEFAULT *comment.GetCommentMissionReq
-
-func (p *GetCommentMissionArgs) GetReq() *comment.GetCommentMissionReq {
-	if !p.IsSetReq() {
-		return GetCommentMissionArgs_Req_DEFAULT
-	}
-	return p.Req
-}
-
-func (p *GetCommentMissionArgs) IsSetReq() bool {
-	return p.Req != nil
-}
-
-func (p *GetCommentMissionArgs) GetFirstArgument() interface{} {
-	return p.Req
-}
-
-type GetCommentMissionResult struct {
-	Success *comment.GetCommentMissionResp
-}
-
-var GetCommentMissionResult_Success_DEFAULT *comment.GetCommentMissionResp
-
-func (p *GetCommentMissionResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetSuccess() {
-		p.Success = new(comment.GetCommentMissionResp)
-	}
-	return p.Success.FastRead(buf, _type, number)
-}
-
-func (p *GetCommentMissionResult) FastWrite(buf []byte) (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.FastWrite(buf)
-}
-
-func (p *GetCommentMissionResult) Size() (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.Size()
-}
-
-func (p *GetCommentMissionResult) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetSuccess() {
-		return out, nil
-	}
-	return proto.Marshal(p.Success)
-}
-
-func (p *GetCommentMissionResult) Unmarshal(in []byte) error {
-	msg := new(comment.GetCommentMissionResp)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Success = msg
-	return nil
-}
-
-func (p *GetCommentMissionResult) GetSuccess() *comment.GetCommentMissionResp {
-	if !p.IsSetSuccess() {
-		return GetCommentMissionResult_Success_DEFAULT
-	}
-	return p.Success
-}
-
-func (p *GetCommentMissionResult) SetSuccess(x interface{}) {
-	p.Success = x.(*comment.GetCommentMissionResp)
-}
-
-func (p *GetCommentMissionResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *GetCommentMissionResult) GetResult() interface{} {
-	return p.Success
-}
-
 type kClient struct {
 	c client.Client
 }
@@ -1508,16 +1354,6 @@ func (p *kClient) ListCommentByReplyToAndType(ctx context.Context, Req *comment.
 	_args.Req = Req
 	var _result ListCommentByReplyToAndTypeResult
 	if err = p.c.Call(ctx, "listCommentByReplyToAndType", &_args, &_result); err != nil {
-		return
-	}
-	return _result.GetSuccess(), nil
-}
-
-func (p *kClient) GetCommentMission(ctx context.Context, Req *comment.GetCommentMissionReq) (r *comment.GetCommentMissionResp, err error) {
-	var _args GetCommentMissionArgs
-	_args.Req = Req
-	var _result GetCommentMissionResult
-	if err = p.c.Call(ctx, "GetCommentMission", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

@@ -19,7 +19,6 @@ type Client interface {
 	RetrieveCommentById(ctx context.Context, Req *comment.RetrieveCommentByIdReq, callOptions ...callopt.Option) (r *comment.RetrieveCommentByIdResp, err error)
 	ListCommentByAuthorIdAndType(ctx context.Context, Req *comment.ListCommentByAuthorIdAndTypeReq, callOptions ...callopt.Option) (r *comment.ListCommentByAuthorIdAndTypeResp, err error)
 	ListCommentByReplyToAndType(ctx context.Context, Req *comment.ListCommentByReplyToAndTypeReq, callOptions ...callopt.Option) (r *comment.ListCommentByReplyToAndTypeResp, err error)
-	GetCommentMission(ctx context.Context, Req *comment.GetCommentMissionReq, callOptions ...callopt.Option) (r *comment.GetCommentMissionResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -89,9 +88,4 @@ func (p *kCommentServiceClient) ListCommentByAuthorIdAndType(ctx context.Context
 func (p *kCommentServiceClient) ListCommentByReplyToAndType(ctx context.Context, Req *comment.ListCommentByReplyToAndTypeReq, callOptions ...callopt.Option) (r *comment.ListCommentByReplyToAndTypeResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.ListCommentByReplyToAndType(ctx, Req)
-}
-
-func (p *kCommentServiceClient) GetCommentMission(ctx context.Context, Req *comment.GetCommentMissionReq, callOptions ...callopt.Option) (r *comment.GetCommentMissionResp, err error) {
-	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.GetCommentMission(ctx, Req)
 }

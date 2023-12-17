@@ -46,7 +46,8 @@ type Client interface {
 	RetrieveUserFish(ctx context.Context, Req *content.RetrieveUserFishReq, callOptions ...callopt.Option) (r *content.RetrieveUserFishResp, err error)
 	CountDonateByUser(ctx context.Context, Req *content.CountDonateByUserReq, callOptions ...callopt.Option) (r *content.CountDonateByUserResp, err error)
 	CountDonateByPlan(ctx context.Context, Req *content.CountDonateByPlanReq, callOptions ...callopt.Option) (r *content.CountDonateByPlanResp, err error)
-	GetContentMission(ctx context.Context, Req *content.GetContentMissionReq, callOptions ...callopt.Option) (r *content.GetContentMissionResp, err error)
+	GetMission(ctx context.Context, Req *content.GetMissionReq, callOptions ...callopt.Option) (r *content.GetMissionResp, err error)
+	CheckIn(ctx context.Context, Req *content.CheckInReq, callOptions ...callopt.Option) (r *content.CheckInResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -253,7 +254,12 @@ func (p *kContentServiceClient) CountDonateByPlan(ctx context.Context, Req *cont
 	return p.kClient.CountDonateByPlan(ctx, Req)
 }
 
-func (p *kContentServiceClient) GetContentMission(ctx context.Context, Req *content.GetContentMissionReq, callOptions ...callopt.Option) (r *content.GetContentMissionResp, err error) {
+func (p *kContentServiceClient) GetMission(ctx context.Context, Req *content.GetMissionReq, callOptions ...callopt.Option) (r *content.GetMissionResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.GetContentMission(ctx, Req)
+	return p.kClient.GetMission(ctx, Req)
+}
+
+func (p *kContentServiceClient) CheckIn(ctx context.Context, Req *content.CheckInReq, callOptions ...callopt.Option) (r *content.CheckInResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.CheckIn(ctx, Req)
 }
