@@ -712,6 +712,11 @@ func (x *GetLikedUsersResp) FastRead(buf []byte, _type int8, number int32) (offs
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -737,6 +742,11 @@ func (x *GetLikedUsersResp) fastReadField1(buf []byte, _type int8) (offset int, 
 
 func (x *GetLikedUsersResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Token, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetLikedUsersResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -1322,6 +1332,7 @@ func (x *GetLikedUsersResp) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
@@ -1340,6 +1351,14 @@ func (x *GetLikedUsersResp) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 2, x.GetToken())
+	return offset
+}
+
+func (x *GetLikedUsersResp) fastWriteField3(buf []byte) (offset int) {
+	if x.Total == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetTotal())
 	return offset
 }
 
@@ -1887,6 +1906,7 @@ func (x *GetLikedUsersResp) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
@@ -1905,6 +1925,14 @@ func (x *GetLikedUsersResp) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(2, x.GetToken())
+	return n
+}
+
+func (x *GetLikedUsersResp) sizeField3() (n int) {
+	if x.Total == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(3, x.GetTotal())
 	return n
 }
 
@@ -2080,6 +2108,7 @@ var fieldIDToName_GetLikedUsersReq = map[int32]string{
 var fieldIDToName_GetLikedUsersResp = map[int32]string{
 	1: "UserIds",
 	2: "Token",
+	3: "Total",
 }
 
 var fieldIDToName_CheckInReq = map[int32]string{
