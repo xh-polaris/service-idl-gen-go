@@ -56,6 +56,7 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		"RetrieveUserFish":  kitex.NewMethodInfo(retrieveUserFishHandler, newRetrieveUserFishArgs, newRetrieveUserFishResult, false),
 		"CountDonateByUser": kitex.NewMethodInfo(countDonateByUserHandler, newCountDonateByUserArgs, newCountDonateByUserResult, false),
 		"CountDonateByPlan": kitex.NewMethodInfo(countDonateByPlanHandler, newCountDonateByPlanArgs, newCountDonateByPlanResult, false),
+		"GetContentMission": kitex.NewMethodInfo(getContentMissionHandler, newGetContentMissionArgs, newGetContentMissionResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName":     "meowchat.content",
@@ -5427,6 +5428,159 @@ func (p *CountDonateByPlanResult) GetResult() interface{} {
 	return p.Success
 }
 
+func getContentMissionHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(content.GetContentMissionReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(content.ContentService).GetContentMission(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *GetContentMissionArgs:
+		success, err := handler.(content.ContentService).GetContentMission(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetContentMissionResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newGetContentMissionArgs() interface{} {
+	return &GetContentMissionArgs{}
+}
+
+func newGetContentMissionResult() interface{} {
+	return &GetContentMissionResult{}
+}
+
+type GetContentMissionArgs struct {
+	Req *content.GetContentMissionReq
+}
+
+func (p *GetContentMissionArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(content.GetContentMissionReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetContentMissionArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetContentMissionArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetContentMissionArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetContentMissionArgs) Unmarshal(in []byte) error {
+	msg := new(content.GetContentMissionReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetContentMissionArgs_Req_DEFAULT *content.GetContentMissionReq
+
+func (p *GetContentMissionArgs) GetReq() *content.GetContentMissionReq {
+	if !p.IsSetReq() {
+		return GetContentMissionArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetContentMissionArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetContentMissionArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetContentMissionResult struct {
+	Success *content.GetContentMissionResp
+}
+
+var GetContentMissionResult_Success_DEFAULT *content.GetContentMissionResp
+
+func (p *GetContentMissionResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(content.GetContentMissionResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetContentMissionResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetContentMissionResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetContentMissionResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetContentMissionResult) Unmarshal(in []byte) error {
+	msg := new(content.GetContentMissionResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetContentMissionResult) GetSuccess() *content.GetContentMissionResp {
+	if !p.IsSetSuccess() {
+		return GetContentMissionResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetContentMissionResult) SetSuccess(x interface{}) {
+	p.Success = x.(*content.GetContentMissionResp)
+}
+
+func (p *GetContentMissionResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetContentMissionResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -5782,6 +5936,16 @@ func (p *kClient) CountDonateByPlan(ctx context.Context, Req *content.CountDonat
 	_args.Req = Req
 	var _result CountDonateByPlanResult
 	if err = p.c.Call(ctx, "CountDonateByPlan", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetContentMission(ctx context.Context, Req *content.GetContentMissionReq) (r *content.GetContentMissionResp, err error) {
+	var _args GetContentMissionArgs
+	_args.Req = Req
+	var _result GetContentMissionResult
+	if err = p.c.Call(ctx, "GetContentMission", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

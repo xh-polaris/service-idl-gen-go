@@ -21,6 +21,7 @@ type Client interface {
 	GetTargetLikes(ctx context.Context, Req *user.GetTargetLikesReq, callOptions ...callopt.Option) (r *user.GetTargetLikesResp, err error)
 	GetUserLikes(ctx context.Context, Req *user.GetUserLikesReq, callOptions ...callopt.Option) (r *user.GetUserLikesResp, err error)
 	GetLikedUsers(ctx context.Context, Req *user.GetLikedUsersReq, callOptions ...callopt.Option) (r *user.GetLikedUsersResp, err error)
+	GetUserMission(ctx context.Context, Req *user.GetUserMissionReq, callOptions ...callopt.Option) (r *user.GetUserMissionResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -100,4 +101,9 @@ func (p *kUserServiceClient) GetUserLikes(ctx context.Context, Req *user.GetUser
 func (p *kUserServiceClient) GetLikedUsers(ctx context.Context, Req *user.GetLikedUsersReq, callOptions ...callopt.Option) (r *user.GetLikedUsersResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.GetLikedUsers(ctx, Req)
+}
+
+func (p *kUserServiceClient) GetUserMission(ctx context.Context, Req *user.GetUserMissionReq, callOptions ...callopt.Option) (r *user.GetUserMissionResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetUserMission(ctx, Req)
 }

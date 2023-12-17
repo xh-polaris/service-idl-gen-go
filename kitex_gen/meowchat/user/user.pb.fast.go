@@ -800,6 +800,66 @@ func (x *CheckInResp) fastReadField2(buf []byte, _type int8) (offset int, err er
 	return offset, err
 }
 
+func (x *GetUserMissionReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetUserMissionReq[number], err)
+}
+
+func (x *GetUserMissionReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetUserMissionResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetUserMissionResp[number], err)
+}
+
+func (x *GetUserMissionResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.SignInTime, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *GetUserMissionResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.LikeTime, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
 func (x *GetUserReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -1321,6 +1381,47 @@ func (x *CheckInResp) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetGetFishTimes())
+	return offset
+}
+
+func (x *GetUserMissionReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *GetUserMissionReq) fastWriteField1(buf []byte) (offset int) {
+	if x.UserId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
+	return offset
+}
+
+func (x *GetUserMissionResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *GetUserMissionResp) fastWriteField1(buf []byte) (offset int) {
+	if x.SignInTime == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetSignInTime())
+	return offset
+}
+
+func (x *GetUserMissionResp) fastWriteField2(buf []byte) (offset int) {
+	if x.LikeTime == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetLikeTime())
 	return offset
 }
 
@@ -1848,6 +1949,47 @@ func (x *CheckInResp) sizeField2() (n int) {
 	return n
 }
 
+func (x *GetUserMissionReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *GetUserMissionReq) sizeField1() (n int) {
+	if x.UserId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetUserId())
+	return n
+}
+
+func (x *GetUserMissionResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *GetUserMissionResp) sizeField1() (n int) {
+	if x.SignInTime == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(1, x.GetSignInTime())
+	return n
+}
+
+func (x *GetUserMissionResp) sizeField2() (n int) {
+	if x.LikeTime == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(2, x.GetLikeTime())
+	return n
+}
+
 var fieldIDToName_GetUserReq = map[int32]string{
 	1: "UserId",
 }
@@ -1947,6 +2089,15 @@ var fieldIDToName_CheckInReq = map[int32]string{
 var fieldIDToName_CheckInResp = map[int32]string{
 	1: "GetFish",
 	2: "GetFishTimes",
+}
+
+var fieldIDToName_GetUserMissionReq = map[int32]string{
+	1: "UserId",
+}
+
+var fieldIDToName_GetUserMissionResp = map[int32]string{
+	1: "SignInTime",
+	2: "LikeTime",
 }
 
 var _ = basic.File_basic_pagination_proto

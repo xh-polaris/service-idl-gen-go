@@ -31,6 +31,7 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		"GetTargetLikes": kitex.NewMethodInfo(getTargetLikesHandler, newGetTargetLikesArgs, newGetTargetLikesResult, false),
 		"GetUserLikes":   kitex.NewMethodInfo(getUserLikesHandler, newGetUserLikesArgs, newGetUserLikesResult, false),
 		"GetLikedUsers":  kitex.NewMethodInfo(getLikedUsersHandler, newGetLikedUsersArgs, newGetLikedUsersResult, false),
+		"GetUserMission": kitex.NewMethodInfo(getUserMissionHandler, newGetUserMissionArgs, newGetUserMissionResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName":     "meowchat.user",
@@ -1577,6 +1578,159 @@ func (p *GetLikedUsersResult) GetResult() interface{} {
 	return p.Success
 }
 
+func getUserMissionHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.GetUserMissionReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.UserService).GetUserMission(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *GetUserMissionArgs:
+		success, err := handler.(user.UserService).GetUserMission(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetUserMissionResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newGetUserMissionArgs() interface{} {
+	return &GetUserMissionArgs{}
+}
+
+func newGetUserMissionResult() interface{} {
+	return &GetUserMissionResult{}
+}
+
+type GetUserMissionArgs struct {
+	Req *user.GetUserMissionReq
+}
+
+func (p *GetUserMissionArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.GetUserMissionReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetUserMissionArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetUserMissionArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetUserMissionArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetUserMissionArgs) Unmarshal(in []byte) error {
+	msg := new(user.GetUserMissionReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetUserMissionArgs_Req_DEFAULT *user.GetUserMissionReq
+
+func (p *GetUserMissionArgs) GetReq() *user.GetUserMissionReq {
+	if !p.IsSetReq() {
+		return GetUserMissionArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetUserMissionArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetUserMissionArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetUserMissionResult struct {
+	Success *user.GetUserMissionResp
+}
+
+var GetUserMissionResult_Success_DEFAULT *user.GetUserMissionResp
+
+func (p *GetUserMissionResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.GetUserMissionResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetUserMissionResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetUserMissionResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetUserMissionResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetUserMissionResult) Unmarshal(in []byte) error {
+	msg := new(user.GetUserMissionResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetUserMissionResult) GetSuccess() *user.GetUserMissionResp {
+	if !p.IsSetSuccess() {
+		return GetUserMissionResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetUserMissionResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.GetUserMissionResp)
+}
+
+func (p *GetUserMissionResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetUserMissionResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -1682,6 +1836,16 @@ func (p *kClient) GetLikedUsers(ctx context.Context, Req *user.GetLikedUsersReq)
 	_args.Req = Req
 	var _result GetLikedUsersResult
 	if err = p.c.Call(ctx, "GetLikedUsers", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetUserMission(ctx context.Context, Req *user.GetUserMissionReq) (r *user.GetUserMissionResp, err error) {
+	var _args GetUserMissionArgs
+	_args.Req = Req
+	var _result GetUserMissionResult
+	if err = p.c.Call(ctx, "GetUserMission", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
