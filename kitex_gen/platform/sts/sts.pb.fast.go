@@ -680,6 +680,11 @@ func (x *SendMessageReq) FastRead(buf []byte, _type int8, number int32) (offset 
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 7:
+		offset, err = x.fastReadField7(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -726,6 +731,16 @@ func (x *SendMessageReq) fastReadField5(buf []byte, _type int8) (offset int, err
 func (x *SendMessageReq) fastReadField6(buf []byte, _type int8) (offset int, err error) {
 	x.CreateAt, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
+}
+
+func (x *SendMessageReq) fastReadField7(buf []byte, _type int8) (offset int, err error) {
+	var v basic.UserMeta
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.User = &v
+	return offset, nil
 }
 
 func (x *SendMessageResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -1194,6 +1209,7 @@ func (x *SendMessageReq) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField4(buf[offset:])
 	offset += x.fastWriteField5(buf[offset:])
 	offset += x.fastWriteField6(buf[offset:])
+	offset += x.fastWriteField7(buf[offset:])
 	return offset
 }
 
@@ -1242,6 +1258,14 @@ func (x *SendMessageReq) fastWriteField6(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 6, x.GetCreateAt())
+	return offset
+}
+
+func (x *SendMessageReq) fastWriteField7(buf []byte) (offset int) {
+	if x.User == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 7, x.GetUser())
 	return offset
 }
 
@@ -1705,6 +1729,7 @@ func (x *SendMessageReq) Size() (n int) {
 	n += x.sizeField4()
 	n += x.sizeField5()
 	n += x.sizeField6()
+	n += x.sizeField7()
 	return n
 }
 
@@ -1753,6 +1778,14 @@ func (x *SendMessageReq) sizeField6() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(6, x.GetCreateAt())
+	return n
+}
+
+func (x *SendMessageReq) sizeField7() (n int) {
+	if x.User == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(7, x.GetUser())
 	return n
 }
 
@@ -1855,6 +1888,7 @@ var fieldIDToName_SendMessageReq = map[int32]string{
 	4: "SourceContent",
 	5: "CommentText",
 	6: "CreateAt",
+	7: "User",
 }
 
 var fieldIDToName_SendMessageResp = map[int32]string{}
