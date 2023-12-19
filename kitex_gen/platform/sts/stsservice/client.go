@@ -20,6 +20,7 @@ type Client interface {
 	SetPassword(ctx context.Context, Req *sts.SetPasswordReq, callOptions ...callopt.Option) (r *sts.SetPasswordResp, err error)
 	SendVerifyCode(ctx context.Context, Req *sts.SendVerifyCodeReq, callOptions ...callopt.Option) (r *sts.SendVerifyCodeResp, err error)
 	AddUserAuth(ctx context.Context, Req *sts.AddUserAuthReq, callOptions ...callopt.Option) (r *sts.AddUserAuthResp, err error)
+	SendMessage(ctx context.Context, Req *sts.SendMessageReq, callOptions ...callopt.Option) (r *sts.SendMessageResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -94,4 +95,9 @@ func (p *kStsServiceClient) SendVerifyCode(ctx context.Context, Req *sts.SendVer
 func (p *kStsServiceClient) AddUserAuth(ctx context.Context, Req *sts.AddUserAuthReq, callOptions ...callopt.Option) (r *sts.AddUserAuthResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.AddUserAuth(ctx, Req)
+}
+
+func (p *kStsServiceClient) SendMessage(ctx context.Context, Req *sts.SendMessageReq, callOptions ...callopt.Option) (r *sts.SendMessageResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.SendMessage(ctx, Req)
 }

@@ -648,6 +648,99 @@ SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 }
 
+func (x *SendMessageReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 4:
+		offset, err = x.fastReadField4(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 5:
+		offset, err = x.fastReadField5(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 6:
+		offset, err = x.fastReadField6(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_SendMessageReq[number], err)
+}
+
+func (x *SendMessageReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v int32
+	v, offset, err = fastpb.ReadInt32(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.MessageType = MessageType(v)
+	return offset, nil
+}
+
+func (x *SendMessageReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.TargetUserId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *SendMessageReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.SourceUserName, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *SendMessageReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+	x.SourceContent, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *SendMessageReq) fastReadField5(buf []byte, _type int8) (offset int, err error) {
+	x.CommentText, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *SendMessageReq) fastReadField6(buf []byte, _type int8) (offset int, err error) {
+	x.CreateAt, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *SendMessageResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+}
+
 func (x *GenCosStsReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -1085,6 +1178,74 @@ func (x *AddUserAuthReq) fastWriteField3(buf []byte) (offset int) {
 }
 
 func (x *AddUserAuthResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	return offset
+}
+
+func (x *SendMessageReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField4(buf[offset:])
+	offset += x.fastWriteField5(buf[offset:])
+	offset += x.fastWriteField6(buf[offset:])
+	return offset
+}
+
+func (x *SendMessageReq) fastWriteField1(buf []byte) (offset int) {
+	if x.MessageType == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt32(buf[offset:], 1, int32(x.GetMessageType()))
+	return offset
+}
+
+func (x *SendMessageReq) fastWriteField2(buf []byte) (offset int) {
+	if x.TargetUserId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetTargetUserId())
+	return offset
+}
+
+func (x *SendMessageReq) fastWriteField3(buf []byte) (offset int) {
+	if x.SourceUserName == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetSourceUserName())
+	return offset
+}
+
+func (x *SendMessageReq) fastWriteField4(buf []byte) (offset int) {
+	if x.SourceContent == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 4, x.GetSourceContent())
+	return offset
+}
+
+func (x *SendMessageReq) fastWriteField5(buf []byte) (offset int) {
+	if x.CommentText == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 5, x.GetCommentText())
+	return offset
+}
+
+func (x *SendMessageReq) fastWriteField6(buf []byte) (offset int) {
+	if x.CreateAt == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 6, x.GetCreateAt())
+	return offset
+}
+
+func (x *SendMessageResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -1534,6 +1695,74 @@ func (x *AddUserAuthResp) Size() (n int) {
 	return n
 }
 
+func (x *SendMessageReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	n += x.sizeField3()
+	n += x.sizeField4()
+	n += x.sizeField5()
+	n += x.sizeField6()
+	return n
+}
+
+func (x *SendMessageReq) sizeField1() (n int) {
+	if x.MessageType == 0 {
+		return n
+	}
+	n += fastpb.SizeInt32(1, int32(x.GetMessageType()))
+	return n
+}
+
+func (x *SendMessageReq) sizeField2() (n int) {
+	if x.TargetUserId == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetTargetUserId())
+	return n
+}
+
+func (x *SendMessageReq) sizeField3() (n int) {
+	if x.SourceUserName == "" {
+		return n
+	}
+	n += fastpb.SizeString(3, x.GetSourceUserName())
+	return n
+}
+
+func (x *SendMessageReq) sizeField4() (n int) {
+	if x.SourceContent == "" {
+		return n
+	}
+	n += fastpb.SizeString(4, x.GetSourceContent())
+	return n
+}
+
+func (x *SendMessageReq) sizeField5() (n int) {
+	if x.CommentText == "" {
+		return n
+	}
+	n += fastpb.SizeString(5, x.GetCommentText())
+	return n
+}
+
+func (x *SendMessageReq) sizeField6() (n int) {
+	if x.CreateAt == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(6, x.GetCreateAt())
+	return n
+}
+
+func (x *SendMessageResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	return n
+}
+
 var fieldIDToName_GenCosStsReq = map[int32]string{
 	1: "Path",
 }
@@ -1618,5 +1847,16 @@ var fieldIDToName_AddUserAuthReq = map[int32]string{
 }
 
 var fieldIDToName_AddUserAuthResp = map[int32]string{}
+
+var fieldIDToName_SendMessageReq = map[int32]string{
+	1: "MessageType",
+	2: "TargetUserId",
+	3: "SourceUserName",
+	4: "SourceContent",
+	5: "CommentText",
+	6: "CreateAt",
+}
+
+var fieldIDToName_SendMessageResp = map[int32]string{}
 
 var _ = basic.File_basic_user_proto

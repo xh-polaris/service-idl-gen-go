@@ -30,6 +30,7 @@ func NewServiceInfo() *kitex.ServiceInfo {
 		"setPassword":    kitex.NewMethodInfo(setPasswordHandler, newSetPasswordArgs, newSetPasswordResult, false),
 		"sendVerifyCode": kitex.NewMethodInfo(sendVerifyCodeHandler, newSendVerifyCodeArgs, newSendVerifyCodeResult, false),
 		"AddUserAuth":    kitex.NewMethodInfo(addUserAuthHandler, newAddUserAuthArgs, newAddUserAuthResult, false),
+		"SendMessage":    kitex.NewMethodInfo(sendMessageHandler, newSendMessageArgs, newSendMessageResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName":     "platform.sts",
@@ -1423,6 +1424,159 @@ func (p *AddUserAuthResult) GetResult() interface{} {
 	return p.Success
 }
 
+func sendMessageHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(sts.SendMessageReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(sts.StsService).SendMessage(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *SendMessageArgs:
+		success, err := handler.(sts.StsService).SendMessage(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*SendMessageResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newSendMessageArgs() interface{} {
+	return &SendMessageArgs{}
+}
+
+func newSendMessageResult() interface{} {
+	return &SendMessageResult{}
+}
+
+type SendMessageArgs struct {
+	Req *sts.SendMessageReq
+}
+
+func (p *SendMessageArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(sts.SendMessageReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *SendMessageArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *SendMessageArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *SendMessageArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *SendMessageArgs) Unmarshal(in []byte) error {
+	msg := new(sts.SendMessageReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var SendMessageArgs_Req_DEFAULT *sts.SendMessageReq
+
+func (p *SendMessageArgs) GetReq() *sts.SendMessageReq {
+	if !p.IsSetReq() {
+		return SendMessageArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *SendMessageArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *SendMessageArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type SendMessageResult struct {
+	Success *sts.SendMessageResp
+}
+
+var SendMessageResult_Success_DEFAULT *sts.SendMessageResp
+
+func (p *SendMessageResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(sts.SendMessageResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *SendMessageResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *SendMessageResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *SendMessageResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *SendMessageResult) Unmarshal(in []byte) error {
+	msg := new(sts.SendMessageResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *SendMessageResult) GetSuccess() *sts.SendMessageResp {
+	if !p.IsSetSuccess() {
+		return SendMessageResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *SendMessageResult) SetSuccess(x interface{}) {
+	p.Success = x.(*sts.SendMessageResp)
+}
+
+func (p *SendMessageResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *SendMessageResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -1518,6 +1672,16 @@ func (p *kClient) AddUserAuth(ctx context.Context, Req *sts.AddUserAuthReq) (r *
 	_args.Req = Req
 	var _result AddUserAuthResult
 	if err = p.c.Call(ctx, "AddUserAuth", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) SendMessage(ctx context.Context, Req *sts.SendMessageReq) (r *sts.SendMessageResp, err error) {
+	var _args SendMessageArgs
+	_args.Req = Req
+	var _result SendMessageResult
+	if err = p.c.Call(ctx, "SendMessage", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
