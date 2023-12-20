@@ -21,32 +21,33 @@ func NewServiceInfo() *kitex.ServiceInfo {
 	serviceName := "system"
 	handlerType := (*core_api.System)(nil)
 	methods := map[string]kitex.MethodInfo{
-		"GetAdmins":            kitex.NewMethodInfo(getAdminsHandler, newGetAdminsArgs, newGetAdminsResult, false),
-		"NewAdmin":             kitex.NewMethodInfo(newAdminHandler, newNewAdminArgs, newNewAdminResult, false),
-		"DeleteAdmin":          kitex.NewMethodInfo(deleteAdminHandler, newDeleteAdminArgs, newDeleteAdminResult, false),
-		"GetNews":              kitex.NewMethodInfo(getNewsHandler, newGetNewsArgs, newGetNewsResult, false),
-		"NewNews":              kitex.NewMethodInfo(newNewsHandler, newNewNewsArgs, newNewNewsResult, false),
-		"DeleteNews":           kitex.NewMethodInfo(deleteNewsHandler, newDeleteNewsArgs, newDeleteNewsResult, false),
-		"GetNotices":           kitex.NewMethodInfo(getNoticesHandler, newGetNoticesArgs, newGetNoticesResult, false),
-		"NewNotice":            kitex.NewMethodInfo(newNoticeHandler, newNewNoticeArgs, newNewNoticeResult, false),
-		"DeleteNotice":         kitex.NewMethodInfo(deleteNoticeHandler, newDeleteNoticeArgs, newDeleteNoticeResult, false),
-		"ListCommunity":        kitex.NewMethodInfo(listCommunityHandler, newListCommunityArgs, newListCommunityResult, false),
-		"NewCommunity":         kitex.NewMethodInfo(newCommunityHandler, newNewCommunityArgs, newNewCommunityResult, false),
-		"DeleteCommunity":      kitex.NewMethodInfo(deleteCommunityHandler, newDeleteCommunityArgs, newDeleteCommunityResult, false),
-		"GetUserRoles":         kitex.NewMethodInfo(getUserRolesHandler, newGetUserRolesArgs, newGetUserRolesResult, false),
-		"UpdateCommunityAdmin": kitex.NewMethodInfo(updateCommunityAdminHandler, newUpdateCommunityAdminArgs, newUpdateCommunityAdminResult, false),
-		"UpdateSuperAdmin":     kitex.NewMethodInfo(updateSuperAdminHandler, newUpdateSuperAdminArgs, newUpdateSuperAdminResult, false),
-		"GetUserByRole":        kitex.NewMethodInfo(getUserByRoleHandler, newGetUserByRoleArgs, newGetUserByRoleResult, false),
-		"UpdateRole":           kitex.NewMethodInfo(updateRoleHandler, newUpdateRoleArgs, newUpdateRoleResult, false),
-		"ListApply":            kitex.NewMethodInfo(listApplyHandler, newListApplyArgs, newListApplyResult, false),
-		"HandleApply":          kitex.NewMethodInfo(handleApplyHandler, newHandleApplyArgs, newHandleApplyResult, false),
-		"CreateApply":          kitex.NewMethodInfo(createApplyHandler, newCreateApplyArgs, newCreateApplyResult, false),
-		"ListNotification":     kitex.NewMethodInfo(listNotificationHandler, newListNotificationArgs, newListNotificationResult, false),
-		"CleanNotification":    kitex.NewMethodInfo(cleanNotificationHandler, newCleanNotificationArgs, newCleanNotificationResult, false),
-		"CountNotification":    kitex.NewMethodInfo(countNotificationHandler, newCountNotificationArgs, newCountNotificationResult, false),
-		"ReadNotification":     kitex.NewMethodInfo(readNotificationHandler, newReadNotificationArgs, newReadNotificationResult, false),
-		"Prefetch":             kitex.NewMethodInfo(prefetchHandler, newPrefetchArgs, newPrefetchResult, false),
-		"GetMinVersion":        kitex.NewMethodInfo(getMinVersionHandler, newGetMinVersionArgs, newGetMinVersionResult, false),
+		"GetAdmins":             kitex.NewMethodInfo(getAdminsHandler, newGetAdminsArgs, newGetAdminsResult, false),
+		"NewAdmin":              kitex.NewMethodInfo(newAdminHandler, newNewAdminArgs, newNewAdminResult, false),
+		"DeleteAdmin":           kitex.NewMethodInfo(deleteAdminHandler, newDeleteAdminArgs, newDeleteAdminResult, false),
+		"GetNews":               kitex.NewMethodInfo(getNewsHandler, newGetNewsArgs, newGetNewsResult, false),
+		"NewNews":               kitex.NewMethodInfo(newNewsHandler, newNewNewsArgs, newNewNewsResult, false),
+		"DeleteNews":            kitex.NewMethodInfo(deleteNewsHandler, newDeleteNewsArgs, newDeleteNewsResult, false),
+		"GetNotices":            kitex.NewMethodInfo(getNoticesHandler, newGetNoticesArgs, newGetNoticesResult, false),
+		"NewNotice":             kitex.NewMethodInfo(newNoticeHandler, newNewNoticeArgs, newNewNoticeResult, false),
+		"DeleteNotice":          kitex.NewMethodInfo(deleteNoticeHandler, newDeleteNoticeArgs, newDeleteNoticeResult, false),
+		"ListCommunity":         kitex.NewMethodInfo(listCommunityHandler, newListCommunityArgs, newListCommunityResult, false),
+		"NewCommunity":          kitex.NewMethodInfo(newCommunityHandler, newNewCommunityArgs, newNewCommunityResult, false),
+		"DeleteCommunity":       kitex.NewMethodInfo(deleteCommunityHandler, newDeleteCommunityArgs, newDeleteCommunityResult, false),
+		"GetUserRoles":          kitex.NewMethodInfo(getUserRolesHandler, newGetUserRolesArgs, newGetUserRolesResult, false),
+		"UpdateCommunityAdmin":  kitex.NewMethodInfo(updateCommunityAdminHandler, newUpdateCommunityAdminArgs, newUpdateCommunityAdminResult, false),
+		"UpdateSuperAdmin":      kitex.NewMethodInfo(updateSuperAdminHandler, newUpdateSuperAdminArgs, newUpdateSuperAdminResult, false),
+		"GetUserByRole":         kitex.NewMethodInfo(getUserByRoleHandler, newGetUserByRoleArgs, newGetUserByRoleResult, false),
+		"UpdateRole":            kitex.NewMethodInfo(updateRoleHandler, newUpdateRoleArgs, newUpdateRoleResult, false),
+		"ListApply":             kitex.NewMethodInfo(listApplyHandler, newListApplyArgs, newListApplyResult, false),
+		"HandleApply":           kitex.NewMethodInfo(handleApplyHandler, newHandleApplyArgs, newHandleApplyResult, false),
+		"CreateApply":           kitex.NewMethodInfo(createApplyHandler, newCreateApplyArgs, newCreateApplyResult, false),
+		"ListNotification":      kitex.NewMethodInfo(listNotificationHandler, newListNotificationArgs, newListNotificationResult, false),
+		"CleanNotification":     kitex.NewMethodInfo(cleanNotificationHandler, newCleanNotificationArgs, newCleanNotificationResult, false),
+		"CountNotification":     kitex.NewMethodInfo(countNotificationHandler, newCountNotificationArgs, newCountNotificationResult, false),
+		"ReadNotification":      kitex.NewMethodInfo(readNotificationHandler, newReadNotificationArgs, newReadNotificationResult, false),
+		"ReadRangeNotification": kitex.NewMethodInfo(readRangeNotificationHandler, newReadRangeNotificationArgs, newReadRangeNotificationResult, false),
+		"Prefetch":              kitex.NewMethodInfo(prefetchHandler, newPrefetchArgs, newPrefetchResult, false),
+		"GetMinVersion":         kitex.NewMethodInfo(getMinVersionHandler, newGetMinVersionArgs, newGetMinVersionResult, false),
 	}
 	extra := map[string]interface{}{
 		"PackageName":     "meowchat.core_api",
@@ -3735,6 +3736,159 @@ func (p *ReadNotificationResult) GetResult() interface{} {
 	return p.Success
 }
 
+func readRangeNotificationHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.ReadRangeNotificationReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.System).ReadRangeNotification(ctx, req)
+		if err != nil {
+			return err
+		}
+		if err := st.SendMsg(resp); err != nil {
+			return err
+		}
+	case *ReadRangeNotificationArgs:
+		success, err := handler.(core_api.System).ReadRangeNotification(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*ReadRangeNotificationResult)
+		realResult.Success = success
+	}
+	return nil
+}
+func newReadRangeNotificationArgs() interface{} {
+	return &ReadRangeNotificationArgs{}
+}
+
+func newReadRangeNotificationResult() interface{} {
+	return &ReadRangeNotificationResult{}
+}
+
+type ReadRangeNotificationArgs struct {
+	Req *core_api.ReadRangeNotificationReq
+}
+
+func (p *ReadRangeNotificationArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.ReadRangeNotificationReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *ReadRangeNotificationArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *ReadRangeNotificationArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *ReadRangeNotificationArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *ReadRangeNotificationArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.ReadRangeNotificationReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var ReadRangeNotificationArgs_Req_DEFAULT *core_api.ReadRangeNotificationReq
+
+func (p *ReadRangeNotificationArgs) GetReq() *core_api.ReadRangeNotificationReq {
+	if !p.IsSetReq() {
+		return ReadRangeNotificationArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *ReadRangeNotificationArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *ReadRangeNotificationArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type ReadRangeNotificationResult struct {
+	Success *core_api.ReadRangeNotificationResp
+}
+
+var ReadRangeNotificationResult_Success_DEFAULT *core_api.ReadRangeNotificationResp
+
+func (p *ReadRangeNotificationResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.ReadRangeNotificationResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *ReadRangeNotificationResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *ReadRangeNotificationResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *ReadRangeNotificationResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *ReadRangeNotificationResult) Unmarshal(in []byte) error {
+	msg := new(core_api.ReadRangeNotificationResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *ReadRangeNotificationResult) GetSuccess() *core_api.ReadRangeNotificationResp {
+	if !p.IsSetSuccess() {
+		return ReadRangeNotificationResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *ReadRangeNotificationResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.ReadRangeNotificationResp)
+}
+
+func (p *ReadRangeNotificationResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *ReadRangeNotificationResult) GetResult() interface{} {
+	return p.Success
+}
+
 func prefetchHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -4286,6 +4440,16 @@ func (p *kClient) ReadNotification(ctx context.Context, Req *core_api.ReadNotifi
 	_args.Req = Req
 	var _result ReadNotificationResult
 	if err = p.c.Call(ctx, "ReadNotification", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) ReadRangeNotification(ctx context.Context, Req *core_api.ReadRangeNotificationReq) (r *core_api.ReadRangeNotificationResp, err error) {
+	var _args ReadRangeNotificationArgs
+	_args.Req = Req
+	var _result ReadRangeNotificationResult
+	if err = p.c.Call(ctx, "ReadRangeNotification", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
