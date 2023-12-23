@@ -154,6 +154,11 @@ func (x *NewCommentReq) FastRead(buf []byte, _type int8, number int32) (offset i
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 5:
+		offset, err = x.fastReadField5(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -192,6 +197,12 @@ func (x *NewCommentReq) fastReadField4(buf []byte, _type int8) (offset int, err 
 	}
 	x.Type = comment.CommentType(v)
 	return offset, nil
+}
+
+func (x *NewCommentReq) fastReadField5(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.ReplyToUserId = &tmp
+	return offset, err
 }
 
 func (x *NewCommentResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -463,6 +474,7 @@ func (x *NewCommentReq) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
+	offset += x.fastWriteField5(buf[offset:])
 	return offset
 }
 
@@ -495,6 +507,14 @@ func (x *NewCommentReq) fastWriteField4(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt32(buf[offset:], 4, int32(x.GetType()))
+	return offset
+}
+
+func (x *NewCommentReq) fastWriteField5(buf []byte) (offset int) {
+	if x.ReplyToUserId == nil {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 5, x.GetReplyToUserId())
 	return offset
 }
 
@@ -712,6 +732,7 @@ func (x *NewCommentReq) Size() (n int) {
 	n += x.sizeField2()
 	n += x.sizeField3()
 	n += x.sizeField4()
+	n += x.sizeField5()
 	return n
 }
 
@@ -744,6 +765,14 @@ func (x *NewCommentReq) sizeField4() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt32(4, int32(x.GetType()))
+	return n
+}
+
+func (x *NewCommentReq) sizeField5() (n int) {
+	if x.ReplyToUserId == nil {
+		return n
+	}
+	n += fastpb.SizeString(5, x.GetReplyToUserId())
 	return n
 }
 
@@ -882,6 +911,7 @@ var fieldIDToName_NewCommentReq = map[int32]string{
 	2: "FirstLevelId",
 	3: "Text",
 	4: "Type",
+	5: "ReplyToUserId",
 }
 
 var fieldIDToName_NewCommentResp = map[int32]string{
