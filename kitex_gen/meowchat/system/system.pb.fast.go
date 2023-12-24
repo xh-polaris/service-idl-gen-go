@@ -1972,6 +1972,11 @@ func (x *ReadRangeNotificationReq) FastRead(buf []byte, _type int8, number int32
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 5:
+		offset, err = x.fastReadField5(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -2012,13 +2017,13 @@ func (x *ReadRangeNotificationReq) fastReadField3(buf []byte, _type int8) (offse
 }
 
 func (x *ReadRangeNotificationReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	var v basic.PaginationOptions
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.PaginationOptions = &v
-	return offset, nil
+	x.FirstId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *ReadRangeNotificationReq) fastReadField5(buf []byte, _type int8) (offset int, err error) {
+	x.LastId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
 }
 
 func (x *ReadRangeNotificationResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -3529,6 +3534,7 @@ func (x *ReadRangeNotificationReq) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
+	offset += x.fastWriteField5(buf[offset:])
 	return offset
 }
 
@@ -3557,10 +3563,18 @@ func (x *ReadRangeNotificationReq) fastWriteField3(buf []byte) (offset int) {
 }
 
 func (x *ReadRangeNotificationReq) fastWriteField4(buf []byte) (offset int) {
-	if x.PaginationOptions == nil {
+	if x.FirstId == "" {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 4, x.GetPaginationOptions())
+	offset += fastpb.WriteString(buf[offset:], 4, x.GetFirstId())
+	return offset
+}
+
+func (x *ReadRangeNotificationReq) fastWriteField5(buf []byte) (offset int) {
+	if x.LastId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 5, x.GetLastId())
 	return offset
 }
 
@@ -4995,6 +5009,7 @@ func (x *ReadRangeNotificationReq) Size() (n int) {
 	n += x.sizeField2()
 	n += x.sizeField3()
 	n += x.sizeField4()
+	n += x.sizeField5()
 	return n
 }
 
@@ -5023,10 +5038,18 @@ func (x *ReadRangeNotificationReq) sizeField3() (n int) {
 }
 
 func (x *ReadRangeNotificationReq) sizeField4() (n int) {
-	if x.PaginationOptions == nil {
+	if x.FirstId == "" {
 		return n
 	}
-	n += fastpb.SizeMessage(4, x.GetPaginationOptions())
+	n += fastpb.SizeString(4, x.GetFirstId())
+	return n
+}
+
+func (x *ReadRangeNotificationReq) sizeField5() (n int) {
+	if x.LastId == "" {
+		return n
+	}
+	n += fastpb.SizeString(5, x.GetLastId())
 	return n
 }
 
@@ -5404,7 +5427,8 @@ var fieldIDToName_ReadRangeNotificationReq = map[int32]string{
 	1: "UserId",
 	2: "Type",
 	3: "TargetType",
-	4: "PaginationOptions",
+	4: "FirstId",
+	5: "LastId",
 }
 
 var fieldIDToName_ReadRangeNotificationResp = map[int32]string{
