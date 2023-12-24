@@ -2177,6 +2177,16 @@ func (x *CountNotificationReq) FastRead(buf []byte, _type int8, number int32) (o
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -2193,6 +2203,26 @@ ReadFieldError:
 func (x *CountNotificationReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.UserId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
+}
+
+func (x *CountNotificationReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	var v int32
+	v, offset, err = fastpb.ReadInt32(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.Type = NotificationType(v).Enum()
+	return offset, nil
+}
+
+func (x *CountNotificationReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	var v int32
+	v, offset, err = fastpb.ReadInt32(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.TargetType = NotificationTargetType(v).Enum()
+	return offset, nil
 }
 
 func (x *CountNotificationResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -3668,6 +3698,8 @@ func (x *CountNotificationReq) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
@@ -3676,6 +3708,22 @@ func (x *CountNotificationReq) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
+	return offset
+}
+
+func (x *CountNotificationReq) fastWriteField2(buf []byte) (offset int) {
+	if x.Type == nil {
+		return offset
+	}
+	offset += fastpb.WriteInt32(buf[offset:], 2, int32(x.GetType()))
+	return offset
+}
+
+func (x *CountNotificationReq) fastWriteField3(buf []byte) (offset int) {
+	if x.TargetType == nil {
+		return offset
+	}
+	offset += fastpb.WriteInt32(buf[offset:], 3, int32(x.GetTargetType()))
 	return offset
 }
 
@@ -5143,6 +5191,8 @@ func (x *CountNotificationReq) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
+	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
@@ -5151,6 +5201,22 @@ func (x *CountNotificationReq) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(1, x.GetUserId())
+	return n
+}
+
+func (x *CountNotificationReq) sizeField2() (n int) {
+	if x.Type == nil {
+		return n
+	}
+	n += fastpb.SizeInt32(2, int32(x.GetType()))
+	return n
+}
+
+func (x *CountNotificationReq) sizeField3() (n int) {
+	if x.TargetType == nil {
+		return n
+	}
+	n += fastpb.SizeInt32(3, int32(x.GetTargetType()))
 	return n
 }
 
@@ -5455,6 +5521,8 @@ var fieldIDToName_ReadNotificationResp = map[int32]string{}
 
 var fieldIDToName_CountNotificationReq = map[int32]string{
 	1: "UserId",
+	2: "Type",
+	3: "TargetType",
 }
 
 var fieldIDToName_CountNotificationResp = map[int32]string{
