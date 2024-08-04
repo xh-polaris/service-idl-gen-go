@@ -41,7 +41,7 @@ jobs:
       - name: Install Protobuf Compiler
         run: |
           go install github.com/zeromicro/go-zero/tools/goctl@latest
-          go install github.com/cloudwego/kitex/tool/cmd/kitex@latest
+          go install github.com/cloudwego/kitex/tool/cmd/kitex@v0.6.1
           goctl env check --install --verbose --force
 
       - name: Update
