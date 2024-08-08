@@ -25,8 +25,8 @@ func (x *DoShareReq) FastRead(buf []byte, _type int8, number int32) (offset int,
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
+	case 254:
+		offset, err = x.fastReadField254(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -58,7 +58,7 @@ func (x *DoShareReq) fastReadField2(buf []byte, _type int8) (offset int, err err
 	return offset, nil
 }
 
-func (x *DoShareReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+func (x *DoShareReq) fastReadField254(buf []byte, _type int8) (offset int, err error) {
 	var v basic.UserMeta
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -70,6 +70,11 @@ func (x *DoShareReq) fastReadField3(buf []byte, _type int8) (offset int, err err
 
 func (x *DoShareResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -79,6 +84,13 @@ func (x *DoShareResp) FastRead(buf []byte, _type int8, number int32) (offset int
 	return offset, nil
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DoShareResp[number], err)
+}
+
+func (x *DoShareResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Done, offset, err = fastpb.ReadBool(buf, _type)
+	return offset, err
 }
 
 func (x *GetSharedCountReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -427,7 +439,7 @@ func (x *DoShareReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField254(buf[offset:])
 	return offset
 }
 
@@ -447,11 +459,11 @@ func (x *DoShareReq) fastWriteField2(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *DoShareReq) fastWriteField3(buf []byte) (offset int) {
+func (x *DoShareReq) fastWriteField254(buf []byte) (offset int) {
 	if x.User == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetUser())
+	offset += fastpb.WriteMessage(buf[offset:], 254, x.GetUser())
 	return offset
 }
 
@@ -459,6 +471,15 @@ func (x *DoShareResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *DoShareResp) fastWriteField1(buf []byte) (offset int) {
+	if !x.Done {
+		return offset
+	}
+	offset += fastpb.WriteBool(buf[offset:], 1, x.GetDone())
 	return offset
 }
 
@@ -681,7 +702,7 @@ func (x *DoShareReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField3()
+	n += x.sizeField254()
 	return n
 }
 
@@ -701,11 +722,11 @@ func (x *DoShareReq) sizeField2() (n int) {
 	return n
 }
 
-func (x *DoShareReq) sizeField3() (n int) {
+func (x *DoShareReq) sizeField254() (n int) {
 	if x.User == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(3, x.GetUser())
+	n += fastpb.SizeMessage(254, x.GetUser())
 	return n
 }
 
@@ -713,6 +734,15 @@ func (x *DoShareResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *DoShareResp) sizeField1() (n int) {
+	if !x.Done {
+		return n
+	}
+	n += fastpb.SizeBool(1, x.GetDone())
 	return n
 }
 
@@ -930,12 +960,14 @@ func (x *GetSharedResp) sizeField1() (n int) {
 }
 
 var fieldIDToName_DoShareReq = map[int32]string{
-	1: "TargetId",
-	2: "TargetType",
-	3: "User",
+	1:   "TargetId",
+	2:   "TargetType",
+	254: "User",
 }
 
-var fieldIDToName_DoShareResp = map[int32]string{}
+var fieldIDToName_DoShareResp = map[int32]string{
+	1: "Done",
+}
 
 var fieldIDToName_GetSharedCountReq = map[int32]string{
 	1: "TargetId",
