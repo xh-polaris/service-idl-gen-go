@@ -55,6 +55,7 @@ jobs:
         run: |
           git config --global user.email "bot@xhpolaris.com"
           git config --global user.name "${{ github.actor }}"
+          git pull
           git add kitex_gen
           git commit -m "${{ github.event.client_payload.commit_msg }}"
           git push origin ${{ github.event.client_payload.ref }}
