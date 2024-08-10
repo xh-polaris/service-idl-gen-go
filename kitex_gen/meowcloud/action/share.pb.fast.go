@@ -227,7 +227,7 @@ ReadFieldError:
 }
 
 func (x *GetSharedUsersResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v action_Share
+	var v Action_Share
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -327,7 +327,7 @@ ReadFieldError:
 }
 
 func (x *GetUserSharedResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v action_Share
+	var v Action_Share
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err

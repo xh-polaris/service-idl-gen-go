@@ -295,7 +295,7 @@ ReadFieldError:
 }
 
 func (x *GetFollowedUsersResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v action_Follow
+	var v Action_Follow
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
@@ -395,7 +395,7 @@ ReadFieldError:
 }
 
 func (x *GetUserFollowedResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v action_Follow
+	var v Action_Follow
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
