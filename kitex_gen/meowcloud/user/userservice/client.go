@@ -14,12 +14,6 @@ type Client interface {
 	GetUser(ctx context.Context, Req *user.GetUserReq, callOptions ...callopt.Option) (r *user.GetUserResp, err error)
 	GetUserDetail(ctx context.Context, Req *user.GetUserDetailReq, callOptions ...callopt.Option) (r *user.GetUserDetailResp, err error)
 	UpdateUser(ctx context.Context, Req *user.UpdateUserReq, callOptions ...callopt.Option) (r *user.UpdateUserResp, err error)
-	SearchUser(ctx context.Context, Req *user.SearchUserReq, callOptions ...callopt.Option) (r *user.SearchUserResp, err error)
-	DoLike(ctx context.Context, Req *user.DoLikeReq, callOptions ...callopt.Option) (r *user.DoLikeResp, err error)
-	GetUserLike(ctx context.Context, Req *user.GetUserLikedReq, callOptions ...callopt.Option) (r *user.GetUserLikedResp, err error)
-	GetTargetLikes(ctx context.Context, Req *user.GetTargetLikesReq, callOptions ...callopt.Option) (r *user.GetTargetLikesResp, err error)
-	GetUserLikes(ctx context.Context, Req *user.GetUserLikesReq, callOptions ...callopt.Option) (r *user.GetUserLikesResp, err error)
-	GetLikedUsers(ctx context.Context, Req *user.GetLikedUsersReq, callOptions ...callopt.Option) (r *user.GetLikedUsersResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -64,34 +58,4 @@ func (p *kUserServiceClient) GetUserDetail(ctx context.Context, Req *user.GetUse
 func (p *kUserServiceClient) UpdateUser(ctx context.Context, Req *user.UpdateUserReq, callOptions ...callopt.Option) (r *user.UpdateUserResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.UpdateUser(ctx, Req)
-}
-
-func (p *kUserServiceClient) SearchUser(ctx context.Context, Req *user.SearchUserReq, callOptions ...callopt.Option) (r *user.SearchUserResp, err error) {
-	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.SearchUser(ctx, Req)
-}
-
-func (p *kUserServiceClient) DoLike(ctx context.Context, Req *user.DoLikeReq, callOptions ...callopt.Option) (r *user.DoLikeResp, err error) {
-	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.DoLike(ctx, Req)
-}
-
-func (p *kUserServiceClient) GetUserLike(ctx context.Context, Req *user.GetUserLikedReq, callOptions ...callopt.Option) (r *user.GetUserLikedResp, err error) {
-	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.GetUserLike(ctx, Req)
-}
-
-func (p *kUserServiceClient) GetTargetLikes(ctx context.Context, Req *user.GetTargetLikesReq, callOptions ...callopt.Option) (r *user.GetTargetLikesResp, err error) {
-	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.GetTargetLikes(ctx, Req)
-}
-
-func (p *kUserServiceClient) GetUserLikes(ctx context.Context, Req *user.GetUserLikesReq, callOptions ...callopt.Option) (r *user.GetUserLikesResp, err error) {
-	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.GetUserLikes(ctx, Req)
-}
-
-func (p *kUserServiceClient) GetLikedUsers(ctx context.Context, Req *user.GetLikedUsersReq, callOptions ...callopt.Option) (r *user.GetLikedUsersResp, err error) {
-	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.GetLikedUsers(ctx, Req)
 }
