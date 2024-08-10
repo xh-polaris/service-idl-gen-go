@@ -118,8 +118,13 @@ func (x *CatAlbum) fastReadField4(buf []byte, _type int8) (offset int, err error
 }
 
 func (x *CatAlbum) fastReadField5(buf []byte, _type int8) (offset int, err error) {
-	x.Visibility, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
+	var v int32
+	v, offset, err = fastpb.ReadInt32(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.Visibility = AlbumVisibility(v)
+	return offset, nil
 }
 
 func (x *CatAlbum) fastReadField6(buf []byte, _type int8) (offset int, err error) {
@@ -521,10 +526,10 @@ func (x *CatAlbum) fastWriteField4(buf []byte) (offset int) {
 }
 
 func (x *CatAlbum) fastWriteField5(buf []byte) (offset int) {
-	if x.Visibility == "" {
+	if x.Visibility == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 5, x.GetVisibility())
+	offset += fastpb.WriteInt32(buf[offset:], 5, int32(x.GetVisibility()))
 	return offset
 }
 
@@ -900,10 +905,10 @@ func (x *CatAlbum) sizeField4() (n int) {
 }
 
 func (x *CatAlbum) sizeField5() (n int) {
-	if x.Visibility == "" {
+	if x.Visibility == 0 {
 		return n
 	}
-	n += fastpb.SizeString(5, x.GetVisibility())
+	n += fastpb.SizeInt32(5, int32(x.GetVisibility()))
 	return n
 }
 
