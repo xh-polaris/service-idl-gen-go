@@ -103,8 +103,13 @@ func (x *CatAlbum) fastReadField1(buf []byte, _type int8) (offset int, err error
 }
 
 func (x *CatAlbum) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.Type, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
+	var v int32
+	v, offset, err = fastpb.ReadInt32(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.Type = AlbumType(v)
+	return offset, nil
 }
 
 func (x *CatAlbum) fastReadField3(buf []byte, _type int8) (offset int, err error) {
@@ -502,10 +507,10 @@ func (x *CatAlbum) fastWriteField1(buf []byte) (offset int) {
 }
 
 func (x *CatAlbum) fastWriteField2(buf []byte) (offset int) {
-	if x.Type == "" {
+	if x.Type == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 2, x.GetType())
+	offset += fastpb.WriteInt32(buf[offset:], 2, int32(x.GetType()))
 	return offset
 }
 
@@ -881,10 +886,10 @@ func (x *CatAlbum) sizeField1() (n int) {
 }
 
 func (x *CatAlbum) sizeField2() (n int) {
-	if x.Type == "" {
+	if x.Type == 0 {
 		return n
 	}
-	n += fastpb.SizeString(2, x.GetType())
+	n += fastpb.SizeInt32(2, int32(x.GetType()))
 	return n
 }
 
