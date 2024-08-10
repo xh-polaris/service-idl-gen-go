@@ -59,7 +59,7 @@ ReadFieldError:
 }
 
 func (x *GetUserResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v User
+	var v UserPreview
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
