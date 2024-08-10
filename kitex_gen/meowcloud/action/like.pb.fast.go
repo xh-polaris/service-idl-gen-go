@@ -25,8 +25,8 @@ func (x *DoLikeReq) FastRead(buf []byte, _type int8, number int32) (offset int, 
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
+	case 254:
+		offset, err = x.fastReadField254(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -58,7 +58,7 @@ func (x *DoLikeReq) fastReadField2(buf []byte, _type int8) (offset int, err erro
 	return offset, nil
 }
 
-func (x *DoLikeReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+func (x *DoLikeReq) fastReadField254(buf []byte, _type int8) (offset int, err error) {
 	var v basic.UserMeta
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -93,8 +93,8 @@ func (x *CancelLikeReq) FastRead(buf []byte, _type int8, number int32) (offset i
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
+	case 254:
+		offset, err = x.fastReadField254(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -126,7 +126,7 @@ func (x *CancelLikeReq) fastReadField2(buf []byte, _type int8) (offset int, err 
 	return offset, nil
 }
 
-func (x *CancelLikeReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+func (x *CancelLikeReq) fastReadField254(buf []byte, _type int8) (offset int, err error) {
 	var v basic.UserMeta
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -321,8 +321,8 @@ func (x *GetUserLikedReq) FastRead(buf []byte, _type int8, number int32) (offset
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
+	case 254:
+		offset, err = x.fastReadField254(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -340,16 +340,6 @@ ReadFieldError:
 }
 
 func (x *GetUserLikedReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v basic.UserMeta
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.User = &v
-	return offset, nil
-}
-
-func (x *GetUserLikedReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	var v int32
 	v, offset, err = fastpb.ReadInt32(buf, _type)
 	if err != nil {
@@ -359,13 +349,23 @@ func (x *GetUserLikedReq) fastReadField2(buf []byte, _type int8) (offset int, er
 	return offset, nil
 }
 
-func (x *GetUserLikedReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+func (x *GetUserLikedReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	var v basic.PaginationOptions
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
 	}
 	x.PaginationOption = &v
+	return offset, nil
+}
+
+func (x *GetUserLikedReq) fastReadField254(buf []byte, _type int8) (offset int, err error) {
+	var v basic.UserMeta
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.User = &v
 	return offset, nil
 }
 
@@ -421,8 +421,8 @@ func (x *GetLikedReq) FastRead(buf []byte, _type int8, number int32) (offset int
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
+	case 254:
+		offset, err = x.fastReadField254(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -454,7 +454,7 @@ func (x *GetLikedReq) fastReadField2(buf []byte, _type int8) (offset int, err er
 	return offset, nil
 }
 
-func (x *GetLikedReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+func (x *GetLikedReq) fastReadField254(buf []byte, _type int8) (offset int, err error) {
 	var v basic.UserMeta
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -495,7 +495,7 @@ func (x *DoLikeReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField254(buf[offset:])
 	return offset
 }
 
@@ -515,11 +515,11 @@ func (x *DoLikeReq) fastWriteField2(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *DoLikeReq) fastWriteField3(buf []byte) (offset int) {
+func (x *DoLikeReq) fastWriteField254(buf []byte) (offset int) {
 	if x.User == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetUser())
+	offset += fastpb.WriteMessage(buf[offset:], 254, x.GetUser())
 	return offset
 }
 
@@ -536,7 +536,7 @@ func (x *CancelLikeReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField254(buf[offset:])
 	return offset
 }
 
@@ -556,11 +556,11 @@ func (x *CancelLikeReq) fastWriteField2(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *CancelLikeReq) fastWriteField3(buf []byte) (offset int) {
+func (x *CancelLikeReq) fastWriteField254(buf []byte) (offset int) {
 	if x.User == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetUser())
+	offset += fastpb.WriteMessage(buf[offset:], 254, x.GetUser())
 	return offset
 }
 
@@ -679,31 +679,31 @@ func (x *GetUserLikedReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField254(buf[offset:])
 	return offset
 }
 
 func (x *GetUserLikedReq) fastWriteField1(buf []byte) (offset int) {
-	if x.User == nil {
+	if x.TargetType == 0 {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetUser())
+	offset += fastpb.WriteInt32(buf[offset:], 1, int32(x.GetTargetType()))
 	return offset
 }
 
 func (x *GetUserLikedReq) fastWriteField2(buf []byte) (offset int) {
-	if x.TargetType == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt32(buf[offset:], 2, int32(x.GetTargetType()))
-	return offset
-}
-
-func (x *GetUserLikedReq) fastWriteField3(buf []byte) (offset int) {
 	if x.PaginationOption == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetPaginationOption())
+	offset += fastpb.WriteMessage(buf[offset:], 2, x.GetPaginationOption())
+	return offset
+}
+
+func (x *GetUserLikedReq) fastWriteField254(buf []byte) (offset int) {
+	if x.User == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 254, x.GetUser())
 	return offset
 }
 
@@ -740,7 +740,7 @@ func (x *GetLikedReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField254(buf[offset:])
 	return offset
 }
 
@@ -760,11 +760,11 @@ func (x *GetLikedReq) fastWriteField2(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *GetLikedReq) fastWriteField3(buf []byte) (offset int) {
+func (x *GetLikedReq) fastWriteField254(buf []byte) (offset int) {
 	if x.User == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetUser())
+	offset += fastpb.WriteMessage(buf[offset:], 254, x.GetUser())
 	return offset
 }
 
@@ -790,7 +790,7 @@ func (x *DoLikeReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField3()
+	n += x.sizeField254()
 	return n
 }
 
@@ -810,11 +810,11 @@ func (x *DoLikeReq) sizeField2() (n int) {
 	return n
 }
 
-func (x *DoLikeReq) sizeField3() (n int) {
+func (x *DoLikeReq) sizeField254() (n int) {
 	if x.User == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(3, x.GetUser())
+	n += fastpb.SizeMessage(254, x.GetUser())
 	return n
 }
 
@@ -831,7 +831,7 @@ func (x *CancelLikeReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField3()
+	n += x.sizeField254()
 	return n
 }
 
@@ -851,11 +851,11 @@ func (x *CancelLikeReq) sizeField2() (n int) {
 	return n
 }
 
-func (x *CancelLikeReq) sizeField3() (n int) {
+func (x *CancelLikeReq) sizeField254() (n int) {
 	if x.User == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(3, x.GetUser())
+	n += fastpb.SizeMessage(254, x.GetUser())
 	return n
 }
 
@@ -974,31 +974,31 @@ func (x *GetUserLikedReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField3()
+	n += x.sizeField254()
 	return n
 }
 
 func (x *GetUserLikedReq) sizeField1() (n int) {
-	if x.User == nil {
+	if x.TargetType == 0 {
 		return n
 	}
-	n += fastpb.SizeMessage(1, x.GetUser())
+	n += fastpb.SizeInt32(1, int32(x.GetTargetType()))
 	return n
 }
 
 func (x *GetUserLikedReq) sizeField2() (n int) {
-	if x.TargetType == 0 {
-		return n
-	}
-	n += fastpb.SizeInt32(2, int32(x.GetTargetType()))
-	return n
-}
-
-func (x *GetUserLikedReq) sizeField3() (n int) {
 	if x.PaginationOption == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(3, x.GetPaginationOption())
+	n += fastpb.SizeMessage(2, x.GetPaginationOption())
+	return n
+}
+
+func (x *GetUserLikedReq) sizeField254() (n int) {
+	if x.User == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(254, x.GetUser())
 	return n
 }
 
@@ -1035,7 +1035,7 @@ func (x *GetLikedReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField3()
+	n += x.sizeField254()
 	return n
 }
 
@@ -1055,11 +1055,11 @@ func (x *GetLikedReq) sizeField2() (n int) {
 	return n
 }
 
-func (x *GetLikedReq) sizeField3() (n int) {
+func (x *GetLikedReq) sizeField254() (n int) {
 	if x.User == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(3, x.GetUser())
+	n += fastpb.SizeMessage(254, x.GetUser())
 	return n
 }
 
@@ -1080,17 +1080,17 @@ func (x *GetLikedResp) sizeField1() (n int) {
 }
 
 var fieldIDToName_DoLikeReq = map[int32]string{
-	1: "TargetId",
-	2: "TargetType",
-	3: "User",
+	1:   "TargetId",
+	2:   "TargetType",
+	254: "User",
 }
 
 var fieldIDToName_DoLikeResp = map[int32]string{}
 
 var fieldIDToName_CancelLikeReq = map[int32]string{
-	1: "TargetId",
-	2: "TargetType",
-	3: "User",
+	1:   "TargetId",
+	2:   "TargetType",
+	254: "User",
 }
 
 var fieldIDToName_CancelLikeResp = map[int32]string{}
@@ -1116,9 +1116,9 @@ var fieldIDToName_GetLikedUsersResp = map[int32]string{
 }
 
 var fieldIDToName_GetUserLikedReq = map[int32]string{
-	1: "User",
-	2: "TargetType",
-	3: "PaginationOption",
+	1:   "TargetType",
+	2:   "PaginationOption",
+	254: "User",
 }
 
 var fieldIDToName_GetUserLikedResp = map[int32]string{
@@ -1127,9 +1127,9 @@ var fieldIDToName_GetUserLikedResp = map[int32]string{
 }
 
 var fieldIDToName_GetLikedReq = map[int32]string{
-	1: "TargetId",
-	2: "TargetType",
-	3: "User",
+	1:   "TargetId",
+	2:   "TargetType",
+	254: "User",
 }
 
 var fieldIDToName_GetLikedResp = map[int32]string{

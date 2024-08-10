@@ -25,8 +25,8 @@ func (x *DoFollowReq) FastRead(buf []byte, _type int8, number int32) (offset int
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
+	case 254:
+		offset, err = x.fastReadField254(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -58,7 +58,7 @@ func (x *DoFollowReq) fastReadField2(buf []byte, _type int8) (offset int, err er
 	return offset, nil
 }
 
-func (x *DoFollowReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+func (x *DoFollowReq) fastReadField254(buf []byte, _type int8) (offset int, err error) {
 	var v basic.UserMeta
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -93,8 +93,8 @@ func (x *CancelFollowReq) FastRead(buf []byte, _type int8, number int32) (offset
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
+	case 254:
+		offset, err = x.fastReadField254(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -126,7 +126,7 @@ func (x *CancelFollowReq) fastReadField2(buf []byte, _type int8) (offset int, er
 	return offset, nil
 }
 
-func (x *CancelFollowReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+func (x *CancelFollowReq) fastReadField254(buf []byte, _type int8) (offset int, err error) {
 	var v basic.UserMeta
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -321,8 +321,8 @@ func (x *GetUserFollowedReq) FastRead(buf []byte, _type int8, number int32) (off
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
+	case 254:
+		offset, err = x.fastReadField254(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -340,16 +340,6 @@ ReadFieldError:
 }
 
 func (x *GetUserFollowedReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v basic.UserMeta
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.User = &v
-	return offset, nil
-}
-
-func (x *GetUserFollowedReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	var v int32
 	v, offset, err = fastpb.ReadInt32(buf, _type)
 	if err != nil {
@@ -359,13 +349,23 @@ func (x *GetUserFollowedReq) fastReadField2(buf []byte, _type int8) (offset int,
 	return offset, nil
 }
 
-func (x *GetUserFollowedReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+func (x *GetUserFollowedReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	var v basic.PaginationOptions
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
 	}
 	x.PaginationOption = &v
+	return offset, nil
+}
+
+func (x *GetUserFollowedReq) fastReadField254(buf []byte, _type int8) (offset int, err error) {
+	var v basic.UserMeta
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.User = &v
 	return offset, nil
 }
 
@@ -421,8 +421,8 @@ func (x *GetFollowedReq) FastRead(buf []byte, _type int8, number int32) (offset 
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
+	case 254:
+		offset, err = x.fastReadField254(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -454,7 +454,7 @@ func (x *GetFollowedReq) fastReadField2(buf []byte, _type int8) (offset int, err
 	return offset, nil
 }
 
-func (x *GetFollowedReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+func (x *GetFollowedReq) fastReadField254(buf []byte, _type int8) (offset int, err error) {
 	var v basic.UserMeta
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -495,7 +495,7 @@ func (x *DoFollowReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField254(buf[offset:])
 	return offset
 }
 
@@ -515,11 +515,11 @@ func (x *DoFollowReq) fastWriteField2(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *DoFollowReq) fastWriteField3(buf []byte) (offset int) {
+func (x *DoFollowReq) fastWriteField254(buf []byte) (offset int) {
 	if x.User == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetUser())
+	offset += fastpb.WriteMessage(buf[offset:], 254, x.GetUser())
 	return offset
 }
 
@@ -536,7 +536,7 @@ func (x *CancelFollowReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField254(buf[offset:])
 	return offset
 }
 
@@ -556,11 +556,11 @@ func (x *CancelFollowReq) fastWriteField2(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *CancelFollowReq) fastWriteField3(buf []byte) (offset int) {
+func (x *CancelFollowReq) fastWriteField254(buf []byte) (offset int) {
 	if x.User == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetUser())
+	offset += fastpb.WriteMessage(buf[offset:], 254, x.GetUser())
 	return offset
 }
 
@@ -679,31 +679,31 @@ func (x *GetUserFollowedReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField254(buf[offset:])
 	return offset
 }
 
 func (x *GetUserFollowedReq) fastWriteField1(buf []byte) (offset int) {
-	if x.User == nil {
+	if x.TargetType == 0 {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetUser())
+	offset += fastpb.WriteInt32(buf[offset:], 1, int32(x.GetTargetType()))
 	return offset
 }
 
 func (x *GetUserFollowedReq) fastWriteField2(buf []byte) (offset int) {
-	if x.TargetType == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt32(buf[offset:], 2, int32(x.GetTargetType()))
-	return offset
-}
-
-func (x *GetUserFollowedReq) fastWriteField3(buf []byte) (offset int) {
 	if x.PaginationOption == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetPaginationOption())
+	offset += fastpb.WriteMessage(buf[offset:], 2, x.GetPaginationOption())
+	return offset
+}
+
+func (x *GetUserFollowedReq) fastWriteField254(buf []byte) (offset int) {
+	if x.User == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 254, x.GetUser())
 	return offset
 }
 
@@ -740,7 +740,7 @@ func (x *GetFollowedReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField254(buf[offset:])
 	return offset
 }
 
@@ -760,11 +760,11 @@ func (x *GetFollowedReq) fastWriteField2(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *GetFollowedReq) fastWriteField3(buf []byte) (offset int) {
+func (x *GetFollowedReq) fastWriteField254(buf []byte) (offset int) {
 	if x.User == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetUser())
+	offset += fastpb.WriteMessage(buf[offset:], 254, x.GetUser())
 	return offset
 }
 
@@ -790,7 +790,7 @@ func (x *DoFollowReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField3()
+	n += x.sizeField254()
 	return n
 }
 
@@ -810,11 +810,11 @@ func (x *DoFollowReq) sizeField2() (n int) {
 	return n
 }
 
-func (x *DoFollowReq) sizeField3() (n int) {
+func (x *DoFollowReq) sizeField254() (n int) {
 	if x.User == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(3, x.GetUser())
+	n += fastpb.SizeMessage(254, x.GetUser())
 	return n
 }
 
@@ -831,7 +831,7 @@ func (x *CancelFollowReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField3()
+	n += x.sizeField254()
 	return n
 }
 
@@ -851,11 +851,11 @@ func (x *CancelFollowReq) sizeField2() (n int) {
 	return n
 }
 
-func (x *CancelFollowReq) sizeField3() (n int) {
+func (x *CancelFollowReq) sizeField254() (n int) {
 	if x.User == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(3, x.GetUser())
+	n += fastpb.SizeMessage(254, x.GetUser())
 	return n
 }
 
@@ -974,31 +974,31 @@ func (x *GetUserFollowedReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField3()
+	n += x.sizeField254()
 	return n
 }
 
 func (x *GetUserFollowedReq) sizeField1() (n int) {
-	if x.User == nil {
+	if x.TargetType == 0 {
 		return n
 	}
-	n += fastpb.SizeMessage(1, x.GetUser())
+	n += fastpb.SizeInt32(1, int32(x.GetTargetType()))
 	return n
 }
 
 func (x *GetUserFollowedReq) sizeField2() (n int) {
-	if x.TargetType == 0 {
-		return n
-	}
-	n += fastpb.SizeInt32(2, int32(x.GetTargetType()))
-	return n
-}
-
-func (x *GetUserFollowedReq) sizeField3() (n int) {
 	if x.PaginationOption == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(3, x.GetPaginationOption())
+	n += fastpb.SizeMessage(2, x.GetPaginationOption())
+	return n
+}
+
+func (x *GetUserFollowedReq) sizeField254() (n int) {
+	if x.User == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(254, x.GetUser())
 	return n
 }
 
@@ -1035,7 +1035,7 @@ func (x *GetFollowedReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField3()
+	n += x.sizeField254()
 	return n
 }
 
@@ -1055,11 +1055,11 @@ func (x *GetFollowedReq) sizeField2() (n int) {
 	return n
 }
 
-func (x *GetFollowedReq) sizeField3() (n int) {
+func (x *GetFollowedReq) sizeField254() (n int) {
 	if x.User == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(3, x.GetUser())
+	n += fastpb.SizeMessage(254, x.GetUser())
 	return n
 }
 
@@ -1080,17 +1080,17 @@ func (x *GetFollowedResp) sizeField1() (n int) {
 }
 
 var fieldIDToName_DoFollowReq = map[int32]string{
-	1: "TargetId",
-	2: "TargetType",
-	3: "User",
+	1:   "TargetId",
+	2:   "TargetType",
+	254: "User",
 }
 
 var fieldIDToName_DoFollowResp = map[int32]string{}
 
 var fieldIDToName_CancelFollowReq = map[int32]string{
-	1: "TargetId",
-	2: "TargetType",
-	3: "User",
+	1:   "TargetId",
+	2:   "TargetType",
+	254: "User",
 }
 
 var fieldIDToName_CancelFollowResp = map[int32]string{}
@@ -1116,9 +1116,9 @@ var fieldIDToName_GetFollowedUsersResp = map[int32]string{
 }
 
 var fieldIDToName_GetUserFollowedReq = map[int32]string{
-	1: "User",
-	2: "TargetType",
-	3: "PaginationOption",
+	1:   "TargetType",
+	2:   "PaginationOption",
+	254: "User",
 }
 
 var fieldIDToName_GetUserFollowedResp = map[int32]string{
@@ -1127,9 +1127,9 @@ var fieldIDToName_GetUserFollowedResp = map[int32]string{
 }
 
 var fieldIDToName_GetFollowedReq = map[int32]string{
-	1: "TargetId",
-	2: "TargetType",
-	3: "User",
+	1:   "TargetId",
+	2:   "TargetType",
+	254: "User",
 }
 
 var fieldIDToName_GetFollowedResp = map[int32]string{

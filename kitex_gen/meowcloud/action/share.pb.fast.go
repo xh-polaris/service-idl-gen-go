@@ -25,8 +25,8 @@ func (x *DoShareReq) FastRead(buf []byte, _type int8, number int32) (offset int,
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
+	case 254:
+		offset, err = x.fastReadField254(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -58,7 +58,7 @@ func (x *DoShareReq) fastReadField2(buf []byte, _type int8) (offset int, err err
 	return offset, nil
 }
 
-func (x *DoShareReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+func (x *DoShareReq) fastReadField254(buf []byte, _type int8) (offset int, err error) {
 	var v basic.UserMeta
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -253,8 +253,8 @@ func (x *GetUserSharedReq) FastRead(buf []byte, _type int8, number int32) (offse
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
+	case 254:
+		offset, err = x.fastReadField254(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -272,16 +272,6 @@ ReadFieldError:
 }
 
 func (x *GetUserSharedReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v basic.UserMeta
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.User = &v
-	return offset, nil
-}
-
-func (x *GetUserSharedReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	var v int32
 	v, offset, err = fastpb.ReadInt32(buf, _type)
 	if err != nil {
@@ -291,13 +281,23 @@ func (x *GetUserSharedReq) fastReadField2(buf []byte, _type int8) (offset int, e
 	return offset, nil
 }
 
-func (x *GetUserSharedReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+func (x *GetUserSharedReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	var v basic.PaginationOptions
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
 	}
 	x.PaginationOption = &v
+	return offset, nil
+}
+
+func (x *GetUserSharedReq) fastReadField254(buf []byte, _type int8) (offset int, err error) {
+	var v basic.UserMeta
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.User = &v
 	return offset, nil
 }
 
@@ -353,8 +353,8 @@ func (x *GetSharedReq) FastRead(buf []byte, _type int8, number int32) (offset in
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
+	case 254:
+		offset, err = x.fastReadField254(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -386,7 +386,7 @@ func (x *GetSharedReq) fastReadField2(buf []byte, _type int8) (offset int, err e
 	return offset, nil
 }
 
-func (x *GetSharedReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+func (x *GetSharedReq) fastReadField254(buf []byte, _type int8) (offset int, err error) {
 	var v basic.UserMeta
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
@@ -427,7 +427,7 @@ func (x *DoShareReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField254(buf[offset:])
 	return offset
 }
 
@@ -447,11 +447,11 @@ func (x *DoShareReq) fastWriteField2(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *DoShareReq) fastWriteField3(buf []byte) (offset int) {
+func (x *DoShareReq) fastWriteField254(buf []byte) (offset int) {
 	if x.User == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetUser())
+	offset += fastpb.WriteMessage(buf[offset:], 254, x.GetUser())
 	return offset
 }
 
@@ -570,31 +570,31 @@ func (x *GetUserSharedReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField254(buf[offset:])
 	return offset
 }
 
 func (x *GetUserSharedReq) fastWriteField1(buf []byte) (offset int) {
-	if x.User == nil {
+	if x.TargetType == 0 {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetUser())
+	offset += fastpb.WriteInt32(buf[offset:], 1, int32(x.GetTargetType()))
 	return offset
 }
 
 func (x *GetUserSharedReq) fastWriteField2(buf []byte) (offset int) {
-	if x.TargetType == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt32(buf[offset:], 2, int32(x.GetTargetType()))
-	return offset
-}
-
-func (x *GetUserSharedReq) fastWriteField3(buf []byte) (offset int) {
 	if x.PaginationOption == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetPaginationOption())
+	offset += fastpb.WriteMessage(buf[offset:], 2, x.GetPaginationOption())
+	return offset
+}
+
+func (x *GetUserSharedReq) fastWriteField254(buf []byte) (offset int) {
+	if x.User == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 254, x.GetUser())
 	return offset
 }
 
@@ -631,7 +631,7 @@ func (x *GetSharedReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField254(buf[offset:])
 	return offset
 }
 
@@ -651,11 +651,11 @@ func (x *GetSharedReq) fastWriteField2(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *GetSharedReq) fastWriteField3(buf []byte) (offset int) {
+func (x *GetSharedReq) fastWriteField254(buf []byte) (offset int) {
 	if x.User == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 3, x.GetUser())
+	offset += fastpb.WriteMessage(buf[offset:], 254, x.GetUser())
 	return offset
 }
 
@@ -681,7 +681,7 @@ func (x *DoShareReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField3()
+	n += x.sizeField254()
 	return n
 }
 
@@ -701,11 +701,11 @@ func (x *DoShareReq) sizeField2() (n int) {
 	return n
 }
 
-func (x *DoShareReq) sizeField3() (n int) {
+func (x *DoShareReq) sizeField254() (n int) {
 	if x.User == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(3, x.GetUser())
+	n += fastpb.SizeMessage(254, x.GetUser())
 	return n
 }
 
@@ -824,31 +824,31 @@ func (x *GetUserSharedReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField3()
+	n += x.sizeField254()
 	return n
 }
 
 func (x *GetUserSharedReq) sizeField1() (n int) {
-	if x.User == nil {
+	if x.TargetType == 0 {
 		return n
 	}
-	n += fastpb.SizeMessage(1, x.GetUser())
+	n += fastpb.SizeInt32(1, int32(x.GetTargetType()))
 	return n
 }
 
 func (x *GetUserSharedReq) sizeField2() (n int) {
-	if x.TargetType == 0 {
-		return n
-	}
-	n += fastpb.SizeInt32(2, int32(x.GetTargetType()))
-	return n
-}
-
-func (x *GetUserSharedReq) sizeField3() (n int) {
 	if x.PaginationOption == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(3, x.GetPaginationOption())
+	n += fastpb.SizeMessage(2, x.GetPaginationOption())
+	return n
+}
+
+func (x *GetUserSharedReq) sizeField254() (n int) {
+	if x.User == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(254, x.GetUser())
 	return n
 }
 
@@ -885,7 +885,7 @@ func (x *GetSharedReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField3()
+	n += x.sizeField254()
 	return n
 }
 
@@ -905,11 +905,11 @@ func (x *GetSharedReq) sizeField2() (n int) {
 	return n
 }
 
-func (x *GetSharedReq) sizeField3() (n int) {
+func (x *GetSharedReq) sizeField254() (n int) {
 	if x.User == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(3, x.GetUser())
+	n += fastpb.SizeMessage(254, x.GetUser())
 	return n
 }
 
@@ -930,9 +930,9 @@ func (x *GetSharedResp) sizeField1() (n int) {
 }
 
 var fieldIDToName_DoShareReq = map[int32]string{
-	1: "TargetId",
-	2: "TargetType",
-	3: "User",
+	1:   "TargetId",
+	2:   "TargetType",
+	254: "User",
 }
 
 var fieldIDToName_DoShareResp = map[int32]string{}
@@ -958,9 +958,9 @@ var fieldIDToName_GetSharedUsersResp = map[int32]string{
 }
 
 var fieldIDToName_GetUserSharedReq = map[int32]string{
-	1: "User",
-	2: "TargetType",
-	3: "PaginationOption",
+	1:   "TargetType",
+	2:   "PaginationOption",
+	254: "User",
 }
 
 var fieldIDToName_GetUserSharedResp = map[int32]string{
@@ -969,9 +969,9 @@ var fieldIDToName_GetUserSharedResp = map[int32]string{
 }
 
 var fieldIDToName_GetSharedReq = map[int32]string{
-	1: "TargetId",
-	2: "TargetType",
-	3: "User",
+	1:   "TargetId",
+	2:   "TargetType",
+	254: "User",
 }
 
 var fieldIDToName_GetSharedResp = map[int32]string{
