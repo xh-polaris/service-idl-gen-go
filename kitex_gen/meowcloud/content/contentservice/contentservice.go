@@ -15,73 +15,38 @@ import (
 var errInvalidMessageType = errors.New("invalid message type for service method handler")
 
 var serviceMethods = map[string]kitex.MethodInfo{
-	"CreateCatAlbum": kitex.NewMethodInfo(
-		createCatAlbumHandler,
-		newCreateCatAlbumArgs,
-		newCreateCatAlbumResult,
+	"CreateAlbum": kitex.NewMethodInfo(
+		createAlbumHandler,
+		newCreateAlbumArgs,
+		newCreateAlbumResult,
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
-	"RetrieveCatAlbum": kitex.NewMethodInfo(
-		retrieveCatAlbumHandler,
-		newRetrieveCatAlbumArgs,
-		newRetrieveCatAlbumResult,
+	"RetrieveAlbum": kitex.NewMethodInfo(
+		retrieveAlbumHandler,
+		newRetrieveAlbumArgs,
+		newRetrieveAlbumResult,
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
-	"UpdateCatAlbum": kitex.NewMethodInfo(
-		updateCatAlbumHandler,
-		newUpdateCatAlbumArgs,
-		newUpdateCatAlbumResult,
+	"UpdateAlbum": kitex.NewMethodInfo(
+		updateAlbumHandler,
+		newUpdateAlbumArgs,
+		newUpdateAlbumResult,
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
-	"DeleteCatAlbum": kitex.NewMethodInfo(
-		deleteCatAlbumHandler,
-		newDeleteCatAlbumArgs,
-		newDeleteCatAlbumResult,
+	"DeleteAlbum": kitex.NewMethodInfo(
+		deleteAlbumHandler,
+		newDeleteAlbumArgs,
+		newDeleteAlbumResult,
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
-	"ListCatAlbum": kitex.NewMethodInfo(
-		listCatAlbumHandler,
-		newListCatAlbumArgs,
-		newListCatAlbumResult,
-		false,
-		kitex.WithStreamingMode(kitex.StreamingUnary),
-	),
-	"CreateLocationAlbum": kitex.NewMethodInfo(
-		createLocationAlbumHandler,
-		newCreateLocationAlbumArgs,
-		newCreateLocationAlbumResult,
-		false,
-		kitex.WithStreamingMode(kitex.StreamingUnary),
-	),
-	"RetrieveLocationAlbum": kitex.NewMethodInfo(
-		retrieveLocationAlbumHandler,
-		newRetrieveLocationAlbumArgs,
-		newRetrieveLocationAlbumResult,
-		false,
-		kitex.WithStreamingMode(kitex.StreamingUnary),
-	),
-	"UpdateLocationAlbum": kitex.NewMethodInfo(
-		updateLocationAlbumHandler,
-		newUpdateLocationAlbumArgs,
-		newUpdateLocationAlbumResult,
-		false,
-		kitex.WithStreamingMode(kitex.StreamingUnary),
-	),
-	"DeleteLocationAlbum": kitex.NewMethodInfo(
-		deleteLocationAlbumHandler,
-		newDeleteLocationAlbumArgs,
-		newDeleteLocationAlbumResult,
-		false,
-		kitex.WithStreamingMode(kitex.StreamingUnary),
-	),
-	"ListLocationAlbum": kitex.NewMethodInfo(
-		listLocationAlbumHandler,
-		newListLocationAlbumArgs,
-		newListLocationAlbumResult,
+	"ListAlbum": kitex.NewMethodInfo(
+		listAlbumHandler,
+		newListAlbumArgs,
+		newListAlbumResult,
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
@@ -117,13 +82,6 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		listPhotoHandler,
 		newListPhotoArgs,
 		newListPhotoResult,
-		false,
-		kitex.WithStreamingMode(kitex.StreamingUnary),
-	),
-	"ListFeaturedPhoto": kitex.NewMethodInfo(
-		listFeaturedPhotoHandler,
-		newListFeaturedPhotoArgs,
-		newListFeaturedPhotoResult,
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
@@ -193,73 +151,73 @@ func newServiceInfo(hasStreaming bool, keepStreamingMethods bool, keepNonStreami
 	return svcInfo
 }
 
-func createCatAlbumHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+func createAlbumHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(content.CreateCatAlbumReq)
+		req := new(content.CreateAlbumReq)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
-		resp, err := handler.(content.ContentService).CreateCatAlbum(ctx, req)
+		resp, err := handler.(content.ContentService).CreateAlbum(ctx, req)
 		if err != nil {
 			return err
 		}
 		return st.SendMsg(resp)
-	case *CreateCatAlbumArgs:
-		success, err := handler.(content.ContentService).CreateCatAlbum(ctx, s.Req)
+	case *CreateAlbumArgs:
+		success, err := handler.(content.ContentService).CreateAlbum(ctx, s.Req)
 		if err != nil {
 			return err
 		}
-		realResult := result.(*CreateCatAlbumResult)
+		realResult := result.(*CreateAlbumResult)
 		realResult.Success = success
 		return nil
 	default:
 		return errInvalidMessageType
 	}
 }
-func newCreateCatAlbumArgs() interface{} {
-	return &CreateCatAlbumArgs{}
+func newCreateAlbumArgs() interface{} {
+	return &CreateAlbumArgs{}
 }
 
-func newCreateCatAlbumResult() interface{} {
-	return &CreateCatAlbumResult{}
+func newCreateAlbumResult() interface{} {
+	return &CreateAlbumResult{}
 }
 
-type CreateCatAlbumArgs struct {
-	Req *content.CreateCatAlbumReq
+type CreateAlbumArgs struct {
+	Req *content.CreateAlbumReq
 }
 
-func (p *CreateCatAlbumArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *CreateAlbumArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(content.CreateCatAlbumReq)
+		p.Req = new(content.CreateAlbumReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
 
-func (p *CreateCatAlbumArgs) FastWrite(buf []byte) (n int) {
+func (p *CreateAlbumArgs) FastWrite(buf []byte) (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.FastWrite(buf)
 }
 
-func (p *CreateCatAlbumArgs) Size() (n int) {
+func (p *CreateAlbumArgs) Size() (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.Size()
 }
 
-func (p *CreateCatAlbumArgs) Marshal(out []byte) ([]byte, error) {
+func (p *CreateAlbumArgs) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetReq() {
 		return out, nil
 	}
 	return proto.Marshal(p.Req)
 }
 
-func (p *CreateCatAlbumArgs) Unmarshal(in []byte) error {
-	msg := new(content.CreateCatAlbumReq)
+func (p *CreateAlbumArgs) Unmarshal(in []byte) error {
+	msg := new(content.CreateAlbumReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -267,59 +225,59 @@ func (p *CreateCatAlbumArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var CreateCatAlbumArgs_Req_DEFAULT *content.CreateCatAlbumReq
+var CreateAlbumArgs_Req_DEFAULT *content.CreateAlbumReq
 
-func (p *CreateCatAlbumArgs) GetReq() *content.CreateCatAlbumReq {
+func (p *CreateAlbumArgs) GetReq() *content.CreateAlbumReq {
 	if !p.IsSetReq() {
-		return CreateCatAlbumArgs_Req_DEFAULT
+		return CreateAlbumArgs_Req_DEFAULT
 	}
 	return p.Req
 }
 
-func (p *CreateCatAlbumArgs) IsSetReq() bool {
+func (p *CreateAlbumArgs) IsSetReq() bool {
 	return p.Req != nil
 }
 
-func (p *CreateCatAlbumArgs) GetFirstArgument() interface{} {
+func (p *CreateAlbumArgs) GetFirstArgument() interface{} {
 	return p.Req
 }
 
-type CreateCatAlbumResult struct {
-	Success *content.CreateCatAlbumResp
+type CreateAlbumResult struct {
+	Success *content.CreateAlbumResp
 }
 
-var CreateCatAlbumResult_Success_DEFAULT *content.CreateCatAlbumResp
+var CreateAlbumResult_Success_DEFAULT *content.CreateAlbumResp
 
-func (p *CreateCatAlbumResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *CreateAlbumResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(content.CreateCatAlbumResp)
+		p.Success = new(content.CreateAlbumResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
 
-func (p *CreateCatAlbumResult) FastWrite(buf []byte) (n int) {
+func (p *CreateAlbumResult) FastWrite(buf []byte) (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.FastWrite(buf)
 }
 
-func (p *CreateCatAlbumResult) Size() (n int) {
+func (p *CreateAlbumResult) Size() (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.Size()
 }
 
-func (p *CreateCatAlbumResult) Marshal(out []byte) ([]byte, error) {
+func (p *CreateAlbumResult) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetSuccess() {
 		return out, nil
 	}
 	return proto.Marshal(p.Success)
 }
 
-func (p *CreateCatAlbumResult) Unmarshal(in []byte) error {
-	msg := new(content.CreateCatAlbumResp)
+func (p *CreateAlbumResult) Unmarshal(in []byte) error {
+	msg := new(content.CreateAlbumResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -327,92 +285,92 @@ func (p *CreateCatAlbumResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *CreateCatAlbumResult) GetSuccess() *content.CreateCatAlbumResp {
+func (p *CreateAlbumResult) GetSuccess() *content.CreateAlbumResp {
 	if !p.IsSetSuccess() {
-		return CreateCatAlbumResult_Success_DEFAULT
+		return CreateAlbumResult_Success_DEFAULT
 	}
 	return p.Success
 }
 
-func (p *CreateCatAlbumResult) SetSuccess(x interface{}) {
-	p.Success = x.(*content.CreateCatAlbumResp)
+func (p *CreateAlbumResult) SetSuccess(x interface{}) {
+	p.Success = x.(*content.CreateAlbumResp)
 }
 
-func (p *CreateCatAlbumResult) IsSetSuccess() bool {
+func (p *CreateAlbumResult) IsSetSuccess() bool {
 	return p.Success != nil
 }
 
-func (p *CreateCatAlbumResult) GetResult() interface{} {
+func (p *CreateAlbumResult) GetResult() interface{} {
 	return p.Success
 }
 
-func retrieveCatAlbumHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+func retrieveAlbumHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(content.RetrieveCatAlbumReq)
+		req := new(content.RetrieveAlbumReq)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
-		resp, err := handler.(content.ContentService).RetrieveCatAlbum(ctx, req)
+		resp, err := handler.(content.ContentService).RetrieveAlbum(ctx, req)
 		if err != nil {
 			return err
 		}
 		return st.SendMsg(resp)
-	case *RetrieveCatAlbumArgs:
-		success, err := handler.(content.ContentService).RetrieveCatAlbum(ctx, s.Req)
+	case *RetrieveAlbumArgs:
+		success, err := handler.(content.ContentService).RetrieveAlbum(ctx, s.Req)
 		if err != nil {
 			return err
 		}
-		realResult := result.(*RetrieveCatAlbumResult)
+		realResult := result.(*RetrieveAlbumResult)
 		realResult.Success = success
 		return nil
 	default:
 		return errInvalidMessageType
 	}
 }
-func newRetrieveCatAlbumArgs() interface{} {
-	return &RetrieveCatAlbumArgs{}
+func newRetrieveAlbumArgs() interface{} {
+	return &RetrieveAlbumArgs{}
 }
 
-func newRetrieveCatAlbumResult() interface{} {
-	return &RetrieveCatAlbumResult{}
+func newRetrieveAlbumResult() interface{} {
+	return &RetrieveAlbumResult{}
 }
 
-type RetrieveCatAlbumArgs struct {
-	Req *content.RetrieveCatAlbumReq
+type RetrieveAlbumArgs struct {
+	Req *content.RetrieveAlbumReq
 }
 
-func (p *RetrieveCatAlbumArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *RetrieveAlbumArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(content.RetrieveCatAlbumReq)
+		p.Req = new(content.RetrieveAlbumReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
 
-func (p *RetrieveCatAlbumArgs) FastWrite(buf []byte) (n int) {
+func (p *RetrieveAlbumArgs) FastWrite(buf []byte) (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.FastWrite(buf)
 }
 
-func (p *RetrieveCatAlbumArgs) Size() (n int) {
+func (p *RetrieveAlbumArgs) Size() (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.Size()
 }
 
-func (p *RetrieveCatAlbumArgs) Marshal(out []byte) ([]byte, error) {
+func (p *RetrieveAlbumArgs) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetReq() {
 		return out, nil
 	}
 	return proto.Marshal(p.Req)
 }
 
-func (p *RetrieveCatAlbumArgs) Unmarshal(in []byte) error {
-	msg := new(content.RetrieveCatAlbumReq)
+func (p *RetrieveAlbumArgs) Unmarshal(in []byte) error {
+	msg := new(content.RetrieveAlbumReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -420,59 +378,59 @@ func (p *RetrieveCatAlbumArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var RetrieveCatAlbumArgs_Req_DEFAULT *content.RetrieveCatAlbumReq
+var RetrieveAlbumArgs_Req_DEFAULT *content.RetrieveAlbumReq
 
-func (p *RetrieveCatAlbumArgs) GetReq() *content.RetrieveCatAlbumReq {
+func (p *RetrieveAlbumArgs) GetReq() *content.RetrieveAlbumReq {
 	if !p.IsSetReq() {
-		return RetrieveCatAlbumArgs_Req_DEFAULT
+		return RetrieveAlbumArgs_Req_DEFAULT
 	}
 	return p.Req
 }
 
-func (p *RetrieveCatAlbumArgs) IsSetReq() bool {
+func (p *RetrieveAlbumArgs) IsSetReq() bool {
 	return p.Req != nil
 }
 
-func (p *RetrieveCatAlbumArgs) GetFirstArgument() interface{} {
+func (p *RetrieveAlbumArgs) GetFirstArgument() interface{} {
 	return p.Req
 }
 
-type RetrieveCatAlbumResult struct {
-	Success *content.RetrieveCatAlbumResp
+type RetrieveAlbumResult struct {
+	Success *content.RetrieveAlbumResp
 }
 
-var RetrieveCatAlbumResult_Success_DEFAULT *content.RetrieveCatAlbumResp
+var RetrieveAlbumResult_Success_DEFAULT *content.RetrieveAlbumResp
 
-func (p *RetrieveCatAlbumResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *RetrieveAlbumResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(content.RetrieveCatAlbumResp)
+		p.Success = new(content.RetrieveAlbumResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
 
-func (p *RetrieveCatAlbumResult) FastWrite(buf []byte) (n int) {
+func (p *RetrieveAlbumResult) FastWrite(buf []byte) (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.FastWrite(buf)
 }
 
-func (p *RetrieveCatAlbumResult) Size() (n int) {
+func (p *RetrieveAlbumResult) Size() (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.Size()
 }
 
-func (p *RetrieveCatAlbumResult) Marshal(out []byte) ([]byte, error) {
+func (p *RetrieveAlbumResult) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetSuccess() {
 		return out, nil
 	}
 	return proto.Marshal(p.Success)
 }
 
-func (p *RetrieveCatAlbumResult) Unmarshal(in []byte) error {
-	msg := new(content.RetrieveCatAlbumResp)
+func (p *RetrieveAlbumResult) Unmarshal(in []byte) error {
+	msg := new(content.RetrieveAlbumResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -480,92 +438,92 @@ func (p *RetrieveCatAlbumResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *RetrieveCatAlbumResult) GetSuccess() *content.RetrieveCatAlbumResp {
+func (p *RetrieveAlbumResult) GetSuccess() *content.RetrieveAlbumResp {
 	if !p.IsSetSuccess() {
-		return RetrieveCatAlbumResult_Success_DEFAULT
+		return RetrieveAlbumResult_Success_DEFAULT
 	}
 	return p.Success
 }
 
-func (p *RetrieveCatAlbumResult) SetSuccess(x interface{}) {
-	p.Success = x.(*content.RetrieveCatAlbumResp)
+func (p *RetrieveAlbumResult) SetSuccess(x interface{}) {
+	p.Success = x.(*content.RetrieveAlbumResp)
 }
 
-func (p *RetrieveCatAlbumResult) IsSetSuccess() bool {
+func (p *RetrieveAlbumResult) IsSetSuccess() bool {
 	return p.Success != nil
 }
 
-func (p *RetrieveCatAlbumResult) GetResult() interface{} {
+func (p *RetrieveAlbumResult) GetResult() interface{} {
 	return p.Success
 }
 
-func updateCatAlbumHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+func updateAlbumHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(content.UpdateCatAlbumReq)
+		req := new(content.UpdateAlbumReq)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
-		resp, err := handler.(content.ContentService).UpdateCatAlbum(ctx, req)
+		resp, err := handler.(content.ContentService).UpdateAlbum(ctx, req)
 		if err != nil {
 			return err
 		}
 		return st.SendMsg(resp)
-	case *UpdateCatAlbumArgs:
-		success, err := handler.(content.ContentService).UpdateCatAlbum(ctx, s.Req)
+	case *UpdateAlbumArgs:
+		success, err := handler.(content.ContentService).UpdateAlbum(ctx, s.Req)
 		if err != nil {
 			return err
 		}
-		realResult := result.(*UpdateCatAlbumResult)
+		realResult := result.(*UpdateAlbumResult)
 		realResult.Success = success
 		return nil
 	default:
 		return errInvalidMessageType
 	}
 }
-func newUpdateCatAlbumArgs() interface{} {
-	return &UpdateCatAlbumArgs{}
+func newUpdateAlbumArgs() interface{} {
+	return &UpdateAlbumArgs{}
 }
 
-func newUpdateCatAlbumResult() interface{} {
-	return &UpdateCatAlbumResult{}
+func newUpdateAlbumResult() interface{} {
+	return &UpdateAlbumResult{}
 }
 
-type UpdateCatAlbumArgs struct {
-	Req *content.UpdateCatAlbumReq
+type UpdateAlbumArgs struct {
+	Req *content.UpdateAlbumReq
 }
 
-func (p *UpdateCatAlbumArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *UpdateAlbumArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(content.UpdateCatAlbumReq)
+		p.Req = new(content.UpdateAlbumReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
 
-func (p *UpdateCatAlbumArgs) FastWrite(buf []byte) (n int) {
+func (p *UpdateAlbumArgs) FastWrite(buf []byte) (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.FastWrite(buf)
 }
 
-func (p *UpdateCatAlbumArgs) Size() (n int) {
+func (p *UpdateAlbumArgs) Size() (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.Size()
 }
 
-func (p *UpdateCatAlbumArgs) Marshal(out []byte) ([]byte, error) {
+func (p *UpdateAlbumArgs) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetReq() {
 		return out, nil
 	}
 	return proto.Marshal(p.Req)
 }
 
-func (p *UpdateCatAlbumArgs) Unmarshal(in []byte) error {
-	msg := new(content.UpdateCatAlbumReq)
+func (p *UpdateAlbumArgs) Unmarshal(in []byte) error {
+	msg := new(content.UpdateAlbumReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -573,59 +531,59 @@ func (p *UpdateCatAlbumArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var UpdateCatAlbumArgs_Req_DEFAULT *content.UpdateCatAlbumReq
+var UpdateAlbumArgs_Req_DEFAULT *content.UpdateAlbumReq
 
-func (p *UpdateCatAlbumArgs) GetReq() *content.UpdateCatAlbumReq {
+func (p *UpdateAlbumArgs) GetReq() *content.UpdateAlbumReq {
 	if !p.IsSetReq() {
-		return UpdateCatAlbumArgs_Req_DEFAULT
+		return UpdateAlbumArgs_Req_DEFAULT
 	}
 	return p.Req
 }
 
-func (p *UpdateCatAlbumArgs) IsSetReq() bool {
+func (p *UpdateAlbumArgs) IsSetReq() bool {
 	return p.Req != nil
 }
 
-func (p *UpdateCatAlbumArgs) GetFirstArgument() interface{} {
+func (p *UpdateAlbumArgs) GetFirstArgument() interface{} {
 	return p.Req
 }
 
-type UpdateCatAlbumResult struct {
-	Success *content.UpdateCatAlbumResp
+type UpdateAlbumResult struct {
+	Success *content.UpdateAlbumResp
 }
 
-var UpdateCatAlbumResult_Success_DEFAULT *content.UpdateCatAlbumResp
+var UpdateAlbumResult_Success_DEFAULT *content.UpdateAlbumResp
 
-func (p *UpdateCatAlbumResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *UpdateAlbumResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(content.UpdateCatAlbumResp)
+		p.Success = new(content.UpdateAlbumResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
 
-func (p *UpdateCatAlbumResult) FastWrite(buf []byte) (n int) {
+func (p *UpdateAlbumResult) FastWrite(buf []byte) (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.FastWrite(buf)
 }
 
-func (p *UpdateCatAlbumResult) Size() (n int) {
+func (p *UpdateAlbumResult) Size() (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.Size()
 }
 
-func (p *UpdateCatAlbumResult) Marshal(out []byte) ([]byte, error) {
+func (p *UpdateAlbumResult) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetSuccess() {
 		return out, nil
 	}
 	return proto.Marshal(p.Success)
 }
 
-func (p *UpdateCatAlbumResult) Unmarshal(in []byte) error {
-	msg := new(content.UpdateCatAlbumResp)
+func (p *UpdateAlbumResult) Unmarshal(in []byte) error {
+	msg := new(content.UpdateAlbumResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -633,92 +591,92 @@ func (p *UpdateCatAlbumResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *UpdateCatAlbumResult) GetSuccess() *content.UpdateCatAlbumResp {
+func (p *UpdateAlbumResult) GetSuccess() *content.UpdateAlbumResp {
 	if !p.IsSetSuccess() {
-		return UpdateCatAlbumResult_Success_DEFAULT
+		return UpdateAlbumResult_Success_DEFAULT
 	}
 	return p.Success
 }
 
-func (p *UpdateCatAlbumResult) SetSuccess(x interface{}) {
-	p.Success = x.(*content.UpdateCatAlbumResp)
+func (p *UpdateAlbumResult) SetSuccess(x interface{}) {
+	p.Success = x.(*content.UpdateAlbumResp)
 }
 
-func (p *UpdateCatAlbumResult) IsSetSuccess() bool {
+func (p *UpdateAlbumResult) IsSetSuccess() bool {
 	return p.Success != nil
 }
 
-func (p *UpdateCatAlbumResult) GetResult() interface{} {
+func (p *UpdateAlbumResult) GetResult() interface{} {
 	return p.Success
 }
 
-func deleteCatAlbumHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+func deleteAlbumHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(content.DeleteCatAlbumReq)
+		req := new(content.DeleteAlbumReq)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
-		resp, err := handler.(content.ContentService).DeleteCatAlbum(ctx, req)
+		resp, err := handler.(content.ContentService).DeleteAlbum(ctx, req)
 		if err != nil {
 			return err
 		}
 		return st.SendMsg(resp)
-	case *DeleteCatAlbumArgs:
-		success, err := handler.(content.ContentService).DeleteCatAlbum(ctx, s.Req)
+	case *DeleteAlbumArgs:
+		success, err := handler.(content.ContentService).DeleteAlbum(ctx, s.Req)
 		if err != nil {
 			return err
 		}
-		realResult := result.(*DeleteCatAlbumResult)
+		realResult := result.(*DeleteAlbumResult)
 		realResult.Success = success
 		return nil
 	default:
 		return errInvalidMessageType
 	}
 }
-func newDeleteCatAlbumArgs() interface{} {
-	return &DeleteCatAlbumArgs{}
+func newDeleteAlbumArgs() interface{} {
+	return &DeleteAlbumArgs{}
 }
 
-func newDeleteCatAlbumResult() interface{} {
-	return &DeleteCatAlbumResult{}
+func newDeleteAlbumResult() interface{} {
+	return &DeleteAlbumResult{}
 }
 
-type DeleteCatAlbumArgs struct {
-	Req *content.DeleteCatAlbumReq
+type DeleteAlbumArgs struct {
+	Req *content.DeleteAlbumReq
 }
 
-func (p *DeleteCatAlbumArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *DeleteAlbumArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(content.DeleteCatAlbumReq)
+		p.Req = new(content.DeleteAlbumReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
 
-func (p *DeleteCatAlbumArgs) FastWrite(buf []byte) (n int) {
+func (p *DeleteAlbumArgs) FastWrite(buf []byte) (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.FastWrite(buf)
 }
 
-func (p *DeleteCatAlbumArgs) Size() (n int) {
+func (p *DeleteAlbumArgs) Size() (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.Size()
 }
 
-func (p *DeleteCatAlbumArgs) Marshal(out []byte) ([]byte, error) {
+func (p *DeleteAlbumArgs) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetReq() {
 		return out, nil
 	}
 	return proto.Marshal(p.Req)
 }
 
-func (p *DeleteCatAlbumArgs) Unmarshal(in []byte) error {
-	msg := new(content.DeleteCatAlbumReq)
+func (p *DeleteAlbumArgs) Unmarshal(in []byte) error {
+	msg := new(content.DeleteAlbumReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -726,59 +684,59 @@ func (p *DeleteCatAlbumArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var DeleteCatAlbumArgs_Req_DEFAULT *content.DeleteCatAlbumReq
+var DeleteAlbumArgs_Req_DEFAULT *content.DeleteAlbumReq
 
-func (p *DeleteCatAlbumArgs) GetReq() *content.DeleteCatAlbumReq {
+func (p *DeleteAlbumArgs) GetReq() *content.DeleteAlbumReq {
 	if !p.IsSetReq() {
-		return DeleteCatAlbumArgs_Req_DEFAULT
+		return DeleteAlbumArgs_Req_DEFAULT
 	}
 	return p.Req
 }
 
-func (p *DeleteCatAlbumArgs) IsSetReq() bool {
+func (p *DeleteAlbumArgs) IsSetReq() bool {
 	return p.Req != nil
 }
 
-func (p *DeleteCatAlbumArgs) GetFirstArgument() interface{} {
+func (p *DeleteAlbumArgs) GetFirstArgument() interface{} {
 	return p.Req
 }
 
-type DeleteCatAlbumResult struct {
-	Success *content.DeleteCatAlbumResp
+type DeleteAlbumResult struct {
+	Success *content.DeleteAlbumResp
 }
 
-var DeleteCatAlbumResult_Success_DEFAULT *content.DeleteCatAlbumResp
+var DeleteAlbumResult_Success_DEFAULT *content.DeleteAlbumResp
 
-func (p *DeleteCatAlbumResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *DeleteAlbumResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(content.DeleteCatAlbumResp)
+		p.Success = new(content.DeleteAlbumResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
 
-func (p *DeleteCatAlbumResult) FastWrite(buf []byte) (n int) {
+func (p *DeleteAlbumResult) FastWrite(buf []byte) (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.FastWrite(buf)
 }
 
-func (p *DeleteCatAlbumResult) Size() (n int) {
+func (p *DeleteAlbumResult) Size() (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.Size()
 }
 
-func (p *DeleteCatAlbumResult) Marshal(out []byte) ([]byte, error) {
+func (p *DeleteAlbumResult) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetSuccess() {
 		return out, nil
 	}
 	return proto.Marshal(p.Success)
 }
 
-func (p *DeleteCatAlbumResult) Unmarshal(in []byte) error {
-	msg := new(content.DeleteCatAlbumResp)
+func (p *DeleteAlbumResult) Unmarshal(in []byte) error {
+	msg := new(content.DeleteAlbumResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -786,92 +744,92 @@ func (p *DeleteCatAlbumResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *DeleteCatAlbumResult) GetSuccess() *content.DeleteCatAlbumResp {
+func (p *DeleteAlbumResult) GetSuccess() *content.DeleteAlbumResp {
 	if !p.IsSetSuccess() {
-		return DeleteCatAlbumResult_Success_DEFAULT
+		return DeleteAlbumResult_Success_DEFAULT
 	}
 	return p.Success
 }
 
-func (p *DeleteCatAlbumResult) SetSuccess(x interface{}) {
-	p.Success = x.(*content.DeleteCatAlbumResp)
+func (p *DeleteAlbumResult) SetSuccess(x interface{}) {
+	p.Success = x.(*content.DeleteAlbumResp)
 }
 
-func (p *DeleteCatAlbumResult) IsSetSuccess() bool {
+func (p *DeleteAlbumResult) IsSetSuccess() bool {
 	return p.Success != nil
 }
 
-func (p *DeleteCatAlbumResult) GetResult() interface{} {
+func (p *DeleteAlbumResult) GetResult() interface{} {
 	return p.Success
 }
 
-func listCatAlbumHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+func listAlbumHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(content.ListCatAlbumReq)
+		req := new(content.ListAlbumReq)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
-		resp, err := handler.(content.ContentService).ListCatAlbum(ctx, req)
+		resp, err := handler.(content.ContentService).ListAlbum(ctx, req)
 		if err != nil {
 			return err
 		}
 		return st.SendMsg(resp)
-	case *ListCatAlbumArgs:
-		success, err := handler.(content.ContentService).ListCatAlbum(ctx, s.Req)
+	case *ListAlbumArgs:
+		success, err := handler.(content.ContentService).ListAlbum(ctx, s.Req)
 		if err != nil {
 			return err
 		}
-		realResult := result.(*ListCatAlbumResult)
+		realResult := result.(*ListAlbumResult)
 		realResult.Success = success
 		return nil
 	default:
 		return errInvalidMessageType
 	}
 }
-func newListCatAlbumArgs() interface{} {
-	return &ListCatAlbumArgs{}
+func newListAlbumArgs() interface{} {
+	return &ListAlbumArgs{}
 }
 
-func newListCatAlbumResult() interface{} {
-	return &ListCatAlbumResult{}
+func newListAlbumResult() interface{} {
+	return &ListAlbumResult{}
 }
 
-type ListCatAlbumArgs struct {
-	Req *content.ListCatAlbumReq
+type ListAlbumArgs struct {
+	Req *content.ListAlbumReq
 }
 
-func (p *ListCatAlbumArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *ListAlbumArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(content.ListCatAlbumReq)
+		p.Req = new(content.ListAlbumReq)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
 
-func (p *ListCatAlbumArgs) FastWrite(buf []byte) (n int) {
+func (p *ListAlbumArgs) FastWrite(buf []byte) (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.FastWrite(buf)
 }
 
-func (p *ListCatAlbumArgs) Size() (n int) {
+func (p *ListAlbumArgs) Size() (n int) {
 	if !p.IsSetReq() {
 		return 0
 	}
 	return p.Req.Size()
 }
 
-func (p *ListCatAlbumArgs) Marshal(out []byte) ([]byte, error) {
+func (p *ListAlbumArgs) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetReq() {
 		return out, nil
 	}
 	return proto.Marshal(p.Req)
 }
 
-func (p *ListCatAlbumArgs) Unmarshal(in []byte) error {
-	msg := new(content.ListCatAlbumReq)
+func (p *ListAlbumArgs) Unmarshal(in []byte) error {
+	msg := new(content.ListAlbumReq)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -879,59 +837,59 @@ func (p *ListCatAlbumArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var ListCatAlbumArgs_Req_DEFAULT *content.ListCatAlbumReq
+var ListAlbumArgs_Req_DEFAULT *content.ListAlbumReq
 
-func (p *ListCatAlbumArgs) GetReq() *content.ListCatAlbumReq {
+func (p *ListAlbumArgs) GetReq() *content.ListAlbumReq {
 	if !p.IsSetReq() {
-		return ListCatAlbumArgs_Req_DEFAULT
+		return ListAlbumArgs_Req_DEFAULT
 	}
 	return p.Req
 }
 
-func (p *ListCatAlbumArgs) IsSetReq() bool {
+func (p *ListAlbumArgs) IsSetReq() bool {
 	return p.Req != nil
 }
 
-func (p *ListCatAlbumArgs) GetFirstArgument() interface{} {
+func (p *ListAlbumArgs) GetFirstArgument() interface{} {
 	return p.Req
 }
 
-type ListCatAlbumResult struct {
-	Success *content.ListCatAlbumResp
+type ListAlbumResult struct {
+	Success *content.ListAlbumResp
 }
 
-var ListCatAlbumResult_Success_DEFAULT *content.ListCatAlbumResp
+var ListAlbumResult_Success_DEFAULT *content.ListAlbumResp
 
-func (p *ListCatAlbumResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+func (p *ListAlbumResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(content.ListCatAlbumResp)
+		p.Success = new(content.ListAlbumResp)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
 
-func (p *ListCatAlbumResult) FastWrite(buf []byte) (n int) {
+func (p *ListAlbumResult) FastWrite(buf []byte) (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.FastWrite(buf)
 }
 
-func (p *ListCatAlbumResult) Size() (n int) {
+func (p *ListAlbumResult) Size() (n int) {
 	if !p.IsSetSuccess() {
 		return 0
 	}
 	return p.Success.Size()
 }
 
-func (p *ListCatAlbumResult) Marshal(out []byte) ([]byte, error) {
+func (p *ListAlbumResult) Marshal(out []byte) ([]byte, error) {
 	if !p.IsSetSuccess() {
 		return out, nil
 	}
 	return proto.Marshal(p.Success)
 }
 
-func (p *ListCatAlbumResult) Unmarshal(in []byte) error {
-	msg := new(content.ListCatAlbumResp)
+func (p *ListAlbumResult) Unmarshal(in []byte) error {
+	msg := new(content.ListAlbumResp)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -939,787 +897,22 @@ func (p *ListCatAlbumResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *ListCatAlbumResult) GetSuccess() *content.ListCatAlbumResp {
+func (p *ListAlbumResult) GetSuccess() *content.ListAlbumResp {
 	if !p.IsSetSuccess() {
-		return ListCatAlbumResult_Success_DEFAULT
+		return ListAlbumResult_Success_DEFAULT
 	}
 	return p.Success
 }
 
-func (p *ListCatAlbumResult) SetSuccess(x interface{}) {
-	p.Success = x.(*content.ListCatAlbumResp)
+func (p *ListAlbumResult) SetSuccess(x interface{}) {
+	p.Success = x.(*content.ListAlbumResp)
 }
 
-func (p *ListCatAlbumResult) IsSetSuccess() bool {
+func (p *ListAlbumResult) IsSetSuccess() bool {
 	return p.Success != nil
 }
 
-func (p *ListCatAlbumResult) GetResult() interface{} {
-	return p.Success
-}
-
-func createLocationAlbumHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	switch s := arg.(type) {
-	case *streaming.Args:
-		st := s.Stream
-		req := new(content.CreateLocationAlbumReq)
-		if err := st.RecvMsg(req); err != nil {
-			return err
-		}
-		resp, err := handler.(content.ContentService).CreateLocationAlbum(ctx, req)
-		if err != nil {
-			return err
-		}
-		return st.SendMsg(resp)
-	case *CreateLocationAlbumArgs:
-		success, err := handler.(content.ContentService).CreateLocationAlbum(ctx, s.Req)
-		if err != nil {
-			return err
-		}
-		realResult := result.(*CreateLocationAlbumResult)
-		realResult.Success = success
-		return nil
-	default:
-		return errInvalidMessageType
-	}
-}
-func newCreateLocationAlbumArgs() interface{} {
-	return &CreateLocationAlbumArgs{}
-}
-
-func newCreateLocationAlbumResult() interface{} {
-	return &CreateLocationAlbumResult{}
-}
-
-type CreateLocationAlbumArgs struct {
-	Req *content.CreateLocationAlbumReq
-}
-
-func (p *CreateLocationAlbumArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetReq() {
-		p.Req = new(content.CreateLocationAlbumReq)
-	}
-	return p.Req.FastRead(buf, _type, number)
-}
-
-func (p *CreateLocationAlbumArgs) FastWrite(buf []byte) (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.FastWrite(buf)
-}
-
-func (p *CreateLocationAlbumArgs) Size() (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.Size()
-}
-
-func (p *CreateLocationAlbumArgs) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetReq() {
-		return out, nil
-	}
-	return proto.Marshal(p.Req)
-}
-
-func (p *CreateLocationAlbumArgs) Unmarshal(in []byte) error {
-	msg := new(content.CreateLocationAlbumReq)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Req = msg
-	return nil
-}
-
-var CreateLocationAlbumArgs_Req_DEFAULT *content.CreateLocationAlbumReq
-
-func (p *CreateLocationAlbumArgs) GetReq() *content.CreateLocationAlbumReq {
-	if !p.IsSetReq() {
-		return CreateLocationAlbumArgs_Req_DEFAULT
-	}
-	return p.Req
-}
-
-func (p *CreateLocationAlbumArgs) IsSetReq() bool {
-	return p.Req != nil
-}
-
-func (p *CreateLocationAlbumArgs) GetFirstArgument() interface{} {
-	return p.Req
-}
-
-type CreateLocationAlbumResult struct {
-	Success *content.CreateLocationAlbumResp
-}
-
-var CreateLocationAlbumResult_Success_DEFAULT *content.CreateLocationAlbumResp
-
-func (p *CreateLocationAlbumResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetSuccess() {
-		p.Success = new(content.CreateLocationAlbumResp)
-	}
-	return p.Success.FastRead(buf, _type, number)
-}
-
-func (p *CreateLocationAlbumResult) FastWrite(buf []byte) (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.FastWrite(buf)
-}
-
-func (p *CreateLocationAlbumResult) Size() (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.Size()
-}
-
-func (p *CreateLocationAlbumResult) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetSuccess() {
-		return out, nil
-	}
-	return proto.Marshal(p.Success)
-}
-
-func (p *CreateLocationAlbumResult) Unmarshal(in []byte) error {
-	msg := new(content.CreateLocationAlbumResp)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Success = msg
-	return nil
-}
-
-func (p *CreateLocationAlbumResult) GetSuccess() *content.CreateLocationAlbumResp {
-	if !p.IsSetSuccess() {
-		return CreateLocationAlbumResult_Success_DEFAULT
-	}
-	return p.Success
-}
-
-func (p *CreateLocationAlbumResult) SetSuccess(x interface{}) {
-	p.Success = x.(*content.CreateLocationAlbumResp)
-}
-
-func (p *CreateLocationAlbumResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *CreateLocationAlbumResult) GetResult() interface{} {
-	return p.Success
-}
-
-func retrieveLocationAlbumHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	switch s := arg.(type) {
-	case *streaming.Args:
-		st := s.Stream
-		req := new(content.RetrieveLocationAlbumReq)
-		if err := st.RecvMsg(req); err != nil {
-			return err
-		}
-		resp, err := handler.(content.ContentService).RetrieveLocationAlbum(ctx, req)
-		if err != nil {
-			return err
-		}
-		return st.SendMsg(resp)
-	case *RetrieveLocationAlbumArgs:
-		success, err := handler.(content.ContentService).RetrieveLocationAlbum(ctx, s.Req)
-		if err != nil {
-			return err
-		}
-		realResult := result.(*RetrieveLocationAlbumResult)
-		realResult.Success = success
-		return nil
-	default:
-		return errInvalidMessageType
-	}
-}
-func newRetrieveLocationAlbumArgs() interface{} {
-	return &RetrieveLocationAlbumArgs{}
-}
-
-func newRetrieveLocationAlbumResult() interface{} {
-	return &RetrieveLocationAlbumResult{}
-}
-
-type RetrieveLocationAlbumArgs struct {
-	Req *content.RetrieveLocationAlbumReq
-}
-
-func (p *RetrieveLocationAlbumArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetReq() {
-		p.Req = new(content.RetrieveLocationAlbumReq)
-	}
-	return p.Req.FastRead(buf, _type, number)
-}
-
-func (p *RetrieveLocationAlbumArgs) FastWrite(buf []byte) (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.FastWrite(buf)
-}
-
-func (p *RetrieveLocationAlbumArgs) Size() (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.Size()
-}
-
-func (p *RetrieveLocationAlbumArgs) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetReq() {
-		return out, nil
-	}
-	return proto.Marshal(p.Req)
-}
-
-func (p *RetrieveLocationAlbumArgs) Unmarshal(in []byte) error {
-	msg := new(content.RetrieveLocationAlbumReq)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Req = msg
-	return nil
-}
-
-var RetrieveLocationAlbumArgs_Req_DEFAULT *content.RetrieveLocationAlbumReq
-
-func (p *RetrieveLocationAlbumArgs) GetReq() *content.RetrieveLocationAlbumReq {
-	if !p.IsSetReq() {
-		return RetrieveLocationAlbumArgs_Req_DEFAULT
-	}
-	return p.Req
-}
-
-func (p *RetrieveLocationAlbumArgs) IsSetReq() bool {
-	return p.Req != nil
-}
-
-func (p *RetrieveLocationAlbumArgs) GetFirstArgument() interface{} {
-	return p.Req
-}
-
-type RetrieveLocationAlbumResult struct {
-	Success *content.RetrieveLocationAlbumResp
-}
-
-var RetrieveLocationAlbumResult_Success_DEFAULT *content.RetrieveLocationAlbumResp
-
-func (p *RetrieveLocationAlbumResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetSuccess() {
-		p.Success = new(content.RetrieveLocationAlbumResp)
-	}
-	return p.Success.FastRead(buf, _type, number)
-}
-
-func (p *RetrieveLocationAlbumResult) FastWrite(buf []byte) (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.FastWrite(buf)
-}
-
-func (p *RetrieveLocationAlbumResult) Size() (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.Size()
-}
-
-func (p *RetrieveLocationAlbumResult) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetSuccess() {
-		return out, nil
-	}
-	return proto.Marshal(p.Success)
-}
-
-func (p *RetrieveLocationAlbumResult) Unmarshal(in []byte) error {
-	msg := new(content.RetrieveLocationAlbumResp)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Success = msg
-	return nil
-}
-
-func (p *RetrieveLocationAlbumResult) GetSuccess() *content.RetrieveLocationAlbumResp {
-	if !p.IsSetSuccess() {
-		return RetrieveLocationAlbumResult_Success_DEFAULT
-	}
-	return p.Success
-}
-
-func (p *RetrieveLocationAlbumResult) SetSuccess(x interface{}) {
-	p.Success = x.(*content.RetrieveLocationAlbumResp)
-}
-
-func (p *RetrieveLocationAlbumResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *RetrieveLocationAlbumResult) GetResult() interface{} {
-	return p.Success
-}
-
-func updateLocationAlbumHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	switch s := arg.(type) {
-	case *streaming.Args:
-		st := s.Stream
-		req := new(content.UpdateLocationAlbumReq)
-		if err := st.RecvMsg(req); err != nil {
-			return err
-		}
-		resp, err := handler.(content.ContentService).UpdateLocationAlbum(ctx, req)
-		if err != nil {
-			return err
-		}
-		return st.SendMsg(resp)
-	case *UpdateLocationAlbumArgs:
-		success, err := handler.(content.ContentService).UpdateLocationAlbum(ctx, s.Req)
-		if err != nil {
-			return err
-		}
-		realResult := result.(*UpdateLocationAlbumResult)
-		realResult.Success = success
-		return nil
-	default:
-		return errInvalidMessageType
-	}
-}
-func newUpdateLocationAlbumArgs() interface{} {
-	return &UpdateLocationAlbumArgs{}
-}
-
-func newUpdateLocationAlbumResult() interface{} {
-	return &UpdateLocationAlbumResult{}
-}
-
-type UpdateLocationAlbumArgs struct {
-	Req *content.UpdateLocationAlbumReq
-}
-
-func (p *UpdateLocationAlbumArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetReq() {
-		p.Req = new(content.UpdateLocationAlbumReq)
-	}
-	return p.Req.FastRead(buf, _type, number)
-}
-
-func (p *UpdateLocationAlbumArgs) FastWrite(buf []byte) (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.FastWrite(buf)
-}
-
-func (p *UpdateLocationAlbumArgs) Size() (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.Size()
-}
-
-func (p *UpdateLocationAlbumArgs) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetReq() {
-		return out, nil
-	}
-	return proto.Marshal(p.Req)
-}
-
-func (p *UpdateLocationAlbumArgs) Unmarshal(in []byte) error {
-	msg := new(content.UpdateLocationAlbumReq)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Req = msg
-	return nil
-}
-
-var UpdateLocationAlbumArgs_Req_DEFAULT *content.UpdateLocationAlbumReq
-
-func (p *UpdateLocationAlbumArgs) GetReq() *content.UpdateLocationAlbumReq {
-	if !p.IsSetReq() {
-		return UpdateLocationAlbumArgs_Req_DEFAULT
-	}
-	return p.Req
-}
-
-func (p *UpdateLocationAlbumArgs) IsSetReq() bool {
-	return p.Req != nil
-}
-
-func (p *UpdateLocationAlbumArgs) GetFirstArgument() interface{} {
-	return p.Req
-}
-
-type UpdateLocationAlbumResult struct {
-	Success *content.UpdateLocationAlbumResp
-}
-
-var UpdateLocationAlbumResult_Success_DEFAULT *content.UpdateLocationAlbumResp
-
-func (p *UpdateLocationAlbumResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetSuccess() {
-		p.Success = new(content.UpdateLocationAlbumResp)
-	}
-	return p.Success.FastRead(buf, _type, number)
-}
-
-func (p *UpdateLocationAlbumResult) FastWrite(buf []byte) (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.FastWrite(buf)
-}
-
-func (p *UpdateLocationAlbumResult) Size() (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.Size()
-}
-
-func (p *UpdateLocationAlbumResult) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetSuccess() {
-		return out, nil
-	}
-	return proto.Marshal(p.Success)
-}
-
-func (p *UpdateLocationAlbumResult) Unmarshal(in []byte) error {
-	msg := new(content.UpdateLocationAlbumResp)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Success = msg
-	return nil
-}
-
-func (p *UpdateLocationAlbumResult) GetSuccess() *content.UpdateLocationAlbumResp {
-	if !p.IsSetSuccess() {
-		return UpdateLocationAlbumResult_Success_DEFAULT
-	}
-	return p.Success
-}
-
-func (p *UpdateLocationAlbumResult) SetSuccess(x interface{}) {
-	p.Success = x.(*content.UpdateLocationAlbumResp)
-}
-
-func (p *UpdateLocationAlbumResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *UpdateLocationAlbumResult) GetResult() interface{} {
-	return p.Success
-}
-
-func deleteLocationAlbumHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	switch s := arg.(type) {
-	case *streaming.Args:
-		st := s.Stream
-		req := new(content.DeleteLocationAlbumReq)
-		if err := st.RecvMsg(req); err != nil {
-			return err
-		}
-		resp, err := handler.(content.ContentService).DeleteLocationAlbum(ctx, req)
-		if err != nil {
-			return err
-		}
-		return st.SendMsg(resp)
-	case *DeleteLocationAlbumArgs:
-		success, err := handler.(content.ContentService).DeleteLocationAlbum(ctx, s.Req)
-		if err != nil {
-			return err
-		}
-		realResult := result.(*DeleteLocationAlbumResult)
-		realResult.Success = success
-		return nil
-	default:
-		return errInvalidMessageType
-	}
-}
-func newDeleteLocationAlbumArgs() interface{} {
-	return &DeleteLocationAlbumArgs{}
-}
-
-func newDeleteLocationAlbumResult() interface{} {
-	return &DeleteLocationAlbumResult{}
-}
-
-type DeleteLocationAlbumArgs struct {
-	Req *content.DeleteLocationAlbumReq
-}
-
-func (p *DeleteLocationAlbumArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetReq() {
-		p.Req = new(content.DeleteLocationAlbumReq)
-	}
-	return p.Req.FastRead(buf, _type, number)
-}
-
-func (p *DeleteLocationAlbumArgs) FastWrite(buf []byte) (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.FastWrite(buf)
-}
-
-func (p *DeleteLocationAlbumArgs) Size() (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.Size()
-}
-
-func (p *DeleteLocationAlbumArgs) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetReq() {
-		return out, nil
-	}
-	return proto.Marshal(p.Req)
-}
-
-func (p *DeleteLocationAlbumArgs) Unmarshal(in []byte) error {
-	msg := new(content.DeleteLocationAlbumReq)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Req = msg
-	return nil
-}
-
-var DeleteLocationAlbumArgs_Req_DEFAULT *content.DeleteLocationAlbumReq
-
-func (p *DeleteLocationAlbumArgs) GetReq() *content.DeleteLocationAlbumReq {
-	if !p.IsSetReq() {
-		return DeleteLocationAlbumArgs_Req_DEFAULT
-	}
-	return p.Req
-}
-
-func (p *DeleteLocationAlbumArgs) IsSetReq() bool {
-	return p.Req != nil
-}
-
-func (p *DeleteLocationAlbumArgs) GetFirstArgument() interface{} {
-	return p.Req
-}
-
-type DeleteLocationAlbumResult struct {
-	Success *content.DeleteLocationAlbumResp
-}
-
-var DeleteLocationAlbumResult_Success_DEFAULT *content.DeleteLocationAlbumResp
-
-func (p *DeleteLocationAlbumResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetSuccess() {
-		p.Success = new(content.DeleteLocationAlbumResp)
-	}
-	return p.Success.FastRead(buf, _type, number)
-}
-
-func (p *DeleteLocationAlbumResult) FastWrite(buf []byte) (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.FastWrite(buf)
-}
-
-func (p *DeleteLocationAlbumResult) Size() (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.Size()
-}
-
-func (p *DeleteLocationAlbumResult) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetSuccess() {
-		return out, nil
-	}
-	return proto.Marshal(p.Success)
-}
-
-func (p *DeleteLocationAlbumResult) Unmarshal(in []byte) error {
-	msg := new(content.DeleteLocationAlbumResp)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Success = msg
-	return nil
-}
-
-func (p *DeleteLocationAlbumResult) GetSuccess() *content.DeleteLocationAlbumResp {
-	if !p.IsSetSuccess() {
-		return DeleteLocationAlbumResult_Success_DEFAULT
-	}
-	return p.Success
-}
-
-func (p *DeleteLocationAlbumResult) SetSuccess(x interface{}) {
-	p.Success = x.(*content.DeleteLocationAlbumResp)
-}
-
-func (p *DeleteLocationAlbumResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *DeleteLocationAlbumResult) GetResult() interface{} {
-	return p.Success
-}
-
-func listLocationAlbumHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	switch s := arg.(type) {
-	case *streaming.Args:
-		st := s.Stream
-		req := new(content.ListLocationAlbumReq)
-		if err := st.RecvMsg(req); err != nil {
-			return err
-		}
-		resp, err := handler.(content.ContentService).ListLocationAlbum(ctx, req)
-		if err != nil {
-			return err
-		}
-		return st.SendMsg(resp)
-	case *ListLocationAlbumArgs:
-		success, err := handler.(content.ContentService).ListLocationAlbum(ctx, s.Req)
-		if err != nil {
-			return err
-		}
-		realResult := result.(*ListLocationAlbumResult)
-		realResult.Success = success
-		return nil
-	default:
-		return errInvalidMessageType
-	}
-}
-func newListLocationAlbumArgs() interface{} {
-	return &ListLocationAlbumArgs{}
-}
-
-func newListLocationAlbumResult() interface{} {
-	return &ListLocationAlbumResult{}
-}
-
-type ListLocationAlbumArgs struct {
-	Req *content.ListLocationAlbumReq
-}
-
-func (p *ListLocationAlbumArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetReq() {
-		p.Req = new(content.ListLocationAlbumReq)
-	}
-	return p.Req.FastRead(buf, _type, number)
-}
-
-func (p *ListLocationAlbumArgs) FastWrite(buf []byte) (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.FastWrite(buf)
-}
-
-func (p *ListLocationAlbumArgs) Size() (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.Size()
-}
-
-func (p *ListLocationAlbumArgs) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetReq() {
-		return out, nil
-	}
-	return proto.Marshal(p.Req)
-}
-
-func (p *ListLocationAlbumArgs) Unmarshal(in []byte) error {
-	msg := new(content.ListLocationAlbumReq)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Req = msg
-	return nil
-}
-
-var ListLocationAlbumArgs_Req_DEFAULT *content.ListLocationAlbumReq
-
-func (p *ListLocationAlbumArgs) GetReq() *content.ListLocationAlbumReq {
-	if !p.IsSetReq() {
-		return ListLocationAlbumArgs_Req_DEFAULT
-	}
-	return p.Req
-}
-
-func (p *ListLocationAlbumArgs) IsSetReq() bool {
-	return p.Req != nil
-}
-
-func (p *ListLocationAlbumArgs) GetFirstArgument() interface{} {
-	return p.Req
-}
-
-type ListLocationAlbumResult struct {
-	Success *content.ListLocationAlbumResp
-}
-
-var ListLocationAlbumResult_Success_DEFAULT *content.ListLocationAlbumResp
-
-func (p *ListLocationAlbumResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetSuccess() {
-		p.Success = new(content.ListLocationAlbumResp)
-	}
-	return p.Success.FastRead(buf, _type, number)
-}
-
-func (p *ListLocationAlbumResult) FastWrite(buf []byte) (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.FastWrite(buf)
-}
-
-func (p *ListLocationAlbumResult) Size() (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.Size()
-}
-
-func (p *ListLocationAlbumResult) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetSuccess() {
-		return out, nil
-	}
-	return proto.Marshal(p.Success)
-}
-
-func (p *ListLocationAlbumResult) Unmarshal(in []byte) error {
-	msg := new(content.ListLocationAlbumResp)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Success = msg
-	return nil
-}
-
-func (p *ListLocationAlbumResult) GetSuccess() *content.ListLocationAlbumResp {
-	if !p.IsSetSuccess() {
-		return ListLocationAlbumResult_Success_DEFAULT
-	}
-	return p.Success
-}
-
-func (p *ListLocationAlbumResult) SetSuccess(x interface{}) {
-	p.Success = x.(*content.ListLocationAlbumResp)
-}
-
-func (p *ListLocationAlbumResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *ListLocationAlbumResult) GetResult() interface{} {
+func (p *ListAlbumResult) GetResult() interface{} {
 	return p.Success
 }
 
@@ -2488,159 +1681,6 @@ func (p *ListPhotoResult) GetResult() interface{} {
 	return p.Success
 }
 
-func listFeaturedPhotoHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	switch s := arg.(type) {
-	case *streaming.Args:
-		st := s.Stream
-		req := new(content.ListFeaturedPhotoReq)
-		if err := st.RecvMsg(req); err != nil {
-			return err
-		}
-		resp, err := handler.(content.ContentService).ListFeaturedPhoto(ctx, req)
-		if err != nil {
-			return err
-		}
-		return st.SendMsg(resp)
-	case *ListFeaturedPhotoArgs:
-		success, err := handler.(content.ContentService).ListFeaturedPhoto(ctx, s.Req)
-		if err != nil {
-			return err
-		}
-		realResult := result.(*ListFeaturedPhotoResult)
-		realResult.Success = success
-		return nil
-	default:
-		return errInvalidMessageType
-	}
-}
-func newListFeaturedPhotoArgs() interface{} {
-	return &ListFeaturedPhotoArgs{}
-}
-
-func newListFeaturedPhotoResult() interface{} {
-	return &ListFeaturedPhotoResult{}
-}
-
-type ListFeaturedPhotoArgs struct {
-	Req *content.ListFeaturedPhotoReq
-}
-
-func (p *ListFeaturedPhotoArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetReq() {
-		p.Req = new(content.ListFeaturedPhotoReq)
-	}
-	return p.Req.FastRead(buf, _type, number)
-}
-
-func (p *ListFeaturedPhotoArgs) FastWrite(buf []byte) (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.FastWrite(buf)
-}
-
-func (p *ListFeaturedPhotoArgs) Size() (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.Size()
-}
-
-func (p *ListFeaturedPhotoArgs) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetReq() {
-		return out, nil
-	}
-	return proto.Marshal(p.Req)
-}
-
-func (p *ListFeaturedPhotoArgs) Unmarshal(in []byte) error {
-	msg := new(content.ListFeaturedPhotoReq)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Req = msg
-	return nil
-}
-
-var ListFeaturedPhotoArgs_Req_DEFAULT *content.ListFeaturedPhotoReq
-
-func (p *ListFeaturedPhotoArgs) GetReq() *content.ListFeaturedPhotoReq {
-	if !p.IsSetReq() {
-		return ListFeaturedPhotoArgs_Req_DEFAULT
-	}
-	return p.Req
-}
-
-func (p *ListFeaturedPhotoArgs) IsSetReq() bool {
-	return p.Req != nil
-}
-
-func (p *ListFeaturedPhotoArgs) GetFirstArgument() interface{} {
-	return p.Req
-}
-
-type ListFeaturedPhotoResult struct {
-	Success *content.ListFeaturedPhotoResp
-}
-
-var ListFeaturedPhotoResult_Success_DEFAULT *content.ListFeaturedPhotoResp
-
-func (p *ListFeaturedPhotoResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetSuccess() {
-		p.Success = new(content.ListFeaturedPhotoResp)
-	}
-	return p.Success.FastRead(buf, _type, number)
-}
-
-func (p *ListFeaturedPhotoResult) FastWrite(buf []byte) (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.FastWrite(buf)
-}
-
-func (p *ListFeaturedPhotoResult) Size() (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.Size()
-}
-
-func (p *ListFeaturedPhotoResult) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetSuccess() {
-		return out, nil
-	}
-	return proto.Marshal(p.Success)
-}
-
-func (p *ListFeaturedPhotoResult) Unmarshal(in []byte) error {
-	msg := new(content.ListFeaturedPhotoResp)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Success = msg
-	return nil
-}
-
-func (p *ListFeaturedPhotoResult) GetSuccess() *content.ListFeaturedPhotoResp {
-	if !p.IsSetSuccess() {
-		return ListFeaturedPhotoResult_Success_DEFAULT
-	}
-	return p.Success
-}
-
-func (p *ListFeaturedPhotoResult) SetSuccess(x interface{}) {
-	p.Success = x.(*content.ListFeaturedPhotoResp)
-}
-
-func (p *ListFeaturedPhotoResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *ListFeaturedPhotoResult) GetResult() interface{} {
-	return p.Success
-}
-
 type kClient struct {
 	c client.Client
 }
@@ -2651,101 +1691,51 @@ func newServiceClient(c client.Client) *kClient {
 	}
 }
 
-func (p *kClient) CreateCatAlbum(ctx context.Context, Req *content.CreateCatAlbumReq) (r *content.CreateCatAlbumResp, err error) {
-	var _args CreateCatAlbumArgs
+func (p *kClient) CreateAlbum(ctx context.Context, Req *content.CreateAlbumReq) (r *content.CreateAlbumResp, err error) {
+	var _args CreateAlbumArgs
 	_args.Req = Req
-	var _result CreateCatAlbumResult
-	if err = p.c.Call(ctx, "CreateCatAlbum", &_args, &_result); err != nil {
+	var _result CreateAlbumResult
+	if err = p.c.Call(ctx, "CreateAlbum", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) RetrieveCatAlbum(ctx context.Context, Req *content.RetrieveCatAlbumReq) (r *content.RetrieveCatAlbumResp, err error) {
-	var _args RetrieveCatAlbumArgs
+func (p *kClient) RetrieveAlbum(ctx context.Context, Req *content.RetrieveAlbumReq) (r *content.RetrieveAlbumResp, err error) {
+	var _args RetrieveAlbumArgs
 	_args.Req = Req
-	var _result RetrieveCatAlbumResult
-	if err = p.c.Call(ctx, "RetrieveCatAlbum", &_args, &_result); err != nil {
+	var _result RetrieveAlbumResult
+	if err = p.c.Call(ctx, "RetrieveAlbum", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) UpdateCatAlbum(ctx context.Context, Req *content.UpdateCatAlbumReq) (r *content.UpdateCatAlbumResp, err error) {
-	var _args UpdateCatAlbumArgs
+func (p *kClient) UpdateAlbum(ctx context.Context, Req *content.UpdateAlbumReq) (r *content.UpdateAlbumResp, err error) {
+	var _args UpdateAlbumArgs
 	_args.Req = Req
-	var _result UpdateCatAlbumResult
-	if err = p.c.Call(ctx, "UpdateCatAlbum", &_args, &_result); err != nil {
+	var _result UpdateAlbumResult
+	if err = p.c.Call(ctx, "UpdateAlbum", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) DeleteCatAlbum(ctx context.Context, Req *content.DeleteCatAlbumReq) (r *content.DeleteCatAlbumResp, err error) {
-	var _args DeleteCatAlbumArgs
+func (p *kClient) DeleteAlbum(ctx context.Context, Req *content.DeleteAlbumReq) (r *content.DeleteAlbumResp, err error) {
+	var _args DeleteAlbumArgs
 	_args.Req = Req
-	var _result DeleteCatAlbumResult
-	if err = p.c.Call(ctx, "DeleteCatAlbum", &_args, &_result); err != nil {
+	var _result DeleteAlbumResult
+	if err = p.c.Call(ctx, "DeleteAlbum", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) ListCatAlbum(ctx context.Context, Req *content.ListCatAlbumReq) (r *content.ListCatAlbumResp, err error) {
-	var _args ListCatAlbumArgs
+func (p *kClient) ListAlbum(ctx context.Context, Req *content.ListAlbumReq) (r *content.ListAlbumResp, err error) {
+	var _args ListAlbumArgs
 	_args.Req = Req
-	var _result ListCatAlbumResult
-	if err = p.c.Call(ctx, "ListCatAlbum", &_args, &_result); err != nil {
-		return
-	}
-	return _result.GetSuccess(), nil
-}
-
-func (p *kClient) CreateLocationAlbum(ctx context.Context, Req *content.CreateLocationAlbumReq) (r *content.CreateLocationAlbumResp, err error) {
-	var _args CreateLocationAlbumArgs
-	_args.Req = Req
-	var _result CreateLocationAlbumResult
-	if err = p.c.Call(ctx, "CreateLocationAlbum", &_args, &_result); err != nil {
-		return
-	}
-	return _result.GetSuccess(), nil
-}
-
-func (p *kClient) RetrieveLocationAlbum(ctx context.Context, Req *content.RetrieveLocationAlbumReq) (r *content.RetrieveLocationAlbumResp, err error) {
-	var _args RetrieveLocationAlbumArgs
-	_args.Req = Req
-	var _result RetrieveLocationAlbumResult
-	if err = p.c.Call(ctx, "RetrieveLocationAlbum", &_args, &_result); err != nil {
-		return
-	}
-	return _result.GetSuccess(), nil
-}
-
-func (p *kClient) UpdateLocationAlbum(ctx context.Context, Req *content.UpdateLocationAlbumReq) (r *content.UpdateLocationAlbumResp, err error) {
-	var _args UpdateLocationAlbumArgs
-	_args.Req = Req
-	var _result UpdateLocationAlbumResult
-	if err = p.c.Call(ctx, "UpdateLocationAlbum", &_args, &_result); err != nil {
-		return
-	}
-	return _result.GetSuccess(), nil
-}
-
-func (p *kClient) DeleteLocationAlbum(ctx context.Context, Req *content.DeleteLocationAlbumReq) (r *content.DeleteLocationAlbumResp, err error) {
-	var _args DeleteLocationAlbumArgs
-	_args.Req = Req
-	var _result DeleteLocationAlbumResult
-	if err = p.c.Call(ctx, "DeleteLocationAlbum", &_args, &_result); err != nil {
-		return
-	}
-	return _result.GetSuccess(), nil
-}
-
-func (p *kClient) ListLocationAlbum(ctx context.Context, Req *content.ListLocationAlbumReq) (r *content.ListLocationAlbumResp, err error) {
-	var _args ListLocationAlbumArgs
-	_args.Req = Req
-	var _result ListLocationAlbumResult
-	if err = p.c.Call(ctx, "ListLocationAlbum", &_args, &_result); err != nil {
+	var _result ListAlbumResult
+	if err = p.c.Call(ctx, "ListAlbum", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
@@ -2796,16 +1786,6 @@ func (p *kClient) ListPhoto(ctx context.Context, Req *content.ListPhotoReq) (r *
 	_args.Req = Req
 	var _result ListPhotoResult
 	if err = p.c.Call(ctx, "ListPhoto", &_args, &_result); err != nil {
-		return
-	}
-	return _result.GetSuccess(), nil
-}
-
-func (p *kClient) ListFeaturedPhoto(ctx context.Context, Req *content.ListFeaturedPhotoReq) (r *content.ListFeaturedPhotoResp, err error) {
-	var _args ListFeaturedPhotoArgs
-	_args.Req = Req
-	var _result ListFeaturedPhotoResult
-	if err = p.c.Call(ctx, "ListFeaturedPhoto", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
