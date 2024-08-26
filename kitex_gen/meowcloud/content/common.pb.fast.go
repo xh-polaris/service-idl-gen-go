@@ -44,6 +44,11 @@ func (x *AlbumInfo) FastRead(buf []byte, _type int8, number int32) (offset int, 
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 7:
+		offset, err = x.fastReadField7(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -84,6 +89,11 @@ func (x *AlbumInfo) fastReadField5(buf []byte, _type int8) (offset int, err erro
 
 func (x *AlbumInfo) fastReadField6(buf []byte, _type int8) (offset int, err error) {
 	x.DeletedTime, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *AlbumInfo) fastReadField7(buf []byte, _type int8) (offset int, err error) {
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -319,11 +329,6 @@ func (x *Photo) FastRead(buf []byte, _type int8, number int32) (offset int, err 
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 13:
-		offset, err = x.fastReadField13(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -378,31 +383,26 @@ func (x *Photo) fastReadField7(buf []byte, _type int8) (offset int, err error) {
 }
 
 func (x *Photo) fastReadField8(buf []byte, _type int8) (offset int, err error) {
-	x.CoverId, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *Photo) fastReadField9(buf []byte, _type int8) (offset int, err error) {
 	x.IsDue, offset, err = fastpb.ReadBool(buf, _type)
 	return offset, err
 }
 
-func (x *Photo) fastReadField10(buf []byte, _type int8) (offset int, err error) {
+func (x *Photo) fastReadField9(buf []byte, _type int8) (offset int, err error) {
 	x.CreatedTime, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *Photo) fastReadField11(buf []byte, _type int8) (offset int, err error) {
+func (x *Photo) fastReadField10(buf []byte, _type int8) (offset int, err error) {
 	x.UpdatedTime, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *Photo) fastReadField12(buf []byte, _type int8) (offset int, err error) {
+func (x *Photo) fastReadField11(buf []byte, _type int8) (offset int, err error) {
 	x.DeletedTime, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *Photo) fastReadField13(buf []byte, _type int8) (offset int, err error) {
+func (x *Photo) fastReadField12(buf []byte, _type int8) (offset int, err error) {
 	x.Url, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
@@ -456,6 +456,11 @@ func (x *CatInfo) FastRead(buf []byte, _type int8, number int32) (offset int, er
 		}
 	case 10:
 		offset, err = x.fastReadField10(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 11:
+		offset, err = x.fastReadField11(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -522,6 +527,11 @@ func (x *CatInfo) fastReadField10(buf []byte, _type int8) (offset int, err error
 	return offset, err
 }
 
+func (x *CatInfo) fastReadField11(buf []byte, _type int8) (offset int, err error) {
+	x.AlbumId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
 func (x *PlaceInfo) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -556,6 +566,11 @@ func (x *PlaceInfo) FastRead(buf []byte, _type int8, number int32) (offset int, 
 		}
 	case 7:
 		offset, err = x.fastReadField7(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 8:
+		offset, err = x.fastReadField8(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -604,6 +619,11 @@ func (x *PlaceInfo) fastReadField6(buf []byte, _type int8) (offset int, err erro
 
 func (x *PlaceInfo) fastReadField7(buf []byte, _type int8) (offset int, err error) {
 	x.DeletedTime, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *PlaceInfo) fastReadField8(buf []byte, _type int8) (offset int, err error) {
+	x.AlbumId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -718,6 +738,11 @@ func (x *PointInfo) FastRead(buf []byte, _type int8, number int32) (offset int, 
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 6:
+		offset, err = x.fastReadField6(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -756,6 +781,11 @@ func (x *PointInfo) fastReadField5(buf []byte, _type int8) (offset int, err erro
 	return offset, err
 }
 
+func (x *PointInfo) fastReadField6(buf []byte, _type int8) (offset int, err error) {
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
 func (x *MemberInfo) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -780,6 +810,11 @@ func (x *MemberInfo) FastRead(buf []byte, _type int8, number int32) (offset int,
 		}
 	case 5:
 		offset, err = x.fastReadField5(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 6:
+		offset, err = x.fastReadField6(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -821,6 +856,11 @@ func (x *MemberInfo) fastReadField5(buf []byte, _type int8) (offset int, err err
 	return offset, err
 }
 
+func (x *MemberInfo) fastReadField6(buf []byte, _type int8) (offset int, err error) {
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
 func (x *AchievementInfo) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -840,6 +880,11 @@ func (x *AchievementInfo) FastRead(buf []byte, _type int8, number int32) (offset
 		}
 	case 4:
 		offset, err = x.fastReadField4(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 5:
+		offset, err = x.fastReadField5(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -873,6 +918,11 @@ func (x *AchievementInfo) fastReadField3(buf []byte, _type int8) (offset int, er
 
 func (x *AchievementInfo) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 	x.DeletedTime, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *AchievementInfo) fastReadField5(buf []byte, _type int8) (offset int, err error) {
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -1075,6 +1125,7 @@ func (x *AlbumInfo) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField4(buf[offset:])
 	offset += x.fastWriteField5(buf[offset:])
 	offset += x.fastWriteField6(buf[offset:])
+	offset += x.fastWriteField7(buf[offset:])
 	return offset
 }
 
@@ -1123,6 +1174,14 @@ func (x *AlbumInfo) fastWriteField6(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 6, x.GetDeletedTime())
+	return offset
+}
+
+func (x *AlbumInfo) fastWriteField7(buf []byte) (offset int) {
+	if x.UserId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 7, x.GetUserId())
 	return offset
 }
 
@@ -1284,7 +1343,6 @@ func (x *Photo) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField10(buf[offset:])
 	offset += x.fastWriteField11(buf[offset:])
 	offset += x.fastWriteField12(buf[offset:])
-	offset += x.fastWriteField13(buf[offset:])
 	return offset
 }
 
@@ -1345,50 +1403,42 @@ func (x *Photo) fastWriteField7(buf []byte) (offset int) {
 }
 
 func (x *Photo) fastWriteField8(buf []byte) (offset int) {
-	if x.CoverId == "" {
+	if !x.IsDue {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 8, x.GetCoverId())
+	offset += fastpb.WriteBool(buf[offset:], 8, x.GetIsDue())
 	return offset
 }
 
 func (x *Photo) fastWriteField9(buf []byte) (offset int) {
-	if !x.IsDue {
+	if x.CreatedTime == 0 {
 		return offset
 	}
-	offset += fastpb.WriteBool(buf[offset:], 9, x.GetIsDue())
+	offset += fastpb.WriteInt64(buf[offset:], 9, x.GetCreatedTime())
 	return offset
 }
 
 func (x *Photo) fastWriteField10(buf []byte) (offset int) {
-	if x.CreatedTime == 0 {
+	if x.UpdatedTime == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 10, x.GetCreatedTime())
+	offset += fastpb.WriteInt64(buf[offset:], 10, x.GetUpdatedTime())
 	return offset
 }
 
 func (x *Photo) fastWriteField11(buf []byte) (offset int) {
-	if x.UpdatedTime == 0 {
+	if x.DeletedTime == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 11, x.GetUpdatedTime())
+	offset += fastpb.WriteInt64(buf[offset:], 11, x.GetDeletedTime())
 	return offset
 }
 
 func (x *Photo) fastWriteField12(buf []byte) (offset int) {
-	if x.DeletedTime == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 12, x.GetDeletedTime())
-	return offset
-}
-
-func (x *Photo) fastWriteField13(buf []byte) (offset int) {
 	if x.Url == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 13, x.GetUrl())
+	offset += fastpb.WriteString(buf[offset:], 12, x.GetUrl())
 	return offset
 }
 
@@ -1406,6 +1456,7 @@ func (x *CatInfo) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField8(buf[offset:])
 	offset += x.fastWriteField9(buf[offset:])
 	offset += x.fastWriteField10(buf[offset:])
+	offset += x.fastWriteField11(buf[offset:])
 	return offset
 }
 
@@ -1489,6 +1540,14 @@ func (x *CatInfo) fastWriteField10(buf []byte) (offset int) {
 	return offset
 }
 
+func (x *CatInfo) fastWriteField11(buf []byte) (offset int) {
+	if x.AlbumId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 11, x.GetAlbumId())
+	return offset
+}
+
 func (x *PlaceInfo) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -1500,6 +1559,7 @@ func (x *PlaceInfo) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField5(buf[offset:])
 	offset += x.fastWriteField6(buf[offset:])
 	offset += x.fastWriteField7(buf[offset:])
+	offset += x.fastWriteField8(buf[offset:])
 	return offset
 }
 
@@ -1556,6 +1616,14 @@ func (x *PlaceInfo) fastWriteField7(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 7, x.GetDeletedTime())
+	return offset
+}
+
+func (x *PlaceInfo) fastWriteField8(buf []byte) (offset int) {
+	if x.AlbumId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 8, x.GetAlbumId())
 	return offset
 }
 
@@ -1634,6 +1702,7 @@ func (x *PointInfo) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
 	offset += x.fastWriteField5(buf[offset:])
+	offset += x.fastWriteField6(buf[offset:])
 	return offset
 }
 
@@ -1677,6 +1746,14 @@ func (x *PointInfo) fastWriteField5(buf []byte) (offset int) {
 	return offset
 }
 
+func (x *PointInfo) fastWriteField6(buf []byte) (offset int) {
+	if x.UserId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 6, x.GetUserId())
+	return offset
+}
+
 func (x *MemberInfo) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -1686,6 +1763,7 @@ func (x *MemberInfo) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
 	offset += x.fastWriteField5(buf[offset:])
+	offset += x.fastWriteField6(buf[offset:])
 	return offset
 }
 
@@ -1729,6 +1807,14 @@ func (x *MemberInfo) fastWriteField5(buf []byte) (offset int) {
 	return offset
 }
 
+func (x *MemberInfo) fastWriteField6(buf []byte) (offset int) {
+	if x.UserId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 6, x.GetUserId())
+	return offset
+}
+
 func (x *AchievementInfo) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -1737,6 +1823,7 @@ func (x *AchievementInfo) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
+	offset += x.fastWriteField5(buf[offset:])
 	return offset
 }
 
@@ -1769,6 +1856,14 @@ func (x *AchievementInfo) fastWriteField4(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 4, x.GetDeletedTime())
+	return offset
+}
+
+func (x *AchievementInfo) fastWriteField5(buf []byte) (offset int) {
+	if x.UserId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 5, x.GetUserId())
 	return offset
 }
 
@@ -1936,6 +2031,7 @@ func (x *AlbumInfo) Size() (n int) {
 	n += x.sizeField4()
 	n += x.sizeField5()
 	n += x.sizeField6()
+	n += x.sizeField7()
 	return n
 }
 
@@ -1984,6 +2080,14 @@ func (x *AlbumInfo) sizeField6() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(6, x.GetDeletedTime())
+	return n
+}
+
+func (x *AlbumInfo) sizeField7() (n int) {
+	if x.UserId == "" {
+		return n
+	}
+	n += fastpb.SizeString(7, x.GetUserId())
 	return n
 }
 
@@ -2145,7 +2249,6 @@ func (x *Photo) Size() (n int) {
 	n += x.sizeField10()
 	n += x.sizeField11()
 	n += x.sizeField12()
-	n += x.sizeField13()
 	return n
 }
 
@@ -2206,50 +2309,42 @@ func (x *Photo) sizeField7() (n int) {
 }
 
 func (x *Photo) sizeField8() (n int) {
-	if x.CoverId == "" {
+	if !x.IsDue {
 		return n
 	}
-	n += fastpb.SizeString(8, x.GetCoverId())
+	n += fastpb.SizeBool(8, x.GetIsDue())
 	return n
 }
 
 func (x *Photo) sizeField9() (n int) {
-	if !x.IsDue {
+	if x.CreatedTime == 0 {
 		return n
 	}
-	n += fastpb.SizeBool(9, x.GetIsDue())
+	n += fastpb.SizeInt64(9, x.GetCreatedTime())
 	return n
 }
 
 func (x *Photo) sizeField10() (n int) {
-	if x.CreatedTime == 0 {
+	if x.UpdatedTime == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(10, x.GetCreatedTime())
+	n += fastpb.SizeInt64(10, x.GetUpdatedTime())
 	return n
 }
 
 func (x *Photo) sizeField11() (n int) {
-	if x.UpdatedTime == 0 {
+	if x.DeletedTime == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(11, x.GetUpdatedTime())
+	n += fastpb.SizeInt64(11, x.GetDeletedTime())
 	return n
 }
 
 func (x *Photo) sizeField12() (n int) {
-	if x.DeletedTime == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(12, x.GetDeletedTime())
-	return n
-}
-
-func (x *Photo) sizeField13() (n int) {
 	if x.Url == "" {
 		return n
 	}
-	n += fastpb.SizeString(13, x.GetUrl())
+	n += fastpb.SizeString(12, x.GetUrl())
 	return n
 }
 
@@ -2267,6 +2362,7 @@ func (x *CatInfo) Size() (n int) {
 	n += x.sizeField8()
 	n += x.sizeField9()
 	n += x.sizeField10()
+	n += x.sizeField11()
 	return n
 }
 
@@ -2350,6 +2446,14 @@ func (x *CatInfo) sizeField10() (n int) {
 	return n
 }
 
+func (x *CatInfo) sizeField11() (n int) {
+	if x.AlbumId == "" {
+		return n
+	}
+	n += fastpb.SizeString(11, x.GetAlbumId())
+	return n
+}
+
 func (x *PlaceInfo) Size() (n int) {
 	if x == nil {
 		return n
@@ -2361,6 +2465,7 @@ func (x *PlaceInfo) Size() (n int) {
 	n += x.sizeField5()
 	n += x.sizeField6()
 	n += x.sizeField7()
+	n += x.sizeField8()
 	return n
 }
 
@@ -2417,6 +2522,14 @@ func (x *PlaceInfo) sizeField7() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(7, x.GetDeletedTime())
+	return n
+}
+
+func (x *PlaceInfo) sizeField8() (n int) {
+	if x.AlbumId == "" {
+		return n
+	}
+	n += fastpb.SizeString(8, x.GetAlbumId())
 	return n
 }
 
@@ -2495,6 +2608,7 @@ func (x *PointInfo) Size() (n int) {
 	n += x.sizeField3()
 	n += x.sizeField4()
 	n += x.sizeField5()
+	n += x.sizeField6()
 	return n
 }
 
@@ -2538,6 +2652,14 @@ func (x *PointInfo) sizeField5() (n int) {
 	return n
 }
 
+func (x *PointInfo) sizeField6() (n int) {
+	if x.UserId == "" {
+		return n
+	}
+	n += fastpb.SizeString(6, x.GetUserId())
+	return n
+}
+
 func (x *MemberInfo) Size() (n int) {
 	if x == nil {
 		return n
@@ -2547,6 +2669,7 @@ func (x *MemberInfo) Size() (n int) {
 	n += x.sizeField3()
 	n += x.sizeField4()
 	n += x.sizeField5()
+	n += x.sizeField6()
 	return n
 }
 
@@ -2590,6 +2713,14 @@ func (x *MemberInfo) sizeField5() (n int) {
 	return n
 }
 
+func (x *MemberInfo) sizeField6() (n int) {
+	if x.UserId == "" {
+		return n
+	}
+	n += fastpb.SizeString(6, x.GetUserId())
+	return n
+}
+
 func (x *AchievementInfo) Size() (n int) {
 	if x == nil {
 		return n
@@ -2598,6 +2729,7 @@ func (x *AchievementInfo) Size() (n int) {
 	n += x.sizeField2()
 	n += x.sizeField3()
 	n += x.sizeField4()
+	n += x.sizeField5()
 	return n
 }
 
@@ -2630,6 +2762,14 @@ func (x *AchievementInfo) sizeField4() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(4, x.GetDeletedTime())
+	return n
+}
+
+func (x *AchievementInfo) sizeField5() (n int) {
+	if x.UserId == "" {
+		return n
+	}
+	n += fastpb.SizeString(5, x.GetUserId())
 	return n
 }
 
@@ -2794,6 +2934,7 @@ var fieldIDToName_AlbumInfo = map[int32]string{
 	4: "CreatedTime",
 	5: "UpdatedTime",
 	6: "DeletedTime",
+	7: "UserId",
 }
 
 var fieldIDToName_Album = map[int32]string{
@@ -2822,12 +2963,11 @@ var fieldIDToName_Photo = map[int32]string{
 	5:  "CatInfoId",
 	6:  "PlaceInfoId",
 	7:  "Description",
-	8:  "CoverId",
-	9:  "IsDue",
-	10: "CreatedTime",
-	11: "UpdatedTime",
-	12: "DeletedTime",
-	13: "Url",
+	8:  "IsDue",
+	9:  "CreatedTime",
+	10: "UpdatedTime",
+	11: "DeletedTime",
+	12: "Url",
 }
 
 var fieldIDToName_CatInfo = map[int32]string{
@@ -2841,6 +2981,7 @@ var fieldIDToName_CatInfo = map[int32]string{
 	8:  "CreatedTime",
 	9:  "UpdatedTime",
 	10: "DeletedTime",
+	11: "AlbumId",
 }
 
 var fieldIDToName_PlaceInfo = map[int32]string{
@@ -2851,6 +2992,7 @@ var fieldIDToName_PlaceInfo = map[int32]string{
 	5: "CreatedTime",
 	6: "UpdatedTime",
 	7: "DeletedTime",
+	8: "AlbumId",
 }
 
 var fieldIDToName_MemoryInfo = map[int32]string{
@@ -2868,6 +3010,7 @@ var fieldIDToName_PointInfo = map[int32]string{
 	3: "CreatedTime",
 	4: "UpdatedTime",
 	5: "DeletedTime",
+	6: "UserId",
 }
 
 var fieldIDToName_MemberInfo = map[int32]string{
@@ -2876,6 +3019,7 @@ var fieldIDToName_MemberInfo = map[int32]string{
 	3: "CreatedTime",
 	4: "UpdatedTime",
 	5: "DeletedTime",
+	6: "UserId",
 }
 
 var fieldIDToName_AchievementInfo = map[int32]string{
@@ -2883,6 +3027,7 @@ var fieldIDToName_AchievementInfo = map[int32]string{
 	2: "CreatedTime",
 	3: "UpdatedTime",
 	4: "DeletedTime",
+	5: "UserId",
 }
 
 var fieldIDToName_TeamInfo = map[int32]string{

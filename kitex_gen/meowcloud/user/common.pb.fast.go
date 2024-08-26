@@ -45,41 +45,6 @@ func (x *MeowUser) FastRead(buf []byte, _type int8, number int32) (offset int, e
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 7:
-		offset, err = x.fastReadField7(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 8:
-		offset, err = x.fastReadField8(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 9:
-		offset, err = x.fastReadField9(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 10:
-		offset, err = x.fastReadField10(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 11:
-		offset, err = x.fastReadField11(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 12:
-		offset, err = x.fastReadField12(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 13:
-		offset, err = x.fastReadField13(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -114,52 +79,17 @@ func (x *MeowUser) fastReadField3(buf []byte, _type int8) (offset int, err error
 }
 
 func (x *MeowUser) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	x.MemberId, offset, err = fastpb.ReadInt32(buf, _type)
+	x.Username, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
 func (x *MeowUser) fastReadField5(buf []byte, _type int8) (offset int, err error) {
-	x.AlbumInfoId, offset, err = fastpb.ReadInt32(buf, _type)
-	return offset, err
-}
-
-func (x *MeowUser) fastReadField6(buf []byte, _type int8) (offset int, err error) {
-	x.TeamInfoId, offset, err = fastpb.ReadInt32(buf, _type)
-	return offset, err
-}
-
-func (x *MeowUser) fastReadField7(buf []byte, _type int8) (offset int, err error) {
-	x.MemoryInfoId, offset, err = fastpb.ReadInt32(buf, _type)
-	return offset, err
-}
-
-func (x *MeowUser) fastReadField8(buf []byte, _type int8) (offset int, err error) {
-	x.PointInfoId, offset, err = fastpb.ReadInt32(buf, _type)
-	return offset, err
-}
-
-func (x *MeowUser) fastReadField9(buf []byte, _type int8) (offset int, err error) {
-	x.AchievementInfoId, offset, err = fastpb.ReadInt32(buf, _type)
-	return offset, err
-}
-
-func (x *MeowUser) fastReadField10(buf []byte, _type int8) (offset int, err error) {
 	x.CreatedTime, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
-func (x *MeowUser) fastReadField11(buf []byte, _type int8) (offset int, err error) {
+func (x *MeowUser) fastReadField6(buf []byte, _type int8) (offset int, err error) {
 	x.UpdatedTime, offset, err = fastpb.ReadInt64(buf, _type)
-	return offset, err
-}
-
-func (x *MeowUser) fastReadField12(buf []byte, _type int8) (offset int, err error) {
-	x.DeletedTime, offset, err = fastpb.ReadInt64(buf, _type)
-	return offset, err
-}
-
-func (x *MeowUser) fastReadField13(buf []byte, _type int8) (offset int, err error) {
-	x.Username, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -173,13 +103,6 @@ func (x *MeowUser) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField4(buf[offset:])
 	offset += x.fastWriteField5(buf[offset:])
 	offset += x.fastWriteField6(buf[offset:])
-	offset += x.fastWriteField7(buf[offset:])
-	offset += x.fastWriteField8(buf[offset:])
-	offset += x.fastWriteField9(buf[offset:])
-	offset += x.fastWriteField10(buf[offset:])
-	offset += x.fastWriteField11(buf[offset:])
-	offset += x.fastWriteField12(buf[offset:])
-	offset += x.fastWriteField13(buf[offset:])
 	return offset
 }
 
@@ -208,82 +131,26 @@ func (x *MeowUser) fastWriteField3(buf []byte) (offset int) {
 }
 
 func (x *MeowUser) fastWriteField4(buf []byte) (offset int) {
-	if x.MemberId == 0 {
+	if x.Username == "" {
 		return offset
 	}
-	offset += fastpb.WriteInt32(buf[offset:], 4, x.GetMemberId())
+	offset += fastpb.WriteString(buf[offset:], 4, x.GetUsername())
 	return offset
 }
 
 func (x *MeowUser) fastWriteField5(buf []byte) (offset int) {
-	if x.AlbumInfoId == 0 {
+	if x.CreatedTime == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt32(buf[offset:], 5, x.GetAlbumInfoId())
+	offset += fastpb.WriteInt64(buf[offset:], 5, x.GetCreatedTime())
 	return offset
 }
 
 func (x *MeowUser) fastWriteField6(buf []byte) (offset int) {
-	if x.TeamInfoId == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt32(buf[offset:], 6, x.GetTeamInfoId())
-	return offset
-}
-
-func (x *MeowUser) fastWriteField7(buf []byte) (offset int) {
-	if x.MemoryInfoId == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt32(buf[offset:], 7, x.GetMemoryInfoId())
-	return offset
-}
-
-func (x *MeowUser) fastWriteField8(buf []byte) (offset int) {
-	if x.PointInfoId == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt32(buf[offset:], 8, x.GetPointInfoId())
-	return offset
-}
-
-func (x *MeowUser) fastWriteField9(buf []byte) (offset int) {
-	if x.AchievementInfoId == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt32(buf[offset:], 9, x.GetAchievementInfoId())
-	return offset
-}
-
-func (x *MeowUser) fastWriteField10(buf []byte) (offset int) {
-	if x.CreatedTime == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 10, x.GetCreatedTime())
-	return offset
-}
-
-func (x *MeowUser) fastWriteField11(buf []byte) (offset int) {
 	if x.UpdatedTime == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 11, x.GetUpdatedTime())
-	return offset
-}
-
-func (x *MeowUser) fastWriteField12(buf []byte) (offset int) {
-	if x.DeletedTime == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 12, x.GetDeletedTime())
-	return offset
-}
-
-func (x *MeowUser) fastWriteField13(buf []byte) (offset int) {
-	if x.Username == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 13, x.GetUsername())
+	offset += fastpb.WriteInt64(buf[offset:], 6, x.GetUpdatedTime())
 	return offset
 }
 
@@ -297,13 +164,6 @@ func (x *MeowUser) Size() (n int) {
 	n += x.sizeField4()
 	n += x.sizeField5()
 	n += x.sizeField6()
-	n += x.sizeField7()
-	n += x.sizeField8()
-	n += x.sizeField9()
-	n += x.sizeField10()
-	n += x.sizeField11()
-	n += x.sizeField12()
-	n += x.sizeField13()
 	return n
 }
 
@@ -332,99 +192,36 @@ func (x *MeowUser) sizeField3() (n int) {
 }
 
 func (x *MeowUser) sizeField4() (n int) {
-	if x.MemberId == 0 {
+	if x.Username == "" {
 		return n
 	}
-	n += fastpb.SizeInt32(4, x.GetMemberId())
+	n += fastpb.SizeString(4, x.GetUsername())
 	return n
 }
 
 func (x *MeowUser) sizeField5() (n int) {
-	if x.AlbumInfoId == 0 {
+	if x.CreatedTime == 0 {
 		return n
 	}
-	n += fastpb.SizeInt32(5, x.GetAlbumInfoId())
+	n += fastpb.SizeInt64(5, x.GetCreatedTime())
 	return n
 }
 
 func (x *MeowUser) sizeField6() (n int) {
-	if x.TeamInfoId == 0 {
-		return n
-	}
-	n += fastpb.SizeInt32(6, x.GetTeamInfoId())
-	return n
-}
-
-func (x *MeowUser) sizeField7() (n int) {
-	if x.MemoryInfoId == 0 {
-		return n
-	}
-	n += fastpb.SizeInt32(7, x.GetMemoryInfoId())
-	return n
-}
-
-func (x *MeowUser) sizeField8() (n int) {
-	if x.PointInfoId == 0 {
-		return n
-	}
-	n += fastpb.SizeInt32(8, x.GetPointInfoId())
-	return n
-}
-
-func (x *MeowUser) sizeField9() (n int) {
-	if x.AchievementInfoId == 0 {
-		return n
-	}
-	n += fastpb.SizeInt32(9, x.GetAchievementInfoId())
-	return n
-}
-
-func (x *MeowUser) sizeField10() (n int) {
-	if x.CreatedTime == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(10, x.GetCreatedTime())
-	return n
-}
-
-func (x *MeowUser) sizeField11() (n int) {
 	if x.UpdatedTime == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(11, x.GetUpdatedTime())
-	return n
-}
-
-func (x *MeowUser) sizeField12() (n int) {
-	if x.DeletedTime == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(12, x.GetDeletedTime())
-	return n
-}
-
-func (x *MeowUser) sizeField13() (n int) {
-	if x.Username == "" {
-		return n
-	}
-	n += fastpb.SizeString(13, x.GetUsername())
+	n += fastpb.SizeInt64(6, x.GetUpdatedTime())
 	return n
 }
 
 var fieldIDToName_MeowUser = map[int32]string{
-	1:  "UserMeta",
-	2:  "Signature",
-	3:  "Avatar",
-	4:  "MemberId",
-	5:  "AlbumInfoId",
-	6:  "TeamInfoId",
-	7:  "MemoryInfoId",
-	8:  "PointInfoId",
-	9:  "AchievementInfoId",
-	10: "CreatedTime",
-	11: "UpdatedTime",
-	12: "DeletedTime",
-	13: "Username",
+	1: "UserMeta",
+	2: "Signature",
+	3: "Avatar",
+	4: "Username",
+	5: "CreatedTime",
+	6: "UpdatedTime",
 }
 
 var _ = basic.File_basic_user_proto
