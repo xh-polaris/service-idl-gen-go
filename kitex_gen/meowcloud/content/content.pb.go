@@ -22,12 +22,14 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Album related messages
 type CreateAlbumReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Album *Album `protobuf:"bytes,1,opt,name=album,proto3" json:"album,omitempty"`
+	Album    *Album          `protobuf:"bytes,1,opt,name=album,proto3" json:"album,omitempty"`
+	UserMeta *basic.UserMeta `protobuf:"bytes,2,opt,name=userMeta,proto3" json:"userMeta,omitempty"`
 }
 
 func (x *CreateAlbumReq) Reset() {
@@ -69,12 +71,19 @@ func (x *CreateAlbumReq) GetAlbum() *Album {
 	return nil
 }
 
+func (x *CreateAlbumReq) GetUserMeta() *basic.UserMeta {
+	if x != nil {
+		return x.UserMeta
+	}
+	return nil
+}
+
 type CreateAlbumResp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Album *Album `protobuf:"bytes,1,opt,name=album,proto3" json:"album,omitempty"`
+	AlbumId string `protobuf:"bytes,1,opt,name=albumId,proto3" json:"albumId,omitempty"`
 }
 
 func (x *CreateAlbumResp) Reset() {
@@ -109,105 +118,11 @@ func (*CreateAlbumResp) Descriptor() ([]byte, []int) {
 	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{1}
 }
 
-func (x *CreateAlbumResp) GetAlbum() *Album {
+func (x *CreateAlbumResp) GetAlbumId() string {
 	if x != nil {
-		return x.Album
-	}
-	return nil
-}
-
-type RetrieveAlbumReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-}
-
-func (x *RetrieveAlbumReq) Reset() {
-	*x = RetrieveAlbumReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_meowcloud_content_content_proto_msgTypes[2]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *RetrieveAlbumReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RetrieveAlbumReq) ProtoMessage() {}
-
-func (x *RetrieveAlbumReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowcloud_content_content_proto_msgTypes[2]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RetrieveAlbumReq.ProtoReflect.Descriptor instead.
-func (*RetrieveAlbumReq) Descriptor() ([]byte, []int) {
-	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{2}
-}
-
-func (x *RetrieveAlbumReq) GetId() string {
-	if x != nil {
-		return x.Id
+		return x.AlbumId
 	}
 	return ""
-}
-
-type RetrieveAlbumResp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Album *Album `protobuf:"bytes,1,opt,name=album,proto3" json:"album,omitempty"`
-}
-
-func (x *RetrieveAlbumResp) Reset() {
-	*x = RetrieveAlbumResp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_meowcloud_content_content_proto_msgTypes[3]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *RetrieveAlbumResp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RetrieveAlbumResp) ProtoMessage() {}
-
-func (x *RetrieveAlbumResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowcloud_content_content_proto_msgTypes[3]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RetrieveAlbumResp.ProtoReflect.Descriptor instead.
-func (*RetrieveAlbumResp) Descriptor() ([]byte, []int) {
-	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{3}
-}
-
-func (x *RetrieveAlbumResp) GetAlbum() *Album {
-	if x != nil {
-		return x.Album
-	}
-	return nil
 }
 
 type UpdateAlbumReq struct {
@@ -221,7 +136,7 @@ type UpdateAlbumReq struct {
 func (x *UpdateAlbumReq) Reset() {
 	*x = UpdateAlbumReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowcloud_content_content_proto_msgTypes[4]
+		mi := &file_meowcloud_content_content_proto_msgTypes[2]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -234,7 +149,7 @@ func (x *UpdateAlbumReq) String() string {
 func (*UpdateAlbumReq) ProtoMessage() {}
 
 func (x *UpdateAlbumReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowcloud_content_content_proto_msgTypes[4]
+	mi := &file_meowcloud_content_content_proto_msgTypes[2]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -247,7 +162,7 @@ func (x *UpdateAlbumReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAlbumReq.ProtoReflect.Descriptor instead.
 func (*UpdateAlbumReq) Descriptor() ([]byte, []int) {
-	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{4}
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{2}
 }
 
 func (x *UpdateAlbumReq) GetAlbum() *Album {
@@ -266,7 +181,7 @@ type UpdateAlbumResp struct {
 func (x *UpdateAlbumResp) Reset() {
 	*x = UpdateAlbumResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowcloud_content_content_proto_msgTypes[5]
+		mi := &file_meowcloud_content_content_proto_msgTypes[3]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -279,7 +194,7 @@ func (x *UpdateAlbumResp) String() string {
 func (*UpdateAlbumResp) ProtoMessage() {}
 
 func (x *UpdateAlbumResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowcloud_content_content_proto_msgTypes[5]
+	mi := &file_meowcloud_content_content_proto_msgTypes[3]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -292,7 +207,195 @@ func (x *UpdateAlbumResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdateAlbumResp.ProtoReflect.Descriptor instead.
 func (*UpdateAlbumResp) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{3}
+}
+
+type GetAlbumReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *GetAlbumReq) Reset() {
+	*x = GetAlbumReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[4]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetAlbumReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAlbumReq) ProtoMessage() {}
+
+func (x *GetAlbumReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[4]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAlbumReq.ProtoReflect.Descriptor instead.
+func (*GetAlbumReq) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{4}
+}
+
+func (x *GetAlbumReq) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type GetAlbumResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Album *Album `protobuf:"bytes,1,opt,name=album,proto3" json:"album,omitempty"`
+}
+
+func (x *GetAlbumResp) Reset() {
+	*x = GetAlbumResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[5]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetAlbumResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAlbumResp) ProtoMessage() {}
+
+func (x *GetAlbumResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[5]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAlbumResp.ProtoReflect.Descriptor instead.
+func (*GetAlbumResp) Descriptor() ([]byte, []int) {
 	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *GetAlbumResp) GetAlbum() *Album {
+	if x != nil {
+		return x.Album
+	}
+	return nil
+}
+
+type ListAlbumsReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Pagination *basic.PaginationOptions `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (x *ListAlbumsReq) Reset() {
+	*x = ListAlbumsReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[6]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListAlbumsReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAlbumsReq) ProtoMessage() {}
+
+func (x *ListAlbumsReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[6]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAlbumsReq.ProtoReflect.Descriptor instead.
+func (*ListAlbumsReq) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *ListAlbumsReq) GetPagination() *basic.PaginationOptions {
+	if x != nil {
+		return x.Pagination
+	}
+	return nil
+}
+
+type ListAlbumsResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Albums []*Album `protobuf:"bytes,1,rep,name=albums,proto3" json:"albums,omitempty"`
+}
+
+func (x *ListAlbumsResp) Reset() {
+	*x = ListAlbumsResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[7]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListAlbumsResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListAlbumsResp) ProtoMessage() {}
+
+func (x *ListAlbumsResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[7]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListAlbumsResp.ProtoReflect.Descriptor instead.
+func (*ListAlbumsResp) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{7}
+}
+
+func (x *ListAlbumsResp) GetAlbums() []*Album {
+	if x != nil {
+		return x.Albums
+	}
+	return nil
 }
 
 type DeleteAlbumReq struct {
@@ -306,7 +409,7 @@ type DeleteAlbumReq struct {
 func (x *DeleteAlbumReq) Reset() {
 	*x = DeleteAlbumReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowcloud_content_content_proto_msgTypes[6]
+		mi := &file_meowcloud_content_content_proto_msgTypes[8]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -319,7 +422,7 @@ func (x *DeleteAlbumReq) String() string {
 func (*DeleteAlbumReq) ProtoMessage() {}
 
 func (x *DeleteAlbumReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowcloud_content_content_proto_msgTypes[6]
+	mi := &file_meowcloud_content_content_proto_msgTypes[8]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -332,7 +435,7 @@ func (x *DeleteAlbumReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAlbumReq.ProtoReflect.Descriptor instead.
 func (*DeleteAlbumReq) Descriptor() ([]byte, []int) {
-	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{6}
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{8}
 }
 
 func (x *DeleteAlbumReq) GetId() string {
@@ -351,7 +454,7 @@ type DeleteAlbumResp struct {
 func (x *DeleteAlbumResp) Reset() {
 	*x = DeleteAlbumResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowcloud_content_content_proto_msgTypes[7]
+		mi := &file_meowcloud_content_content_proto_msgTypes[9]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -364,7 +467,7 @@ func (x *DeleteAlbumResp) String() string {
 func (*DeleteAlbumResp) ProtoMessage() {}
 
 func (x *DeleteAlbumResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowcloud_content_content_proto_msgTypes[7]
+	mi := &file_meowcloud_content_content_proto_msgTypes[9]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -377,121 +480,21 @@ func (x *DeleteAlbumResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteAlbumResp.ProtoReflect.Descriptor instead.
 func (*DeleteAlbumResp) Descriptor() ([]byte, []int) {
-	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{7}
-}
-
-type ListAlbumReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	PaginationOptions *basic.PaginationOptions `protobuf:"bytes,1,opt,name=paginationOptions,proto3,oneof" json:"paginationOptions,omitempty"`
-}
-
-func (x *ListAlbumReq) Reset() {
-	*x = ListAlbumReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_meowcloud_content_content_proto_msgTypes[8]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ListAlbumReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListAlbumReq) ProtoMessage() {}
-
-func (x *ListAlbumReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowcloud_content_content_proto_msgTypes[8]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListAlbumReq.ProtoReflect.Descriptor instead.
-func (*ListAlbumReq) Descriptor() ([]byte, []int) {
-	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{8}
-}
-
-func (x *ListAlbumReq) GetPaginationOptions() *basic.PaginationOptions {
-	if x != nil {
-		return x.PaginationOptions
-	}
-	return nil
-}
-
-type ListAlbumResp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Albums []*Album `protobuf:"bytes,1,rep,name=Albums,proto3" json:"Albums,omitempty"`
-	Total  int64    `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
-}
-
-func (x *ListAlbumResp) Reset() {
-	*x = ListAlbumResp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_meowcloud_content_content_proto_msgTypes[9]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *ListAlbumResp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*ListAlbumResp) ProtoMessage() {}
-
-func (x *ListAlbumResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowcloud_content_content_proto_msgTypes[9]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use ListAlbumResp.ProtoReflect.Descriptor instead.
-func (*ListAlbumResp) Descriptor() ([]byte, []int) {
 	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{9}
 }
 
-func (x *ListAlbumResp) GetAlbums() []*Album {
-	if x != nil {
-		return x.Albums
-	}
-	return nil
-}
-
-func (x *ListAlbumResp) GetTotal() int64 {
-	if x != nil {
-		return x.Total
-	}
-	return 0
-}
-
-type CreatePhotoReq struct {
+// Photo related messages
+type UploadPhotoReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Photo *Photo `protobuf:"bytes,1,opt,name=photo,proto3" json:"photo,omitempty"`
+	Photo    *Photo          `protobuf:"bytes,1,opt,name=photo,proto3" json:"photo,omitempty"`
+	UserMeta *basic.UserMeta `protobuf:"bytes,2,opt,name=userMeta,proto3" json:"userMeta,omitempty"`
 }
 
-func (x *CreatePhotoReq) Reset() {
-	*x = CreatePhotoReq{}
+func (x *UploadPhotoReq) Reset() {
+	*x = UploadPhotoReq{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_meowcloud_content_content_proto_msgTypes[10]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -499,13 +502,13 @@ func (x *CreatePhotoReq) Reset() {
 	}
 }
 
-func (x *CreatePhotoReq) String() string {
+func (x *UploadPhotoReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreatePhotoReq) ProtoMessage() {}
+func (*UploadPhotoReq) ProtoMessage() {}
 
-func (x *CreatePhotoReq) ProtoReflect() protoreflect.Message {
+func (x *UploadPhotoReq) ProtoReflect() protoreflect.Message {
 	mi := &file_meowcloud_content_content_proto_msgTypes[10]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -517,28 +520,35 @@ func (x *CreatePhotoReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreatePhotoReq.ProtoReflect.Descriptor instead.
-func (*CreatePhotoReq) Descriptor() ([]byte, []int) {
+// Deprecated: Use UploadPhotoReq.ProtoReflect.Descriptor instead.
+func (*UploadPhotoReq) Descriptor() ([]byte, []int) {
 	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{10}
 }
 
-func (x *CreatePhotoReq) GetPhoto() *Photo {
+func (x *UploadPhotoReq) GetPhoto() *Photo {
 	if x != nil {
 		return x.Photo
 	}
 	return nil
 }
 
-type CreatePhotoResp struct {
+func (x *UploadPhotoReq) GetUserMeta() *basic.UserMeta {
+	if x != nil {
+		return x.UserMeta
+	}
+	return nil
+}
+
+type UploadPhotoResp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Photo *Photo `protobuf:"bytes,1,opt,name=photo,proto3" json:"photo,omitempty"`
+	PhotoId string `protobuf:"bytes,1,opt,name=photoId,proto3" json:"photoId,omitempty"`
 }
 
-func (x *CreatePhotoResp) Reset() {
-	*x = CreatePhotoResp{}
+func (x *UploadPhotoResp) Reset() {
+	*x = UploadPhotoResp{}
 	if protoimpl.UnsafeEnabled {
 		mi := &file_meowcloud_content_content_proto_msgTypes[11]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -546,13 +556,13 @@ func (x *CreatePhotoResp) Reset() {
 	}
 }
 
-func (x *CreatePhotoResp) String() string {
+func (x *UploadPhotoResp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*CreatePhotoResp) ProtoMessage() {}
+func (*UploadPhotoResp) ProtoMessage() {}
 
-func (x *CreatePhotoResp) ProtoReflect() protoreflect.Message {
+func (x *UploadPhotoResp) ProtoReflect() protoreflect.Message {
 	mi := &file_meowcloud_content_content_proto_msgTypes[11]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -564,110 +574,16 @@ func (x *CreatePhotoResp) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use CreatePhotoResp.ProtoReflect.Descriptor instead.
-func (*CreatePhotoResp) Descriptor() ([]byte, []int) {
+// Deprecated: Use UploadPhotoResp.ProtoReflect.Descriptor instead.
+func (*UploadPhotoResp) Descriptor() ([]byte, []int) {
 	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{11}
 }
 
-func (x *CreatePhotoResp) GetPhoto() *Photo {
+func (x *UploadPhotoResp) GetPhotoId() string {
 	if x != nil {
-		return x.Photo
-	}
-	return nil
-}
-
-type RetrievePhotoReq struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
-}
-
-func (x *RetrievePhotoReq) Reset() {
-	*x = RetrievePhotoReq{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_meowcloud_content_content_proto_msgTypes[12]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *RetrievePhotoReq) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RetrievePhotoReq) ProtoMessage() {}
-
-func (x *RetrievePhotoReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowcloud_content_content_proto_msgTypes[12]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RetrievePhotoReq.ProtoReflect.Descriptor instead.
-func (*RetrievePhotoReq) Descriptor() ([]byte, []int) {
-	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{12}
-}
-
-func (x *RetrievePhotoReq) GetId() string {
-	if x != nil {
-		return x.Id
+		return x.PhotoId
 	}
 	return ""
-}
-
-type RetrievePhotoResp struct {
-	state         protoimpl.MessageState
-	sizeCache     protoimpl.SizeCache
-	unknownFields protoimpl.UnknownFields
-
-	Photo *Photo `protobuf:"bytes,1,opt,name=photo,proto3" json:"photo,omitempty"`
-}
-
-func (x *RetrievePhotoResp) Reset() {
-	*x = RetrievePhotoResp{}
-	if protoimpl.UnsafeEnabled {
-		mi := &file_meowcloud_content_content_proto_msgTypes[13]
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		ms.StoreMessageInfo(mi)
-	}
-}
-
-func (x *RetrievePhotoResp) String() string {
-	return protoimpl.X.MessageStringOf(x)
-}
-
-func (*RetrievePhotoResp) ProtoMessage() {}
-
-func (x *RetrievePhotoResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowcloud_content_content_proto_msgTypes[13]
-	if protoimpl.UnsafeEnabled && x != nil {
-		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
-		if ms.LoadMessageInfo() == nil {
-			ms.StoreMessageInfo(mi)
-		}
-		return ms
-	}
-	return mi.MessageOf(x)
-}
-
-// Deprecated: Use RetrievePhotoResp.ProtoReflect.Descriptor instead.
-func (*RetrievePhotoResp) Descriptor() ([]byte, []int) {
-	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{13}
-}
-
-func (x *RetrievePhotoResp) GetPhoto() *Photo {
-	if x != nil {
-		return x.Photo
-	}
-	return nil
 }
 
 type UpdatePhotoReq struct {
@@ -681,7 +597,7 @@ type UpdatePhotoReq struct {
 func (x *UpdatePhotoReq) Reset() {
 	*x = UpdatePhotoReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowcloud_content_content_proto_msgTypes[14]
+		mi := &file_meowcloud_content_content_proto_msgTypes[12]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -694,7 +610,7 @@ func (x *UpdatePhotoReq) String() string {
 func (*UpdatePhotoReq) ProtoMessage() {}
 
 func (x *UpdatePhotoReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowcloud_content_content_proto_msgTypes[14]
+	mi := &file_meowcloud_content_content_proto_msgTypes[12]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -707,7 +623,7 @@ func (x *UpdatePhotoReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdatePhotoReq.ProtoReflect.Descriptor instead.
 func (*UpdatePhotoReq) Descriptor() ([]byte, []int) {
-	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{14}
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{12}
 }
 
 func (x *UpdatePhotoReq) GetPhoto() *Photo {
@@ -726,7 +642,7 @@ type UpdatePhotoResp struct {
 func (x *UpdatePhotoResp) Reset() {
 	*x = UpdatePhotoResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowcloud_content_content_proto_msgTypes[15]
+		mi := &file_meowcloud_content_content_proto_msgTypes[13]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -739,7 +655,7 @@ func (x *UpdatePhotoResp) String() string {
 func (*UpdatePhotoResp) ProtoMessage() {}
 
 func (x *UpdatePhotoResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowcloud_content_content_proto_msgTypes[15]
+	mi := &file_meowcloud_content_content_proto_msgTypes[13]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -752,7 +668,195 @@ func (x *UpdatePhotoResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use UpdatePhotoResp.ProtoReflect.Descriptor instead.
 func (*UpdatePhotoResp) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{13}
+}
+
+type GetPhotoReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *GetPhotoReq) Reset() {
+	*x = GetPhotoReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[14]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetPhotoReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPhotoReq) ProtoMessage() {}
+
+func (x *GetPhotoReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[14]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPhotoReq.ProtoReflect.Descriptor instead.
+func (*GetPhotoReq) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *GetPhotoReq) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type GetPhotoResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Photo *Photo `protobuf:"bytes,1,opt,name=photo,proto3" json:"photo,omitempty"`
+}
+
+func (x *GetPhotoResp) Reset() {
+	*x = GetPhotoResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[15]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetPhotoResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPhotoResp) ProtoMessage() {}
+
+func (x *GetPhotoResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[15]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPhotoResp.ProtoReflect.Descriptor instead.
+func (*GetPhotoResp) Descriptor() ([]byte, []int) {
 	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *GetPhotoResp) GetPhoto() *Photo {
+	if x != nil {
+		return x.Photo
+	}
+	return nil
+}
+
+type ListPhotosReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Pagination *basic.PaginationOptions `protobuf:"bytes,1,opt,name=pagination,proto3" json:"pagination,omitempty"`
+}
+
+func (x *ListPhotosReq) Reset() {
+	*x = ListPhotosReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[16]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListPhotosReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListPhotosReq) ProtoMessage() {}
+
+func (x *ListPhotosReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[16]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListPhotosReq.ProtoReflect.Descriptor instead.
+func (*ListPhotosReq) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{16}
+}
+
+func (x *ListPhotosReq) GetPagination() *basic.PaginationOptions {
+	if x != nil {
+		return x.Pagination
+	}
+	return nil
+}
+
+type ListPhotosResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Photos []*Photo `protobuf:"bytes,1,rep,name=photos,proto3" json:"photos,omitempty"`
+}
+
+func (x *ListPhotosResp) Reset() {
+	*x = ListPhotosResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[17]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListPhotosResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListPhotosResp) ProtoMessage() {}
+
+func (x *ListPhotosResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[17]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListPhotosResp.ProtoReflect.Descriptor instead.
+func (*ListPhotosResp) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{17}
+}
+
+func (x *ListPhotosResp) GetPhotos() []*Photo {
+	if x != nil {
+		return x.Photos
+	}
+	return nil
 }
 
 type DeletePhotoReq struct {
@@ -766,7 +870,7 @@ type DeletePhotoReq struct {
 func (x *DeletePhotoReq) Reset() {
 	*x = DeletePhotoReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowcloud_content_content_proto_msgTypes[16]
+		mi := &file_meowcloud_content_content_proto_msgTypes[18]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -779,7 +883,7 @@ func (x *DeletePhotoReq) String() string {
 func (*DeletePhotoReq) ProtoMessage() {}
 
 func (x *DeletePhotoReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowcloud_content_content_proto_msgTypes[16]
+	mi := &file_meowcloud_content_content_proto_msgTypes[18]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -792,7 +896,7 @@ func (x *DeletePhotoReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeletePhotoReq.ProtoReflect.Descriptor instead.
 func (*DeletePhotoReq) Descriptor() ([]byte, []int) {
-	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{16}
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{18}
 }
 
 func (x *DeletePhotoReq) GetId() string {
@@ -811,7 +915,7 @@ type DeletePhotoResp struct {
 func (x *DeletePhotoResp) Reset() {
 	*x = DeletePhotoResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowcloud_content_content_proto_msgTypes[17]
+		mi := &file_meowcloud_content_content_proto_msgTypes[19]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -824,7 +928,7 @@ func (x *DeletePhotoResp) String() string {
 func (*DeletePhotoResp) ProtoMessage() {}
 
 func (x *DeletePhotoResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowcloud_content_content_proto_msgTypes[17]
+	mi := &file_meowcloud_content_content_proto_msgTypes[19]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -837,36 +941,36 @@ func (x *DeletePhotoResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeletePhotoResp.ProtoReflect.Descriptor instead.
 func (*DeletePhotoResp) Descriptor() ([]byte, []int) {
-	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{17}
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{19}
 }
 
-type ListPhotoReq struct {
+// Cat related messages
+type AddCatReq struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	AlbumId           string                   `protobuf:"bytes,1,opt,name=albumId,proto3" json:"albumId,omitempty"`
-	PaginationOptions *basic.PaginationOptions `protobuf:"bytes,2,opt,name=paginationOptions,proto3,oneof" json:"paginationOptions,omitempty"`
-	OnlyFeatured      *bool                    `protobuf:"varint,3,opt,name=onlyFeatured,proto3,oneof" json:"onlyFeatured,omitempty"`
+	Cat     *CatInfo `protobuf:"bytes,1,opt,name=cat,proto3" json:"cat,omitempty"`
+	AlbumId string   `protobuf:"bytes,2,opt,name=albumId,proto3" json:"albumId,omitempty"`
 }
 
-func (x *ListPhotoReq) Reset() {
-	*x = ListPhotoReq{}
+func (x *AddCatReq) Reset() {
+	*x = AddCatReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowcloud_content_content_proto_msgTypes[18]
+		mi := &file_meowcloud_content_content_proto_msgTypes[20]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *ListPhotoReq) String() string {
+func (x *AddCatReq) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListPhotoReq) ProtoMessage() {}
+func (*AddCatReq) ProtoMessage() {}
 
-func (x *ListPhotoReq) ProtoReflect() protoreflect.Message {
-	mi := &file_meowcloud_content_content_proto_msgTypes[18]
+func (x *AddCatReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[20]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -877,58 +981,50 @@ func (x *ListPhotoReq) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListPhotoReq.ProtoReflect.Descriptor instead.
-func (*ListPhotoReq) Descriptor() ([]byte, []int) {
-	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{18}
+// Deprecated: Use AddCatReq.ProtoReflect.Descriptor instead.
+func (*AddCatReq) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{20}
 }
 
-func (x *ListPhotoReq) GetAlbumId() string {
+func (x *AddCatReq) GetCat() *CatInfo {
+	if x != nil {
+		return x.Cat
+	}
+	return nil
+}
+
+func (x *AddCatReq) GetAlbumId() string {
 	if x != nil {
 		return x.AlbumId
 	}
 	return ""
 }
 
-func (x *ListPhotoReq) GetPaginationOptions() *basic.PaginationOptions {
-	if x != nil {
-		return x.PaginationOptions
-	}
-	return nil
-}
-
-func (x *ListPhotoReq) GetOnlyFeatured() bool {
-	if x != nil && x.OnlyFeatured != nil {
-		return *x.OnlyFeatured
-	}
-	return false
-}
-
-type ListPhotoResp struct {
+type AddCatResp struct {
 	state         protoimpl.MessageState
 	sizeCache     protoimpl.SizeCache
 	unknownFields protoimpl.UnknownFields
 
-	Photos []*Photo `protobuf:"bytes,1,rep,name=photos,proto3" json:"photos,omitempty"`
-	Total  int64    `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"`
+	CatId string `protobuf:"bytes,1,opt,name=catId,proto3" json:"catId,omitempty"`
 }
 
-func (x *ListPhotoResp) Reset() {
-	*x = ListPhotoResp{}
+func (x *AddCatResp) Reset() {
+	*x = AddCatResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_meowcloud_content_content_proto_msgTypes[19]
+		mi := &file_meowcloud_content_content_proto_msgTypes[21]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
 }
 
-func (x *ListPhotoResp) String() string {
+func (x *AddCatResp) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*ListPhotoResp) ProtoMessage() {}
+func (*AddCatResp) ProtoMessage() {}
 
-func (x *ListPhotoResp) ProtoReflect() protoreflect.Message {
-	mi := &file_meowcloud_content_content_proto_msgTypes[19]
+func (x *AddCatResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[21]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -939,23 +1035,1387 @@ func (x *ListPhotoResp) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use ListPhotoResp.ProtoReflect.Descriptor instead.
-func (*ListPhotoResp) Descriptor() ([]byte, []int) {
-	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{19}
+// Deprecated: Use AddCatResp.ProtoReflect.Descriptor instead.
+func (*AddCatResp) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{21}
 }
 
-func (x *ListPhotoResp) GetPhotos() []*Photo {
+func (x *AddCatResp) GetCatId() string {
 	if x != nil {
-		return x.Photos
+		return x.CatId
+	}
+	return ""
+}
+
+type UpdateCatReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Cat *CatInfo `protobuf:"bytes,1,opt,name=cat,proto3" json:"cat,omitempty"`
+}
+
+func (x *UpdateCatReq) Reset() {
+	*x = UpdateCatReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[22]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateCatReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateCatReq) ProtoMessage() {}
+
+func (x *UpdateCatReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[22]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateCatReq.ProtoReflect.Descriptor instead.
+func (*UpdateCatReq) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{22}
+}
+
+func (x *UpdateCatReq) GetCat() *CatInfo {
+	if x != nil {
+		return x.Cat
 	}
 	return nil
 }
 
-func (x *ListPhotoResp) GetTotal() int64 {
-	if x != nil {
-		return x.Total
+type UpdateCatResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *UpdateCatResp) Reset() {
+	*x = UpdateCatResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[23]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
 	}
-	return 0
+}
+
+func (x *UpdateCatResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateCatResp) ProtoMessage() {}
+
+func (x *UpdateCatResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[23]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateCatResp.ProtoReflect.Descriptor instead.
+func (*UpdateCatResp) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{23}
+}
+
+type GetCatReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	AlbumId string `protobuf:"bytes,1,opt,name=albumId,proto3" json:"albumId,omitempty"`
+}
+
+func (x *GetCatReq) Reset() {
+	*x = GetCatReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[24]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetCatReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetCatReq) ProtoMessage() {}
+
+func (x *GetCatReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[24]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetCatReq.ProtoReflect.Descriptor instead.
+func (*GetCatReq) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{24}
+}
+
+func (x *GetCatReq) GetAlbumId() string {
+	if x != nil {
+		return x.AlbumId
+	}
+	return ""
+}
+
+type GetCatResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Cat *CatInfo `protobuf:"bytes,1,opt,name=cat,proto3" json:"cat,omitempty"`
+}
+
+func (x *GetCatResp) Reset() {
+	*x = GetCatResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[25]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetCatResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetCatResp) ProtoMessage() {}
+
+func (x *GetCatResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[25]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetCatResp.ProtoReflect.Descriptor instead.
+func (*GetCatResp) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{25}
+}
+
+func (x *GetCatResp) GetCat() *CatInfo {
+	if x != nil {
+		return x.Cat
+	}
+	return nil
+}
+
+type DeleteCatReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *DeleteCatReq) Reset() {
+	*x = DeleteCatReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[26]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteCatReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteCatReq) ProtoMessage() {}
+
+func (x *DeleteCatReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[26]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteCatReq.ProtoReflect.Descriptor instead.
+func (*DeleteCatReq) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{26}
+}
+
+func (x *DeleteCatReq) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type DeleteCatResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *DeleteCatResp) Reset() {
+	*x = DeleteCatResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[27]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteCatResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteCatResp) ProtoMessage() {}
+
+func (x *DeleteCatResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[27]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteCatResp.ProtoReflect.Descriptor instead.
+func (*DeleteCatResp) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{27}
+}
+
+// Place related messages
+type AddPlaceReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Place   *PlaceInfo `protobuf:"bytes,1,opt,name=place,proto3" json:"place,omitempty"`
+	AlbumId string     `protobuf:"bytes,2,opt,name=albumId,proto3" json:"albumId,omitempty"`
+}
+
+func (x *AddPlaceReq) Reset() {
+	*x = AddPlaceReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[28]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddPlaceReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddPlaceReq) ProtoMessage() {}
+
+func (x *AddPlaceReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[28]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddPlaceReq.ProtoReflect.Descriptor instead.
+func (*AddPlaceReq) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{28}
+}
+
+func (x *AddPlaceReq) GetPlace() *PlaceInfo {
+	if x != nil {
+		return x.Place
+	}
+	return nil
+}
+
+func (x *AddPlaceReq) GetAlbumId() string {
+	if x != nil {
+		return x.AlbumId
+	}
+	return ""
+}
+
+type AddPlaceResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	PlaceId string `protobuf:"bytes,1,opt,name=placeId,proto3" json:"placeId,omitempty"`
+}
+
+func (x *AddPlaceResp) Reset() {
+	*x = AddPlaceResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[29]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddPlaceResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddPlaceResp) ProtoMessage() {}
+
+func (x *AddPlaceResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[29]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddPlaceResp.ProtoReflect.Descriptor instead.
+func (*AddPlaceResp) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{29}
+}
+
+func (x *AddPlaceResp) GetPlaceId() string {
+	if x != nil {
+		return x.PlaceId
+	}
+	return ""
+}
+
+type UpdatePlaceReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Place *PlaceInfo `protobuf:"bytes,1,opt,name=place,proto3" json:"place,omitempty"`
+}
+
+func (x *UpdatePlaceReq) Reset() {
+	*x = UpdatePlaceReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[30]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdatePlaceReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePlaceReq) ProtoMessage() {}
+
+func (x *UpdatePlaceReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[30]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePlaceReq.ProtoReflect.Descriptor instead.
+func (*UpdatePlaceReq) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{30}
+}
+
+func (x *UpdatePlaceReq) GetPlace() *PlaceInfo {
+	if x != nil {
+		return x.Place
+	}
+	return nil
+}
+
+type UpdatePlaceResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *UpdatePlaceResp) Reset() {
+	*x = UpdatePlaceResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[31]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdatePlaceResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdatePlaceResp) ProtoMessage() {}
+
+func (x *UpdatePlaceResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[31]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdatePlaceResp.ProtoReflect.Descriptor instead.
+func (*UpdatePlaceResp) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{31}
+}
+
+type GetPlaceReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	AlbumId string `protobuf:"bytes,1,opt,name=albumId,proto3" json:"albumId,omitempty"`
+}
+
+func (x *GetPlaceReq) Reset() {
+	*x = GetPlaceReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[32]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetPlaceReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPlaceReq) ProtoMessage() {}
+
+func (x *GetPlaceReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[32]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPlaceReq.ProtoReflect.Descriptor instead.
+func (*GetPlaceReq) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{32}
+}
+
+func (x *GetPlaceReq) GetAlbumId() string {
+	if x != nil {
+		return x.AlbumId
+	}
+	return ""
+}
+
+type GetPlaceResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Place *PlaceInfo `protobuf:"bytes,1,opt,name=place,proto3" json:"place,omitempty"`
+}
+
+func (x *GetPlaceResp) Reset() {
+	*x = GetPlaceResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[33]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetPlaceResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetPlaceResp) ProtoMessage() {}
+
+func (x *GetPlaceResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[33]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetPlaceResp.ProtoReflect.Descriptor instead.
+func (*GetPlaceResp) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{33}
+}
+
+func (x *GetPlaceResp) GetPlace() *PlaceInfo {
+	if x != nil {
+		return x.Place
+	}
+	return nil
+}
+
+type DeletePlaceReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *DeletePlaceReq) Reset() {
+	*x = DeletePlaceReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[34]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeletePlaceReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeletePlaceReq) ProtoMessage() {}
+
+func (x *DeletePlaceReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[34]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeletePlaceReq.ProtoReflect.Descriptor instead.
+func (*DeletePlaceReq) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *DeletePlaceReq) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type DeletePlaceResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *DeletePlaceResp) Reset() {
+	*x = DeletePlaceResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[35]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeletePlaceResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeletePlaceResp) ProtoMessage() {}
+
+func (x *DeletePlaceResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[35]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeletePlaceResp.ProtoReflect.Descriptor instead.
+func (*DeletePlaceResp) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{35}
+}
+
+type AddTeamReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Team     *Team           `protobuf:"bytes,1,opt,name=team,proto3" json:"team,omitempty"`
+	UserMeta *basic.UserMeta `protobuf:"bytes,2,opt,name=userMeta,proto3" json:"userMeta,omitempty"`
+}
+
+func (x *AddTeamReq) Reset() {
+	*x = AddTeamReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[36]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddTeamReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddTeamReq) ProtoMessage() {}
+
+func (x *AddTeamReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[36]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddTeamReq.ProtoReflect.Descriptor instead.
+func (*AddTeamReq) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{36}
+}
+
+func (x *AddTeamReq) GetTeam() *Team {
+	if x != nil {
+		return x.Team
+	}
+	return nil
+}
+
+func (x *AddTeamReq) GetUserMeta() *basic.UserMeta {
+	if x != nil {
+		return x.UserMeta
+	}
+	return nil
+}
+
+type AddTeamResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	TeamId string `protobuf:"bytes,1,opt,name=teamId,proto3" json:"teamId,omitempty"`
+}
+
+func (x *AddTeamResp) Reset() {
+	*x = AddTeamResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[37]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *AddTeamResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*AddTeamResp) ProtoMessage() {}
+
+func (x *AddTeamResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[37]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use AddTeamResp.ProtoReflect.Descriptor instead.
+func (*AddTeamResp) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{37}
+}
+
+func (x *AddTeamResp) GetTeamId() string {
+	if x != nil {
+		return x.TeamId
+	}
+	return ""
+}
+
+type UpdateTeamReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Team *Team `protobuf:"bytes,1,opt,name=team,proto3" json:"team,omitempty"`
+}
+
+func (x *UpdateTeamReq) Reset() {
+	*x = UpdateTeamReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[38]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateTeamReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateTeamReq) ProtoMessage() {}
+
+func (x *UpdateTeamReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[38]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateTeamReq.ProtoReflect.Descriptor instead.
+func (*UpdateTeamReq) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{38}
+}
+
+func (x *UpdateTeamReq) GetTeam() *Team {
+	if x != nil {
+		return x.Team
+	}
+	return nil
+}
+
+type UpdateTeamResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *UpdateTeamResp) Reset() {
+	*x = UpdateTeamResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[39]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *UpdateTeamResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*UpdateTeamResp) ProtoMessage() {}
+
+func (x *UpdateTeamResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[39]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use UpdateTeamResp.ProtoReflect.Descriptor instead.
+func (*UpdateTeamResp) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{39}
+}
+
+type GetTeamReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *GetTeamReq) Reset() {
+	*x = GetTeamReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[40]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetTeamReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTeamReq) ProtoMessage() {}
+
+func (x *GetTeamReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[40]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTeamReq.ProtoReflect.Descriptor instead.
+func (*GetTeamReq) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{40}
+}
+
+func (x *GetTeamReq) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type GetTeamResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Team *Team `protobuf:"bytes,1,opt,name=team,proto3" json:"team,omitempty"`
+}
+
+func (x *GetTeamResp) Reset() {
+	*x = GetTeamResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[41]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetTeamResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTeamResp) ProtoMessage() {}
+
+func (x *GetTeamResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[41]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTeamResp.ProtoReflect.Descriptor instead.
+func (*GetTeamResp) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{41}
+}
+
+func (x *GetTeamResp) GetTeam() *Team {
+	if x != nil {
+		return x.Team
+	}
+	return nil
+}
+
+type DeleteTeamReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *DeleteTeamReq) Reset() {
+	*x = DeleteTeamReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[42]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteTeamReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteTeamReq) ProtoMessage() {}
+
+func (x *DeleteTeamReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[42]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteTeamReq.ProtoReflect.Descriptor instead.
+func (*DeleteTeamReq) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{42}
+}
+
+func (x *DeleteTeamReq) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+type DeleteTeamResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *DeleteTeamResp) Reset() {
+	*x = DeleteTeamResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[43]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *DeleteTeamResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteTeamResp) ProtoMessage() {}
+
+func (x *DeleteTeamResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[43]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteTeamResp.ProtoReflect.Descriptor instead.
+func (*DeleteTeamResp) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{43}
+}
+
+type JoinTeamReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	TeamId   string          `protobuf:"bytes,1,opt,name=teamId,proto3" json:"teamId,omitempty"`
+	UserMeta *basic.UserMeta `protobuf:"bytes,2,opt,name=userMeta,proto3" json:"userMeta,omitempty"`
+}
+
+func (x *JoinTeamReq) Reset() {
+	*x = JoinTeamReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[44]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *JoinTeamReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JoinTeamReq) ProtoMessage() {}
+
+func (x *JoinTeamReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[44]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use JoinTeamReq.ProtoReflect.Descriptor instead.
+func (*JoinTeamReq) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{44}
+}
+
+func (x *JoinTeamReq) GetTeamId() string {
+	if x != nil {
+		return x.TeamId
+	}
+	return ""
+}
+
+func (x *JoinTeamReq) GetUserMeta() *basic.UserMeta {
+	if x != nil {
+		return x.UserMeta
+	}
+	return nil
+}
+
+type JoinTeamResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *JoinTeamResp) Reset() {
+	*x = JoinTeamResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[45]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *JoinTeamResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*JoinTeamResp) ProtoMessage() {}
+
+func (x *JoinTeamResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[45]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use JoinTeamResp.ProtoReflect.Descriptor instead.
+func (*JoinTeamResp) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{45}
+}
+
+type LeaveTeamReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	TeamId   string          `protobuf:"bytes,1,opt,name=teamId,proto3" json:"teamId,omitempty"`
+	UserMeta *basic.UserMeta `protobuf:"bytes,2,opt,name=userMeta,proto3" json:"userMeta,omitempty"`
+}
+
+func (x *LeaveTeamReq) Reset() {
+	*x = LeaveTeamReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[46]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *LeaveTeamReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LeaveTeamReq) ProtoMessage() {}
+
+func (x *LeaveTeamReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[46]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LeaveTeamReq.ProtoReflect.Descriptor instead.
+func (*LeaveTeamReq) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{46}
+}
+
+func (x *LeaveTeamReq) GetTeamId() string {
+	if x != nil {
+		return x.TeamId
+	}
+	return ""
+}
+
+func (x *LeaveTeamReq) GetUserMeta() *basic.UserMeta {
+	if x != nil {
+		return x.UserMeta
+	}
+	return nil
+}
+
+type LeaveTeamResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+}
+
+func (x *LeaveTeamResp) Reset() {
+	*x = LeaveTeamResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[47]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *LeaveTeamResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*LeaveTeamResp) ProtoMessage() {}
+
+func (x *LeaveTeamResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[47]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use LeaveTeamResp.ProtoReflect.Descriptor instead.
+func (*LeaveTeamResp) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{47}
+}
+
+type ListTeamReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	UserMeta *basic.UserMeta `protobuf:"bytes,1,opt,name=userMeta,proto3" json:"userMeta,omitempty"`
+}
+
+func (x *ListTeamReq) Reset() {
+	*x = ListTeamReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[48]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListTeamReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTeamReq) ProtoMessage() {}
+
+func (x *ListTeamReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[48]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTeamReq.ProtoReflect.Descriptor instead.
+func (*ListTeamReq) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{48}
+}
+
+func (x *ListTeamReq) GetUserMeta() *basic.UserMeta {
+	if x != nil {
+		return x.UserMeta
+	}
+	return nil
+}
+
+type ListTeamResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Teams []*Team `protobuf:"bytes,1,rep,name=teams,proto3" json:"teams,omitempty"`
+}
+
+func (x *ListTeamResp) Reset() {
+	*x = ListTeamResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[49]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *ListTeamResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListTeamResp) ProtoMessage() {}
+
+func (x *ListTeamResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[49]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListTeamResp.ProtoReflect.Descriptor instead.
+func (*ListTeamResp) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{49}
+}
+
+func (x *ListTeamResp) GetTeams() []*Team {
+	if x != nil {
+		return x.Teams
+	}
+	return nil
+}
+
+type GetTeamInfoReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	UserMeta *basic.UserMeta `protobuf:"bytes,1,opt,name=userMeta,proto3" json:"userMeta,omitempty"`
+}
+
+func (x *GetTeamInfoReq) Reset() {
+	*x = GetTeamInfoReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[50]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetTeamInfoReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTeamInfoReq) ProtoMessage() {}
+
+func (x *GetTeamInfoReq) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[50]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTeamInfoReq.ProtoReflect.Descriptor instead.
+func (*GetTeamInfoReq) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{50}
+}
+
+func (x *GetTeamInfoReq) GetUserMeta() *basic.UserMeta {
+	if x != nil {
+		return x.UserMeta
+	}
+	return nil
+}
+
+type GetTeamInfoResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	TeamInfo *TeamInfo `protobuf:"bytes,1,opt,name=teamInfo,proto3" json:"teamInfo,omitempty"`
+}
+
+func (x *GetTeamInfoResp) Reset() {
+	*x = GetTeamInfoResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_meowcloud_content_content_proto_msgTypes[51]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetTeamInfoResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetTeamInfoResp) ProtoMessage() {}
+
+func (x *GetTeamInfoResp) ProtoReflect() protoreflect.Message {
+	mi := &file_meowcloud_content_content_proto_msgTypes[51]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetTeamInfoResp.ProtoReflect.Descriptor instead.
+func (*GetTeamInfoResp) Descriptor() ([]byte, []int) {
+	return file_meowcloud_content_content_proto_rawDescGZIP(), []int{51}
+}
+
+func (x *GetTeamInfoResp) GetTeamInfo() *TeamInfo {
+	if x != nil {
+		return x.TeamInfo
+	}
+	return nil
 }
 
 var File_meowcloud_content_content_proto protoreflect.FileDescriptor
@@ -967,148 +2427,317 @@ var file_meowcloud_content_content_proto_rawDesc = []byte{
 	0x74, 0x65, 0x6e, 0x74, 0x1a, 0x16, 0x62, 0x61, 0x73, 0x69, 0x63, 0x2f, 0x70, 0x61, 0x67, 0x69,
 	0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x1e, 0x6d, 0x65,
 	0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2f,
-	0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x40, 0x0a, 0x0e,
-	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x71, 0x12, 0x2e,
-	0x0a, 0x05, 0x61, 0x6c, 0x62, 0x75, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e,
-	0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e,
-	0x74, 0x2e, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x05, 0x61, 0x6c, 0x62, 0x75, 0x6d, 0x22, 0x41,
-	0x0a, 0x0f, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x73,
-	0x70, 0x12, 0x2e, 0x0a, 0x05, 0x61, 0x6c, 0x62, 0x75, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
-	0x32, 0x18, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e,
-	0x74, 0x65, 0x6e, 0x74, 0x2e, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x05, 0x61, 0x6c, 0x62, 0x75,
-	0x6d, 0x22, 0x22, 0x0a, 0x10, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x65, 0x41, 0x6c, 0x62,
-	0x75, 0x6d, 0x52, 0x65, 0x71, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x43, 0x0a, 0x11, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76,
-	0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x12, 0x2e, 0x0a, 0x05, 0x61, 0x6c,
-	0x62, 0x75, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x6d, 0x65, 0x6f, 0x77,
-	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x41, 0x6c,
-	0x62, 0x75, 0x6d, 0x52, 0x05, 0x61, 0x6c, 0x62, 0x75, 0x6d, 0x22, 0x40, 0x0a, 0x0e, 0x55, 0x70,
+	0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x10, 0x62, 0x61,
+	0x73, 0x69, 0x63, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x6d,
+	0x0a, 0x0e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x71,
+	0x12, 0x2e, 0x0a, 0x05, 0x61, 0x6c, 0x62, 0x75, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
+	0x18, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74,
+	0x65, 0x6e, 0x74, 0x2e, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x05, 0x61, 0x6c, 0x62, 0x75, 0x6d,
+	0x12, 0x2b, 0x0a, 0x08, 0x75, 0x73, 0x65, 0x72, 0x4d, 0x65, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x62, 0x61, 0x73, 0x69, 0x63, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x4d,
+	0x65, 0x74, 0x61, 0x52, 0x08, 0x75, 0x73, 0x65, 0x72, 0x4d, 0x65, 0x74, 0x61, 0x22, 0x2b, 0x0a,
+	0x0f, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x73, 0x70,
+	0x12, 0x18, 0x0a, 0x07, 0x61, 0x6c, 0x62, 0x75, 0x6d, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x09, 0x52, 0x07, 0x61, 0x6c, 0x62, 0x75, 0x6d, 0x49, 0x64, 0x22, 0x40, 0x0a, 0x0e, 0x55, 0x70,
 	0x64, 0x61, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x71, 0x12, 0x2e, 0x0a, 0x05,
 	0x61, 0x6c, 0x62, 0x75, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x6d, 0x65,
 	0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e,
 	0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x05, 0x61, 0x6c, 0x62, 0x75, 0x6d, 0x22, 0x11, 0x0a, 0x0f,
 	0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x22,
-	0x20, 0x0a, 0x0e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65,
-	0x71, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69,
-	0x64, 0x22, 0x11, 0x0a, 0x0f, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d,
-	0x52, 0x65, 0x73, 0x70, 0x22, 0x71, 0x0a, 0x0c, 0x4c, 0x69, 0x73, 0x74, 0x41, 0x6c, 0x62, 0x75,
-	0x6d, 0x52, 0x65, 0x71, 0x12, 0x4b, 0x0a, 0x11, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
-	0x18, 0x2e, 0x62, 0x61, 0x73, 0x69, 0x63, 0x2e, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69,
-	0x6f, 0x6e, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x48, 0x00, 0x52, 0x11, 0x70, 0x61, 0x67,
-	0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x88, 0x01,
-	0x01, 0x42, 0x14, 0x0a, 0x12, 0x5f, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e,
-	0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x22, 0x57, 0x0a, 0x0d, 0x4c, 0x69, 0x73, 0x74, 0x41,
-	0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x12, 0x30, 0x0a, 0x06, 0x41, 0x6c, 0x62, 0x75,
-	0x6d, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63,
-	0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x41, 0x6c, 0x62,
-	0x75, 0x6d, 0x52, 0x06, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x73, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x6f,
-	0x74, 0x61, 0x6c, 0x18, 0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c,
-	0x22, 0x40, 0x0a, 0x0e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52,
-	0x65, 0x71, 0x12, 0x2e, 0x0a, 0x05, 0x70, 0x68, 0x6f, 0x74, 0x6f, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x0b, 0x32, 0x18, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f,
-	0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x05, 0x70, 0x68, 0x6f,
-	0x74, 0x6f, 0x22, 0x41, 0x0a, 0x0f, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x50, 0x68, 0x6f, 0x74,
-	0x6f, 0x52, 0x65, 0x73, 0x70, 0x12, 0x2e, 0x0a, 0x05, 0x70, 0x68, 0x6f, 0x74, 0x6f, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64,
-	0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x05,
-	0x70, 0x68, 0x6f, 0x74, 0x6f, 0x22, 0x22, 0x0a, 0x10, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76,
-	0x65, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x65, 0x71, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18,
-	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x43, 0x0a, 0x11, 0x52, 0x65, 0x74,
-	0x72, 0x69, 0x65, 0x76, 0x65, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x12, 0x2e,
-	0x0a, 0x05, 0x70, 0x68, 0x6f, 0x74, 0x6f, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e,
+	0x1d, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x71, 0x12, 0x0e,
+	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x3e,
+	0x0a, 0x0c, 0x47, 0x65, 0x74, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x12, 0x2e,
+	0x0a, 0x05, 0x61, 0x6c, 0x62, 0x75, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e,
 	0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e,
-	0x74, 0x2e, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x05, 0x70, 0x68, 0x6f, 0x74, 0x6f, 0x22, 0x40,
+	0x74, 0x2e, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x05, 0x61, 0x6c, 0x62, 0x75, 0x6d, 0x22, 0x49,
+	0x0a, 0x0d, 0x4c, 0x69, 0x73, 0x74, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x12,
+	0x38, 0x0a, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x62, 0x61, 0x73, 0x69, 0x63, 0x2e, 0x50, 0x61, 0x67, 0x69,
+	0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x52, 0x0a, 0x70,
+	0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x42, 0x0a, 0x0e, 0x4c, 0x69, 0x73,
+	0x74, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x12, 0x30, 0x0a, 0x06, 0x61,
+	0x6c, 0x62, 0x75, 0x6d, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x6d, 0x65,
+	0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e,
+	0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x06, 0x61, 0x6c, 0x62, 0x75, 0x6d, 0x73, 0x22, 0x20, 0x0a,
+	0x0e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x71, 0x12,
+	0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22,
+	0x11, 0x0a, 0x0f, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65,
+	0x73, 0x70, 0x22, 0x6d, 0x0a, 0x0e, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x50, 0x68, 0x6f, 0x74,
+	0x6f, 0x52, 0x65, 0x71, 0x12, 0x2e, 0x0a, 0x05, 0x70, 0x68, 0x6f, 0x74, 0x6f, 0x18, 0x01, 0x20,
+	0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
+	0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x05, 0x70,
+	0x68, 0x6f, 0x74, 0x6f, 0x12, 0x2b, 0x0a, 0x08, 0x75, 0x73, 0x65, 0x72, 0x4d, 0x65, 0x74, 0x61,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x62, 0x61, 0x73, 0x69, 0x63, 0x2e, 0x55,
+	0x73, 0x65, 0x72, 0x4d, 0x65, 0x74, 0x61, 0x52, 0x08, 0x75, 0x73, 0x65, 0x72, 0x4d, 0x65, 0x74,
+	0x61, 0x22, 0x2b, 0x0a, 0x0f, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x50, 0x68, 0x6f, 0x74, 0x6f,
+	0x52, 0x65, 0x73, 0x70, 0x12, 0x18, 0x0a, 0x07, 0x70, 0x68, 0x6f, 0x74, 0x6f, 0x49, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x70, 0x68, 0x6f, 0x74, 0x6f, 0x49, 0x64, 0x22, 0x40,
 	0x0a, 0x0e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x65, 0x71,
 	0x12, 0x2e, 0x0a, 0x05, 0x70, 0x68, 0x6f, 0x74, 0x6f, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32,
 	0x18, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74,
 	0x65, 0x6e, 0x74, 0x2e, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x05, 0x70, 0x68, 0x6f, 0x74, 0x6f,
 	0x22, 0x11, 0x0a, 0x0f, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52,
-	0x65, 0x73, 0x70, 0x22, 0x20, 0x0a, 0x0e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x68, 0x6f,
-	0x74, 0x6f, 0x52, 0x65, 0x71, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28,
-	0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x11, 0x0a, 0x0f, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50,
-	0x68, 0x6f, 0x74, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x22, 0xc5, 0x01, 0x0a, 0x0c, 0x4c, 0x69, 0x73,
-	0x74, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x65, 0x71, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x6c, 0x62,
-	0x75, 0x6d, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x6c, 0x62, 0x75,
-	0x6d, 0x49, 0x64, 0x12, 0x4b, 0x0a, 0x11, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18,
-	0x2e, 0x62, 0x61, 0x73, 0x69, 0x63, 0x2e, 0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f,
-	0x6e, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x48, 0x00, 0x52, 0x11, 0x70, 0x61, 0x67, 0x69,
-	0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x88, 0x01, 0x01,
-	0x12, 0x27, 0x0a, 0x0c, 0x6f, 0x6e, 0x6c, 0x79, 0x46, 0x65, 0x61, 0x74, 0x75, 0x72, 0x65, 0x64,
-	0x18, 0x03, 0x20, 0x01, 0x28, 0x08, 0x48, 0x01, 0x52, 0x0c, 0x6f, 0x6e, 0x6c, 0x79, 0x46, 0x65,
-	0x61, 0x74, 0x75, 0x72, 0x65, 0x64, 0x88, 0x01, 0x01, 0x42, 0x14, 0x0a, 0x12, 0x5f, 0x70, 0x61,
-	0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e, 0x73, 0x42,
-	0x0f, 0x0a, 0x0d, 0x5f, 0x6f, 0x6e, 0x6c, 0x79, 0x46, 0x65, 0x61, 0x74, 0x75, 0x72, 0x65, 0x64,
-	0x22, 0x57, 0x0a, 0x0d, 0x4c, 0x69, 0x73, 0x74, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x65, 0x73,
-	0x70, 0x12, 0x30, 0x0a, 0x06, 0x70, 0x68, 0x6f, 0x74, 0x6f, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28,
+	0x65, 0x73, 0x70, 0x22, 0x1d, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52,
+	0x65, 0x71, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02,
+	0x69, 0x64, 0x22, 0x3e, 0x0a, 0x0c, 0x47, 0x65, 0x74, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x65,
+	0x73, 0x70, 0x12, 0x2e, 0x0a, 0x05, 0x70, 0x68, 0x6f, 0x74, 0x6f, 0x18, 0x01, 0x20, 0x01, 0x28,
 	0x0b, 0x32, 0x18, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f,
-	0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x06, 0x70, 0x68, 0x6f,
-	0x74, 0x6f, 0x73, 0x12, 0x14, 0x0a, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x18, 0x02, 0x20, 0x01,
-	0x28, 0x03, 0x52, 0x05, 0x74, 0x6f, 0x74, 0x61, 0x6c, 0x32, 0xec, 0x06, 0x0a, 0x0e, 0x43, 0x6f,
-	0x6e, 0x74, 0x65, 0x6e, 0x74, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x54, 0x0a, 0x0b,
-	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x12, 0x21, 0x2e, 0x6d, 0x65,
-	0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e,
-	0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x71, 0x1a, 0x22,
-	0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65,
-	0x6e, 0x74, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65,
-	0x73, 0x70, 0x12, 0x5a, 0x0a, 0x0d, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x65, 0x41, 0x6c,
-	0x62, 0x75, 0x6d, 0x12, 0x23, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
-	0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x65,
-	0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x71, 0x1a, 0x24, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63,
-	0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x52, 0x65, 0x74,
-	0x72, 0x69, 0x65, 0x76, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x12, 0x54,
-	0x0a, 0x0b, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x12, 0x21, 0x2e,
-	0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e,
-	0x74, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x71,
-	0x1a, 0x22, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e,
-	0x74, 0x65, 0x6e, 0x74, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d,
-	0x52, 0x65, 0x73, 0x70, 0x12, 0x54, 0x0a, 0x0b, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x6c,
-	0x62, 0x75, 0x6d, 0x12, 0x21, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
-	0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x6c,
-	0x62, 0x75, 0x6d, 0x52, 0x65, 0x71, 0x1a, 0x22, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f,
-	0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74,
-	0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x12, 0x4e, 0x0a, 0x09, 0x4c, 0x69,
-	0x73, 0x74, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x12, 0x1f, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c,
-	0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x4c, 0x69, 0x73, 0x74,
-	0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x71, 0x1a, 0x20, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63,
-	0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x4c, 0x69, 0x73,
-	0x74, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x12, 0x54, 0x0a, 0x0b, 0x43, 0x72,
-	0x65, 0x61, 0x74, 0x65, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x12, 0x21, 0x2e, 0x6d, 0x65, 0x6f, 0x77,
-	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x43, 0x72,
-	0x65, 0x61, 0x74, 0x65, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x65, 0x71, 0x1a, 0x22, 0x2e, 0x6d,
+	0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x05, 0x70, 0x68, 0x6f,
+	0x74, 0x6f, 0x22, 0x49, 0x0a, 0x0d, 0x4c, 0x69, 0x73, 0x74, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x73,
+	0x52, 0x65, 0x71, 0x12, 0x38, 0x0a, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f,
+	0x6e, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x62, 0x61, 0x73, 0x69, 0x63, 0x2e,
+	0x50, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x4f, 0x70, 0x74, 0x69, 0x6f, 0x6e,
+	0x73, 0x52, 0x0a, 0x70, 0x61, 0x67, 0x69, 0x6e, 0x61, 0x74, 0x69, 0x6f, 0x6e, 0x22, 0x42, 0x0a,
+	0x0e, 0x4c, 0x69, 0x73, 0x74, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x73, 0x52, 0x65, 0x73, 0x70, 0x12,
+	0x30, 0x0a, 0x06, 0x70, 0x68, 0x6f, 0x74, 0x6f, 0x73, 0x18, 0x01, 0x20, 0x03, 0x28, 0x0b, 0x32,
+	0x18, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74,
+	0x65, 0x6e, 0x74, 0x2e, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x06, 0x70, 0x68, 0x6f, 0x74, 0x6f,
+	0x73, 0x22, 0x20, 0x0a, 0x0e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x68, 0x6f, 0x74, 0x6f,
+	0x52, 0x65, 0x71, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x02, 0x69, 0x64, 0x22, 0x11, 0x0a, 0x0f, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x68, 0x6f,
+	0x74, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x22, 0x53, 0x0a, 0x09, 0x41, 0x64, 0x64, 0x43, 0x61, 0x74,
+	0x52, 0x65, 0x71, 0x12, 0x2c, 0x0a, 0x03, 0x63, 0x61, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x1a, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e,
+	0x74, 0x65, 0x6e, 0x74, 0x2e, 0x43, 0x61, 0x74, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x03, 0x63, 0x61,
+	0x74, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x6c, 0x62, 0x75, 0x6d, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x07, 0x61, 0x6c, 0x62, 0x75, 0x6d, 0x49, 0x64, 0x22, 0x22, 0x0a, 0x0a, 0x41,
+	0x64, 0x64, 0x43, 0x61, 0x74, 0x52, 0x65, 0x73, 0x70, 0x12, 0x14, 0x0a, 0x05, 0x63, 0x61, 0x74,
+	0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x05, 0x63, 0x61, 0x74, 0x49, 0x64, 0x22,
+	0x3c, 0x0a, 0x0c, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x61, 0x74, 0x52, 0x65, 0x71, 0x12,
+	0x2c, 0x0a, 0x03, 0x63, 0x61, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1a, 0x2e, 0x6d,
 	0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74,
-	0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x65, 0x73, 0x70,
-	0x12, 0x5a, 0x0a, 0x0d, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x65, 0x50, 0x68, 0x6f, 0x74,
-	0x6f, 0x12, 0x23, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f,
-	0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x52, 0x65, 0x74, 0x72, 0x69, 0x65, 0x76, 0x65, 0x50, 0x68,
-	0x6f, 0x74, 0x6f, 0x52, 0x65, 0x71, 0x1a, 0x24, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f,
-	0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x52, 0x65, 0x74, 0x72, 0x69,
-	0x65, 0x76, 0x65, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x12, 0x54, 0x0a, 0x0b,
-	0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x12, 0x21, 0x2e, 0x6d, 0x65,
+	0x2e, 0x43, 0x61, 0x74, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x03, 0x63, 0x61, 0x74, 0x22, 0x0f, 0x0a,
+	0x0d, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x61, 0x74, 0x52, 0x65, 0x73, 0x70, 0x22, 0x25,
+	0x0a, 0x09, 0x47, 0x65, 0x74, 0x43, 0x61, 0x74, 0x52, 0x65, 0x71, 0x12, 0x18, 0x0a, 0x07, 0x61,
+	0x6c, 0x62, 0x75, 0x6d, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x6c,
+	0x62, 0x75, 0x6d, 0x49, 0x64, 0x22, 0x3a, 0x0a, 0x0a, 0x47, 0x65, 0x74, 0x43, 0x61, 0x74, 0x52,
+	0x65, 0x73, 0x70, 0x12, 0x2c, 0x0a, 0x03, 0x63, 0x61, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x1a, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e,
+	0x74, 0x65, 0x6e, 0x74, 0x2e, 0x43, 0x61, 0x74, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x03, 0x63, 0x61,
+	0x74, 0x22, 0x1e, 0x0a, 0x0c, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x61, 0x74, 0x52, 0x65,
+	0x71, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69,
+	0x64, 0x22, 0x0f, 0x0a, 0x0d, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x61, 0x74, 0x52, 0x65,
+	0x73, 0x70, 0x22, 0x5b, 0x0a, 0x0b, 0x41, 0x64, 0x64, 0x50, 0x6c, 0x61, 0x63, 0x65, 0x52, 0x65,
+	0x71, 0x12, 0x32, 0x0a, 0x05, 0x70, 0x6c, 0x61, 0x63, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x1c, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e,
+	0x74, 0x65, 0x6e, 0x74, 0x2e, 0x50, 0x6c, 0x61, 0x63, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x05,
+	0x70, 0x6c, 0x61, 0x63, 0x65, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x6c, 0x62, 0x75, 0x6d, 0x49, 0x64,
+	0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x07, 0x61, 0x6c, 0x62, 0x75, 0x6d, 0x49, 0x64, 0x22,
+	0x28, 0x0a, 0x0c, 0x41, 0x64, 0x64, 0x50, 0x6c, 0x61, 0x63, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12,
+	0x18, 0x0a, 0x07, 0x70, 0x6c, 0x61, 0x63, 0x65, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09,
+	0x52, 0x07, 0x70, 0x6c, 0x61, 0x63, 0x65, 0x49, 0x64, 0x22, 0x44, 0x0a, 0x0e, 0x55, 0x70, 0x64,
+	0x61, 0x74, 0x65, 0x50, 0x6c, 0x61, 0x63, 0x65, 0x52, 0x65, 0x71, 0x12, 0x32, 0x0a, 0x05, 0x70,
+	0x6c, 0x61, 0x63, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x6d, 0x65, 0x6f,
+	0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x50,
+	0x6c, 0x61, 0x63, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x05, 0x70, 0x6c, 0x61, 0x63, 0x65, 0x22,
+	0x11, 0x0a, 0x0f, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x6c, 0x61, 0x63, 0x65, 0x52, 0x65,
+	0x73, 0x70, 0x22, 0x27, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x50, 0x6c, 0x61, 0x63, 0x65, 0x52, 0x65,
+	0x71, 0x12, 0x18, 0x0a, 0x07, 0x61, 0x6c, 0x62, 0x75, 0x6d, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x09, 0x52, 0x07, 0x61, 0x6c, 0x62, 0x75, 0x6d, 0x49, 0x64, 0x22, 0x42, 0x0a, 0x0c, 0x47,
+	0x65, 0x74, 0x50, 0x6c, 0x61, 0x63, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x32, 0x0a, 0x05, 0x70,
+	0x6c, 0x61, 0x63, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1c, 0x2e, 0x6d, 0x65, 0x6f,
+	0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x50,
+	0x6c, 0x61, 0x63, 0x65, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x05, 0x70, 0x6c, 0x61, 0x63, 0x65, 0x22,
+	0x20, 0x0a, 0x0e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x6c, 0x61, 0x63, 0x65, 0x52, 0x65,
+	0x71, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69,
+	0x64, 0x22, 0x11, 0x0a, 0x0f, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x6c, 0x61, 0x63, 0x65,
+	0x52, 0x65, 0x73, 0x70, 0x22, 0x66, 0x0a, 0x0a, 0x41, 0x64, 0x64, 0x54, 0x65, 0x61, 0x6d, 0x52,
+	0x65, 0x71, 0x12, 0x2b, 0x0a, 0x04, 0x74, 0x65, 0x61, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b,
+	0x32, 0x17, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e,
+	0x74, 0x65, 0x6e, 0x74, 0x2e, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x04, 0x74, 0x65, 0x61, 0x6d, 0x12,
+	0x2b, 0x0a, 0x08, 0x75, 0x73, 0x65, 0x72, 0x4d, 0x65, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28,
+	0x0b, 0x32, 0x0f, 0x2e, 0x62, 0x61, 0x73, 0x69, 0x63, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x4d, 0x65,
+	0x74, 0x61, 0x52, 0x08, 0x75, 0x73, 0x65, 0x72, 0x4d, 0x65, 0x74, 0x61, 0x22, 0x25, 0x0a, 0x0b,
+	0x41, 0x64, 0x64, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x12, 0x16, 0x0a, 0x06, 0x74,
+	0x65, 0x61, 0x6d, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x74, 0x65, 0x61,
+	0x6d, 0x49, 0x64, 0x22, 0x3c, 0x0a, 0x0d, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x54, 0x65, 0x61,
+	0x6d, 0x52, 0x65, 0x71, 0x12, 0x2b, 0x0a, 0x04, 0x74, 0x65, 0x61, 0x6d, 0x18, 0x01, 0x20, 0x01,
+	0x28, 0x0b, 0x32, 0x17, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63,
+	0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x04, 0x74, 0x65, 0x61,
+	0x6d, 0x22, 0x10, 0x0a, 0x0e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x54, 0x65, 0x61, 0x6d, 0x52,
+	0x65, 0x73, 0x70, 0x22, 0x1c, 0x0a, 0x0a, 0x47, 0x65, 0x74, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x65,
+	0x71, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69,
+	0x64, 0x22, 0x3a, 0x0a, 0x0b, 0x47, 0x65, 0x74, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73, 0x70,
+	0x12, 0x2b, 0x0a, 0x04, 0x74, 0x65, 0x61, 0x6d, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x17,
+	0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65,
+	0x6e, 0x74, 0x2e, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x04, 0x74, 0x65, 0x61, 0x6d, 0x22, 0x1f, 0x0a,
+	0x0d, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x12, 0x0e,
+	0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x10,
+	0x0a, 0x0e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73, 0x70,
+	0x22, 0x52, 0x0a, 0x0b, 0x4a, 0x6f, 0x69, 0x6e, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x12,
+	0x16, 0x0a, 0x06, 0x74, 0x65, 0x61, 0x6d, 0x49, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x06, 0x74, 0x65, 0x61, 0x6d, 0x49, 0x64, 0x12, 0x2b, 0x0a, 0x08, 0x75, 0x73, 0x65, 0x72, 0x4d,
+	0x65, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x62, 0x61, 0x73, 0x69,
+	0x63, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x4d, 0x65, 0x74, 0x61, 0x52, 0x08, 0x75, 0x73, 0x65, 0x72,
+	0x4d, 0x65, 0x74, 0x61, 0x22, 0x0e, 0x0a, 0x0c, 0x4a, 0x6f, 0x69, 0x6e, 0x54, 0x65, 0x61, 0x6d,
+	0x52, 0x65, 0x73, 0x70, 0x22, 0x53, 0x0a, 0x0c, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x54, 0x65, 0x61,
+	0x6d, 0x52, 0x65, 0x71, 0x12, 0x16, 0x0a, 0x06, 0x74, 0x65, 0x61, 0x6d, 0x49, 0x64, 0x18, 0x01,
+	0x20, 0x01, 0x28, 0x09, 0x52, 0x06, 0x74, 0x65, 0x61, 0x6d, 0x49, 0x64, 0x12, 0x2b, 0x0a, 0x08,
+	0x75, 0x73, 0x65, 0x72, 0x4d, 0x65, 0x74, 0x61, 0x18, 0x02, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f,
+	0x2e, 0x62, 0x61, 0x73, 0x69, 0x63, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x4d, 0x65, 0x74, 0x61, 0x52,
+	0x08, 0x75, 0x73, 0x65, 0x72, 0x4d, 0x65, 0x74, 0x61, 0x22, 0x0f, 0x0a, 0x0d, 0x4c, 0x65, 0x61,
+	0x76, 0x65, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x22, 0x3a, 0x0a, 0x0b, 0x4c, 0x69,
+	0x73, 0x74, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x12, 0x2b, 0x0a, 0x08, 0x75, 0x73, 0x65,
+	0x72, 0x4d, 0x65, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x62, 0x61,
+	0x73, 0x69, 0x63, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x4d, 0x65, 0x74, 0x61, 0x52, 0x08, 0x75, 0x73,
+	0x65, 0x72, 0x4d, 0x65, 0x74, 0x61, 0x22, 0x3d, 0x0a, 0x0c, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x65,
+	0x61, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x12, 0x2d, 0x0a, 0x05, 0x74, 0x65, 0x61, 0x6d, 0x73, 0x18,
+	0x01, 0x20, 0x03, 0x28, 0x0b, 0x32, 0x17, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75,
+	0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x05,
+	0x74, 0x65, 0x61, 0x6d, 0x73, 0x22, 0x3d, 0x0a, 0x0e, 0x47, 0x65, 0x74, 0x54, 0x65, 0x61, 0x6d,
+	0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71, 0x12, 0x2b, 0x0a, 0x08, 0x75, 0x73, 0x65, 0x72, 0x4d,
+	0x65, 0x74, 0x61, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x0f, 0x2e, 0x62, 0x61, 0x73, 0x69,
+	0x63, 0x2e, 0x55, 0x73, 0x65, 0x72, 0x4d, 0x65, 0x74, 0x61, 0x52, 0x08, 0x75, 0x73, 0x65, 0x72,
+	0x4d, 0x65, 0x74, 0x61, 0x22, 0x4a, 0x0a, 0x0f, 0x47, 0x65, 0x74, 0x54, 0x65, 0x61, 0x6d, 0x49,
+	0x6e, 0x66, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x12, 0x37, 0x0a, 0x08, 0x74, 0x65, 0x61, 0x6d, 0x49,
+	0x6e, 0x66, 0x6f, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x1b, 0x2e, 0x6d, 0x65, 0x6f, 0x77,
+	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x54, 0x65,
+	0x61, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x08, 0x74, 0x65, 0x61, 0x6d, 0x49, 0x6e, 0x66, 0x6f,
+	0x32, 0xb0, 0x03, 0x0a, 0x0c, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63,
+	0x65, 0x12, 0x54, 0x0a, 0x0b, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d,
+	0x12, 0x21, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e,
+	0x74, 0x65, 0x6e, 0x74, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d,
+	0x52, 0x65, 0x71, 0x1a, 0x22, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
+	0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x41, 0x6c,
+	0x62, 0x75, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x12, 0x54, 0x0a, 0x0b, 0x55, 0x70, 0x64, 0x61, 0x74,
+	0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x12, 0x21, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f,
+	0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74,
+	0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x71, 0x1a, 0x22, 0x2e, 0x6d, 0x65, 0x6f, 0x77,
+	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x12, 0x4b, 0x0a,
+	0x08, 0x47, 0x65, 0x74, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x12, 0x1e, 0x2e, 0x6d, 0x65, 0x6f, 0x77,
+	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x47, 0x65,
+	0x74, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x71, 0x1a, 0x1f, 0x2e, 0x6d, 0x65, 0x6f, 0x77,
+	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x47, 0x65,
+	0x74, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x12, 0x51, 0x0a, 0x0a, 0x4c, 0x69,
+	0x73, 0x74, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x73, 0x12, 0x20, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63,
+	0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x4c, 0x69, 0x73,
+	0x74, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x73, 0x52, 0x65, 0x71, 0x1a, 0x21, 0x2e, 0x6d, 0x65, 0x6f,
+	0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x4c,
+	0x69, 0x73, 0x74, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x73, 0x52, 0x65, 0x73, 0x70, 0x12, 0x54, 0x0a,
+	0x0b, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x12, 0x21, 0x2e, 0x6d,
+	0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74,
+	0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52, 0x65, 0x71, 0x1a,
+	0x22, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74,
+	0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x41, 0x6c, 0x62, 0x75, 0x6d, 0x52,
+	0x65, 0x73, 0x70, 0x32, 0xb0, 0x03, 0x0a, 0x0c, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x53, 0x65, 0x72,
+	0x76, 0x69, 0x63, 0x65, 0x12, 0x54, 0x0a, 0x0b, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x50, 0x68,
+	0x6f, 0x74, 0x6f, 0x12, 0x21, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
+	0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x55, 0x70, 0x6c, 0x6f, 0x61, 0x64, 0x50, 0x68,
+	0x6f, 0x74, 0x6f, 0x52, 0x65, 0x71, 0x1a, 0x22, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f,
+	0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x55, 0x70, 0x6c, 0x6f, 0x61,
+	0x64, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x12, 0x54, 0x0a, 0x0b, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x12, 0x21, 0x2e, 0x6d, 0x65, 0x6f, 0x77,
+	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x65, 0x71, 0x1a, 0x22, 0x2e, 0x6d,
+	0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74,
+	0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x65, 0x73, 0x70,
+	0x12, 0x4b, 0x0a, 0x08, 0x47, 0x65, 0x74, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x12, 0x1e, 0x2e, 0x6d,
+	0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74,
+	0x2e, 0x47, 0x65, 0x74, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x65, 0x71, 0x1a, 0x1f, 0x2e, 0x6d,
+	0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74,
+	0x2e, 0x47, 0x65, 0x74, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x12, 0x51, 0x0a,
+	0x0a, 0x4c, 0x69, 0x73, 0x74, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x73, 0x12, 0x20, 0x2e, 0x6d, 0x65,
 	0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e,
-	0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x65, 0x71, 0x1a, 0x22,
+	0x4c, 0x69, 0x73, 0x74, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x73, 0x52, 0x65, 0x71, 0x1a, 0x21, 0x2e,
+	0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e,
+	0x74, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x73, 0x52, 0x65, 0x73, 0x70,
+	0x12, 0x54, 0x0a, 0x0b, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x12,
+	0x21, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74,
+	0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52,
+	0x65, 0x71, 0x1a, 0x22, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63,
+	0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x68, 0x6f,
+	0x74, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x32, 0xba, 0x02, 0x0a, 0x0a, 0x43, 0x61, 0x74, 0x53, 0x65,
+	0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x45, 0x0a, 0x06, 0x41, 0x64, 0x64, 0x43, 0x61, 0x74, 0x12,
+	0x1c, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74,
+	0x65, 0x6e, 0x74, 0x2e, 0x41, 0x64, 0x64, 0x43, 0x61, 0x74, 0x52, 0x65, 0x71, 0x1a, 0x1d, 0x2e,
+	0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e,
+	0x74, 0x2e, 0x41, 0x64, 0x64, 0x43, 0x61, 0x74, 0x52, 0x65, 0x73, 0x70, 0x12, 0x4e, 0x0a, 0x09,
+	0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x61, 0x74, 0x12, 0x1f, 0x2e, 0x6d, 0x65, 0x6f, 0x77,
+	0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x55, 0x70,
+	0x64, 0x61, 0x74, 0x65, 0x43, 0x61, 0x74, 0x52, 0x65, 0x71, 0x1a, 0x20, 0x2e, 0x6d, 0x65, 0x6f,
+	0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x55,
+	0x70, 0x64, 0x61, 0x74, 0x65, 0x43, 0x61, 0x74, 0x52, 0x65, 0x73, 0x70, 0x12, 0x45, 0x0a, 0x06,
+	0x47, 0x65, 0x74, 0x43, 0x61, 0x74, 0x12, 0x1c, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f,
+	0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x61,
+	0x74, 0x52, 0x65, 0x71, 0x1a, 0x1d, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64,
+	0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x43, 0x61, 0x74, 0x52,
+	0x65, 0x73, 0x70, 0x12, 0x4e, 0x0a, 0x09, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x61, 0x74,
+	0x12, 0x1f, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e,
+	0x74, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x61, 0x74, 0x52, 0x65,
+	0x71, 0x1a, 0x20, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f,
+	0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x43, 0x61, 0x74, 0x52,
+	0x65, 0x73, 0x70, 0x32, 0xd4, 0x02, 0x0a, 0x0c, 0x50, 0x6c, 0x61, 0x63, 0x65, 0x53, 0x65, 0x72,
+	0x76, 0x69, 0x63, 0x65, 0x12, 0x4b, 0x0a, 0x08, 0x41, 0x64, 0x64, 0x50, 0x6c, 0x61, 0x63, 0x65,
+	0x12, 0x1e, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e,
+	0x74, 0x65, 0x6e, 0x74, 0x2e, 0x41, 0x64, 0x64, 0x50, 0x6c, 0x61, 0x63, 0x65, 0x52, 0x65, 0x71,
+	0x1a, 0x1f, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e,
+	0x74, 0x65, 0x6e, 0x74, 0x2e, 0x41, 0x64, 0x64, 0x50, 0x6c, 0x61, 0x63, 0x65, 0x52, 0x65, 0x73,
+	0x70, 0x12, 0x54, 0x0a, 0x0b, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x6c, 0x61, 0x63, 0x65,
+	0x12, 0x21, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e,
+	0x74, 0x65, 0x6e, 0x74, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x6c, 0x61, 0x63, 0x65,
+	0x52, 0x65, 0x71, 0x1a, 0x22, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
+	0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x6c,
+	0x61, 0x63, 0x65, 0x52, 0x65, 0x73, 0x70, 0x12, 0x4b, 0x0a, 0x08, 0x47, 0x65, 0x74, 0x50, 0x6c,
+	0x61, 0x63, 0x65, 0x12, 0x1e, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
+	0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x50, 0x6c, 0x61, 0x63, 0x65,
+	0x52, 0x65, 0x71, 0x1a, 0x1f, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
+	0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x50, 0x6c, 0x61, 0x63, 0x65,
+	0x52, 0x65, 0x73, 0x70, 0x12, 0x54, 0x0a, 0x0b, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x6c,
+	0x61, 0x63, 0x65, 0x12, 0x21, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e,
+	0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x6c,
+	0x61, 0x63, 0x65, 0x52, 0x65, 0x71, 0x1a, 0x22, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f,
+	0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74,
+	0x65, 0x50, 0x6c, 0x61, 0x63, 0x65, 0x52, 0x65, 0x73, 0x70, 0x32, 0x87, 0x05, 0x0a, 0x0b, 0x54,
+	0x65, 0x61, 0x6d, 0x53, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x12, 0x48, 0x0a, 0x07, 0x41, 0x64,
+	0x64, 0x54, 0x65, 0x61, 0x6d, 0x12, 0x1d, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75,
+	0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x41, 0x64, 0x64, 0x54, 0x65, 0x61,
+	0x6d, 0x52, 0x65, 0x71, 0x1a, 0x1e, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64,
+	0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x41, 0x64, 0x64, 0x54, 0x65, 0x61, 0x6d,
+	0x52, 0x65, 0x73, 0x70, 0x12, 0x51, 0x0a, 0x0a, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x54, 0x65,
+	0x61, 0x6d, 0x12, 0x20, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63,
+	0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x54, 0x65, 0x61,
+	0x6d, 0x52, 0x65, 0x71, 0x1a, 0x21, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64,
+	0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x54,
+	0x65, 0x61, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x12, 0x48, 0x0a, 0x07, 0x47, 0x65, 0x74, 0x54, 0x65,
+	0x61, 0x6d, 0x12, 0x1d, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63,
+	0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x65,
+	0x71, 0x1a, 0x1e, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f,
+	0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73,
+	0x70, 0x12, 0x51, 0x0a, 0x0a, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x54, 0x65, 0x61, 0x6d, 0x12,
+	0x20, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74,
+	0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x65,
+	0x71, 0x1a, 0x21, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f,
+	0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x54, 0x65, 0x61, 0x6d,
+	0x52, 0x65, 0x73, 0x70, 0x12, 0x4b, 0x0a, 0x08, 0x4a, 0x6f, 0x69, 0x6e, 0x54, 0x65, 0x61, 0x6d,
+	0x12, 0x1e, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e,
+	0x74, 0x65, 0x6e, 0x74, 0x2e, 0x4a, 0x6f, 0x69, 0x6e, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x71,
+	0x1a, 0x1f, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e,
+	0x74, 0x65, 0x6e, 0x74, 0x2e, 0x4a, 0x6f, 0x69, 0x6e, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73,
+	0x70, 0x12, 0x4e, 0x0a, 0x09, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x54, 0x65, 0x61, 0x6d, 0x12, 0x1f,
 	0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65,
-	0x6e, 0x74, 0x2e, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x50, 0x68, 0x6f, 0x74, 0x6f, 0x52, 0x65,
-	0x73, 0x70, 0x12, 0x54, 0x0a, 0x0b, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x68, 0x6f, 0x74,
-	0x6f, 0x12, 0x21, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f,
-	0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50, 0x68, 0x6f, 0x74,
-	0x6f, 0x52, 0x65, 0x71, 0x1a, 0x22, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64,
-	0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x50,
-	0x68, 0x6f, 0x74, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x12, 0x4e, 0x0a, 0x09, 0x4c, 0x69, 0x73, 0x74,
-	0x50, 0x68, 0x6f, 0x74, 0x6f, 0x12, 0x1f, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75,
-	0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x50, 0x68,
-	0x6f, 0x74, 0x6f, 0x52, 0x65, 0x71, 0x1a, 0x20, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f,
-	0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x50,
-	0x68, 0x6f, 0x74, 0x6f, 0x52, 0x65, 0x73, 0x70, 0x42, 0x7e, 0x0a, 0x26, 0x63, 0x6f, 0x6d, 0x2e,
-	0x78, 0x68, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2e, 0x69, 0x64, 0x6c, 0x67, 0x65, 0x6e,
-	0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65,
-	0x6e, 0x74, 0x42, 0x0c, 0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x50, 0x72, 0x6f, 0x74, 0x6f,
-	0x50, 0x01, 0x5a, 0x44, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x78,
-	0x68, 0x2d, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63,
-	0x65, 0x2d, 0x69, 0x64, 0x6c, 0x2d, 0x67, 0x65, 0x6e, 0x2d, 0x67, 0x6f, 0x2f, 0x6b, 0x69, 0x74,
-	0x65, 0x78, 0x5f, 0x67, 0x65, 0x6e, 0x2f, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64,
-	0x2f, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x6e, 0x74, 0x2e, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x1a,
+	0x20, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74,
+	0x65, 0x6e, 0x74, 0x2e, 0x4c, 0x65, 0x61, 0x76, 0x65, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73,
+	0x70, 0x12, 0x4b, 0x0a, 0x08, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x65, 0x61, 0x6d, 0x12, 0x1e, 0x2e,
+	0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e,
+	0x74, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x71, 0x1a, 0x1f, 0x2e,
+	0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e,
+	0x74, 0x2e, 0x4c, 0x69, 0x73, 0x74, 0x54, 0x65, 0x61, 0x6d, 0x52, 0x65, 0x73, 0x70, 0x12, 0x54,
+	0x0a, 0x0b, 0x47, 0x65, 0x74, 0x54, 0x65, 0x61, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x12, 0x21, 0x2e,
+	0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e,
+	0x74, 0x2e, 0x47, 0x65, 0x74, 0x54, 0x65, 0x61, 0x6d, 0x49, 0x6e, 0x66, 0x6f, 0x52, 0x65, 0x71,
+	0x1a, 0x22, 0x2e, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e,
+	0x74, 0x65, 0x6e, 0x74, 0x2e, 0x47, 0x65, 0x74, 0x54, 0x65, 0x61, 0x6d, 0x49, 0x6e, 0x66, 0x6f,
+	0x52, 0x65, 0x73, 0x70, 0x42, 0x7e, 0x0a, 0x26, 0x63, 0x6f, 0x6d, 0x2e, 0x78, 0x68, 0x70, 0x6f,
+	0x6c, 0x61, 0x72, 0x69, 0x73, 0x2e, 0x69, 0x64, 0x6c, 0x67, 0x65, 0x6e, 0x2e, 0x6d, 0x65, 0x6f,
+	0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2e, 0x63, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x42, 0x0c,
+	0x43, 0x6f, 0x6e, 0x74, 0x65, 0x6e, 0x74, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x44,
+	0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x68, 0x2d, 0x70, 0x6f,
+	0x6c, 0x61, 0x72, 0x69, 0x73, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2d, 0x69, 0x64,
+	0x6c, 0x2d, 0x67, 0x65, 0x6e, 0x2d, 0x67, 0x6f, 0x2f, 0x6b, 0x69, 0x74, 0x65, 0x78, 0x5f, 0x67,
+	0x65, 0x6e, 0x2f, 0x6d, 0x65, 0x6f, 0x77, 0x63, 0x6c, 0x6f, 0x75, 0x64, 0x2f, 0x63, 0x6f, 0x6e,
+	0x74, 0x65, 0x6e, 0x74, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1123,70 +2752,155 @@ func file_meowcloud_content_content_proto_rawDescGZIP() []byte {
 	return file_meowcloud_content_content_proto_rawDescData
 }
 
-var file_meowcloud_content_content_proto_msgTypes = make([]protoimpl.MessageInfo, 20)
+var file_meowcloud_content_content_proto_msgTypes = make([]protoimpl.MessageInfo, 52)
 var file_meowcloud_content_content_proto_goTypes = []interface{}{
 	(*CreateAlbumReq)(nil),          // 0: meowcloud.content.CreateAlbumReq
 	(*CreateAlbumResp)(nil),         // 1: meowcloud.content.CreateAlbumResp
-	(*RetrieveAlbumReq)(nil),        // 2: meowcloud.content.RetrieveAlbumReq
-	(*RetrieveAlbumResp)(nil),       // 3: meowcloud.content.RetrieveAlbumResp
-	(*UpdateAlbumReq)(nil),          // 4: meowcloud.content.UpdateAlbumReq
-	(*UpdateAlbumResp)(nil),         // 5: meowcloud.content.UpdateAlbumResp
-	(*DeleteAlbumReq)(nil),          // 6: meowcloud.content.DeleteAlbumReq
-	(*DeleteAlbumResp)(nil),         // 7: meowcloud.content.DeleteAlbumResp
-	(*ListAlbumReq)(nil),            // 8: meowcloud.content.ListAlbumReq
-	(*ListAlbumResp)(nil),           // 9: meowcloud.content.ListAlbumResp
-	(*CreatePhotoReq)(nil),          // 10: meowcloud.content.CreatePhotoReq
-	(*CreatePhotoResp)(nil),         // 11: meowcloud.content.CreatePhotoResp
-	(*RetrievePhotoReq)(nil),        // 12: meowcloud.content.RetrievePhotoReq
-	(*RetrievePhotoResp)(nil),       // 13: meowcloud.content.RetrievePhotoResp
-	(*UpdatePhotoReq)(nil),          // 14: meowcloud.content.UpdatePhotoReq
-	(*UpdatePhotoResp)(nil),         // 15: meowcloud.content.UpdatePhotoResp
-	(*DeletePhotoReq)(nil),          // 16: meowcloud.content.DeletePhotoReq
-	(*DeletePhotoResp)(nil),         // 17: meowcloud.content.DeletePhotoResp
-	(*ListPhotoReq)(nil),            // 18: meowcloud.content.ListPhotoReq
-	(*ListPhotoResp)(nil),           // 19: meowcloud.content.ListPhotoResp
-	(*Album)(nil),                   // 20: meowcloud.content.Album
-	(*basic.PaginationOptions)(nil), // 21: basic.PaginationOptions
-	(*Photo)(nil),                   // 22: meowcloud.content.Photo
+	(*UpdateAlbumReq)(nil),          // 2: meowcloud.content.UpdateAlbumReq
+	(*UpdateAlbumResp)(nil),         // 3: meowcloud.content.UpdateAlbumResp
+	(*GetAlbumReq)(nil),             // 4: meowcloud.content.GetAlbumReq
+	(*GetAlbumResp)(nil),            // 5: meowcloud.content.GetAlbumResp
+	(*ListAlbumsReq)(nil),           // 6: meowcloud.content.ListAlbumsReq
+	(*ListAlbumsResp)(nil),          // 7: meowcloud.content.ListAlbumsResp
+	(*DeleteAlbumReq)(nil),          // 8: meowcloud.content.DeleteAlbumReq
+	(*DeleteAlbumResp)(nil),         // 9: meowcloud.content.DeleteAlbumResp
+	(*UploadPhotoReq)(nil),          // 10: meowcloud.content.UploadPhotoReq
+	(*UploadPhotoResp)(nil),         // 11: meowcloud.content.UploadPhotoResp
+	(*UpdatePhotoReq)(nil),          // 12: meowcloud.content.UpdatePhotoReq
+	(*UpdatePhotoResp)(nil),         // 13: meowcloud.content.UpdatePhotoResp
+	(*GetPhotoReq)(nil),             // 14: meowcloud.content.GetPhotoReq
+	(*GetPhotoResp)(nil),            // 15: meowcloud.content.GetPhotoResp
+	(*ListPhotosReq)(nil),           // 16: meowcloud.content.ListPhotosReq
+	(*ListPhotosResp)(nil),          // 17: meowcloud.content.ListPhotosResp
+	(*DeletePhotoReq)(nil),          // 18: meowcloud.content.DeletePhotoReq
+	(*DeletePhotoResp)(nil),         // 19: meowcloud.content.DeletePhotoResp
+	(*AddCatReq)(nil),               // 20: meowcloud.content.AddCatReq
+	(*AddCatResp)(nil),              // 21: meowcloud.content.AddCatResp
+	(*UpdateCatReq)(nil),            // 22: meowcloud.content.UpdateCatReq
+	(*UpdateCatResp)(nil),           // 23: meowcloud.content.UpdateCatResp
+	(*GetCatReq)(nil),               // 24: meowcloud.content.GetCatReq
+	(*GetCatResp)(nil),              // 25: meowcloud.content.GetCatResp
+	(*DeleteCatReq)(nil),            // 26: meowcloud.content.DeleteCatReq
+	(*DeleteCatResp)(nil),           // 27: meowcloud.content.DeleteCatResp
+	(*AddPlaceReq)(nil),             // 28: meowcloud.content.AddPlaceReq
+	(*AddPlaceResp)(nil),            // 29: meowcloud.content.AddPlaceResp
+	(*UpdatePlaceReq)(nil),          // 30: meowcloud.content.UpdatePlaceReq
+	(*UpdatePlaceResp)(nil),         // 31: meowcloud.content.UpdatePlaceResp
+	(*GetPlaceReq)(nil),             // 32: meowcloud.content.GetPlaceReq
+	(*GetPlaceResp)(nil),            // 33: meowcloud.content.GetPlaceResp
+	(*DeletePlaceReq)(nil),          // 34: meowcloud.content.DeletePlaceReq
+	(*DeletePlaceResp)(nil),         // 35: meowcloud.content.DeletePlaceResp
+	(*AddTeamReq)(nil),              // 36: meowcloud.content.AddTeamReq
+	(*AddTeamResp)(nil),             // 37: meowcloud.content.AddTeamResp
+	(*UpdateTeamReq)(nil),           // 38: meowcloud.content.UpdateTeamReq
+	(*UpdateTeamResp)(nil),          // 39: meowcloud.content.UpdateTeamResp
+	(*GetTeamReq)(nil),              // 40: meowcloud.content.GetTeamReq
+	(*GetTeamResp)(nil),             // 41: meowcloud.content.GetTeamResp
+	(*DeleteTeamReq)(nil),           // 42: meowcloud.content.DeleteTeamReq
+	(*DeleteTeamResp)(nil),          // 43: meowcloud.content.DeleteTeamResp
+	(*JoinTeamReq)(nil),             // 44: meowcloud.content.JoinTeamReq
+	(*JoinTeamResp)(nil),            // 45: meowcloud.content.JoinTeamResp
+	(*LeaveTeamReq)(nil),            // 46: meowcloud.content.LeaveTeamReq
+	(*LeaveTeamResp)(nil),           // 47: meowcloud.content.LeaveTeamResp
+	(*ListTeamReq)(nil),             // 48: meowcloud.content.ListTeamReq
+	(*ListTeamResp)(nil),            // 49: meowcloud.content.ListTeamResp
+	(*GetTeamInfoReq)(nil),          // 50: meowcloud.content.GetTeamInfoReq
+	(*GetTeamInfoResp)(nil),         // 51: meowcloud.content.GetTeamInfoResp
+	(*Album)(nil),                   // 52: meowcloud.content.Album
+	(*basic.UserMeta)(nil),          // 53: basic.UserMeta
+	(*basic.PaginationOptions)(nil), // 54: basic.PaginationOptions
+	(*Photo)(nil),                   // 55: meowcloud.content.Photo
+	(*CatInfo)(nil),                 // 56: meowcloud.content.CatInfo
+	(*PlaceInfo)(nil),               // 57: meowcloud.content.PlaceInfo
+	(*Team)(nil),                    // 58: meowcloud.content.Team
+	(*TeamInfo)(nil),                // 59: meowcloud.content.TeamInfo
 }
 var file_meowcloud_content_content_proto_depIdxs = []int32{
-	20, // 0: meowcloud.content.CreateAlbumReq.album:type_name -> meowcloud.content.Album
-	20, // 1: meowcloud.content.CreateAlbumResp.album:type_name -> meowcloud.content.Album
-	20, // 2: meowcloud.content.RetrieveAlbumResp.album:type_name -> meowcloud.content.Album
-	20, // 3: meowcloud.content.UpdateAlbumReq.album:type_name -> meowcloud.content.Album
-	21, // 4: meowcloud.content.ListAlbumReq.paginationOptions:type_name -> basic.PaginationOptions
-	20, // 5: meowcloud.content.ListAlbumResp.Albums:type_name -> meowcloud.content.Album
-	22, // 6: meowcloud.content.CreatePhotoReq.photo:type_name -> meowcloud.content.Photo
-	22, // 7: meowcloud.content.CreatePhotoResp.photo:type_name -> meowcloud.content.Photo
-	22, // 8: meowcloud.content.RetrievePhotoResp.photo:type_name -> meowcloud.content.Photo
-	22, // 9: meowcloud.content.UpdatePhotoReq.photo:type_name -> meowcloud.content.Photo
-	21, // 10: meowcloud.content.ListPhotoReq.paginationOptions:type_name -> basic.PaginationOptions
-	22, // 11: meowcloud.content.ListPhotoResp.photos:type_name -> meowcloud.content.Photo
-	0,  // 12: meowcloud.content.ContentService.CreateAlbum:input_type -> meowcloud.content.CreateAlbumReq
-	2,  // 13: meowcloud.content.ContentService.RetrieveAlbum:input_type -> meowcloud.content.RetrieveAlbumReq
-	4,  // 14: meowcloud.content.ContentService.UpdateAlbum:input_type -> meowcloud.content.UpdateAlbumReq
-	6,  // 15: meowcloud.content.ContentService.DeleteAlbum:input_type -> meowcloud.content.DeleteAlbumReq
-	8,  // 16: meowcloud.content.ContentService.ListAlbum:input_type -> meowcloud.content.ListAlbumReq
-	10, // 17: meowcloud.content.ContentService.CreatePhoto:input_type -> meowcloud.content.CreatePhotoReq
-	12, // 18: meowcloud.content.ContentService.RetrievePhoto:input_type -> meowcloud.content.RetrievePhotoReq
-	14, // 19: meowcloud.content.ContentService.UpdatePhoto:input_type -> meowcloud.content.UpdatePhotoReq
-	16, // 20: meowcloud.content.ContentService.DeletePhoto:input_type -> meowcloud.content.DeletePhotoReq
-	18, // 21: meowcloud.content.ContentService.ListPhoto:input_type -> meowcloud.content.ListPhotoReq
-	1,  // 22: meowcloud.content.ContentService.CreateAlbum:output_type -> meowcloud.content.CreateAlbumResp
-	3,  // 23: meowcloud.content.ContentService.RetrieveAlbum:output_type -> meowcloud.content.RetrieveAlbumResp
-	5,  // 24: meowcloud.content.ContentService.UpdateAlbum:output_type -> meowcloud.content.UpdateAlbumResp
-	7,  // 25: meowcloud.content.ContentService.DeleteAlbum:output_type -> meowcloud.content.DeleteAlbumResp
-	9,  // 26: meowcloud.content.ContentService.ListAlbum:output_type -> meowcloud.content.ListAlbumResp
-	11, // 27: meowcloud.content.ContentService.CreatePhoto:output_type -> meowcloud.content.CreatePhotoResp
-	13, // 28: meowcloud.content.ContentService.RetrievePhoto:output_type -> meowcloud.content.RetrievePhotoResp
-	15, // 29: meowcloud.content.ContentService.UpdatePhoto:output_type -> meowcloud.content.UpdatePhotoResp
-	17, // 30: meowcloud.content.ContentService.DeletePhoto:output_type -> meowcloud.content.DeletePhotoResp
-	19, // 31: meowcloud.content.ContentService.ListPhoto:output_type -> meowcloud.content.ListPhotoResp
-	22, // [22:32] is the sub-list for method output_type
-	12, // [12:22] is the sub-list for method input_type
-	12, // [12:12] is the sub-list for extension type_name
-	12, // [12:12] is the sub-list for extension extendee
-	0,  // [0:12] is the sub-list for field type_name
+	52, // 0: meowcloud.content.CreateAlbumReq.album:type_name -> meowcloud.content.Album
+	53, // 1: meowcloud.content.CreateAlbumReq.userMeta:type_name -> basic.UserMeta
+	52, // 2: meowcloud.content.UpdateAlbumReq.album:type_name -> meowcloud.content.Album
+	52, // 3: meowcloud.content.GetAlbumResp.album:type_name -> meowcloud.content.Album
+	54, // 4: meowcloud.content.ListAlbumsReq.pagination:type_name -> basic.PaginationOptions
+	52, // 5: meowcloud.content.ListAlbumsResp.albums:type_name -> meowcloud.content.Album
+	55, // 6: meowcloud.content.UploadPhotoReq.photo:type_name -> meowcloud.content.Photo
+	53, // 7: meowcloud.content.UploadPhotoReq.userMeta:type_name -> basic.UserMeta
+	55, // 8: meowcloud.content.UpdatePhotoReq.photo:type_name -> meowcloud.content.Photo
+	55, // 9: meowcloud.content.GetPhotoResp.photo:type_name -> meowcloud.content.Photo
+	54, // 10: meowcloud.content.ListPhotosReq.pagination:type_name -> basic.PaginationOptions
+	55, // 11: meowcloud.content.ListPhotosResp.photos:type_name -> meowcloud.content.Photo
+	56, // 12: meowcloud.content.AddCatReq.cat:type_name -> meowcloud.content.CatInfo
+	56, // 13: meowcloud.content.UpdateCatReq.cat:type_name -> meowcloud.content.CatInfo
+	56, // 14: meowcloud.content.GetCatResp.cat:type_name -> meowcloud.content.CatInfo
+	57, // 15: meowcloud.content.AddPlaceReq.place:type_name -> meowcloud.content.PlaceInfo
+	57, // 16: meowcloud.content.UpdatePlaceReq.place:type_name -> meowcloud.content.PlaceInfo
+	57, // 17: meowcloud.content.GetPlaceResp.place:type_name -> meowcloud.content.PlaceInfo
+	58, // 18: meowcloud.content.AddTeamReq.team:type_name -> meowcloud.content.Team
+	53, // 19: meowcloud.content.AddTeamReq.userMeta:type_name -> basic.UserMeta
+	58, // 20: meowcloud.content.UpdateTeamReq.team:type_name -> meowcloud.content.Team
+	58, // 21: meowcloud.content.GetTeamResp.team:type_name -> meowcloud.content.Team
+	53, // 22: meowcloud.content.JoinTeamReq.userMeta:type_name -> basic.UserMeta
+	53, // 23: meowcloud.content.LeaveTeamReq.userMeta:type_name -> basic.UserMeta
+	53, // 24: meowcloud.content.ListTeamReq.userMeta:type_name -> basic.UserMeta
+	58, // 25: meowcloud.content.ListTeamResp.teams:type_name -> meowcloud.content.Team
+	53, // 26: meowcloud.content.GetTeamInfoReq.userMeta:type_name -> basic.UserMeta
+	59, // 27: meowcloud.content.GetTeamInfoResp.teamInfo:type_name -> meowcloud.content.TeamInfo
+	0,  // 28: meowcloud.content.AlbumService.CreateAlbum:input_type -> meowcloud.content.CreateAlbumReq
+	2,  // 29: meowcloud.content.AlbumService.UpdateAlbum:input_type -> meowcloud.content.UpdateAlbumReq
+	4,  // 30: meowcloud.content.AlbumService.GetAlbum:input_type -> meowcloud.content.GetAlbumReq
+	6,  // 31: meowcloud.content.AlbumService.ListAlbums:input_type -> meowcloud.content.ListAlbumsReq
+	8,  // 32: meowcloud.content.AlbumService.DeleteAlbum:input_type -> meowcloud.content.DeleteAlbumReq
+	10, // 33: meowcloud.content.PhotoService.UploadPhoto:input_type -> meowcloud.content.UploadPhotoReq
+	12, // 34: meowcloud.content.PhotoService.UpdatePhoto:input_type -> meowcloud.content.UpdatePhotoReq
+	14, // 35: meowcloud.content.PhotoService.GetPhoto:input_type -> meowcloud.content.GetPhotoReq
+	16, // 36: meowcloud.content.PhotoService.ListPhotos:input_type -> meowcloud.content.ListPhotosReq
+	18, // 37: meowcloud.content.PhotoService.DeletePhoto:input_type -> meowcloud.content.DeletePhotoReq
+	20, // 38: meowcloud.content.CatService.AddCat:input_type -> meowcloud.content.AddCatReq
+	22, // 39: meowcloud.content.CatService.UpdateCat:input_type -> meowcloud.content.UpdateCatReq
+	24, // 40: meowcloud.content.CatService.GetCat:input_type -> meowcloud.content.GetCatReq
+	26, // 41: meowcloud.content.CatService.DeleteCat:input_type -> meowcloud.content.DeleteCatReq
+	28, // 42: meowcloud.content.PlaceService.AddPlace:input_type -> meowcloud.content.AddPlaceReq
+	30, // 43: meowcloud.content.PlaceService.UpdatePlace:input_type -> meowcloud.content.UpdatePlaceReq
+	32, // 44: meowcloud.content.PlaceService.GetPlace:input_type -> meowcloud.content.GetPlaceReq
+	34, // 45: meowcloud.content.PlaceService.DeletePlace:input_type -> meowcloud.content.DeletePlaceReq
+	36, // 46: meowcloud.content.TeamService.AddTeam:input_type -> meowcloud.content.AddTeamReq
+	38, // 47: meowcloud.content.TeamService.UpdateTeam:input_type -> meowcloud.content.UpdateTeamReq
+	40, // 48: meowcloud.content.TeamService.GetTeam:input_type -> meowcloud.content.GetTeamReq
+	42, // 49: meowcloud.content.TeamService.DeleteTeam:input_type -> meowcloud.content.DeleteTeamReq
+	44, // 50: meowcloud.content.TeamService.JoinTeam:input_type -> meowcloud.content.JoinTeamReq
+	46, // 51: meowcloud.content.TeamService.LeaveTeam:input_type -> meowcloud.content.LeaveTeamReq
+	48, // 52: meowcloud.content.TeamService.ListTeam:input_type -> meowcloud.content.ListTeamReq
+	50, // 53: meowcloud.content.TeamService.GetTeamInfo:input_type -> meowcloud.content.GetTeamInfoReq
+	1,  // 54: meowcloud.content.AlbumService.CreateAlbum:output_type -> meowcloud.content.CreateAlbumResp
+	3,  // 55: meowcloud.content.AlbumService.UpdateAlbum:output_type -> meowcloud.content.UpdateAlbumResp
+	5,  // 56: meowcloud.content.AlbumService.GetAlbum:output_type -> meowcloud.content.GetAlbumResp
+	7,  // 57: meowcloud.content.AlbumService.ListAlbums:output_type -> meowcloud.content.ListAlbumsResp
+	9,  // 58: meowcloud.content.AlbumService.DeleteAlbum:output_type -> meowcloud.content.DeleteAlbumResp
+	11, // 59: meowcloud.content.PhotoService.UploadPhoto:output_type -> meowcloud.content.UploadPhotoResp
+	13, // 60: meowcloud.content.PhotoService.UpdatePhoto:output_type -> meowcloud.content.UpdatePhotoResp
+	15, // 61: meowcloud.content.PhotoService.GetPhoto:output_type -> meowcloud.content.GetPhotoResp
+	17, // 62: meowcloud.content.PhotoService.ListPhotos:output_type -> meowcloud.content.ListPhotosResp
+	19, // 63: meowcloud.content.PhotoService.DeletePhoto:output_type -> meowcloud.content.DeletePhotoResp
+	21, // 64: meowcloud.content.CatService.AddCat:output_type -> meowcloud.content.AddCatResp
+	23, // 65: meowcloud.content.CatService.UpdateCat:output_type -> meowcloud.content.UpdateCatResp
+	25, // 66: meowcloud.content.CatService.GetCat:output_type -> meowcloud.content.GetCatResp
+	27, // 67: meowcloud.content.CatService.DeleteCat:output_type -> meowcloud.content.DeleteCatResp
+	29, // 68: meowcloud.content.PlaceService.AddPlace:output_type -> meowcloud.content.AddPlaceResp
+	31, // 69: meowcloud.content.PlaceService.UpdatePlace:output_type -> meowcloud.content.UpdatePlaceResp
+	33, // 70: meowcloud.content.PlaceService.GetPlace:output_type -> meowcloud.content.GetPlaceResp
+	35, // 71: meowcloud.content.PlaceService.DeletePlace:output_type -> meowcloud.content.DeletePlaceResp
+	37, // 72: meowcloud.content.TeamService.AddTeam:output_type -> meowcloud.content.AddTeamResp
+	39, // 73: meowcloud.content.TeamService.UpdateTeam:output_type -> meowcloud.content.UpdateTeamResp
+	41, // 74: meowcloud.content.TeamService.GetTeam:output_type -> meowcloud.content.GetTeamResp
+	43, // 75: meowcloud.content.TeamService.DeleteTeam:output_type -> meowcloud.content.DeleteTeamResp
+	45, // 76: meowcloud.content.TeamService.JoinTeam:output_type -> meowcloud.content.JoinTeamResp
+	47, // 77: meowcloud.content.TeamService.LeaveTeam:output_type -> meowcloud.content.LeaveTeamResp
+	49, // 78: meowcloud.content.TeamService.ListTeam:output_type -> meowcloud.content.ListTeamResp
+	51, // 79: meowcloud.content.TeamService.GetTeamInfo:output_type -> meowcloud.content.GetTeamInfoResp
+	54, // [54:80] is the sub-list for method output_type
+	28, // [28:54] is the sub-list for method input_type
+	28, // [28:28] is the sub-list for extension type_name
+	28, // [28:28] is the sub-list for extension extendee
+	0,  // [0:28] is the sub-list for field type_name
 }
 
 func init() { file_meowcloud_content_content_proto_init() }
@@ -1221,30 +2935,6 @@ func file_meowcloud_content_content_proto_init() {
 			}
 		}
 		file_meowcloud_content_content_proto_msgTypes[2].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RetrieveAlbumReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_meowcloud_content_content_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RetrieveAlbumResp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_meowcloud_content_content_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UpdateAlbumReq); i {
 			case 0:
 				return &v.state
@@ -1256,7 +2946,7 @@ func file_meowcloud_content_content_proto_init() {
 				return nil
 			}
 		}
-		file_meowcloud_content_content_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+		file_meowcloud_content_content_proto_msgTypes[3].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UpdateAlbumResp); i {
 			case 0:
 				return &v.state
@@ -1268,8 +2958,32 @@ func file_meowcloud_content_content_proto_init() {
 				return nil
 			}
 		}
+		file_meowcloud_content_content_proto_msgTypes[4].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetAlbumReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[5].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetAlbumResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 		file_meowcloud_content_content_proto_msgTypes[6].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteAlbumReq); i {
+			switch v := v.(*ListAlbumsReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1281,7 +2995,7 @@ func file_meowcloud_content_content_proto_init() {
 			}
 		}
 		file_meowcloud_content_content_proto_msgTypes[7].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteAlbumResp); i {
+			switch v := v.(*ListAlbumsResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1293,7 +3007,7 @@ func file_meowcloud_content_content_proto_init() {
 			}
 		}
 		file_meowcloud_content_content_proto_msgTypes[8].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListAlbumReq); i {
+			switch v := v.(*DeleteAlbumReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1305,7 +3019,7 @@ func file_meowcloud_content_content_proto_init() {
 			}
 		}
 		file_meowcloud_content_content_proto_msgTypes[9].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListAlbumResp); i {
+			switch v := v.(*DeleteAlbumResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1317,7 +3031,7 @@ func file_meowcloud_content_content_proto_init() {
 			}
 		}
 		file_meowcloud_content_content_proto_msgTypes[10].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreatePhotoReq); i {
+			switch v := v.(*UploadPhotoReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1329,7 +3043,7 @@ func file_meowcloud_content_content_proto_init() {
 			}
 		}
 		file_meowcloud_content_content_proto_msgTypes[11].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*CreatePhotoResp); i {
+			switch v := v.(*UploadPhotoResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1341,30 +3055,6 @@ func file_meowcloud_content_content_proto_init() {
 			}
 		}
 		file_meowcloud_content_content_proto_msgTypes[12].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RetrievePhotoReq); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_meowcloud_content_content_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*RetrievePhotoResp); i {
-			case 0:
-				return &v.state
-			case 1:
-				return &v.sizeCache
-			case 2:
-				return &v.unknownFields
-			default:
-				return nil
-			}
-		}
-		file_meowcloud_content_content_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UpdatePhotoReq); i {
 			case 0:
 				return &v.state
@@ -1376,7 +3066,7 @@ func file_meowcloud_content_content_proto_init() {
 				return nil
 			}
 		}
-		file_meowcloud_content_content_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+		file_meowcloud_content_content_proto_msgTypes[13].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*UpdatePhotoResp); i {
 			case 0:
 				return &v.state
@@ -1388,8 +3078,32 @@ func file_meowcloud_content_content_proto_init() {
 				return nil
 			}
 		}
+		file_meowcloud_content_content_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetPhotoReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetPhotoResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 		file_meowcloud_content_content_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeletePhotoReq); i {
+			switch v := v.(*ListPhotosReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1401,7 +3115,7 @@ func file_meowcloud_content_content_proto_init() {
 			}
 		}
 		file_meowcloud_content_content_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeletePhotoResp); i {
+			switch v := v.(*ListPhotosResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1413,7 +3127,7 @@ func file_meowcloud_content_content_proto_init() {
 			}
 		}
 		file_meowcloud_content_content_proto_msgTypes[18].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListPhotoReq); i {
+			switch v := v.(*DeletePhotoReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1425,7 +3139,391 @@ func file_meowcloud_content_content_proto_init() {
 			}
 		}
 		file_meowcloud_content_content_proto_msgTypes[19].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*ListPhotoResp); i {
+			switch v := v.(*DeletePhotoResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[20].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddCatReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[21].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddCatResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[22].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateCatReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[23].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateCatResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[24].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetCatReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[25].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetCatResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[26].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteCatReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[27].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteCatResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[28].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddPlaceReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[29].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddPlaceResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[30].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdatePlaceReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[31].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdatePlaceResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[32].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetPlaceReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[33].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetPlaceResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeletePlaceReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeletePlaceResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[36].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddTeamReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[37].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*AddTeamResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[38].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateTeamReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[39].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*UpdateTeamResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[40].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetTeamReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[41].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetTeamResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[42].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteTeamReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[43].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteTeamResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[44].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*JoinTeamReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[45].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*JoinTeamResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[46].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*LeaveTeamReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[47].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*LeaveTeamResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[48].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListTeamReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[49].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*ListTeamResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[50].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetTeamInfoReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_meowcloud_content_content_proto_msgTypes[51].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetTeamInfoResp); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1437,17 +3535,15 @@ func file_meowcloud_content_content_proto_init() {
 			}
 		}
 	}
-	file_meowcloud_content_content_proto_msgTypes[8].OneofWrappers = []interface{}{}
-	file_meowcloud_content_content_proto_msgTypes[18].OneofWrappers = []interface{}{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_meowcloud_content_content_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   20,
+			NumMessages:   52,
 			NumExtensions: 0,
-			NumServices:   1,
+			NumServices:   5,
 		},
 		GoTypes:           file_meowcloud_content_content_proto_goTypes,
 		DependencyIndexes: file_meowcloud_content_content_proto_depIdxs,
@@ -1463,15 +3559,43 @@ var _ context.Context
 
 // Code generated by Kitex v0.10.3. DO NOT EDIT.
 
-type ContentService interface {
+type AlbumService interface {
 	CreateAlbum(ctx context.Context, req *CreateAlbumReq) (res *CreateAlbumResp, err error)
-	RetrieveAlbum(ctx context.Context, req *RetrieveAlbumReq) (res *RetrieveAlbumResp, err error)
 	UpdateAlbum(ctx context.Context, req *UpdateAlbumReq) (res *UpdateAlbumResp, err error)
+	GetAlbum(ctx context.Context, req *GetAlbumReq) (res *GetAlbumResp, err error)
+	ListAlbums(ctx context.Context, req *ListAlbumsReq) (res *ListAlbumsResp, err error)
 	DeleteAlbum(ctx context.Context, req *DeleteAlbumReq) (res *DeleteAlbumResp, err error)
-	ListAlbum(ctx context.Context, req *ListAlbumReq) (res *ListAlbumResp, err error)
-	CreatePhoto(ctx context.Context, req *CreatePhotoReq) (res *CreatePhotoResp, err error)
-	RetrievePhoto(ctx context.Context, req *RetrievePhotoReq) (res *RetrievePhotoResp, err error)
+}
+
+type PhotoService interface {
+	UploadPhoto(ctx context.Context, req *UploadPhotoReq) (res *UploadPhotoResp, err error)
 	UpdatePhoto(ctx context.Context, req *UpdatePhotoReq) (res *UpdatePhotoResp, err error)
+	GetPhoto(ctx context.Context, req *GetPhotoReq) (res *GetPhotoResp, err error)
+	ListPhotos(ctx context.Context, req *ListPhotosReq) (res *ListPhotosResp, err error)
 	DeletePhoto(ctx context.Context, req *DeletePhotoReq) (res *DeletePhotoResp, err error)
-	ListPhoto(ctx context.Context, req *ListPhotoReq) (res *ListPhotoResp, err error)
+}
+
+type CatService interface {
+	AddCat(ctx context.Context, req *AddCatReq) (res *AddCatResp, err error)
+	UpdateCat(ctx context.Context, req *UpdateCatReq) (res *UpdateCatResp, err error)
+	GetCat(ctx context.Context, req *GetCatReq) (res *GetCatResp, err error)
+	DeleteCat(ctx context.Context, req *DeleteCatReq) (res *DeleteCatResp, err error)
+}
+
+type PlaceService interface {
+	AddPlace(ctx context.Context, req *AddPlaceReq) (res *AddPlaceResp, err error)
+	UpdatePlace(ctx context.Context, req *UpdatePlaceReq) (res *UpdatePlaceResp, err error)
+	GetPlace(ctx context.Context, req *GetPlaceReq) (res *GetPlaceResp, err error)
+	DeletePlace(ctx context.Context, req *DeletePlaceReq) (res *DeletePlaceResp, err error)
+}
+
+type TeamService interface {
+	AddTeam(ctx context.Context, req *AddTeamReq) (res *AddTeamResp, err error)
+	UpdateTeam(ctx context.Context, req *UpdateTeamReq) (res *UpdateTeamResp, err error)
+	GetTeam(ctx context.Context, req *GetTeamReq) (res *GetTeamResp, err error)
+	DeleteTeam(ctx context.Context, req *DeleteTeamReq) (res *DeleteTeamResp, err error)
+	JoinTeam(ctx context.Context, req *JoinTeamReq) (res *JoinTeamResp, err error)
+	LeaveTeam(ctx context.Context, req *LeaveTeamReq) (res *LeaveTeamResp, err error)
+	ListTeam(ctx context.Context, req *ListTeamReq) (res *ListTeamResp, err error)
+	GetTeamInfo(ctx context.Context, req *GetTeamInfoReq) (res *GetTeamInfoResp, err error)
 }

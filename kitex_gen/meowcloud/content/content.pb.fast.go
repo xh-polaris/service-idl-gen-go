@@ -20,6 +20,11 @@ func (x *CreateAlbumReq) FastRead(buf []byte, _type int8, number int32) (offset 
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -40,6 +45,16 @@ func (x *CreateAlbumReq) fastReadField1(buf []byte, _type int8) (offset int, err
 		return offset, err
 	}
 	x.Album = &v
+	return offset, nil
+}
+
+func (x *CreateAlbumReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	var v basic.UserMeta
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.UserMeta = &v
 	return offset, nil
 }
 
@@ -64,68 +79,8 @@ ReadFieldError:
 }
 
 func (x *CreateAlbumResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v Album
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Album = &v
-	return offset, nil
-}
-
-func (x *RetrieveAlbumReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_RetrieveAlbumReq[number], err)
-}
-
-func (x *RetrieveAlbumReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	x.AlbumId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
-}
-
-func (x *RetrieveAlbumResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_RetrieveAlbumResp[number], err)
-}
-
-func (x *RetrieveAlbumResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v Album
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Album = &v
-	return offset, nil
 }
 
 func (x *UpdateAlbumReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -171,6 +126,121 @@ SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 }
 
+func (x *GetAlbumReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetAlbumReq[number], err)
+}
+
+func (x *GetAlbumReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetAlbumResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetAlbumResp[number], err)
+}
+
+func (x *GetAlbumResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v Album
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Album = &v
+	return offset, nil
+}
+
+func (x *ListAlbumsReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListAlbumsReq[number], err)
+}
+
+func (x *ListAlbumsReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v basic.PaginationOptions
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Pagination = &v
+	return offset, nil
+}
+
+func (x *ListAlbumsResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListAlbumsResp[number], err)
+}
+
+func (x *ListAlbumsResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v Album
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Albums = append(x.Albums, &v)
+	return offset, nil
+}
+
 func (x *DeleteAlbumReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -209,37 +279,7 @@ SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 }
 
-func (x *ListAlbumReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListAlbumReq[number], err)
-}
-
-func (x *ListAlbumReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v basic.PaginationOptions
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.PaginationOptions = &v
-	return offset, nil
-}
-
-func (x *ListAlbumResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *UploadPhotoReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -261,137 +301,52 @@ func (x *ListAlbumResp) FastRead(buf []byte, _type int8, number int32) (offset i
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListAlbumResp[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_UploadPhotoReq[number], err)
 }
 
-func (x *ListAlbumResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v Album
+func (x *UploadPhotoReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v Photo
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
 	}
-	x.Albums = append(x.Albums, &v)
+	x.Photo = &v
 	return offset, nil
 }
 
-func (x *ListAlbumResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
+func (x *UploadPhotoReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	var v basic.UserMeta
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.UserMeta = &v
+	return offset, nil
+}
+
+func (x *UploadPhotoResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_UploadPhotoResp[number], err)
+}
+
+func (x *UploadPhotoResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.PhotoId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
-}
-
-func (x *CreatePhotoReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CreatePhotoReq[number], err)
-}
-
-func (x *CreatePhotoReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v Photo
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Photo = &v
-	return offset, nil
-}
-
-func (x *CreatePhotoResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CreatePhotoResp[number], err)
-}
-
-func (x *CreatePhotoResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v Photo
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Photo = &v
-	return offset, nil
-}
-
-func (x *RetrievePhotoReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_RetrievePhotoReq[number], err)
-}
-
-func (x *RetrievePhotoReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.Id, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *RetrievePhotoResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
-	switch number {
-	case 1:
-		offset, err = x.fastReadField1(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	default:
-		offset, err = fastpb.Skip(buf, _type, number)
-		if err != nil {
-			goto SkipFieldError
-		}
-	}
-	return offset, nil
-SkipFieldError:
-	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
-ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_RetrievePhotoResp[number], err)
-}
-
-func (x *RetrievePhotoResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v Photo
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.Photo = &v
-	return offset, nil
 }
 
 func (x *UpdatePhotoReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -437,6 +392,121 @@ SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 }
 
+func (x *GetPhotoReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetPhotoReq[number], err)
+}
+
+func (x *GetPhotoReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetPhotoResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetPhotoResp[number], err)
+}
+
+func (x *GetPhotoResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v Photo
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Photo = &v
+	return offset, nil
+}
+
+func (x *ListPhotosReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListPhotosReq[number], err)
+}
+
+func (x *ListPhotosReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v basic.PaginationOptions
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Pagination = &v
+	return offset, nil
+}
+
+func (x *ListPhotosResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListPhotosResp[number], err)
+}
+
+func (x *ListPhotosResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v Photo
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Photos = append(x.Photos, &v)
+	return offset, nil
+}
+
 func (x *DeletePhotoReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -475,7 +545,7 @@ SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 }
 
-func (x *ListPhotoReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *AddCatReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -484,11 +554,6 @@ func (x *ListPhotoReq) FastRead(buf []byte, _type int8, number int32) (offset in
 		}
 	case 2:
 		offset, err = x.fastReadField2(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -502,31 +567,186 @@ func (x *ListPhotoReq) FastRead(buf []byte, _type int8, number int32) (offset in
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListPhotoReq[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_AddCatReq[number], err)
 }
 
-func (x *ListPhotoReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *AddCatReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v CatInfo
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Cat = &v
+	return offset, nil
+}
+
+func (x *AddCatReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.AlbumId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *ListPhotoReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	var v basic.PaginationOptions
+func (x *AddCatResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_AddCatResp[number], err)
+}
+
+func (x *AddCatResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.CatId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *UpdateCatReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_UpdateCatReq[number], err)
+}
+
+func (x *UpdateCatReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v CatInfo
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
 	}
-	x.PaginationOptions = &v
+	x.Cat = &v
 	return offset, nil
 }
 
-func (x *ListPhotoReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	tmp, offset, err := fastpb.ReadBool(buf, _type)
-	x.OnlyFeatured = &tmp
+func (x *UpdateCatResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+}
+
+func (x *GetCatReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetCatReq[number], err)
+}
+
+func (x *GetCatReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.AlbumId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *ListPhotoResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *GetCatResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetCatResp[number], err)
+}
+
+func (x *GetCatResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v CatInfo
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Cat = &v
+	return offset, nil
+}
+
+func (x *DeleteCatReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DeleteCatReq[number], err)
+}
+
+func (x *DeleteCatReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *DeleteCatResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+}
+
+func (x *AddPlaceReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -548,22 +768,615 @@ func (x *ListPhotoResp) FastRead(buf []byte, _type int8, number int32) (offset i
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListPhotoResp[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_AddPlaceReq[number], err)
 }
 
-func (x *ListPhotoResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v Photo
+func (x *AddPlaceReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v PlaceInfo
 	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
 	}
-	x.Photos = append(x.Photos, &v)
+	x.Place = &v
 	return offset, nil
 }
 
-func (x *ListPhotoResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.Total, offset, err = fastpb.ReadInt64(buf, _type)
+func (x *AddPlaceReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.AlbumId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
+}
+
+func (x *AddPlaceResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_AddPlaceResp[number], err)
+}
+
+func (x *AddPlaceResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.PlaceId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *UpdatePlaceReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_UpdatePlaceReq[number], err)
+}
+
+func (x *UpdatePlaceReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v PlaceInfo
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Place = &v
+	return offset, nil
+}
+
+func (x *UpdatePlaceResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+}
+
+func (x *GetPlaceReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetPlaceReq[number], err)
+}
+
+func (x *GetPlaceReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.AlbumId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetPlaceResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetPlaceResp[number], err)
+}
+
+func (x *GetPlaceResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v PlaceInfo
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Place = &v
+	return offset, nil
+}
+
+func (x *DeletePlaceReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DeletePlaceReq[number], err)
+}
+
+func (x *DeletePlaceReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *DeletePlaceResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+}
+
+func (x *AddTeamReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_AddTeamReq[number], err)
+}
+
+func (x *AddTeamReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v Team
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Team = &v
+	return offset, nil
+}
+
+func (x *AddTeamReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	var v basic.UserMeta
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.UserMeta = &v
+	return offset, nil
+}
+
+func (x *AddTeamResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_AddTeamResp[number], err)
+}
+
+func (x *AddTeamResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.TeamId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *UpdateTeamReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_UpdateTeamReq[number], err)
+}
+
+func (x *UpdateTeamReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v Team
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Team = &v
+	return offset, nil
+}
+
+func (x *UpdateTeamResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+}
+
+func (x *GetTeamReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetTeamReq[number], err)
+}
+
+func (x *GetTeamReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetTeamResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetTeamResp[number], err)
+}
+
+func (x *GetTeamResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v Team
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Team = &v
+	return offset, nil
+}
+
+func (x *DeleteTeamReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DeleteTeamReq[number], err)
+}
+
+func (x *DeleteTeamReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *DeleteTeamResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+}
+
+func (x *JoinTeamReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_JoinTeamReq[number], err)
+}
+
+func (x *JoinTeamReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.TeamId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *JoinTeamReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	var v basic.UserMeta
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.UserMeta = &v
+	return offset, nil
+}
+
+func (x *JoinTeamResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+}
+
+func (x *LeaveTeamReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_LeaveTeamReq[number], err)
+}
+
+func (x *LeaveTeamReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.TeamId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *LeaveTeamReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	var v basic.UserMeta
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.UserMeta = &v
+	return offset, nil
+}
+
+func (x *LeaveTeamResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+}
+
+func (x *ListTeamReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListTeamReq[number], err)
+}
+
+func (x *ListTeamReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v basic.UserMeta
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.UserMeta = &v
+	return offset, nil
+}
+
+func (x *ListTeamResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ListTeamResp[number], err)
+}
+
+func (x *ListTeamResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v Team
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Teams = append(x.Teams, &v)
+	return offset, nil
+}
+
+func (x *GetTeamInfoReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetTeamInfoReq[number], err)
+}
+
+func (x *GetTeamInfoReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v basic.UserMeta
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.UserMeta = &v
+	return offset, nil
+}
+
+func (x *GetTeamInfoResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetTeamInfoResp[number], err)
+}
+
+func (x *GetTeamInfoResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v TeamInfo
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.TeamInfo = &v
+	return offset, nil
 }
 
 func (x *CreateAlbumReq) FastWrite(buf []byte) (offset int) {
@@ -571,6 +1384,7 @@ func (x *CreateAlbumReq) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
 	return offset
 }
 
@@ -579,6 +1393,14 @@ func (x *CreateAlbumReq) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetAlbum())
+	return offset
+}
+
+func (x *CreateAlbumReq) fastWriteField2(buf []byte) (offset int) {
+	if x.UserMeta == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 2, x.GetUserMeta())
 	return offset
 }
 
@@ -591,42 +1413,10 @@ func (x *CreateAlbumResp) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *CreateAlbumResp) fastWriteField1(buf []byte) (offset int) {
-	if x.Album == nil {
+	if x.AlbumId == "" {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetAlbum())
-	return offset
-}
-
-func (x *RetrieveAlbumReq) FastWrite(buf []byte) (offset int) {
-	if x == nil {
-		return offset
-	}
-	offset += x.fastWriteField1(buf[offset:])
-	return offset
-}
-
-func (x *RetrieveAlbumReq) fastWriteField1(buf []byte) (offset int) {
-	if x.Id == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
-	return offset
-}
-
-func (x *RetrieveAlbumResp) FastWrite(buf []byte) (offset int) {
-	if x == nil {
-		return offset
-	}
-	offset += x.fastWriteField1(buf[offset:])
-	return offset
-}
-
-func (x *RetrieveAlbumResp) fastWriteField1(buf []byte) (offset int) {
-	if x.Album == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetAlbum())
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetAlbumId())
 	return offset
 }
 
@@ -649,6 +1439,72 @@ func (x *UpdateAlbumReq) fastWriteField1(buf []byte) (offset int) {
 func (x *UpdateAlbumResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
+	}
+	return offset
+}
+
+func (x *GetAlbumReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *GetAlbumReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Id == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
+	return offset
+}
+
+func (x *GetAlbumResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *GetAlbumResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Album == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetAlbum())
+	return offset
+}
+
+func (x *ListAlbumsReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *ListAlbumsReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Pagination == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetPagination())
+	return offset
+}
+
+func (x *ListAlbumsResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *ListAlbumsResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Albums == nil {
+		return offset
+	}
+	for i := range x.GetAlbums() {
+		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetAlbums()[i])
 	}
 	return offset
 }
@@ -676,23 +1532,7 @@ func (x *DeleteAlbumResp) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *ListAlbumReq) FastWrite(buf []byte) (offset int) {
-	if x == nil {
-		return offset
-	}
-	offset += x.fastWriteField1(buf[offset:])
-	return offset
-}
-
-func (x *ListAlbumReq) fastWriteField1(buf []byte) (offset int) {
-	if x.PaginationOptions == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetPaginationOptions())
-	return offset
-}
-
-func (x *ListAlbumResp) FastWrite(buf []byte) (offset int) {
+func (x *UploadPhotoReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -701,33 +1541,7 @@ func (x *ListAlbumResp) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *ListAlbumResp) fastWriteField1(buf []byte) (offset int) {
-	if x.Albums == nil {
-		return offset
-	}
-	for i := range x.GetAlbums() {
-		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetAlbums()[i])
-	}
-	return offset
-}
-
-func (x *ListAlbumResp) fastWriteField2(buf []byte) (offset int) {
-	if x.Total == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetTotal())
-	return offset
-}
-
-func (x *CreatePhotoReq) FastWrite(buf []byte) (offset int) {
-	if x == nil {
-		return offset
-	}
-	offset += x.fastWriteField1(buf[offset:])
-	return offset
-}
-
-func (x *CreatePhotoReq) fastWriteField1(buf []byte) (offset int) {
+func (x *UploadPhotoReq) fastWriteField1(buf []byte) (offset int) {
 	if x.Photo == nil {
 		return offset
 	}
@@ -735,7 +1549,15 @@ func (x *CreatePhotoReq) fastWriteField1(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *CreatePhotoResp) FastWrite(buf []byte) (offset int) {
+func (x *UploadPhotoReq) fastWriteField2(buf []byte) (offset int) {
+	if x.UserMeta == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 2, x.GetUserMeta())
+	return offset
+}
+
+func (x *UploadPhotoResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -743,43 +1565,11 @@ func (x *CreatePhotoResp) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *CreatePhotoResp) fastWriteField1(buf []byte) (offset int) {
-	if x.Photo == nil {
+func (x *UploadPhotoResp) fastWriteField1(buf []byte) (offset int) {
+	if x.PhotoId == "" {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetPhoto())
-	return offset
-}
-
-func (x *RetrievePhotoReq) FastWrite(buf []byte) (offset int) {
-	if x == nil {
-		return offset
-	}
-	offset += x.fastWriteField1(buf[offset:])
-	return offset
-}
-
-func (x *RetrievePhotoReq) fastWriteField1(buf []byte) (offset int) {
-	if x.Id == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
-	return offset
-}
-
-func (x *RetrievePhotoResp) FastWrite(buf []byte) (offset int) {
-	if x == nil {
-		return offset
-	}
-	offset += x.fastWriteField1(buf[offset:])
-	return offset
-}
-
-func (x *RetrievePhotoResp) fastWriteField1(buf []byte) (offset int) {
-	if x.Photo == nil {
-		return offset
-	}
-	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetPhoto())
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetPhotoId())
 	return offset
 }
 
@@ -802,6 +1592,72 @@ func (x *UpdatePhotoReq) fastWriteField1(buf []byte) (offset int) {
 func (x *UpdatePhotoResp) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
+	}
+	return offset
+}
+
+func (x *GetPhotoReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *GetPhotoReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Id == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
+	return offset
+}
+
+func (x *GetPhotoResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *GetPhotoResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Photo == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetPhoto())
+	return offset
+}
+
+func (x *ListPhotosReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *ListPhotosReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Pagination == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetPagination())
+	return offset
+}
+
+func (x *ListPhotosResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *ListPhotosResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Photos == nil {
+		return offset
+	}
+	for i := range x.GetPhotos() {
+		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetPhotos()[i])
 	}
 	return offset
 }
@@ -829,17 +1685,79 @@ func (x *DeletePhotoResp) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *ListPhotoReq) FastWrite(buf []byte) (offset int) {
+func (x *AddCatReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
-func (x *ListPhotoReq) fastWriteField1(buf []byte) (offset int) {
+func (x *AddCatReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Cat == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetCat())
+	return offset
+}
+
+func (x *AddCatReq) fastWriteField2(buf []byte) (offset int) {
+	if x.AlbumId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetAlbumId())
+	return offset
+}
+
+func (x *AddCatResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *AddCatResp) fastWriteField1(buf []byte) (offset int) {
+	if x.CatId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetCatId())
+	return offset
+}
+
+func (x *UpdateCatReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *UpdateCatReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Cat == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetCat())
+	return offset
+}
+
+func (x *UpdateCatResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	return offset
+}
+
+func (x *GetCatReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *GetCatReq) fastWriteField1(buf []byte) (offset int) {
 	if x.AlbumId == "" {
 		return offset
 	}
@@ -847,23 +1765,46 @@ func (x *ListPhotoReq) fastWriteField1(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *ListPhotoReq) fastWriteField2(buf []byte) (offset int) {
-	if x.PaginationOptions == nil {
+func (x *GetCatResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 2, x.GetPaginationOptions())
+	offset += x.fastWriteField1(buf[offset:])
 	return offset
 }
 
-func (x *ListPhotoReq) fastWriteField3(buf []byte) (offset int) {
-	if x.OnlyFeatured == nil {
+func (x *GetCatResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Cat == nil {
 		return offset
 	}
-	offset += fastpb.WriteBool(buf[offset:], 3, x.GetOnlyFeatured())
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetCat())
 	return offset
 }
 
-func (x *ListPhotoResp) FastWrite(buf []byte) (offset int) {
+func (x *DeleteCatReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *DeleteCatReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Id == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
+	return offset
+}
+
+func (x *DeleteCatResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	return offset
+}
+
+func (x *AddPlaceReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -872,21 +1813,362 @@ func (x *ListPhotoResp) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *ListPhotoResp) fastWriteField1(buf []byte) (offset int) {
-	if x.Photos == nil {
+func (x *AddPlaceReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Place == nil {
 		return offset
 	}
-	for i := range x.GetPhotos() {
-		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetPhotos()[i])
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetPlace())
+	return offset
+}
+
+func (x *AddPlaceReq) fastWriteField2(buf []byte) (offset int) {
+	if x.AlbumId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetAlbumId())
+	return offset
+}
+
+func (x *AddPlaceResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *AddPlaceResp) fastWriteField1(buf []byte) (offset int) {
+	if x.PlaceId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetPlaceId())
+	return offset
+}
+
+func (x *UpdatePlaceReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *UpdatePlaceReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Place == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetPlace())
+	return offset
+}
+
+func (x *UpdatePlaceResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
 	}
 	return offset
 }
 
-func (x *ListPhotoResp) fastWriteField2(buf []byte) (offset int) {
-	if x.Total == 0 {
+func (x *GetPlaceReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetTotal())
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *GetPlaceReq) fastWriteField1(buf []byte) (offset int) {
+	if x.AlbumId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetAlbumId())
+	return offset
+}
+
+func (x *GetPlaceResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *GetPlaceResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Place == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetPlace())
+	return offset
+}
+
+func (x *DeletePlaceReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *DeletePlaceReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Id == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
+	return offset
+}
+
+func (x *DeletePlaceResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	return offset
+}
+
+func (x *AddTeamReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *AddTeamReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Team == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetTeam())
+	return offset
+}
+
+func (x *AddTeamReq) fastWriteField2(buf []byte) (offset int) {
+	if x.UserMeta == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 2, x.GetUserMeta())
+	return offset
+}
+
+func (x *AddTeamResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *AddTeamResp) fastWriteField1(buf []byte) (offset int) {
+	if x.TeamId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetTeamId())
+	return offset
+}
+
+func (x *UpdateTeamReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *UpdateTeamReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Team == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetTeam())
+	return offset
+}
+
+func (x *UpdateTeamResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	return offset
+}
+
+func (x *GetTeamReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *GetTeamReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Id == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
+	return offset
+}
+
+func (x *GetTeamResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *GetTeamResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Team == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetTeam())
+	return offset
+}
+
+func (x *DeleteTeamReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *DeleteTeamReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Id == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
+	return offset
+}
+
+func (x *DeleteTeamResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	return offset
+}
+
+func (x *JoinTeamReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *JoinTeamReq) fastWriteField1(buf []byte) (offset int) {
+	if x.TeamId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetTeamId())
+	return offset
+}
+
+func (x *JoinTeamReq) fastWriteField2(buf []byte) (offset int) {
+	if x.UserMeta == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 2, x.GetUserMeta())
+	return offset
+}
+
+func (x *JoinTeamResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	return offset
+}
+
+func (x *LeaveTeamReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *LeaveTeamReq) fastWriteField1(buf []byte) (offset int) {
+	if x.TeamId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetTeamId())
+	return offset
+}
+
+func (x *LeaveTeamReq) fastWriteField2(buf []byte) (offset int) {
+	if x.UserMeta == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 2, x.GetUserMeta())
+	return offset
+}
+
+func (x *LeaveTeamResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	return offset
+}
+
+func (x *ListTeamReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *ListTeamReq) fastWriteField1(buf []byte) (offset int) {
+	if x.UserMeta == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetUserMeta())
+	return offset
+}
+
+func (x *ListTeamResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *ListTeamResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Teams == nil {
+		return offset
+	}
+	for i := range x.GetTeams() {
+		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetTeams()[i])
+	}
+	return offset
+}
+
+func (x *GetTeamInfoReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *GetTeamInfoReq) fastWriteField1(buf []byte) (offset int) {
+	if x.UserMeta == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetUserMeta())
+	return offset
+}
+
+func (x *GetTeamInfoResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *GetTeamInfoResp) fastWriteField1(buf []byte) (offset int) {
+	if x.TeamInfo == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetTeamInfo())
 	return offset
 }
 
@@ -895,6 +2177,7 @@ func (x *CreateAlbumReq) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
+	n += x.sizeField2()
 	return n
 }
 
@@ -903,6 +2186,14 @@ func (x *CreateAlbumReq) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeMessage(1, x.GetAlbum())
+	return n
+}
+
+func (x *CreateAlbumReq) sizeField2() (n int) {
+	if x.UserMeta == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(2, x.GetUserMeta())
 	return n
 }
 
@@ -915,42 +2206,10 @@ func (x *CreateAlbumResp) Size() (n int) {
 }
 
 func (x *CreateAlbumResp) sizeField1() (n int) {
-	if x.Album == nil {
+	if x.AlbumId == "" {
 		return n
 	}
-	n += fastpb.SizeMessage(1, x.GetAlbum())
-	return n
-}
-
-func (x *RetrieveAlbumReq) Size() (n int) {
-	if x == nil {
-		return n
-	}
-	n += x.sizeField1()
-	return n
-}
-
-func (x *RetrieveAlbumReq) sizeField1() (n int) {
-	if x.Id == "" {
-		return n
-	}
-	n += fastpb.SizeString(1, x.GetId())
-	return n
-}
-
-func (x *RetrieveAlbumResp) Size() (n int) {
-	if x == nil {
-		return n
-	}
-	n += x.sizeField1()
-	return n
-}
-
-func (x *RetrieveAlbumResp) sizeField1() (n int) {
-	if x.Album == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(1, x.GetAlbum())
+	n += fastpb.SizeString(1, x.GetAlbumId())
 	return n
 }
 
@@ -973,6 +2232,72 @@ func (x *UpdateAlbumReq) sizeField1() (n int) {
 func (x *UpdateAlbumResp) Size() (n int) {
 	if x == nil {
 		return n
+	}
+	return n
+}
+
+func (x *GetAlbumReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *GetAlbumReq) sizeField1() (n int) {
+	if x.Id == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetId())
+	return n
+}
+
+func (x *GetAlbumResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *GetAlbumResp) sizeField1() (n int) {
+	if x.Album == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(1, x.GetAlbum())
+	return n
+}
+
+func (x *ListAlbumsReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *ListAlbumsReq) sizeField1() (n int) {
+	if x.Pagination == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(1, x.GetPagination())
+	return n
+}
+
+func (x *ListAlbumsResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *ListAlbumsResp) sizeField1() (n int) {
+	if x.Albums == nil {
+		return n
+	}
+	for i := range x.GetAlbums() {
+		n += fastpb.SizeMessage(1, x.GetAlbums()[i])
 	}
 	return n
 }
@@ -1000,23 +2325,7 @@ func (x *DeleteAlbumResp) Size() (n int) {
 	return n
 }
 
-func (x *ListAlbumReq) Size() (n int) {
-	if x == nil {
-		return n
-	}
-	n += x.sizeField1()
-	return n
-}
-
-func (x *ListAlbumReq) sizeField1() (n int) {
-	if x.PaginationOptions == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(1, x.GetPaginationOptions())
-	return n
-}
-
-func (x *ListAlbumResp) Size() (n int) {
+func (x *UploadPhotoReq) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -1025,33 +2334,7 @@ func (x *ListAlbumResp) Size() (n int) {
 	return n
 }
 
-func (x *ListAlbumResp) sizeField1() (n int) {
-	if x.Albums == nil {
-		return n
-	}
-	for i := range x.GetAlbums() {
-		n += fastpb.SizeMessage(1, x.GetAlbums()[i])
-	}
-	return n
-}
-
-func (x *ListAlbumResp) sizeField2() (n int) {
-	if x.Total == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(2, x.GetTotal())
-	return n
-}
-
-func (x *CreatePhotoReq) Size() (n int) {
-	if x == nil {
-		return n
-	}
-	n += x.sizeField1()
-	return n
-}
-
-func (x *CreatePhotoReq) sizeField1() (n int) {
+func (x *UploadPhotoReq) sizeField1() (n int) {
 	if x.Photo == nil {
 		return n
 	}
@@ -1059,7 +2342,15 @@ func (x *CreatePhotoReq) sizeField1() (n int) {
 	return n
 }
 
-func (x *CreatePhotoResp) Size() (n int) {
+func (x *UploadPhotoReq) sizeField2() (n int) {
+	if x.UserMeta == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(2, x.GetUserMeta())
+	return n
+}
+
+func (x *UploadPhotoResp) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -1067,43 +2358,11 @@ func (x *CreatePhotoResp) Size() (n int) {
 	return n
 }
 
-func (x *CreatePhotoResp) sizeField1() (n int) {
-	if x.Photo == nil {
+func (x *UploadPhotoResp) sizeField1() (n int) {
+	if x.PhotoId == "" {
 		return n
 	}
-	n += fastpb.SizeMessage(1, x.GetPhoto())
-	return n
-}
-
-func (x *RetrievePhotoReq) Size() (n int) {
-	if x == nil {
-		return n
-	}
-	n += x.sizeField1()
-	return n
-}
-
-func (x *RetrievePhotoReq) sizeField1() (n int) {
-	if x.Id == "" {
-		return n
-	}
-	n += fastpb.SizeString(1, x.GetId())
-	return n
-}
-
-func (x *RetrievePhotoResp) Size() (n int) {
-	if x == nil {
-		return n
-	}
-	n += x.sizeField1()
-	return n
-}
-
-func (x *RetrievePhotoResp) sizeField1() (n int) {
-	if x.Photo == nil {
-		return n
-	}
-	n += fastpb.SizeMessage(1, x.GetPhoto())
+	n += fastpb.SizeString(1, x.GetPhotoId())
 	return n
 }
 
@@ -1126,6 +2385,72 @@ func (x *UpdatePhotoReq) sizeField1() (n int) {
 func (x *UpdatePhotoResp) Size() (n int) {
 	if x == nil {
 		return n
+	}
+	return n
+}
+
+func (x *GetPhotoReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *GetPhotoReq) sizeField1() (n int) {
+	if x.Id == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetId())
+	return n
+}
+
+func (x *GetPhotoResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *GetPhotoResp) sizeField1() (n int) {
+	if x.Photo == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(1, x.GetPhoto())
+	return n
+}
+
+func (x *ListPhotosReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *ListPhotosReq) sizeField1() (n int) {
+	if x.Pagination == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(1, x.GetPagination())
+	return n
+}
+
+func (x *ListPhotosResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *ListPhotosResp) sizeField1() (n int) {
+	if x.Photos == nil {
+		return n
+	}
+	for i := range x.GetPhotos() {
+		n += fastpb.SizeMessage(1, x.GetPhotos()[i])
 	}
 	return n
 }
@@ -1153,17 +2478,79 @@ func (x *DeletePhotoResp) Size() (n int) {
 	return n
 }
 
-func (x *ListPhotoReq) Size() (n int) {
+func (x *AddCatReq) Size() (n int) {
 	if x == nil {
 		return n
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField3()
 	return n
 }
 
-func (x *ListPhotoReq) sizeField1() (n int) {
+func (x *AddCatReq) sizeField1() (n int) {
+	if x.Cat == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(1, x.GetCat())
+	return n
+}
+
+func (x *AddCatReq) sizeField2() (n int) {
+	if x.AlbumId == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetAlbumId())
+	return n
+}
+
+func (x *AddCatResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *AddCatResp) sizeField1() (n int) {
+	if x.CatId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetCatId())
+	return n
+}
+
+func (x *UpdateCatReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *UpdateCatReq) sizeField1() (n int) {
+	if x.Cat == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(1, x.GetCat())
+	return n
+}
+
+func (x *UpdateCatResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	return n
+}
+
+func (x *GetCatReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *GetCatReq) sizeField1() (n int) {
 	if x.AlbumId == "" {
 		return n
 	}
@@ -1171,23 +2558,46 @@ func (x *ListPhotoReq) sizeField1() (n int) {
 	return n
 }
 
-func (x *ListPhotoReq) sizeField2() (n int) {
-	if x.PaginationOptions == nil {
+func (x *GetCatResp) Size() (n int) {
+	if x == nil {
 		return n
 	}
-	n += fastpb.SizeMessage(2, x.GetPaginationOptions())
+	n += x.sizeField1()
 	return n
 }
 
-func (x *ListPhotoReq) sizeField3() (n int) {
-	if x.OnlyFeatured == nil {
+func (x *GetCatResp) sizeField1() (n int) {
+	if x.Cat == nil {
 		return n
 	}
-	n += fastpb.SizeBool(3, x.GetOnlyFeatured())
+	n += fastpb.SizeMessage(1, x.GetCat())
 	return n
 }
 
-func (x *ListPhotoResp) Size() (n int) {
+func (x *DeleteCatReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *DeleteCatReq) sizeField1() (n int) {
+	if x.Id == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetId())
+	return n
+}
+
+func (x *DeleteCatResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	return n
+}
+
+func (x *AddPlaceReq) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -1196,38 +2606,372 @@ func (x *ListPhotoResp) Size() (n int) {
 	return n
 }
 
-func (x *ListPhotoResp) sizeField1() (n int) {
-	if x.Photos == nil {
+func (x *AddPlaceReq) sizeField1() (n int) {
+	if x.Place == nil {
 		return n
 	}
-	for i := range x.GetPhotos() {
-		n += fastpb.SizeMessage(1, x.GetPhotos()[i])
+	n += fastpb.SizeMessage(1, x.GetPlace())
+	return n
+}
+
+func (x *AddPlaceReq) sizeField2() (n int) {
+	if x.AlbumId == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetAlbumId())
+	return n
+}
+
+func (x *AddPlaceResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *AddPlaceResp) sizeField1() (n int) {
+	if x.PlaceId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetPlaceId())
+	return n
+}
+
+func (x *UpdatePlaceReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *UpdatePlaceReq) sizeField1() (n int) {
+	if x.Place == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(1, x.GetPlace())
+	return n
+}
+
+func (x *UpdatePlaceResp) Size() (n int) {
+	if x == nil {
+		return n
 	}
 	return n
 }
 
-func (x *ListPhotoResp) sizeField2() (n int) {
-	if x.Total == 0 {
+func (x *GetPlaceReq) Size() (n int) {
+	if x == nil {
 		return n
 	}
-	n += fastpb.SizeInt64(2, x.GetTotal())
+	n += x.sizeField1()
+	return n
+}
+
+func (x *GetPlaceReq) sizeField1() (n int) {
+	if x.AlbumId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetAlbumId())
+	return n
+}
+
+func (x *GetPlaceResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *GetPlaceResp) sizeField1() (n int) {
+	if x.Place == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(1, x.GetPlace())
+	return n
+}
+
+func (x *DeletePlaceReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *DeletePlaceReq) sizeField1() (n int) {
+	if x.Id == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetId())
+	return n
+}
+
+func (x *DeletePlaceResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	return n
+}
+
+func (x *AddTeamReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *AddTeamReq) sizeField1() (n int) {
+	if x.Team == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(1, x.GetTeam())
+	return n
+}
+
+func (x *AddTeamReq) sizeField2() (n int) {
+	if x.UserMeta == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(2, x.GetUserMeta())
+	return n
+}
+
+func (x *AddTeamResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *AddTeamResp) sizeField1() (n int) {
+	if x.TeamId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetTeamId())
+	return n
+}
+
+func (x *UpdateTeamReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *UpdateTeamReq) sizeField1() (n int) {
+	if x.Team == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(1, x.GetTeam())
+	return n
+}
+
+func (x *UpdateTeamResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	return n
+}
+
+func (x *GetTeamReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *GetTeamReq) sizeField1() (n int) {
+	if x.Id == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetId())
+	return n
+}
+
+func (x *GetTeamResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *GetTeamResp) sizeField1() (n int) {
+	if x.Team == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(1, x.GetTeam())
+	return n
+}
+
+func (x *DeleteTeamReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *DeleteTeamReq) sizeField1() (n int) {
+	if x.Id == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetId())
+	return n
+}
+
+func (x *DeleteTeamResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	return n
+}
+
+func (x *JoinTeamReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *JoinTeamReq) sizeField1() (n int) {
+	if x.TeamId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetTeamId())
+	return n
+}
+
+func (x *JoinTeamReq) sizeField2() (n int) {
+	if x.UserMeta == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(2, x.GetUserMeta())
+	return n
+}
+
+func (x *JoinTeamResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	return n
+}
+
+func (x *LeaveTeamReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *LeaveTeamReq) sizeField1() (n int) {
+	if x.TeamId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetTeamId())
+	return n
+}
+
+func (x *LeaveTeamReq) sizeField2() (n int) {
+	if x.UserMeta == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(2, x.GetUserMeta())
+	return n
+}
+
+func (x *LeaveTeamResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	return n
+}
+
+func (x *ListTeamReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *ListTeamReq) sizeField1() (n int) {
+	if x.UserMeta == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(1, x.GetUserMeta())
+	return n
+}
+
+func (x *ListTeamResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *ListTeamResp) sizeField1() (n int) {
+	if x.Teams == nil {
+		return n
+	}
+	for i := range x.GetTeams() {
+		n += fastpb.SizeMessage(1, x.GetTeams()[i])
+	}
+	return n
+}
+
+func (x *GetTeamInfoReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *GetTeamInfoReq) sizeField1() (n int) {
+	if x.UserMeta == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(1, x.GetUserMeta())
+	return n
+}
+
+func (x *GetTeamInfoResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *GetTeamInfoResp) sizeField1() (n int) {
+	if x.TeamInfo == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(1, x.GetTeamInfo())
 	return n
 }
 
 var fieldIDToName_CreateAlbumReq = map[int32]string{
 	1: "Album",
+	2: "UserMeta",
 }
 
 var fieldIDToName_CreateAlbumResp = map[int32]string{
-	1: "Album",
-}
-
-var fieldIDToName_RetrieveAlbumReq = map[int32]string{
-	1: "Id",
-}
-
-var fieldIDToName_RetrieveAlbumResp = map[int32]string{
-	1: "Album",
+	1: "AlbumId",
 }
 
 var fieldIDToName_UpdateAlbumReq = map[int32]string{
@@ -1236,35 +2980,35 @@ var fieldIDToName_UpdateAlbumReq = map[int32]string{
 
 var fieldIDToName_UpdateAlbumResp = map[int32]string{}
 
+var fieldIDToName_GetAlbumReq = map[int32]string{
+	1: "Id",
+}
+
+var fieldIDToName_GetAlbumResp = map[int32]string{
+	1: "Album",
+}
+
+var fieldIDToName_ListAlbumsReq = map[int32]string{
+	1: "Pagination",
+}
+
+var fieldIDToName_ListAlbumsResp = map[int32]string{
+	1: "Albums",
+}
+
 var fieldIDToName_DeleteAlbumReq = map[int32]string{
 	1: "Id",
 }
 
 var fieldIDToName_DeleteAlbumResp = map[int32]string{}
 
-var fieldIDToName_ListAlbumReq = map[int32]string{
-	1: "PaginationOptions",
-}
-
-var fieldIDToName_ListAlbumResp = map[int32]string{
-	1: "Albums",
-	2: "Total",
-}
-
-var fieldIDToName_CreatePhotoReq = map[int32]string{
+var fieldIDToName_UploadPhotoReq = map[int32]string{
 	1: "Photo",
+	2: "UserMeta",
 }
 
-var fieldIDToName_CreatePhotoResp = map[int32]string{
-	1: "Photo",
-}
-
-var fieldIDToName_RetrievePhotoReq = map[int32]string{
-	1: "Id",
-}
-
-var fieldIDToName_RetrievePhotoResp = map[int32]string{
-	1: "Photo",
+var fieldIDToName_UploadPhotoResp = map[int32]string{
+	1: "PhotoId",
 }
 
 var fieldIDToName_UpdatePhotoReq = map[int32]string{
@@ -1273,21 +3017,144 @@ var fieldIDToName_UpdatePhotoReq = map[int32]string{
 
 var fieldIDToName_UpdatePhotoResp = map[int32]string{}
 
+var fieldIDToName_GetPhotoReq = map[int32]string{
+	1: "Id",
+}
+
+var fieldIDToName_GetPhotoResp = map[int32]string{
+	1: "Photo",
+}
+
+var fieldIDToName_ListPhotosReq = map[int32]string{
+	1: "Pagination",
+}
+
+var fieldIDToName_ListPhotosResp = map[int32]string{
+	1: "Photos",
+}
+
 var fieldIDToName_DeletePhotoReq = map[int32]string{
 	1: "Id",
 }
 
 var fieldIDToName_DeletePhotoResp = map[int32]string{}
 
-var fieldIDToName_ListPhotoReq = map[int32]string{
-	1: "AlbumId",
-	2: "PaginationOptions",
-	3: "OnlyFeatured",
+var fieldIDToName_AddCatReq = map[int32]string{
+	1: "Cat",
+	2: "AlbumId",
 }
 
-var fieldIDToName_ListPhotoResp = map[int32]string{
-	1: "Photos",
-	2: "Total",
+var fieldIDToName_AddCatResp = map[int32]string{
+	1: "CatId",
+}
+
+var fieldIDToName_UpdateCatReq = map[int32]string{
+	1: "Cat",
+}
+
+var fieldIDToName_UpdateCatResp = map[int32]string{}
+
+var fieldIDToName_GetCatReq = map[int32]string{
+	1: "AlbumId",
+}
+
+var fieldIDToName_GetCatResp = map[int32]string{
+	1: "Cat",
+}
+
+var fieldIDToName_DeleteCatReq = map[int32]string{
+	1: "Id",
+}
+
+var fieldIDToName_DeleteCatResp = map[int32]string{}
+
+var fieldIDToName_AddPlaceReq = map[int32]string{
+	1: "Place",
+	2: "AlbumId",
+}
+
+var fieldIDToName_AddPlaceResp = map[int32]string{
+	1: "PlaceId",
+}
+
+var fieldIDToName_UpdatePlaceReq = map[int32]string{
+	1: "Place",
+}
+
+var fieldIDToName_UpdatePlaceResp = map[int32]string{}
+
+var fieldIDToName_GetPlaceReq = map[int32]string{
+	1: "AlbumId",
+}
+
+var fieldIDToName_GetPlaceResp = map[int32]string{
+	1: "Place",
+}
+
+var fieldIDToName_DeletePlaceReq = map[int32]string{
+	1: "Id",
+}
+
+var fieldIDToName_DeletePlaceResp = map[int32]string{}
+
+var fieldIDToName_AddTeamReq = map[int32]string{
+	1: "Team",
+	2: "UserMeta",
+}
+
+var fieldIDToName_AddTeamResp = map[int32]string{
+	1: "TeamId",
+}
+
+var fieldIDToName_UpdateTeamReq = map[int32]string{
+	1: "Team",
+}
+
+var fieldIDToName_UpdateTeamResp = map[int32]string{}
+
+var fieldIDToName_GetTeamReq = map[int32]string{
+	1: "Id",
+}
+
+var fieldIDToName_GetTeamResp = map[int32]string{
+	1: "Team",
+}
+
+var fieldIDToName_DeleteTeamReq = map[int32]string{
+	1: "Id",
+}
+
+var fieldIDToName_DeleteTeamResp = map[int32]string{}
+
+var fieldIDToName_JoinTeamReq = map[int32]string{
+	1: "TeamId",
+	2: "UserMeta",
+}
+
+var fieldIDToName_JoinTeamResp = map[int32]string{}
+
+var fieldIDToName_LeaveTeamReq = map[int32]string{
+	1: "TeamId",
+	2: "UserMeta",
+}
+
+var fieldIDToName_LeaveTeamResp = map[int32]string{}
+
+var fieldIDToName_ListTeamReq = map[int32]string{
+	1: "UserMeta",
+}
+
+var fieldIDToName_ListTeamResp = map[int32]string{
+	1: "Teams",
+}
+
+var fieldIDToName_GetTeamInfoReq = map[int32]string{
+	1: "UserMeta",
+}
+
+var fieldIDToName_GetTeamInfoResp = map[int32]string{
+	1: "TeamInfo",
 }
 
 var _ = basic.File_basic_pagination_proto
+var _ = basic.File_basic_user_proto
