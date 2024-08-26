@@ -80,11 +80,6 @@ func (x *MeowUser) FastRead(buf []byte, _type int8, number int32) (offset int, e
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 14:
-		offset, err = x.fastReadField14(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -149,26 +144,21 @@ func (x *MeowUser) fastReadField9(buf []byte, _type int8) (offset int, err error
 }
 
 func (x *MeowUser) fastReadField10(buf []byte, _type int8) (offset int, err error) {
-	x.CreatedTime, offset, err = fastpb.ReadString(buf, _type)
+	x.CreatedTime, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
 func (x *MeowUser) fastReadField11(buf []byte, _type int8) (offset int, err error) {
-	x.UpdatedTime, offset, err = fastpb.ReadString(buf, _type)
+	x.UpdatedTime, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
 func (x *MeowUser) fastReadField12(buf []byte, _type int8) (offset int, err error) {
-	x.DeletedTime, offset, err = fastpb.ReadString(buf, _type)
+	x.DeletedTime, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
 func (x *MeowUser) fastReadField13(buf []byte, _type int8) (offset int, err error) {
-	x.Id, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *MeowUser) fastReadField14(buf []byte, _type int8) (offset int, err error) {
 	x.Username, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
@@ -190,7 +180,6 @@ func (x *MeowUser) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField11(buf[offset:])
 	offset += x.fastWriteField12(buf[offset:])
 	offset += x.fastWriteField13(buf[offset:])
-	offset += x.fastWriteField14(buf[offset:])
 	return offset
 }
 
@@ -267,42 +256,34 @@ func (x *MeowUser) fastWriteField9(buf []byte) (offset int) {
 }
 
 func (x *MeowUser) fastWriteField10(buf []byte) (offset int) {
-	if x.CreatedTime == "" {
+	if x.CreatedTime == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 10, x.GetCreatedTime())
+	offset += fastpb.WriteInt64(buf[offset:], 10, x.GetCreatedTime())
 	return offset
 }
 
 func (x *MeowUser) fastWriteField11(buf []byte) (offset int) {
-	if x.UpdatedTime == "" {
+	if x.UpdatedTime == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 11, x.GetUpdatedTime())
+	offset += fastpb.WriteInt64(buf[offset:], 11, x.GetUpdatedTime())
 	return offset
 }
 
 func (x *MeowUser) fastWriteField12(buf []byte) (offset int) {
-	if x.DeletedTime == "" {
+	if x.DeletedTime == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 12, x.GetDeletedTime())
+	offset += fastpb.WriteInt64(buf[offset:], 12, x.GetDeletedTime())
 	return offset
 }
 
 func (x *MeowUser) fastWriteField13(buf []byte) (offset int) {
-	if x.Id == "" {
-		return offset
-	}
-	offset += fastpb.WriteString(buf[offset:], 13, x.GetId())
-	return offset
-}
-
-func (x *MeowUser) fastWriteField14(buf []byte) (offset int) {
 	if x.Username == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 14, x.GetUsername())
+	offset += fastpb.WriteString(buf[offset:], 13, x.GetUsername())
 	return offset
 }
 
@@ -323,7 +304,6 @@ func (x *MeowUser) Size() (n int) {
 	n += x.sizeField11()
 	n += x.sizeField12()
 	n += x.sizeField13()
-	n += x.sizeField14()
 	return n
 }
 
@@ -400,42 +380,34 @@ func (x *MeowUser) sizeField9() (n int) {
 }
 
 func (x *MeowUser) sizeField10() (n int) {
-	if x.CreatedTime == "" {
+	if x.CreatedTime == 0 {
 		return n
 	}
-	n += fastpb.SizeString(10, x.GetCreatedTime())
+	n += fastpb.SizeInt64(10, x.GetCreatedTime())
 	return n
 }
 
 func (x *MeowUser) sizeField11() (n int) {
-	if x.UpdatedTime == "" {
+	if x.UpdatedTime == 0 {
 		return n
 	}
-	n += fastpb.SizeString(11, x.GetUpdatedTime())
+	n += fastpb.SizeInt64(11, x.GetUpdatedTime())
 	return n
 }
 
 func (x *MeowUser) sizeField12() (n int) {
-	if x.DeletedTime == "" {
+	if x.DeletedTime == 0 {
 		return n
 	}
-	n += fastpb.SizeString(12, x.GetDeletedTime())
+	n += fastpb.SizeInt64(12, x.GetDeletedTime())
 	return n
 }
 
 func (x *MeowUser) sizeField13() (n int) {
-	if x.Id == "" {
-		return n
-	}
-	n += fastpb.SizeString(13, x.GetId())
-	return n
-}
-
-func (x *MeowUser) sizeField14() (n int) {
 	if x.Username == "" {
 		return n
 	}
-	n += fastpb.SizeString(14, x.GetUsername())
+	n += fastpb.SizeString(13, x.GetUsername())
 	return n
 }
 
@@ -452,8 +424,7 @@ var fieldIDToName_MeowUser = map[int32]string{
 	10: "CreatedTime",
 	11: "UpdatedTime",
 	12: "DeletedTime",
-	13: "Id",
-	14: "Username",
+	13: "Username",
 }
 
 var _ = basic.File_basic_user_proto
