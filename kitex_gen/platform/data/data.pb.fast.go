@@ -12,7 +12,7 @@ var (
 	_ = fastpb.Skip
 )
 
-func (x *InsertReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+func (x *Document) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
 		offset, err = x.fastReadField1(buf, _type)
@@ -34,33 +34,46 @@ func (x *InsertReq) FastRead(buf []byte, _type int8, number int32) (offset int, 
 SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
-	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_InsertReq[number], err)
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_Document[number], err)
 }
 
-func (x *InsertReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+func (x *Document) fastReadField1(buf []byte, _type int8) (offset int, err error) {
 	x.EventName, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
-func (x *InsertReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	if x.Tags == nil {
-		x.Tags = make(map[string]string)
+func (x *Document) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Tags, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *InsertReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
 	}
-	var key string
-	var value string
-	offset, err = fastpb.ReadMapEntry(buf, _type,
-		func(buf []byte, _type int8) (offset int, err error) {
-			key, offset, err = fastpb.ReadString(buf, _type)
-			return offset, err
-		},
-		func(buf []byte, _type int8) (offset int, err error) {
-			value, offset, err = fastpb.ReadString(buf, _type)
-			return offset, err
-		})
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_InsertReq[number], err)
+}
+
+func (x *InsertReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v Document
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
 	if err != nil {
 		return offset, err
 	}
-	x.Tags[key] = value
+	x.Documents = append(x.Documents, &v)
 	return offset, nil
 }
 
@@ -89,7 +102,7 @@ func (x *InsertResp) fastReadField1(buf []byte, _type int8) (offset int, err err
 	return offset, err
 }
 
-func (x *InsertReq) FastWrite(buf []byte) (offset int) {
+func (x *Document) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
@@ -98,7 +111,7 @@ func (x *InsertReq) FastWrite(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *InsertReq) fastWriteField1(buf []byte) (offset int) {
+func (x *Document) fastWriteField1(buf []byte) (offset int) {
 	if x.EventName == "" {
 		return offset
 	}
@@ -106,18 +119,28 @@ func (x *InsertReq) fastWriteField1(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *InsertReq) fastWriteField2(buf []byte) (offset int) {
-	if x.Tags == nil {
+func (x *Document) fastWriteField2(buf []byte) (offset int) {
+	if x.Tags == "" {
 		return offset
 	}
-	for k, v := range x.GetTags() {
-		offset += fastpb.WriteMapEntry(buf[offset:], 2,
-			func(buf []byte, numTagOrKey, numIdxOrVal int32) int {
-				offset := 0
-				offset += fastpb.WriteString(buf[offset:], numTagOrKey, k)
-				offset += fastpb.WriteString(buf[offset:], numIdxOrVal, v)
-				return offset
-			})
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetTags())
+	return offset
+}
+
+func (x *InsertReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *InsertReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Documents == nil {
+		return offset
+	}
+	for i := range x.GetDocuments() {
+		offset += fastpb.WriteMessage(buf[offset:], 1, x.GetDocuments()[i])
 	}
 	return offset
 }
@@ -138,7 +161,7 @@ func (x *InsertResp) fastWriteField1(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *InsertReq) Size() (n int) {
+func (x *Document) Size() (n int) {
 	if x == nil {
 		return n
 	}
@@ -147,7 +170,7 @@ func (x *InsertReq) Size() (n int) {
 	return n
 }
 
-func (x *InsertReq) sizeField1() (n int) {
+func (x *Document) sizeField1() (n int) {
 	if x.EventName == "" {
 		return n
 	}
@@ -155,18 +178,28 @@ func (x *InsertReq) sizeField1() (n int) {
 	return n
 }
 
-func (x *InsertReq) sizeField2() (n int) {
-	if x.Tags == nil {
+func (x *Document) sizeField2() (n int) {
+	if x.Tags == "" {
 		return n
 	}
-	for k, v := range x.GetTags() {
-		n += fastpb.SizeMapEntry(2,
-			func(numTagOrKey, numIdxOrVal int32) int {
-				n := 0
-				n += fastpb.SizeString(numTagOrKey, k)
-				n += fastpb.SizeString(numIdxOrVal, v)
-				return n
-			})
+	n += fastpb.SizeString(2, x.GetTags())
+	return n
+}
+
+func (x *InsertReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *InsertReq) sizeField1() (n int) {
+	if x.Documents == nil {
+		return n
+	}
+	for i := range x.GetDocuments() {
+		n += fastpb.SizeMessage(1, x.GetDocuments()[i])
 	}
 	return n
 }
@@ -187,9 +220,13 @@ func (x *InsertResp) sizeField1() (n int) {
 	return n
 }
 
-var fieldIDToName_InsertReq = map[int32]string{
+var fieldIDToName_Document = map[int32]string{
 	1: "EventName",
 	2: "Tags",
+}
+
+var fieldIDToName_InsertReq = map[int32]string{
+	1: "Documents",
 }
 
 var fieldIDToName_InsertResp = map[int32]string{
