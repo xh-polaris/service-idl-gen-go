@@ -59,7 +59,7 @@ func NewServiceInfoForStreamClient() *kitex.ServiceInfo {
 }
 
 func newServiceInfo(hasStreaming bool, keepStreamingMethods bool, keepNonStreamingMethods bool) *kitex.ServiceInfo {
-	serviceName := "data"
+	serviceName := "Data"
 	handlerType := (*data.Data)(nil)
 	methods := map[string]kitex.MethodInfo{}
 	for name, m := range serviceMethods {
