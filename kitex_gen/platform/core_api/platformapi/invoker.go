@@ -4,11 +4,11 @@ package platformapi
 
 import (
 	server "github.com/cloudwego/kitex/server"
-	data "github.com/xh-polaris/service-idl-gen-go/kitex_gen/platform/data"
+	core_api "github.com/xh-polaris/service-idl-gen-go/kitex_gen/platform/core_api"
 )
 
 // NewInvoker creates a server.Invoker with the given handler and options.
-func NewInvoker(handler data.PlatformApi, opts ...server.Option) server.Invoker {
+func NewInvoker(handler core_api.PlatformApi, opts ...server.Option) server.Invoker {
 	var options []server.Option
 
 	options = append(options, opts...)

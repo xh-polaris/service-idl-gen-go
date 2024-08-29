@@ -6,12 +6,12 @@ import (
 	"context"
 	client "github.com/cloudwego/kitex/client"
 	callopt "github.com/cloudwego/kitex/client/callopt"
-	api "github.com/xh-polaris/service-idl-gen-go/kitex_gen/platform/api"
+	core_api "github.com/xh-polaris/service-idl-gen-go/kitex_gen/platform/core_api"
 )
 
 // Client is designed to provide IDL-compatible methods with call-option parameter for kitex framework.
 type Client interface {
-	ReportEvent(ctx context.Context, Req *api.InsertRequest, callOptions ...callopt.Option) (r *api.InsertResponse, err error)
+	ReportEvent(ctx context.Context, Req *core_api.ReportEventRequest, callOptions ...callopt.Option) (r *core_api.ReportEventResponse, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -43,7 +43,7 @@ type kPlatformApiClient struct {
 	*kClient
 }
 
-func (p *kPlatformApiClient) ReportEvent(ctx context.Context, Req *api.InsertRequest, callOptions ...callopt.Option) (r *api.InsertResponse, err error) {
+func (p *kPlatformApiClient) ReportEvent(ctx context.Context, Req *core_api.ReportEventRequest, callOptions ...callopt.Option) (r *core_api.ReportEventResponse, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.ReportEvent(ctx, Req)
 }

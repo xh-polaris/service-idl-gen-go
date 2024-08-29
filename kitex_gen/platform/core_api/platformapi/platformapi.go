@@ -8,8 +8,7 @@ import (
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
 	streaming "github.com/cloudwego/kitex/pkg/streaming"
-	api "github.com/xh-polaris/service-idl-gen-go/kitex_gen/platform/api"
-	data "github.com/xh-polaris/service-idl-gen-go/kitex_gen/platform/data"
+	core_api "github.com/xh-polaris/service-idl-gen-go/kitex_gen/platform/core_api"
 	proto "google.golang.org/protobuf/proto"
 )
 
@@ -61,7 +60,7 @@ func NewServiceInfoForStreamClient() *kitex.ServiceInfo {
 
 func newServiceInfo(hasStreaming bool, keepStreamingMethods bool, keepNonStreamingMethods bool) *kitex.ServiceInfo {
 	serviceName := "PlatformApi"
-	handlerType := (*data.PlatformApi)(nil)
+	handlerType := (*core_api.PlatformApi)(nil)
 	methods := map[string]kitex.MethodInfo{}
 	for name, m := range serviceMethods {
 		if m.IsStreaming() && !keepStreamingMethods {
@@ -73,7 +72,7 @@ func newServiceInfo(hasStreaming bool, keepStreamingMethods bool, keepNonStreami
 		methods[name] = m
 	}
 	extra := map[string]interface{}{
-		"PackageName": "platform.data",
+		"PackageName": "platform.core_api",
 	}
 	if hasStreaming {
 		extra["streaming"] = hasStreaming
@@ -93,17 +92,17 @@ func reportEventHandler(ctx context.Context, handler interface{}, arg, result in
 	switch s := arg.(type) {
 	case *streaming.Args:
 		st := s.Stream
-		req := new(api.InsertRequest)
+		req := new(core_api.ReportEventRequest)
 		if err := st.RecvMsg(req); err != nil {
 			return err
 		}
-		resp, err := handler.(data.PlatformApi).ReportEvent(ctx, req)
+		resp, err := handler.(core_api.PlatformApi).ReportEvent(ctx, req)
 		if err != nil {
 			return err
 		}
 		return st.SendMsg(resp)
 	case *ReportEventArgs:
-		success, err := handler.(data.PlatformApi).ReportEvent(ctx, s.Req)
+		success, err := handler.(core_api.PlatformApi).ReportEvent(ctx, s.Req)
 		if err != nil {
 			return err
 		}
@@ -123,12 +122,12 @@ func newReportEventResult() interface{} {
 }
 
 type ReportEventArgs struct {
-	Req *api.InsertRequest
+	Req *core_api.ReportEventRequest
 }
 
 func (p *ReportEventArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetReq() {
-		p.Req = new(api.InsertRequest)
+		p.Req = new(core_api.ReportEventRequest)
 	}
 	return p.Req.FastRead(buf, _type, number)
 }
@@ -155,7 +154,7 @@ func (p *ReportEventArgs) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *ReportEventArgs) Unmarshal(in []byte) error {
-	msg := new(api.InsertRequest)
+	msg := new(core_api.ReportEventRequest)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -163,9 +162,9 @@ func (p *ReportEventArgs) Unmarshal(in []byte) error {
 	return nil
 }
 
-var ReportEventArgs_Req_DEFAULT *api.InsertRequest
+var ReportEventArgs_Req_DEFAULT *core_api.ReportEventRequest
 
-func (p *ReportEventArgs) GetReq() *api.InsertRequest {
+func (p *ReportEventArgs) GetReq() *core_api.ReportEventRequest {
 	if !p.IsSetReq() {
 		return ReportEventArgs_Req_DEFAULT
 	}
@@ -181,14 +180,14 @@ func (p *ReportEventArgs) GetFirstArgument() interface{} {
 }
 
 type ReportEventResult struct {
-	Success *api.InsertResponse
+	Success *core_api.ReportEventResponse
 }
 
-var ReportEventResult_Success_DEFAULT *api.InsertResponse
+var ReportEventResult_Success_DEFAULT *core_api.ReportEventResponse
 
 func (p *ReportEventResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
 	if !p.IsSetSuccess() {
-		p.Success = new(api.InsertResponse)
+		p.Success = new(core_api.ReportEventResponse)
 	}
 	return p.Success.FastRead(buf, _type, number)
 }
@@ -215,7 +214,7 @@ func (p *ReportEventResult) Marshal(out []byte) ([]byte, error) {
 }
 
 func (p *ReportEventResult) Unmarshal(in []byte) error {
-	msg := new(api.InsertResponse)
+	msg := new(core_api.ReportEventResponse)
 	if err := proto.Unmarshal(in, msg); err != nil {
 		return err
 	}
@@ -223,7 +222,7 @@ func (p *ReportEventResult) Unmarshal(in []byte) error {
 	return nil
 }
 
-func (p *ReportEventResult) GetSuccess() *api.InsertResponse {
+func (p *ReportEventResult) GetSuccess() *core_api.ReportEventResponse {
 	if !p.IsSetSuccess() {
 		return ReportEventResult_Success_DEFAULT
 	}
@@ -231,7 +230,7 @@ func (p *ReportEventResult) GetSuccess() *api.InsertResponse {
 }
 
 func (p *ReportEventResult) SetSuccess(x interface{}) {
-	p.Success = x.(*api.InsertResponse)
+	p.Success = x.(*core_api.ReportEventResponse)
 }
 
 func (p *ReportEventResult) IsSetSuccess() bool {
@@ -252,7 +251,7 @@ func newServiceClient(c client.Client) *kClient {
 	}
 }
 
-func (p *kClient) ReportEvent(ctx context.Context, Req *api.InsertRequest) (r *api.InsertResponse, err error) {
+func (p *kClient) ReportEvent(ctx context.Context, Req *core_api.ReportEventRequest) (r *core_api.ReportEventResponse, err error) {
 	var _args ReportEventArgs
 	_args.Req = Req
 	var _result ReportEventResult
