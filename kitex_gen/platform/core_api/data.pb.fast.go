@@ -5,7 +5,6 @@ package core_api
 import (
 	fmt "fmt"
 	fastpb "github.com/cloudwego/fastpb"
-	http "github.com/xh-polaris/service-idl-gen-go/kitex_gen/http"
 )
 
 var (
@@ -233,5 +232,3 @@ var fieldIDToName_ReportEventRequest = map[int32]string{
 var fieldIDToName_ReportEventResponse = map[int32]string{
 	1: "Done",
 }
-
-var _ = http.File_http_http_proto
