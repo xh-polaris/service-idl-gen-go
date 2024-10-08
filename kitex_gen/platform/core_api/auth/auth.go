@@ -8,7 +8,7 @@ import (
 	client "github.com/cloudwego/kitex/client"
 	kitex "github.com/cloudwego/kitex/pkg/serviceinfo"
 	streaming "github.com/cloudwego/kitex/pkg/streaming"
-	core_api "github.com/xh-polaris/service-idl-gen-go/kitex_gen/meowchat/core_api"
+	core_api "github.com/xh-polaris/service-idl-gen-go/kitex_gen/platform/core_api"
 	proto "google.golang.org/protobuf/proto"
 )
 
@@ -86,7 +86,7 @@ func newServiceInfo(hasStreaming bool, keepStreamingMethods bool, keepNonStreami
 		methods[name] = m
 	}
 	extra := map[string]interface{}{
-		"PackageName": "meowchat.core_api",
+		"PackageName": "platform.core_api",
 	}
 	if hasStreaming {
 		extra["streaming"] = hasStreaming
