@@ -3,11 +3,15 @@
 package money
 
 import (
+	"context"
 	client "github.com/cloudwego/kitex/client"
+	callopt "github.com/cloudwego/kitex/client/callopt"
+	user "github.com/xh-polaris/service-idl-gen-go/kitex_gen/openapi/user"
 )
 
 // Client is designed to provide IDL-compatible methods with call-option parameter for kitex framework.
 type Client interface {
+	SetRemain(ctx context.Context, Req *user.SetRemainReq, callOptions ...callopt.Option) (r *user.SetRemainResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -37,4 +41,9 @@ func MustNewClient(destService string, opts ...client.Option) Client {
 
 type kMoneyClient struct {
 	*kClient
+}
+
+func (p *kMoneyClient) SetRemain(ctx context.Context, Req *user.SetRemainReq, callOptions ...callopt.Option) (r *user.SetRemainResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.SetRemain(ctx, Req)
 }
