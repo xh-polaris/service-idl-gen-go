@@ -886,6 +886,110 @@ func (x *UpdateHostsResp) GetMsg() string {
 	return ""
 }
 
+// 刷新一个密钥内容请求
+type RefreshKeyReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Id string `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
+}
+
+func (x *RefreshKeyReq) Reset() {
+	*x = RefreshKeyReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_openapi_user_auth_proto_msgTypes[14]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RefreshKeyReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefreshKeyReq) ProtoMessage() {}
+
+func (x *RefreshKeyReq) ProtoReflect() protoreflect.Message {
+	mi := &file_openapi_user_auth_proto_msgTypes[14]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefreshKeyReq.ProtoReflect.Descriptor instead.
+func (*RefreshKeyReq) Descriptor() ([]byte, []int) {
+	return file_openapi_user_auth_proto_rawDescGZIP(), []int{14}
+}
+
+func (x *RefreshKeyReq) GetId() string {
+	if x != nil {
+		return x.Id
+	}
+	return ""
+}
+
+// 刷新一个密钥内容响应
+type RefreshKeyResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Done bool   `protobuf:"varint,1,opt,name=done,proto3" json:"done,omitempty"`
+	Msg  string `protobuf:"bytes,2,opt,name=msg,proto3" json:"msg,omitempty"`
+}
+
+func (x *RefreshKeyResp) Reset() {
+	*x = RefreshKeyResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_openapi_user_auth_proto_msgTypes[15]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *RefreshKeyResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*RefreshKeyResp) ProtoMessage() {}
+
+func (x *RefreshKeyResp) ProtoReflect() protoreflect.Message {
+	mi := &file_openapi_user_auth_proto_msgTypes[15]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use RefreshKeyResp.ProtoReflect.Descriptor instead.
+func (*RefreshKeyResp) Descriptor() ([]byte, []int) {
+	return file_openapi_user_auth_proto_rawDescGZIP(), []int{15}
+}
+
+func (x *RefreshKeyResp) GetDone() bool {
+	if x != nil {
+		return x.Done
+	}
+	return false
+}
+
+func (x *RefreshKeyResp) GetMsg() string {
+	if x != nil {
+		return x.Msg
+	}
+	return ""
+}
+
 // 删除一个密钥请求
 type DeleteKeyReq struct {
 	state         protoimpl.MessageState
@@ -898,7 +1002,7 @@ type DeleteKeyReq struct {
 func (x *DeleteKeyReq) Reset() {
 	*x = DeleteKeyReq{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_openapi_user_auth_proto_msgTypes[14]
+		mi := &file_openapi_user_auth_proto_msgTypes[16]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -911,7 +1015,7 @@ func (x *DeleteKeyReq) String() string {
 func (*DeleteKeyReq) ProtoMessage() {}
 
 func (x *DeleteKeyReq) ProtoReflect() protoreflect.Message {
-	mi := &file_openapi_user_auth_proto_msgTypes[14]
+	mi := &file_openapi_user_auth_proto_msgTypes[16]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -924,7 +1028,7 @@ func (x *DeleteKeyReq) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteKeyReq.ProtoReflect.Descriptor instead.
 func (*DeleteKeyReq) Descriptor() ([]byte, []int) {
-	return file_openapi_user_auth_proto_rawDescGZIP(), []int{14}
+	return file_openapi_user_auth_proto_rawDescGZIP(), []int{16}
 }
 
 func (x *DeleteKeyReq) GetId() string {
@@ -947,7 +1051,7 @@ type DeleteKeyResp struct {
 func (x *DeleteKeyResp) Reset() {
 	*x = DeleteKeyResp{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_openapi_user_auth_proto_msgTypes[15]
+		mi := &file_openapi_user_auth_proto_msgTypes[17]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -960,7 +1064,7 @@ func (x *DeleteKeyResp) String() string {
 func (*DeleteKeyResp) ProtoMessage() {}
 
 func (x *DeleteKeyResp) ProtoReflect() protoreflect.Message {
-	mi := &file_openapi_user_auth_proto_msgTypes[15]
+	mi := &file_openapi_user_auth_proto_msgTypes[17]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -973,7 +1077,7 @@ func (x *DeleteKeyResp) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use DeleteKeyResp.ProtoReflect.Descriptor instead.
 func (*DeleteKeyResp) Descriptor() ([]byte, []int) {
-	return file_openapi_user_auth_proto_rawDescGZIP(), []int{15}
+	return file_openapi_user_auth_proto_rawDescGZIP(), []int{17}
 }
 
 func (x *DeleteKeyResp) GetDone() bool {
@@ -1089,20 +1193,26 @@ var file_openapi_user_auth_proto_rawDesc = []byte{
 	0x37, 0x0a, 0x0f, 0x55, 0x70, 0x64, 0x61, 0x74, 0x65, 0x48, 0x6f, 0x73, 0x74, 0x73, 0x52, 0x65,
 	0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x6f, 0x6e, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08,
 	0x52, 0x04, 0x64, 0x6f, 0x6e, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x02, 0x20,
-	0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x22, 0x1e, 0x0a, 0x0c, 0x44, 0x65, 0x6c, 0x65,
-	0x74, 0x65, 0x4b, 0x65, 0x79, 0x52, 0x65, 0x71, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01,
-	0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x35, 0x0a, 0x0d, 0x44, 0x65, 0x6c, 0x65,
-	0x74, 0x65, 0x4b, 0x65, 0x79, 0x52, 0x65, 0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x6f, 0x6e,
-	0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x04, 0x64, 0x6f, 0x6e, 0x65, 0x12, 0x10, 0x0a,
-	0x03, 0x6d, 0x73, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x42,
-	0x71, 0x0a, 0x21, 0x63, 0x6f, 0x6d, 0x2e, 0x78, 0x68, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73,
-	0x2e, 0x69, 0x64, 0x6c, 0x67, 0x65, 0x6e, 0x2e, 0x6f, 0x70, 0x65, 0x6e, 0x61, 0x70, 0x69, 0x2e,
-	0x75, 0x73, 0x65, 0x72, 0x42, 0x09, 0x41, 0x75, 0x74, 0x68, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50,
-	0x01, 0x5a, 0x3f, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x68,
-	0x2d, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65,
-	0x2d, 0x69, 0x64, 0x6c, 0x2d, 0x67, 0x65, 0x6e, 0x2d, 0x67, 0x6f, 0x2f, 0x6b, 0x69, 0x74, 0x65,
-	0x78, 0x5f, 0x67, 0x65, 0x6e, 0x2f, 0x6f, 0x70, 0x65, 0x6e, 0x61, 0x70, 0x69, 0x2f, 0x75, 0x73,
-	0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x22, 0x1f, 0x0a, 0x0d, 0x52, 0x65, 0x66, 0x72,
+	0x65, 0x73, 0x68, 0x4b, 0x65, 0x79, 0x52, 0x65, 0x71, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18,
+	0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69, 0x64, 0x22, 0x36, 0x0a, 0x0e, 0x52, 0x65, 0x66,
+	0x72, 0x65, 0x73, 0x68, 0x4b, 0x65, 0x79, 0x52, 0x65, 0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x64,
+	0x6f, 0x6e, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08, 0x52, 0x04, 0x64, 0x6f, 0x6e, 0x65, 0x12,
+	0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73,
+	0x67, 0x22, 0x1e, 0x0a, 0x0c, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x4b, 0x65, 0x79, 0x52, 0x65,
+	0x71, 0x12, 0x0e, 0x0a, 0x02, 0x69, 0x64, 0x18, 0x01, 0x20, 0x01, 0x28, 0x09, 0x52, 0x02, 0x69,
+	0x64, 0x22, 0x35, 0x0a, 0x0d, 0x44, 0x65, 0x6c, 0x65, 0x74, 0x65, 0x4b, 0x65, 0x79, 0x52, 0x65,
+	0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x64, 0x6f, 0x6e, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x08,
+	0x52, 0x04, 0x64, 0x6f, 0x6e, 0x65, 0x12, 0x10, 0x0a, 0x03, 0x6d, 0x73, 0x67, 0x18, 0x02, 0x20,
+	0x01, 0x28, 0x09, 0x52, 0x03, 0x6d, 0x73, 0x67, 0x42, 0x71, 0x0a, 0x21, 0x63, 0x6f, 0x6d, 0x2e,
+	0x78, 0x68, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2e, 0x69, 0x64, 0x6c, 0x67, 0x65, 0x6e,
+	0x2e, 0x6f, 0x70, 0x65, 0x6e, 0x61, 0x70, 0x69, 0x2e, 0x75, 0x73, 0x65, 0x72, 0x42, 0x09, 0x41,
+	0x75, 0x74, 0x68, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x3f, 0x67, 0x69, 0x74, 0x68,
+	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x68, 0x2d, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69,
+	0x73, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2d, 0x69, 0x64, 0x6c, 0x2d, 0x67, 0x65,
+	0x6e, 0x2d, 0x67, 0x6f, 0x2f, 0x6b, 0x69, 0x74, 0x65, 0x78, 0x5f, 0x67, 0x65, 0x6e, 0x2f, 0x6f,
+	0x70, 0x65, 0x6e, 0x61, 0x70, 0x69, 0x2f, 0x75, 0x73, 0x65, 0x72, 0x62, 0x06, 0x70, 0x72, 0x6f,
+	0x74, 0x6f, 0x33,
 }
 
 var (
@@ -1117,7 +1227,7 @@ func file_openapi_user_auth_proto_rawDescGZIP() []byte {
 	return file_openapi_user_auth_proto_rawDescData
 }
 
-var file_openapi_user_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 16)
+var file_openapi_user_auth_proto_msgTypes = make([]protoimpl.MessageInfo, 18)
 var file_openapi_user_auth_proto_goTypes = []interface{}{
 	(*SignUpReq)(nil),               // 0: openapi.user.SignUpReq
 	(*SignUpResp)(nil),              // 1: openapi.user.SignUpResp
@@ -1133,22 +1243,24 @@ var file_openapi_user_auth_proto_goTypes = []interface{}{
 	(*UpdateKeyResp)(nil),           // 11: openapi.user.UpdateKeyResp
 	(*UpdateHostsReq)(nil),          // 12: openapi.user.UpdateHostsReq
 	(*UpdateHostsResp)(nil),         // 13: openapi.user.UpdateHostsResp
-	(*DeleteKeyReq)(nil),            // 14: openapi.user.DeleteKeyReq
-	(*DeleteKeyResp)(nil),           // 15: openapi.user.DeleteKeyResp
-	(Role)(0),                       // 16: openapi.user.Role
-	(UserStatus)(0),                 // 17: openapi.user.UserStatus
-	(*basic.PaginationOptions)(nil), // 18: basic.PaginationOptions
-	(*Key)(nil),                     // 19: openapi.user.Key
-	(KeyStatus)(0),                  // 20: openapi.user.KeyStatus
+	(*RefreshKeyReq)(nil),           // 14: openapi.user.RefreshKeyReq
+	(*RefreshKeyResp)(nil),          // 15: openapi.user.RefreshKeyResp
+	(*DeleteKeyReq)(nil),            // 16: openapi.user.DeleteKeyReq
+	(*DeleteKeyResp)(nil),           // 17: openapi.user.DeleteKeyResp
+	(Role)(0),                       // 18: openapi.user.Role
+	(UserStatus)(0),                 // 19: openapi.user.UserStatus
+	(*basic.PaginationOptions)(nil), // 20: basic.PaginationOptions
+	(*Key)(nil),                     // 21: openapi.user.Key
+	(KeyStatus)(0),                  // 22: openapi.user.KeyStatus
 }
 var file_openapi_user_auth_proto_depIdxs = []int32{
-	16, // 0: openapi.user.SignUpReq.role:type_name -> openapi.user.Role
-	16, // 1: openapi.user.GetUserInfoResp.role:type_name -> openapi.user.Role
-	17, // 2: openapi.user.GetUserInfoResp.status:type_name -> openapi.user.UserStatus
-	17, // 3: openapi.user.SetUserInfoReq.status:type_name -> openapi.user.UserStatus
-	18, // 4: openapi.user.GetKeysReq.paginationOptions:type_name -> basic.PaginationOptions
-	19, // 5: openapi.user.GetKeysResp.keys:type_name -> openapi.user.Key
-	20, // 6: openapi.user.UpdateKeyReq.status:type_name -> openapi.user.KeyStatus
+	18, // 0: openapi.user.SignUpReq.role:type_name -> openapi.user.Role
+	18, // 1: openapi.user.GetUserInfoResp.role:type_name -> openapi.user.Role
+	19, // 2: openapi.user.GetUserInfoResp.status:type_name -> openapi.user.UserStatus
+	19, // 3: openapi.user.SetUserInfoReq.status:type_name -> openapi.user.UserStatus
+	20, // 4: openapi.user.GetKeysReq.paginationOptions:type_name -> basic.PaginationOptions
+	21, // 5: openapi.user.GetKeysResp.keys:type_name -> openapi.user.Key
+	22, // 6: openapi.user.UpdateKeyReq.status:type_name -> openapi.user.KeyStatus
 	7,  // [7:7] is the sub-list for method output_type
 	7,  // [7:7] is the sub-list for method input_type
 	7,  // [7:7] is the sub-list for extension type_name
@@ -1332,7 +1444,7 @@ func file_openapi_user_auth_proto_init() {
 			}
 		}
 		file_openapi_user_auth_proto_msgTypes[14].Exporter = func(v interface{}, i int) interface{} {
-			switch v := v.(*DeleteKeyReq); i {
+			switch v := v.(*RefreshKeyReq); i {
 			case 0:
 				return &v.state
 			case 1:
@@ -1344,6 +1456,30 @@ func file_openapi_user_auth_proto_init() {
 			}
 		}
 		file_openapi_user_auth_proto_msgTypes[15].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*RefreshKeyResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_openapi_user_auth_proto_msgTypes[16].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*DeleteKeyReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_openapi_user_auth_proto_msgTypes[17].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*DeleteKeyResp); i {
 			case 0:
 				return &v.state
@@ -1365,7 +1501,7 @@ func file_openapi_user_auth_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_openapi_user_auth_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   16,
+			NumMessages:   18,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
