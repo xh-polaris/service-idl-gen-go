@@ -18,6 +18,7 @@ type Client interface {
 	GetKey(ctx context.Context, Req *user.GetKeysReq, callOptions ...callopt.Option) (r *user.GetKeysResp, err error)
 	UpdateKey(ctx context.Context, Req *user.UpdateKeyReq, callOptions ...callopt.Option) (r *user.UpdateKeyResp, err error)
 	UpdateHosts(ctx context.Context, Req *user.UpdateHostsReq, callOptions ...callopt.Option) (r *user.UpdateHostsResp, err error)
+	RefreshKey(ctx context.Context, Req *user.RefreshKeyReq, callOptions ...callopt.Option) (r *user.RefreshKeyResp, err error)
 	DeleteKey(ctx context.Context, Req *user.DeleteKeyReq, callOptions ...callopt.Option) (r *user.DeleteKeyResp, err error)
 }
 
@@ -83,6 +84,11 @@ func (p *kAuthClient) UpdateKey(ctx context.Context, Req *user.UpdateKeyReq, cal
 func (p *kAuthClient) UpdateHosts(ctx context.Context, Req *user.UpdateHostsReq, callOptions ...callopt.Option) (r *user.UpdateHostsResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.UpdateHosts(ctx, Req)
+}
+
+func (p *kAuthClient) RefreshKey(ctx context.Context, Req *user.RefreshKeyReq, callOptions ...callopt.Option) (r *user.RefreshKeyResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.RefreshKey(ctx, Req)
 }
 
 func (p *kAuthClient) DeleteKey(ctx context.Context, Req *user.DeleteKeyReq, callOptions ...callopt.Option) (r *user.DeleteKeyResp, err error) {

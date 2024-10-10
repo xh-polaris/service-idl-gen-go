@@ -64,6 +64,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"RefreshKey": kitex.NewMethodInfo(
+		refreshKeyHandler,
+		newRefreshKeyArgs,
+		newRefreshKeyResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"DeleteKey": kitex.NewMethodInfo(
 		deleteKeyHandler,
 		newDeleteKeyArgs,
@@ -1208,6 +1215,159 @@ func (p *UpdateHostsResult) GetResult() interface{} {
 	return p.Success
 }
 
+func refreshKeyHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.RefreshKeyReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.Auth).RefreshKey(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *RefreshKeyArgs:
+		success, err := handler.(user.Auth).RefreshKey(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*RefreshKeyResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newRefreshKeyArgs() interface{} {
+	return &RefreshKeyArgs{}
+}
+
+func newRefreshKeyResult() interface{} {
+	return &RefreshKeyResult{}
+}
+
+type RefreshKeyArgs struct {
+	Req *user.RefreshKeyReq
+}
+
+func (p *RefreshKeyArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.RefreshKeyReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *RefreshKeyArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *RefreshKeyArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *RefreshKeyArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *RefreshKeyArgs) Unmarshal(in []byte) error {
+	msg := new(user.RefreshKeyReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var RefreshKeyArgs_Req_DEFAULT *user.RefreshKeyReq
+
+func (p *RefreshKeyArgs) GetReq() *user.RefreshKeyReq {
+	if !p.IsSetReq() {
+		return RefreshKeyArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *RefreshKeyArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *RefreshKeyArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type RefreshKeyResult struct {
+	Success *user.RefreshKeyResp
+}
+
+var RefreshKeyResult_Success_DEFAULT *user.RefreshKeyResp
+
+func (p *RefreshKeyResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.RefreshKeyResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *RefreshKeyResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *RefreshKeyResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *RefreshKeyResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *RefreshKeyResult) Unmarshal(in []byte) error {
+	msg := new(user.RefreshKeyResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *RefreshKeyResult) GetSuccess() *user.RefreshKeyResp {
+	if !p.IsSetSuccess() {
+		return RefreshKeyResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *RefreshKeyResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.RefreshKeyResp)
+}
+
+func (p *RefreshKeyResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *RefreshKeyResult) GetResult() interface{} {
+	return p.Success
+}
+
 func deleteKeyHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -1436,6 +1596,16 @@ func (p *kClient) UpdateHosts(ctx context.Context, Req *user.UpdateHostsReq) (r 
 	_args.Req = Req
 	var _result UpdateHostsResult
 	if err = p.c.Call(ctx, "UpdateHosts", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) RefreshKey(ctx context.Context, Req *user.RefreshKeyReq) (r *user.RefreshKeyResp, err error) {
+	var _args RefreshKeyArgs
+	_args.Req = Req
+	var _result RefreshKeyResult
+	if err = p.c.Call(ctx, "RefreshKey", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
