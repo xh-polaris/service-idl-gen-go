@@ -321,6 +321,16 @@ func (x *CreateKeyReq) FastRead(buf []byte, _type int8, number int32) (offset in
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -342,6 +352,21 @@ func (x *CreateKeyReq) fastReadField1(buf []byte, _type int8) (offset int, err e
 	}
 	x.User = &v
 	return offset, nil
+}
+
+func (x *CreateKeyReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Name, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *CreateKeyReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	var v string
+	v, offset, err = fastpb.ReadString(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.Hosts = append(x.Hosts, v)
+	return offset, err
 }
 
 func (x *CreateKeyResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -967,6 +992,8 @@ func (x *CreateKeyReq) FastWrite(buf []byte) (offset int) {
 		return offset
 	}
 	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
@@ -975,6 +1002,24 @@ func (x *CreateKeyReq) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetUser())
+	return offset
+}
+
+func (x *CreateKeyReq) fastWriteField2(buf []byte) (offset int) {
+	if x.Name == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetName())
+	return offset
+}
+
+func (x *CreateKeyReq) fastWriteField3(buf []byte) (offset int) {
+	if len(x.Hosts) == 0 {
+		return offset
+	}
+	for i := range x.GetHosts() {
+		offset += fastpb.WriteString(buf[offset:], 3, x.GetHosts()[i])
+	}
 	return offset
 }
 
@@ -1466,6 +1511,8 @@ func (x *CreateKeyReq) Size() (n int) {
 		return n
 	}
 	n += x.sizeField1()
+	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
@@ -1474,6 +1521,24 @@ func (x *CreateKeyReq) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeMessage(1, x.GetUser())
+	return n
+}
+
+func (x *CreateKeyReq) sizeField2() (n int) {
+	if x.Name == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetName())
+	return n
+}
+
+func (x *CreateKeyReq) sizeField3() (n int) {
+	if len(x.Hosts) == 0 {
+		return n
+	}
+	for i := range x.GetHosts() {
+		n += fastpb.SizeString(3, x.GetHosts()[i])
+	}
 	return n
 }
 
@@ -1802,6 +1867,8 @@ var fieldIDToName_SetUserInfoResp = map[int32]string{
 
 var fieldIDToName_CreateKeyReq = map[int32]string{
 	1: "User",
+	2: "Name",
+	3: "Hosts",
 }
 
 var fieldIDToName_CreateKeyResp = map[int32]string{
