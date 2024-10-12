@@ -70,11 +70,6 @@ func (x *SignUpResp) FastRead(buf []byte, _type int8, number int32) (offset int,
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -89,17 +84,12 @@ ReadFieldError:
 }
 
 func (x *SignUpResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	x.Done, offset, err = fastpb.ReadBool(buf, _type)
 	return offset, err
 }
 
 func (x *SignUpResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.AccessToken, offset, err = fastpb.ReadString(buf, _type)
-	return offset, err
-}
-
-func (x *SignUpResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.AccessExpire, offset, err = fastpb.ReadInt64(buf, _type)
+	x.Msg, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -808,31 +798,22 @@ func (x *SignUpResp) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
 func (x *SignUpResp) fastWriteField1(buf []byte) (offset int) {
-	if x.UserId == "" {
+	if !x.Done {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
+	offset += fastpb.WriteBool(buf[offset:], 1, x.GetDone())
 	return offset
 }
 
 func (x *SignUpResp) fastWriteField2(buf []byte) (offset int) {
-	if x.AccessToken == "" {
+	if x.Msg == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 2, x.GetAccessToken())
-	return offset
-}
-
-func (x *SignUpResp) fastWriteField3(buf []byte) (offset int) {
-	if x.AccessExpire == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetAccessExpire())
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetMsg())
 	return offset
 }
 
@@ -1318,31 +1299,22 @@ func (x *SignUpResp) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField3()
 	return n
 }
 
 func (x *SignUpResp) sizeField1() (n int) {
-	if x.UserId == "" {
+	if !x.Done {
 		return n
 	}
-	n += fastpb.SizeString(1, x.GetUserId())
+	n += fastpb.SizeBool(1, x.GetDone())
 	return n
 }
 
 func (x *SignUpResp) sizeField2() (n int) {
-	if x.AccessToken == "" {
+	if x.Msg == "" {
 		return n
 	}
-	n += fastpb.SizeString(2, x.GetAccessToken())
-	return n
-}
-
-func (x *SignUpResp) sizeField3() (n int) {
-	if x.AccessExpire == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(3, x.GetAccessExpire())
+	n += fastpb.SizeString(2, x.GetMsg())
 	return n
 }
 
@@ -1803,9 +1775,8 @@ var fieldIDToName_SignUpReq = map[int32]string{
 }
 
 var fieldIDToName_SignUpResp = map[int32]string{
-	1: "UserId",
-	2: "AccessToken",
-	3: "AccessExpire",
+	1: "Done",
+	2: "Msg",
 }
 
 var fieldIDToName_GetUserInfoReq = map[int32]string{
