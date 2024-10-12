@@ -29,7 +29,7 @@ type SetRemainReq struct {
 	unknownFields protoimpl.UnknownFields
 
 	User      *basic.UserMeta `protobuf:"bytes,1,opt,name=user,proto3" json:"user,omitempty"`
-	Increment int64           `protobuf:"varint,2,opt,name=increment,proto3" json:"increment,omitempty"`
+	Increment int64           `protobuf:"varint,2,opt,name=increment,proto3" json:"increment,omitempty"` // 增量，减少则用负数
 }
 
 func (x *SetRemainReq) Reset() {
