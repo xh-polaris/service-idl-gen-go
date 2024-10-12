@@ -54,6 +54,21 @@ func (x *Key) FastRead(buf []byte, _type int8, number int32) (offset int, err er
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 9:
+		offset, err = x.fastReadField9(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 10:
+		offset, err = x.fastReadField10(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 11:
+		offset, err = x.fastReadField11(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -117,6 +132,21 @@ func (x *Key) fastReadField8(buf []byte, _type int8) (offset int, err error) {
 	return offset, err
 }
 
+func (x *Key) fastReadField9(buf []byte, _type int8) (offset int, err error) {
+	x.CreateTime, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *Key) fastReadField10(buf []byte, _type int8) (offset int, err error) {
+	x.UpdateTime, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *Key) fastReadField11(buf []byte, _type int8) (offset int, err error) {
+	x.DeleteTime, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
 func (x *Key) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -129,6 +159,9 @@ func (x *Key) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField6(buf[offset:])
 	offset += x.fastWriteField7(buf[offset:])
 	offset += x.fastWriteField8(buf[offset:])
+	offset += x.fastWriteField9(buf[offset:])
+	offset += x.fastWriteField10(buf[offset:])
+	offset += x.fastWriteField11(buf[offset:])
 	return offset
 }
 
@@ -198,6 +231,30 @@ func (x *Key) fastWriteField8(buf []byte) (offset int) {
 	return offset
 }
 
+func (x *Key) fastWriteField9(buf []byte) (offset int) {
+	if x.CreateTime == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 9, x.GetCreateTime())
+	return offset
+}
+
+func (x *Key) fastWriteField10(buf []byte) (offset int) {
+	if x.UpdateTime == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 10, x.GetUpdateTime())
+	return offset
+}
+
+func (x *Key) fastWriteField11(buf []byte) (offset int) {
+	if x.DeleteTime == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 11, x.GetDeleteTime())
+	return offset
+}
+
 func (x *Key) Size() (n int) {
 	if x == nil {
 		return n
@@ -210,6 +267,9 @@ func (x *Key) Size() (n int) {
 	n += x.sizeField6()
 	n += x.sizeField7()
 	n += x.sizeField8()
+	n += x.sizeField9()
+	n += x.sizeField10()
+	n += x.sizeField11()
 	return n
 }
 
@@ -279,13 +339,40 @@ func (x *Key) sizeField8() (n int) {
 	return n
 }
 
+func (x *Key) sizeField9() (n int) {
+	if x.CreateTime == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(9, x.GetCreateTime())
+	return n
+}
+
+func (x *Key) sizeField10() (n int) {
+	if x.UpdateTime == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(10, x.GetUpdateTime())
+	return n
+}
+
+func (x *Key) sizeField11() (n int) {
+	if x.DeleteTime == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(11, x.GetDeleteTime())
+	return n
+}
+
 var fieldIDToName_Key = map[int32]string{
-	1: "Id",
-	2: "UserId",
-	3: "Name",
-	4: "Content",
-	5: "Status",
-	6: "Hosts",
-	7: "Timestamp",
-	8: "ExpireTime",
+	1:  "Id",
+	2:  "UserId",
+	3:  "Name",
+	4:  "Content",
+	5:  "Status",
+	6:  "Hosts",
+	7:  "Timestamp",
+	8:  "ExpireTime",
+	9:  "CreateTime",
+	10: "UpdateTime",
+	11: "DeleteTime",
 }
