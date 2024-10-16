@@ -104,11 +104,6 @@ func (x *BaseInterface) FastRead(buf []byte, _type int8, number int32) (offset i
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 12:
-		offset, err = x.fastReadField12(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -197,11 +192,6 @@ func (x *BaseInterface) fastReadField11(buf []byte, _type int8) (offset int, err
 	return offset, err
 }
 
-func (x *BaseInterface) fastReadField12(buf []byte, _type int8) (offset int, err error) {
-	x.DeleteTime, offset, err = fastpb.ReadInt64(buf, _type)
-	return offset, err
-}
-
 func (x *FullInterface) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -246,11 +236,6 @@ func (x *FullInterface) FastRead(buf []byte, _type int8, number int32) (offset i
 		}
 	case 9:
 		offset, err = x.fastReadField9(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
-	case 10:
-		offset, err = x.fastReadField10(buf, _type)
 		if err != nil {
 			goto ReadFieldError
 		}
@@ -319,11 +304,6 @@ func (x *FullInterface) fastReadField8(buf []byte, _type int8) (offset int, err 
 
 func (x *FullInterface) fastReadField9(buf []byte, _type int8) (offset int, err error) {
 	x.UpdateTime, offset, err = fastpb.ReadInt64(buf, _type)
-	return offset, err
-}
-
-func (x *FullInterface) fastReadField10(buf []byte, _type int8) (offset int, err error) {
-	x.DeleteTime, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -404,11 +384,6 @@ func (x *Gradient) FastRead(buf []byte, _type int8, number int32) (offset int, e
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 7:
-		offset, err = x.fastReadField7(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -459,11 +434,6 @@ func (x *Gradient) fastReadField5(buf []byte, _type int8) (offset int, err error
 
 func (x *Gradient) fastReadField6(buf []byte, _type int8) (offset int, err error) {
 	x.UpdateTime, offset, err = fastpb.ReadInt64(buf, _type)
-	return offset, err
-}
-
-func (x *Gradient) fastReadField7(buf []byte, _type int8) (offset int, err error) {
-	x.DeleteTime, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -627,7 +597,6 @@ func (x *BaseInterface) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField9(buf[offset:])
 	offset += x.fastWriteField10(buf[offset:])
 	offset += x.fastWriteField11(buf[offset:])
-	offset += x.fastWriteField12(buf[offset:])
 	return offset
 }
 
@@ -721,14 +690,6 @@ func (x *BaseInterface) fastWriteField11(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *BaseInterface) fastWriteField12(buf []byte) (offset int) {
-	if x.DeleteTime == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 12, x.GetDeleteTime())
-	return offset
-}
-
 func (x *FullInterface) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -742,7 +703,6 @@ func (x *FullInterface) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField7(buf[offset:])
 	offset += x.fastWriteField8(buf[offset:])
 	offset += x.fastWriteField9(buf[offset:])
-	offset += x.fastWriteField10(buf[offset:])
 	return offset
 }
 
@@ -818,14 +778,6 @@ func (x *FullInterface) fastWriteField9(buf []byte) (offset int) {
 	return offset
 }
 
-func (x *FullInterface) fastWriteField10(buf []byte) (offset int) {
-	if x.DeleteTime == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 10, x.GetDeleteTime())
-	return offset
-}
-
 func (x *Discount) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -870,7 +822,6 @@ func (x *Gradient) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField4(buf[offset:])
 	offset += x.fastWriteField5(buf[offset:])
 	offset += x.fastWriteField6(buf[offset:])
-	offset += x.fastWriteField7(buf[offset:])
 	return offset
 }
 
@@ -921,14 +872,6 @@ func (x *Gradient) fastWriteField6(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 6, x.GetUpdateTime())
-	return offset
-}
-
-func (x *Gradient) fastWriteField7(buf []byte) (offset int) {
-	if x.DeleteTime == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 7, x.GetDeleteTime())
 	return offset
 }
 
@@ -1069,7 +1012,6 @@ func (x *BaseInterface) Size() (n int) {
 	n += x.sizeField9()
 	n += x.sizeField10()
 	n += x.sizeField11()
-	n += x.sizeField12()
 	return n
 }
 
@@ -1163,14 +1105,6 @@ func (x *BaseInterface) sizeField11() (n int) {
 	return n
 }
 
-func (x *BaseInterface) sizeField12() (n int) {
-	if x.DeleteTime == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(12, x.GetDeleteTime())
-	return n
-}
-
 func (x *FullInterface) Size() (n int) {
 	if x == nil {
 		return n
@@ -1184,7 +1118,6 @@ func (x *FullInterface) Size() (n int) {
 	n += x.sizeField7()
 	n += x.sizeField8()
 	n += x.sizeField9()
-	n += x.sizeField10()
 	return n
 }
 
@@ -1260,14 +1193,6 @@ func (x *FullInterface) sizeField9() (n int) {
 	return n
 }
 
-func (x *FullInterface) sizeField10() (n int) {
-	if x.DeleteTime == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(10, x.GetDeleteTime())
-	return n
-}
-
 func (x *Discount) Size() (n int) {
 	if x == nil {
 		return n
@@ -1312,7 +1237,6 @@ func (x *Gradient) Size() (n int) {
 	n += x.sizeField4()
 	n += x.sizeField5()
 	n += x.sizeField6()
-	n += x.sizeField7()
 	return n
 }
 
@@ -1363,14 +1287,6 @@ func (x *Gradient) sizeField6() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(6, x.GetUpdateTime())
-	return n
-}
-
-func (x *Gradient) sizeField7() (n int) {
-	if x.DeleteTime == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(7, x.GetDeleteTime())
 	return n
 }
 
@@ -1488,20 +1404,18 @@ var fieldIDToName_BaseInterface = map[int32]string{
 	9:  "Status",
 	10: "CreateTime",
 	11: "UpdateTime",
-	12: "DeleteTime",
 }
 
 var fieldIDToName_FullInterface = map[int32]string{
-	1:  "Id",
-	2:  "BaseInterfaceId",
-	3:  "UserId",
-	4:  "ChargeType",
-	5:  "Price",
-	6:  "Margin",
-	7:  "Status",
-	8:  "CreateTime",
-	9:  "UpdateTime",
-	10: "DeleteTime",
+	1: "Id",
+	2: "BaseInterfaceId",
+	3: "UserId",
+	4: "ChargeType",
+	5: "Price",
+	6: "Margin",
+	7: "Status",
+	8: "CreateTime",
+	9: "UpdateTime",
 }
 
 var fieldIDToName_Discount = map[int32]string{
@@ -1517,7 +1431,6 @@ var fieldIDToName_Gradient = map[int32]string{
 	4: "Status",
 	5: "CreateTime",
 	6: "UpdateTime",
-	7: "DeleteTime",
 }
 
 var fieldIDToName_Log = map[int32]string{
