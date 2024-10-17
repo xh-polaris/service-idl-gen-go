@@ -39,13 +39,8 @@ ReadFieldError:
 }
 
 func (x *SignUpReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v basic.UserMeta
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.User = &v
-	return offset, nil
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
 }
 
 func (x *SignUpReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
@@ -114,13 +109,8 @@ ReadFieldError:
 }
 
 func (x *GetUserInfoReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v basic.UserMeta
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.User = &v
-	return offset, nil
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
 }
 
 func (x *GetUserInfoResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -229,13 +219,8 @@ ReadFieldError:
 }
 
 func (x *SetUserInfoReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v basic.UserMeta
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.User = &v
-	return offset, nil
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
 }
 
 func (x *SetUserInfoReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
@@ -320,13 +305,8 @@ ReadFieldError:
 }
 
 func (x *CreateKeyReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v basic.UserMeta
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.User = &v
-	return offset, nil
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
 }
 
 func (x *CreateKeyReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
@@ -405,13 +385,8 @@ ReadFieldError:
 }
 
 func (x *GetKeysReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v basic.UserMeta
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.User = &v
-	return offset, nil
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
 }
 
 func (x *GetKeysReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
@@ -777,10 +752,10 @@ func (x *SignUpReq) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *SignUpReq) fastWriteField1(buf []byte) (offset int) {
-	if x.User == nil {
+	if x.UserId == "" {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetUser())
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
 	return offset
 }
 
@@ -826,10 +801,10 @@ func (x *GetUserInfoReq) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *GetUserInfoReq) fastWriteField1(buf []byte) (offset int) {
-	if x.User == nil {
+	if x.UserId == "" {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetUser())
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
 	return offset
 }
 
@@ -896,10 +871,10 @@ func (x *SetUserInfoReq) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *SetUserInfoReq) fastWriteField1(buf []byte) (offset int) {
-	if x.User == nil {
+	if x.UserId == "" {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetUser())
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
 	return offset
 }
 
@@ -955,10 +930,10 @@ func (x *CreateKeyReq) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *CreateKeyReq) fastWriteField1(buf []byte) (offset int) {
-	if x.User == nil {
+	if x.UserId == "" {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetUser())
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
 	return offset
 }
 
@@ -1015,10 +990,10 @@ func (x *GetKeysReq) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *GetKeysReq) fastWriteField1(buf []byte) (offset int) {
-	if x.User == nil {
+	if x.UserId == "" {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetUser())
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
 	return offset
 }
 
@@ -1278,10 +1253,10 @@ func (x *SignUpReq) Size() (n int) {
 }
 
 func (x *SignUpReq) sizeField1() (n int) {
-	if x.User == nil {
+	if x.UserId == "" {
 		return n
 	}
-	n += fastpb.SizeMessage(1, x.GetUser())
+	n += fastpb.SizeString(1, x.GetUserId())
 	return n
 }
 
@@ -1327,10 +1302,10 @@ func (x *GetUserInfoReq) Size() (n int) {
 }
 
 func (x *GetUserInfoReq) sizeField1() (n int) {
-	if x.User == nil {
+	if x.UserId == "" {
 		return n
 	}
-	n += fastpb.SizeMessage(1, x.GetUser())
+	n += fastpb.SizeString(1, x.GetUserId())
 	return n
 }
 
@@ -1397,10 +1372,10 @@ func (x *SetUserInfoReq) Size() (n int) {
 }
 
 func (x *SetUserInfoReq) sizeField1() (n int) {
-	if x.User == nil {
+	if x.UserId == "" {
 		return n
 	}
-	n += fastpb.SizeMessage(1, x.GetUser())
+	n += fastpb.SizeString(1, x.GetUserId())
 	return n
 }
 
@@ -1456,10 +1431,10 @@ func (x *CreateKeyReq) Size() (n int) {
 }
 
 func (x *CreateKeyReq) sizeField1() (n int) {
-	if x.User == nil {
+	if x.UserId == "" {
 		return n
 	}
-	n += fastpb.SizeMessage(1, x.GetUser())
+	n += fastpb.SizeString(1, x.GetUserId())
 	return n
 }
 
@@ -1516,10 +1491,10 @@ func (x *GetKeysReq) Size() (n int) {
 }
 
 func (x *GetKeysReq) sizeField1() (n int) {
-	if x.User == nil {
+	if x.UserId == "" {
 		return n
 	}
-	n += fastpb.SizeMessage(1, x.GetUser())
+	n += fastpb.SizeString(1, x.GetUserId())
 	return n
 }
 
@@ -1770,7 +1745,7 @@ func (x *DeleteKeyResp) sizeField2() (n int) {
 }
 
 var fieldIDToName_SignUpReq = map[int32]string{
-	1: "User",
+	1: "UserId",
 	2: "Role",
 }
 
@@ -1780,7 +1755,7 @@ var fieldIDToName_SignUpResp = map[int32]string{
 }
 
 var fieldIDToName_GetUserInfoReq = map[int32]string{
-	1: "User",
+	1: "UserId",
 }
 
 var fieldIDToName_GetUserInfoResp = map[int32]string{
@@ -1792,7 +1767,7 @@ var fieldIDToName_GetUserInfoResp = map[int32]string{
 }
 
 var fieldIDToName_SetUserInfoReq = map[int32]string{
-	1: "User",
+	1: "UserId",
 	2: "Username",
 	3: "Status",
 }
@@ -1803,7 +1778,7 @@ var fieldIDToName_SetUserInfoResp = map[int32]string{
 }
 
 var fieldIDToName_CreateKeyReq = map[int32]string{
-	1: "User",
+	1: "UserId",
 	2: "Name",
 	3: "Hosts",
 }
@@ -1814,7 +1789,7 @@ var fieldIDToName_CreateKeyResp = map[int32]string{
 }
 
 var fieldIDToName_GetKeysReq = map[int32]string{
-	1: "User",
+	1: "UserId",
 	2: "PaginationOptions",
 }
 

@@ -799,13 +799,8 @@ ReadFieldError:
 }
 
 func (x *GetFullInterfaceReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v basic.UserMeta
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.User = &v
-	return offset, nil
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
 }
 
 func (x *GetFullInterfaceReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
@@ -1620,10 +1615,10 @@ func (x *GetFullInterfaceReq) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *GetFullInterfaceReq) fastWriteField1(buf []byte) (offset int) {
-	if x.User == nil {
+	if x.UserId == "" {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetUser())
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
 	return offset
 }
 
@@ -2349,10 +2344,10 @@ func (x *GetFullInterfaceReq) Size() (n int) {
 }
 
 func (x *GetFullInterfaceReq) sizeField1() (n int) {
-	if x.User == nil {
+	if x.UserId == "" {
 		return n
 	}
-	n += fastpb.SizeMessage(1, x.GetUser())
+	n += fastpb.SizeString(1, x.GetUserId())
 	return n
 }
 
@@ -2631,7 +2626,7 @@ var fieldIDToName_DeleteFullInterfaceResp = map[int32]string{
 }
 
 var fieldIDToName_GetFullInterfaceReq = map[int32]string{
-	1: "User",
+	1: "UserId",
 	2: "PaginationOptions",
 }
 

@@ -39,13 +39,8 @@ ReadFieldError:
 }
 
 func (x *SetRemainReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	var v basic.UserMeta
-	offset, err = fastpb.ReadMessage(buf, _type, &v)
-	if err != nil {
-		return offset, err
-	}
-	x.User = &v
-	return offset, nil
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
 }
 
 func (x *SetRemainReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
@@ -98,10 +93,10 @@ func (x *SetRemainReq) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *SetRemainReq) fastWriteField1(buf []byte) (offset int) {
-	if x.User == nil {
+	if x.UserId == "" {
 		return offset
 	}
-	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetUser())
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
 	return offset
 }
 
@@ -148,10 +143,10 @@ func (x *SetRemainReq) Size() (n int) {
 }
 
 func (x *SetRemainReq) sizeField1() (n int) {
-	if x.User == nil {
+	if x.UserId == "" {
 		return n
 	}
-	n += fastpb.SizeMessage(1, x.GetUser())
+	n += fastpb.SizeString(1, x.GetUserId())
 	return n
 }
 
@@ -189,7 +184,7 @@ func (x *SetRemainResp) sizeField2() (n int) {
 }
 
 var fieldIDToName_SetRemainReq = map[int32]string{
-	1: "User",
+	1: "UserId",
 	2: "Increment",
 }
 
