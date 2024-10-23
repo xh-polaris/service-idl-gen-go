@@ -833,7 +833,7 @@ func (x *GetKeyForCheckResp) fastReadField2(buf []byte, _type int8) (offset int,
 }
 
 func (x *GetKeyForCheckResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.Check, offset, err = fastpb.ReadString(buf, _type)
+	x.Check, offset, err = fastpb.ReadBool(buf, _type)
 	return offset, err
 }
 
@@ -1405,10 +1405,10 @@ func (x *GetKeyForCheckResp) fastWriteField2(buf []byte) (offset int) {
 }
 
 func (x *GetKeyForCheckResp) fastWriteField3(buf []byte) (offset int) {
-	if x.Check == "" {
+	if !x.Check {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetCheck())
+	offset += fastpb.WriteBool(buf[offset:], 3, x.GetCheck())
 	return offset
 }
 
@@ -1983,10 +1983,10 @@ func (x *GetKeyForCheckResp) sizeField2() (n int) {
 }
 
 func (x *GetKeyForCheckResp) sizeField3() (n int) {
-	if x.Check == "" {
+	if !x.Check {
 		return n
 	}
-	n += fastpb.SizeString(3, x.GetCheck())
+	n += fastpb.SizeBool(3, x.GetCheck())
 	return n
 }
 
