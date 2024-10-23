@@ -78,6 +78,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"GetFullAndBaseInterfaceForCheck": kitex.NewMethodInfo(
+		getFullAndBaseInterfaceForCheckHandler,
+		newGetFullAndBaseInterfaceForCheckArgs,
+		newGetFullAndBaseInterfaceForCheckResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"CreateGradient": kitex.NewMethodInfo(
 		createGradientHandler,
 		newCreateGradientArgs,
@@ -1556,6 +1563,159 @@ func (p *GetFullInterfaceResult) GetResult() interface{} {
 	return p.Success
 }
 
+func getFullAndBaseInterfaceForCheckHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(charge.GetFullAndBaseInterfaceForCheckReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(charge.Charge).GetFullAndBaseInterfaceForCheck(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *GetFullAndBaseInterfaceForCheckArgs:
+		success, err := handler.(charge.Charge).GetFullAndBaseInterfaceForCheck(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetFullAndBaseInterfaceForCheckResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newGetFullAndBaseInterfaceForCheckArgs() interface{} {
+	return &GetFullAndBaseInterfaceForCheckArgs{}
+}
+
+func newGetFullAndBaseInterfaceForCheckResult() interface{} {
+	return &GetFullAndBaseInterfaceForCheckResult{}
+}
+
+type GetFullAndBaseInterfaceForCheckArgs struct {
+	Req *charge.GetFullAndBaseInterfaceForCheckReq
+}
+
+func (p *GetFullAndBaseInterfaceForCheckArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(charge.GetFullAndBaseInterfaceForCheckReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetFullAndBaseInterfaceForCheckArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetFullAndBaseInterfaceForCheckArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetFullAndBaseInterfaceForCheckArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetFullAndBaseInterfaceForCheckArgs) Unmarshal(in []byte) error {
+	msg := new(charge.GetFullAndBaseInterfaceForCheckReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetFullAndBaseInterfaceForCheckArgs_Req_DEFAULT *charge.GetFullAndBaseInterfaceForCheckReq
+
+func (p *GetFullAndBaseInterfaceForCheckArgs) GetReq() *charge.GetFullAndBaseInterfaceForCheckReq {
+	if !p.IsSetReq() {
+		return GetFullAndBaseInterfaceForCheckArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetFullAndBaseInterfaceForCheckArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetFullAndBaseInterfaceForCheckArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetFullAndBaseInterfaceForCheckResult struct {
+	Success *charge.GetFullAndBaseInterfaceForCheckResp
+}
+
+var GetFullAndBaseInterfaceForCheckResult_Success_DEFAULT *charge.GetFullAndBaseInterfaceForCheckResp
+
+func (p *GetFullAndBaseInterfaceForCheckResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(charge.GetFullAndBaseInterfaceForCheckResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetFullAndBaseInterfaceForCheckResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetFullAndBaseInterfaceForCheckResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetFullAndBaseInterfaceForCheckResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetFullAndBaseInterfaceForCheckResult) Unmarshal(in []byte) error {
+	msg := new(charge.GetFullAndBaseInterfaceForCheckResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetFullAndBaseInterfaceForCheckResult) GetSuccess() *charge.GetFullAndBaseInterfaceForCheckResp {
+	if !p.IsSetSuccess() {
+		return GetFullAndBaseInterfaceForCheckResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetFullAndBaseInterfaceForCheckResult) SetSuccess(x interface{}) {
+	p.Success = x.(*charge.GetFullAndBaseInterfaceForCheckResp)
+}
+
+func (p *GetFullAndBaseInterfaceForCheckResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetFullAndBaseInterfaceForCheckResult) GetResult() interface{} {
+	return p.Success
+}
+
 func createGradientHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -2416,6 +2576,16 @@ func (p *kClient) GetFullInterface(ctx context.Context, Req *charge.GetFullInter
 	_args.Req = Req
 	var _result GetFullInterfaceResult
 	if err = p.c.Call(ctx, "GetFullInterface", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetFullAndBaseInterfaceForCheck(ctx context.Context, Req *charge.GetFullAndBaseInterfaceForCheckReq) (r *charge.GetFullAndBaseInterfaceForCheckResp, err error) {
+	var _args GetFullAndBaseInterfaceForCheckArgs
+	_args.Req = Req
+	var _result GetFullAndBaseInterfaceForCheckResult
+	if err = p.c.Call(ctx, "GetFullAndBaseInterfaceForCheck", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

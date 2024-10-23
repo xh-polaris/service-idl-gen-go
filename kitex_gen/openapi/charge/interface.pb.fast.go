@@ -853,6 +853,146 @@ func (x *GetFullInterfaceResp) fastReadField2(buf []byte, _type int8) (offset in
 	return offset, err
 }
 
+func (x *GetFullAndBaseInterfaceForCheckReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetFullAndBaseInterfaceForCheckReq[number], err)
+}
+
+func (x *GetFullAndBaseInterfaceForCheckReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Url, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetFullAndBaseInterfaceForCheckReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Method, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetFullAndBaseInterfaceForCheckReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 4:
+		offset, err = x.fastReadField4(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 5:
+		offset, err = x.fastReadField5(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 6:
+		offset, err = x.fastReadField6(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 7:
+		offset, err = x.fastReadField7(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 8:
+		offset, err = x.fastReadField8(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetFullAndBaseInterfaceForCheckResp[number], err)
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.BaseInterfaceId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.BaseInterfaceStatus, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) fastReadField5(buf []byte, _type int8) (offset int, err error) {
+	x.ChargeType, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) fastReadField6(buf []byte, _type int8) (offset int, err error) {
+	x.Price, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) fastReadField7(buf []byte, _type int8) (offset int, err error) {
+	x.Margin, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) fastReadField8(buf []byte, _type int8) (offset int, err error) {
+	x.Status, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
 func (x *CreateGradientReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -1657,6 +1797,119 @@ func (x *GetFullInterfaceResp) fastWriteField2(buf []byte) (offset int) {
 	return offset
 }
 
+func (x *GetFullAndBaseInterfaceForCheckReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
+	return offset
+}
+
+func (x *GetFullAndBaseInterfaceForCheckReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Url == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUrl())
+	return offset
+}
+
+func (x *GetFullAndBaseInterfaceForCheckReq) fastWriteField2(buf []byte) (offset int) {
+	if x.Method == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetMethod())
+	return offset
+}
+
+func (x *GetFullAndBaseInterfaceForCheckReq) fastWriteField3(buf []byte) (offset int) {
+	if x.UserId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetUserId())
+	return offset
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField4(buf[offset:])
+	offset += x.fastWriteField5(buf[offset:])
+	offset += x.fastWriteField6(buf[offset:])
+	offset += x.fastWriteField7(buf[offset:])
+	offset += x.fastWriteField8(buf[offset:])
+	return offset
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Id == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
+	return offset
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) fastWriteField2(buf []byte) (offset int) {
+	if x.BaseInterfaceId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetBaseInterfaceId())
+	return offset
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) fastWriteField3(buf []byte) (offset int) {
+	if x.BaseInterfaceStatus == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetBaseInterfaceStatus())
+	return offset
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) fastWriteField4(buf []byte) (offset int) {
+	if x.UserId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 4, x.GetUserId())
+	return offset
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) fastWriteField5(buf []byte) (offset int) {
+	if x.ChargeType == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 5, x.GetChargeType())
+	return offset
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) fastWriteField6(buf []byte) (offset int) {
+	if x.Price == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 6, x.GetPrice())
+	return offset
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) fastWriteField7(buf []byte) (offset int) {
+	if x.Margin == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 7, x.GetMargin())
+	return offset
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) fastWriteField8(buf []byte) (offset int) {
+	if x.Status == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 8, x.GetStatus())
+	return offset
+}
+
 func (x *CreateGradientReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -2386,6 +2639,119 @@ func (x *GetFullInterfaceResp) sizeField2() (n int) {
 	return n
 }
 
+func (x *GetFullAndBaseInterfaceForCheckReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	n += x.sizeField3()
+	return n
+}
+
+func (x *GetFullAndBaseInterfaceForCheckReq) sizeField1() (n int) {
+	if x.Url == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetUrl())
+	return n
+}
+
+func (x *GetFullAndBaseInterfaceForCheckReq) sizeField2() (n int) {
+	if x.Method == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetMethod())
+	return n
+}
+
+func (x *GetFullAndBaseInterfaceForCheckReq) sizeField3() (n int) {
+	if x.UserId == "" {
+		return n
+	}
+	n += fastpb.SizeString(3, x.GetUserId())
+	return n
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	n += x.sizeField3()
+	n += x.sizeField4()
+	n += x.sizeField5()
+	n += x.sizeField6()
+	n += x.sizeField7()
+	n += x.sizeField8()
+	return n
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) sizeField1() (n int) {
+	if x.Id == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetId())
+	return n
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) sizeField2() (n int) {
+	if x.BaseInterfaceId == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetBaseInterfaceId())
+	return n
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) sizeField3() (n int) {
+	if x.BaseInterfaceStatus == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(3, x.GetBaseInterfaceStatus())
+	return n
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) sizeField4() (n int) {
+	if x.UserId == "" {
+		return n
+	}
+	n += fastpb.SizeString(4, x.GetUserId())
+	return n
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) sizeField5() (n int) {
+	if x.ChargeType == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(5, x.GetChargeType())
+	return n
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) sizeField6() (n int) {
+	if x.Price == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(6, x.GetPrice())
+	return n
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) sizeField7() (n int) {
+	if x.Margin == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(7, x.GetMargin())
+	return n
+}
+
+func (x *GetFullAndBaseInterfaceForCheckResp) sizeField8() (n int) {
+	if x.Status == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(8, x.GetStatus())
+	return n
+}
+
 func (x *CreateGradientReq) Size() (n int) {
 	if x == nil {
 		return n
@@ -2633,6 +2999,23 @@ var fieldIDToName_GetFullInterfaceReq = map[int32]string{
 var fieldIDToName_GetFullInterfaceResp = map[int32]string{
 	1: "FullInterfaces",
 	2: "Total",
+}
+
+var fieldIDToName_GetFullAndBaseInterfaceForCheckReq = map[int32]string{
+	1: "Url",
+	2: "Method",
+	3: "UserId",
+}
+
+var fieldIDToName_GetFullAndBaseInterfaceForCheckResp = map[int32]string{
+	1: "Id",
+	2: "BaseInterfaceId",
+	3: "BaseInterfaceStatus",
+	4: "UserId",
+	5: "ChargeType",
+	6: "Price",
+	7: "Margin",
+	8: "Status",
 }
 
 var fieldIDToName_CreateGradientReq = map[int32]string{
