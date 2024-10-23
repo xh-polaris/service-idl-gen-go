@@ -78,6 +78,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"GetKeyForCheck": kitex.NewMethodInfo(
+		getKeyForCheckHandler,
+		newGetKeyForCheckArgs,
+		newGetKeyForCheckResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"SetRemain": kitex.NewMethodInfo(
 		setRemainHandler,
 		newSetRemainArgs,
@@ -1528,6 +1535,159 @@ func (p *DeleteKeyResult) GetResult() interface{} {
 	return p.Success
 }
 
+func getKeyForCheckHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(user.GetKeyForCheckReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(user.User).GetKeyForCheck(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *GetKeyForCheckArgs:
+		success, err := handler.(user.User).GetKeyForCheck(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetKeyForCheckResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newGetKeyForCheckArgs() interface{} {
+	return &GetKeyForCheckArgs{}
+}
+
+func newGetKeyForCheckResult() interface{} {
+	return &GetKeyForCheckResult{}
+}
+
+type GetKeyForCheckArgs struct {
+	Req *user.GetKeyForCheckReq
+}
+
+func (p *GetKeyForCheckArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(user.GetKeyForCheckReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetKeyForCheckArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetKeyForCheckArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetKeyForCheckArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetKeyForCheckArgs) Unmarshal(in []byte) error {
+	msg := new(user.GetKeyForCheckReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetKeyForCheckArgs_Req_DEFAULT *user.GetKeyForCheckReq
+
+func (p *GetKeyForCheckArgs) GetReq() *user.GetKeyForCheckReq {
+	if !p.IsSetReq() {
+		return GetKeyForCheckArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetKeyForCheckArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetKeyForCheckArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetKeyForCheckResult struct {
+	Success *user.GetKeyForCheckResp
+}
+
+var GetKeyForCheckResult_Success_DEFAULT *user.GetKeyForCheckResp
+
+func (p *GetKeyForCheckResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(user.GetKeyForCheckResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetKeyForCheckResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetKeyForCheckResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetKeyForCheckResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetKeyForCheckResult) Unmarshal(in []byte) error {
+	msg := new(user.GetKeyForCheckResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetKeyForCheckResult) GetSuccess() *user.GetKeyForCheckResp {
+	if !p.IsSetSuccess() {
+		return GetKeyForCheckResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetKeyForCheckResult) SetSuccess(x interface{}) {
+	p.Success = x.(*user.GetKeyForCheckResp)
+}
+
+func (p *GetKeyForCheckResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetKeyForCheckResult) GetResult() interface{} {
+	return p.Success
+}
+
 func setRemainHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -1776,6 +1936,16 @@ func (p *kClient) DeleteKey(ctx context.Context, Req *user.DeleteKeyReq) (r *use
 	_args.Req = Req
 	var _result DeleteKeyResult
 	if err = p.c.Call(ctx, "DeleteKey", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetKeyForCheck(ctx context.Context, Req *user.GetKeyForCheckReq) (r *user.GetKeyForCheckResp, err error) {
+	var _args GetKeyForCheckArgs
+	_args.Req = Req
+	var _result GetKeyForCheckResult
+	if err = p.c.Call(ctx, "GetKeyForCheck", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

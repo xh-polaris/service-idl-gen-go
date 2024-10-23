@@ -20,6 +20,7 @@ type Client interface {
 	UpdateHosts(ctx context.Context, Req *user.UpdateHostsReq, callOptions ...callopt.Option) (r *user.UpdateHostsResp, err error)
 	RefreshKey(ctx context.Context, Req *user.RefreshKeyReq, callOptions ...callopt.Option) (r *user.RefreshKeyResp, err error)
 	DeleteKey(ctx context.Context, Req *user.DeleteKeyReq, callOptions ...callopt.Option) (r *user.DeleteKeyResp, err error)
+	GetKeyForCheck(ctx context.Context, Req *user.GetKeyForCheckReq, callOptions ...callopt.Option) (r *user.GetKeyForCheckResp, err error)
 	SetRemain(ctx context.Context, Req *user.SetRemainReq, callOptions ...callopt.Option) (r *user.SetRemainResp, err error)
 }
 
@@ -95,6 +96,11 @@ func (p *kUserClient) RefreshKey(ctx context.Context, Req *user.RefreshKeyReq, c
 func (p *kUserClient) DeleteKey(ctx context.Context, Req *user.DeleteKeyReq, callOptions ...callopt.Option) (r *user.DeleteKeyResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.DeleteKey(ctx, Req)
+}
+
+func (p *kUserClient) GetKeyForCheck(ctx context.Context, Req *user.GetKeyForCheckReq, callOptions ...callopt.Option) (r *user.GetKeyForCheckResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetKeyForCheck(ctx, Req)
 }
 
 func (p *kUserClient) SetRemain(ctx context.Context, Req *user.SetRemainReq, callOptions ...callopt.Option) (r *user.SetRemainResp, err error) {
