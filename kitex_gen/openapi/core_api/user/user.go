@@ -22,6 +22,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"SignIn": kitex.NewMethodInfo(
+		signInHandler,
+		newSignInArgs,
+		newSignInResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"GetUserInfo": kitex.NewMethodInfo(
 		getUserInfoHandler,
 		newGetUserInfoArgs,
@@ -252,6 +259,159 @@ func (p *SignUpResult) IsSetSuccess() bool {
 }
 
 func (p *SignUpResult) GetResult() interface{} {
+	return p.Success
+}
+
+func signInHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.SignUpReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.User).SignIn(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *SignInArgs:
+		success, err := handler.(core_api.User).SignIn(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*SignInResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newSignInArgs() interface{} {
+	return &SignInArgs{}
+}
+
+func newSignInResult() interface{} {
+	return &SignInResult{}
+}
+
+type SignInArgs struct {
+	Req *core_api.SignUpReq
+}
+
+func (p *SignInArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.SignUpReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *SignInArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *SignInArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *SignInArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *SignInArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.SignUpReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var SignInArgs_Req_DEFAULT *core_api.SignUpReq
+
+func (p *SignInArgs) GetReq() *core_api.SignUpReq {
+	if !p.IsSetReq() {
+		return SignInArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *SignInArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *SignInArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type SignInResult struct {
+	Success *core_api.SignUpResp
+}
+
+var SignInResult_Success_DEFAULT *core_api.SignUpResp
+
+func (p *SignInResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.SignUpResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *SignInResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *SignInResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *SignInResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *SignInResult) Unmarshal(in []byte) error {
+	msg := new(core_api.SignUpResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *SignInResult) GetSuccess() *core_api.SignUpResp {
+	if !p.IsSetSuccess() {
+		return SignInResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *SignInResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.SignUpResp)
+}
+
+func (p *SignInResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *SignInResult) GetResult() interface{} {
 	return p.Success
 }
 
@@ -576,6 +736,16 @@ func (p *kClient) SignUp(ctx context.Context, Req *core_api.SignUpReq) (r *core_
 	_args.Req = Req
 	var _result SignUpResult
 	if err = p.c.Call(ctx, "SignUp", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) SignIn(ctx context.Context, Req *core_api.SignUpReq) (r *core_api.SignUpResp, err error) {
+	var _args SignInArgs
+	_args.Req = Req
+	var _result SignInResult
+	if err = p.c.Call(ctx, "SignIn", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
