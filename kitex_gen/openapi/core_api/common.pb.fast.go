@@ -1243,6 +1243,11 @@ func (x *BuyFullInterfaceReq) FastRead(buf []byte, _type int8, number int32) (of
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -1262,7 +1267,12 @@ func (x *BuyFullInterfaceReq) fastReadField1(buf []byte, _type int8) (offset int
 }
 
 func (x *BuyFullInterfaceReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.Increment, offset, err = fastpb.ReadString(buf, _type)
+	x.Increment, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *BuyFullInterfaceReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.Discount, offset, err = fastpb.ReadBool(buf, _type)
 	return offset, err
 }
 
@@ -2484,6 +2494,7 @@ func (x *BuyFullInterfaceReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
@@ -2496,10 +2507,18 @@ func (x *BuyFullInterfaceReq) fastWriteField1(buf []byte) (offset int) {
 }
 
 func (x *BuyFullInterfaceReq) fastWriteField2(buf []byte) (offset int) {
-	if x.Increment == "" {
+	if x.Increment == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 2, x.GetIncrement())
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetIncrement())
+	return offset
+}
+
+func (x *BuyFullInterfaceReq) fastWriteField3(buf []byte) (offset int) {
+	if !x.Discount {
+		return offset
+	}
+	offset += fastpb.WriteBool(buf[offset:], 3, x.GetDiscount())
 	return offset
 }
 
@@ -3604,6 +3623,7 @@ func (x *BuyFullInterfaceReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
@@ -3616,10 +3636,18 @@ func (x *BuyFullInterfaceReq) sizeField1() (n int) {
 }
 
 func (x *BuyFullInterfaceReq) sizeField2() (n int) {
-	if x.Increment == "" {
+	if x.Increment == 0 {
 		return n
 	}
-	n += fastpb.SizeString(2, x.GetIncrement())
+	n += fastpb.SizeInt64(2, x.GetIncrement())
+	return n
+}
+
+func (x *BuyFullInterfaceReq) sizeField3() (n int) {
+	if !x.Discount {
+		return n
+	}
+	n += fastpb.SizeBool(3, x.GetDiscount())
 	return n
 }
 
@@ -4030,6 +4058,7 @@ var fieldIDToName_GetFullInterfacesResp = map[int32]string{
 var fieldIDToName_BuyFullInterfaceReq = map[int32]string{
 	1: "FullInterfaceId",
 	2: "Increment",
+	3: "Discount",
 }
 
 var fieldIDToName_CreateGradientReq = map[int32]string{
