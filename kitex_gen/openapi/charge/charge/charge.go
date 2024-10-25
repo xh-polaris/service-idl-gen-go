@@ -78,6 +78,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"GetOneFullInterface": kitex.NewMethodInfo(
+		getOneFullInterfaceHandler,
+		newGetOneFullInterfaceArgs,
+		newGetOneFullInterfaceResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"GetFullAndBaseInterfaceForCheck": kitex.NewMethodInfo(
 		getFullAndBaseInterfaceForCheckHandler,
 		newGetFullAndBaseInterfaceForCheckArgs,
@@ -1563,6 +1570,159 @@ func (p *GetFullInterfaceResult) GetResult() interface{} {
 	return p.Success
 }
 
+func getOneFullInterfaceHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(charge.GetOneFullInterfaceReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(charge.Charge).GetOneFullInterface(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *GetOneFullInterfaceArgs:
+		success, err := handler.(charge.Charge).GetOneFullInterface(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetOneFullInterfaceResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newGetOneFullInterfaceArgs() interface{} {
+	return &GetOneFullInterfaceArgs{}
+}
+
+func newGetOneFullInterfaceResult() interface{} {
+	return &GetOneFullInterfaceResult{}
+}
+
+type GetOneFullInterfaceArgs struct {
+	Req *charge.GetOneFullInterfaceReq
+}
+
+func (p *GetOneFullInterfaceArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(charge.GetOneFullInterfaceReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetOneFullInterfaceArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetOneFullInterfaceArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetOneFullInterfaceArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetOneFullInterfaceArgs) Unmarshal(in []byte) error {
+	msg := new(charge.GetOneFullInterfaceReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetOneFullInterfaceArgs_Req_DEFAULT *charge.GetOneFullInterfaceReq
+
+func (p *GetOneFullInterfaceArgs) GetReq() *charge.GetOneFullInterfaceReq {
+	if !p.IsSetReq() {
+		return GetOneFullInterfaceArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetOneFullInterfaceArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetOneFullInterfaceArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetOneFullInterfaceResult struct {
+	Success *charge.GetOneFullInterfaceResp
+}
+
+var GetOneFullInterfaceResult_Success_DEFAULT *charge.GetOneFullInterfaceResp
+
+func (p *GetOneFullInterfaceResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(charge.GetOneFullInterfaceResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetOneFullInterfaceResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetOneFullInterfaceResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetOneFullInterfaceResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetOneFullInterfaceResult) Unmarshal(in []byte) error {
+	msg := new(charge.GetOneFullInterfaceResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetOneFullInterfaceResult) GetSuccess() *charge.GetOneFullInterfaceResp {
+	if !p.IsSetSuccess() {
+		return GetOneFullInterfaceResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetOneFullInterfaceResult) SetSuccess(x interface{}) {
+	p.Success = x.(*charge.GetOneFullInterfaceResp)
+}
+
+func (p *GetOneFullInterfaceResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetOneFullInterfaceResult) GetResult() interface{} {
+	return p.Success
+}
+
 func getFullAndBaseInterfaceForCheckHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -2576,6 +2736,16 @@ func (p *kClient) GetFullInterface(ctx context.Context, Req *charge.GetFullInter
 	_args.Req = Req
 	var _result GetFullInterfaceResult
 	if err = p.c.Call(ctx, "GetFullInterface", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetOneFullInterface(ctx context.Context, Req *charge.GetOneFullInterfaceReq) (r *charge.GetOneFullInterfaceResp, err error) {
+	var _args GetOneFullInterfaceArgs
+	_args.Req = Req
+	var _result GetOneFullInterfaceResult
+	if err = p.c.Call(ctx, "GetOneFullInterface", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

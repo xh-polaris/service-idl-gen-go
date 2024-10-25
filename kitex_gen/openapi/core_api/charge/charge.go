@@ -78,6 +78,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"BuyFullInterface": kitex.NewMethodInfo(
+		buyFullInterfaceHandler,
+		newBuyFullInterfaceArgs,
+		newBuyFullInterfaceResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"CreateGradient": kitex.NewMethodInfo(
 		createGradientHandler,
 		newCreateGradientArgs,
@@ -1542,6 +1549,159 @@ func (p *GetFullInterfacesResult) GetResult() interface{} {
 	return p.Success
 }
 
+func buyFullInterfaceHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.BuyFullInterfaceReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.Charge).BuyFullInterface(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *BuyFullInterfaceArgs:
+		success, err := handler.(core_api.Charge).BuyFullInterface(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*BuyFullInterfaceResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newBuyFullInterfaceArgs() interface{} {
+	return &BuyFullInterfaceArgs{}
+}
+
+func newBuyFullInterfaceResult() interface{} {
+	return &BuyFullInterfaceResult{}
+}
+
+type BuyFullInterfaceArgs struct {
+	Req *core_api.BuyFullInterfaceReq
+}
+
+func (p *BuyFullInterfaceArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.BuyFullInterfaceReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *BuyFullInterfaceArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *BuyFullInterfaceArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *BuyFullInterfaceArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *BuyFullInterfaceArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.BuyFullInterfaceReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var BuyFullInterfaceArgs_Req_DEFAULT *core_api.BuyFullInterfaceReq
+
+func (p *BuyFullInterfaceArgs) GetReq() *core_api.BuyFullInterfaceReq {
+	if !p.IsSetReq() {
+		return BuyFullInterfaceArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *BuyFullInterfaceArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *BuyFullInterfaceArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type BuyFullInterfaceResult struct {
+	Success *core_api.Response
+}
+
+var BuyFullInterfaceResult_Success_DEFAULT *core_api.Response
+
+func (p *BuyFullInterfaceResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.Response)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *BuyFullInterfaceResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *BuyFullInterfaceResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *BuyFullInterfaceResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *BuyFullInterfaceResult) Unmarshal(in []byte) error {
+	msg := new(core_api.Response)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *BuyFullInterfaceResult) GetSuccess() *core_api.Response {
+	if !p.IsSetSuccess() {
+		return BuyFullInterfaceResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *BuyFullInterfaceResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.Response)
+}
+
+func (p *BuyFullInterfaceResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *BuyFullInterfaceResult) GetResult() interface{} {
+	return p.Success
+}
+
 func createGradientHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -2096,6 +2256,16 @@ func (p *kClient) GetFullInterfaces(ctx context.Context, Req *core_api.GetFullIn
 	_args.Req = Req
 	var _result GetFullInterfacesResult
 	if err = p.c.Call(ctx, "GetFullInterfaces", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) BuyFullInterface(ctx context.Context, Req *core_api.BuyFullInterfaceReq) (r *core_api.Response, err error) {
+	var _args BuyFullInterfaceArgs
+	_args.Req = Req
+	var _result BuyFullInterfaceResult
+	if err = p.c.Call(ctx, "BuyFullInterface", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

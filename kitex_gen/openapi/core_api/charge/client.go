@@ -20,6 +20,7 @@ type Client interface {
 	UpdateMargin(ctx context.Context, Req *core_api.UpdateMarginReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 	DeleteFullInterface(ctx context.Context, Req *core_api.DeleteFullInterfaceReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 	GetFullInterfaces(ctx context.Context, Req *core_api.GetFullInterfacesReq, callOptions ...callopt.Option) (r *core_api.GetFullInterfacesResp, err error)
+	BuyFullInterface(ctx context.Context, Req *core_api.BuyFullInterfaceReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 	CreateGradient(ctx context.Context, Req *core_api.CreateGradientReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 	UpdateGradient(ctx context.Context, Req *core_api.UpdateGradientReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 	GetGradient(ctx context.Context, Req *core_api.GetGradientReq, callOptions ...callopt.Option) (r *core_api.GetGradientResp, err error)
@@ -97,6 +98,11 @@ func (p *kChargeClient) DeleteFullInterface(ctx context.Context, Req *core_api.D
 func (p *kChargeClient) GetFullInterfaces(ctx context.Context, Req *core_api.GetFullInterfacesReq, callOptions ...callopt.Option) (r *core_api.GetFullInterfacesResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.GetFullInterfaces(ctx, Req)
+}
+
+func (p *kChargeClient) BuyFullInterface(ctx context.Context, Req *core_api.BuyFullInterfaceReq, callOptions ...callopt.Option) (r *core_api.Response, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.BuyFullInterface(ctx, Req)
 }
 
 func (p *kChargeClient) CreateGradient(ctx context.Context, Req *core_api.CreateGradientReq, callOptions ...callopt.Option) (r *core_api.Response, err error) {
