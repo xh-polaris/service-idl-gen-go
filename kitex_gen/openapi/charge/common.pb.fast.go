@@ -403,7 +403,7 @@ func (x *Gradient) fastReadField1(buf []byte, _type int8) (offset int, err error
 }
 
 func (x *Gradient) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.FullInterfaceId, offset, err = fastpb.ReadString(buf, _type)
+	x.BaseInterfaceId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -834,10 +834,10 @@ func (x *Gradient) fastWriteField1(buf []byte) (offset int) {
 }
 
 func (x *Gradient) fastWriteField2(buf []byte) (offset int) {
-	if x.FullInterfaceId == "" {
+	if x.BaseInterfaceId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 2, x.GetFullInterfaceId())
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetBaseInterfaceId())
 	return offset
 }
 
@@ -1249,10 +1249,10 @@ func (x *Gradient) sizeField1() (n int) {
 }
 
 func (x *Gradient) sizeField2() (n int) {
-	if x.FullInterfaceId == "" {
+	if x.BaseInterfaceId == "" {
 		return n
 	}
-	n += fastpb.SizeString(2, x.GetFullInterfaceId())
+	n += fastpb.SizeString(2, x.GetBaseInterfaceId())
 	return n
 }
 
@@ -1426,7 +1426,7 @@ var fieldIDToName_Discount = map[int32]string{
 
 var fieldIDToName_Gradient = map[int32]string{
 	1: "Id",
-	2: "FullInterfaceId",
+	2: "BaseInterfaceId",
 	3: "Discounts",
 	4: "Status",
 	5: "CreateTime",
