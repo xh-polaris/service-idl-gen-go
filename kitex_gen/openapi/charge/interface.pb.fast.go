@@ -1074,7 +1074,7 @@ ReadFieldError:
 }
 
 func (x *CreateGradientReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.BaseInterfaceId, offset, err = fastpb.ReadString(buf, _type)
+	x.FullInterfaceId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -1234,7 +1234,7 @@ ReadFieldError:
 }
 
 func (x *GetGradientReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
-	x.BaseInterfaceId, offset, err = fastpb.ReadString(buf, _type)
+	x.FullInterfaceId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -2007,10 +2007,10 @@ func (x *CreateGradientReq) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *CreateGradientReq) fastWriteField1(buf []byte) (offset int) {
-	if x.BaseInterfaceId == "" {
+	if x.FullInterfaceId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetBaseInterfaceId())
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetFullInterfaceId())
 	return offset
 }
 
@@ -2119,10 +2119,10 @@ func (x *GetGradientReq) FastWrite(buf []byte) (offset int) {
 }
 
 func (x *GetGradientReq) fastWriteField1(buf []byte) (offset int) {
-	if x.BaseInterfaceId == "" {
+	if x.FullInterfaceId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 1, x.GetBaseInterfaceId())
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetFullInterfaceId())
 	return offset
 }
 
@@ -2881,10 +2881,10 @@ func (x *CreateGradientReq) Size() (n int) {
 }
 
 func (x *CreateGradientReq) sizeField1() (n int) {
-	if x.BaseInterfaceId == "" {
+	if x.FullInterfaceId == "" {
 		return n
 	}
-	n += fastpb.SizeString(1, x.GetBaseInterfaceId())
+	n += fastpb.SizeString(1, x.GetFullInterfaceId())
 	return n
 }
 
@@ -2993,10 +2993,10 @@ func (x *GetGradientReq) Size() (n int) {
 }
 
 func (x *GetGradientReq) sizeField1() (n int) {
-	if x.BaseInterfaceId == "" {
+	if x.FullInterfaceId == "" {
 		return n
 	}
-	n += fastpb.SizeString(1, x.GetBaseInterfaceId())
+	n += fastpb.SizeString(1, x.GetFullInterfaceId())
 	return n
 }
 
@@ -3146,7 +3146,7 @@ var fieldIDToName_GetOneFullInterfaceResp = map[int32]string{
 }
 
 var fieldIDToName_CreateGradientReq = map[int32]string{
-	1: "BaseInterfaceId",
+	1: "FullInterfaceId",
 	2: "Discounts",
 }
 
@@ -3167,7 +3167,7 @@ var fieldIDToName_UpdateGradientResp = map[int32]string{
 }
 
 var fieldIDToName_GetGradientReq = map[int32]string{
-	1: "BaseInterfaceId",
+	1: "FullInterfaceId",
 }
 
 var fieldIDToName_GetGradientResp = map[int32]string{
