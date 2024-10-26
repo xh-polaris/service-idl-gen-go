@@ -1150,11 +1150,6 @@ func (x *GetFullAndBaseInterfaceForCheckResp) FastRead(buf []byte, _type int8, n
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 8:
-		offset, err = x.fastReadField8(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -1199,11 +1194,6 @@ func (x *GetFullAndBaseInterfaceForCheckResp) fastReadField6(buf []byte, _type i
 }
 
 func (x *GetFullAndBaseInterfaceForCheckResp) fastReadField7(buf []byte, _type int8) (offset int, err error) {
-	x.Margin, offset, err = fastpb.ReadInt64(buf, _type)
-	return offset, err
-}
-
-func (x *GetFullAndBaseInterfaceForCheckResp) fastReadField8(buf []byte, _type int8) (offset int, err error) {
 	x.Status, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
@@ -2262,7 +2252,6 @@ func (x *GetFullAndBaseInterfaceForCheckResp) FastWrite(buf []byte) (offset int)
 	offset += x.fastWriteField5(buf[offset:])
 	offset += x.fastWriteField6(buf[offset:])
 	offset += x.fastWriteField7(buf[offset:])
-	offset += x.fastWriteField8(buf[offset:])
 	return offset
 }
 
@@ -2315,18 +2304,10 @@ func (x *GetFullAndBaseInterfaceForCheckResp) fastWriteField6(buf []byte) (offse
 }
 
 func (x *GetFullAndBaseInterfaceForCheckResp) fastWriteField7(buf []byte) (offset int) {
-	if x.Margin == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 7, x.GetMargin())
-	return offset
-}
-
-func (x *GetFullAndBaseInterfaceForCheckResp) fastWriteField8(buf []byte) (offset int) {
 	if x.Status == 0 {
 		return offset
 	}
-	offset += fastpb.WriteInt64(buf[offset:], 8, x.GetStatus())
+	offset += fastpb.WriteInt64(buf[offset:], 7, x.GetStatus())
 	return offset
 }
 
@@ -3286,7 +3267,6 @@ func (x *GetFullAndBaseInterfaceForCheckResp) Size() (n int) {
 	n += x.sizeField5()
 	n += x.sizeField6()
 	n += x.sizeField7()
-	n += x.sizeField8()
 	return n
 }
 
@@ -3339,18 +3319,10 @@ func (x *GetFullAndBaseInterfaceForCheckResp) sizeField6() (n int) {
 }
 
 func (x *GetFullAndBaseInterfaceForCheckResp) sizeField7() (n int) {
-	if x.Margin == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(7, x.GetMargin())
-	return n
-}
-
-func (x *GetFullAndBaseInterfaceForCheckResp) sizeField8() (n int) {
 	if x.Status == 0 {
 		return n
 	}
-	n += fastpb.SizeInt64(8, x.GetStatus())
+	n += fastpb.SizeInt64(7, x.GetStatus())
 	return n
 }
 
@@ -3678,8 +3650,7 @@ var fieldIDToName_GetFullAndBaseInterfaceForCheckResp = map[int32]string{
 	4: "UserId",
 	5: "ChargeType",
 	6: "Price",
-	7: "Margin",
-	8: "Status",
+	7: "Status",
 }
 
 var fieldIDToName_GetOneFullInterfaceReq = map[int32]string{
