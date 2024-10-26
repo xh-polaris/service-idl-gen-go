@@ -15,6 +15,11 @@ var (
 
 func (x *CreateLogReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	case 2:
 		offset, err = x.fastReadField2(buf, _type)
 		if err != nil {
@@ -61,6 +66,11 @@ SkipFieldError:
 	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
 ReadFieldError:
 	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CreateLogReq[number], err)
+}
+
+func (x *CreateLogReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.MarginId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
 }
 
 func (x *CreateLogReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
@@ -222,6 +232,7 @@ func (x *CreateLogReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
 	}
+	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
@@ -229,6 +240,14 @@ func (x *CreateLogReq) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField6(buf[offset:])
 	offset += x.fastWriteField7(buf[offset:])
 	offset += x.fastWriteField9(buf[offset:])
+	return offset
+}
+
+func (x *CreateLogReq) fastWriteField1(buf []byte) (offset int) {
+	if x.MarginId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetMarginId())
 	return offset
 }
 
@@ -369,6 +388,7 @@ func (x *CreateLogReq) Size() (n int) {
 	if x == nil {
 		return n
 	}
+	n += x.sizeField1()
 	n += x.sizeField2()
 	n += x.sizeField3()
 	n += x.sizeField4()
@@ -376,6 +396,14 @@ func (x *CreateLogReq) Size() (n int) {
 	n += x.sizeField6()
 	n += x.sizeField7()
 	n += x.sizeField9()
+	return n
+}
+
+func (x *CreateLogReq) sizeField1() (n int) {
+	if x.MarginId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetMarginId())
 	return n
 }
 
@@ -513,6 +541,7 @@ func (x *GetLogResp) sizeField2() (n int) {
 }
 
 var fieldIDToName_CreateLogReq = map[int32]string{
+	1: "MarginId",
 	2: "FullInterfaceId",
 	3: "UserId",
 	4: "KeyId",
