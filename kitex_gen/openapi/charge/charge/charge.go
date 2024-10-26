@@ -57,13 +57,6 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
-	"UpdateMargin": kitex.NewMethodInfo(
-		updateMarginHandler,
-		newUpdateMarginArgs,
-		newUpdateMarginResult,
-		false,
-		kitex.WithStreamingMode(kitex.StreamingUnary),
-	),
 	"DeleteFullInterface": kitex.NewMethodInfo(
 		deleteFullInterfaceHandler,
 		newDeleteFullInterfaceArgs,
@@ -82,6 +75,34 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		getOneFullInterfaceHandler,
 		newGetOneFullInterfaceArgs,
 		newGetOneFullInterfaceResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"CreateMargin": kitex.NewMethodInfo(
+		createMarginHandler,
+		newCreateMarginArgs,
+		newCreateMarginResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"UpdateMargin": kitex.NewMethodInfo(
+		updateMarginHandler,
+		newUpdateMarginArgs,
+		newUpdateMarginResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"GetMargin": kitex.NewMethodInfo(
+		getMarginHandler,
+		newGetMarginArgs,
+		newGetMarginResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"DeleteMargin": kitex.NewMethodInfo(
+		deleteMarginHandler,
+		newDeleteMarginArgs,
+		newDeleteMarginResult,
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
@@ -1111,159 +1132,6 @@ func (p *UpdateFullInterfaceResult) GetResult() interface{} {
 	return p.Success
 }
 
-func updateMarginHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
-	switch s := arg.(type) {
-	case *streaming.Args:
-		st := s.Stream
-		req := new(charge.UpdateMarginReq)
-		if err := st.RecvMsg(req); err != nil {
-			return err
-		}
-		resp, err := handler.(charge.Charge).UpdateMargin(ctx, req)
-		if err != nil {
-			return err
-		}
-		return st.SendMsg(resp)
-	case *UpdateMarginArgs:
-		success, err := handler.(charge.Charge).UpdateMargin(ctx, s.Req)
-		if err != nil {
-			return err
-		}
-		realResult := result.(*UpdateMarginResult)
-		realResult.Success = success
-		return nil
-	default:
-		return errInvalidMessageType
-	}
-}
-func newUpdateMarginArgs() interface{} {
-	return &UpdateMarginArgs{}
-}
-
-func newUpdateMarginResult() interface{} {
-	return &UpdateMarginResult{}
-}
-
-type UpdateMarginArgs struct {
-	Req *charge.UpdateMarginReq
-}
-
-func (p *UpdateMarginArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetReq() {
-		p.Req = new(charge.UpdateMarginReq)
-	}
-	return p.Req.FastRead(buf, _type, number)
-}
-
-func (p *UpdateMarginArgs) FastWrite(buf []byte) (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.FastWrite(buf)
-}
-
-func (p *UpdateMarginArgs) Size() (n int) {
-	if !p.IsSetReq() {
-		return 0
-	}
-	return p.Req.Size()
-}
-
-func (p *UpdateMarginArgs) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetReq() {
-		return out, nil
-	}
-	return proto.Marshal(p.Req)
-}
-
-func (p *UpdateMarginArgs) Unmarshal(in []byte) error {
-	msg := new(charge.UpdateMarginReq)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Req = msg
-	return nil
-}
-
-var UpdateMarginArgs_Req_DEFAULT *charge.UpdateMarginReq
-
-func (p *UpdateMarginArgs) GetReq() *charge.UpdateMarginReq {
-	if !p.IsSetReq() {
-		return UpdateMarginArgs_Req_DEFAULT
-	}
-	return p.Req
-}
-
-func (p *UpdateMarginArgs) IsSetReq() bool {
-	return p.Req != nil
-}
-
-func (p *UpdateMarginArgs) GetFirstArgument() interface{} {
-	return p.Req
-}
-
-type UpdateMarginResult struct {
-	Success *charge.UpdateMarginResp
-}
-
-var UpdateMarginResult_Success_DEFAULT *charge.UpdateMarginResp
-
-func (p *UpdateMarginResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
-	if !p.IsSetSuccess() {
-		p.Success = new(charge.UpdateMarginResp)
-	}
-	return p.Success.FastRead(buf, _type, number)
-}
-
-func (p *UpdateMarginResult) FastWrite(buf []byte) (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.FastWrite(buf)
-}
-
-func (p *UpdateMarginResult) Size() (n int) {
-	if !p.IsSetSuccess() {
-		return 0
-	}
-	return p.Success.Size()
-}
-
-func (p *UpdateMarginResult) Marshal(out []byte) ([]byte, error) {
-	if !p.IsSetSuccess() {
-		return out, nil
-	}
-	return proto.Marshal(p.Success)
-}
-
-func (p *UpdateMarginResult) Unmarshal(in []byte) error {
-	msg := new(charge.UpdateMarginResp)
-	if err := proto.Unmarshal(in, msg); err != nil {
-		return err
-	}
-	p.Success = msg
-	return nil
-}
-
-func (p *UpdateMarginResult) GetSuccess() *charge.UpdateMarginResp {
-	if !p.IsSetSuccess() {
-		return UpdateMarginResult_Success_DEFAULT
-	}
-	return p.Success
-}
-
-func (p *UpdateMarginResult) SetSuccess(x interface{}) {
-	p.Success = x.(*charge.UpdateMarginResp)
-}
-
-func (p *UpdateMarginResult) IsSetSuccess() bool {
-	return p.Success != nil
-}
-
-func (p *UpdateMarginResult) GetResult() interface{} {
-	return p.Success
-}
-
 func deleteFullInterfaceHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -1720,6 +1588,618 @@ func (p *GetOneFullInterfaceResult) IsSetSuccess() bool {
 }
 
 func (p *GetOneFullInterfaceResult) GetResult() interface{} {
+	return p.Success
+}
+
+func createMarginHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(charge.CreateMarginReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(charge.Charge).CreateMargin(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *CreateMarginArgs:
+		success, err := handler.(charge.Charge).CreateMargin(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*CreateMarginResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newCreateMarginArgs() interface{} {
+	return &CreateMarginArgs{}
+}
+
+func newCreateMarginResult() interface{} {
+	return &CreateMarginResult{}
+}
+
+type CreateMarginArgs struct {
+	Req *charge.CreateMarginReq
+}
+
+func (p *CreateMarginArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(charge.CreateMarginReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *CreateMarginArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *CreateMarginArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *CreateMarginArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *CreateMarginArgs) Unmarshal(in []byte) error {
+	msg := new(charge.CreateMarginReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var CreateMarginArgs_Req_DEFAULT *charge.CreateMarginReq
+
+func (p *CreateMarginArgs) GetReq() *charge.CreateMarginReq {
+	if !p.IsSetReq() {
+		return CreateMarginArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *CreateMarginArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *CreateMarginArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type CreateMarginResult struct {
+	Success *charge.CreateMarginResp
+}
+
+var CreateMarginResult_Success_DEFAULT *charge.CreateMarginResp
+
+func (p *CreateMarginResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(charge.CreateMarginResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *CreateMarginResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *CreateMarginResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *CreateMarginResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *CreateMarginResult) Unmarshal(in []byte) error {
+	msg := new(charge.CreateMarginResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *CreateMarginResult) GetSuccess() *charge.CreateMarginResp {
+	if !p.IsSetSuccess() {
+		return CreateMarginResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *CreateMarginResult) SetSuccess(x interface{}) {
+	p.Success = x.(*charge.CreateMarginResp)
+}
+
+func (p *CreateMarginResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *CreateMarginResult) GetResult() interface{} {
+	return p.Success
+}
+
+func updateMarginHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(charge.UpdateMarginReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(charge.Charge).UpdateMargin(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *UpdateMarginArgs:
+		success, err := handler.(charge.Charge).UpdateMargin(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*UpdateMarginResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newUpdateMarginArgs() interface{} {
+	return &UpdateMarginArgs{}
+}
+
+func newUpdateMarginResult() interface{} {
+	return &UpdateMarginResult{}
+}
+
+type UpdateMarginArgs struct {
+	Req *charge.UpdateMarginReq
+}
+
+func (p *UpdateMarginArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(charge.UpdateMarginReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *UpdateMarginArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *UpdateMarginArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *UpdateMarginArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *UpdateMarginArgs) Unmarshal(in []byte) error {
+	msg := new(charge.UpdateMarginReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var UpdateMarginArgs_Req_DEFAULT *charge.UpdateMarginReq
+
+func (p *UpdateMarginArgs) GetReq() *charge.UpdateMarginReq {
+	if !p.IsSetReq() {
+		return UpdateMarginArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *UpdateMarginArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *UpdateMarginArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type UpdateMarginResult struct {
+	Success *charge.UpdateMarginResp
+}
+
+var UpdateMarginResult_Success_DEFAULT *charge.UpdateMarginResp
+
+func (p *UpdateMarginResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(charge.UpdateMarginResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *UpdateMarginResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *UpdateMarginResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *UpdateMarginResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *UpdateMarginResult) Unmarshal(in []byte) error {
+	msg := new(charge.UpdateMarginResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *UpdateMarginResult) GetSuccess() *charge.UpdateMarginResp {
+	if !p.IsSetSuccess() {
+		return UpdateMarginResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *UpdateMarginResult) SetSuccess(x interface{}) {
+	p.Success = x.(*charge.UpdateMarginResp)
+}
+
+func (p *UpdateMarginResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *UpdateMarginResult) GetResult() interface{} {
+	return p.Success
+}
+
+func getMarginHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(charge.GetMarginReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(charge.Charge).GetMargin(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *GetMarginArgs:
+		success, err := handler.(charge.Charge).GetMargin(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetMarginResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newGetMarginArgs() interface{} {
+	return &GetMarginArgs{}
+}
+
+func newGetMarginResult() interface{} {
+	return &GetMarginResult{}
+}
+
+type GetMarginArgs struct {
+	Req *charge.GetMarginReq
+}
+
+func (p *GetMarginArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(charge.GetMarginReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetMarginArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetMarginArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetMarginArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetMarginArgs) Unmarshal(in []byte) error {
+	msg := new(charge.GetMarginReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetMarginArgs_Req_DEFAULT *charge.GetMarginReq
+
+func (p *GetMarginArgs) GetReq() *charge.GetMarginReq {
+	if !p.IsSetReq() {
+		return GetMarginArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetMarginArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetMarginArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetMarginResult struct {
+	Success *charge.GetMarginResp
+}
+
+var GetMarginResult_Success_DEFAULT *charge.GetMarginResp
+
+func (p *GetMarginResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(charge.GetMarginResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetMarginResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetMarginResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetMarginResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetMarginResult) Unmarshal(in []byte) error {
+	msg := new(charge.GetMarginResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetMarginResult) GetSuccess() *charge.GetMarginResp {
+	if !p.IsSetSuccess() {
+		return GetMarginResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetMarginResult) SetSuccess(x interface{}) {
+	p.Success = x.(*charge.GetMarginResp)
+}
+
+func (p *GetMarginResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetMarginResult) GetResult() interface{} {
+	return p.Success
+}
+
+func deleteMarginHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(charge.DeleteMarginReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(charge.Charge).DeleteMargin(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *DeleteMarginArgs:
+		success, err := handler.(charge.Charge).DeleteMargin(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*DeleteMarginResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newDeleteMarginArgs() interface{} {
+	return &DeleteMarginArgs{}
+}
+
+func newDeleteMarginResult() interface{} {
+	return &DeleteMarginResult{}
+}
+
+type DeleteMarginArgs struct {
+	Req *charge.DeleteMarginReq
+}
+
+func (p *DeleteMarginArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(charge.DeleteMarginReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *DeleteMarginArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *DeleteMarginArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *DeleteMarginArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *DeleteMarginArgs) Unmarshal(in []byte) error {
+	msg := new(charge.DeleteMarginReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var DeleteMarginArgs_Req_DEFAULT *charge.DeleteMarginReq
+
+func (p *DeleteMarginArgs) GetReq() *charge.DeleteMarginReq {
+	if !p.IsSetReq() {
+		return DeleteMarginArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *DeleteMarginArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *DeleteMarginArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type DeleteMarginResult struct {
+	Success *charge.DeleteMarginResp
+}
+
+var DeleteMarginResult_Success_DEFAULT *charge.DeleteMarginResp
+
+func (p *DeleteMarginResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(charge.DeleteMarginResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *DeleteMarginResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *DeleteMarginResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *DeleteMarginResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *DeleteMarginResult) Unmarshal(in []byte) error {
+	msg := new(charge.DeleteMarginResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *DeleteMarginResult) GetSuccess() *charge.DeleteMarginResp {
+	if !p.IsSetSuccess() {
+		return DeleteMarginResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *DeleteMarginResult) SetSuccess(x interface{}) {
+	p.Success = x.(*charge.DeleteMarginResp)
+}
+
+func (p *DeleteMarginResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *DeleteMarginResult) GetResult() interface{} {
 	return p.Success
 }
 
@@ -2711,16 +3191,6 @@ func (p *kClient) UpdateFullInterface(ctx context.Context, Req *charge.UpdateFul
 	return _result.GetSuccess(), nil
 }
 
-func (p *kClient) UpdateMargin(ctx context.Context, Req *charge.UpdateMarginReq) (r *charge.UpdateMarginResp, err error) {
-	var _args UpdateMarginArgs
-	_args.Req = Req
-	var _result UpdateMarginResult
-	if err = p.c.Call(ctx, "UpdateMargin", &_args, &_result); err != nil {
-		return
-	}
-	return _result.GetSuccess(), nil
-}
-
 func (p *kClient) DeleteFullInterface(ctx context.Context, Req *charge.DeleteFullInterfaceReq) (r *charge.DeleteFullInterfaceResp, err error) {
 	var _args DeleteFullInterfaceArgs
 	_args.Req = Req
@@ -2746,6 +3216,46 @@ func (p *kClient) GetOneFullInterface(ctx context.Context, Req *charge.GetOneFul
 	_args.Req = Req
 	var _result GetOneFullInterfaceResult
 	if err = p.c.Call(ctx, "GetOneFullInterface", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) CreateMargin(ctx context.Context, Req *charge.CreateMarginReq) (r *charge.CreateMarginResp, err error) {
+	var _args CreateMarginArgs
+	_args.Req = Req
+	var _result CreateMarginResult
+	if err = p.c.Call(ctx, "CreateMargin", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) UpdateMargin(ctx context.Context, Req *charge.UpdateMarginReq) (r *charge.UpdateMarginResp, err error) {
+	var _args UpdateMarginArgs
+	_args.Req = Req
+	var _result UpdateMarginResult
+	if err = p.c.Call(ctx, "UpdateMargin", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetMargin(ctx context.Context, Req *charge.GetMarginReq) (r *charge.GetMarginResp, err error) {
+	var _args GetMarginArgs
+	_args.Req = Req
+	var _result GetMarginResult
+	if err = p.c.Call(ctx, "GetMargin", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) DeleteMargin(ctx context.Context, Req *charge.DeleteMarginReq) (r *charge.DeleteMarginResp, err error) {
+	var _args DeleteMarginArgs
+	_args.Req = Req
+	var _result DeleteMarginResult
+	if err = p.c.Call(ctx, "DeleteMargin", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

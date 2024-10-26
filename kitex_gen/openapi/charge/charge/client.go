@@ -17,10 +17,13 @@ type Client interface {
 	GetBaseInterface(ctx context.Context, Req *charge.GetBaseInterfaceReq, callOptions ...callopt.Option) (r *charge.GetBaseInterfaceResp, err error)
 	CreateFullInterface(ctx context.Context, Req *charge.CreateFullInterfaceReq, callOptions ...callopt.Option) (r *charge.CreateFullInterfaceResp, err error)
 	UpdateFullInterface(ctx context.Context, Req *charge.UpdateFullInterfaceReq, callOptions ...callopt.Option) (r *charge.UpdateFullInterfaceResp, err error)
-	UpdateMargin(ctx context.Context, Req *charge.UpdateMarginReq, callOptions ...callopt.Option) (r *charge.UpdateMarginResp, err error)
 	DeleteFullInterface(ctx context.Context, Req *charge.DeleteFullInterfaceReq, callOptions ...callopt.Option) (r *charge.DeleteFullInterfaceResp, err error)
 	GetFullInterface(ctx context.Context, Req *charge.GetFullInterfaceReq, callOptions ...callopt.Option) (r *charge.GetFullInterfaceResp, err error)
 	GetOneFullInterface(ctx context.Context, Req *charge.GetOneFullInterfaceReq, callOptions ...callopt.Option) (r *charge.GetOneFullInterfaceResp, err error)
+	CreateMargin(ctx context.Context, Req *charge.CreateMarginReq, callOptions ...callopt.Option) (r *charge.CreateMarginResp, err error)
+	UpdateMargin(ctx context.Context, Req *charge.UpdateMarginReq, callOptions ...callopt.Option) (r *charge.UpdateMarginResp, err error)
+	GetMargin(ctx context.Context, Req *charge.GetMarginReq, callOptions ...callopt.Option) (r *charge.GetMarginResp, err error)
+	DeleteMargin(ctx context.Context, Req *charge.DeleteMarginReq, callOptions ...callopt.Option) (r *charge.DeleteMarginResp, err error)
 	GetFullAndBaseInterfaceForCheck(ctx context.Context, Req *charge.GetFullAndBaseInterfaceForCheckReq, callOptions ...callopt.Option) (r *charge.GetFullAndBaseInterfaceForCheckResp, err error)
 	CreateGradient(ctx context.Context, Req *charge.CreateGradientReq, callOptions ...callopt.Option) (r *charge.CreateGradientResp, err error)
 	UpdateGradient(ctx context.Context, Req *charge.UpdateGradientReq, callOptions ...callopt.Option) (r *charge.UpdateGradientResp, err error)
@@ -88,11 +91,6 @@ func (p *kChargeClient) UpdateFullInterface(ctx context.Context, Req *charge.Upd
 	return p.kClient.UpdateFullInterface(ctx, Req)
 }
 
-func (p *kChargeClient) UpdateMargin(ctx context.Context, Req *charge.UpdateMarginReq, callOptions ...callopt.Option) (r *charge.UpdateMarginResp, err error) {
-	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
-	return p.kClient.UpdateMargin(ctx, Req)
-}
-
 func (p *kChargeClient) DeleteFullInterface(ctx context.Context, Req *charge.DeleteFullInterfaceReq, callOptions ...callopt.Option) (r *charge.DeleteFullInterfaceResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.DeleteFullInterface(ctx, Req)
@@ -106,6 +104,26 @@ func (p *kChargeClient) GetFullInterface(ctx context.Context, Req *charge.GetFul
 func (p *kChargeClient) GetOneFullInterface(ctx context.Context, Req *charge.GetOneFullInterfaceReq, callOptions ...callopt.Option) (r *charge.GetOneFullInterfaceResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.GetOneFullInterface(ctx, Req)
+}
+
+func (p *kChargeClient) CreateMargin(ctx context.Context, Req *charge.CreateMarginReq, callOptions ...callopt.Option) (r *charge.CreateMarginResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.CreateMargin(ctx, Req)
+}
+
+func (p *kChargeClient) UpdateMargin(ctx context.Context, Req *charge.UpdateMarginReq, callOptions ...callopt.Option) (r *charge.UpdateMarginResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.UpdateMargin(ctx, Req)
+}
+
+func (p *kChargeClient) GetMargin(ctx context.Context, Req *charge.GetMarginReq, callOptions ...callopt.Option) (r *charge.GetMarginResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetMargin(ctx, Req)
+}
+
+func (p *kChargeClient) DeleteMargin(ctx context.Context, Req *charge.DeleteMarginReq, callOptions ...callopt.Option) (r *charge.DeleteMarginResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.DeleteMargin(ctx, Req)
 }
 
 func (p *kChargeClient) GetFullAndBaseInterfaceForCheck(ctx context.Context, Req *charge.GetFullAndBaseInterfaceForCheckReq, callOptions ...callopt.Option) (r *charge.GetFullAndBaseInterfaceForCheckResp, err error) {

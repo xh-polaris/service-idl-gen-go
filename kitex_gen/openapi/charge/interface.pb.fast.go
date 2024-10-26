@@ -460,11 +460,6 @@ func (x *CreateFullInterfaceReq) FastRead(buf []byte, _type int8, number int32) 
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 5:
-		offset, err = x.fastReadField5(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -500,11 +495,6 @@ func (x *CreateFullInterfaceReq) fastReadField3(buf []byte, _type int8) (offset 
 
 func (x *CreateFullInterfaceReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 	x.Price, offset, err = fastpb.ReadInt64(buf, _type)
-	return offset, err
-}
-
-func (x *CreateFullInterfaceReq) fastReadField5(buf []byte, _type int8) (offset int, err error) {
-	x.Margin, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -653,6 +643,86 @@ func (x *UpdateFullInterfaceResp) fastReadField2(buf []byte, _type int8) (offset
 	return offset, err
 }
 
+func (x *CreateMarginReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CreateMarginReq[number], err)
+}
+
+func (x *CreateMarginReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *CreateMarginReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.FullInterfaceId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *CreateMarginReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.Margin, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *CreateMarginResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_CreateMarginResp[number], err)
+}
+
+func (x *CreateMarginResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Done, offset, err = fastpb.ReadBool(buf, _type)
+	return offset, err
+}
+
+func (x *CreateMarginResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Msg, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
 func (x *UpdateMarginReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -721,6 +791,131 @@ func (x *UpdateMarginResp) fastReadField1(buf []byte, _type int8) (offset int, e
 func (x *UpdateMarginResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Msg, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
+}
+
+func (x *DeleteMarginReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DeleteMarginReq[number], err)
+}
+
+func (x *DeleteMarginReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *DeleteMarginResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DeleteMarginResp[number], err)
+}
+
+func (x *DeleteMarginResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Done, offset, err = fastpb.ReadBool(buf, _type)
+	return offset, err
+}
+
+func (x *DeleteMarginResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Msg, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetMarginReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetMarginReq[number], err)
+}
+
+func (x *GetMarginReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetMarginReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.FullInterfaceId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetMarginResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetMarginResp[number], err)
+}
+
+func (x *GetMarginResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v Margin
+	offset, err = fastpb.ReadMessage(buf, _type, &v)
+	if err != nil {
+		return offset, err
+	}
+	x.Margin = &v
+	return offset, nil
 }
 
 func (x *DeleteFullInterfaceReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -1582,7 +1777,6 @@ func (x *CreateFullInterfaceReq) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
-	offset += x.fastWriteField5(buf[offset:])
 	return offset
 }
 
@@ -1615,14 +1809,6 @@ func (x *CreateFullInterfaceReq) fastWriteField4(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 4, x.GetPrice())
-	return offset
-}
-
-func (x *CreateFullInterfaceReq) fastWriteField5(buf []byte) (offset int) {
-	if x.Margin == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 5, x.GetMargin())
 	return offset
 }
 
@@ -1728,6 +1914,65 @@ func (x *UpdateFullInterfaceResp) fastWriteField2(buf []byte) (offset int) {
 	return offset
 }
 
+func (x *CreateMarginReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
+	return offset
+}
+
+func (x *CreateMarginReq) fastWriteField1(buf []byte) (offset int) {
+	if x.UserId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
+	return offset
+}
+
+func (x *CreateMarginReq) fastWriteField2(buf []byte) (offset int) {
+	if x.FullInterfaceId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetFullInterfaceId())
+	return offset
+}
+
+func (x *CreateMarginReq) fastWriteField3(buf []byte) (offset int) {
+	if x.Margin == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetMargin())
+	return offset
+}
+
+func (x *CreateMarginResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *CreateMarginResp) fastWriteField1(buf []byte) (offset int) {
+	if !x.Done {
+		return offset
+	}
+	offset += fastpb.WriteBool(buf[offset:], 1, x.GetDone())
+	return offset
+}
+
+func (x *CreateMarginResp) fastWriteField2(buf []byte) (offset int) {
+	if x.Msg == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetMsg())
+	return offset
+}
+
 func (x *UpdateMarginReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -1775,6 +2020,88 @@ func (x *UpdateMarginResp) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 2, x.GetMsg())
+	return offset
+}
+
+func (x *DeleteMarginReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *DeleteMarginReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Id == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
+	return offset
+}
+
+func (x *DeleteMarginResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *DeleteMarginResp) fastWriteField1(buf []byte) (offset int) {
+	if !x.Done {
+		return offset
+	}
+	offset += fastpb.WriteBool(buf[offset:], 1, x.GetDone())
+	return offset
+}
+
+func (x *DeleteMarginResp) fastWriteField2(buf []byte) (offset int) {
+	if x.Msg == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetMsg())
+	return offset
+}
+
+func (x *GetMarginReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *GetMarginReq) fastWriteField1(buf []byte) (offset int) {
+	if x.UserId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUserId())
+	return offset
+}
+
+func (x *GetMarginReq) fastWriteField2(buf []byte) (offset int) {
+	if x.FullInterfaceId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetFullInterfaceId())
+	return offset
+}
+
+func (x *GetMarginResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *GetMarginResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Margin == nil {
+		return offset
+	}
+	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetMargin())
 	return offset
 }
 
@@ -2465,7 +2792,6 @@ func (x *CreateFullInterfaceReq) Size() (n int) {
 	n += x.sizeField2()
 	n += x.sizeField3()
 	n += x.sizeField4()
-	n += x.sizeField5()
 	return n
 }
 
@@ -2498,14 +2824,6 @@ func (x *CreateFullInterfaceReq) sizeField4() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(4, x.GetPrice())
-	return n
-}
-
-func (x *CreateFullInterfaceReq) sizeField5() (n int) {
-	if x.Margin == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(5, x.GetMargin())
 	return n
 }
 
@@ -2611,6 +2929,65 @@ func (x *UpdateFullInterfaceResp) sizeField2() (n int) {
 	return n
 }
 
+func (x *CreateMarginReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	n += x.sizeField3()
+	return n
+}
+
+func (x *CreateMarginReq) sizeField1() (n int) {
+	if x.UserId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetUserId())
+	return n
+}
+
+func (x *CreateMarginReq) sizeField2() (n int) {
+	if x.FullInterfaceId == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetFullInterfaceId())
+	return n
+}
+
+func (x *CreateMarginReq) sizeField3() (n int) {
+	if x.Margin == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(3, x.GetMargin())
+	return n
+}
+
+func (x *CreateMarginResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *CreateMarginResp) sizeField1() (n int) {
+	if !x.Done {
+		return n
+	}
+	n += fastpb.SizeBool(1, x.GetDone())
+	return n
+}
+
+func (x *CreateMarginResp) sizeField2() (n int) {
+	if x.Msg == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetMsg())
+	return n
+}
+
 func (x *UpdateMarginReq) Size() (n int) {
 	if x == nil {
 		return n
@@ -2658,6 +3035,88 @@ func (x *UpdateMarginResp) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(2, x.GetMsg())
+	return n
+}
+
+func (x *DeleteMarginReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *DeleteMarginReq) sizeField1() (n int) {
+	if x.Id == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetId())
+	return n
+}
+
+func (x *DeleteMarginResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *DeleteMarginResp) sizeField1() (n int) {
+	if !x.Done {
+		return n
+	}
+	n += fastpb.SizeBool(1, x.GetDone())
+	return n
+}
+
+func (x *DeleteMarginResp) sizeField2() (n int) {
+	if x.Msg == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetMsg())
+	return n
+}
+
+func (x *GetMarginReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *GetMarginReq) sizeField1() (n int) {
+	if x.UserId == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetUserId())
+	return n
+}
+
+func (x *GetMarginReq) sizeField2() (n int) {
+	if x.FullInterfaceId == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetFullInterfaceId())
+	return n
+}
+
+func (x *GetMarginResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *GetMarginResp) sizeField1() (n int) {
+	if x.Margin == nil {
+		return n
+	}
+	n += fastpb.SizeMessage(1, x.GetMargin())
 	return n
 }
 
@@ -3099,7 +3558,6 @@ var fieldIDToName_CreateFullInterfaceReq = map[int32]string{
 	2: "UserId",
 	3: "ChargeType",
 	4: "Price",
-	5: "Margin",
 }
 
 var fieldIDToName_CreateFullInterfaceResp = map[int32]string{
@@ -3120,6 +3578,17 @@ var fieldIDToName_UpdateFullInterfaceResp = map[int32]string{
 	2: "Msg",
 }
 
+var fieldIDToName_CreateMarginReq = map[int32]string{
+	1: "UserId",
+	2: "FullInterfaceId",
+	3: "Margin",
+}
+
+var fieldIDToName_CreateMarginResp = map[int32]string{
+	1: "Done",
+	2: "Msg",
+}
+
 var fieldIDToName_UpdateMarginReq = map[int32]string{
 	1: "Id",
 	2: "Increment",
@@ -3128,6 +3597,24 @@ var fieldIDToName_UpdateMarginReq = map[int32]string{
 var fieldIDToName_UpdateMarginResp = map[int32]string{
 	1: "Done",
 	2: "Msg",
+}
+
+var fieldIDToName_DeleteMarginReq = map[int32]string{
+	1: "Id",
+}
+
+var fieldIDToName_DeleteMarginResp = map[int32]string{
+	1: "Done",
+	2: "Msg",
+}
+
+var fieldIDToName_GetMarginReq = map[int32]string{
+	1: "UserId",
+	2: "FullInterfaceId",
+}
+
+var fieldIDToName_GetMarginResp = map[int32]string{
+	1: "Margin",
 }
 
 var fieldIDToName_DeleteFullInterfaceReq = map[int32]string{
