@@ -700,6 +700,11 @@ func (x *CreateMarginResp) FastRead(buf []byte, _type int8, number int32) (offse
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -720,6 +725,11 @@ func (x *CreateMarginResp) fastReadField1(buf []byte, _type int8) (offset int, e
 
 func (x *CreateMarginResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Msg, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *CreateMarginResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.MarginId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -1954,6 +1964,7 @@ func (x *CreateMarginResp) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
@@ -1970,6 +1981,14 @@ func (x *CreateMarginResp) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 2, x.GetMsg())
+	return offset
+}
+
+func (x *CreateMarginResp) fastWriteField3(buf []byte) (offset int) {
+	if x.MarginId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetMarginId())
 	return offset
 }
 
@@ -2969,6 +2988,7 @@ func (x *CreateMarginResp) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
@@ -2985,6 +3005,14 @@ func (x *CreateMarginResp) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(2, x.GetMsg())
+	return n
+}
+
+func (x *CreateMarginResp) sizeField3() (n int) {
+	if x.MarginId == "" {
+		return n
+	}
+	n += fastpb.SizeString(3, x.GetMarginId())
 	return n
 }
 
@@ -3587,6 +3615,7 @@ var fieldIDToName_CreateMarginReq = map[int32]string{
 var fieldIDToName_CreateMarginResp = map[int32]string{
 	1: "Done",
 	2: "Msg",
+	3: "MarginId",
 }
 
 var fieldIDToName_UpdateMarginReq = map[int32]string{

@@ -978,11 +978,6 @@ func (x *CreateFullInterfaceReq) FastRead(buf []byte, _type int8, number int32) 
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 5:
-		offset, err = x.fastReadField5(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -1018,11 +1013,6 @@ func (x *CreateFullInterfaceReq) fastReadField3(buf []byte, _type int8) (offset 
 
 func (x *CreateFullInterfaceReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 	x.Price, offset, err = fastpb.ReadInt64(buf, _type)
-	return offset, err
-}
-
-func (x *CreateFullInterfaceReq) fastReadField5(buf []byte, _type int8) (offset int, err error) {
-	x.Margin, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -2308,7 +2298,6 @@ func (x *CreateFullInterfaceReq) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
-	offset += x.fastWriteField5(buf[offset:])
 	return offset
 }
 
@@ -2341,14 +2330,6 @@ func (x *CreateFullInterfaceReq) fastWriteField4(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 4, x.GetPrice())
-	return offset
-}
-
-func (x *CreateFullInterfaceReq) fastWriteField5(buf []byte) (offset int) {
-	if x.Margin == 0 {
-		return offset
-	}
-	offset += fastpb.WriteInt64(buf[offset:], 5, x.GetMargin())
 	return offset
 }
 
@@ -3437,7 +3418,6 @@ func (x *CreateFullInterfaceReq) Size() (n int) {
 	n += x.sizeField2()
 	n += x.sizeField3()
 	n += x.sizeField4()
-	n += x.sizeField5()
 	return n
 }
 
@@ -3470,14 +3450,6 @@ func (x *CreateFullInterfaceReq) sizeField4() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(4, x.GetPrice())
-	return n
-}
-
-func (x *CreateFullInterfaceReq) sizeField5() (n int) {
-	if x.Margin == 0 {
-		return n
-	}
-	n += fastpb.SizeInt64(5, x.GetMargin())
 	return n
 }
 
@@ -4026,7 +3998,6 @@ var fieldIDToName_CreateFullInterfaceReq = map[int32]string{
 	2: "UserId",
 	3: "ChargeType",
 	4: "Price",
-	5: "Margin",
 }
 
 var fieldIDToName_UpdateFullInterfaceReq = map[int32]string{
