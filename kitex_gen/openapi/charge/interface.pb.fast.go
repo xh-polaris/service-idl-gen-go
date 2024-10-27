@@ -1085,6 +1085,11 @@ func (x *GetFullAndBaseInterfaceForCheckReq) FastRead(buf []byte, _type int8, nu
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 4:
+		offset, err = x.fastReadField4(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -1110,6 +1115,11 @@ func (x *GetFullAndBaseInterfaceForCheckReq) fastReadField2(buf []byte, _type in
 
 func (x *GetFullAndBaseInterfaceForCheckReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	x.UserId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetFullAndBaseInterfaceForCheckReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+	x.Role, offset, err = fastpb.ReadInt64(buf, _type)
 	return offset, err
 }
 
@@ -2214,6 +2224,7 @@ func (x *GetFullAndBaseInterfaceForCheckReq) FastWrite(buf []byte) (offset int) 
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField4(buf[offset:])
 	return offset
 }
 
@@ -2238,6 +2249,14 @@ func (x *GetFullAndBaseInterfaceForCheckReq) fastWriteField3(buf []byte) (offset
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 3, x.GetUserId())
+	return offset
+}
+
+func (x *GetFullAndBaseInterfaceForCheckReq) fastWriteField4(buf []byte) (offset int) {
+	if x.Role == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 4, x.GetRole())
 	return offset
 }
 
@@ -3229,6 +3248,7 @@ func (x *GetFullAndBaseInterfaceForCheckReq) Size() (n int) {
 	n += x.sizeField1()
 	n += x.sizeField2()
 	n += x.sizeField3()
+	n += x.sizeField4()
 	return n
 }
 
@@ -3253,6 +3273,14 @@ func (x *GetFullAndBaseInterfaceForCheckReq) sizeField3() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(3, x.GetUserId())
+	return n
+}
+
+func (x *GetFullAndBaseInterfaceForCheckReq) sizeField4() (n int) {
+	if x.Role == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(4, x.GetRole())
 	return n
 }
 
@@ -3641,6 +3669,7 @@ var fieldIDToName_GetFullAndBaseInterfaceForCheckReq = map[int32]string{
 	1: "Url",
 	2: "Method",
 	3: "UserId",
+	4: "Role",
 }
 
 var fieldIDToName_GetFullAndBaseInterfaceForCheckResp = map[int32]string{
