@@ -819,6 +819,11 @@ func (x *GetKeyForCheckResp) FastRead(buf []byte, _type int8, number int32) (off
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 5:
+		offset, err = x.fastReadField5(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -850,6 +855,16 @@ func (x *GetKeyForCheckResp) fastReadField3(buf []byte, _type int8) (offset int,
 func (x *GetKeyForCheckResp) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 	x.Msg, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
+}
+
+func (x *GetKeyForCheckResp) fastReadField5(buf []byte, _type int8) (offset int, err error) {
+	var v int32
+	v, offset, err = fastpb.ReadInt32(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.Role = Role(v)
+	return offset, nil
 }
 
 func (x *SignUpReq) FastWrite(buf []byte) (offset int) {
@@ -1404,6 +1419,7 @@ func (x *GetKeyForCheckResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
 	offset += x.fastWriteField4(buf[offset:])
+	offset += x.fastWriteField5(buf[offset:])
 	return offset
 }
 
@@ -1436,6 +1452,14 @@ func (x *GetKeyForCheckResp) fastWriteField4(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteString(buf[offset:], 4, x.GetMsg())
+	return offset
+}
+
+func (x *GetKeyForCheckResp) fastWriteField5(buf []byte) (offset int) {
+	if x.Role == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt32(buf[offset:], 5, int32(x.GetRole()))
 	return offset
 }
 
@@ -1991,6 +2015,7 @@ func (x *GetKeyForCheckResp) Size() (n int) {
 	n += x.sizeField2()
 	n += x.sizeField3()
 	n += x.sizeField4()
+	n += x.sizeField5()
 	return n
 }
 
@@ -2023,6 +2048,14 @@ func (x *GetKeyForCheckResp) sizeField4() (n int) {
 		return n
 	}
 	n += fastpb.SizeString(4, x.GetMsg())
+	return n
+}
+
+func (x *GetKeyForCheckResp) sizeField5() (n int) {
+	if x.Role == 0 {
+		return n
+	}
+	n += fastpb.SizeInt32(5, int32(x.GetRole()))
 	return n
 }
 
@@ -2133,6 +2166,7 @@ var fieldIDToName_GetKeyForCheckResp = map[int32]string{
 	2: "UserId",
 	3: "Check",
 	4: "Msg",
+	5: "Role",
 }
 
 var _ = basic.File_basic_pagination_proto
