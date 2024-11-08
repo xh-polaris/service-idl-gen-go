@@ -1547,7 +1547,7 @@ func (x *CallInterfaceReq) fastReadField2(buf []byte, _type int8) (offset int, e
 }
 
 func (x *CallInterfaceReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.Url, offset, err = fastpb.ReadString(buf, _type)
+	x.Action, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -2679,10 +2679,10 @@ func (x *CallInterfaceReq) fastWriteField2(buf []byte) (offset int) {
 }
 
 func (x *CallInterfaceReq) fastWriteField3(buf []byte) (offset int) {
-	if x.Url == "" {
+	if x.Action == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetUrl())
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetAction())
 	return offset
 }
 
@@ -3799,10 +3799,10 @@ func (x *CallInterfaceReq) sizeField2() (n int) {
 }
 
 func (x *CallInterfaceReq) sizeField3() (n int) {
-	if x.Url == "" {
+	if x.Action == "" {
 		return n
 	}
-	n += fastpb.SizeString(3, x.GetUrl())
+	n += fastpb.SizeString(3, x.GetAction())
 	return n
 }
 
@@ -4064,7 +4064,7 @@ var fieldIDToName_GetLogResp = map[int32]string{
 var fieldIDToName_CallInterfaceReq = map[int32]string{
 	1: "Key",
 	2: "Method",
-	3: "Url",
+	3: "Action",
 	5: "Timestamp",
 	6: "Params",
 }
