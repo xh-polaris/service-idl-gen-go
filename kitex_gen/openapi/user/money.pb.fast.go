@@ -25,6 +25,11 @@ func (x *SetRemainReq) FastRead(buf []byte, _type int8, number int32) (offset in
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -45,6 +50,12 @@ func (x *SetRemainReq) fastReadField1(buf []byte, _type int8) (offset int, err e
 
 func (x *SetRemainReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Increment, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *SetRemainReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.TxId = &tmp
 	return offset, err
 }
 
@@ -89,6 +100,7 @@ func (x *SetRemainReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
@@ -105,6 +117,14 @@ func (x *SetRemainReq) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetIncrement())
+	return offset
+}
+
+func (x *SetRemainReq) fastWriteField3(buf []byte) (offset int) {
+	if x.TxId == nil {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetTxId())
 	return offset
 }
 
@@ -139,6 +159,7 @@ func (x *SetRemainReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
@@ -155,6 +176,14 @@ func (x *SetRemainReq) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(2, x.GetIncrement())
+	return n
+}
+
+func (x *SetRemainReq) sizeField3() (n int) {
+	if x.TxId == nil {
+		return n
+	}
+	n += fastpb.SizeString(3, x.GetTxId())
 	return n
 }
 
@@ -186,6 +215,7 @@ func (x *SetRemainResp) sizeField2() (n int) {
 var fieldIDToName_SetRemainReq = map[int32]string{
 	1: "UserId",
 	2: "Increment",
+	3: "TxId",
 }
 
 var fieldIDToName_SetRemainResp = map[int32]string{
