@@ -148,6 +148,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"GetAccountByTxId": kitex.NewMethodInfo(
+		getAccountByTxIdHandler,
+		newGetAccountByTxIdArgs,
+		newGetAccountByTxIdResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 }
 
 var (
@@ -3121,6 +3128,159 @@ func (p *GetLogResult) GetResult() interface{} {
 	return p.Success
 }
 
+func getAccountByTxIdHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(charge.GetAccountByTxIdReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(charge.Charge).GetAccountByTxId(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *GetAccountByTxIdArgs:
+		success, err := handler.(charge.Charge).GetAccountByTxId(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetAccountByTxIdResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newGetAccountByTxIdArgs() interface{} {
+	return &GetAccountByTxIdArgs{}
+}
+
+func newGetAccountByTxIdResult() interface{} {
+	return &GetAccountByTxIdResult{}
+}
+
+type GetAccountByTxIdArgs struct {
+	Req *charge.GetAccountByTxIdReq
+}
+
+func (p *GetAccountByTxIdArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(charge.GetAccountByTxIdReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetAccountByTxIdArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetAccountByTxIdArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetAccountByTxIdArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetAccountByTxIdArgs) Unmarshal(in []byte) error {
+	msg := new(charge.GetAccountByTxIdReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetAccountByTxIdArgs_Req_DEFAULT *charge.GetAccountByTxIdReq
+
+func (p *GetAccountByTxIdArgs) GetReq() *charge.GetAccountByTxIdReq {
+	if !p.IsSetReq() {
+		return GetAccountByTxIdArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetAccountByTxIdArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetAccountByTxIdArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetAccountByTxIdResult struct {
+	Success *charge.GetAccountByTxIdResp
+}
+
+var GetAccountByTxIdResult_Success_DEFAULT *charge.GetAccountByTxIdResp
+
+func (p *GetAccountByTxIdResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(charge.GetAccountByTxIdResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetAccountByTxIdResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetAccountByTxIdResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetAccountByTxIdResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetAccountByTxIdResult) Unmarshal(in []byte) error {
+	msg := new(charge.GetAccountByTxIdResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetAccountByTxIdResult) GetSuccess() *charge.GetAccountByTxIdResp {
+	if !p.IsSetSuccess() {
+		return GetAccountByTxIdResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetAccountByTxIdResult) SetSuccess(x interface{}) {
+	p.Success = x.(*charge.GetAccountByTxIdResp)
+}
+
+func (p *GetAccountByTxIdResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetAccountByTxIdResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -3316,6 +3476,16 @@ func (p *kClient) GetLog(ctx context.Context, Req *charge.GetLogReq) (r *charge.
 	_args.Req = Req
 	var _result GetLogResult
 	if err = p.c.Call(ctx, "GetLog", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetAccountByTxId(ctx context.Context, Req *charge.GetAccountByTxIdReq) (r *charge.GetAccountByTxIdResp, err error) {
+	var _args GetAccountByTxIdArgs
+	_args.Req = Req
+	var _result GetAccountByTxIdResult
+	if err = p.c.Call(ctx, "GetAccountByTxId", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

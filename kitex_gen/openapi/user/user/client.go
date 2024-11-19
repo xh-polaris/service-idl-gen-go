@@ -22,6 +22,7 @@ type Client interface {
 	DeleteKey(ctx context.Context, Req *user.DeleteKeyReq, callOptions ...callopt.Option) (r *user.DeleteKeyResp, err error)
 	GetKeyForCheck(ctx context.Context, Req *user.GetKeyForCheckReq, callOptions ...callopt.Option) (r *user.GetKeyForCheckResp, err error)
 	SetRemain(ctx context.Context, Req *user.SetRemainReq, callOptions ...callopt.Option) (r *user.SetRemainResp, err error)
+	GetAccountByTxId(ctx context.Context, Req *user.GetAccountByTxIdReq, callOptions ...callopt.Option) (r *user.GetAccountByTxIdResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -106,4 +107,9 @@ func (p *kUserClient) GetKeyForCheck(ctx context.Context, Req *user.GetKeyForChe
 func (p *kUserClient) SetRemain(ctx context.Context, Req *user.SetRemainReq, callOptions ...callopt.Option) (r *user.SetRemainResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.SetRemain(ctx, Req)
+}
+
+func (p *kUserClient) GetAccountByTxId(ctx context.Context, Req *user.GetAccountByTxIdReq, callOptions ...callopt.Option) (r *user.GetAccountByTxIdResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetAccountByTxId(ctx, Req)
 }

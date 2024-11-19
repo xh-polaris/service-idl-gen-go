@@ -29,7 +29,7 @@ var file_openapi_charge_charge_proto_rawDesc = []byte{
 	0x70, 0x65, 0x6e, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x68, 0x61, 0x72, 0x67, 0x65, 0x2f, 0x69, 0x6e,
 	0x74, 0x65, 0x72, 0x66, 0x61, 0x63, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x18, 0x6f,
 	0x70, 0x65, 0x6e, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x68, 0x61, 0x72, 0x67, 0x65, 0x2f, 0x6c, 0x6f,
-	0x67, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0xfb, 0x0d, 0x0a, 0x06, 0x63, 0x68, 0x61, 0x72,
+	0x67, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x32, 0xda, 0x0e, 0x0a, 0x06, 0x63, 0x68, 0x61, 0x72,
 	0x67, 0x65, 0x12, 0x66, 0x0a, 0x13, 0x43, 0x72, 0x65, 0x61, 0x74, 0x65, 0x42, 0x61, 0x73, 0x65,
 	0x49, 0x6e, 0x74, 0x65, 0x72, 0x66, 0x61, 0x63, 0x65, 0x12, 0x26, 0x2e, 0x6f, 0x70, 0x65, 0x6e,
 	0x61, 0x70, 0x69, 0x2e, 0x63, 0x68, 0x61, 0x72, 0x67, 0x65, 0x2e, 0x43, 0x72, 0x65, 0x61, 0x74,
@@ -141,15 +141,21 @@ var file_openapi_charge_charge_proto_rawDesc = []byte{
 	0x2e, 0x6f, 0x70, 0x65, 0x6e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x68, 0x61, 0x72, 0x67, 0x65, 0x2e,
 	0x47, 0x65, 0x74, 0x4c, 0x6f, 0x67, 0x52, 0x65, 0x71, 0x1a, 0x1a, 0x2e, 0x6f, 0x70, 0x65, 0x6e,
 	0x61, 0x70, 0x69, 0x2e, 0x63, 0x68, 0x61, 0x72, 0x67, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x4c, 0x6f,
-	0x67, 0x52, 0x65, 0x73, 0x70, 0x42, 0x77, 0x0a, 0x23, 0x63, 0x6f, 0x6d, 0x2e, 0x78, 0x68, 0x70,
-	0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2e, 0x69, 0x64, 0x6c, 0x67, 0x65, 0x6e, 0x2e, 0x6f, 0x70,
-	0x65, 0x6e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x68, 0x61, 0x72, 0x67, 0x65, 0x42, 0x0b, 0x43, 0x68,
-	0x61, 0x72, 0x67, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x41, 0x67, 0x69, 0x74,
-	0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x68, 0x2d, 0x70, 0x6f, 0x6c, 0x61, 0x72,
-	0x69, 0x73, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2d, 0x69, 0x64, 0x6c, 0x2d, 0x67,
-	0x65, 0x6e, 0x2d, 0x67, 0x6f, 0x2f, 0x6b, 0x69, 0x74, 0x65, 0x78, 0x5f, 0x67, 0x65, 0x6e, 0x2f,
-	0x6f, 0x70, 0x65, 0x6e, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x68, 0x61, 0x72, 0x67, 0x65, 0x62, 0x06,
-	0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
+	0x67, 0x52, 0x65, 0x73, 0x70, 0x12, 0x5d, 0x0a, 0x10, 0x47, 0x65, 0x74, 0x41, 0x63, 0x63, 0x6f,
+	0x75, 0x6e, 0x74, 0x42, 0x79, 0x54, 0x78, 0x49, 0x64, 0x12, 0x23, 0x2e, 0x6f, 0x70, 0x65, 0x6e,
+	0x61, 0x70, 0x69, 0x2e, 0x63, 0x68, 0x61, 0x72, 0x67, 0x65, 0x2e, 0x47, 0x65, 0x74, 0x41, 0x63,
+	0x63, 0x6f, 0x75, 0x6e, 0x74, 0x42, 0x79, 0x54, 0x78, 0x49, 0x64, 0x52, 0x65, 0x71, 0x1a, 0x24,
+	0x2e, 0x6f, 0x70, 0x65, 0x6e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x68, 0x61, 0x72, 0x67, 0x65, 0x2e,
+	0x47, 0x65, 0x74, 0x41, 0x63, 0x63, 0x6f, 0x75, 0x6e, 0x74, 0x42, 0x79, 0x54, 0x78, 0x49, 0x64,
+	0x52, 0x65, 0x73, 0x70, 0x42, 0x77, 0x0a, 0x23, 0x63, 0x6f, 0x6d, 0x2e, 0x78, 0x68, 0x70, 0x6f,
+	0x6c, 0x61, 0x72, 0x69, 0x73, 0x2e, 0x69, 0x64, 0x6c, 0x67, 0x65, 0x6e, 0x2e, 0x6f, 0x70, 0x65,
+	0x6e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x68, 0x61, 0x72, 0x67, 0x65, 0x42, 0x0b, 0x43, 0x68, 0x61,
+	0x72, 0x67, 0x65, 0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x41, 0x67, 0x69, 0x74, 0x68,
+	0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x68, 0x2d, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69,
+	0x73, 0x2f, 0x73, 0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2d, 0x69, 0x64, 0x6c, 0x2d, 0x67, 0x65,
+	0x6e, 0x2d, 0x67, 0x6f, 0x2f, 0x6b, 0x69, 0x74, 0x65, 0x78, 0x5f, 0x67, 0x65, 0x6e, 0x2f, 0x6f,
+	0x70, 0x65, 0x6e, 0x61, 0x70, 0x69, 0x2f, 0x63, 0x68, 0x61, 0x72, 0x67, 0x65, 0x62, 0x06, 0x70,
+	0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var file_openapi_charge_charge_proto_goTypes = []interface{}{
@@ -172,25 +178,27 @@ var file_openapi_charge_charge_proto_goTypes = []interface{}{
 	(*GetGradientReq)(nil),                      // 16: openapi.charge.GetGradientReq
 	(*CreateLogReq)(nil),                        // 17: openapi.charge.CreateLogReq
 	(*GetLogReq)(nil),                           // 18: openapi.charge.GetLogReq
-	(*CreateBaseInterfaceResp)(nil),             // 19: openapi.charge.CreateBaseInterfaceResp
-	(*UpdateBaseInterfaceResp)(nil),             // 20: openapi.charge.UpdateBaseInterfaceResp
-	(*DeleteBaseInterfaceResp)(nil),             // 21: openapi.charge.DeleteBaseInterfaceResp
-	(*GetBaseInterfaceResp)(nil),                // 22: openapi.charge.GetBaseInterfaceResp
-	(*CreateFullInterfaceResp)(nil),             // 23: openapi.charge.CreateFullInterfaceResp
-	(*UpdateFullInterfaceResp)(nil),             // 24: openapi.charge.UpdateFullInterfaceResp
-	(*DeleteFullInterfaceResp)(nil),             // 25: openapi.charge.DeleteFullInterfaceResp
-	(*GetFullInterfaceResp)(nil),                // 26: openapi.charge.GetFullInterfaceResp
-	(*GetOneFullInterfaceResp)(nil),             // 27: openapi.charge.GetOneFullInterfaceResp
-	(*CreateMarginResp)(nil),                    // 28: openapi.charge.CreateMarginResp
-	(*UpdateMarginResp)(nil),                    // 29: openapi.charge.UpdateMarginResp
-	(*GetMarginResp)(nil),                       // 30: openapi.charge.GetMarginResp
-	(*DeleteMarginResp)(nil),                    // 31: openapi.charge.DeleteMarginResp
-	(*GetFullAndBaseInterfaceForCheckResp)(nil), // 32: openapi.charge.GetFullAndBaseInterfaceForCheckResp
-	(*CreateGradientResp)(nil),                  // 33: openapi.charge.CreateGradientResp
-	(*UpdateGradientResp)(nil),                  // 34: openapi.charge.UpdateGradientResp
-	(*GetGradientResp)(nil),                     // 35: openapi.charge.GetGradientResp
-	(*CreateLogResp)(nil),                       // 36: openapi.charge.CreateLogResp
-	(*GetLogResp)(nil),                          // 37: openapi.charge.GetLogResp
+	(*GetAccountByTxIdReq)(nil),                 // 19: openapi.charge.GetAccountByTxIdReq
+	(*CreateBaseInterfaceResp)(nil),             // 20: openapi.charge.CreateBaseInterfaceResp
+	(*UpdateBaseInterfaceResp)(nil),             // 21: openapi.charge.UpdateBaseInterfaceResp
+	(*DeleteBaseInterfaceResp)(nil),             // 22: openapi.charge.DeleteBaseInterfaceResp
+	(*GetBaseInterfaceResp)(nil),                // 23: openapi.charge.GetBaseInterfaceResp
+	(*CreateFullInterfaceResp)(nil),             // 24: openapi.charge.CreateFullInterfaceResp
+	(*UpdateFullInterfaceResp)(nil),             // 25: openapi.charge.UpdateFullInterfaceResp
+	(*DeleteFullInterfaceResp)(nil),             // 26: openapi.charge.DeleteFullInterfaceResp
+	(*GetFullInterfaceResp)(nil),                // 27: openapi.charge.GetFullInterfaceResp
+	(*GetOneFullInterfaceResp)(nil),             // 28: openapi.charge.GetOneFullInterfaceResp
+	(*CreateMarginResp)(nil),                    // 29: openapi.charge.CreateMarginResp
+	(*UpdateMarginResp)(nil),                    // 30: openapi.charge.UpdateMarginResp
+	(*GetMarginResp)(nil),                       // 31: openapi.charge.GetMarginResp
+	(*DeleteMarginResp)(nil),                    // 32: openapi.charge.DeleteMarginResp
+	(*GetFullAndBaseInterfaceForCheckResp)(nil), // 33: openapi.charge.GetFullAndBaseInterfaceForCheckResp
+	(*CreateGradientResp)(nil),                  // 34: openapi.charge.CreateGradientResp
+	(*UpdateGradientResp)(nil),                  // 35: openapi.charge.UpdateGradientResp
+	(*GetGradientResp)(nil),                     // 36: openapi.charge.GetGradientResp
+	(*CreateLogResp)(nil),                       // 37: openapi.charge.CreateLogResp
+	(*GetLogResp)(nil),                          // 38: openapi.charge.GetLogResp
+	(*GetAccountByTxIdResp)(nil),                // 39: openapi.charge.GetAccountByTxIdResp
 }
 var file_openapi_charge_charge_proto_depIdxs = []int32{
 	0,  // 0: openapi.charge.charge.CreateBaseInterface:input_type -> openapi.charge.CreateBaseInterfaceReq
@@ -212,27 +220,29 @@ var file_openapi_charge_charge_proto_depIdxs = []int32{
 	16, // 16: openapi.charge.charge.GetGradient:input_type -> openapi.charge.GetGradientReq
 	17, // 17: openapi.charge.charge.CreateLog:input_type -> openapi.charge.CreateLogReq
 	18, // 18: openapi.charge.charge.GetLog:input_type -> openapi.charge.GetLogReq
-	19, // 19: openapi.charge.charge.CreateBaseInterface:output_type -> openapi.charge.CreateBaseInterfaceResp
-	20, // 20: openapi.charge.charge.UpdateBaseInterface:output_type -> openapi.charge.UpdateBaseInterfaceResp
-	21, // 21: openapi.charge.charge.DeleteBaseInterface:output_type -> openapi.charge.DeleteBaseInterfaceResp
-	22, // 22: openapi.charge.charge.GetBaseInterface:output_type -> openapi.charge.GetBaseInterfaceResp
-	23, // 23: openapi.charge.charge.CreateFullInterface:output_type -> openapi.charge.CreateFullInterfaceResp
-	24, // 24: openapi.charge.charge.UpdateFullInterface:output_type -> openapi.charge.UpdateFullInterfaceResp
-	25, // 25: openapi.charge.charge.DeleteFullInterface:output_type -> openapi.charge.DeleteFullInterfaceResp
-	26, // 26: openapi.charge.charge.GetFullInterface:output_type -> openapi.charge.GetFullInterfaceResp
-	27, // 27: openapi.charge.charge.GetOneFullInterface:output_type -> openapi.charge.GetOneFullInterfaceResp
-	28, // 28: openapi.charge.charge.CreateMargin:output_type -> openapi.charge.CreateMarginResp
-	29, // 29: openapi.charge.charge.UpdateMargin:output_type -> openapi.charge.UpdateMarginResp
-	30, // 30: openapi.charge.charge.GetMargin:output_type -> openapi.charge.GetMarginResp
-	31, // 31: openapi.charge.charge.DeleteMargin:output_type -> openapi.charge.DeleteMarginResp
-	32, // 32: openapi.charge.charge.GetFullAndBaseInterfaceForCheck:output_type -> openapi.charge.GetFullAndBaseInterfaceForCheckResp
-	33, // 33: openapi.charge.charge.CreateGradient:output_type -> openapi.charge.CreateGradientResp
-	34, // 34: openapi.charge.charge.UpdateGradient:output_type -> openapi.charge.UpdateGradientResp
-	35, // 35: openapi.charge.charge.GetGradient:output_type -> openapi.charge.GetGradientResp
-	36, // 36: openapi.charge.charge.CreateLog:output_type -> openapi.charge.CreateLogResp
-	37, // 37: openapi.charge.charge.GetLog:output_type -> openapi.charge.GetLogResp
-	19, // [19:38] is the sub-list for method output_type
-	0,  // [0:19] is the sub-list for method input_type
+	19, // 19: openapi.charge.charge.GetAccountByTxId:input_type -> openapi.charge.GetAccountByTxIdReq
+	20, // 20: openapi.charge.charge.CreateBaseInterface:output_type -> openapi.charge.CreateBaseInterfaceResp
+	21, // 21: openapi.charge.charge.UpdateBaseInterface:output_type -> openapi.charge.UpdateBaseInterfaceResp
+	22, // 22: openapi.charge.charge.DeleteBaseInterface:output_type -> openapi.charge.DeleteBaseInterfaceResp
+	23, // 23: openapi.charge.charge.GetBaseInterface:output_type -> openapi.charge.GetBaseInterfaceResp
+	24, // 24: openapi.charge.charge.CreateFullInterface:output_type -> openapi.charge.CreateFullInterfaceResp
+	25, // 25: openapi.charge.charge.UpdateFullInterface:output_type -> openapi.charge.UpdateFullInterfaceResp
+	26, // 26: openapi.charge.charge.DeleteFullInterface:output_type -> openapi.charge.DeleteFullInterfaceResp
+	27, // 27: openapi.charge.charge.GetFullInterface:output_type -> openapi.charge.GetFullInterfaceResp
+	28, // 28: openapi.charge.charge.GetOneFullInterface:output_type -> openapi.charge.GetOneFullInterfaceResp
+	29, // 29: openapi.charge.charge.CreateMargin:output_type -> openapi.charge.CreateMarginResp
+	30, // 30: openapi.charge.charge.UpdateMargin:output_type -> openapi.charge.UpdateMarginResp
+	31, // 31: openapi.charge.charge.GetMargin:output_type -> openapi.charge.GetMarginResp
+	32, // 32: openapi.charge.charge.DeleteMargin:output_type -> openapi.charge.DeleteMarginResp
+	33, // 33: openapi.charge.charge.GetFullAndBaseInterfaceForCheck:output_type -> openapi.charge.GetFullAndBaseInterfaceForCheckResp
+	34, // 34: openapi.charge.charge.CreateGradient:output_type -> openapi.charge.CreateGradientResp
+	35, // 35: openapi.charge.charge.UpdateGradient:output_type -> openapi.charge.UpdateGradientResp
+	36, // 36: openapi.charge.charge.GetGradient:output_type -> openapi.charge.GetGradientResp
+	37, // 37: openapi.charge.charge.CreateLog:output_type -> openapi.charge.CreateLogResp
+	38, // 38: openapi.charge.charge.GetLog:output_type -> openapi.charge.GetLogResp
+	39, // 39: openapi.charge.charge.GetAccountByTxId:output_type -> openapi.charge.GetAccountByTxIdResp
+	20, // [20:40] is the sub-list for method output_type
+	0,  // [0:20] is the sub-list for method input_type
 	0,  // [0:0] is the sub-list for extension type_name
 	0,  // [0:0] is the sub-list for extension extendee
 	0,  // [0:0] is the sub-list for field type_name
@@ -288,4 +298,5 @@ type Charge interface {
 	GetGradient(ctx context.Context, req *GetGradientReq) (res *GetGradientResp, err error)
 	CreateLog(ctx context.Context, req *CreateLogReq) (res *CreateLogResp, err error)
 	GetLog(ctx context.Context, req *GetLogReq) (res *GetLogResp, err error)
+	GetAccountByTxId(ctx context.Context, req *GetAccountByTxIdReq) (res *GetAccountByTxIdResp, err error)
 }

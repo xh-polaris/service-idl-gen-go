@@ -30,6 +30,7 @@ type Client interface {
 	GetGradient(ctx context.Context, Req *charge.GetGradientReq, callOptions ...callopt.Option) (r *charge.GetGradientResp, err error)
 	CreateLog(ctx context.Context, Req *charge.CreateLogReq, callOptions ...callopt.Option) (r *charge.CreateLogResp, err error)
 	GetLog(ctx context.Context, Req *charge.GetLogReq, callOptions ...callopt.Option) (r *charge.GetLogResp, err error)
+	GetAccountByTxId(ctx context.Context, Req *charge.GetAccountByTxIdReq, callOptions ...callopt.Option) (r *charge.GetAccountByTxIdResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -154,4 +155,9 @@ func (p *kChargeClient) CreateLog(ctx context.Context, Req *charge.CreateLogReq,
 func (p *kChargeClient) GetLog(ctx context.Context, Req *charge.GetLogReq, callOptions ...callopt.Option) (r *charge.GetLogResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.GetLog(ctx, Req)
+}
+
+func (p *kChargeClient) GetAccountByTxId(ctx context.Context, Req *charge.GetAccountByTxIdReq, callOptions ...callopt.Option) (r *charge.GetAccountByTxIdResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetAccountByTxId(ctx, Req)
 }
