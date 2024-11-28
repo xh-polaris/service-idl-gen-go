@@ -23,6 +23,7 @@ type Client interface {
 	GetActivity(ctx context.Context, Req *core_api.GetActivityReq, callOptions ...callopt.Option) (r *core_api.GetActivityResp, err error)
 	RegisterActivity(ctx context.Context, Req *core_api.RegisterActivityReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 	CheckIn(ctx context.Context, Req *core_api.CheckInReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
+	GetRegisters(ctx context.Context, Req *core_api.GetRegistersReq, callOptions ...callopt.Option) (r *core_api.GetRegisterResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -112,4 +113,9 @@ func (p *kCoreApiClient) RegisterActivity(ctx context.Context, Req *core_api.Reg
 func (p *kCoreApiClient) CheckIn(ctx context.Context, Req *core_api.CheckInReq, callOptions ...callopt.Option) (r *core_api.Response, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.CheckIn(ctx, Req)
+}
+
+func (p *kCoreApiClient) GetRegisters(ctx context.Context, Req *core_api.GetRegistersReq, callOptions ...callopt.Option) (r *core_api.GetRegisterResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetRegisters(ctx, Req)
 }

@@ -99,6 +99,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"GetRegisters": kitex.NewMethodInfo(
+		getRegistersHandler,
+		newGetRegistersArgs,
+		newGetRegistersResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 }
 
 var (
@@ -2001,6 +2008,159 @@ func (p *CheckInResult) GetResult() interface{} {
 	return p.Success
 }
 
+func getRegistersHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.GetRegistersReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.CoreApi).GetRegisters(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *GetRegistersArgs:
+		success, err := handler.(core_api.CoreApi).GetRegisters(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetRegistersResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newGetRegistersArgs() interface{} {
+	return &GetRegistersArgs{}
+}
+
+func newGetRegistersResult() interface{} {
+	return &GetRegistersResult{}
+}
+
+type GetRegistersArgs struct {
+	Req *core_api.GetRegistersReq
+}
+
+func (p *GetRegistersArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.GetRegistersReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetRegistersArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetRegistersArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetRegistersArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetRegistersArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.GetRegistersReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetRegistersArgs_Req_DEFAULT *core_api.GetRegistersReq
+
+func (p *GetRegistersArgs) GetReq() *core_api.GetRegistersReq {
+	if !p.IsSetReq() {
+		return GetRegistersArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetRegistersArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetRegistersArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetRegistersResult struct {
+	Success *core_api.GetRegisterResp
+}
+
+var GetRegistersResult_Success_DEFAULT *core_api.GetRegisterResp
+
+func (p *GetRegistersResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.GetRegisterResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetRegistersResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetRegistersResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetRegistersResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetRegistersResult) Unmarshal(in []byte) error {
+	msg := new(core_api.GetRegisterResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetRegistersResult) GetSuccess() *core_api.GetRegisterResp {
+	if !p.IsSetSuccess() {
+		return GetRegistersResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetRegistersResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.GetRegisterResp)
+}
+
+func (p *GetRegistersResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetRegistersResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -2126,6 +2286,16 @@ func (p *kClient) CheckIn(ctx context.Context, Req *core_api.CheckInReq) (r *cor
 	_args.Req = Req
 	var _result CheckInResult
 	if err = p.c.Call(ctx, "CheckIn", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetRegisters(ctx context.Context, Req *core_api.GetRegistersReq) (r *core_api.GetRegisterResp, err error) {
+	var _args GetRegistersArgs
+	_args.Req = Req
+	var _result GetRegistersResult
+	if err = p.c.Call(ctx, "GetRegisters", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

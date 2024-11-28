@@ -36,6 +36,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"UpdateUserInfo": kitex.NewMethodInfo(
+		updateUserInfoHandler,
+		newUpdateUserInfoArgs,
+		newUpdateUserInfoResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"EssayEvaluate": kitex.NewMethodInfo(
 		essayEvaluateHandler,
 		newEssayEvaluateArgs,
@@ -575,6 +582,159 @@ func (p *GetUserInfoResult) GetResult() interface{} {
 	return p.Success
 }
 
+func updateUserInfoHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(show.UpdateUserInfoReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(show.Show).UpdateUserInfo(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *UpdateUserInfoArgs:
+		success, err := handler.(show.Show).UpdateUserInfo(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*UpdateUserInfoResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newUpdateUserInfoArgs() interface{} {
+	return &UpdateUserInfoArgs{}
+}
+
+func newUpdateUserInfoResult() interface{} {
+	return &UpdateUserInfoResult{}
+}
+
+type UpdateUserInfoArgs struct {
+	Req *show.UpdateUserInfoReq
+}
+
+func (p *UpdateUserInfoArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(show.UpdateUserInfoReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *UpdateUserInfoArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *UpdateUserInfoArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *UpdateUserInfoArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *UpdateUserInfoArgs) Unmarshal(in []byte) error {
+	msg := new(show.UpdateUserInfoReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var UpdateUserInfoArgs_Req_DEFAULT *show.UpdateUserInfoReq
+
+func (p *UpdateUserInfoArgs) GetReq() *show.UpdateUserInfoReq {
+	if !p.IsSetReq() {
+		return UpdateUserInfoArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *UpdateUserInfoArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *UpdateUserInfoArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type UpdateUserInfoResult struct {
+	Success *show.Response
+}
+
+var UpdateUserInfoResult_Success_DEFAULT *show.Response
+
+func (p *UpdateUserInfoResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(show.Response)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *UpdateUserInfoResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *UpdateUserInfoResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *UpdateUserInfoResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *UpdateUserInfoResult) Unmarshal(in []byte) error {
+	msg := new(show.Response)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *UpdateUserInfoResult) GetSuccess() *show.Response {
+	if !p.IsSetSuccess() {
+		return UpdateUserInfoResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *UpdateUserInfoResult) SetSuccess(x interface{}) {
+	p.Success = x.(*show.Response)
+}
+
+func (p *UpdateUserInfoResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *UpdateUserInfoResult) GetResult() interface{} {
+	return p.Success
+}
+
 func essayEvaluateHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -916,6 +1076,16 @@ func (p *kClient) GetUserInfo(ctx context.Context, Req *show.GetUserInfoReq) (r 
 	_args.Req = Req
 	var _result GetUserInfoResult
 	if err = p.c.Call(ctx, "GetUserInfo", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) UpdateUserInfo(ctx context.Context, Req *show.UpdateUserInfoReq) (r *show.Response, err error) {
+	var _args UpdateUserInfoArgs
+	_args.Req = Req
+	var _result UpdateUserInfoResult
+	if err = p.c.Call(ctx, "UpdateUserInfo", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

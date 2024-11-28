@@ -14,6 +14,7 @@ type Client interface {
 	SignUp(ctx context.Context, Req *show.SignUpReq, callOptions ...callopt.Option) (r *show.SignUpResp, err error)
 	SignIn(ctx context.Context, Req *show.SignInReq, callOptions ...callopt.Option) (r *show.SignInResp, err error)
 	GetUserInfo(ctx context.Context, Req *show.GetUserInfoReq, callOptions ...callopt.Option) (r *show.GetUserInfoResp, err error)
+	UpdateUserInfo(ctx context.Context, Req *show.UpdateUserInfoReq, callOptions ...callopt.Option) (r *show.Response, err error)
 	EssayEvaluate(ctx context.Context, Req *show.EssayEvaluateReq, callOptions ...callopt.Option) (r *show.EssayEvaluateResp, err error)
 	GetEvaluateLogs(ctx context.Context, Req *show.GetEssayEvaluateLogsReq, callOptions ...callopt.Option) (r *show.GetEssayEvaluateLogsResp, err error)
 }
@@ -60,6 +61,11 @@ func (p *kShowClient) SignIn(ctx context.Context, Req *show.SignInReq, callOptio
 func (p *kShowClient) GetUserInfo(ctx context.Context, Req *show.GetUserInfoReq, callOptions ...callopt.Option) (r *show.GetUserInfoResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.GetUserInfo(ctx, Req)
+}
+
+func (p *kShowClient) UpdateUserInfo(ctx context.Context, Req *show.UpdateUserInfoReq, callOptions ...callopt.Option) (r *show.Response, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.UpdateUserInfo(ctx, Req)
 }
 
 func (p *kShowClient) EssayEvaluate(ctx context.Context, Req *show.EssayEvaluateReq, callOptions ...callopt.Option) (r *show.EssayEvaluateResp, err error) {
