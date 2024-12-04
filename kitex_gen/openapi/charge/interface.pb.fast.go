@@ -1525,7 +1525,7 @@ func (x *GetAmountReq) fastReadField1(buf []byte, _type int8) (offset int, err e
 }
 
 func (x *GetAmountReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
-	x.BaseInfId, offset, err = fastpb.ReadString(buf, _type)
+	x.FullInfId, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -2625,10 +2625,10 @@ func (x *GetAmountReq) fastWriteField1(buf []byte) (offset int) {
 }
 
 func (x *GetAmountReq) fastWriteField2(buf []byte) (offset int) {
-	if x.BaseInfId == "" {
+	if x.FullInfId == "" {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 2, x.GetBaseInfId())
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetFullInfId())
 	return offset
 }
 
@@ -3717,10 +3717,10 @@ func (x *GetAmountReq) sizeField1() (n int) {
 }
 
 func (x *GetAmountReq) sizeField2() (n int) {
-	if x.BaseInfId == "" {
+	if x.FullInfId == "" {
 		return n
 	}
-	n += fastpb.SizeString(2, x.GetBaseInfId())
+	n += fastpb.SizeString(2, x.GetFullInfId())
 	return n
 }
 
@@ -3949,7 +3949,7 @@ var fieldIDToName_GetGradientResp = map[int32]string{
 
 var fieldIDToName_GetAmountReq = map[int32]string{
 	1: "Increment",
-	2: "BaseInfId",
+	2: "FullInfId",
 }
 
 var fieldIDToName_GetAmountResp = map[int32]string{
