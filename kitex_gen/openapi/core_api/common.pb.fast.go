@@ -1233,11 +1233,6 @@ func (x *BuyFullInterfaceReq) FastRead(buf []byte, _type int8, number int32) (of
 		if err != nil {
 			goto ReadFieldError
 		}
-	case 3:
-		offset, err = x.fastReadField3(buf, _type)
-		if err != nil {
-			goto ReadFieldError
-		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -1258,11 +1253,6 @@ func (x *BuyFullInterfaceReq) fastReadField1(buf []byte, _type int8) (offset int
 
 func (x *BuyFullInterfaceReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Increment, offset, err = fastpb.ReadInt64(buf, _type)
-	return offset, err
-}
-
-func (x *BuyFullInterfaceReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.Discount, offset, err = fastpb.ReadBool(buf, _type)
 	return offset, err
 }
 
@@ -1414,6 +1404,86 @@ func (x *GetGradientResp) fastReadField1(buf []byte, _type int8) (offset int, er
 	}
 	x.Gradient = &v
 	return offset, nil
+}
+
+func (x *GetAmountReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetAmountReq[number], err)
+}
+
+func (x *GetAmountReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Increment, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *GetAmountReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.BaseInfId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetAmountResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetAmountResp[number], err)
+}
+
+func (x *GetAmountResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Rate, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *GetAmountResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.OriginAmount, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *GetAmountResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.Amount, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
 }
 
 func (x *GetLogReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
@@ -2475,7 +2545,6 @@ func (x *BuyFullInterfaceReq) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
-	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
@@ -2492,14 +2561,6 @@ func (x *BuyFullInterfaceReq) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetIncrement())
-	return offset
-}
-
-func (x *BuyFullInterfaceReq) fastWriteField3(buf []byte) (offset int) {
-	if !x.Discount {
-		return offset
-	}
-	offset += fastpb.WriteBool(buf[offset:], 3, x.GetDiscount())
 	return offset
 }
 
@@ -2595,6 +2656,65 @@ func (x *GetGradientResp) fastWriteField1(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteMessage(buf[offset:], 1, x.GetGradient())
+	return offset
+}
+
+func (x *GetAmountReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *GetAmountReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Increment == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetIncrement())
+	return offset
+}
+
+func (x *GetAmountReq) fastWriteField2(buf []byte) (offset int) {
+	if x.BaseInfId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetBaseInfId())
+	return offset
+}
+
+func (x *GetAmountResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
+	return offset
+}
+
+func (x *GetAmountResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Rate == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetRate())
+	return offset
+}
+
+func (x *GetAmountResp) fastWriteField2(buf []byte) (offset int) {
+	if x.OriginAmount == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetOriginAmount())
+	return offset
+}
+
+func (x *GetAmountResp) fastWriteField3(buf []byte) (offset int) {
+	if x.Amount == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetAmount())
 	return offset
 }
 
@@ -3595,7 +3715,6 @@ func (x *BuyFullInterfaceReq) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
-	n += x.sizeField3()
 	return n
 }
 
@@ -3612,14 +3731,6 @@ func (x *BuyFullInterfaceReq) sizeField2() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(2, x.GetIncrement())
-	return n
-}
-
-func (x *BuyFullInterfaceReq) sizeField3() (n int) {
-	if !x.Discount {
-		return n
-	}
-	n += fastpb.SizeBool(3, x.GetDiscount())
 	return n
 }
 
@@ -3715,6 +3826,65 @@ func (x *GetGradientResp) sizeField1() (n int) {
 		return n
 	}
 	n += fastpb.SizeMessage(1, x.GetGradient())
+	return n
+}
+
+func (x *GetAmountReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *GetAmountReq) sizeField1() (n int) {
+	if x.Increment == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(1, x.GetIncrement())
+	return n
+}
+
+func (x *GetAmountReq) sizeField2() (n int) {
+	if x.BaseInfId == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetBaseInfId())
+	return n
+}
+
+func (x *GetAmountResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	n += x.sizeField3()
+	return n
+}
+
+func (x *GetAmountResp) sizeField1() (n int) {
+	if x.Rate == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(1, x.GetRate())
+	return n
+}
+
+func (x *GetAmountResp) sizeField2() (n int) {
+	if x.OriginAmount == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(2, x.GetOriginAmount())
+	return n
+}
+
+func (x *GetAmountResp) sizeField3() (n int) {
+	if x.Amount == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(3, x.GetAmount())
 	return n
 }
 
@@ -4029,7 +4199,6 @@ var fieldIDToName_GetFullInterfacesResp = map[int32]string{
 var fieldIDToName_BuyFullInterfaceReq = map[int32]string{
 	1: "FullInterfaceId",
 	2: "Increment",
-	3: "Discount",
 }
 
 var fieldIDToName_CreateGradientReq = map[int32]string{
@@ -4049,6 +4218,17 @@ var fieldIDToName_GetGradientReq = map[int32]string{
 
 var fieldIDToName_GetGradientResp = map[int32]string{
 	1: "Gradient",
+}
+
+var fieldIDToName_GetAmountReq = map[int32]string{
+	1: "Increment",
+	2: "BaseInfId",
+}
+
+var fieldIDToName_GetAmountResp = map[int32]string{
+	1: "Rate",
+	2: "OriginAmount",
+	3: "Amount",
 }
 
 var fieldIDToName_GetLogReq = map[int32]string{

@@ -106,6 +106,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"GetAmount": kitex.NewMethodInfo(
+		getAmountHandler,
+		newGetAmountArgs,
+		newGetAmountResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 }
 
 var (
@@ -2161,6 +2168,159 @@ func (p *GetGradientResult) GetResult() interface{} {
 	return p.Success
 }
 
+func getAmountHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(core_api.GetAmountReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(core_api.Charge).GetAmount(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *GetAmountArgs:
+		success, err := handler.(core_api.Charge).GetAmount(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*GetAmountResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newGetAmountArgs() interface{} {
+	return &GetAmountArgs{}
+}
+
+func newGetAmountResult() interface{} {
+	return &GetAmountResult{}
+}
+
+type GetAmountArgs struct {
+	Req *core_api.GetAmountReq
+}
+
+func (p *GetAmountArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(core_api.GetAmountReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *GetAmountArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *GetAmountArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *GetAmountArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *GetAmountArgs) Unmarshal(in []byte) error {
+	msg := new(core_api.GetAmountReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var GetAmountArgs_Req_DEFAULT *core_api.GetAmountReq
+
+func (p *GetAmountArgs) GetReq() *core_api.GetAmountReq {
+	if !p.IsSetReq() {
+		return GetAmountArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *GetAmountArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *GetAmountArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type GetAmountResult struct {
+	Success *core_api.GetAmountResp
+}
+
+var GetAmountResult_Success_DEFAULT *core_api.GetAmountResp
+
+func (p *GetAmountResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(core_api.GetAmountResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *GetAmountResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *GetAmountResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *GetAmountResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *GetAmountResult) Unmarshal(in []byte) error {
+	msg := new(core_api.GetAmountResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *GetAmountResult) GetSuccess() *core_api.GetAmountResp {
+	if !p.IsSetSuccess() {
+		return GetAmountResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *GetAmountResult) SetSuccess(x interface{}) {
+	p.Success = x.(*core_api.GetAmountResp)
+}
+
+func (p *GetAmountResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *GetAmountResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -2296,6 +2456,16 @@ func (p *kClient) GetGradient(ctx context.Context, Req *core_api.GetGradientReq)
 	_args.Req = Req
 	var _result GetGradientResult
 	if err = p.c.Call(ctx, "GetGradient", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) GetAmount(ctx context.Context, Req *core_api.GetAmountReq) (r *core_api.GetAmountResp, err error) {
+	var _args GetAmountArgs
+	_args.Req = Req
+	var _result GetAmountResult
+	if err = p.c.Call(ctx, "GetAmount", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

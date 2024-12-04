@@ -288,6 +288,31 @@ func (x *GetUserInfoResp) fastReadField3(buf []byte, _type int8) (offset int, er
 	return offset, nil
 }
 
+func (x *UpdateUserInfoReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_UpdateUserInfoReq[number], err)
+}
+
+func (x *UpdateUserInfoReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Username, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
 func (x *EssayEvaluateReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -339,7 +364,12 @@ func (x *EssayEvaluateReq) fastReadField3(buf []byte, _type int8) (offset int, e
 }
 
 func (x *EssayEvaluateReq) fastReadField4(buf []byte, _type int8) (offset int, err error) {
-	x.Ocr, offset, err = fastpb.ReadString(buf, _type)
+	var v string
+	v, offset, err = fastpb.ReadString(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.Ocr = append(x.Ocr, v)
 	return offset, err
 }
 
@@ -509,7 +539,12 @@ func (x *Log) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 }
 
 func (x *Log) fastReadField3(buf []byte, _type int8) (offset int, err error) {
-	x.Ocr, offset, err = fastpb.ReadString(buf, _type)
+	var v string
+	v, offset, err = fastpb.ReadString(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.Ocr = append(x.Ocr, v)
 	return offset, err
 }
 
@@ -520,6 +555,178 @@ func (x *Log) fastReadField4(buf []byte, _type int8) (offset int, err error) {
 
 func (x *Log) fastReadField5(buf []byte, _type int8) (offset int, err error) {
 	x.CreateTime, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *ApplySignedUrlReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ApplySignedUrlReq[number], err)
+}
+
+func (x *ApplySignedUrlReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.Prefix = &tmp
+	return offset, err
+}
+
+func (x *ApplySignedUrlReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.Suffix = &tmp
+	return offset, err
+}
+
+func (x *ApplySignedUrlResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ApplySignedUrlResp[number], err)
+}
+
+func (x *ApplySignedUrlResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Url, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *ApplySignedUrlResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.SessionToken, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *OCRReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_OCRReq[number], err)
+}
+
+func (x *OCRReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	var v string
+	v, offset, err = fastpb.ReadString(buf, _type)
+	if err != nil {
+		return offset, err
+	}
+	x.Ocr = append(x.Ocr, v)
+	return offset, err
+}
+
+func (x *OCRResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_OCRResp[number], err)
+}
+
+func (x *OCRResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Title, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *OCRResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Text, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *Response) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_Response[number], err)
+}
+
+func (x *Response) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Code, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *Response) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Msg, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -762,6 +969,22 @@ func (x *GetUserInfoResp) fastWriteField3(buf []byte) (offset int) {
 	return offset
 }
 
+func (x *UpdateUserInfoReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *UpdateUserInfoReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Username == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUsername())
+	return offset
+}
+
 func (x *EssayEvaluateReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -798,10 +1021,12 @@ func (x *EssayEvaluateReq) fastWriteField3(buf []byte) (offset int) {
 }
 
 func (x *EssayEvaluateReq) fastWriteField4(buf []byte) (offset int) {
-	if x.Ocr == "" {
+	if len(x.Ocr) == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 4, x.GetOcr())
+	for i := range x.GetOcr() {
+		offset += fastpb.WriteString(buf[offset:], 4, x.GetOcr()[i])
+	}
 	return offset
 }
 
@@ -911,10 +1136,12 @@ func (x *Log) fastWriteField2(buf []byte) (offset int) {
 }
 
 func (x *Log) fastWriteField3(buf []byte) (offset int) {
-	if x.Ocr == "" {
+	if len(x.Ocr) == 0 {
 		return offset
 	}
-	offset += fastpb.WriteString(buf[offset:], 3, x.GetOcr())
+	for i := range x.GetOcr() {
+		offset += fastpb.WriteString(buf[offset:], 3, x.GetOcr()[i])
+	}
 	return offset
 }
 
@@ -931,6 +1158,124 @@ func (x *Log) fastWriteField5(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 5, x.GetCreateTime())
+	return offset
+}
+
+func (x *ApplySignedUrlReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *ApplySignedUrlReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Prefix == nil {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetPrefix())
+	return offset
+}
+
+func (x *ApplySignedUrlReq) fastWriteField2(buf []byte) (offset int) {
+	if x.Suffix == nil {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetSuffix())
+	return offset
+}
+
+func (x *ApplySignedUrlResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *ApplySignedUrlResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Url == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUrl())
+	return offset
+}
+
+func (x *ApplySignedUrlResp) fastWriteField2(buf []byte) (offset int) {
+	if x.SessionToken == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetSessionToken())
+	return offset
+}
+
+func (x *OCRReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *OCRReq) fastWriteField1(buf []byte) (offset int) {
+	if len(x.Ocr) == 0 {
+		return offset
+	}
+	for i := range x.GetOcr() {
+		offset += fastpb.WriteString(buf[offset:], 1, x.GetOcr()[i])
+	}
+	return offset
+}
+
+func (x *OCRResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *OCRResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Title == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetTitle())
+	return offset
+}
+
+func (x *OCRResp) fastWriteField2(buf []byte) (offset int) {
+	if x.Text == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetText())
+	return offset
+}
+
+func (x *Response) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *Response) fastWriteField1(buf []byte) (offset int) {
+	if x.Code == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetCode())
+	return offset
+}
+
+func (x *Response) fastWriteField2(buf []byte) (offset int) {
+	if x.Msg == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetMsg())
 	return offset
 }
 
@@ -1163,6 +1508,22 @@ func (x *GetUserInfoResp) sizeField3() (n int) {
 	return n
 }
 
+func (x *UpdateUserInfoReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *UpdateUserInfoReq) sizeField1() (n int) {
+	if x.Username == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetUsername())
+	return n
+}
+
 func (x *EssayEvaluateReq) Size() (n int) {
 	if x == nil {
 		return n
@@ -1199,10 +1560,12 @@ func (x *EssayEvaluateReq) sizeField3() (n int) {
 }
 
 func (x *EssayEvaluateReq) sizeField4() (n int) {
-	if x.Ocr == "" {
+	if len(x.Ocr) == 0 {
 		return n
 	}
-	n += fastpb.SizeString(4, x.GetOcr())
+	for i := range x.GetOcr() {
+		n += fastpb.SizeString(4, x.GetOcr()[i])
+	}
 	return n
 }
 
@@ -1312,10 +1675,12 @@ func (x *Log) sizeField2() (n int) {
 }
 
 func (x *Log) sizeField3() (n int) {
-	if x.Ocr == "" {
+	if len(x.Ocr) == 0 {
 		return n
 	}
-	n += fastpb.SizeString(3, x.GetOcr())
+	for i := range x.GetOcr() {
+		n += fastpb.SizeString(3, x.GetOcr()[i])
+	}
 	return n
 }
 
@@ -1332,6 +1697,124 @@ func (x *Log) sizeField5() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(5, x.GetCreateTime())
+	return n
+}
+
+func (x *ApplySignedUrlReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *ApplySignedUrlReq) sizeField1() (n int) {
+	if x.Prefix == nil {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetPrefix())
+	return n
+}
+
+func (x *ApplySignedUrlReq) sizeField2() (n int) {
+	if x.Suffix == nil {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetSuffix())
+	return n
+}
+
+func (x *ApplySignedUrlResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *ApplySignedUrlResp) sizeField1() (n int) {
+	if x.Url == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetUrl())
+	return n
+}
+
+func (x *ApplySignedUrlResp) sizeField2() (n int) {
+	if x.SessionToken == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetSessionToken())
+	return n
+}
+
+func (x *OCRReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *OCRReq) sizeField1() (n int) {
+	if len(x.Ocr) == 0 {
+		return n
+	}
+	for i := range x.GetOcr() {
+		n += fastpb.SizeString(1, x.GetOcr()[i])
+	}
+	return n
+}
+
+func (x *OCRResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *OCRResp) sizeField1() (n int) {
+	if x.Title == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetTitle())
+	return n
+}
+
+func (x *OCRResp) sizeField2() (n int) {
+	if x.Text == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetText())
+	return n
+}
+
+func (x *Response) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *Response) sizeField1() (n int) {
+	if x.Code == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(1, x.GetCode())
+	return n
+}
+
+func (x *Response) sizeField2() (n int) {
+	if x.Msg == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetMsg())
 	return n
 }
 
@@ -1395,6 +1878,10 @@ var fieldIDToName_GetUserInfoResp = map[int32]string{
 	3: "Payload",
 }
 
+var fieldIDToName_UpdateUserInfoReq = map[int32]string{
+	1: "Username",
+}
+
 var fieldIDToName_EssayEvaluateReq = map[int32]string{
 	1: "Title",
 	2: "Text",
@@ -1423,6 +1910,30 @@ var fieldIDToName_Log = map[int32]string{
 	3: "Ocr",
 	4: "Response",
 	5: "CreateTime",
+}
+
+var fieldIDToName_ApplySignedUrlReq = map[int32]string{
+	1: "Prefix",
+	2: "Suffix",
+}
+
+var fieldIDToName_ApplySignedUrlResp = map[int32]string{
+	1: "Url",
+	2: "SessionToken",
+}
+
+var fieldIDToName_OCRReq = map[int32]string{
+	1: "Ocr",
+}
+
+var fieldIDToName_OCRResp = map[int32]string{
+	1: "Title",
+	2: "Text",
+}
+
+var fieldIDToName_Response = map[int32]string{
+	1: "Code",
+	2: "Msg",
 }
 
 var fieldIDToName_GetUserInfoResp_Payload = map[int32]string{

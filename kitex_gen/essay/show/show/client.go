@@ -16,6 +16,8 @@ type Client interface {
 	GetUserInfo(ctx context.Context, Req *show.GetUserInfoReq, callOptions ...callopt.Option) (r *show.GetUserInfoResp, err error)
 	EssayEvaluate(ctx context.Context, Req *show.EssayEvaluateReq, callOptions ...callopt.Option) (r *show.EssayEvaluateResp, err error)
 	GetEvaluateLogs(ctx context.Context, Req *show.GetEssayEvaluateLogsReq, callOptions ...callopt.Option) (r *show.GetEssayEvaluateLogsResp, err error)
+	OCR(ctx context.Context, Req *show.OCRReq, callOptions ...callopt.Option) (r *show.OCRResp, err error)
+	ApplySignedUrl(ctx context.Context, Req *show.ApplySignedUrlReq, callOptions ...callopt.Option) (r *show.ApplySignedUrlResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -70,4 +72,14 @@ func (p *kShowClient) EssayEvaluate(ctx context.Context, Req *show.EssayEvaluate
 func (p *kShowClient) GetEvaluateLogs(ctx context.Context, Req *show.GetEssayEvaluateLogsReq, callOptions ...callopt.Option) (r *show.GetEssayEvaluateLogsResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.GetEvaluateLogs(ctx, Req)
+}
+
+func (p *kShowClient) OCR(ctx context.Context, Req *show.OCRReq, callOptions ...callopt.Option) (r *show.OCRResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.OCR(ctx, Req)
+}
+
+func (p *kShowClient) ApplySignedUrl(ctx context.Context, Req *show.ApplySignedUrlReq, callOptions ...callopt.Option) (r *show.ApplySignedUrlResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.ApplySignedUrl(ctx, Req)
 }

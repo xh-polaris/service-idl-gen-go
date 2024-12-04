@@ -50,6 +50,20 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"OCR": kitex.NewMethodInfo(
+		oCRHandler,
+		newOCRArgs,
+		newOCRResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"ApplySignedUrl": kitex.NewMethodInfo(
+		applySignedUrlHandler,
+		newApplySignedUrlArgs,
+		newApplySignedUrlResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 }
 
 var (
@@ -881,6 +895,312 @@ func (p *GetEvaluateLogsResult) GetResult() interface{} {
 	return p.Success
 }
 
+func oCRHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(show.OCRReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(show.Show).OCR(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *OCRArgs:
+		success, err := handler.(show.Show).OCR(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*OCRResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newOCRArgs() interface{} {
+	return &OCRArgs{}
+}
+
+func newOCRResult() interface{} {
+	return &OCRResult{}
+}
+
+type OCRArgs struct {
+	Req *show.OCRReq
+}
+
+func (p *OCRArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(show.OCRReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *OCRArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *OCRArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *OCRArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *OCRArgs) Unmarshal(in []byte) error {
+	msg := new(show.OCRReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var OCRArgs_Req_DEFAULT *show.OCRReq
+
+func (p *OCRArgs) GetReq() *show.OCRReq {
+	if !p.IsSetReq() {
+		return OCRArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *OCRArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *OCRArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type OCRResult struct {
+	Success *show.OCRResp
+}
+
+var OCRResult_Success_DEFAULT *show.OCRResp
+
+func (p *OCRResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(show.OCRResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *OCRResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *OCRResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *OCRResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *OCRResult) Unmarshal(in []byte) error {
+	msg := new(show.OCRResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *OCRResult) GetSuccess() *show.OCRResp {
+	if !p.IsSetSuccess() {
+		return OCRResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *OCRResult) SetSuccess(x interface{}) {
+	p.Success = x.(*show.OCRResp)
+}
+
+func (p *OCRResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *OCRResult) GetResult() interface{} {
+	return p.Success
+}
+
+func applySignedUrlHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(show.ApplySignedUrlReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(show.Show).ApplySignedUrl(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *ApplySignedUrlArgs:
+		success, err := handler.(show.Show).ApplySignedUrl(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*ApplySignedUrlResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newApplySignedUrlArgs() interface{} {
+	return &ApplySignedUrlArgs{}
+}
+
+func newApplySignedUrlResult() interface{} {
+	return &ApplySignedUrlResult{}
+}
+
+type ApplySignedUrlArgs struct {
+	Req *show.ApplySignedUrlReq
+}
+
+func (p *ApplySignedUrlArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(show.ApplySignedUrlReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *ApplySignedUrlArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *ApplySignedUrlArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *ApplySignedUrlArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *ApplySignedUrlArgs) Unmarshal(in []byte) error {
+	msg := new(show.ApplySignedUrlReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var ApplySignedUrlArgs_Req_DEFAULT *show.ApplySignedUrlReq
+
+func (p *ApplySignedUrlArgs) GetReq() *show.ApplySignedUrlReq {
+	if !p.IsSetReq() {
+		return ApplySignedUrlArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *ApplySignedUrlArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *ApplySignedUrlArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type ApplySignedUrlResult struct {
+	Success *show.ApplySignedUrlResp
+}
+
+var ApplySignedUrlResult_Success_DEFAULT *show.ApplySignedUrlResp
+
+func (p *ApplySignedUrlResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(show.ApplySignedUrlResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *ApplySignedUrlResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *ApplySignedUrlResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *ApplySignedUrlResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *ApplySignedUrlResult) Unmarshal(in []byte) error {
+	msg := new(show.ApplySignedUrlResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *ApplySignedUrlResult) GetSuccess() *show.ApplySignedUrlResp {
+	if !p.IsSetSuccess() {
+		return ApplySignedUrlResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *ApplySignedUrlResult) SetSuccess(x interface{}) {
+	p.Success = x.(*show.ApplySignedUrlResp)
+}
+
+func (p *ApplySignedUrlResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *ApplySignedUrlResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -936,6 +1256,26 @@ func (p *kClient) GetEvaluateLogs(ctx context.Context, Req *show.GetEssayEvaluat
 	_args.Req = Req
 	var _result GetEvaluateLogsResult
 	if err = p.c.Call(ctx, "GetEvaluateLogs", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) OCR(ctx context.Context, Req *show.OCRReq) (r *show.OCRResp, err error) {
+	var _args OCRArgs
+	_args.Req = Req
+	var _result OCRResult
+	if err = p.c.Call(ctx, "OCR", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) ApplySignedUrl(ctx context.Context, Req *show.ApplySignedUrlReq) (r *show.ApplySignedUrlResp, err error) {
+	var _args ApplySignedUrlArgs
+	_args.Req = Req
+	var _result ApplySignedUrlResult
+	if err = p.c.Call(ctx, "ApplySignedUrl", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil

@@ -24,6 +24,7 @@ type Client interface {
 	CreateGradient(ctx context.Context, Req *core_api.CreateGradientReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 	UpdateGradient(ctx context.Context, Req *core_api.UpdateGradientReq, callOptions ...callopt.Option) (r *core_api.Response, err error)
 	GetGradient(ctx context.Context, Req *core_api.GetGradientReq, callOptions ...callopt.Option) (r *core_api.GetGradientResp, err error)
+	GetAmount(ctx context.Context, Req *core_api.GetAmountReq, callOptions ...callopt.Option) (r *core_api.GetAmountResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -118,4 +119,9 @@ func (p *kChargeClient) UpdateGradient(ctx context.Context, Req *core_api.Update
 func (p *kChargeClient) GetGradient(ctx context.Context, Req *core_api.GetGradientReq, callOptions ...callopt.Option) (r *core_api.GetGradientResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.GetGradient(ctx, Req)
+}
+
+func (p *kChargeClient) GetAmount(ctx context.Context, Req *core_api.GetAmountReq, callOptions ...callopt.Option) (r *core_api.GetAmountResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetAmount(ctx, Req)
 }
