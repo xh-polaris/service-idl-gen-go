@@ -18,6 +18,7 @@ type Client interface {
 	GetEvaluateLogs(ctx context.Context, Req *show.GetEssayEvaluateLogsReq, callOptions ...callopt.Option) (r *show.GetEssayEvaluateLogsResp, err error)
 	OCR(ctx context.Context, Req *show.OCRReq, callOptions ...callopt.Option) (r *show.OCRResp, err error)
 	ApplySignedUrl(ctx context.Context, Req *show.ApplySignedUrlReq, callOptions ...callopt.Option) (r *show.ApplySignedUrlResp, err error)
+	SendVerifyCode(ctx context.Context, Req *show.SendVerifyCodeReq, callOptions ...callopt.Option) (r *show.Response, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -82,4 +83,9 @@ func (p *kShowClient) OCR(ctx context.Context, Req *show.OCRReq, callOptions ...
 func (p *kShowClient) ApplySignedUrl(ctx context.Context, Req *show.ApplySignedUrlReq, callOptions ...callopt.Option) (r *show.ApplySignedUrlResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.ApplySignedUrl(ctx, Req)
+}
+
+func (p *kShowClient) SendVerifyCode(ctx context.Context, Req *show.SendVerifyCodeReq, callOptions ...callopt.Option) (r *show.Response, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.SendVerifyCode(ctx, Req)
 }

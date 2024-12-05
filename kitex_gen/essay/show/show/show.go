@@ -64,6 +64,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"SendVerifyCode": kitex.NewMethodInfo(
+		sendVerifyCodeHandler,
+		newSendVerifyCodeArgs,
+		newSendVerifyCodeResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 }
 
 var (
@@ -1201,6 +1208,159 @@ func (p *ApplySignedUrlResult) GetResult() interface{} {
 	return p.Success
 }
 
+func sendVerifyCodeHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(show.SendVerifyCodeReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(show.Show).SendVerifyCode(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *SendVerifyCodeArgs:
+		success, err := handler.(show.Show).SendVerifyCode(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*SendVerifyCodeResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newSendVerifyCodeArgs() interface{} {
+	return &SendVerifyCodeArgs{}
+}
+
+func newSendVerifyCodeResult() interface{} {
+	return &SendVerifyCodeResult{}
+}
+
+type SendVerifyCodeArgs struct {
+	Req *show.SendVerifyCodeReq
+}
+
+func (p *SendVerifyCodeArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(show.SendVerifyCodeReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *SendVerifyCodeArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *SendVerifyCodeArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *SendVerifyCodeArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *SendVerifyCodeArgs) Unmarshal(in []byte) error {
+	msg := new(show.SendVerifyCodeReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var SendVerifyCodeArgs_Req_DEFAULT *show.SendVerifyCodeReq
+
+func (p *SendVerifyCodeArgs) GetReq() *show.SendVerifyCodeReq {
+	if !p.IsSetReq() {
+		return SendVerifyCodeArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *SendVerifyCodeArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *SendVerifyCodeArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type SendVerifyCodeResult struct {
+	Success *show.Response
+}
+
+var SendVerifyCodeResult_Success_DEFAULT *show.Response
+
+func (p *SendVerifyCodeResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(show.Response)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *SendVerifyCodeResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *SendVerifyCodeResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *SendVerifyCodeResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *SendVerifyCodeResult) Unmarshal(in []byte) error {
+	msg := new(show.Response)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *SendVerifyCodeResult) GetSuccess() *show.Response {
+	if !p.IsSetSuccess() {
+		return SendVerifyCodeResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *SendVerifyCodeResult) SetSuccess(x interface{}) {
+	p.Success = x.(*show.Response)
+}
+
+func (p *SendVerifyCodeResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *SendVerifyCodeResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -1276,6 +1436,16 @@ func (p *kClient) ApplySignedUrl(ctx context.Context, Req *show.ApplySignedUrlRe
 	_args.Req = Req
 	var _result ApplySignedUrlResult
 	if err = p.c.Call(ctx, "ApplySignedUrl", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) SendVerifyCode(ctx context.Context, Req *show.SendVerifyCodeReq) (r *show.Response, err error) {
+	var _args SendVerifyCodeArgs
+	_args.Req = Req
+	var _result SendVerifyCodeResult
+	if err = p.c.Call(ctx, "SendVerifyCode", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
