@@ -95,6 +95,11 @@ func (x *SignUpResp) FastRead(buf []byte, _type int8, number int32) (offset int,
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 4:
+		offset, err = x.fastReadField4(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -120,6 +125,11 @@ func (x *SignUpResp) fastReadField2(buf []byte, _type int8) (offset int, err err
 
 func (x *SignUpResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	x.AccessExpire, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *SignUpResp) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+	x.Name, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -197,6 +207,11 @@ func (x *SignInResp) FastRead(buf []byte, _type int8, number int32) (offset int,
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 4:
+		offset, err = x.fastReadField4(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -222,6 +237,11 @@ func (x *SignInResp) fastReadField2(buf []byte, _type int8) (offset int, err err
 
 func (x *SignInResp) fastReadField3(buf []byte, _type int8) (offset int, err error) {
 	x.AccessExpire, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *SignInResp) fastReadField4(buf []byte, _type int8) (offset int, err error) {
+	x.Name, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -787,6 +807,11 @@ func (x *GetUserInfoResp_Payload) FastRead(buf []byte, _type int8, number int32)
 		if err != nil {
 			goto ReadFieldError
 		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
 	default:
 		offset, err = fastpb.Skip(buf, _type, number)
 		if err != nil {
@@ -807,6 +832,11 @@ func (x *GetUserInfoResp_Payload) fastReadField1(buf []byte, _type int8) (offset
 
 func (x *GetUserInfoResp_Payload) fastReadField2(buf []byte, _type int8) (offset int, err error) {
 	x.Count, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *GetUserInfoResp_Payload) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.Phone, offset, err = fastpb.ReadString(buf, _type)
 	return offset, err
 }
 
@@ -869,6 +899,7 @@ func (x *SignUpResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField4(buf[offset:])
 	return offset
 }
 
@@ -893,6 +924,14 @@ func (x *SignUpResp) fastWriteField3(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetAccessExpire())
+	return offset
+}
+
+func (x *SignUpResp) fastWriteField4(buf []byte) (offset int) {
+	if x.Name == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 4, x.GetName())
 	return offset
 }
 
@@ -946,6 +985,7 @@ func (x *SignInResp) FastWrite(buf []byte) (offset int) {
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
 	offset += x.fastWriteField3(buf[offset:])
+	offset += x.fastWriteField4(buf[offset:])
 	return offset
 }
 
@@ -970,6 +1010,14 @@ func (x *SignInResp) fastWriteField3(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetAccessExpire())
+	return offset
+}
+
+func (x *SignInResp) fastWriteField4(buf []byte) (offset int) {
+	if x.Name == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 4, x.GetName())
 	return offset
 }
 
@@ -1364,6 +1412,7 @@ func (x *GetUserInfoResp_Payload) FastWrite(buf []byte) (offset int) {
 	}
 	offset += x.fastWriteField1(buf[offset:])
 	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
 	return offset
 }
 
@@ -1380,6 +1429,14 @@ func (x *GetUserInfoResp_Payload) fastWriteField2(buf []byte) (offset int) {
 		return offset
 	}
 	offset += fastpb.WriteInt64(buf[offset:], 2, x.GetCount())
+	return offset
+}
+
+func (x *GetUserInfoResp_Payload) fastWriteField3(buf []byte) (offset int) {
+	if x.Phone == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 3, x.GetPhone())
 	return offset
 }
 
@@ -1442,6 +1499,7 @@ func (x *SignUpResp) Size() (n int) {
 	n += x.sizeField1()
 	n += x.sizeField2()
 	n += x.sizeField3()
+	n += x.sizeField4()
 	return n
 }
 
@@ -1466,6 +1524,14 @@ func (x *SignUpResp) sizeField3() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(3, x.GetAccessExpire())
+	return n
+}
+
+func (x *SignUpResp) sizeField4() (n int) {
+	if x.Name == "" {
+		return n
+	}
+	n += fastpb.SizeString(4, x.GetName())
 	return n
 }
 
@@ -1519,6 +1585,7 @@ func (x *SignInResp) Size() (n int) {
 	n += x.sizeField1()
 	n += x.sizeField2()
 	n += x.sizeField3()
+	n += x.sizeField4()
 	return n
 }
 
@@ -1543,6 +1610,14 @@ func (x *SignInResp) sizeField3() (n int) {
 		return n
 	}
 	n += fastpb.SizeInt64(3, x.GetAccessExpire())
+	return n
+}
+
+func (x *SignInResp) sizeField4() (n int) {
+	if x.Name == "" {
+		return n
+	}
+	n += fastpb.SizeString(4, x.GetName())
 	return n
 }
 
@@ -1937,6 +2012,7 @@ func (x *GetUserInfoResp_Payload) Size() (n int) {
 	}
 	n += x.sizeField1()
 	n += x.sizeField2()
+	n += x.sizeField3()
 	return n
 }
 
@@ -1956,6 +2032,14 @@ func (x *GetUserInfoResp_Payload) sizeField2() (n int) {
 	return n
 }
 
+func (x *GetUserInfoResp_Payload) sizeField3() (n int) {
+	if x.Phone == "" {
+		return n
+	}
+	n += fastpb.SizeString(3, x.GetPhone())
+	return n
+}
+
 var fieldIDToName_SignUpReq = map[int32]string{
 	1: "AuthId",
 	2: "AuthType",
@@ -1968,6 +2052,7 @@ var fieldIDToName_SignUpResp = map[int32]string{
 	1: "Id",
 	2: "AccessToken",
 	3: "AccessExpire",
+	4: "Name",
 }
 
 var fieldIDToName_SignInReq = map[int32]string{
@@ -1981,6 +2066,7 @@ var fieldIDToName_SignInResp = map[int32]string{
 	1: "Id",
 	2: "AccessToken",
 	3: "AccessExpire",
+	4: "Name",
 }
 
 var fieldIDToName_GetUserInfoReq = map[int32]string{}
@@ -2058,6 +2144,7 @@ var fieldIDToName_SendVerifyCodeReq = map[int32]string{
 var fieldIDToName_GetUserInfoResp_Payload = map[int32]string{
 	1: "Name",
 	2: "Count",
+	3: "Phone",
 }
 
 var _ = basic.File_basic_pagination_proto
