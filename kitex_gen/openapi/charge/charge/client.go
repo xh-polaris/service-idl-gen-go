@@ -28,6 +28,7 @@ type Client interface {
 	CreateGradient(ctx context.Context, Req *charge.CreateGradientReq, callOptions ...callopt.Option) (r *charge.CreateGradientResp, err error)
 	UpdateGradient(ctx context.Context, Req *charge.UpdateGradientReq, callOptions ...callopt.Option) (r *charge.UpdateGradientResp, err error)
 	GetGradient(ctx context.Context, Req *charge.GetGradientReq, callOptions ...callopt.Option) (r *charge.GetGradientResp, err error)
+	GetAmount(ctx context.Context, Req *charge.GetAmountReq, callOptions ...callopt.Option) (r *charge.GetAmountResp, err error)
 	CreateLog(ctx context.Context, Req *charge.CreateLogReq, callOptions ...callopt.Option) (r *charge.CreateLogResp, err error)
 	GetLog(ctx context.Context, Req *charge.GetLogReq, callOptions ...callopt.Option) (r *charge.GetLogResp, err error)
 	GetAccountByTxId(ctx context.Context, Req *charge.GetAccountByTxIdReq, callOptions ...callopt.Option) (r *charge.GetAccountByTxIdResp, err error)
@@ -145,6 +146,11 @@ func (p *kChargeClient) UpdateGradient(ctx context.Context, Req *charge.UpdateGr
 func (p *kChargeClient) GetGradient(ctx context.Context, Req *charge.GetGradientReq, callOptions ...callopt.Option) (r *charge.GetGradientResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.GetGradient(ctx, Req)
+}
+
+func (p *kChargeClient) GetAmount(ctx context.Context, Req *charge.GetAmountReq, callOptions ...callopt.Option) (r *charge.GetAmountResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetAmount(ctx, Req)
 }
 
 func (p *kChargeClient) CreateLog(ctx context.Context, Req *charge.CreateLogReq, callOptions ...callopt.Option) (r *charge.CreateLogResp, err error) {

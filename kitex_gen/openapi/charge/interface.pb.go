@@ -2078,6 +2078,126 @@ func (x *GetGradientResp) GetGradient() *Gradient {
 	return nil
 }
 
+// 计算价格请求
+type GetAmountReq struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Increment int64  `protobuf:"varint,1,opt,name=increment,proto3" json:"increment,omitempty"`
+	FullInfId string `protobuf:"bytes,2,opt,name=fullInfId,proto3" json:"fullInfId,omitempty"`
+}
+
+func (x *GetAmountReq) Reset() {
+	*x = GetAmountReq{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_openapi_charge_interface_proto_msgTypes[34]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetAmountReq) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAmountReq) ProtoMessage() {}
+
+func (x *GetAmountReq) ProtoReflect() protoreflect.Message {
+	mi := &file_openapi_charge_interface_proto_msgTypes[34]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAmountReq.ProtoReflect.Descriptor instead.
+func (*GetAmountReq) Descriptor() ([]byte, []int) {
+	return file_openapi_charge_interface_proto_rawDescGZIP(), []int{34}
+}
+
+func (x *GetAmountReq) GetIncrement() int64 {
+	if x != nil {
+		return x.Increment
+	}
+	return 0
+}
+
+func (x *GetAmountReq) GetFullInfId() string {
+	if x != nil {
+		return x.FullInfId
+	}
+	return ""
+}
+
+// 计算价格响应
+type GetAmountResp struct {
+	state         protoimpl.MessageState
+	sizeCache     protoimpl.SizeCache
+	unknownFields protoimpl.UnknownFields
+
+	Rate         int64 `protobuf:"varint,1,opt,name=rate,proto3" json:"rate,omitempty"`                 // 折扣程度
+	OriginAmount int64 `protobuf:"varint,2,opt,name=originAmount,proto3" json:"originAmount,omitempty"` // 原始价格
+	Amount       int64 `protobuf:"varint,3,opt,name=amount,proto3" json:"amount,omitempty"`             // 折后价格
+}
+
+func (x *GetAmountResp) Reset() {
+	*x = GetAmountResp{}
+	if protoimpl.UnsafeEnabled {
+		mi := &file_openapi_charge_interface_proto_msgTypes[35]
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		ms.StoreMessageInfo(mi)
+	}
+}
+
+func (x *GetAmountResp) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*GetAmountResp) ProtoMessage() {}
+
+func (x *GetAmountResp) ProtoReflect() protoreflect.Message {
+	mi := &file_openapi_charge_interface_proto_msgTypes[35]
+	if protoimpl.UnsafeEnabled && x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use GetAmountResp.ProtoReflect.Descriptor instead.
+func (*GetAmountResp) Descriptor() ([]byte, []int) {
+	return file_openapi_charge_interface_proto_rawDescGZIP(), []int{35}
+}
+
+func (x *GetAmountResp) GetRate() int64 {
+	if x != nil {
+		return x.Rate
+	}
+	return 0
+}
+
+func (x *GetAmountResp) GetOriginAmount() int64 {
+	if x != nil {
+		return x.OriginAmount
+	}
+	return 0
+}
+
+func (x *GetAmountResp) GetAmount() int64 {
+	if x != nil {
+		return x.Amount
+	}
+	return 0
+}
+
 var File_openapi_charge_interface_proto protoreflect.FileDescriptor
 
 var file_openapi_charge_interface_proto_rawDesc = []byte{
@@ -2309,16 +2429,26 @@ var file_openapi_charge_interface_proto_rawDesc = []byte{
 	0x69, 0x65, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x12, 0x34, 0x0a, 0x08, 0x67, 0x72, 0x61, 0x64,
 	0x69, 0x65, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0b, 0x32, 0x18, 0x2e, 0x6f, 0x70, 0x65,
 	0x6e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x68, 0x61, 0x72, 0x67, 0x65, 0x2e, 0x47, 0x72, 0x61, 0x64,
-	0x69, 0x65, 0x6e, 0x74, 0x52, 0x08, 0x67, 0x72, 0x61, 0x64, 0x69, 0x65, 0x6e, 0x74, 0x42, 0x7a,
-	0x0a, 0x23, 0x63, 0x6f, 0x6d, 0x2e, 0x78, 0x68, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2e,
-	0x69, 0x64, 0x6c, 0x67, 0x65, 0x6e, 0x2e, 0x6f, 0x70, 0x65, 0x6e, 0x61, 0x70, 0x69, 0x2e, 0x63,
-	0x68, 0x61, 0x72, 0x67, 0x65, 0x42, 0x0e, 0x49, 0x6e, 0x74, 0x65, 0x72, 0x66, 0x61, 0x63, 0x65,
-	0x50, 0x72, 0x6f, 0x74, 0x6f, 0x50, 0x01, 0x5a, 0x41, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e,
-	0x63, 0x6f, 0x6d, 0x2f, 0x78, 0x68, 0x2d, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2f, 0x73,
-	0x65, 0x72, 0x76, 0x69, 0x63, 0x65, 0x2d, 0x69, 0x64, 0x6c, 0x2d, 0x67, 0x65, 0x6e, 0x2d, 0x67,
-	0x6f, 0x2f, 0x6b, 0x69, 0x74, 0x65, 0x78, 0x5f, 0x67, 0x65, 0x6e, 0x2f, 0x6f, 0x70, 0x65, 0x6e,
-	0x61, 0x70, 0x69, 0x2f, 0x63, 0x68, 0x61, 0x72, 0x67, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74,
-	0x6f, 0x33,
+	0x69, 0x65, 0x6e, 0x74, 0x52, 0x08, 0x67, 0x72, 0x61, 0x64, 0x69, 0x65, 0x6e, 0x74, 0x22, 0x4a,
+	0x0a, 0x0c, 0x47, 0x65, 0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x71, 0x12, 0x1c,
+	0x0a, 0x09, 0x69, 0x6e, 0x63, 0x72, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x18, 0x01, 0x20, 0x01, 0x28,
+	0x03, 0x52, 0x09, 0x69, 0x6e, 0x63, 0x72, 0x65, 0x6d, 0x65, 0x6e, 0x74, 0x12, 0x1c, 0x0a, 0x09,
+	0x66, 0x75, 0x6c, 0x6c, 0x49, 0x6e, 0x66, 0x49, 0x64, 0x18, 0x02, 0x20, 0x01, 0x28, 0x09, 0x52,
+	0x09, 0x66, 0x75, 0x6c, 0x6c, 0x49, 0x6e, 0x66, 0x49, 0x64, 0x22, 0x5f, 0x0a, 0x0d, 0x47, 0x65,
+	0x74, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x52, 0x65, 0x73, 0x70, 0x12, 0x12, 0x0a, 0x04, 0x72,
+	0x61, 0x74, 0x65, 0x18, 0x01, 0x20, 0x01, 0x28, 0x03, 0x52, 0x04, 0x72, 0x61, 0x74, 0x65, 0x12,
+	0x22, 0x0a, 0x0c, 0x6f, 0x72, 0x69, 0x67, 0x69, 0x6e, 0x41, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18,
+	0x02, 0x20, 0x01, 0x28, 0x03, 0x52, 0x0c, 0x6f, 0x72, 0x69, 0x67, 0x69, 0x6e, 0x41, 0x6d, 0x6f,
+	0x75, 0x6e, 0x74, 0x12, 0x16, 0x0a, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x18, 0x03, 0x20,
+	0x01, 0x28, 0x03, 0x52, 0x06, 0x61, 0x6d, 0x6f, 0x75, 0x6e, 0x74, 0x42, 0x7a, 0x0a, 0x23, 0x63,
+	0x6f, 0x6d, 0x2e, 0x78, 0x68, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2e, 0x69, 0x64, 0x6c,
+	0x67, 0x65, 0x6e, 0x2e, 0x6f, 0x70, 0x65, 0x6e, 0x61, 0x70, 0x69, 0x2e, 0x63, 0x68, 0x61, 0x72,
+	0x67, 0x65, 0x42, 0x0e, 0x49, 0x6e, 0x74, 0x65, 0x72, 0x66, 0x61, 0x63, 0x65, 0x50, 0x72, 0x6f,
+	0x74, 0x6f, 0x50, 0x01, 0x5a, 0x41, 0x67, 0x69, 0x74, 0x68, 0x75, 0x62, 0x2e, 0x63, 0x6f, 0x6d,
+	0x2f, 0x78, 0x68, 0x2d, 0x70, 0x6f, 0x6c, 0x61, 0x72, 0x69, 0x73, 0x2f, 0x73, 0x65, 0x72, 0x76,
+	0x69, 0x63, 0x65, 0x2d, 0x69, 0x64, 0x6c, 0x2d, 0x67, 0x65, 0x6e, 0x2d, 0x67, 0x6f, 0x2f, 0x6b,
+	0x69, 0x74, 0x65, 0x78, 0x5f, 0x67, 0x65, 0x6e, 0x2f, 0x6f, 0x70, 0x65, 0x6e, 0x61, 0x70, 0x69,
+	0x2f, 0x63, 0x68, 0x61, 0x72, 0x67, 0x65, 0x62, 0x06, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x33,
 }
 
 var (
@@ -2333,7 +2463,7 @@ func file_openapi_charge_interface_proto_rawDescGZIP() []byte {
 	return file_openapi_charge_interface_proto_rawDescData
 }
 
-var file_openapi_charge_interface_proto_msgTypes = make([]protoimpl.MessageInfo, 34)
+var file_openapi_charge_interface_proto_msgTypes = make([]protoimpl.MessageInfo, 36)
 var file_openapi_charge_interface_proto_goTypes = []interface{}{
 	(*CreateBaseInterfaceReq)(nil),              // 0: openapi.charge.CreateBaseInterfaceReq
 	(*CreateBaseInterfaceResp)(nil),             // 1: openapi.charge.CreateBaseInterfaceResp
@@ -2369,39 +2499,41 @@ var file_openapi_charge_interface_proto_goTypes = []interface{}{
 	(*UpdateGradientResp)(nil),                  // 31: openapi.charge.UpdateGradientResp
 	(*GetGradientReq)(nil),                      // 32: openapi.charge.GetGradientReq
 	(*GetGradientResp)(nil),                     // 33: openapi.charge.GetGradientResp
-	(MethodType)(0),                             // 34: openapi.charge.MethodType
-	(PassWayType)(0),                            // 35: openapi.charge.PassWayType
-	(*Parameter)(nil),                           // 36: openapi.charge.Parameter
-	(InterfaceStatus)(0),                        // 37: openapi.charge.InterfaceStatus
-	(*basic.PaginationOptions)(nil),             // 38: basic.PaginationOptions
-	(*BaseInterface)(nil),                       // 39: openapi.charge.BaseInterface
-	(ChargeType)(0),                             // 40: openapi.charge.ChargeType
-	(*Margin)(nil),                              // 41: openapi.charge.Margin
-	(*FullInterface)(nil),                       // 42: openapi.charge.FullInterface
-	(*Discount)(nil),                            // 43: openapi.charge.Discount
-	(*Gradient)(nil),                            // 44: openapi.charge.Gradient
+	(*GetAmountReq)(nil),                        // 34: openapi.charge.GetAmountReq
+	(*GetAmountResp)(nil),                       // 35: openapi.charge.GetAmountResp
+	(MethodType)(0),                             // 36: openapi.charge.MethodType
+	(PassWayType)(0),                            // 37: openapi.charge.PassWayType
+	(*Parameter)(nil),                           // 38: openapi.charge.Parameter
+	(InterfaceStatus)(0),                        // 39: openapi.charge.InterfaceStatus
+	(*basic.PaginationOptions)(nil),             // 40: basic.PaginationOptions
+	(*BaseInterface)(nil),                       // 41: openapi.charge.BaseInterface
+	(ChargeType)(0),                             // 42: openapi.charge.ChargeType
+	(*Margin)(nil),                              // 43: openapi.charge.Margin
+	(*FullInterface)(nil),                       // 44: openapi.charge.FullInterface
+	(*Discount)(nil),                            // 45: openapi.charge.Discount
+	(*Gradient)(nil),                            // 46: openapi.charge.Gradient
 }
 var file_openapi_charge_interface_proto_depIdxs = []int32{
-	34, // 0: openapi.charge.CreateBaseInterfaceReq.method:type_name -> openapi.charge.MethodType
-	35, // 1: openapi.charge.CreateBaseInterfaceReq.passWay:type_name -> openapi.charge.PassWayType
-	36, // 2: openapi.charge.CreateBaseInterfaceReq.params:type_name -> openapi.charge.Parameter
-	34, // 3: openapi.charge.UpdateBaseInterfaceReq.method:type_name -> openapi.charge.MethodType
-	35, // 4: openapi.charge.UpdateBaseInterfaceReq.passWay:type_name -> openapi.charge.PassWayType
-	36, // 5: openapi.charge.UpdateBaseInterfaceReq.params:type_name -> openapi.charge.Parameter
-	37, // 6: openapi.charge.UpdateBaseInterfaceReq.status:type_name -> openapi.charge.InterfaceStatus
-	38, // 7: openapi.charge.GetBaseInterfaceReq.paginationOptions:type_name -> basic.PaginationOptions
-	39, // 8: openapi.charge.GetBaseInterfaceResp.baseInterfaces:type_name -> openapi.charge.BaseInterface
-	40, // 9: openapi.charge.CreateFullInterfaceReq.chargeType:type_name -> openapi.charge.ChargeType
-	40, // 10: openapi.charge.UpdateFullInterfaceReq.chargeType:type_name -> openapi.charge.ChargeType
-	37, // 11: openapi.charge.UpdateFullInterfaceReq.status:type_name -> openapi.charge.InterfaceStatus
-	41, // 12: openapi.charge.GetMarginResp.margin:type_name -> openapi.charge.Margin
-	38, // 13: openapi.charge.GetFullInterfaceReq.paginationOptions:type_name -> basic.PaginationOptions
-	42, // 14: openapi.charge.GetFullInterfaceResp.fullInterfaces:type_name -> openapi.charge.FullInterface
-	42, // 15: openapi.charge.GetOneFullInterfaceResp.inf:type_name -> openapi.charge.FullInterface
-	43, // 16: openapi.charge.CreateGradientReq.discounts:type_name -> openapi.charge.Discount
-	43, // 17: openapi.charge.UpdateGradientReq.discounts:type_name -> openapi.charge.Discount
-	37, // 18: openapi.charge.UpdateGradientReq.status:type_name -> openapi.charge.InterfaceStatus
-	44, // 19: openapi.charge.GetGradientResp.gradient:type_name -> openapi.charge.Gradient
+	36, // 0: openapi.charge.CreateBaseInterfaceReq.method:type_name -> openapi.charge.MethodType
+	37, // 1: openapi.charge.CreateBaseInterfaceReq.passWay:type_name -> openapi.charge.PassWayType
+	38, // 2: openapi.charge.CreateBaseInterfaceReq.params:type_name -> openapi.charge.Parameter
+	36, // 3: openapi.charge.UpdateBaseInterfaceReq.method:type_name -> openapi.charge.MethodType
+	37, // 4: openapi.charge.UpdateBaseInterfaceReq.passWay:type_name -> openapi.charge.PassWayType
+	38, // 5: openapi.charge.UpdateBaseInterfaceReq.params:type_name -> openapi.charge.Parameter
+	39, // 6: openapi.charge.UpdateBaseInterfaceReq.status:type_name -> openapi.charge.InterfaceStatus
+	40, // 7: openapi.charge.GetBaseInterfaceReq.paginationOptions:type_name -> basic.PaginationOptions
+	41, // 8: openapi.charge.GetBaseInterfaceResp.baseInterfaces:type_name -> openapi.charge.BaseInterface
+	42, // 9: openapi.charge.CreateFullInterfaceReq.chargeType:type_name -> openapi.charge.ChargeType
+	42, // 10: openapi.charge.UpdateFullInterfaceReq.chargeType:type_name -> openapi.charge.ChargeType
+	39, // 11: openapi.charge.UpdateFullInterfaceReq.status:type_name -> openapi.charge.InterfaceStatus
+	43, // 12: openapi.charge.GetMarginResp.margin:type_name -> openapi.charge.Margin
+	40, // 13: openapi.charge.GetFullInterfaceReq.paginationOptions:type_name -> basic.PaginationOptions
+	44, // 14: openapi.charge.GetFullInterfaceResp.fullInterfaces:type_name -> openapi.charge.FullInterface
+	44, // 15: openapi.charge.GetOneFullInterfaceResp.inf:type_name -> openapi.charge.FullInterface
+	45, // 16: openapi.charge.CreateGradientReq.discounts:type_name -> openapi.charge.Discount
+	45, // 17: openapi.charge.UpdateGradientReq.discounts:type_name -> openapi.charge.Discount
+	39, // 18: openapi.charge.UpdateGradientReq.status:type_name -> openapi.charge.InterfaceStatus
+	46, // 19: openapi.charge.GetGradientResp.gradient:type_name -> openapi.charge.Gradient
 	20, // [20:20] is the sub-list for method output_type
 	20, // [20:20] is the sub-list for method input_type
 	20, // [20:20] is the sub-list for extension type_name
@@ -2824,6 +2956,30 @@ func file_openapi_charge_interface_proto_init() {
 				return nil
 			}
 		}
+		file_openapi_charge_interface_proto_msgTypes[34].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetAmountReq); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
+		file_openapi_charge_interface_proto_msgTypes[35].Exporter = func(v interface{}, i int) interface{} {
+			switch v := v.(*GetAmountResp); i {
+			case 0:
+				return &v.state
+			case 1:
+				return &v.sizeCache
+			case 2:
+				return &v.unknownFields
+			default:
+				return nil
+			}
+		}
 	}
 	file_openapi_charge_interface_proto_msgTypes[14].OneofWrappers = []interface{}{}
 	type x struct{}
@@ -2832,7 +2988,7 @@ func file_openapi_charge_interface_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: file_openapi_charge_interface_proto_rawDesc,
 			NumEnums:      0,
-			NumMessages:   34,
+			NumMessages:   36,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
