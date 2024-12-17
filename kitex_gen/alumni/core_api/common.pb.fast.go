@@ -1483,6 +1483,123 @@ func (x *Response) fastReadField2(buf []byte, _type int8) (offset int, err error
 	return offset, err
 }
 
+func (x *SendVerifyCodeReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 3:
+		offset, err = x.fastReadField3(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_SendVerifyCodeReq[number], err)
+}
+
+func (x *SendVerifyCodeReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.AuthType, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *SendVerifyCodeReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.AuthId, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *SendVerifyCodeReq) fastReadField3(buf []byte, _type int8) (offset int, err error) {
+	x.Type, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *ApplySignedUrlReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ApplySignedUrlReq[number], err)
+}
+
+func (x *ApplySignedUrlReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.Prefix = &tmp
+	return offset, err
+}
+
+func (x *ApplySignedUrlReq) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	tmp, offset, err := fastpb.ReadString(buf, _type)
+	x.Suffix = &tmp
+	return offset, err
+}
+
+func (x *ApplySignedUrlResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_ApplySignedUrlResp[number], err)
+}
+
+func (x *ApplySignedUrlResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Url, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *ApplySignedUrlResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.SessionToken, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
 func (x *RegisterActivityReq_RegisterItem) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -2638,6 +2755,90 @@ func (x *Response) fastWriteField2(buf []byte) (offset int) {
 	return offset
 }
 
+func (x *SendVerifyCodeReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	offset += x.fastWriteField3(buf[offset:])
+	return offset
+}
+
+func (x *SendVerifyCodeReq) fastWriteField1(buf []byte) (offset int) {
+	if x.AuthType == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetAuthType())
+	return offset
+}
+
+func (x *SendVerifyCodeReq) fastWriteField2(buf []byte) (offset int) {
+	if x.AuthId == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetAuthId())
+	return offset
+}
+
+func (x *SendVerifyCodeReq) fastWriteField3(buf []byte) (offset int) {
+	if x.Type == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 3, x.GetType())
+	return offset
+}
+
+func (x *ApplySignedUrlReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *ApplySignedUrlReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Prefix == nil {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetPrefix())
+	return offset
+}
+
+func (x *ApplySignedUrlReq) fastWriteField2(buf []byte) (offset int) {
+	if x.Suffix == nil {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetSuffix())
+	return offset
+}
+
+func (x *ApplySignedUrlResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *ApplySignedUrlResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Url == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetUrl())
+	return offset
+}
+
+func (x *ApplySignedUrlResp) fastWriteField2(buf []byte) (offset int) {
+	if x.SessionToken == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetSessionToken())
+	return offset
+}
+
 func (x *RegisterActivityReq_RegisterItem) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -3783,6 +3984,90 @@ func (x *Response) sizeField2() (n int) {
 	return n
 }
 
+func (x *SendVerifyCodeReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	n += x.sizeField3()
+	return n
+}
+
+func (x *SendVerifyCodeReq) sizeField1() (n int) {
+	if x.AuthType == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetAuthType())
+	return n
+}
+
+func (x *SendVerifyCodeReq) sizeField2() (n int) {
+	if x.AuthId == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetAuthId())
+	return n
+}
+
+func (x *SendVerifyCodeReq) sizeField3() (n int) {
+	if x.Type == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(3, x.GetType())
+	return n
+}
+
+func (x *ApplySignedUrlReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *ApplySignedUrlReq) sizeField1() (n int) {
+	if x.Prefix == nil {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetPrefix())
+	return n
+}
+
+func (x *ApplySignedUrlReq) sizeField2() (n int) {
+	if x.Suffix == nil {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetSuffix())
+	return n
+}
+
+func (x *ApplySignedUrlResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *ApplySignedUrlResp) sizeField1() (n int) {
+	if x.Url == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetUrl())
+	return n
+}
+
+func (x *ApplySignedUrlResp) sizeField2() (n int) {
+	if x.SessionToken == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetSessionToken())
+	return n
+}
+
 func (x *RegisterActivityReq_RegisterItem) Size() (n int) {
 	if x == nil {
 		return n
@@ -3981,6 +4266,22 @@ var fieldIDToName_Register = map[int32]string{
 var fieldIDToName_Response = map[int32]string{
 	1: "Code",
 	2: "Msg",
+}
+
+var fieldIDToName_SendVerifyCodeReq = map[int32]string{
+	1: "AuthType",
+	2: "AuthId",
+	3: "Type",
+}
+
+var fieldIDToName_ApplySignedUrlReq = map[int32]string{
+	1: "Prefix",
+	2: "Suffix",
+}
+
+var fieldIDToName_ApplySignedUrlResp = map[int32]string{
+	1: "Url",
+	2: "SessionToken",
 }
 
 var fieldIDToName_RegisterActivityReq_RegisterItem = map[int32]string{
