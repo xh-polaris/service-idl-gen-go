@@ -14,9 +14,13 @@ type Client interface {
 	SignUp(ctx context.Context, Req *show.SignUpReq, callOptions ...callopt.Option) (r *show.SignUpResp, err error)
 	SignIn(ctx context.Context, Req *show.SignInReq, callOptions ...callopt.Option) (r *show.SignInResp, err error)
 	GetUserInfo(ctx context.Context, Req *show.GetUserInfoReq, callOptions ...callopt.Option) (r *show.GetUserInfoResp, err error)
+	UpdatePassword(ctx context.Context, Req *show.UpdatePasswordReq, callOptions ...callopt.Option) (r *show.UpdatePasswordReq, err error)
 	UpdateUserInfo(ctx context.Context, Req *show.UpdateUserInfoReq, callOptions ...callopt.Option) (r *show.Response, err error)
 	EssayEvaluate(ctx context.Context, Req *show.EssayEvaluateReq, callOptions ...callopt.Option) (r *show.EssayEvaluateResp, err error)
 	GetEvaluateLogs(ctx context.Context, Req *show.GetEssayEvaluateLogsReq, callOptions ...callopt.Option) (r *show.GetEssayEvaluateLogsResp, err error)
+	OCR(ctx context.Context, Req *show.OCRReq, callOptions ...callopt.Option) (r *show.OCRResp, err error)
+	ApplySignedUrl(ctx context.Context, Req *show.ApplySignedUrlReq, callOptions ...callopt.Option) (r *show.ApplySignedUrlResp, err error)
+	SendVerifyCode(ctx context.Context, Req *show.SendVerifyCodeReq, callOptions ...callopt.Option) (r *show.Response, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -63,6 +67,11 @@ func (p *kShowClient) GetUserInfo(ctx context.Context, Req *show.GetUserInfoReq,
 	return p.kClient.GetUserInfo(ctx, Req)
 }
 
+func (p *kShowClient) UpdatePassword(ctx context.Context, Req *show.UpdatePasswordReq, callOptions ...callopt.Option) (r *show.UpdatePasswordReq, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.UpdatePassword(ctx, Req)
+}
+
 func (p *kShowClient) UpdateUserInfo(ctx context.Context, Req *show.UpdateUserInfoReq, callOptions ...callopt.Option) (r *show.Response, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.UpdateUserInfo(ctx, Req)
@@ -76,4 +85,19 @@ func (p *kShowClient) EssayEvaluate(ctx context.Context, Req *show.EssayEvaluate
 func (p *kShowClient) GetEvaluateLogs(ctx context.Context, Req *show.GetEssayEvaluateLogsReq, callOptions ...callopt.Option) (r *show.GetEssayEvaluateLogsResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.GetEvaluateLogs(ctx, Req)
+}
+
+func (p *kShowClient) OCR(ctx context.Context, Req *show.OCRReq, callOptions ...callopt.Option) (r *show.OCRResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.OCR(ctx, Req)
+}
+
+func (p *kShowClient) ApplySignedUrl(ctx context.Context, Req *show.ApplySignedUrlReq, callOptions ...callopt.Option) (r *show.ApplySignedUrlResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.ApplySignedUrl(ctx, Req)
+}
+
+func (p *kShowClient) SendVerifyCode(ctx context.Context, Req *show.SendVerifyCodeReq, callOptions ...callopt.Option) (r *show.Response, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.SendVerifyCode(ctx, Req)
 }

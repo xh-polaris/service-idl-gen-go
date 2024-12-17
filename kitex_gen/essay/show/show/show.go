@@ -36,6 +36,13 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
+	"UpdatePassword": kitex.NewMethodInfo(
+		updatePasswordHandler,
+		newUpdatePasswordArgs,
+		newUpdatePasswordResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
 	"UpdateUserInfo": kitex.NewMethodInfo(
 		updateUserInfoHandler,
 		newUpdateUserInfoArgs,
@@ -54,6 +61,27 @@ var serviceMethods = map[string]kitex.MethodInfo{
 		getEvaluateLogsHandler,
 		newGetEvaluateLogsArgs,
 		newGetEvaluateLogsResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"OCR": kitex.NewMethodInfo(
+		oCRHandler,
+		newOCRArgs,
+		newOCRResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"ApplySignedUrl": kitex.NewMethodInfo(
+		applySignedUrlHandler,
+		newApplySignedUrlArgs,
+		newApplySignedUrlResult,
+		false,
+		kitex.WithStreamingMode(kitex.StreamingUnary),
+	),
+	"SendVerifyCode": kitex.NewMethodInfo(
+		sendVerifyCodeHandler,
+		newSendVerifyCodeArgs,
+		newSendVerifyCodeResult,
 		false,
 		kitex.WithStreamingMode(kitex.StreamingUnary),
 	),
@@ -582,6 +610,159 @@ func (p *GetUserInfoResult) GetResult() interface{} {
 	return p.Success
 }
 
+func updatePasswordHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(show.UpdatePasswordReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(show.Show).UpdatePassword(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *UpdatePasswordArgs:
+		success, err := handler.(show.Show).UpdatePassword(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*UpdatePasswordResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newUpdatePasswordArgs() interface{} {
+	return &UpdatePasswordArgs{}
+}
+
+func newUpdatePasswordResult() interface{} {
+	return &UpdatePasswordResult{}
+}
+
+type UpdatePasswordArgs struct {
+	Req *show.UpdatePasswordReq
+}
+
+func (p *UpdatePasswordArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(show.UpdatePasswordReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *UpdatePasswordArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *UpdatePasswordArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *UpdatePasswordArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *UpdatePasswordArgs) Unmarshal(in []byte) error {
+	msg := new(show.UpdatePasswordReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var UpdatePasswordArgs_Req_DEFAULT *show.UpdatePasswordReq
+
+func (p *UpdatePasswordArgs) GetReq() *show.UpdatePasswordReq {
+	if !p.IsSetReq() {
+		return UpdatePasswordArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *UpdatePasswordArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *UpdatePasswordArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type UpdatePasswordResult struct {
+	Success *show.UpdatePasswordReq
+}
+
+var UpdatePasswordResult_Success_DEFAULT *show.UpdatePasswordReq
+
+func (p *UpdatePasswordResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(show.UpdatePasswordReq)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *UpdatePasswordResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *UpdatePasswordResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *UpdatePasswordResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *UpdatePasswordResult) Unmarshal(in []byte) error {
+	msg := new(show.UpdatePasswordReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *UpdatePasswordResult) GetSuccess() *show.UpdatePasswordReq {
+	if !p.IsSetSuccess() {
+		return UpdatePasswordResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *UpdatePasswordResult) SetSuccess(x interface{}) {
+	p.Success = x.(*show.UpdatePasswordReq)
+}
+
+func (p *UpdatePasswordResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *UpdatePasswordResult) GetResult() interface{} {
+	return p.Success
+}
+
 func updateUserInfoHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
 	switch s := arg.(type) {
 	case *streaming.Args:
@@ -1041,6 +1222,465 @@ func (p *GetEvaluateLogsResult) GetResult() interface{} {
 	return p.Success
 }
 
+func oCRHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(show.OCRReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(show.Show).OCR(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *OCRArgs:
+		success, err := handler.(show.Show).OCR(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*OCRResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newOCRArgs() interface{} {
+	return &OCRArgs{}
+}
+
+func newOCRResult() interface{} {
+	return &OCRResult{}
+}
+
+type OCRArgs struct {
+	Req *show.OCRReq
+}
+
+func (p *OCRArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(show.OCRReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *OCRArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *OCRArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *OCRArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *OCRArgs) Unmarshal(in []byte) error {
+	msg := new(show.OCRReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var OCRArgs_Req_DEFAULT *show.OCRReq
+
+func (p *OCRArgs) GetReq() *show.OCRReq {
+	if !p.IsSetReq() {
+		return OCRArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *OCRArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *OCRArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type OCRResult struct {
+	Success *show.OCRResp
+}
+
+var OCRResult_Success_DEFAULT *show.OCRResp
+
+func (p *OCRResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(show.OCRResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *OCRResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *OCRResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *OCRResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *OCRResult) Unmarshal(in []byte) error {
+	msg := new(show.OCRResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *OCRResult) GetSuccess() *show.OCRResp {
+	if !p.IsSetSuccess() {
+		return OCRResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *OCRResult) SetSuccess(x interface{}) {
+	p.Success = x.(*show.OCRResp)
+}
+
+func (p *OCRResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *OCRResult) GetResult() interface{} {
+	return p.Success
+}
+
+func applySignedUrlHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(show.ApplySignedUrlReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(show.Show).ApplySignedUrl(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *ApplySignedUrlArgs:
+		success, err := handler.(show.Show).ApplySignedUrl(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*ApplySignedUrlResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newApplySignedUrlArgs() interface{} {
+	return &ApplySignedUrlArgs{}
+}
+
+func newApplySignedUrlResult() interface{} {
+	return &ApplySignedUrlResult{}
+}
+
+type ApplySignedUrlArgs struct {
+	Req *show.ApplySignedUrlReq
+}
+
+func (p *ApplySignedUrlArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(show.ApplySignedUrlReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *ApplySignedUrlArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *ApplySignedUrlArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *ApplySignedUrlArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *ApplySignedUrlArgs) Unmarshal(in []byte) error {
+	msg := new(show.ApplySignedUrlReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var ApplySignedUrlArgs_Req_DEFAULT *show.ApplySignedUrlReq
+
+func (p *ApplySignedUrlArgs) GetReq() *show.ApplySignedUrlReq {
+	if !p.IsSetReq() {
+		return ApplySignedUrlArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *ApplySignedUrlArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *ApplySignedUrlArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type ApplySignedUrlResult struct {
+	Success *show.ApplySignedUrlResp
+}
+
+var ApplySignedUrlResult_Success_DEFAULT *show.ApplySignedUrlResp
+
+func (p *ApplySignedUrlResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(show.ApplySignedUrlResp)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *ApplySignedUrlResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *ApplySignedUrlResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *ApplySignedUrlResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *ApplySignedUrlResult) Unmarshal(in []byte) error {
+	msg := new(show.ApplySignedUrlResp)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *ApplySignedUrlResult) GetSuccess() *show.ApplySignedUrlResp {
+	if !p.IsSetSuccess() {
+		return ApplySignedUrlResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *ApplySignedUrlResult) SetSuccess(x interface{}) {
+	p.Success = x.(*show.ApplySignedUrlResp)
+}
+
+func (p *ApplySignedUrlResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *ApplySignedUrlResult) GetResult() interface{} {
+	return p.Success
+}
+
+func sendVerifyCodeHandler(ctx context.Context, handler interface{}, arg, result interface{}) error {
+	switch s := arg.(type) {
+	case *streaming.Args:
+		st := s.Stream
+		req := new(show.SendVerifyCodeReq)
+		if err := st.RecvMsg(req); err != nil {
+			return err
+		}
+		resp, err := handler.(show.Show).SendVerifyCode(ctx, req)
+		if err != nil {
+			return err
+		}
+		return st.SendMsg(resp)
+	case *SendVerifyCodeArgs:
+		success, err := handler.(show.Show).SendVerifyCode(ctx, s.Req)
+		if err != nil {
+			return err
+		}
+		realResult := result.(*SendVerifyCodeResult)
+		realResult.Success = success
+		return nil
+	default:
+		return errInvalidMessageType
+	}
+}
+func newSendVerifyCodeArgs() interface{} {
+	return &SendVerifyCodeArgs{}
+}
+
+func newSendVerifyCodeResult() interface{} {
+	return &SendVerifyCodeResult{}
+}
+
+type SendVerifyCodeArgs struct {
+	Req *show.SendVerifyCodeReq
+}
+
+func (p *SendVerifyCodeArgs) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetReq() {
+		p.Req = new(show.SendVerifyCodeReq)
+	}
+	return p.Req.FastRead(buf, _type, number)
+}
+
+func (p *SendVerifyCodeArgs) FastWrite(buf []byte) (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.FastWrite(buf)
+}
+
+func (p *SendVerifyCodeArgs) Size() (n int) {
+	if !p.IsSetReq() {
+		return 0
+	}
+	return p.Req.Size()
+}
+
+func (p *SendVerifyCodeArgs) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetReq() {
+		return out, nil
+	}
+	return proto.Marshal(p.Req)
+}
+
+func (p *SendVerifyCodeArgs) Unmarshal(in []byte) error {
+	msg := new(show.SendVerifyCodeReq)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Req = msg
+	return nil
+}
+
+var SendVerifyCodeArgs_Req_DEFAULT *show.SendVerifyCodeReq
+
+func (p *SendVerifyCodeArgs) GetReq() *show.SendVerifyCodeReq {
+	if !p.IsSetReq() {
+		return SendVerifyCodeArgs_Req_DEFAULT
+	}
+	return p.Req
+}
+
+func (p *SendVerifyCodeArgs) IsSetReq() bool {
+	return p.Req != nil
+}
+
+func (p *SendVerifyCodeArgs) GetFirstArgument() interface{} {
+	return p.Req
+}
+
+type SendVerifyCodeResult struct {
+	Success *show.Response
+}
+
+var SendVerifyCodeResult_Success_DEFAULT *show.Response
+
+func (p *SendVerifyCodeResult) FastRead(buf []byte, _type int8, number int32) (n int, err error) {
+	if !p.IsSetSuccess() {
+		p.Success = new(show.Response)
+	}
+	return p.Success.FastRead(buf, _type, number)
+}
+
+func (p *SendVerifyCodeResult) FastWrite(buf []byte) (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.FastWrite(buf)
+}
+
+func (p *SendVerifyCodeResult) Size() (n int) {
+	if !p.IsSetSuccess() {
+		return 0
+	}
+	return p.Success.Size()
+}
+
+func (p *SendVerifyCodeResult) Marshal(out []byte) ([]byte, error) {
+	if !p.IsSetSuccess() {
+		return out, nil
+	}
+	return proto.Marshal(p.Success)
+}
+
+func (p *SendVerifyCodeResult) Unmarshal(in []byte) error {
+	msg := new(show.Response)
+	if err := proto.Unmarshal(in, msg); err != nil {
+		return err
+	}
+	p.Success = msg
+	return nil
+}
+
+func (p *SendVerifyCodeResult) GetSuccess() *show.Response {
+	if !p.IsSetSuccess() {
+		return SendVerifyCodeResult_Success_DEFAULT
+	}
+	return p.Success
+}
+
+func (p *SendVerifyCodeResult) SetSuccess(x interface{}) {
+	p.Success = x.(*show.Response)
+}
+
+func (p *SendVerifyCodeResult) IsSetSuccess() bool {
+	return p.Success != nil
+}
+
+func (p *SendVerifyCodeResult) GetResult() interface{} {
+	return p.Success
+}
+
 type kClient struct {
 	c client.Client
 }
@@ -1081,6 +1721,16 @@ func (p *kClient) GetUserInfo(ctx context.Context, Req *show.GetUserInfoReq) (r 
 	return _result.GetSuccess(), nil
 }
 
+func (p *kClient) UpdatePassword(ctx context.Context, Req *show.UpdatePasswordReq) (r *show.UpdatePasswordReq, err error) {
+	var _args UpdatePasswordArgs
+	_args.Req = Req
+	var _result UpdatePasswordResult
+	if err = p.c.Call(ctx, "UpdatePassword", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
 func (p *kClient) UpdateUserInfo(ctx context.Context, Req *show.UpdateUserInfoReq) (r *show.Response, err error) {
 	var _args UpdateUserInfoArgs
 	_args.Req = Req
@@ -1106,6 +1756,36 @@ func (p *kClient) GetEvaluateLogs(ctx context.Context, Req *show.GetEssayEvaluat
 	_args.Req = Req
 	var _result GetEvaluateLogsResult
 	if err = p.c.Call(ctx, "GetEvaluateLogs", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) OCR(ctx context.Context, Req *show.OCRReq) (r *show.OCRResp, err error) {
+	var _args OCRArgs
+	_args.Req = Req
+	var _result OCRResult
+	if err = p.c.Call(ctx, "OCR", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) ApplySignedUrl(ctx context.Context, Req *show.ApplySignedUrlReq) (r *show.ApplySignedUrlResp, err error) {
+	var _args ApplySignedUrlArgs
+	_args.Req = Req
+	var _result ApplySignedUrlResult
+	if err = p.c.Call(ctx, "ApplySignedUrl", &_args, &_result); err != nil {
+		return
+	}
+	return _result.GetSuccess(), nil
+}
+
+func (p *kClient) SendVerifyCode(ctx context.Context, Req *show.SendVerifyCodeReq) (r *show.Response, err error) {
+	var _args SendVerifyCodeArgs
+	_args.Req = Req
+	var _result SendVerifyCodeResult
+	if err = p.c.Call(ctx, "SendVerifyCode", &_args, &_result); err != nil {
 		return
 	}
 	return _result.GetSuccess(), nil
