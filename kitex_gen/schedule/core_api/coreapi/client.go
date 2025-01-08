@@ -13,6 +13,7 @@ import (
 type Client interface {
 	SignUp(ctx context.Context, Req *core_api.SignUpReq, callOptions ...callopt.Option) (r *core_api.SignUpResp, err error)
 	SignIn(ctx context.Context, Req *core_api.SignInReq, callOptions ...callopt.Option) (r *core_api.SignInResp, err error)
+	SendVerifyCode(ctx context.Context, Req *core_api.SendVerifyCodeReq, callOptions ...callopt.Option) (r *core_api.SendVerifyCodeResp, err error)
 	CreateSchedule(ctx context.Context, Req *core_api.CreateScheduleReq, callOptions ...callopt.Option) (r *core_api.CreateScheduleResp, err error)
 	CreateScheduleFromOrigin(ctx context.Context, Req *core_api.CreateScheduleFromOriginReq, callOptions ...callopt.Option) (r *core_api.CreateScheduleFromOriginResp, err error)
 	CreateSchedules(ctx context.Context, Req *core_api.CreateSchedulesReq, callOptions ...callopt.Option) (r *core_api.CreateSchedulesResp, err error)
@@ -57,6 +58,11 @@ func (p *kCoreApiClient) SignUp(ctx context.Context, Req *core_api.SignUpReq, ca
 func (p *kCoreApiClient) SignIn(ctx context.Context, Req *core_api.SignInReq, callOptions ...callopt.Option) (r *core_api.SignInResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.SignIn(ctx, Req)
+}
+
+func (p *kCoreApiClient) SendVerifyCode(ctx context.Context, Req *core_api.SendVerifyCodeReq, callOptions ...callopt.Option) (r *core_api.SendVerifyCodeResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.SendVerifyCode(ctx, Req)
 }
 
 func (p *kCoreApiClient) CreateSchedule(ctx context.Context, Req *core_api.CreateScheduleReq, callOptions ...callopt.Option) (r *core_api.CreateScheduleResp, err error) {
