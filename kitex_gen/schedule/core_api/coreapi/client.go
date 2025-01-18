@@ -14,11 +14,14 @@ type Client interface {
 	SignUp(ctx context.Context, Req *core_api.SignUpReq, callOptions ...callopt.Option) (r *core_api.SignUpResp, err error)
 	SignIn(ctx context.Context, Req *core_api.SignInReq, callOptions ...callopt.Option) (r *core_api.SignInResp, err error)
 	SendVerifyCode(ctx context.Context, Req *core_api.SendVerifyCodeReq, callOptions ...callopt.Option) (r *core_api.SendVerifyCodeResp, err error)
+	GetUserInfo(ctx context.Context, Req *core_api.GetUserInfoReq, callOptions ...callopt.Option) (r *core_api.GetUserInfoResp, err error)
+	UpdateUserInfo(ctx context.Context, Req *core_api.UpdateUserInfoReq, callOptions ...callopt.Option) (r *core_api.UpdateUserInfoResp, err error)
 	CreateSchedule(ctx context.Context, Req *core_api.CreateScheduleReq, callOptions ...callopt.Option) (r *core_api.CreateScheduleResp, err error)
 	CreateScheduleFromOrigin(ctx context.Context, Req *core_api.CreateScheduleFromOriginReq, callOptions ...callopt.Option) (r *core_api.CreateScheduleFromOriginResp, err error)
 	CreateSchedules(ctx context.Context, Req *core_api.CreateSchedulesReq, callOptions ...callopt.Option) (r *core_api.CreateSchedulesResp, err error)
 	UpdateSchedule(ctx context.Context, Req *core_api.UpdateScheduleReq, callOptions ...callopt.Option) (r *core_api.UpdateScheduleResp, err error)
 	GetSchedules(ctx context.Context, Req *core_api.GetSchedulesReq, callOptions ...callopt.Option) (r *core_api.GetSchedulesResp, err error)
+	DeleteSchedule(ctx context.Context, Req *core_api.DeleteScheduleReq, callOptions ...callopt.Option) (r *core_api.DeleteScheduleResp, err error)
 }
 
 // NewClient creates a client for the service defined in IDL.
@@ -65,6 +68,16 @@ func (p *kCoreApiClient) SendVerifyCode(ctx context.Context, Req *core_api.SendV
 	return p.kClient.SendVerifyCode(ctx, Req)
 }
 
+func (p *kCoreApiClient) GetUserInfo(ctx context.Context, Req *core_api.GetUserInfoReq, callOptions ...callopt.Option) (r *core_api.GetUserInfoResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.GetUserInfo(ctx, Req)
+}
+
+func (p *kCoreApiClient) UpdateUserInfo(ctx context.Context, Req *core_api.UpdateUserInfoReq, callOptions ...callopt.Option) (r *core_api.UpdateUserInfoResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.UpdateUserInfo(ctx, Req)
+}
+
 func (p *kCoreApiClient) CreateSchedule(ctx context.Context, Req *core_api.CreateScheduleReq, callOptions ...callopt.Option) (r *core_api.CreateScheduleResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.CreateSchedule(ctx, Req)
@@ -88,4 +101,9 @@ func (p *kCoreApiClient) UpdateSchedule(ctx context.Context, Req *core_api.Updat
 func (p *kCoreApiClient) GetSchedules(ctx context.Context, Req *core_api.GetSchedulesReq, callOptions ...callopt.Option) (r *core_api.GetSchedulesResp, err error) {
 	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
 	return p.kClient.GetSchedules(ctx, Req)
+}
+
+func (p *kCoreApiClient) DeleteSchedule(ctx context.Context, Req *core_api.DeleteScheduleReq, callOptions ...callopt.Option) (r *core_api.DeleteScheduleResp, err error) {
+	ctx = client.NewCtxWithCallOptions(ctx, callOptions)
+	return p.kClient.DeleteSchedule(ctx, Req)
 }

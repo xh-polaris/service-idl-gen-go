@@ -295,6 +295,114 @@ func (x *SendVerifyCodeResp) fastReadField2(buf []byte, _type int8) (offset int,
 	return offset, err
 }
 
+func (x *GetUserInfoReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+}
+
+func (x *GetUserInfoResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_GetUserInfoResp[number], err)
+}
+
+func (x *GetUserInfoResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Name, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *GetUserInfoResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Phone, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *UpdateUserInfoReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_UpdateUserInfoReq[number], err)
+}
+
+func (x *UpdateUserInfoReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Name, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *UpdateUserInfoResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_UpdateUserInfoResp[number], err)
+}
+
+func (x *UpdateUserInfoResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Code, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *UpdateUserInfoResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Msg, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
 func (x *CreateScheduleReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -720,6 +828,66 @@ func (x *GetSchedulesResp) fastReadField2(buf []byte, _type int8) (offset int, e
 	return offset, nil
 }
 
+func (x *DeleteScheduleReq) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DeleteScheduleReq[number], err)
+}
+
+func (x *DeleteScheduleReq) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Id, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
+func (x *DeleteScheduleResp) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
+	switch number {
+	case 1:
+		offset, err = x.fastReadField1(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	case 2:
+		offset, err = x.fastReadField2(buf, _type)
+		if err != nil {
+			goto ReadFieldError
+		}
+	default:
+		offset, err = fastpb.Skip(buf, _type, number)
+		if err != nil {
+			goto SkipFieldError
+		}
+	}
+	return offset, nil
+SkipFieldError:
+	return offset, fmt.Errorf("%T cannot parse invalid wire-format data, error: %s", x, err)
+ReadFieldError:
+	return offset, fmt.Errorf("%T read field %d '%s' error: %s", x, number, fieldIDToName_DeleteScheduleResp[number], err)
+}
+
+func (x *DeleteScheduleResp) fastReadField1(buf []byte, _type int8) (offset int, err error) {
+	x.Code, offset, err = fastpb.ReadInt64(buf, _type)
+	return offset, err
+}
+
+func (x *DeleteScheduleResp) fastReadField2(buf []byte, _type int8) (offset int, err error) {
+	x.Msg, offset, err = fastpb.ReadString(buf, _type)
+	return offset, err
+}
+
 func (x *Schedule) FastRead(buf []byte, _type int8, number int32) (offset int, err error) {
 	switch number {
 	case 1:
@@ -1078,6 +1246,79 @@ func (x *SendVerifyCodeResp) fastWriteField2(buf []byte) (offset int) {
 	return offset
 }
 
+func (x *GetUserInfoReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	return offset
+}
+
+func (x *GetUserInfoResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *GetUserInfoResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Name == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetName())
+	return offset
+}
+
+func (x *GetUserInfoResp) fastWriteField2(buf []byte) (offset int) {
+	if x.Phone == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetPhone())
+	return offset
+}
+
+func (x *UpdateUserInfoReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *UpdateUserInfoReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Name == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetName())
+	return offset
+}
+
+func (x *UpdateUserInfoResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *UpdateUserInfoResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Code == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetCode())
+	return offset
+}
+
+func (x *UpdateUserInfoResp) fastWriteField2(buf []byte) (offset int) {
+	if x.Msg == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetMsg())
+	return offset
+}
+
 func (x *CreateScheduleReq) FastWrite(buf []byte) (offset int) {
 	if x == nil {
 		return offset
@@ -1367,6 +1608,47 @@ func (x *GetSchedulesResp) fastWriteField2(buf []byte) (offset int) {
 	for i := range x.GetSchedules() {
 		offset += fastpb.WriteMessage(buf[offset:], 2, x.GetSchedules()[i])
 	}
+	return offset
+}
+
+func (x *DeleteScheduleReq) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	return offset
+}
+
+func (x *DeleteScheduleReq) fastWriteField1(buf []byte) (offset int) {
+	if x.Id == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 1, x.GetId())
+	return offset
+}
+
+func (x *DeleteScheduleResp) FastWrite(buf []byte) (offset int) {
+	if x == nil {
+		return offset
+	}
+	offset += x.fastWriteField1(buf[offset:])
+	offset += x.fastWriteField2(buf[offset:])
+	return offset
+}
+
+func (x *DeleteScheduleResp) fastWriteField1(buf []byte) (offset int) {
+	if x.Code == 0 {
+		return offset
+	}
+	offset += fastpb.WriteInt64(buf[offset:], 1, x.GetCode())
+	return offset
+}
+
+func (x *DeleteScheduleResp) fastWriteField2(buf []byte) (offset int) {
+	if x.Msg == "" {
+		return offset
+	}
+	offset += fastpb.WriteString(buf[offset:], 2, x.GetMsg())
 	return offset
 }
 
@@ -1707,6 +1989,79 @@ func (x *SendVerifyCodeResp) sizeField2() (n int) {
 	return n
 }
 
+func (x *GetUserInfoReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	return n
+}
+
+func (x *GetUserInfoResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *GetUserInfoResp) sizeField1() (n int) {
+	if x.Name == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetName())
+	return n
+}
+
+func (x *GetUserInfoResp) sizeField2() (n int) {
+	if x.Phone == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetPhone())
+	return n
+}
+
+func (x *UpdateUserInfoReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *UpdateUserInfoReq) sizeField1() (n int) {
+	if x.Name == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetName())
+	return n
+}
+
+func (x *UpdateUserInfoResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *UpdateUserInfoResp) sizeField1() (n int) {
+	if x.Code == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(1, x.GetCode())
+	return n
+}
+
+func (x *UpdateUserInfoResp) sizeField2() (n int) {
+	if x.Msg == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetMsg())
+	return n
+}
+
 func (x *CreateScheduleReq) Size() (n int) {
 	if x == nil {
 		return n
@@ -1999,6 +2354,47 @@ func (x *GetSchedulesResp) sizeField2() (n int) {
 	return n
 }
 
+func (x *DeleteScheduleReq) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	return n
+}
+
+func (x *DeleteScheduleReq) sizeField1() (n int) {
+	if x.Id == "" {
+		return n
+	}
+	n += fastpb.SizeString(1, x.GetId())
+	return n
+}
+
+func (x *DeleteScheduleResp) Size() (n int) {
+	if x == nil {
+		return n
+	}
+	n += x.sizeField1()
+	n += x.sizeField2()
+	return n
+}
+
+func (x *DeleteScheduleResp) sizeField1() (n int) {
+	if x.Code == 0 {
+		return n
+	}
+	n += fastpb.SizeInt64(1, x.GetCode())
+	return n
+}
+
+func (x *DeleteScheduleResp) sizeField2() (n int) {
+	if x.Msg == "" {
+		return n
+	}
+	n += fastpb.SizeString(2, x.GetMsg())
+	return n
+}
+
 func (x *Schedule) Size() (n int) {
 	if x == nil {
 		return n
@@ -2160,6 +2556,22 @@ var fieldIDToName_SendVerifyCodeResp = map[int32]string{
 	2: "Msg",
 }
 
+var fieldIDToName_GetUserInfoReq = map[int32]string{}
+
+var fieldIDToName_GetUserInfoResp = map[int32]string{
+	1: "Name",
+	2: "Phone",
+}
+
+var fieldIDToName_UpdateUserInfoReq = map[int32]string{
+	1: "Name",
+}
+
+var fieldIDToName_UpdateUserInfoResp = map[int32]string{
+	1: "Code",
+	2: "Msg",
+}
+
 var fieldIDToName_CreateScheduleReq = map[int32]string{
 	1: "Group",
 	2: "Title",
@@ -2212,6 +2624,15 @@ var fieldIDToName_GetSchedulesReq = map[int32]string{
 var fieldIDToName_GetSchedulesResp = map[int32]string{
 	1: "Total",
 	2: "Schedules",
+}
+
+var fieldIDToName_DeleteScheduleReq = map[int32]string{
+	1: "Id",
+}
+
+var fieldIDToName_DeleteScheduleResp = map[int32]string{
+	1: "Code",
+	2: "Msg",
 }
 
 var fieldIDToName_Schedule = map[int32]string{
